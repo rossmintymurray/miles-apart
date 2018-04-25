@@ -1,0 +1,58 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_attribute_unit_of_measurement' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Attribute Unit Of Measurement
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Attribute Unit Of Measurement		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new attribute unit of measurement to the system
+{% endblock %}
+
+{% block page_content -%}
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Attribute</legend>
+            {{ form_row(form.attribute_unit_of_measurement_name) }}
+            {{ form_row(form.attribute_unit_of_measurement_abr) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_attribute-unit-of-measurement') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

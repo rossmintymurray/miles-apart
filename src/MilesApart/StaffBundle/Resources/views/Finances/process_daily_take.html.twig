@@ -1,0 +1,39 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/process_daily_take.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'process_daily_take' %}
+
+{% block page_name %}
+    Process daily take
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Daily Take Date</legend>
+            {{ form_row(form.daily_take_date) }}
+           
+        </fieldset>
+           
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+    <div id="loadingImage"></div>
+    <div id="daily_take_business_premises_form"></div>
+{% endblock %}

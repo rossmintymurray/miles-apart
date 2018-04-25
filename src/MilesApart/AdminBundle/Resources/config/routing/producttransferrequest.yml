@@ -1,0 +1,33 @@
+product_product-transfer-request:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_product-transfer-request_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:show" }
+
+product_product-transfer-request_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:new" }
+
+product_product-transfer-request_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:create" }
+    requirements: { _method: post }
+
+product_product-transfer-request_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:edit" }
+
+product_product-transfer-request_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:update" }
+    requirements: { _method: post|put }
+
+product_product-transfer-request_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ProductTransferRequest:delete" }
+    requirements: { _method: post|delete }

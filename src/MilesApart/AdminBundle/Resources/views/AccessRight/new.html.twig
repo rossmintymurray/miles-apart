@@ -1,0 +1,57 @@
+{# src/MilesApart/AdminBundle/Resources/views/AccessRight/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/webmanagement.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_access_right' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Access Right
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Access Right	
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Add a new access right for Miles Apart ISys 
+{% endblock %}
+
+{% block page_content -%}
+    
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Access Right</legend>
+            {{ form_row(form.access_right_action) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('website-management_access-right') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

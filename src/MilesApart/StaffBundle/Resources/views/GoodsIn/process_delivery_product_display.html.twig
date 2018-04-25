@@ -1,0 +1,96 @@
+<div id="goods_in_pop_up_wrapper">
+    
+
+    {# Change qtys to show remaining required #}
+    <div class="goods_in_pop_up_area">
+        <div class="row">
+            <div class="col-xs-4">
+                <p>Unit</p>
+                <h1>{{delivered_product.supplierdeliveryqtyremaining }}</h1>
+            </div>
+            <div class="col-xs-4">
+                <p>Inners</p>
+                <h1>{{delivered_product.supplierdeliveryproductinnersremaining }}</h1>
+            </div>
+            <div class="col-xs-4">
+                <p>Outers</p>
+                <h1>{{delivered_product.supplierdeliveryproductoutersremaining }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="goods_in_pop_up_area">
+        <h3>Delivered</h3>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="delivered_qty_unit">Unit</label>
+                    <input type="text" class="form-control col-xs-12" id="delivered_qty_unit">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="delivered_qty_inners">Inners</label>
+                    <input type="text" class="form-control col-xs-12" id="delivered_qty_inners">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="delivered_qty_outers">Outers</label>
+                    <input type="text" class="form-control col-xs-12" id="delivered_qty_outers">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="goods_in_pop_up_area">
+        <h3>Price - {{ delivered_product.product.getCurrentPriceDisplay }}</h3>
+        <div class="row">
+           
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="new_price">New</label>
+                    <input type="text" class="form-control col-xs-12" id="new_price">
+                </div>
+            </div>
+            
+            <div class="col-xs-6">
+                <p>Min - &pound;{{ delivered_product.product.getMinRecommendedPrice }}</p>
+                <p>Max - &pound;{{ delivered_product.product.getMaxRecommendedPrice }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="goods_in_pop_up_area margin_bottom">
+        <h3>To Store</h3>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="store_qty_unit">Unit</label>
+                    <input type="text" class="form-control col-xs-12" id="store_qty_unit">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                 <div class="form-group">
+                    <label for="store_qty_inners">Inners</label>
+                    <input type="text" class="form-control col-xs-12" id="store_qty_inners">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                 <div class="form-group">
+                    <label for="store_qty_outers">Outers</label>
+                    <input type="text" class="form-control col-xs-12" id="store_qty_outers">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {# Save button #}
+    <button class="btn btn-default col-md-12 col-xs-12" onclick="processDeliveryNoteProductDelivered({{ delivered_product.id }})" role="button">
+        Save
+    </button>
+
+</div>

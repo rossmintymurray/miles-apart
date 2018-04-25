@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>{% block email_title %}{% endblock %}| Miles Apart</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link href="http://localhost:8888/Miles-Apart/web/css/screen.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" media="print" href="http://localhost:8888/Miles-Apart/web/css/screen.css">
+		<script src="{{ asset('js/jquery-1.11.1.js') }}" type="text/javascript"></script>
+		<style>
+		  	@media print {
+		    	#flyer_wrapper {page-break-after: always;}
+			}
+		</style>
+	</head>
+
+	<body style="margin: 0; padding: 0; font-family:Helvetica Neue, Helvetica, Sans Serif;color:#353535">
+		<div class="container">
+
+			{# Iterate over each order #}
+			{% for order in entities %}
+
+				{# Calculate number of pages #}
+				{% set number_of_pages = order.customerorderproduct|length / 13 %}
+
+				{% set number_of_pages = number_of_pages|round(0, 'ceil') %}
+
+				{# Set current page #}
+				{% set current_page = 0 %}
+
+					
+				{% for item in order.customerorderproduct %}
+
+					{# if the first item of page, show the page header #}
+					{% if (loop.index == 1) %}
+						{% set current_page = current_page + 1 %}
+							
+						<div class="row">
+					 		<div id="flyer_wrapper" style="padding:190px 20px 40px 0px; background-image: url('http://localhost:8888/Miles-Apart/web/images/invoices/flyer_front_V4-150dpi.png'); background-repeat:no-repeat;">
+					 			<div id="flyer_inner" style="height:632px;width:770px;">
+					 				<div id="inner_wrapper" style="padding:1px 30px 30px 30px;">
+					 				
+
+					 				<div id="order_details" class="row" style="margin-bottom:10px;margin-top:20px">
+					 					<div class="col-md-4" style="height:140px;border-right:2px solid #353535">
+					 						<h4>You</h4>
+
+					 						<address style="line-height:18px;font-size:15px">
+					 							{# Get customer address details #}
+					 							{% if order.billingaddress != null %}
+						 							<strong>{{ order.billingaddress.customeraddresscontactfullname }}</strong><br />
+						 							{{ order.billingaddress.customeraddressline1 }}<br />
+						 							{% if order.billingaddress.customeraddressline2 != null %}
+						 								{{ order.billingaddress.customeraddressline2 }}<br />
+						 							{% endif %}
+						 							{{ order.billingaddress.customeraddresstown }}<br />
+						 							{{ order.billingaddress.customeraddresscounty }}<br />
+						 							{{ order.billingaddress.customeraddresspostcode }}<br />
+						 						{% else %}
+					 								<strong>{{ order.deliveryaddress.customeraddresscontactfullname }}</strong><br />
+						 							{{ order.deliveryaddress.customeraddressline1 }}<br />
+						 							{% if order.deliveryaddress.customeraddressline2 != null %}
+						 								{{ order.deliveryaddress.customeraddressline2 }}<br />
+						 							{% endif %}
+						 							{{ order.deliveryaddress.customeraddresstown }}<br />
+						 							{{ order.deliveryaddress.customeraddresscounty }}<br />
+						 							{{ order.deliveryaddress.customeraddresspostcode }}<br />
+						 						{% endif %}
+					 						</address>
+
+					 					</div>
+
+					 					<div class="col-md-4" style="height:140px;border-right:2px solid #353535">
+					 						<h4>Us</h4>
+
+					 						<address style="line-height:18px;font-size:15px;">
+					 							<strong>Miles Apart</strong><br/>
+					 							28 Salisbury Street<br />
+					 							Amesbury</br />
+					 							Salisbury<br />
+					 							Wiltshire<br />
+					 							SP4 7HD
+					 						</address>
+					 					</div>
+
+					 					<div class="col-md-4" style="height:140px;">
+					 						<h4>Your order</h4>
+
+					 						<h3>#{{ order.id }}</h3>
+					 						<h4>{{ order.customerorderdatecreated|date('jS F Y') }}</h4>
+
+					 						{# order barcode #}
+					 						<img style="margin-top:10px;margin-left:-10px" class="order_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code128', order.id, {'barcodeOptions': {'barHeight' : 35, drawText : false}, 'rendererOptions': {'width':175, 'height':35}}) }}">
+
+
+
+					 					</div>
+					 				</div>
+					 				<div class="row">
+						 				<div id="order_contents" class="col-md-12" style="height:635px;margin-bottom:5px;border-top:2px solid #353535">
+						 					<h3>Your Items</h3>
+					 						<table class="table table-striped text-center">
+											    <thead>
+											        <tr>
+											           <th width="10%" class="text-center">Code</th>
+						 								<th width="50%">Name</th>
+						 								<th width="15%" class="text-center">Price</th>
+						 								<th width="10%" class="text-center">Qty</th>
+						 								<th width="15%" class="text-center">Total</th>
+											        </tr>
+											    </thead>
+											    <tbody>
+					 							{% endif %}
+						 							
+				 								<tr>
+				 									<td class="text-center">{{ item.product.id }}</td>
+				 									<td class="text-left">{{ item.product.productmarketingname }}</td>
+				 									<td class="text-center">{{ item.product.productpricebydate(order.customerorderdatecreated).productpricevalue }}</td>
+				 									<td class="text-center">{{ item.customerorderproductquantity }}</td>
+				 									<td class="text-center">{{ item.customerorderproductquantity * item.product.productpricebydate(order.customerorderdatecreated).productpricevalue }}</td>
+				 								</tr>
+				 							
+					 							{# if last on page #}
+					 							{% if (loop.last) %}
+
+						 							{# Create the total bar #}
+						 							<tr>
+						 								<td colspan="4" class="text-right">Total</td>
+						 								<td>{{ order.getCustomerOrderTotalPriceDisplay }}</td>
+						 							</tr>
+						 							{# Create the shipping bar #}
+						 							<tr>
+						 								<td colspan="4" class="text-right">Shipping</td>
+						 								<td>{{ order.getCustomerOrderShippingPaidDisplay }}</td>
+
+						 							</tr>
+
+						 							{# Create the grand total bar #}
+						 							<tr>
+						 								<td colspan="4" class="text-right">Grand Total</td>
+						 								<td><b>{{ order.grandtotaldisplay }}</b></td>
+						 							</tr>
+
+						 						{% endif %}
+
+					 							{% if (loop.last) %}
+
+							 						</tbody>
+						 						</table>
+							 				</div>
+							 			</div>
+							 			<div class="row">
+							 				<div class="col-md-4">
+							 				</div>
+							 				<div class="col-md-4">
+							 					{% if order.customerordersource != null %}
+							 						{% if order.customerordersource.id == 2 %}
+							 							<h6 style="text-align:center;">Thank you for your Amazon order</h6>
+							 						{% endif %}
+							 					{% endif %}
+							 				</div>
+							 				<div class="col-md-4">
+								 				<div id="page_number" style="text-align:right;">
+								 					<h4 style="font-size:14px">Page {{ current_page }} of {{ number_of_pages }}</h4>
+								 				</div>
+								 			</div>
+							 			</div>
+
+						 			</div>
+					 			</div>
+					 		</div>
+					 	</div>
+					{% endif %}
+
+					{#If there are more than 13 products create new table header #}
+					{% if loop.index is divisible by(13) %}
+						</tbody>
+						 						</table>
+							 				</div>
+							 			</div>
+							 			<div class="row">
+							 				<div id="page_number" style="text-align:right;">
+							 					<h4 style="font-size:14px">Page {{ current_page }} of {{ number_of_pages }}</h4>
+							 				</div>
+							 			</div>
+
+						 			</div>
+					 			</div>
+					 		</div>
+					 	</div>
+
+					<div class="row">
+					 		<div id="flyer_wrapper" style="padding:190px 20px 40px 0px; background-image: url('http://localhost:8888/Miles-Apart/web/images/invoices/flyer_front_V4-150dpi.png'); background-repeat:no-repeat;">
+					 			<div id="flyer_inner" style="height:632px;width:770px;">
+					 				<div id="inner_wrapper" style="padding:1px 30px 30px 30px;">
+					 				
+
+					 				<div id="order_details" class="row" style="margin-bottom:10px;margin-top:20px">
+					 					<div class="col-md-4" style="height:140px;border-right:2px solid #353535">
+					 						<h4>You</h4>
+
+					 						<address style="line-height:18px;font-size:15px">
+					 							{# Get customer address details #}
+					 							{% if order.billingaddress != null %}
+						 							<strong>{{ order.billingaddress.customeraddresscontactfullname }}</strong><br />
+						 							{{ order.billingaddress.customeraddressline1 }}<br />
+						 							{% if order.billingaddress.customeraddressline2 != null %}
+						 								{{ order.billingaddress.customeraddressline2 }}<br />
+						 							{% endif %}
+						 							{{ order.billingaddress.customeraddresstown }}<br />
+						 							{{ order.billingaddress.customeraddresscounty }}<br />
+						 							{{ order.billingaddress.customeraddresspostcode }}<br />
+						 						{% else %}
+					 								<strong>{{ order.deliveryaddress.customeraddresscontactfullname }}</strong><br />
+						 							{{ order.deliveryaddress.customeraddressline1 }}<br />
+						 							{% if order.deliveryaddress.customeraddressline2 != null %}
+						 								{{ order.deliveryaddress.customeraddressline2 }}<br />
+						 							{% endif %}
+						 							{{ order.deliveryaddress.customeraddresstown }}<br />
+						 							{{ order.deliveryaddress.customeraddresscounty }}<br />
+						 							{{ order.deliveryaddress.customeraddresspostcode }}<br />
+						 						{% endif %}
+					 						</address>
+
+					 					</div>
+
+					 					<div class="col-md-4" style="height:140px;border-right:2px solid #353535">
+					 						<h4>Us</h4>
+
+					 						<address style="line-height:18px;font-size:15px;">
+					 							<strong>Miles Apart</strong><br/>
+					 							28 Salisbury Street<br />
+					 							Amesbury</br />
+					 							Salisbury<br />
+					 							Wiltshire<br />
+					 							SP4 7HD
+					 						</address>
+					 					</div>
+
+					 					<div class="col-md-4" style="height:140px;">
+					 						<h4>Your order</h4>
+
+					 						<h3>#{{ order.id }}</h3>
+					 						<h4>{{ order.customerorderdatecreated|date('jS F Y') }}</h4>
+
+					 						{# order barcode #}
+					 						<img style="margin-top:10px;margin-left:-10px" class="order_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code128', order.id, {'barcodeOptions': {'barHeight' : 35, drawText : false}, 'rendererOptions': {'width':175, 'height':35}}) }}">
+
+
+
+					 					</div>
+					 				</div>
+					 				<div class="row">
+						 				<div id="order_contents" class="col-md-12" style="height:635px;margin-bottom:5px;border-top:2px solid #353535">
+						 					<h3>Your Items</h3>
+					 						<table class="table table-striped text-center">
+											    <thead>
+											        <tr>
+											           <th width="10%" class="text-center">Code</th>
+						 								<th width="50%">Name</th>
+						 								<th width="15%" class="text-center">Price</th>
+						 								<th width="10%" class="text-center">Qty</th>
+						 								<th width="15%" class="text-center">Total</th>
+											        </tr>
+											    </thead>
+											    <tbody>
+											    {% endif %}
+			 	{% endfor%}
+
+			{% endfor %}
+	 	</div>
+	 	{% block javascripts %}{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,39 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+{% if error %}
+	<div data-alert class="alert-box alert">
+            <!-- Your content goes here -->
+    	{{ error|trans({}, 'FOSUserBundle') }}
+    	
+    </div>
+{% endif %}
+
+	<form action="{{ path("fos_user_security_check") }}" method="post" data-abide>
+	    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+	    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+	    <input type="email" id="username" name="_username" pattern="email" value="{{ last_username }}"  required="required"/>
+	    <small class="error">Please enter a valid email address.</small>
+	    
+
+	    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+	    <input type="password" id="password" name="_password" required="required" pattern="alpha_numeric" minlength="8" maxlength="20"/>
+	    <small class="error">Please enter a password between 8 and 10 characters long.</small>
+
+	    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+	    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+
+	    {# Need to show this only if the user is logging in to complete an order #}
+	    {% if checkout == true %}
+	    	<input type="hidden" name="_target_path" value="miles_apart_basket_checkout_shipping" />
+	    {% endif %}
+	    
+	    <input type="submit" class="button small-12" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+	</form>
+
+	<a href="{{ path('fos_user_resetting_request') }}" class="text-center">Forgotten your password? Reset it here.</a>
+{% endblock fos_user_content %}

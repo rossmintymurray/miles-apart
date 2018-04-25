@@ -1,0 +1,32 @@
+Code,Description,Barcode,Type,Inner,Outer,Tot,Caes,Price
+9684,Cute printed tissue paper, 5 Sheets & 10 stickers,5013922096841,o,24,48,48,1,0.45
+1490,CHRISTMAS SILVER FOIL ROLL WRAP,5013922014906,,1,48,96,2,0.5
+1492,CHRISTMAS FOIL TRADITIONAL ROLL WRAP,5013922014920,O,1,48,96,2,0.50
+8160,4 Handcrafted Money Wallets, Trad designs,5013922081601,O,12,72,72,1,0.42
+1566,3 Gift Card Boxes,5013922015668,O,12,48,48,1,0.45
+8082,100 Foil Paper Chains,5013922080826,O,12,96,96,1,0.42
+9588,100 Printed Creative Paper Chains,5013922095882,O,12,96,96,1,0.42
+8802,Christmas Super Jumbo Colouring Book,5013922088020,O,6,48,96,2,0.50
+9921,DIY Christmas Cracker Kit x 6,5013922099217,O,12,48,48,1,0.75
+9796,Assorted Christmas Stickers,5013922097961,O,12,48,48,1,0.40
+9625,Glitter window Stickers,5013922096254,O,12,48,48,1,0.46
+9733,Small Window Gel Decorations,5013922097336,O,12,48,48,1,0.40
+9626,300 Hanging Hooks,5013922096261,O,12,48,48,1,0.48
+8381,6 X 6cm Baubles In PVC Box Traditional Colour,5013922083810,O,12,48,48,1,0.50
+8382,9 X 4cm Baubles In PVC Box Traditional Colour,5013922083827,O,12,48,48,1,0.50
+8385,6 X 6cm Baubles In PVC Box Modern Colours,5013922083858,O,12,48,48,1,0.50
+8386,9 X 4cm Baubles In PVC Box Modern Colours,5013922083865,O,12,48,48,1,0.50
+9688,Tartan Stocking,5013922096889,O,12,48,48,1,0.50 
+8899,Nativity Advent Calendar With Postal Envelope,5013922088990,O,12,72,72,1,0.26
+8695,30 Card Pegs And String,5013922086958,O,12,72,72,1,0.55
+3223,Pk 2 Christmas Traditional Card Holders,5013922032238,O,12,72,72,1,0.30
+8644,8 Square Whimsical Christmas Cards,5013922086446,O,24,48,48,1,0.48
+8647,8 Rectangle Cute Christmas Cards,5013922086477,O,24,48,48,1,0.48
+8649,30 BoxChristmas Cards,5013922086491,O,1,24,48,2,0.95
+8922,Super Jumbo Gift Bag Winter Wildlife,5013922089225,O,12,60,60,1,0.69
+8653,Super Jumbo Gift Bag :Cute Reindeer & Santa,5013922086538,O,12,60,60,1,0.69
+8655,Landscape Super Jumbo Gift Bag juvenile Char,5013922086552,O,12,60,60,1,0.69
+8708,Landscape Jumbo Gift Bag: Cute Reindeer & Santa,5013922087085,O,12,72,72,1,0.60
+8805,Jumbo Gift Bag:Cute Snowman & Polar Bears,5013922088051,O,12,72,72,1,0.60
+8807,Jumbo Gift Bag: Traditional Robin Scene,5013922088075,O,12,72,72,1,0.6
+8910,Christmas Deluxe Black Bottle Bag ,5013922089102,o,12,72,72,1,0.25

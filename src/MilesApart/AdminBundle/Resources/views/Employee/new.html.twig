@@ -1,0 +1,81 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_employee' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Employee
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Employee		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new employee to the system
+{% endblock %}
+
+{% block page_content -%}
+
+     {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <fieldset>
+            <legend class="text-muted">Name</legend>
+                {{ form_row(form.employee_first_name) }}
+                {{ form_row(form.employee_surname) }}
+              {{ form_row(form.employee_date_of_birth)  }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Contact</legend>
+            {{ form_row(form.employee_mobile_phone) }}
+            {{ form_row(form.employee_landline_phone) }}
+            {{ form_row(form.employee_email) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Address</legend>
+            {{ form_row(form.employee_address_1) }}
+            {{ form_row(form.employee_address_2) }}
+            {{ form_row(form.employee_town) }}
+            {{ form_row(form.employee_county) }}
+            {{ form_row(form.employee_postcode) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Earnings</legend>
+            {{ form_row(form.employee_contracted_weekly_hours) }}
+            {{ form_row(form.employee_national_insurance_number) }}
+            {{ form_row(form.employee_tax_code) }}
+            {{ form_row(form.employee_starting_date)  }}
+            {{ form_row(form.employee_leaving_date)  }}
+
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+   
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hr_employee') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

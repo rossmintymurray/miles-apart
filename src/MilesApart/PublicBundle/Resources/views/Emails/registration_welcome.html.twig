@@ -1,0 +1,24 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_name %}
+	Registration Successful - Welcome to Miles Apart
+{% endblock %}
+
+{% block email_title %}
+	Welcome...
+{% endblock %}
+
+{% block email_intro %}
+	Hi {{ personal_customer.getPersonalCustomerFirstName }}, thank you for registering with Miles Apart.
+{% endblock %}
+
+{% block email_content %}
+	<p>You can now create wish lists, leave reviews and check out faster.</p>
+{% endblock %}
+
+{% block email_callout %}
+{% endblock %}
+
+{% block email_footer %}
+{% endblock %}

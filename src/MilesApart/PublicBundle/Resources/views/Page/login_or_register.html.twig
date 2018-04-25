@@ -1,0 +1,63 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::login_or_register_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{# Set the page content #}
+{% block page_title %}
+    Login Or Register
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<div class="row">
+		<div class="large-6 columns">
+			<div class="row hide-for-large-up">
+				<div class="large-12 columns">
+				    <div class="homepage_header"></div>
+				    <h3 class="text-center homepage_header_text"><span>Existing Customers</span></h3>
+				</div>
+			</div>
+			<h3 class="show-for-large-up">Existing Customers</h3>
+		    <p class="lead">Please login using the form below.</p>
+
+		    <div class="row">
+		    	<div class="large-9 large-offset-1  columns">
+					{% render url('fos_user_security_login') %}
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="show-for-large-up">
+			<div class="divider vertical_divider"></div>
+		</div>
+
+		<div class="large-6 columns">
+			<div class="row hide-for-large-up">
+				<div class="large-12 columns">
+				    <div class="homepage_header"></div>
+				    <h3 class="text-center homepage_header_text"><span>New Customers</span></h3>
+				</div>
+			</div>
+			<h3 class="show-for-large-up">New Customers</h3>
+		    <p class="lead">Please complete your details to register.</p>
+			<div class="row">
+		    	<div class="large-9 large-offset-1 columns">
+					
+					{% render url('fos_user_registration_register', {'registration_form': registration_form}) %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+   	<li class="heading">Contact Us</li>
+   	<li><a href="#contact_form">Contact Form</a></li>
+   	<li><a href="#contact_details">Contact Details</a></li>
+{% endblock %}

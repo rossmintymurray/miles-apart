@@ -1,0 +1,50 @@
+{# src/MilesApart/StaffBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'index' %}
+{% set current_page = 'index' %}
+
+{% block page_name %}
+    Record Sale
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+   
+    {# Create and show the form #}
+    {{ form_start(form) }}
+    {% if submitted == true %}
+        {{ form_errors(form) }}
+    {% endif %}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Barcode</legend>
+            {{ form_row(form.product_barcode) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_recordsale_product_barcode').val(bar);
+
+            //Submit the form
+            $("form[name='milesapart_staffbundle_recordsale']").submit();
+
+            return true;
+        }
+    </script>
+{% endblock %}

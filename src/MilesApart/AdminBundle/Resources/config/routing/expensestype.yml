@@ -1,0 +1,33 @@
+finance_expenses-type:
+    path:     /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_expenses-type_show:
+    path:     /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:show" }
+
+finance_expenses-type_new:
+    path:     /new
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:new" }
+
+finance_expenses-type_create:
+    path:     /create
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:create" }
+    requirements: { _method: post }
+
+finance_expenses-type_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:edit" }
+
+finance_expenses-type_update:
+    path:     /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:update" }
+    requirements: { _method: post|put }
+
+finance_expenses-type_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesType:delete" }
+    requirements: { _method: post|delete }

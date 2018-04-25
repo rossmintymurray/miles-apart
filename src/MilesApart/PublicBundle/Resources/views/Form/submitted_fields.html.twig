@@ -1,0 +1,90 @@
+{# src/MilesApart/AdminBundle/Resources/views/Form/fields.html.twig #}
+{# Form has failed validation so show correct fiedlds and validation errors #}
+{% block form_row %}
+	{% spaceless %}
+	
+	{# Check if the input has an error and therefore failed validation #}
+		{% if errors|length > 0 %}
+			
+			{# Errors exist so render row with error class #}
+		        {{ form_label(form) }}
+		 		{{ form_widget(form) }}
+		 		{# Display the error #}
+			    {{ form_errors(form) }}
+			  	
+		    
+		 
+		{# There are no errors #}   
+		{% else %}
+
+			{# The filed passed validation and is not empty #}
+			{% if form.vars.value is not sameas ("") %}
+			        {{ form_label(form) }}
+			        
+			        {{ form_widget(form) }}
+			        {{ form_errors(form) }}
+			    	
+			{% else %}
+
+				{# The filed passed validation as it was not required but is empty  #}
+		        {{ form_label(form) }}
+		        
+		        {{ form_widget(form) }}
+		       	{{ form_errors(form) }}
+				    	
+				
+			{% endif %}
+		{% endif %}
+
+	{% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% if label is not sameas(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+        	{% if label_format is defined %}
+	            {% if label_format is not empty %}
+	                {% set label = label_format|replace({
+	                    '%name%': name,
+	                    '%id%': id,
+	                }) %}
+	            {% else %}
+	                {% set label = name|humanize %}
+	            {% endif %}
+	        {% endif %}
+        {% endif %}
+        {% if errors|length > 0 %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' error')|trim}) %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    {% endif %}
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    
+
+    {% if errors|length > 0 %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} class="error" {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% else %}
+    	<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    	
+	{% endif %}
+{% endblock form_widget_simple %}
+
+
+
+
+{% block textarea_widget %}
+	{% if errors|length > 0 %}
+    	<textarea {{ block('widget_attributes') }} class="error">{{ value }}</textarea>
+    {% else %}
+    	<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    {% endif %}
+{% endblock textarea_widget %}

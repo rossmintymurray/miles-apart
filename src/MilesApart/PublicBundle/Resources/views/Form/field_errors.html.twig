@@ -1,0 +1,14 @@
+{# src/MilesApart/AdminBundle/Resources/views/Form/field_errors.html.twig #}
+{# Template for the error messages #}
+{% block form_errors %}
+
+	{% spaceless %}
+		{% if errors|length > 0 %}
+			<small class="error">
+			    {% for error in errors %}
+			    {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+			    {% endfor %}
+			</small>
+		{% endif %}
+	{% endspaceless %}
+{% endblock form_errors %}

@@ -1,0 +1,20 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::homepage_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Sitemap
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<h1>Sitemap</h1>
+    <p class="lead">A Visual reprsentation of our website.</p>
+    <p>The diagram shows the basic structure of our website. If you do have any problems please <a href="mailto:customersupport@miles-apart.com">contact us</a> and we will be happy to help.</p>
+    <img src="{{ asset('images/web/sitemap.png') }}" class="large-12" />
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Sitemap</li>
+{% endblock %}

@@ -1,0 +1,67 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'suppliers' %}
+{% set current_page = 'notifications' %}
+
+{% block page_name %}
+    Supplier notifications
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    <h3>Suppliers by Pending Deliveries</h3>
+
+    <h3>Suppliers by Purchase Orders Pending</h3>
+
+    <h3>Suppliers by Stockouts</h3>
+
+    <h3>Suppliers by Returns</h3>
+
+    {# Create table for suppliers 
+    <table class="table table-striped text-center">
+        <thead>
+            <tr class="text-center">
+                <th class="text-left">Supplier name</th>
+                <th class="text-center">Account number</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">Fax</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+
+    	{% for entity in entities %}
+    		<tr>
+    			<td class="text-left">{{ entity.getSupplierName() }}</td>
+    			<td>{{ entity.getSupplierAccountNumber() }}</td>
+    			<td>{{ entity.getSupplierPhone() }}</td>
+    			<td>{{ entity.getSupplierFax() }}</td>
+    			{% if entity.getSupplierOrderingEmail != null %}
+                    {% set sendMail = entity.getSupplierOrderingEmail() %}
+    			{% else %}
+                    {% set sendMail = entity.getSupplierInfoEmail() %}
+    			{% endif %}
+                <td>
+                    <a href="mailto:{{ sendMail }}">{{ sendMail }}</a>
+                </td>
+                <td>
+                    <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Rep"><span class="glyphicon glyphicon-user"></span></a>
+                    <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" ><span class="glyphicon glyphicon-print"></span></a>
+                    <a href="tel:{{ entity.getSupplierPhone() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Call"><span class="glyphicon glyphicon-phone"></span></a>
+                    <a href="mailto:{{sendMail}}"class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Email"><span class="glyphicon glyphicon-envelope"></span></a>
+                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
+
+    		</tr>
+    	{% endfor %}
+    	</tbody>
+    </table>
+
+<script>$(function () { $("[data-toggle='tooltip']").tooltip(); });</script>
+#}
+{% endblock %}

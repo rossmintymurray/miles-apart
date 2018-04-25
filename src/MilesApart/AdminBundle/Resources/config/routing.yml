@@ -1,0 +1,542 @@
+#*****************************************
+# 
+# Routing file for MilesApartAdminBundle
+#
+#*****************************************
+
+
+
+#
+# Set top level pages
+#
+miles_apart_admin_homepage:
+    pattern:  /
+    defaults: { _controller: MilesApartAdminBundle:Page:index }
+
+miles_apart_admin_supplier:
+    pattern:  /supplier
+    defaults: { _controller: MilesApartAdminBundle:Page:supplier }
+
+miles_apart_admin_pickpack:
+    pattern:  /customer-order
+    defaults: { _controller: MilesApartAdminBundle:Page:customerorder }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_product:
+    pattern:  /product
+    defaults: { _controller: MilesApartAdminBundle:Page:product }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_customer:
+    pattern:  /customer
+    defaults: { _controller: MilesApartAdminBundle:Page:customer }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_customerorder:
+    pattern:  /customer-order
+    defaults: { _controller: MilesApartAdminBundle:Page:customerorder }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_campaign:
+    pattern:  /campaign
+    defaults: { _controller: MilesApartAdminBundle:Page:campaign }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_finance:
+    pattern:  /finance
+    defaults: { _controller: MilesApartAdminBundle:Page:finance }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_business:
+    pattern:  /business
+    defaults: { _controller: MilesApartAdminBundle:Page:business }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_goodsin:
+    pattern:  /goodsin
+    defaults: { _controller: MilesApartAdminBundle:Page:goodsin }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_hr:
+    pattern:  /hr
+    defaults: { _controller: MilesApartAdminBundle:Page:hr }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_procurement:
+    pattern:  /procurement
+    defaults: { _controller: MilesApartAdminBundle:Page:procurement }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_transferrequest:
+    pattern:  /transfer-request
+    defaults: { _controller: MilesApartAdminBundle:Page:transferrequest }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_webmanagement:
+    pattern:  /website-management
+    defaults: { _controller: MilesApartAdminBundle:Page:webmanagement }
+    requirements:
+        _method:  GET
+
+miles_apart_admin_category:
+    pattern:  /category
+    defaults: { _controller: MilesApartAdminBundle:Page:taxonomy }
+    requirements:
+        _method:  GET
+
+
+#*****************************************
+# 
+# Import CRUD routing
+#
+#*****************************************
+MilesApartAdminBundle_website-management_access-right:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/accessright.yml"
+        prefix:   /website-management/access-right
+
+MilesApartAdminBundle_website-management_admin-user-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/adminusertype.yml"
+        prefix:   /website-management/admin-user-type
+
+MilesApartAdminBundle_website-management_admin-user:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/adminuser.yml"
+        prefix:   /website-management/admin-user
+
+MilesApartAdminBundle_website-management_admin-user-type-access-right:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/adminusertypeaccessright.yml"
+        prefix:   /website-management/admin-user-type-access-right
+
+MilesApartAdminBundle_product_attribute:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/attribute.yml"
+        prefix:   /product/attribute
+
+MilesApartAdminBundle_product_attribute-unit-of-measurement:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/attributeunitofmeasurement.yml"
+        prefix:   /product/attribute-unit-of-measurement
+
+MilesApartAdminBundle_product_attribute-value:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/attributevalue.yml"
+        prefix:   /product/attribute-value
+
+MilesApartAdminBundle_product_attribute-value-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/attributevalueproduct.yml"
+        prefix:   /product/attribute-value-product
+
+MilesApartAdminBundle_product_brand:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/brand.yml"
+        prefix:   /product/brand
+
+MilesApartAdminBundle_business:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/business.yml"
+        prefix:   /business/business
+
+MilesApartAdminBundle_customer_business-customer:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/businesscustomer.yml"
+        prefix:   /customer/business-customer
+
+MilesApartAdminBundle_customer_business-customer-representative:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/businesscustomerrepresentative.yml"
+        prefix:   /customer/business-customer-representative
+
+MilesApartAdminBundle_business_business-premises:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/businesspremises.yml"
+        prefix:   /business/business-premises
+
+MilesApartAdminBundle_business_business-premises-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/businesspremisestype.yml"
+        prefix:   /business/business-premises-type
+
+MilesApartAdminBundle_category_category-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/categorytype.yml"
+        prefix:   /category/category-type
+
+MilesApartAdminBundle_business_competitor:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/competitor.yml"
+        prefix:   /business/competitor
+
+MilesApartAdminBundle_business_competitor-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/competitorproduct.yml"
+        prefix:   /business/competitor-product
+
+MilesApartAdminBundle_business_competitor-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/competitortype.yml"
+        prefix:   /business/competitor-type
+
+MilesApartAdminBundle_customer_customer:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customer.yml"
+        prefix:   /customer/customer
+
+MilesApartAdminBundle_customer_customer-address:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customeraddress.yml"
+        prefix:   /customer/customer-address
+
+MilesApartAdminBundle_customer_customer-interaction:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerinteraction.yml"
+        prefix:   /customer/customer-interaction
+
+MilesApartAdminBundle_customer_customer-interaction-reason:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerinteractionreason.yml"
+        prefix:   /customer/customer-interaction-reason
+
+MilesApartAdminBundle_customer_customer-interaction-resolution:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerinteractionresolution.yml"
+        prefix:   /customer/customer-interaction-resolution
+
+MilesApartAdminBundle_customer_customer-interaction-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerinteractiontype.yml"
+        prefix:   /customer/customer-interaction-type
+
+MilesApartAdminBundle_customer_customer-opt-in:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customeroptin.yml"
+        prefix:   /customer/customer-opt-in
+
+MilesApartAdminBundle_customer_customer-opt-in-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customeroptintype.yml"
+        prefix:   /customer/customer-opt-in-type
+
+MilesApartAdminBundle_customer-order_customer-order:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerorder.yml"
+        prefix:   /customer-order/customer-order
+
+MilesApartAdminBundle_customer-order_customer-order-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerorderproduct.yml"
+        prefix:   /customer-order/customer-order-product
+
+MilesApartAdminBundle_customer-order_customer-order-state:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerorderstate.yml"
+        prefix:   /customer-order/customer-order-state
+
+MilesApartAdminBundle_customer_customer-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customertype.yml"
+        prefix:   /customer/customer-type
+
+MilesApartAdminBundle_customer_customer-wish-list:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerwishlist.yml"
+        prefix:   /customer/customer-wish-list
+
+MilesApartAdminBundle_customer_customer-wish-list-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/customerwishlistproduct.yml"
+        prefix:   /customer/customer-wish-list-product
+
+MilesApartAdminBundle_finance_daily-take:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/dailytake.yml"
+        prefix:   /finance/daily-take
+
+MilesApartAdminBundle_finance_daily-take-business-premises:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/dailytakebusinesspremises.yml"
+        prefix:   /finance/daily-take-business-premises
+
+MilesApartAdminBundle_campaign_email-send-list:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/emailsendlist.yml"
+        prefix:   /campaign/email-send-list
+
+MilesApartAdminBundle_campaign_email-send-list-customer:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/emailsendlistcustomer.yml"
+        prefix:   /campaign/email-send-list-customer
+
+MilesApartAdminBundle_hr_employee:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employee.yml"
+        prefix:   /hr/employee
+
+MilesApartAdminBundle_hr_employee-holiday:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeeholiday.yml"
+        prefix:   /hr/employee-holiday
+
+MilesApartAdminBundle_hr_employee-job-role:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeejobrole.yml"
+        prefix:   /hr/employee-job-role
+
+MilesApartAdminBundle_hr_employee-job-role-employee:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeejobroleemployee.yml"
+        prefix:   /hr/employee-job-role-employee
+
+MilesApartAdminBundle_hr_employee-wage-rate:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeewagerate.yml"
+        prefix:   /hr/employee-wage-rate
+
+MilesApartAdminBundle_hr_employee-wage-rate-job-role:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeewageratejobrole.yml"
+        prefix:   /hr/employee-wage-rate-job-role
+
+MilesApartAdminBundle_hr_employee-work-week:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeeworkweek.yml"
+        prefix:   /hr/employee-work-week
+
+MilesApartAdminBundle_campaign_hidden-url:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/hiddenurl.yml"
+        prefix:   /campaign/hidden-url
+
+MilesApartAdminBundle_category_keyword:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/keyword.yml"
+        prefix:   /category/keyword
+
+MilesApartAdminBundle_procurement_logistics-company:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/logisticscompany.yml"
+        prefix:   /procurement/logistics-company
+
+MilesApartAdminBundle_campaign_marketing-email:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/marketingemail.yml"
+        prefix:   /campaign/marketing-email
+
+MilesApartAdminBundle_campaign_marketing-email-component:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/marketingemailcomponent.yml"
+        prefix:   /campaign/marketing-email-component
+
+MilesApartAdminBundle_campaign_marketing-email-component-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/marketingemailcomponenttype.yml"
+        prefix:   /campaign/marketing-email-component-type
+
+MilesApartAdminBundle_campaign_marketing-email-send-list:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/marketingemailsendlist.yml"
+        prefix:   /campaign/marketing-email-send-list
+
+MilesApartAdminBundle_campaign_marketing-email-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/marketingemailtype.yml"
+        prefix:   /campaign/marketing-email-type
+
+MilesApartAdminBundle_customer-order_packaging-box-size:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/packagingboxsize.yml"
+        prefix:   /customer-order/packaging-box-size
+
+MilesApartAdminBundle_customer_personal-customer:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/personalcustomer.yml"
+        prefix:   /customer/personal-customer
+
+MilesApartAdminBundle_customer-order_postage-band:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/postageband.yml"
+        prefix:   /customer-order/postage-band
+
+MilesApartAdminBundle_customer-order_postage-band-dispatch-logistics:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/postagebanddispatchlogistics.yml"
+        prefix:   /customer-order/postage-band-dispatch-logistics
+
+MilesApartAdminBundle_product_product-cost:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productcost.yml"
+        prefix:   /product/product-cost
+
+MilesApartAdminBundle_product_product-transfer-request:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/producttransferrequest.yml"
+        prefix:   /product/product-transfer-request
+
+MilesApartAdminBundle_product_product-transfer-request-state:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/producttransferrequeststate.yml"
+        prefix:   /product/product-transfer-request-state
+
+MilesApartAdminBundle_campaign_promotion:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/promotion.yml"
+        prefix:   /campaign/promotion
+
+MilesApartAdminBundle_campaign_promotion-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/promotiontype.yml"
+        prefix:   /campaign/promotion-type
+
+MilesApartAdminBundle_campaign_promotion-visit:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/promotionvisit.yml"
+        prefix:   /campaign/promotion-visit
+
+MilesApartAdminBundle_procurement_purchase-order:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/purchaseorder.yml"
+        prefix:   /procurement/purchase-order
+
+MilesApartAdminBundle_finance_supplier-invoice-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierinvoiceproduct.yml"
+        prefix:   /finance/supplier-invoice-product
+
+MilesApartAdminBundle_procurement_purchase-order-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/purchaseorderproduct.yml"
+        prefix:   /procurement/purchase-order-product
+
+MilesApartAdminBundle_procurement_purchase-order-state:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/purchaseorderstate.yml"
+        prefix:   /procurement/purchase-order-state
+
+MilesApartAdminBundle_customer-order_returned-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/returnedproduct.yml"
+        prefix:   /customer-order/returned-product
+
+MilesApartAdminBundle_customer-order_returned-reason:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/returnedreason.yml"
+        prefix:   /customer-order/returned-reason
+
+MilesApartAdminBundle_goods-in_stock-location-product-sent:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/stocklocationproductsent.yml"
+        prefix:   /goods-in/stock-location-product-sent
+
+MilesApartAdminBundle_business_stocktake:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/stocktake.yml"
+        prefix:   /business/stocktake
+
+MilesApartAdminBundle_business_stocktake-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/stocktakeproduct.yml"
+        prefix:   /business/stocktake-product
+
+MilesApartAdminBundle_goods-in_supplier-delivery:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierdelivery.yml"
+        prefix:   /goods-in/supplier-delivery
+
+MilesApartAdminBundle_goods-in_supplier-delivery-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierdeliveryproduct.yml"
+        prefix:   /goods-in/supplier-delivery-product
+
+MilesApartAdminBundle_supplier_supplier-discount:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierdiscount.yml"
+        prefix:   /supplier/supplier-discount
+
+MilesApartAdminBundle_finance_supplier-invoice:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierinvoice.yml"
+        prefix:   /finance/supplier-invoice
+
+MilesApartAdminBundle_finance_supplier-invoice-payment:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierinvoicepayment.yml"
+        prefix:   /finance/supplier-invoice-payment
+
+MilesApartAdminBundle_finance_supplier-invoice-purchase-order:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierinvoicepurchaseorder.yml"
+        prefix:   /finance/supplier-invoice/purchase-order
+
+MilesApartAdminBundle_finance_supplier-invoice-state:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierinvoicestate.yml"
+        prefix:   /finance/supplier-invoice-state
+
+MilesApartAdminBundle_finance_supplier-payment:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierpayment.yml"
+        prefix:   /finance/supplier-payment
+
+MilesApartAdminBundle_product_product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/product.yml"
+        prefix:   /product/product
+
+MilesApartAdminBundle_finance_supplier-payment-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierpaymenttype.yml"
+        prefix:   /finance/supplier-payment-type
+
+MilesApartAdminBundle_campaign_traffic-source:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/trafficsource.yml"
+        prefix:   /campaign/traffic-source
+
+MilesApartAdminBundle_campaign_traffic-source-promotion:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/trafficsourcepromotion.yml"
+        prefix:   /campaign/traffic-source-promotion
+
+MilesApartAdminBundle_campaign_traffic-source-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/trafficsourcetype.yml"
+        prefix:   /campaign/traffic-source-type
+
+MilesApartAdminBundle_product_transfer-request:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/transferrequest.yml"
+        prefix:   /product/transfer-request
+
+MilesApartAdminBundle_product_transfer-request-state:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/transferrequeststate.yml"
+        prefix:   /product/transfer-request-state
+
+MilesApartAdminBundle_campaign_vanity-url:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/vanityurl.yml"
+        prefix:   /campaign/vanity-url
+
+MilesApartAdminBundle_campaign_vanity-url-promotion:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/vanityurlpromotion.yml"
+        prefix:   /campaign/vanity-url-promotion
+
+MilesApartAdminBundle_product_product-answer:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productanswer.yml"
+        prefix:   /product/product-answer
+
+MilesApartAdminBundle_product_product-feature:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productfeature.yml"
+        prefix:   /product/product-feature
+
+MilesApartAdminBundle_product_product-image:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productimage.yml"
+        prefix:   /product/product-image
+
+MilesApartAdminBundle_product_product-keyword:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productkeyword.yml"
+        prefix:   /product/product-keyword
+
+MilesApartAdminBundle_product_product-price:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productprice.yml"
+        prefix:   /product/product-price
+
+MilesApartAdminBundle_product_product-question:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productquestion.yml"
+        prefix:   /product/product-question
+
+MilesApartAdminBundle_category_season:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/season.yml"
+        prefix:   /category/season
+
+MilesApartAdminBundle_category_season-product:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/seasonproduct.yml"
+        prefix:   /category/season-product
+
+MilesApartAdminBundle_category_category:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/category.yml"
+        prefix:   /category/category
+
+MilesApartAdminBundle_business_stock-location:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/stocklocation.yml"
+        prefix:   /business/stock-location
+
+MilesApartAdminBundle_supplier_supplier:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplier.yml"
+        prefix:   /supplier/supplier
+
+MilesApartAdminBundle_supplier_supplier-representative:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/supplierrepresentative.yml"
+        prefix:   /supplier/supplier-representative
+
+MilesApartAdminBundle_supplier_supplier-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/suppliertype.yml"
+        prefix:   /supplier/supplier-type
+
+MilesApartAdminBundle_finance_vat-rate:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/vatrate.yml"
+        prefix:   /finance/vat-rate
+
+MilesApartAdminBundle_finance_vat-rate-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/vatratetype.yml"
+        prefix:   /finance/vat-rate-type
+
+MilesApartAdminBundle_hr_work-week:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/workweek.yml"
+        prefix:   /hr/work-week
+
+MilesApartAdminBundle_product_product-supplier:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/productsupplier.yml"
+        prefix:   /product/product-supplier
+
+MilesApartAdminBundle_finance_daily-take-business-premises-petty-cash:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/dailytakebusinesspremisespettycash.yml"
+        prefix:   /finance/daily-take-business-premises-petty-cash
+
+MilesApartAdminBundle_finance_daily-take-business-premises-shop-department:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/dailytakebusinesspremisesshopdepartment.yml"
+        prefix:   /finance/daily-take-business-premises-shop-department
+
+MilesApartAdminBundle_finance_employee-payment:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/employeepayment.yml"
+        prefix:   /finance/employee-payment
+
+MilesApartAdminBundle_finance_expenses-company:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/expensescompany.yml"
+        prefix:   /finance/expenses-company
+
+MilesApartAdminBundle_finance_expenses-type:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/expensestype.yml"
+        prefix:   /finance/expenses-type
+
+MilesApartAdminBundle_category_shop-department:
+        resource: "@MilesApartAdminBundle/Resources/config/routing/shopdepartment.yml"
+        prefix:   /category/shop-department

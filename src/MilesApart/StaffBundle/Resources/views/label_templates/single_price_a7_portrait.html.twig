@@ -1,0 +1,69 @@
+<div class="print_main_wraper_pa7p price_div">
+	<!-- Header bar text -->
+	<h6 class="print_header_shop_pa7p">{{ entity.getBusinessPremises.getBusinessPremisesAddressLine1 }}, {{ entity.getBusinessPremises.getBusinessPremisesTown }}, {{ entity.getBusinessPremises.getBusinessPremisesCounty }}, {{ entity.getBusinessPremises.getBusinessPremisesPostcode }}</h6>
+
+	<!-- The background image for the price type  -->
+	<img class="print_bg_img_pa7p" src="{{ asset('images/price_templates/A7-Portrait.jpg') }}" />
+	
+	{#
+	*
+	* AREA FOR PRODUCT 
+	*
+	#}
+	{% if entity.getProduct != NULL %}
+		<!-- Product name, use short name if exists, otherwise truncate  -->
+		<h2 class="print_product_name_pa7p">{% if entity.getProduct.getShortName != "" %}   
+				{{ entity.getProduct.getShortName }}
+			{% else %}
+				{{ entity.getProduct.getProductName }}
+			{% endif %}
+		</h2>
+		
+		<!-- Grey sub text -->
+		<h4 class="print_price_subtitle_pa7p">{% if entity.getProduct.getPrintSubtitle != null %}   
+				{{ entity.getProduct.getPrintSubtitle }}
+			{% else %}
+				each
+			{% endif %}
+		</h4>
+		
+		<!-- Price -->
+		<h1 class="print_price_pa7p">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
+
+		<!-- Footer bar text -->
+		<div class="print_footer_barcode_pa7p">
+
+			<!-- Barcode -->
+			{# Check number of digits, if 13 print normal barcode, if 8, print small barcode  #}
+			{% if entity.getProduct.getProductBarcode|length == 8 %}
+				<img  class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean8', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 5, drawText : false}, 'rendererOptions': {'width':95, 'height':5}}) }}">
+			{% else %}
+				<img class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 5, drawText : false}, 'rendererOptions': {'width':115, 'height':5}}) }}">
+			{% endif %}
+		</div>
+	{#
+	*
+	* AREA FOR PRODUCT GROUP
+	*
+	#}
+	{% elseif entity.getProductGroup != NULL %}
+		<!-- Main content -->
+		<h2 class="print_product_name_pa7p">
+			{{ entity.getProductGroup.getProductGroupName }}
+		</h2>
+
+
+		{% if entity.getProductGroup.getProductGroupDefaultPriceDisplay != NULL %}
+			<h1 class="print_price_pa7p">{{ entity.getProductGroup.getProductGroupDefaultPriceDisplay }}</h1>
+			<!-- Grey sub text -->
+			<h4 class="print_price_subtitle_pa7p">
+				Unless marked otherwise
+			</h4>
+		{% else %}
+			<h2>Please see product for price</h2>
+		{% endif %}
+
+		<!-- Barcode -->
+		<img class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
+	{% endif %}
+</div>

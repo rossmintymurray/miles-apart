@@ -1,0 +1,187 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/pick.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'customer_order_details' %}
+
+{% block page_name %}
+    Customer Order Details
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well">
+				<span class="text-muted">Order -</span> #<span id="pick_product_order_id">{{ order.id }}</span> <b>|</b><span class="text-muted">  Item Qty -</span> <span id="pick_product_item_qty">{{ order.getOrderItemQty }}</span> <b>|</b><span class="text-muted"> Product Qty -</span> <span id="pick_product_product_qty">{{ order.customerorderproduct|length }}</span>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="well">
+				<h4>Customer</h4>
+				<h3>
+					<a href="{{ path('staff-customers_view-customer', {'customer_id': order.customer.getId()}) }}">
+						{{ order.customerorderfullname }}
+					</a>
+				</h3>
+				<h5>Billing Address</h5>
+				{% if order.billingaddress != null %}
+					<address>
+						{{ order.billingaddress.customeraddressline1 }}<br />
+						{{ order.billingaddress.customeraddressline2 }}<br />
+						{{ order.billingaddress.customeraddresstown }}<br />
+						{{ order.billingaddress.customeraddresscounty }}<br />
+						{{ order.billingaddress.customeraddresspostcode }}<br />
+					</address>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="well">
+				<h4>State</h4>
+				{{ order.customerorderstate.customerorderstate }}
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="well">
+				<h4>Postage</h4>
+				<h5>Postage Selected</h5>
+				{{ order.deliveryoption.postagetype.postagetypename }} - {{ order.deliveryoption.postageband.postagebandtype.postagebandtypename}} - £{{ order.deliveryoption.postagebandprice }}
+				<h5>Royal Mail details</h5>
+				Posted on 
+				Shipment ID
+				Manifest ID
+				<h5>Delivery Address</h5>
+				<address>
+					{{ order.deliveryaddress.customeraddressline1 }}<br />
+					{% if order.deliveryaddress.customeraddressline2 != null %}
+						{{ order.deliveryaddress.customeraddressline2 }}<br />
+					{% endif %}
+					{{ order.deliveryaddress.customeraddresstown }}<br />
+					{{ order.deliveryaddress.customeraddresscounty }}<br />
+					{{ order.deliveryaddress.customeraddresspostcode }}<br />
+				</address>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well">
+				<h4>Products</h4>
+
+				<table class="table table-striped text-center">
+				    <thead>
+				        <tr>
+				           	<th width="10%" class="text-center">Supplier Code</th>
+							<th width="50%">Name</th>
+							<th width="15%" class="text-center">Price</th>
+							<th width="10%" class="text-center">Qty</th>
+							<th width="15%" class="text-center">Total</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+						
+						{% for item in order.customerorderproduct %}
+							<tr {% if item.customerorderproductstate.customerorderproductstate is defined %} class="table_row_green" {% endif %} id="{{ item.product.productbarcode }}">
+								<td class="text-center">{{ item.product.productsuppliercode }}</td>
+								<td class="text-left">{{ item.product.productname }}</td>
+								<td class="text-center">{{ item.product.currentpricedisplay }}</td>
+								<td class="text-center">{{ item.customerorderproductquantity }}</td>
+								<td class="text-center">£{{ item.customerorderproductquantity * item.product.currentpricedecimal }}</td>
+							</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="well">
+				<h4>Costs</h4>
+				<table class="table table-striped text-center">
+				    <thead>
+				        <tr>
+				           	<th class="text-left">Cost</th>
+							<th class="text-center">Value</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    	<tr>
+				    		<td class="text-left">Product</td>
+				    		<td></td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left">Postage</td>
+				    		<td>£{{ order.deliveryoption.postagebandprice }}</td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left">Card/Paypal fees</td>
+				    		<td></td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left">PAF lookup</td>
+				    		<td>£0.01</td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left">Packaging fees</td>
+				    		<td></td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left"><b>Total</td>
+				    		<td></td>
+				    	</tr>
+				    </tbody>
+				</table>
+
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="well">
+				<h4>Payments</h4>
+				<table class="table table-striped text-center">
+				    <thead>
+				        <tr>
+				           	<th class="text-left">Income</th>
+							<th class="text-center">Value</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    	<tr>
+				    		<td class="text-left">Product</td>
+				    		<td>£{{ order.customerordertotalpricepaid - order.customerordershippingpaid }}</td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left">Postage</td>
+				    		<td>£{{ order.customerordershippingpaid }}</td>
+				    	</tr>
+				    	<tr>
+				    		<td class="text-left"><b>Total</b></td>
+				    		<td><b>£{{ order.customerordertotalpricepaid }}</b></td>
+				    	</tr>
+				    </tbody>
+				</table>	
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="well">
+				<h4>Source</h4>
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+{% endblock %}

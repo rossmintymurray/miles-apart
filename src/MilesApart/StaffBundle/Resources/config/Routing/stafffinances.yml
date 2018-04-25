@@ -1,0 +1,64 @@
+staff-finances_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Finances:notifications" }
+                
+staff-finances_process-daily-take:
+    pattern:  /process-daily-take
+    defaults: { _controller: "MilesApartStaffBundle:Finances:processdailytake" }
+
+staff-finances_process-daily-take-date-select:
+    pattern:  /process-daily-take/date-select
+    defaults: { _controller: "MilesApartStaffBundle:Finances:processdailytakedateselect" }
+
+staff-finances_process-daily-take-business-premises:
+    pattern:  /process-daily-take/business-premises
+    defaults: { _controller: "MilesApartStaffBundle:Finances:processdailytakebusinesspremises" }
+
+staff-finances_process-daily-take-business-premises-submit:
+    pattern:  /process-daily-take/business-premises-submit
+    defaults: { _controller: "MilesApartStaffBundle:Finances:processdailytakebusinesspremisessubmit" }
+
+staff-finances_view-daily-takes:
+    pattern:  /view-daily-takes
+    defaults: { _controller: "MilesApartStaffBundle:Finances:viewdailytakes" }
+
+staff-finances_print-daily-takes:
+    pattern:  /print-daily-takes
+    defaults: { _controller: "MilesApartStaffBundle:Finances:printdailytakes" }
+
+staff-finances_view-daily-takes-by-date:
+    pattern:  /view-daily-takes-by-date
+    defaults: { _controller: "MilesApartStaffBundle:Finances:viewdailytakesbydate" }
+
+staff-finances_view-daily-takes-business-premises:
+    pattern:  /view-daily-takes-business-premises/{business_premises}
+    defaults: { _controller: "MilesApartStaffBundle:Finances:viewdailytakesbusinesspremises" }
+
+staff-finances_view-daily-takes-business-premises_edit:
+    pattern:  /view-daily-takes-business-premises/edit/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Finances:editprocessdailytakebusinesspremises" }
+
+staff-finances_view-daily-takes-business-premises_update:
+    pattern:  /view-daily-takes-business-premises/update/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Finances:updateprocessdailytakebusinesspremises" }
+    requirements: { _method: post|put }
+
+staff-finances_import-invoice-csv:
+    pattern:  /import-invoice-csv
+    defaults: { _controller: "MilesApartStaffBundle:Finances:importinvoicecsv" }
+    requirements: { _method: post|get }
+
+staff-finances_add-invoice:
+    pattern:  /add-invoice
+    defaults: { _controller: "MilesApartStaffBundle:Finances:addinvoice" }
+    requirements: { _method: post|put }
+
+staff-finances_analyse-finances:
+    pattern:  /analyse-finances
+    defaults: { _controller: "MilesApartStaffBundle:Finances:analysefinances" }
+
+staff-finances_employee-payment-calculator:
+    pattern:  /employee-payment-calculator
+    defaults: { _controller: "MilesApartStaffBundle:Finances:employeepaymentcalculator" }
+    requirements: { _method: post|put }
+    

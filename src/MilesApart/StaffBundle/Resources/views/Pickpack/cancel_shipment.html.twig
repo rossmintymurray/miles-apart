@@ -1,0 +1,23 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/pick.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'cancel_shipment' %}
+
+{% block page_name %}
+    Cancel shipment
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	
+	{% if cancel_shipment_success == true %}
+		<h3>The shipment has been successfully cancelled.</h3>
+	{% else %}
+		<h3>There has been an issue cancelling the shipment, please check the response below.</h3>
+		{{ ladybug_dump(cancel_shipment_response) }}
+	{% endif %}
+		
+
+{% endblock %}

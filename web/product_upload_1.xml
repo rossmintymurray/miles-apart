@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <Header>
+    <DocumentVersion>1.0</DocumentVersion>
+    <MerchantIdentifier>A38J5HCNU7X658</MerchantIdentifier>
+  </Header>
+  <MessageType>Product</MessageType>
+  <PurgeAndReplace>false</PurgeAndReplace>
+  <Message>
+    <MessageID>1</MessageID>
+    <OperationType>Update</OperationType>
+    <Product>
+      <SKU>8944</SKU>
+      <StandardProductID>
+        <Type>ASIN</Type>
+        <Value>B00GN5TLIS</Value>
+      </StandardProductID>
+      <DescriptionData>
+        <MSRP currency="GBP">10.99</MSRP>
+      </DescriptionData>
+    </Product>
+  </Message>
+</AmazonEnvelope>

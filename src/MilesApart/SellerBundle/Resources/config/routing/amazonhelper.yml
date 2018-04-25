@@ -1,0 +1,27 @@
+miles_apart_seller_amazon-product-modal:
+    path:     /amazon/product-modal
+    defaults: { _controller: MilesApartSellerBundle:Amazon:amazonproductmodal }
+
+miles_apart_seller_amazon-product-modal-submit:
+    path:     /amazon/product-modal/submit
+    defaults: { _controller: MilesApartSellerBundle:Amazon:amazonproductmodalsubmit }
+
+miles_apart_seller_amazon-total-price:
+    path:     /amazon/total-price
+    defaults: { _controller: MilesApartSellerBundle:Amazon:amazontotalprice }
+
+miles_apart_seller_amazon-price-check-submit:
+    path:     /amazon/total-price/submit
+    defaults: { _controller: MilesApartSellerBundle:Amazon:amazontotalpricesubmit }
+
+miles_apart_seller_get-amazon-orders:
+    path:     /amazon/get-orders
+    defaults: { _controller: MilesApartSellerBundle:Amazon:getamazonorders }
+
+miles_apart_seller_get-amazon-asin:
+    path:     /amazon/get-asin/{barcode}
+    defaults: { _controller: MilesApartSellerBundle:Amazon:getamazonasin }
+
+miles_apart_seller_get-product-info:
+    path:     /amazon/get-product-info
+    defaults: { _controller: MilesApartSellerBundle:Amazon:getproductinfo }

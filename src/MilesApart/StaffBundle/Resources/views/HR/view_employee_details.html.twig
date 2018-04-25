@@ -1,0 +1,281 @@
+{# src/MilesApart/StaffBundle/Resources/views/HR/all_employees.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'hr' %}
+{% set current_page = 'view_employee' %}
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    View Employee
+{% endblock %}
+
+{% block page_content %}
+   
+    <div class="row">
+        <a target="_blank" href="{{ path('staff-hr_statement-of-employment', {'id': employee.getId()}) }}" class="btn btn-primary">
+            Print statement of employment
+        </a>
+        <a target="_blank" href="{{ path('staff-hr_holiday-request-form', {'id': employee.getId()}) }}" class="btn btn-primary">
+            Print holiday request form
+        </a>
+        <div class="col-md-8">
+             <h2>{{ employee.getEmployeeFullName }}</h2>
+             <p class="lead">
+                {% if employee.getCurrentJobRole != false %}
+                    {{ employee.getCurrentJobRole.getEmployeeJobRoleTitle }} since {{ employee.getCurrentJobRoleDateCommenced|date('D jS M Y') }}
+                {% else %}
+                    Unknown
+                {% endif %}
+            </p>
+
+            <h2>
+                <span class="text-muted">Current avg. weekly contracted hours:</span> 
+                {% if employee.getEmployeeContractedHours != false %}
+                    {{ employee.getCurrentContractedHoursDisplay }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </h2>
+             
+             
+        </div>
+        <div class="col-md-4">
+            <div class="well">
+                 <h3>HMRC</h3>
+                 <div class="row">
+                    <div class="col-md-6">
+                        <span class="text-muted">NI Number:</span> 
+                        <h4>{{ employee.getEmployeeNationalInsuranceNumber }}</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-muted">Tax Code:</span>
+                        <h4> {{ employee.getEmployeeTaxCode }}</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12" style="margin-top:40px">
+                        <h3>Holiday Pay</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-muted">Earned to date:</span>
+                    
+                        <h4>{{ employee.getWeightedHolidayHoursEarnedToDate }} <span class="text-muted">hours</span></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-muted">Projected annual:</span>
+                        <h4>{{ employee.getProjectedHolidayHours }} <span class="text-muted">hours</span></h4>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="text-muted">Taken:</span>
+                    
+                        <h4>{{ employee.getTakenHolidayHours }} <span class="text-muted">hours</span></h4>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <span class="text-muted">Remaining:</span>
+                    
+                        <h4>{{ employee.getRemainingHolidayHoursEarned }} <span class="text-muted">hours</span></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-muted">Remaining:</span>
+                        <h4>{{ employee.getRemainingHolidayHoursProjected }} <span class="text-muted">hours</span></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="well">
+                <h5>Contracted Hours</h5>
+                    
+                <table class="table table-striped small"> 
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Avg. Weekly Hours</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for contracted_hours in employee.getEmployeeContractedHours %}
+
+                            
+                                <tr>
+                                    
+                                    <td>{{ contracted_hours.getEmployeeContractedHoursValidFrom|date('jS M Y') }}</td>
+                                    
+                                    
+                                    <td>{{ contracted_hours.getEmployeeContractedHours }}</td>
+                                    
+                                </tr>
+
+                            {% endfor %}
+                        
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="well">
+                <h5>Previous job roles</h5>
+
+                <table class="table table-striped small"> 
+                    <thead>
+                        <tr>
+                            <th>Start Date</th>
+                            <th>Role</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job_role in employee.getEmployeeJobRoleEmployee %}
+
+                                <tr>
+                                    
+                                    <td>{{ job_role.getEmployeeJobRoleDateCommenced|date('jS M Y') }}</td>
+                                 
+                                    
+                                    <td>{{ job_role.getEmployeeJobRole.getEmployeeJobRoleTitle }}</td>
+                                   
+                                </tr>
+
+                            
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="well">
+                <h5>Previous wage rates</h5>
+
+                <table class="table table-striped small"> 
+                    <thead>
+                        <tr>
+                            <th>Start Date</th>
+                            <th>Rate</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for job_role in employee.getEmployeeJobRoleEmployee %}
+
+                            {% for wage_rate in job_role.getEmployeeJobRole.getEmployeeWageRateJobRole %}
+                                <tr>
+                                    <td>{{ wage_rate.getEmployeeWageRate.getEmployeeWageRateDateCreated|date('jS M Y') }}</td>
+                                    <td>&pound;{{ wage_rate.getEmployeeWageRate.getEmployeeWageRateHourlyRate }}</td>
+                                </tr>
+
+                            {% endfor %}
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="well">
+                <h5>Previous holiday hours</h5>
+                    
+                <table class="table table-striped small"> 
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Taken</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                       {% for payment in employee.getEmployeePayment %}
+
+                            {% if payment.getIsEmployeePaymentHoliday == true %}
+
+                            
+                                <tr>
+                                    
+                                    <td>{{ payment.getEmployeePaymentWeekEndDate|date('jS M Y') }}</td>
+                                    
+                                    
+                                    <td>{{ payment.getEmployeePaymentTotalHoursDisplay }}</td>
+                                    <td class="text-center">&pound;{{ payment.getEmployeePaymentTotal|number_format(2, '.', ',') }}</td>
+                                    
+
+                                </tr>
+
+                            {% endif %}
+                        {% endfor %}
+                        
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                <h5>Previous wage payments</h5>
+
+                <table class="table table-striped small"> 
+                    <thead>
+                        <tr>
+                            <th>Payment W/E Date</th>
+                            <th>Payment Date</th>
+                            <th>Hours</th>
+                            <th>Value</th>
+                            <th>Holiday</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for payment in employee.getEmployeePayment %}
+
+                           
+                                <tr>
+                                    
+                                    <td><b>{{ payment.getEmployeePaymentWeekEndDate|date('D jS M Y') }}</b></td>
+                                    <td><b>{{ payment.getDailyTakeBusinessPremises.getDailyTake.getDailyTakeDate|date('D jS M Y') }}</b></td>
+                                    
+                                    <td><b>{{ payment.getEmployeePaymentTotalHoursDisplay }}</b></td>
+                                    <td class="text-center">{{ payment.getEmployeePaymentTotal|number_format(2, '.', ',') }}</td>
+                                    <td>
+                                        <b>{% if payment.getIsEmployeePaymentHoliday == true %}
+                                                Holiday
+                                            {% else %}
+                                                No
+                                            {% endif %}
+                                        </b>
+                                    </td>
+
+                                </tr>
+
+                            
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+   
+
+{% endblock %}

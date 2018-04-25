@@ -1,0 +1,38 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+    About Us
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<div data-spy="scroll" data-target=".document_navigation">
+		<a name="intro"></a>
+	    <p class="lead">Miles Apart was established in 2012 by Lyn Miles, one of the founding partners of Miles Of Value. We are based in Amesbury, Wiltshire with two shops and our head office in the town. We also have a shop in Westbury, also in Wiltshire.</p>
+
+	    <p class="lead">A huge range of products at fair prices, we are a family business with over 25 years experience.</p>
+
+	    <a name="history"></a>
+	    <h3>History</h3>
+	    <p>The origin of Miles Apart can be traced back to 1990, when a partnership (between Michael and Lynda Miles)? was formed to take over 'The Toy Box,' a market stall with a regular pitch at Salisbury (2 pitches on a Saturday), Calne and Ringwood markets.</p>
+	    <p>Selling toys and puzzles, the new owners continued the success of The Toy Box, and in 1992 a retail premises between 'Zebedee The Butchers' and 'Lemon, Line and Felton Soliciters' was found, 28 Salisbury Street, and the business name changed to Miles Of Value. </p>
+	    <p>Over several years the range of products offered grew and grew and more space was needed so 26 Salisbury Street was purchased to increase our size, following the closure of 'Zebedee the Butchers.'</p>
+	    <p>Shops in Fordingbridge, Westbury and Blandford Forum followed as the family's understanding of the business and it's customers developed.<p>
+
+	    <a name="a_new_chapter"></a>
+	    <h3>A New Chapter</h3>
+	    <p>In 2012 the partnership ended and Lyn &amp; daughter Ella now run the Westbury and two Amesbury shops. We continue to strive to provide our customers with the largest range of products at competitive prices.</p>
+	    <p>In 2015 we launched our online shop, with most of our products available to buy from the comfort of your home!
+	</div>
+    
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">About Us</li>
+	<li><a href="#intro">Introduction</a></li>
+	<li><a href="#history">History</a></li>
+	<li><a href="#a_new_chapter">A New Chapter</a></li>
+{% endblock %}

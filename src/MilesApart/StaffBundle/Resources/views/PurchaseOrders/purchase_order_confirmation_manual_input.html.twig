@@ -1,0 +1,151 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/add_product_to_purchase_order.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% form_theme form _self %}
+
+{% block integer_widget %}
+    
+        {% set type = type|default('number') %}
+        {{ block('form_widget_simple') }}
+    
+{% endblock %}
+
+{% block form_row %}
+    {% spaceless %}
+        <td>
+            {{ form_widget(form) }}
+
+            {# Create the form errors and display if validation fails #}
+            <div class="form-error col-md-7 col-md-offset-4">
+                {{ form_errors(form) }}
+            </div>
+        </td>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    
+    {% if errors|length > 0 %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} class="error" {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% else %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        
+        
+    {% endif %}
+{% endblock form_widget_simple %}
+
+{% macro widget_prototype_table(widget, remove_text) %}
+    {% if widget.vars.prototype is defined %}
+        {% set form = widget.vars.prototype %}
+        {% set name = widget.vars.prototype.vars.name %}
+
+    {% else %}
+        {% set form = widget %}
+        {% set name = widget.vars.id %}
+    {% endif %}
+
+    <tr class="prototype_data_content" data-content="{{ name }}" id="{{ name }}">
+        {{ form_widget(form) }}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="form_feedback_div" id="{{ name }}"></div>
+            </div>
+        </div>
+        <td class="prototype_remove_button"><a class="btn-remove btn btn-danger col-md-12 btn-xs" data-related="{{ name }}">X</a></td>
+    </tr>
+{% endmacro %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'add_product_to_purchase_order' %}
+
+{% block page_name %}
+	Add product to purchase order confirmation
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th width="10%">Supplier code</th>
+                <th width="20%">Name</th>
+                <th width="15%">Barcode</th>
+                <th width="10%">Outer Qty</th>
+                <th width="10%">Inner Qty</th>
+                <th width="10%">Ordered Qty</th>
+                <th width="10%">Unit Cost</th>
+                <th width="10%">Total Cost</th>
+                <th width="5%">Remove</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {# Data rows #}
+            {% for purchase_order in purchase_orders %}
+                <tr style="background-color:#e0e0e0;padding:0;margin:0"><td colspan="9"  style="background-color:#e0e0e0;padding-top:0;padding-bottom:0;margin:0;"><h5 style="font-size:1.2rem">PO - {{ purchase_order.id }} <span class="text-muted">- {{ purchase_order.purchaseorderdatecreated|date('jS \\o\\f M Y') }}</h5></td></tr>
+                {% for purchase_order_product in purchase_order.purchaseorderproduct %}
+                    <tr>
+                        <td>{{ purchase_order_product.product.productsuppliercode }}</td>
+                        <td>{{ purchase_order_product.product.productname }}</td>
+                        <td>{{ purchase_order_product.product.productbarcode }}</td>
+                        <td>{{ purchase_order_product.product.productouterquantity }}</td>
+                        <td>{{ purchase_order_product.product.productinnerquantity }}</td>
+                        <td>{{ purchase_order_product.purchaseorderproductquantity }}</td>
+                        <td>{{ purchase_order_product.product.currentcostdisplay }}</td>
+                        <td>{{ purchase_order_product.purchaseorderproductcosttotaldisplay }}</td>
+                        <td><a class="btn-remove btn btn-danger col-md-12 btn-xs">X</a></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="10%">Supplier code</th>
+                        <th width="20%">Name</th>
+                        <th width="15%">Barcode</th>
+                        <th width="10%">Outer Qty</th>
+                        <th width="10%">Inner Qty</th>
+                        <th width="10%">Ordered Qty</th>
+                        <th width="10%">Unit Cost</th>
+                        <th width="10%">Total Cost</th>
+                        <th width="5%">Remove</th>
+                    </tr>
+                </thead>
+
+                
+                <tbody id="purchase_order_products" data-prototype="{{ _self.widget_prototype_table(form.purchase_order_product, 'Remove product')|escape }}">
+
+                    {% for widget in form.purchase_order_product.children %}
+    	                {{ _self.widget_prototype_table(widget, 'Remove product') }}
+    	            {% endfor %}
+
+    	        </tbody>
+            </table>
+        
+	        <div class="prototype_add_button">
+	            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="purchase_order_products">New product</a>
+	        </div>
+
+            <div class="clearfix"></div>
+    
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+
+{% endblock %}
+

@@ -1,0 +1,107 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted is defined %}
+   	{% form_theme form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{% block page_title %}
+	Product return
+{% endblock %}
+
+{% block left_menu %}
+	{% set current_page = "product_return" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+                 
+       	{{ form_start(form) }}       
+		<div class="row">
+		    <div class="large-9 columns">
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.returned_reason) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.returned_reason) }}
+		                {{ form_errors(form.returned_reason) }}
+		            </div>
+		        </div>
+		          
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.returned_product_quantity) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.returned_product_quantity) }}
+		                {{ form_errors(form.returned_product_quantity) }}
+		            </div>
+		        </div>
+
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.return_notes) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.return_notes) }}
+		                {{ form_errors(form.return_notes) }}
+		            </div>
+		        </div>
+
+	
+	            <div class="row"> 
+	                <div class="small-offset-5 small-7 columns">
+	
+	     				{{ form_row(form.submit) }}
+	     			</div>
+	     		</div>
+	     	</div>
+	     </div>
+	     {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+	   
+     	
+	</div>
+
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+	<script>
+		function toggleNewAddressDisplay() {
+
+        	
+        	if ($('#new_address').css("display") == "none") {
+        		$("#new_address").show();
+
+        		//If any addresses are selected, deselect them 
+        		$( ".delivery_address_select" ).each(function() {
+			    if($( this ).hasClass( "success" )) {
+			    	$( this ).removeClass( "success" );
+			    	$(this).text("Select address");
+			    }
+			});
+        	} else {
+        		$("#new_address").hide();
+        		
+
+        		
+        		
+        	
+        	}
+
+        	return false;
+
+	        	
+	    }
+	   </script>
+{% endblock %}

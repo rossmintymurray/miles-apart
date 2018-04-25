@@ -1,0 +1,128 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/find_supplier.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'customers' %}
+{% set current_page = 'view_customers' %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    View Customers
+{% endblock %}
+
+{% block page_content %}
+    
+    {# Create the form to find supplier #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Customer name</legend>
+            {{ form_row(form.customer_name) }}
+       		{{ form_row(form.customer_email) }}
+            {{ form_row(form.business_name) }}
+        </fieldset> 
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+    
+
+    <div id="customers_table">
+
+    	<h3>{{ customer_count }} Total customers</h3>
+
+    	<div id="customers_big_table">
+		    {# Create table for suppliers #}
+		    <table class="table table-striped text-center">
+		        <thead>
+		            <tr class="text-center">
+		            	<th class="text-center">#</th>
+		                <th class="text-left">Customer name</th>
+		               
+		                <th class="text-center">Email</th>
+		                <th class="text-center">Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        
+
+		    	{% for entity in entities %}
+
+		    		{# Check if the customer is a registered customer ?#}
+		    		{# Check if personal customer or business #}
+					{% if entity.personalcustomer != null %}
+						{% set customer = entity.personalcustomer %}
+					{% elseif entity.businesscustomer != null %}
+						{% set customer = entity.businesscustomer %}
+					{% else %}
+						{% set customer = null %}
+					{% endif %}
+
+		    		<tr>
+		    			<td>
+		    				{{ entity.getId() }}
+		    			</td>
+		    			<td class="text-left">
+		    				<a href="{{ path('staff-customers_view-customer', {'customer_id': entity.getId()}) }}">
+		    					{# Check if personal customer or business #}
+		    					{% if entity.personalcustomer != null %}
+		    						{{ customer.personalcustomerfullname }}
+		    					{% elseif entity.businesscustomer != null %}
+		    						{% for reps in customer.businesscustomerrepresentative %}
+		    							{{ reps.businesscustomerrepresentativefullname }},
+		    						{% endfor %}
+		    					{% else %}
+		    						No customer
+		    					{% endif %}
+		    				</a>
+		    			</td>
+		    			
+
+		    			{% if entity.personalcustomer != null %}
+		                    {% set email = customer.personalcustomeremailaddress %}
+		    			{% else %}
+		                    {% set email = "Unknown" %}
+		    			{% endif %}
+		    			
+		                <td>
+		                    <a href="mailto:{{ email }}">{{ email }}</a>
+		                </td>
+		                <td>
+		                    <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Rep">
+		                    	<span class="glyphicon glyphicon-user"></span>
+		                    </a>
+		                    <a href="{{ path('staff-customers_edit-customer', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+		                    	<span class="glyphicon glyphicon-pencil"></span>
+		                    </a>
+		                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" >
+		                    	<span class="glyphicon glyphicon-print"></span>
+		                    </a>
+		                   
+		                    <a href="mailto:{{email}}"class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Email">
+		                    	<span class="glyphicon glyphicon-envelope"></span>
+		                    </a>
+		                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+		                    	<span class="glyphicon glyphicon-trash"></span>
+		                    </a>
+		                </td>
+		    		</tr>
+		    	{% endfor %}
+		    	</tbody>
+		    </table>
+		</div>
+
+	</div>
+
+
+{% endblock %}

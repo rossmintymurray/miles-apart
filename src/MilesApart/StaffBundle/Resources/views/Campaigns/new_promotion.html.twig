@@ -1,0 +1,72 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/new_campaign.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'new_promotion' %}
+
+{% block page_name %}
+    New promotion
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Promotion Details</legend>
+            {{ form_row(form.campaign) }}
+        </fieldset>
+        
+        <fieldset>
+            <legend class="text-muted">Promotion Details</legend>
+            {{ form_row(form.promotion_name) }}
+            {{ form_row(form.promotion_start_date) }}
+            {{ form_row(form.promotion_end_date) }}
+            {{ form_row(form.promotion_type) }}
+        </fieldset>
+        
+        <fieldset>
+            <legend class="text-muted">URLs</legend>
+            {{ form_row(form.promotion_landing_page) }}
+            {{ form_row(form.vanity_url_append_text) }}
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div id="vanity_url_check_response"></div>
+                </div>
+            </div>
+        </fieldset>
+
+         <fieldset>
+            <legend class="text-muted">Traffic source</legend>
+            {{ form_row(form.traffic_source) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">On completion</legend>
+            {{ form_row(form.promotion_total_cost) }}
+        </fieldset>
+
+        
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $("#milesapart_staffbundle_promotion_vanity_url_append_text").keyup(function() {
+            vanityURLCheck($(this).val());
+        });
+    </script>
+{% endblock %}

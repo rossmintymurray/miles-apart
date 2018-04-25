@@ -1,0 +1,61 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::form_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Leave Feedback
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+    
+    <!--Info box area placeholder for success/failure messages  (flash messages) -->
+    {% for flashMessage in app.session.flashbag.get('public-error') %}
+        <div data-alert class="alert-box alert radius">
+            {{ flashMessage }}
+            <a href="#" class="close">&times;</a>
+        </div>
+    {% endfor %}
+
+    {# Flash message for success #}
+    {% for flashMessage in app.session.flashbag.get('public-success') %}
+        <div data-alert class="alert-box success radius">
+            {{ flashMessage }}
+            <a href="#" class="close">&times;</a>
+        </div>
+    {% endfor %}
+
+	<h3>Feedback Form</h3>
+    <p class="lead">We are always striving to improve the service we provide to our customers. If we have failed to meet your expectations or if there's someting you think we could do better, please do let us know by completeing the form below.</p>
+
+    <div class="row">
+    	<div class="large-7 large-offset-2 columns">
+
+		    {# Show the form #}
+		    {{ form_start(form) }}
+		        {{ form_errors(form) }}
+
+		       
+		            {{ form_row(form.feedback_name) }}
+		            {{ form_row(form.feedback_email_address) }}
+		            {{ form_row(form.feedback_content) }}
+		        	<div style="margin-bottom:1rem">
+		        		{{ form_row(form.recaptcha) }}
+		        	</div>
+		            {{ form_row(form.submit) }}
+		        
+		        {{ form_rest(form) }}
+		   
+		    {{ form_end(form) }}
+		</div>
+	</div>
+    
+
+    
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Leave Feedback</li>
+	<li><a href="#feedback_form">Feedback Form</a></li>
+{% endblock %}

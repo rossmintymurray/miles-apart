@@ -1,0 +1,29 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'add_product_to_print_list_business_premises_select' %}
+
+{% block page_name %}
+    Select Business Premises 
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <h1>Select business premises</h1>
+
+    <p>Please select the business premises you wish to print prices/labels for</p>
+
+    <div class="row">
+
+	    {% for premises in business_premises %}
+	    
+		  <div class="col-xs-6 col-md-4 shop_selection">
+		    <a href="{{ path('staff-products_add-product-to-print-list-business-premises-selected', { 'business_premises_slug': premises.getBusinessPremisesSlug }) }}" class="thumbnail">
+		      <h4>{{ premises.getBusinessPremisesName }}</h4>
+		    </a>
+		  </div>
+		 {% endfor %}
+	</div>
+{% endblock %}

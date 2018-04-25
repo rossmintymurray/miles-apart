@@ -1,0 +1,51 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/campaign.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_traffic_source_type' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Traffic Source Type
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Traffic Source Type		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new Traffic Source Type to the system
+{% endblock %}
+
+{% block page_content -%}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Traffic Source Type</legend>
+            {{ form_row(form.traffic_source_type_name) }}
+            {{ form_row(form.traffic_source_type_description) }}
+            </fieldset>
+        {{ form_rest(form) }}
+    </form>
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('campaign_traffic-source-type') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,98 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'business' %}
+{% set current_page = 'view_stock_location_shelves' %}
+
+{% block page_name %}
+	View stock location shelves
+{% endblock %}
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    {% for entity in entities %}
+        <div class="well">
+            <h3>{{ entity.getBusinessPremisesName }}</h3>
+
+            {% for stock_location in entity.getStockLocation %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                
+                                <div class="row">
+                                    <div class="col-md-10">
+
+                                        <h4 style="margin-bottom:10px">{{ stock_location.getStockLocationName }}</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="#" onclick="printAllStockLocationShelfBarcode('{{ stock_location.id }}')" class="btn btn-primary btn-sm col-md-11"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print all</a>
+                                    </div>
+                                </div>
+                                {% set n = 0 %}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <table class="table table-striped small" id="existing_transfer_request_products">
+                                            <thead>
+                                                <tr>
+                                                    <th>Stock Location Shelf Code</th>
+                                                      <th>Print</th>
+                                                </tr>
+                                                    
+                                            </thead>
+                                            <tbody>
+                                            {% for stock_location_shelf in stock_location.getStockLocationShelf %}
+                                                <tr>
+                                                    <td class="{{ stock_location.id }}">{{ stock_location_shelf.stocklocationshelfcode }}</td>
+                                                    <td><a href="#" onclick="printStockLocationShelfBarcode('{{ stock_location_shelf.getStockLocationShelfCode }}')" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a></td>
+                                                </tr>
+                                                {% set n = n + 1 %}
+                                                {% if n  % 8 == 0 %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <table class="table table-striped small" id="existing_transfer_request_products">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Stock Location Shelf Code</th>
+                                                        
+                                                        <th>Print</th>
+                                                    </tr>
+                                                        
+                                                </thead>
+                                                <tbody>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+    function printAllStockLocationShelfBarcode(id) {
+        tableClass = "."+id;
+        var shelves = $(tableClass).toArray();
+        console.log(shelves);
+        console.log(id);
+        alert(shelves[0].innerHTML);
+        for (i=0; i < shelves.length; i++) {
+            printStockLocationShelfBarcode(shelves[i].innerHTML);
+            
+        }
+    }
+    </script>
+{% endblock %}

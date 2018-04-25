@@ -1,0 +1,59 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'suppliers' %}
+{% set current_page = 'view_supplier_products' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    View Supplier Products 
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    
+        <h4>All products from {{ supplier.suppliername }}</h4>
+
+        {# Set up the existing products table #}
+        <table class="table table-striped small" id="existing_transfer_request_products">
+            <thead>
+                <tr>
+                    <th class="hide-on-print hidden-xs">No.</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Supplier Code</th>
+                    <th class="hide-on-print hidden-xs">Barcode</th>
+                    
+                </tr>
+                    
+            </thead>
+            <tbody>
+                
+                {% for product in products %}
+                    <tr>
+                        <td class="hide-on-print hidden-xs">
+                            {{ loop.index }}
+                        </td>
+                        <td>
+                            <a href="{{ path('staff-products_view-product', {'id': product.getId()}) }}">{{ product.getProductName }}</a>
+                        </td>
+                        <td><b>
+                             {{ product.getCurrentPriceDisplay }}</b>
+                        </td>
+                        <td>
+                            {{ product.getProductSupplierCode }}
+                        </td>
+                        <td class="hide-on-print hidden-xs">
+                            {{ product.getProductBarcode }}
+                        </td>
+                        
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   
+
+{% endblock %}

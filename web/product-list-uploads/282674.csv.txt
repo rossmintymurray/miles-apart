@@ -1,0 +1,44 @@
+Code,Description,Barcode,Type,Inner,Outer,Tot Qty,OrdPrc
+5119/96,12 Half Sized Coloured Pencils,5013922051192,O,24,96,96,0.25
+5120/72,10 Full Size Colour Pencils,5013922051208,O,12,72,72,0.28
+3058/48,Scrapbook Multi-Coloured Paper,5013922030586,O,6,48,48,0.38
+3060/72,Scrapbook Black Paper,5013922030609,O,6,72,72,0.38
+5283/48,10 Sheets A3 Neon Card,5013922052830,O,12,48,48,0.48
+5286/48,10 Sheets A3 Pastel Card,5013922052861,O,12,48,48,0.48
+6840,Superior Colouring Book 80 GSM,5013922068404,O,12,48,48,0.50
+4074,4 Chunky Highlighters Assorted Colours,5013922040745,O,12,48,48,0.48
+4255,20 White Luggage Labels 12 x 6cm,5013922042558,O,12,48,48,0.45
+4254,20 Brown Luggage Labels 12 x 6cm ,5013922042541,O,12,48,48,0.45
+4146/48,A4 White Copy Paper 75 80gsm Sheets,5013922041469,O,12,48,48,0.48
+8000/48,Cloakroom Tickets 1-500,5013922080000,O,12,48,48,0.28
+8001/48,Cloakroom tickets 1 - 1000,5013922080017,O,12,48,48,0.48
+6142,Bubble Wrap 4 metre x 300mm,5013922061429,O,1,40,40,0.48
+9281,Magic Bubbles 60ml,5013922092812,O,24,96,96,0.12
+9296,"Glitter Hair Spray 85ml, 6 Assorted Colours",5013922092966,O,24,96,96,0.65
+6723,Acrylic Paints 120ml Assorted Colours,5013922067230,O,12,48,48,0.50
+7832,Large Pop Up Mailing Boxes 447x347x157mm,5013922078328,O,1,15,15,1.05
+7831,Med Pop Up Mailing Boxes 347x247x157mm,5013922078311,O,1,15,15,0.70
+7830,Small Pop Up Mailing Boxes 270x180x105mm,5013922078304,O,1,15,15,0.48
+4056/96,10 Clear plastic Punched pockets,5013922040561,O,12,96,96,0.16
+4055,80 Clear plastic Punched pockets,5013922040554,O,5,30,30,0.95
+6046,5 A5 Zip Top Document Wallets ID pocket,5013922060460,O,12,72,72,0.52
+6502,"4 A4 Business/report Files, metal tabs",5013922065021,O,12,48,48,0.48
+4059/48,20 A-Z A4 Index Divider- Card,5013922040592,O,12,48,48,0.48
+4051/72,"10 A4 Index Dividers, Assorted Colours, Paper",5013922040516,O,12,72,72,0.30
+4220,4 Bubble Envelopes Size D 180 x 265,5013922042206,O,1,30,30,0.46
+4238,Bubble Envelope Size J - Bulk,5013922042381,O,1,50,50,0.35
+4239,Bubble Envelope Size K - Bulk,5013922042398,O,1,50,50,0.35
+4248,6 E Mailer Bags Medium 240 x 320,5013922042480,O,12,72,72,0.48
+4670/40,15 C4 White peel & seal Envelopes 80gsm,5013922046709,O,20,40,40,0.48
+4672/40,30 C5 White peal & seal Envelopes 80gsm,5013922046723,O,10,40,40,0.48
+4674/48,50 DL White peal & seal Envelopes 80gsm,5013922046747,O,12,48,48,0.48
+4682,40 DL Window peal & seal Envelopes 80gsm,5013922046822,O,12,72,72,0.48
+4678/48,50 C6 White peal & seal Envelopes 80gsm,5013922046785,O,12,48,48,0.48
+4680/48,50 Duke White peal & seal Envelopes 80gsm,5013922046808,O,12,48,48,0.48
+4675/48,50 DL Manila peal & seal Envelopes 80gsm,5013922046754,O,12,48,48,0.48
+4681,50 Duke Manila peal & seal Envelopes 80gsm,5013922046815,O,12,72,72,0.48
+5158/48,3 Balls of White String,5013922051581,O,12,48,48,0.48
+5160/48,100m ball of white String,5013922051604,O,12,48,48,0.48
+4289,Cork Board 600 x 800mm,5013922042893,O,2,10,10,3.40
+6314,A4 80 Sheet Refill Pad,5013922063140,O,6,36,36,0.60
+6829/48,Reward Stars,5013922068299,O,12,48,48,0.48

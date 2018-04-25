@@ -1,0 +1,50 @@
+Code,Description,Barcode,Type,Inner,Outer,Tot Qty,OrdPrc
+1090,16 fine tip Fibre Colouring Pens,5013922010908,O,12,48,48,0.32
+5121/48,20 Full Size Colour Pencils,5013922051215,O,12,48,48,0.48
+5684,A4 60 Sheet Sketch Pad,5013922056845,O,6,48,48,0.48
+5685,A3 30 Sheet Sketch Pad 2 designs,5013922056852,O,6,48,48,0.48
+5132,A5 Artists Easynote Sketch Pad,5013922051321,O,6,36,36,1.10
+5131,A4 Artists Easynote Sketch Pad,5013922051314,O,6,36,36,1.10
+5130,A3 Artists Easynote Sketch Pad,5013922051307,O,6,36,36,1.10
+1035,4 Fine liner Pens,5013922010359,O,12,72,72,0.50
+1036/48,4 Roller ball Pens,5013922010366,O,12,48,48,0.50
+1031/48,8 Assorted Ballpoint clear barrel Pens,5013922010311,O,24,48,48,0.32
+1010,4 Hand Writing Pens,5013922010106,O,12,48,48,0.48
+1032/48,10 Technoline Pens,5013922010328,O,12,48,48,0.48
+4072/48,6 Scented Mini Highlighters,5013922040721,O,12,48,48,0.48
+8002/48,Jumbo Bingo Tickets 21 x 12cm,5013922080024,O,12,48,48,0.48
+6055,2 by 20ml Bottles of Correction Fluid,5013922060552,O,12,72,72,0.48
+6075,30cm Easy Grip Clear plastic Ruler,5013922060750,O,12,48,48,0.28
+6224/48,Coloured elastic Bands 100gm,5013922062242,O,12,48,48,0.48
+6225/48,Original Elastic Bands 100gm,5013922062259,O,12,48,48,0.48
+6081/48,2 x 1000 No 26/6 Staples,5013922060811,O,12,48,48,0.32
+6030/72,5 by 3gm tubes Super Glue,5013922060309,O,12,72,72,0.50
+5638,Hook & Loop Self adhesive,5013922056388,O,12,48,48,0.48
+5927/48,Memo Stickers - by 75mm square,5013922059273,O,12,48,48,0.48
+5925,Memo Stickers  Neon Variety 3 sizes,5013922059259,O,12,72,72,0.48
+5931/48,288 Coloured 19mm Sticky Dots,5013922059310,O,12,48,48,0.33
+5135,24 Washable Easynote Fibre Pens,5013922051352,O,6,24,24,1.50
+4256/48,30 Luggage Labels Mixed Colour 135 x 75mm,5013922042565,O,12,48,48,0.45
+4255,20 White Luggage Labels 12 x 6cm,5013922042558,O,12,48,48,0.45
+4254,20 Brown Luggage Labels 12 x 6cm ,5013922042541,O,12,48,48,0.45
+3251/96,Reporter Notepad 160 Pages 50gsm,5013922032511,O,12,96,96,0.28
+8000/48,Cloakroom Tickets 1-500,5013922080000,O,12,48,48,0.28
+6026/72,4 A4 Polyfile Wallet Stud 4 Colours Assorted,5013922060262,O,12,72,72,0.48
+6140,A4 Display Book 40 Pocket,5013922061405,O,12,36,36,0.95
+6195/10,A4 Lever Arch Files ready assembled,5013922061955,O,1,10,10,1.10
+5921,8 A4 Laminating Pouches,5013922059211,O,12,72,72,0.52
+4672/40,30 C5 White peal & seal Envelopes 80gsm,5013922046723,O,10,40,40,0.48
+4674/48,50 DL White peal & seal Envelopes 80gsm,5013922046747,O,12,48,48,0.48
+4678/48,50 C6 White peal & seal Envelopes 80gsm,5013922046785,O,12,48,48,0.48
+4251/48,100 Money Wallets 70 x 105mm,5013922042510,O,12,48,48,0.48
+4250/48,80 Wage Packets 100 x 110 mm,5013922042503,O,12,48,48,0.48
+1277,Parcel/Kraft wrap 4M x 70cm,5013922012773,O,36,72,72,0.42
+6129,Large Exec Padded Address Book,5013922061290,O,12,48,48,1.20
+6204,Wedding Guest Book 19.5 x 26.5 cm,5013922062044,O,1,12,12,3.20
+4197,10 Mixed Floral Birthday Cards in Keepsake Box,5013922041971,O,12,72,72,0.48
+4187/48,10 Adult Birthday Cards in Keepsake Box,5013922041872,O,12,48,48,0.48
+4198,10 Mixed Pets Birthday Cards in Keepsake Box,5013922041988,O,12,72,72,0.48
+1468,9 Sheets Printed Tissue Paper 50 x 60cm,5013922014685,O,24,48,48,0.48
+6723,Acrylic Paints 120ml Assorted Colours,5013922067230,O,12,48,48,0.50
+4490,8 Kids Birthday Cards in Keepsake Box,5013922044903,O,12,48,48,0.48
+8011,"Receipt Book, Half size 80 sets",5013922080116,O,12,48,48,0.28

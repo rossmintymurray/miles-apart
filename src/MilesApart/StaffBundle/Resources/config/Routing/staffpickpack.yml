@@ -1,0 +1,67 @@
+staff-pickpack_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:notifications" }
+
+staff-pickpack_find-order:
+    pattern:  /find-order
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:findorder" }
+
+staff-pickpack_find-order-form-submit:
+    pattern:  /find-order-submit
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:findordersubmit" }
+                
+staff-pickpack_pick:
+    pattern:  /pick
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:pick" }
+
+staff-pickpack_pick-form-submit:
+    pattern:  /pick-form-submit
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:pickformsubmit" }
+
+staff-pickpack_pick-product-form-submit:
+    pattern:  /pick-product-form-submit
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:pickproductformsubmit" }
+
+staff-pickpack_process-pick-product:
+    pattern:  /process-pick-product
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:processpickproduct" }
+
+staff-pickpack_complete-order-pick:
+    pattern:  /complete-order-pick/{order_id}
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:completeorderpick" }
+
+staff-pickpack_pack:
+    pattern:  /pack
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:pack" }
+
+staff-pickpack_pack-form-submit:
+    pattern:  /pack-form-submit
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:packformsubmit" }
+
+staff-pickpack_pack-product-form-submit:
+    pattern:  /pack-product-form-submit
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:packproductformsubmit" }
+
+staff-pickpack_process-pack-product:
+    pattern:  /process-pack-product
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:processpackproduct" }
+
+staff-pickpack_complete-order-pack:
+    pattern:  /complete-order-pack/{order_id}
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:completeorderpack" }
+
+staff-pickpack_recall:
+    pattern:  /recall
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:recall" }
+
+staff-pickpack_print-packing-slips:
+    pattern:  /print-packing-slips/{customer_order_id}
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:printpackingslips", customer_order_id: null }
+
+staff-pickpack_print-invoices:
+    pattern:  /print-invoices/{customer_order_id}
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:printinvoices", customer_order_id: null }
+
+staff-pickpack_update-order-state-printed:
+    pattern:  /update-order-state/printed
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:updateorderstateprinted"}

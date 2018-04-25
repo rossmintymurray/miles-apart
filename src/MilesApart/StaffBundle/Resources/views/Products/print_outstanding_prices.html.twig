@@ -1,0 +1,168 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/print_outstanding_prices.html.twig #}
+{% extends '::price_print_base.html.twig' %}
+
+{% block print_page_content %}
+	
+
+	{# Check if there are multiple price types to be printed #}
+	{% if print_request_types is defined %}
+		{# Iterate over each price type #}
+		{% for print_request_type in print_request_types %}
+			{# Show by price type #}
+
+			
+			{% for entity in print_request_type.getPrintRequest %}
+				
+				
+					{# Get the price type template from the db - might have to check this #}
+					{% if entity.getPrintRequestType.getPrintRequestTypeName == 'Hook Hanger'%}
+						{% include 'MilesApartStaffBundle:label_templates:hook_hanger.html.twig' %}
+
+
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Large'%}
+						{% include 'MilesApartStaffBundle:label_templates:shelf_front_large.html.twig' %}
+					
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Medium'%}
+						{% include 'MilesApartStaffBundle:label_templates:shelf_front_medium.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Small'%}
+						{% include 'MilesApartStaffBundle:label_templates:shelf_front_small.html.twig' %}
+
+
+						
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A4 - Portrait'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a4_portrait.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A4 - Landscape'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a4_landscape.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A5 - Portrait'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a5_portrait.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A5 - Landscape'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a5_landscape.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A6 - Portrait'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a6_portrait.html.twig' %}
+						
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A6 - Landscape'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a6_landscape.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A7 - Portrait'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a7_portrait.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A7 - Landscape'%}
+						{% include 'MilesApartStaffBundle:label_templates:single_price_a7_landscape.html.twig' %}
+
+
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Small'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_small.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Medium'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_medium.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Large'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_large.html.twig' %}
+
+
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - XSmall'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_colour_xsmall.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - Small'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_colour_small.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - Medium'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_colour_medium.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - Large'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_colour_large.html.twig' %}
+
+					{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - XLarge'%}
+						{% include 'MilesApartStaffBundle:label_templates:price_window_colour_xlarge.html.twig' %}
+					{% endif %}
+					
+
+			{% endfor %}
+
+			
+
+		{% endfor %}
+	{% else %}
+		
+		{% for entity in entities %}
+		    {# Get the price type template from the db - might have to check this #}
+				{% if entity.getPrintRequestType.getPrintRequestTypeName == 'Hook Hanger'%}
+					{% include 'MilesApartStaffBundle:label_templates:hook_hanger.html.twig' %}
+				
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Large'%}
+					{% include 'MilesApartStaffBundle:label_templates:shelf_front_large.html.twig' %}
+				
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Medium'%}
+					{% include 'MilesApartStaffBundle:label_templates:shelf_front_medium.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Small'%}
+					{% include 'MilesApartStaffBundle:label_templates:shelf_front_small.html.twig' %}
+
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A4 - Portrait'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a4_portrait.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A4 - Landscape'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a4_landscape.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A5 - Portrait'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a5_portrait.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A5 - Landscape'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a5_landscape.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A6 - Portrait'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a6_portrait.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A6 - Landscape'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a6_landscape.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A7 - Portrait'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a7_portrait.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - A7 - Landscape'%}
+					{% include 'MilesApartStaffBundle:label_templates:single_price_a7_landscape.html.twig' %}
+
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Small'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_small.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Medium'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_medium.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Large'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_large.html.twig' %}
+
+
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - XSmall'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_colour_xsmall.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - Small'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_colour_small.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - Medium'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_colour_medium.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - Large'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_colour_large.html.twig' %}
+
+				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Price - Window - Colour - XLarge'%}
+					{% include 'MilesApartStaffBundle:label_templates:price_window_colour_xlarge.html.twig' %}
+
+				{% endif %}
+
+				
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}

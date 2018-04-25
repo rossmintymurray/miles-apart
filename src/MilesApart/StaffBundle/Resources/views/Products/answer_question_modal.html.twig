@@ -1,0 +1,42 @@
+{# Create the wrapper to hold the form for answering questions #}
+{# src/MilesApart/StaffBundle/Resources/views/Sellers/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::modal_layout.html.twig' %}
+
+{# Set the dynamic content for this template #}
+{% block modal_title %}
+    
+{% endblock %}
+
+{% block product_name %}
+    Answer Question Modal
+{% endblock %}
+
+
+{% block modal_content %}
+
+
+    <div id="ask_question_modal_content">
+        <h2 id="modalTitle"></h2>
+        <p class="lead">Please answer the question using the form below.</p>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        {{ form_row(form.product_question) }}
+        {{ form_row(form.product_answer_text) }}      
+       
+    </div>
+
+{% endblock %}
+    
+{% block modal_footer %}
+    {{ form_row(form.submit) }}
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block modal_javascripts %}
+    submitAnswerQuestionModal();
+{% endblock %}
+    

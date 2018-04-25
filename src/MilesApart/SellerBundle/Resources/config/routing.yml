@@ -1,0 +1,12 @@
+miles_apart_seller_notifications:
+    path:     /notifications
+    defaults: { _controller: MilesApartSellerBundle:Seller:notifications }
+
+#*****************************************
+# 
+# Import routing
+#
+#*****************************************
+MilesApartSellerBundle_seller-helper:
+        resource: "@MilesApartSellerBundle/Resources/config/routing/amazonhelper.yml"
+        prefix:   /staff/seller

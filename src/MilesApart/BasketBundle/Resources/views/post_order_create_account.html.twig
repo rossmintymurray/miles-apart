@@ -1,0 +1,55 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::form_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{# Set the page content #}
+{% block page_title %}
+    Registration
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<!--Info box area placeholder for success/failure messages  (flash messages) -->
+    {% for flashMessage in app.session.flashbag.get('public-error') %}
+        <div data-alert class="alert-box alert radius">
+            {{ flashMessage }}
+            <a href="#" class="close">&times;</a>
+        </div>
+    {% endfor %}
+
+    {# Flash message for success #}
+    {% for flashMessage in app.session.flashbag.get('public-success') %}
+        <div data-alert class="alert-box success radius">
+            {{ flashMessage }}
+            <a href="#" class="close">&times;</a>
+        </div>
+    {% endfor %}
+    <p class="lead">Please enter a password to finalise your registration.</p>
+
+    <div class="row">
+    	<div class="large-7 large-offset-2 columns">
+			
+		    {# Show the form #}
+		    {{ form_start(form) }}
+            	{{ form_errors(form) }}
+            	
+               
+            	{{ form_row(form.plainPassword) }}
+            
+            	<div class="hidden"> 
+            		{{ form_rest(form) }}
+            	</div>
+        <input type="submit" class="button small-12 " value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+        	{{ form_end(form) }}
+		    {#{% render (controller("MilesApartPublicUserBundle:Registration:register", { 'checkout' : true })) %}#}
+		</div>
+	</div>
+
+	
+
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+   	
+{% endblock %}

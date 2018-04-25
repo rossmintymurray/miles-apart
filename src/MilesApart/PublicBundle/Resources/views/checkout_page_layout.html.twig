@@ -1,0 +1,65 @@
+{# src/MilesApart/PublicBundle/Resources/views/shop_page_layout.html.twig #}
+{% extends '::public_base_foundation.html.twig' %}
+
+
+{% block body %}
+    
+    {# Create the breadcrumbs wrapper 
+    <div class="row">
+        <div class="large-12 columns">
+            {% block breadcrumb %}
+                {{ wo_render_breadcrumbs() }}
+            {% endblock %}
+        </div>
+    </div>#}
+
+    <div class="row">
+        <div class="large-10 large-offset-1">
+            {# Create page content #}
+            {% block checkout_progress_bar %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    {# Main content row #}
+    <div class="row">
+
+    	{# Create the about text column #}
+        <div class="large-8 columns" >
+           
+           
+
+    		{# Create page content #}
+    		{% block page_content %}
+
+    		{% endblock %}
+
+            {% block pagination_links %}
+            {% endblock %}
+                   
+
+        </div>
+
+        {# Create the right column #}
+        <div class="large-4 columns">
+            
+                
+            {% block right_column %}
+                
+                
+
+            {% endblock %}
+                
+        </div>
+
+    	
+        
+
+        
+    	
+
+    {# End of main body wrapper #}
+    </div>
+
+{% endblock %}

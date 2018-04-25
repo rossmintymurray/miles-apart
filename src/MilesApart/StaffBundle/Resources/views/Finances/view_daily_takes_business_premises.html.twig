@@ -1,0 +1,62 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/view_daily_takes.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'view_daily_takes' %}
+
+{% block page_name %}
+  View daily takes business premises
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+<div class="row" id="date_range_picker">
+  	
+  	<div class="col-md-8">
+    	
+    </div>
+    <div class="col-md-2">
+    	<div class="form-group">
+    		<label class="sr-only" for="startdatepicker">Start date</label>
+    		<input type="text" class="form-control col-md-12" id="startdatepicker" placeholder="Start date">
+    	</div>
+    </div>
+    <div class="col-md-2">
+    	<div class="form-group">
+    		<label class="sr-only" for="enddatepicker">End date</label>
+			<input type="text" class="form-control col-md-12" id="enddatepicker" placeholder="End date">
+		</div>
+	</div>
+</div>
+
+
+{# Create tabs for navigation of sections #}
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#take" role="tab" data-toggle="tab">Take</a></li>
+  <li role="presentation"><a href="#departments" role="tab" data-toggle="tab">Departments</a></li>
+  <li role="presentation"><a href="#receipts" role="tab" data-toggle="tab">Receipts</a></li>
+  <li role="presentation"><a href="#payments" role="tab" data-toggle="tab">Payments</a></li>
+</ul>
+
+{# Create the tab panes to be hidden and shown #}
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="take">
+  	<h3><span class="text-muted">Take for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+
+  	<h3>{{ business_premises }}
+  </div>
+  <div role="tabpanel" class="tab-pane" id="departments">
+  		<h3><span class="text-muted">Departments for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+	</div>
+  	<div role="tabpanel" class="tab-pane" id="receipts">
+  		<h3><span class="text-muted">Receipts for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+  	</div>
+  	<div role="tabpanel" class="tab-pane" id="payments">
+  		<h3><span class="text-muted">Payments for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+  	</div>
+</div>
+
+
+
+{% endblock %}

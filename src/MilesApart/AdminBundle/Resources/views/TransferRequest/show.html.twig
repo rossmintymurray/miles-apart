@@ -1,0 +1,58 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'transfer_request' %}
+
+{# Set the page title #}
+{% block title %}
+    - Transfer Request
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    - Transfer Request           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Transfer Request details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Transfer request date created</th>
+                <td>{{ entity.transferrequestdatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Transfer request date modified</th>
+                <td>{{ entity.transferrequestdatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Transfer request date completed</th>
+                <td>{{ entity.transferrequestdatecompleted|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_transfer-request') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('product_transfer-request_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

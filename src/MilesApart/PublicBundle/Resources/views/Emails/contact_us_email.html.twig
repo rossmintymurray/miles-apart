@@ -1,0 +1,38 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_name %}
+	New Contact Us Message
+{% endblock %}
+
+{% block email_title %}
+	New Contact Us Message
+{% endblock %}
+
+{% block email_intro %}
+	A new contact us message has been received from <b>{{ contact_us.getContactUsMessageName }}</b> on <b>{{ contact_us.getContactUsMessageDateCreated|date("F jS \\a\\t g:ia") }}</b>.
+{% endblock %}
+
+{% block email_content %}
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th>
+					      	<p>{{ contact_us.getContactUsMessageContent }}</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+	
+{% endblock %}
+
+{% block email_callout %}
+{% endblock %}
+
+{% block email_footer %}
+{% endblock %}

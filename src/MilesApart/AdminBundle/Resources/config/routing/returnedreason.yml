@@ -1,0 +1,33 @@
+customer-order_returned-reason:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer-order_returned-reason_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:show" }
+
+customer-order_returned-reason_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:new" }
+
+customer-order_returned-reason_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:create" }
+    requirements: { _method: post }
+
+customer-order_returned-reason_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:edit" }
+
+customer-order_returned-reason_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:update" }
+    requirements: { _method: post|put }
+
+customer-order_returned-reason_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedReason:delete" }
+    requirements: { _method: post|delete }

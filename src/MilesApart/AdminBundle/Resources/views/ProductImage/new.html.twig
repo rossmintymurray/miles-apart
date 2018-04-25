@@ -1,0 +1,58 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_product_image' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Product Image
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Product Image		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new product image to the system
+{% endblock %}
+
+{% block page_content -%}
+    
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Name &amp; Description</legend>
+            {{ form_row(form.file) }}
+            {{ form_row(form.product_image_path) }}
+            {{ form_row(form.product_image_title) }}
+            {{ form_row(form.product_image_description) }}
+            {{ form_row(form.product_image_is_main) }}
+            {{ form_row(form.product) }}
+        </fieldset>
+
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_product-image') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

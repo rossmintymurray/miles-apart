@@ -1,0 +1,88 @@
+{# Include the css stylesheet #}
+{% block stylesheets %}
+	<link href="{{ asset('css/shelf_front_medium.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% if loop.index is not divisible by (3) %}
+	<div class="margin-right">
+{% endif %}
+
+<div class="shelf_front_medium_main_wraper">
+
+	<!-- MA Logo -->
+	<img class="shelf_front_medium_logo" src="{{ asset('images/logos/Small-Logo-No-Text.png') }}" />
+
+	{#
+	*
+	* AREA FOR PRODUCT 
+	*
+	#}
+	{% if entity.getProduct != NULL %}
+		<!-- Supplier text -->
+		<h6 class="shelf_front_medium_supplier">
+			{# Check that the supplier is set #}
+			{% if entity.getProduct.getDefaultProductSupplier is defined %}
+				{{ entity.getProduct.getDefaultProductSupplier.getSupplier.getSupplierShortName }}
+			{% endif %}
+		</h6>
+
+		<!-- Main content -->
+		<h2 class="shelf_front_medium_product_name">
+			{# Check if the short name has been set, if it has show it, otherwise show the full name #}
+			{% if entity.getProduct.getShortName != "" %}   
+				{{ entity.getProduct.getShortName }}
+			{% else %}
+				{{ entity.getProduct.getProductName }}
+			{% endif %}
+		</h2>
+		
+		<!-- Barcode -->
+		<img class="shelf_front_medium_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
+
+		<h1 class="shelf_front_medium_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
+		<!-- Grey sub text -->
+		<h4 class="shelf_front_medium_price_subtitle">
+			{% if entity.getProduct.getPrintSubtitle != null %}   
+				{{ entity.getProduct.getPrintSubtitle }}
+			{% else %}
+				each
+			{% endif %}
+		</h4>
+
+		
+
+		<!-- Supplier Code -->
+		<h6 class="shelf_front_medium_supplier_code">Supplier code: {{ entity.getProduct.getProductSupplierCode }}</h6>
+	{#
+	*
+	* AREA FOR PRODUCT GROUP
+	*
+	#}
+	{% elseif entity.getProductGroup != NULL %}
+		<!-- Main content -->
+		<h2 class="shelf_front_medium_product_name">
+			{{ entity.getProductGroup.getProductGroupName }}
+		</h2>
+
+		<!-- Barcode -->
+		<img class="shelf_front_medium_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':132, 'height':30}}) }}">
+
+		<div class="clearfix"></div>
+
+		{% if entity.getProductGroup.getProductGroupDefaultPrice != NULL %}
+			<h1 class="shelf_front_medium_price">{{ entity.getProductGroup.getProductGroupDefaultPriceDisplay }}</h1>
+			<!-- Grey sub text -->
+			<h4 class="shelf_front_medium_price_subtitle">
+				Unless marked otherwise
+			</h4>
+		{% else %}
+			<h4 class="shelf_front_medium_price_as_marked">Price as marked</h4>
+		{% endif %}
+	{% endif %}
+</div>
+
+{% if loop.index is not divisible by (3) %}
+	</div>
+{% endif %}
+</body>
+</html>

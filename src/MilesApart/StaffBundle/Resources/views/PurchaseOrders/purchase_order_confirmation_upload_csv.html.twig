@@ -1,0 +1,51 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'csv_upload' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    Import product list CSV 
+{% endblock %}
+
+{# Set the page sub header #}
+{% block page_sub_header %}
+    Add product list or catalogue data to the system
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    <h2>Please select file for upload</h2>
+
+    {# Create and show the form #
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #
+        <fieldset>
+            <legend class="text-muted">CSV File</legend>
+            {{ form_row(form.file) }}
+            {{ form_row(form.supplier) }}
+
+          
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+    #}
+    
+{% endblock %}

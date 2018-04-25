@@ -1,0 +1,63 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'goods_in' %}
+{% set current_page = 'store_deliveries' %}
+
+{% block page_name %}
+    Store deliveries
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+
+    {# Delivered deliveries #}
+    <h2>Delivered deliveries</h2>
+    {# Iterate over the deliveries #}
+    <table class="table table-striped small" id="existing_supplier_deliveries">
+        <thead>
+            <tr>
+                <th>Supplier name</th>
+                <th>Carrier</th>
+                <th>Booked In Date</th>
+                <th>Delivery location</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Iterate over the deliveries #}
+            {% for delivery in supplier_deliveries %} 
+        
+        
+                {% if delivery.delivereddatetime != null %}
+        
+                    <tr>
+                        <td>
+                            {{ delivery.getSupplier.getSupplierName }}
+                        </td>
+                        <td>
+                            {{ delivery.getLogisticsCompany.getLogisticsCompanyName }}
+                        </td>
+                        <td>
+                            {{ delivery.getBookedInDate|date('d M Y') }}
+                        </td>
+                        <td>
+                            {{ delivery.getBusinessPremises.getBusinessPremisesName }}
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <a href="{{ path('staff-goods-in_store-delivery', { 'supplier_delivery_id': delivery.getId }) }}" class="btn btn-xs btn-primary">Store</a>
+                        </td>
+                        
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

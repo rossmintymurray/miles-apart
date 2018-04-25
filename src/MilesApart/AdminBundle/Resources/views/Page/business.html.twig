@@ -1,0 +1,130 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/business.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'business' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'business_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Business
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Business			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing business premises and business wide settings (VAT etc)
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    {# Create the overview nav #}
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'business_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_business') }}">Business overview</a>
+    </li>
+
+    {#Create the business nav #}
+     <li class="nav-header">Business</li>
+     <li {% if current_page == 'business' %} class="active" {% endif %}>
+        <a href="{{ path('business') }}">View business</a>
+    </li>
+    <li {% if current_page == 'new_business' %} class="active" {% endif %}>
+        <a href="{{ path('business_new') }}">New business</a>
+    </li>
+
+    <li class="nav-divider"></li>
+
+    {#Create the business premises nav #}
+     {#<li class="nav-header">Business</li>#}
+     <li {% if current_page == 'business_premises' %} class="active" {% endif %}>
+        <a href="{{ path('business_business-premises') }}">View premises</a>
+    </li>
+    <li {% if current_page == 'new_business_premises' %} class="active" {% endif %}>
+        <a href="{{ path('business_business-premises_new') }}">New premises</a>
+    </li>
+
+    <li  class="nav-divider"></li>
+
+    {#Create the business premises type nav #}
+     {#<li class="nav-header">Business Premises Type</li>#}
+     <li {% if current_page == 'business_premises_type' %} class="active" {% endif %}>
+        <a href="{{ path('business_business-premises-type') }}">View premises types</a>
+    </li>
+    <li {% if current_page == 'new_business_premises_type' %} class="active" {% endif %}>
+        <a href="{{ path('business_business-premises-type_new') }}">New premises type</a>
+    </li>
+
+    
+<li  class="nav-divider"></li>
+    {#Create the competitor nav #}
+     <li class="nav-header">Competitor</li>
+     <li {% if current_page == 'competitor' %} class="active" {% endif %}>
+        <a href="{{ path('business_competitor') }}">View competitors</a>
+    </li>
+    <li {% if current_page == 'new_competitor' %} class="active" {% endif %}>
+        <a href="{{ path('business_competitor_new') }}">New competitor</a>
+    </li>
+
+    <li  class="nav-divider"></li>
+
+    {#Create the competitor product nav #}
+     {#<li class="nav-header">Competitor Product</li>#}
+     <li {% if current_page == 'competitor_product' %} class="active" {% endif %}>
+        <a href="{{ path('business_competitor-product') }}">View competitor products</a>
+    </li>
+    <li {% if current_page == 'new_competitor_product' %} class="active" {% endif %}>
+        <a href="{{ path('business_competitor-product_new') }}">New competitor product</a>
+    </li>
+
+    <li  class="nav-divider"></li>
+
+    {#Create the competitor type nav #}
+     {#<li class="nav-header">Competitor Type</li>#}
+     <li {% if current_page == 'competitor_type' %} class="active" {% endif %}>
+        <a href="{{ path('business_competitor-type') }}">View competitor types</a>
+    </li>
+    <li {% if current_page == 'new_competitor_type' %} class="active" {% endif %}>
+        <a href="{{ path('business_competitor-type_new') }}">New competitor type</a>
+    </li>
+
+    {#Create the stocktake nav #}
+    <li class="nav-header">Stocktake</li>
+     <li {% if current_page == 'stocktake' %} class="active" {% endif %}>
+        <a href="{{ path('business_stocktake') }}">View stocktakes</a>
+    </li>
+    <li {% if current_page == 'new_stocktake' %} class="active" {% endif %}>
+        <a href="{{ path('business_stocktake_new') }}">New stocktake</a>
+    </li>
+
+    {#Create the stocktake product nav #}
+    <li class="nav-header">Stocktake Product</li>
+     <li {% if current_page == 'stocktake_product' %} class="active" {% endif %}>
+        <a href="{{ path('business_stocktake-product') }}">View stocktake products</a>
+    </li>
+    <li {% if current_page == 'new_stocktake_product' %} class="active" {% endif %}>
+        <a href="{{ path('business_stocktake-product_new') }}">New stocktake product</a>
+    </li>
+    
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

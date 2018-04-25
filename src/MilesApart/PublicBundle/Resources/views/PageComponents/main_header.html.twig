@@ -1,0 +1,66 @@
+{# Create header row #}
+<div class="show-for-large-up">
+    <div class="row">
+        
+        {# Create logo #}
+        <div class="small-3 large-3 columns">
+            <a href="{{ path('miles_apart_public_homepage') }}">
+                <img src="{{ asset('images/logos/HomepageLogoSm.jpg') }}" class="miles-apart-logo-main" alt="Miles Apart main logo" />
+            </a>
+            <h2 class="header_logo_text textfill"><a href="{{ path('miles_apart_public_homepage') }}">Miles Apart</a></h2>
+        </div>
+        
+        <div id="search-bar-and-basket-wrapper">
+            {# Create the search bar #}
+            <div class="small-9 medium-9 large-5 xlarge-6 columns">
+               
+
+                 <form action="{{ path('miles_apart_public_search_results') }}" novalidate method="get">
+                    <div class="row collapse">
+                        
+                        <div class="small-10 columns">
+                           <input type="text" id="query" name="query" required="required" class="search-bar" placeholder="Search..." 
+                            
+                            {# Replace search bar placeholder with value if it is set #}
+                            {% if search_string is defined %}
+                                value="{{ search_string }}"
+                            {% endif %}
+
+                            {# Delete search string iof it is set when the user selects the search #}
+                            onfocus="if (this.value == '{{ search_string }}') {this.value = ''; this.style.color='#333333'}" onblur="if (this.value == '') {this.value = '{{ search_string }}'; this.style.color='#333333';}"
+                            />
+                        </div>
+                        <div class="small-2 columns">
+                            <a href="#" type="submit" class="button postfix search-bar-button"></a>
+                        </div>
+                    </div>
+                </form>
+
+                {# Old Form 
+                <form action="{{ path('miles_apart_public_search_results') }}" novalidate method="post"{{ form_enctype(form) }}>
+                    <div class="row collapse">
+                        
+                        <div class="small-10 columns">
+                           {{ form_widget(form.search_string) }}
+                        </div>
+                        <div class="small-2 columns">
+                            <a href="#" type="submit" class="button postfix search-bar-button"></a>
+                        </div>
+                    </div>
+                        {{ form_rest(form) }}
+        
+                    {{ form_end(form) }}
+                    #}
+                
+            </div>   
+
+            {# Create the basket bar #}
+            <div class="small-12 medium-12 large-4 xlarge-3 columns">
+                {# Call the main navigation controller #}
+                {{ render(controller('MilesApartPublicBundle:PageComponents:basketBar')) }}
+            </div> 
+        </div>
+
+    {# End header row #}
+    </div>
+</div>

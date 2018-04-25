@@ -1,0 +1,62 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/business.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'business' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.businessname }} - Business
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.businessname }} - Business        
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View business details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Business name</th>
+                <td>{{ entity.businessname }}</td>
+            </tr>
+            <tr>
+                <th>Business VAT number</th>
+                <td>{{ entity.businessvatnumber }}</td>
+            </tr>
+            <tr>
+                <th>Business registration number</th>
+                <td>{{ entity.businessregistrationnumber }}</td>
+            </tr>
+            <tr>
+                <th>Business tax office ref</th>
+                <td>{{ entity.businesstaxofficereference }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('business') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('business_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

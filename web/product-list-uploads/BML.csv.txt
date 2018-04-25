@@ -1,0 +1,7 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+100 Pink Chaser Lights with Ultra Bright LED,5025301750305,75030,10.99,BML
+144 Twinkle Lights with Colour Bulbs,5025301751708,75170,11.99,BML
+20 Hollyt Berrys with 60 Green & Red Ultra Bright LED,5025301707507,70750,10.99,BML
+80 LED Outdoor Candle Chaser Lights,5025301753801,75380,19.99,BML
+24 White LED Star Curtain Lights,5025301740207,74020,10.50,BML
+40 Fairy Lights With Clear Bulbs ,5025301757007,75700,3.50,BML

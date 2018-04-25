@@ -1,0 +1,33 @@
+finance_daily-take-business-premises:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_daily-take-business-premises_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:show" }
+
+finance_daily-take-business-premises_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:new" }
+
+finance_daily-take-business-premises_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:create" }
+    requirements: { _method: post }
+
+finance_daily-take-business-premises_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:edit" }
+
+finance_daily-take-business-premises_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:update" }
+    requirements: { _method: post|put }
+
+finance_daily-take-business-premises_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremises:delete" }
+    requirements: { _method: post|delete }

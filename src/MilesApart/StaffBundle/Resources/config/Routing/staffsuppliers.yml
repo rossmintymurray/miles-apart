@@ -1,0 +1,99 @@
+staff-suppliers_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:notifications" }
+
+staff-suppliers_new-supplier:
+    pattern:  /new-supplier
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:newsupplier" }
+    requirements:
+        _method:  GET|POST
+
+staff-suppliers_new-supplier-submit:
+    pattern:  /new-supplier/submit
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:newsuppliersubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-suppliers_edit-supplier:
+    pattern:  /edit-supplier/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:editsupplier" }
+    requirements:
+        _method:  GET|POST
+
+staff-suppliers_edit-supplier-submit:
+    pattern:  /edit-supplier/{id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:editsuppliersubmit" }
+    requirements:
+        _method:  PUT|GET
+                
+staff-suppliers_find-suppliers:
+    pattern:  /find-suppliers
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:findsuppliers" }
+
+staff-suppliers_find-supplier-submit:
+    pattern:  /find-suppliers/submit
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:findsuppliersubmit" }
+
+staff-suppliers_view-supplier:
+    pattern:  /view-supplier/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:viewsupplier" }
+
+staff-suppliers_view-supplier-products:
+    pattern:  /view-supplier-products/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:viewsupplierproducts" }
+
+staff-suppliers_contact-supplier:
+    pattern:  /contact-supplier
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:contactsupplier" }
+
+staff-suppliers_new-supplier-representative:
+    pattern:  /new-representative
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:newsupplierrepresentative" }
+    requirements:
+        _method:  GET|POST
+                
+staff-suppliers_new-supplier-representative-submit:
+    pattern:  /new-representative/submit
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:newsupplierrepresentativesubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-suppliers_edit-supplier-representative:
+    pattern:  /edit-supplier-representative/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:editsupplierrepresentative" }
+    requirements:
+        _method:  GET|POST
+
+staff-suppliers_edit-supplier-representative-submit:
+    pattern:  /edit-supplier-representative/{id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:editsupplierrepresentativesubmit" }
+    requirements:
+        _method:  PUT|GET
+
+staff-suppliers_find-supplier-representatives:
+    pattern:  /find-supplier-representatives
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:findsupplierrepresentatives" }
+
+staff-suppliers_find-supplier-representative-submit:
+    pattern:  /find-supplier-representatives/submit
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:findsupplierrepresentativesubmit" }
+
+staff-suppliers_view-supplier-representative:
+    pattern:  /view-representative/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:viewsupplierrepresentative" }
+
+staff-suppliers_contact-supplier-representative:
+    pattern:  /contact-representative
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:contactsupplierrepresentative" }
+
+staff-suppliers_get-supplier-address:
+    pattern:  /get-supplier-address
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:getsupplieraddress" }
+    requirements:
+        _method:  GET|POST
+
+staff-suppliers_get-suppliers-list:
+    pattern:  /get-suppliers-list
+    defaults: { _controller: "MilesApartStaffBundle:Suppliers:getsupplierslist" }
+    requirements:
+        _method:  GET|POST

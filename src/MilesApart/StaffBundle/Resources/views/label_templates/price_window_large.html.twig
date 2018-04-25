@@ -1,0 +1,17 @@
+<div class="price_window_large_main_wraper">
+
+	<!-- MA Logo -->
+	<img class="price_window_large_logo" src="{{ asset('images/logos/Small-Logo-No-Text.png') }}" />
+	
+	<!-- Price -->
+	<h1 class="price_window_large_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
+	
+	<!-- Barcode -->
+	{#{{mopa_barcode_url|replace({'{{region_top}}': region_top, '{{region_center}}': region_center})}}#}
+
+
+	<img class="price_window_large_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
+
+	<!-- Supplier Code -->
+	<h6 class="price_window_large_supplier_code">SC: {{ entity.getProduct.getProductSupplierCode }}</h6>
+</div>

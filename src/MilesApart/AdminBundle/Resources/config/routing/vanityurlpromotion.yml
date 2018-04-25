@@ -1,0 +1,33 @@
+campaign_vanity-url-promotion:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+campaign_vanity-url-promotion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:show" }
+
+campaign_vanity-url-promotion_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:new" }
+
+campaign_vanity-url-promotion_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:create" }
+    requirements: { _method: post }
+
+campaign_vanity-url-promotion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:edit" }
+
+campaign_vanity-url-promotion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:update" }
+    requirements: { _method: post|put }
+
+campaign_vanity-url-promotion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:VanityURLPromotion:delete" }
+    requirements: { _method: post|delete }

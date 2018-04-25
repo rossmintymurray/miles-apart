@@ -1,0 +1,62 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'notifications' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	<div class="well">
+		<div class="row">
+			<div class="col-md-8">
+
+    			<h1>{{ entities|length }} New orders</h1>
+    		</div>
+    		<div class="col-md-4">
+    			<!-- Single button -->
+				<div class="btn-group col-md-12">
+					<button type="button" class="btn btn-success btn-lg dropdown-toggle col-md-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Action <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a  target="_blank" href="{{ path('staff-pickpack_print-packing-slips') }}">Print packing slips</a></li>
+						<li><a  target="_blank" href="{{ path('staff-pickpack_print-invoices') }}">Print invoices</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="well">
+				<div class="row">
+					<div class="col-md-8">
+    					<h2>Awaiting Pick</h2>
+    				</div>
+    				<div class="col-md-4">
+    					<a href="{{ path('staff-pickpack_pick') }}" class="btn btn-success col-md-12">Pick</a>
+					</div>
+				</div>
+			</div>
+    	</div>
+    	<div class="col-md-6">
+    		<div class="well">
+    			<div class="row">
+    				<div class="col-md-8">
+    					<h2>Awaiting Pack</h2>
+    				</div>
+    				<div class="col-md-4">
+    					<a href="{{ path('staff-pickpack_pack') }}" class="btn btn-success col-md-12">Pack</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

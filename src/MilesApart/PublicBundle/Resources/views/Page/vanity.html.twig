@@ -1,0 +1,14 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+    Vanity URL
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<h1>{{ vanity_url}}</h1>
+    
+{% endblock %}
+

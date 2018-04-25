@@ -1,0 +1,137 @@
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    
+    {{ form_errors(form) }}
+
+        <div class="row">
+            <div class="small-4 columns">
+                 {{ form_label(form.email) }}
+            </div>
+            <div class="small-8 columns">
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+
+        {# Check if user is personal #}
+        {% if user.customer.personalcustomer != null %}
+            <div class="row">
+                <div class="small-4 columns">
+                     {{ form_label(form.personal_customer.personal_customer_first_name) }}
+                </div>
+                <div class="small-8 columns">
+                    {{ form_widget(form.personal_customer.personal_customer_first_name) }}
+                    {{ form_errors(form.personal_customer.personal_customer_first_name) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-4 columns">
+                    {{ form_label(form.personal_customer.personal_customer_surname) }}
+                </div>
+                <div class="small-8 columns">
+                    {{ form_widget(form.personal_customer.personal_customer_surname) }}
+                    {{ form_errors(form.personal_customer.personal_customer_surname) }}
+                </div>
+            </div>
+               
+            {# Show the opts #}
+            <div class="row">
+                <div class="large-4 columns">
+                    <label class="inline right">Contact Options</label>
+                </div>
+                <div class="large-8 columns">
+                    <div class="row" style="margin-top:0.4rem">
+                        <div class="large-3 columns">
+                            {{ form_widget(form.personal_customer.personal_customer_email_opt_in) }}{{ form_label(form.personal_customer.personal_customer_email_opt_in) }}
+                        </div>
+                        <div class="large-3 columns">
+                            {{ form_widget(form.personal_customer.personal_customer_phone_opt_in) }}{{ form_label(form.personal_customer.personal_customer_phone_opt_in) }}
+                        </div>
+                        <div class="large-3 columns">
+                            {{ form_widget(form.personal_customer.personal_customer_text_opt_in) }}{{ form_label(form.personal_customer.personal_customer_text_opt_in) }}
+                        </div>
+                        <div class="large-3 columns">
+                            {{ form_widget(form.personal_customer.personal_customer_post_opt_in) }}{{ form_label(form.personal_customer.personal_customer_post_opt_in) }}
+                        </div>
+                    </div>
+                    <p class="form_subtext">Please select the methods to which we are able to contact you. If you leave unchecked we will still contact you regarding purchases you have made or if there are any problems with your account.</p>
+                </div>
+            </div>
+
+        {# Check if user is business #}
+        {% elseif user.customer.businesscustomer != null %}
+            <div class="row">
+                <div class="small-4 columns">
+                     {{ form_label(form.business_customer_representative.business_customer_representative_first_name) }}
+                </div>
+                <div class="small-8 columns">
+                    {{ form_widget(form.business_customer_representative.business_customer_representative_first_name) }}
+                    {{ form_errors(form.business_customer_representative.business_customer_representative_first_name) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-4 columns">
+                    {{ form_label(form.business_customer_representative.business_customer_representative_surname) }}
+                </div>
+                <div class="small-8 columns">
+                    {{ form_widget(form.business_customer_representative.business_customer_representative_surname) }}
+                    {{ form_errors(form.business_customer_representative.business_customer_representative_surname) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-4 columns">
+                    {{ form_label(form.business_customer_representative.business_customer.business_customer_name) }}
+                </div>
+                <div class="small-8 columns">
+                    {{ form_widget(form.business_customer_representative.business_customer.business_customer_name) }}
+                    {{ form_errors(form.business_customer_representative.business_customer.business_customer_name) }}
+                </div>
+            </div>
+               
+            {# Show the opts #}
+            <div class="row">
+                <div class="large-4 columns">
+                    <label class="inline right">Contact Options</label>
+                </div>
+                <div class="large-8 columns">
+                    <div class="row" style="margin-top:0.4rem">
+                        <div class="large-3 columns">
+                            {{ form_widget(form.business_customer_representative.business_customer_representative_email_opt_in) }}{{ form_label(form.business_customer_representative.business_customer_representative_email_opt_in) }}
+                        </div>
+                        <div class="large-3 columns">
+                            {{ form_widget(form.business_customer_representative.business_customer_representative_phone_opt_in) }}{{ form_label(form.business_customer_representative.business_customer_representative_phone_opt_in) }}
+                        </div>
+                        <div class="large-3 columns">
+                            {{ form_widget(form.business_customer_representative.business_customer_representative_text_opt_in) }}{{ form_label(form.business_customer_representative.business_customer_representative_text_opt_in) }}
+                        </div>
+                        <div class="large-3 columns">
+                            {{ form_widget(form.business_customer_representative.business_customer_representative_post_opt_in) }}{{ form_label(form.business_customer_representative.business_customer_representative_post_opt_in) }}
+                        </div>
+                    </div>
+                    <p class="form_subtext">Please select the methods to which we are able to contact you. If you leave unchecked we will still contact you regarding purchases you have made or if there are any problems with your account.</p>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="small-4 columns">
+                 {{ form_label(form.current_password) }}
+            </div>
+            <div class="small-8 columns">
+                {{ form_widget(form.current_password) }}
+                {{ form_errors(form.current_password) }}
+                <p class="form_subtext">Please enter your password so we can confirm that chages are being made by the account holder.</p>
+            </div>
+        </div>
+
+       
+        {{ form_rest(form) }}
+    
+    
+        <input type="submit" class="button large-offset-4 large-8" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+    
+
+    
+</form>

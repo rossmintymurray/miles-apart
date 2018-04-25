@@ -1,0 +1,74 @@
+{# src/MilesApart/StaffBundle/Resources/views/Categories/new_category.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'categories' %}
+{% set current_page = 'new_category' %}
+
+{% block page_name %}
+    New category
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Category</legend>
+            {{ form_row(form.category_name) }}
+            {{ form_row(form.category_image_path) }}
+            {{ form_row(form.category_description) }}
+            {{ form_row(form.category_navigation_display) }}
+            {{ form_row(form.category_products_display) }}
+            {{ form_row(form.category_description_display) }}
+            {{ form_row(form.file) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Owning Category</legend>
+            {{ form_row(form.category_type) }}
+            {{ form_row(form.parent) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('category_category') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+   $(document).ready(function () {
+    $('#milesapart_staffbundle_newcategory_category_type').change(function(){
+        var id = $('#milesapart_staffbundle_newcategory_category_type option:selected').val();
+        
+       if($(this).val()){
+           $.ajax({
+        type: "POST",
+        url: "./category-dropdown/"+id,
+        data: $(this).serialize(),
+        success: function(data) {
+            $('#milesapart_staffbundle_newcategory_parent').html(data);
+        }
+    });
+
+    return false; 
+        }
+    });
+});
+</script>
+{% endblock %}

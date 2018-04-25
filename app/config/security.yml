@@ -1,0 +1,49 @@
+
+security:
+    encoders:
+        MilesApart\AdminBundle\Entity\AdminUser:
+            algorithm: bcrypt
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        administrators:
+            entity: { class: MilesApartAdminBundle:AdminUser, property: username }
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        staff_area:
+            pattern:   ^/staff
+            http_basic: ~
+        main:
+            pattern: ^/
+            form_login:
+                use_referer: true
+                provider: fos_userbundle
+                failure_path: miles_apart_public_login_or_register
+                login_path: miles_apart_public_login_or_register
+                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+            logout: 
+                path: fos_user_security_logout
+                target: /
+                invalidate_session: false 
+                success_handler: logout_success_handler     
+            anonymous:    true
+            
+
+    access_control:
+        - { path: ^/staff/, roles: ROLE_ADMIN }
+        - { path: ^/staff$, roles: ROLE_ADMIN }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        
+
+

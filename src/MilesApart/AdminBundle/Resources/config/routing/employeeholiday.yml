@@ -1,0 +1,33 @@
+hr_employee-holiday:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+hr_employee-holiday_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:show" }
+
+hr_employee-holiday_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:new" }
+
+hr_employee-holiday_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:create" }
+    requirements: { _method: post }
+
+hr_employee-holiday_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:edit" }
+
+hr_employee-holiday_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:update" }
+    requirements: { _method: post|put }
+
+hr_employee-holiday_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeHoliday:delete" }
+    requirements: { _method: post|delete }

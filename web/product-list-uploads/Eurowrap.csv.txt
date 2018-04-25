@@ -1,0 +1,3 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+20cm Paper Ball Christams Decoration,5033601821960,X-10152-BALL,1.25,Eurowrap
+Christmas Santa Gel Window Sticker,5033601755418,X-14400-WS,1.00,Eurowrap

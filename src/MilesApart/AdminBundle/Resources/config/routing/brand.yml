@@ -1,0 +1,33 @@
+product_brand:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:Brand:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_brand_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:Brand:show" }
+
+product_brand_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:Brand:new" }
+
+product_brand_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:Brand:create" }
+    requirements: { _method: post }
+
+product_brand_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:Brand:edit" }
+
+product_brand_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:Brand:update" }
+    requirements: { _method: post|put }
+
+product_brand_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:Brand:delete" }
+    requirements: { _method: post|delete }

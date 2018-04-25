@@ -1,0 +1,98 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/supplier.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'supplier_representative' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.supplierrepresentativefirstname }} {{ entity.supplierrepresentativesurname }} - Supplier Representative
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.supplierrepresentativefirstname }} {{ entity.supplierrepresentativesurname }} - Supplier Representative        
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View supplier representative details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative first name</th>
+                <td>{{ entity.supplierrepresentativefirstname }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative surname</th>
+                <td>{{ entity.supplierrepresentativesurname }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative address 1</th>
+                <td>{{ entity.supplierrepresentativeaddress1 }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative address 2</th>
+                <td>{{ entity.supplierrepresentativeaddress2 }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative town</th>
+                <td>{{ entity.supplierrepresentativetown }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative county</th>
+                <td>{{ entity.supplierrepresentativecounty }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative postcode</th>
+                <td>{{ entity.supplierrepresentativepostcode }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative country</th>
+                <td>{{ entity.supplierrepresentativecountry }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative mobile number</th>
+                <td>{{ entity.supplierrepresentativemobilenumber }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative landline number</th>
+                <td>{{ entity.supplierrepresentativelandlinenumber }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative email</th>
+                <td>{{ entity.supplierrepresentativeemail }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative start date</th>
+                <td>{{ entity.supplierrepresentativestartdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Supplier representative end date</th>
+                <td>{{ entity.supplierrepresentativeenddate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('supplier_supplier-representative') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('supplier_supplier-representative_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

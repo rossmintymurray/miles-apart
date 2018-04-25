@@ -1,0 +1,70 @@
+staff-categories_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Categories:notifications" }
+                
+staff-categories_new-category:
+    pattern:  /new-category
+    defaults: { _controller: "MilesApartStaffBundle:Categories:newcategory" }
+
+staff-categories_view-categories:
+    pattern:  /view-categories
+    defaults: { _controller: "MilesApartStaffBundle:Categories:viewcategories" }
+
+staff-categories_create-new-category:
+    pattern:  /create-new-category
+    defaults: { _controller: "MilesApartStaffBundle:Categories:createnewcategory" }
+
+staff-categories_edit-category:
+    pattern:  /edit-category/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:editcategory" }
+
+staff-categories_edit-category-update:
+    pattern:  /edit-category-update/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:editcategoryupdate" }
+
+staff-categories_new-season:
+    pattern:  /new-season
+    defaults: { _controller: "MilesApartStaffBundle:Categories:newseason" }
+
+staff-categories_view-seasons:
+    pattern:  /view-seasons
+    defaults: { _controller: "MilesApartStaffBundle:Categories:viewseasons" }
+
+staff-categories_create-new-season:
+    pattern:  /create-new-season
+    defaults: { _controller: "MilesApartStaffBundle:Categories:createnewbrand" }
+
+staff-categories_edit-season:
+    pattern:  /edit-season/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:editseason" }
+
+staff-categories_edit-season-update:
+    pattern:  /edit-season-update/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:editseasonupdate" }
+
+staff-categories_new-brand:
+    pattern:  /new-brand
+    defaults: { _controller: "MilesApartStaffBundle:Categories:newbrand" }
+
+staff-categories_view-brands:
+    pattern:  /view-brands
+    defaults: { _controller: "MilesApartStaffBundle:Categories:viewbrands" }
+
+staff-categories_create-new-brand:
+    pattern:  /create-new-brand
+    defaults: { _controller: "MilesApartStaffBundle:Categories:createnewbrand" }
+
+staff-categories_edit-brand:
+    pattern:  /edit-brand/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:editbrand" }
+
+staff-categories_edit-brand-update:
+    pattern:  /edit-brand-update/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:editbrandupdate" }
+
+staff-categories_populate-drop-down:
+    pattern:  /category-dropdown/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Categories:categoryCreateSubmit", id: 1 }
+    requirements: 
+        _method: GET|post
+        page: \d+

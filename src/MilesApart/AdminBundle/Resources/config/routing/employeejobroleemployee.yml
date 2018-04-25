@@ -1,0 +1,33 @@
+hr_employee-job-role-employee:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+hr_employee-job-role-employee_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:show" }
+
+hr_employee-job-role-employee_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:new" }
+
+hr_employee-job-role-employee_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:create" }
+    requirements: { _method: post }
+
+hr_employee-job-role-employee_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:edit" }
+
+hr_employee-job-role-employee_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:update" }
+    requirements: { _method: post|put }
+
+hr_employee-job-role-employee_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeJobRoleEmployee:delete" }
+    requirements: { _method: post|delete }

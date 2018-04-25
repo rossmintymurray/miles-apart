@@ -1,0 +1,46 @@
+Code,Description,InnerQty,InnerPrice,Value,InnerSize,PieceQty,PricePiece,VatRate,barcode,innerbarcode
+TY0163,Large Dinosaurs - 6 Assorted,2,47.76,95.52,12,24,3.98,20%,5033849059941,
+TY0465,Plastic Friction Fire Truck On Pvc Platform,2,31.50,63.00,18,36,1.75,20%,5033849029692,
+TY0779,1:87sc Die Cast & Plastic Military Set 20pc  - 4 Asst,2,57.60,115.20,24,48,2.40,20%,5033849077471,
+TY0911,Plastic Guitar In Np Pvc Carry Case - Lets Play Music,1,97.20,97.20,36,36,2.70,20%,5033849017132,
+TY1248,6pc Pullback Trains In Tube - Display Box,8,10.20,81.60,12,96,0.85,20%,5033849008987,5033849114299
+TY1708,Knight Sheild Sword & Gauntlet Set On Tie Card,4,18.00,72.00,12,48,1.50,20%,5033849035365,
+TY1709,6 Assorted Dinosaurs In Pvc Bag/Header,3,36.00,108.00,36,108,1.00,20%,5033849035372,
+TY1728,Baby Doll Milk Bottle On Blistercard,6,13.20,79.20,24,144,0.55,20%,5033849409760,
+TY1744,Large Growing Dinosaur Egg In Display Box,12,6.00,72.00,6,72,1.00,20%,5033849035723,5033849128852
+TY2032,"2 Flocked Ponies (3 Asst Colours) - ""Its Girls Stuff""",8,19.80,158.40,12,96,1.65,20%,5033849032043,
+TY2301,"Bubble Stick In Display Box - Length 15.5""/ 37cm",4,6.72,26.88,24,96,0.28,20%,5033849036874,5033849145446
+TY2519,Sealife Tpr With Beans 12 Assorted In Display Box,12,6.72,80.64,24,288,0.28,20%,5033849039745,5033849152109
+TY2624,Water Pistol - 2 In 1 Water & Ball Gun - Air Launcher,6,13.20,79.20,24,144,0.55,20%,5033849076566,
+TY3150,Spy Mission 2000  Bb Ammo In Display Box,3,6.60,19.80,12,36,0.55,20%,5033849022402,5033849170837
+TY3191,50+3 Marbles In Net Bag In Display Box,4,3.96,15.84,12,48,0.33,20%,5033849022815,5033849171988
+TY3192,Alphabet Wooden Puzzle In Display Box,1,21.60,21.60,24,24,0.90,20%,5033849022822,
+TY3194,Clock Wooden Puzzle In Display Box,4,10.80,43.20,12,48,0.90,20%,5033849022846,5033849172091
+TY3376,100g  6 Colour Modelling Clay In Display Box,12,3.52,42.24,16,192,0.22,20%,5033849075439,5033849177539
+TY3418,Classic Wing Die Cast Pull Back Plane In Display Box,20,11.88,237.60,6,120,1.98,20%,5033849025083,5033849178796
+TY3432,Water Tinsel Baton Assorted Colours In Display Box,6,9.60,57.60,24,144,0.40,20%,5033849179212,5033849179212
+TY3476,Fairy Fizzy In Display Box,6,12.00,72.00,24,144,0.50,20%,5033849025663,5033849180546
+TY3719,6pc Dinosaurs In Large Bag/Header Card,3,35.52,106.56,24,72,1.48,20%,5033849075743,
+TY3722,6pc Farm Animals In Large Bag/Header,3,35.52,106.56,24,72,1.48,20%,5033849075767,
+TY3798,"21""/54cm Rib Ladies Telescopic Umbrella - 4 Asst Col",6,13.20,79.20,12,72,1.10,20%,5033849041045,5033849190163
+TY3931,"Plastic Teaset With Tray In Net Bag ""Happy Homes""",1,57.60,57.60,24,24,2.40,20%,5033849044329,
+TY4099,"15"" Soft Body Rag Doll - 3 Assorted Colours",1,54.00,54.00,24,24,2.25,20%,5033849051969,
+TY4129,"6pc Pvc Sealife Animals (4"") In Pvc Bag / Header",4,36.00,144.00,36,144,1.00,20%,5033849052263,
+TY4420,Triangular Bunting 10m 20 Flags 5 Colours,6,7.68,46.08,24,144,0.32,20%,5033849411435,
+TY4720,5m Triangular Pirate Bunting - 15 Flags,6,8.40,50.40,24,144,0.35,20%,5033849411657,5033849220815
+TY4849,6pc Sea World Animals (6 Assorted) - Pvc Bag / Header,3,48.00,144.00,24,72,2.00,20%,5033849225735,
+TY4857,Ice Age Animals 13-17cm 6 Assorted In Display Box,24,5.76,138.24,12,288,0.48,20%,5033849226053,5033849226060
+TY4884,65mm  Neon Colour Light Up Happy Face Balls In D/Box,24,4.32,103.68,12,288,0.36,20%,5033849227135,
+TY4900,"6pc Marble Bounce Balls On Blistercard - ""Alienz""",4,12.00,48.00,24,96,0.50,20%,5033849227777,
+TY4971,Friction Auto Bubble Gun - Blistercard,4,26.40,105.60,24,96,1.10,20%,5033849397166,
+TY5293,"22"" Plush Snake - 3 Assorted",1,69.35,69.35,19,19,3.65,20%,5033849240943,
+TY5847,3d Puzzle Erasers On Blistercard - 4 Assorted,8,3.60,28.80,24,192,0.15,20%,5033849259860,5033849259891
+TY6193,Large Bubble Tub In Display Box,6,4.20,25.20,12,72,0.35,20%,5033849062538,5033849270766
+TY6405,4pc Plastic Planes On Blistercard - Combat Mission,4,13.20,52.80,24,96,0.55,20%,5033849277208,
+TY6586,"Western Gun Set In Otb ""Try Me"" - ""Wild West""",2,35.76,71.52,12,24,2.98,20%,5033849397845,
+TY7537,"100pc Soldier Set - ""Combat Mission""",3,13.20,39.60,24,72,0.55,20%,5033849313852,
+TY7648,Glow In The Dark Creatures (4 Assorted) On Blistercard,12,6.00,72.00,12,144,0.50,20%,5033849398620,5033849317539
+TY7811,Dino Fizzy In Display Box,6,12.00,72.00,24,144,0.50,20%,5033849323660,5033849323677
+TY7868,Die Cast Pull Back Tractor  In Display Box- Farm Series,24,6.84,164.16,12,288,0.57,20%,5033849325756,5033849325763
+TY7976,6pc Wild Animals In Large Bag/Header,,35.52,,24,72,1.48,20%,5033849010515,
+TY9865,"6pc Farm Animals (4"") In Pvc Bag/Header",,36.00,,36,144,1.00,20%,5033849067045,

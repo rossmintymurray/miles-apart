@@ -1,0 +1,300 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: doctrine_extensions.yml }
+
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    globals:
+        pagerfanta_opts:
+            next_message: '&#65515;'
+            prev_message: '&#65513;'
+    form:
+        resources:
+            - LexikFormFilterBundle:Form:form_div_layout.html.twig  
+
+    exception_controller:  app.exception_controller:showAction
+            
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ MilesApartPublicBundle ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        #yui_css:
+        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+        mappings:
+            translatable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Translatable\Entity
+                # make sure vendor library location is correct
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+
+
+# Swiftmailer Configuration
+swiftmailer:
+    default_mailer: useraccounts_mailer
+    mailers:
+        webmaster_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %webmaster_mailer_user%
+            password:  %webmaster_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+            
+        customersupport_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %customersupport_mailer_user%
+            password:  %customersupport_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+
+        marketing_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %marketing_mailer_user%
+            password:  %marketing_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+
+        weborders_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %weborders_mailer_user%
+            password:  %weborders_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+
+        useraccounts_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %useraccounts_mailer_user%
+            password:  %useraccounts_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+
+        system_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %system_mailer_user%
+            password:  %system_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+
+        purchaseorders_mailer:
+            transport: %mailer_transport%
+            host:      %mailer_host%
+            username:  %purchaseorders_mailer_user%
+            password:  %purchaseorders_mailer_password%
+            port:      %mailer_port%
+            logging:   "%kernel.debug%"
+
+#Breadcrumb set up
+white_october_breadcrumbs:
+    separator:          ''
+    separatorClass:     'separator'
+    listId:             'wo-breadcrumbs'
+    listClass:          'breadcrumbs'
+    itemClass:          ''
+    linkRel:            ''
+    viewTemplate:       "WhiteOctoberBreadcrumbsBundle::breadcrumbs.html.twig"
+
+white_october_pagerfanta:
+    exceptions_strategy:
+        out_of_range_page:        ~
+        not_valid_current_page:   ~
+        
+#User security 
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: staff_area
+    user_class: MilesApart\AdminBundle\Entity\AdminUser
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: MilesApart\AdminBundle\Entity\FosUser
+    service:
+        mailer: fos_user.mailer.twig_swift
+    registration:
+        form:
+            type: milesapart_publicuser_registration
+            handler: app.form.handler.registration
+        confirmation:
+            template: MilesApartPublicBundle:Emails:registration_confirmation.email.twig
+            enabled: true
+            from_email:
+                address:        useraccounts@miles-apart.com
+                sender_name:    Miles Apart Website Registration
+    resetting:
+        email:
+            template: MilesApartPublicBundle:Emails:password_resetting.email.twig
+            from_email:
+                address:        useraccounts@miles-apart.com
+                sender_name:    Miles Apart Password Reset
+    profile:
+        form:
+            name: milesapart_publicuser_profile
+            type: milesapart_publicuser_profile
+
+    change_password:
+        form:
+            type:               milesapart_publicuser_changepassword
+            
+
+services:
+    app.form.handler.registration:
+        class: MilesApart\PublicUserBundle\Form\Handler\RegistrationFormHandler
+        arguments: ['@router', "@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
+        scope: request
+        public: false
+    fos_user.doctrine_registry:
+        alias: doctrine
+    milesapart_publicuser_registration:
+        class: MilesApart\PublicUserBundle\Form\Type\RegistrationFormType
+        tags:
+            - {name: form.type, alias: milesapart_publicuser_registration}
+    milesapart_publicuser_changepassword:
+        class: MilesApart\PublicUserBundle\Form\Type\ChangePasswordFormType
+        tags:
+            - {name: form.type, alias: milesapart_publicuser_changepassword}
+    milesapart_publicuser_profile:
+        class: MilesApart\PublicUserBundle\Form\Type\ProfileFormType
+        tags:
+            - {name: form.type, alias: milesapart_publicuser_profile}
+        arguments:
+            - @security.context
+
+    caponica_mws_client_pool_de:
+        class:      %caponica_amazon_mws.client_pool.class%
+        calls:
+            - [ setConfig, [ %caponica_amazon_mws_config_de% ]]
+    caponica_mws_client_pool_uk:
+        class:      %caponica_amazon_mws.client_pool.class%
+        calls:
+            - [ setConfig, [ %caponica_amazon_mws_config_uk% ]]
+    caponica_mws_amazon_pool_uk:
+        class:      %caponica_amazon_mws.amazon_pool.class%
+        calls:
+            - [ setConfig, [ %caponica_amazon_mws_config_uk% ]]
+
+    umpirsky.mailer.message_file_logger:
+        class: MessageFileLogger
+        arguments:
+            - %kernel.logs_dir%/mailer.log
+        tags:
+            - { name: swiftmailer.plugin }
+
+    swiftmailer.plugins.loggerplugin:
+        class: 'Swift_Plugins_LoggerPlugin'
+        arguments: ['@swiftmailer.plugins.loggerplugin.logger']
+        tags: [{ name: 'swiftmailer.default.plugin' }]
+
+    swiftmailer.plugins.loggerplugin.logger:
+        class: 'Swift_Plugins_Loggers_EchoLogger'
+        arguments: [false]
+
+    monolog.formatter.html:
+        class: Monolog\Formatter\HtmlFormatter
+
+    app.exception_controller:
+        class: MilesApart\PublicBundle\Controller\ExceptionController
+        arguments: [@twig, %kernel.debug%]
+
+    amazon_service:
+        class: MilesApart\SellerBundle\Controller\AmazonController
+
+    staff.add_product_from_add_to_list:
+        class:     MilesApart\StaffBundle\Service\AddProductFromAddToList
+        arguments: ["@doctrine.orm.entity_manager", "@logger", '@session', "@inject.product", "@inject.product_price", "@inject.product_supplier"]
+
+    inject.product:
+        class: MilesApart\AdminBundle\Entity\Product
+        shared: false
+
+    inject.product_price:
+        class: MilesApart\AdminBundle\Entity\ProductPrice
+        shared: false
+
+    inject.product_supplier:
+        class: MilesApart\AdminBundle\Entity\ProductSupplier
+        shared: false
+
+    staff.get_vat_at_date:
+        class:     MilesApart\StaffBundle\Service\GetVATAtDate
+        arguments: ["@doctrine.orm.entity_manager", "@logger", '@session']
+
+
+#Image resizing
+avalanche_imagine:
+    filters:
+        public_product_thumb:
+            type:    thumbnail
+            options: { size: [222, 222], quality:90, mode: outbound }
+        small_thumb:
+            type:    thumbnail
+            options: { size: [120, 90], mode: inset }
+
+#Staff image upload
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: dropzone # or any uploader you use in the frontend
+
+#Google recaptcha
+ewz_recaptcha:
+    public_key:  6Lf7QkoUAAAAADf3qRw-CWmPyBaCgkUB_lZc2GNp
+    private_key: 6Lf7QkoUAAAAAIxFP4oJQeyEXQSIpNg7EH1XuU9P
+    # Not needed as "%kernel.default_locale%" is the default value for the locale key
+    locale_key:  %kernel.default_locale%
+    enabled: true
+

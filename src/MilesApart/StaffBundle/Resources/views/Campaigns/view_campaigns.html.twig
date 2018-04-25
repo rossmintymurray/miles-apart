@@ -1,0 +1,97 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/view_campaigns.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'view_campaigns' %}
+
+{% block page_name %}
+    View campaigns
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <table class="table table-striped small" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>Campaign Name</th>
+                <th>Type</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>
+                        {{ entity.getCampaignName }}
+                    </td>
+                    <td>
+                        {{ entity.getCampaignType.getCampaignTypeName }}
+                    </td>
+                    <td>
+                        {{ entity.getCampaignStartDate|date("jS \\o\\f M Y")  }}
+                    </td>
+                    <td>
+                        {{ entity.getCampaignEndDate|date("jS \\o\\f M Y")  }}
+                    </td>
+                    <td>
+	                    <a href="{{ path('staff-campaigns_edit-campaign', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+                        <a href="#campaign_{{ entity.id }}_promotions" class="table-glyphicon" data-toggle="collapse" data-placement="top" title="Show promotions">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                        </a>
+	                </td>
+                    
+                    <tr id="campaign_{{ entity.id }}_promotions" class="collapse">
+                        
+                        <td colspan="5">
+                            <table class="table table-striped small">
+                                <thead>
+                                    <tr>
+                                        <th>Promotion Name</th>
+                                        <th>Type</th>
+                                        <th>Traffic Source</th>
+                                        <th>Tracking URL</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                        
+                                </thead>
+                                <tbody>
+                                    {% for promotion in entity.promotion %}
+                                        <tr>
+                                            <td>
+                                                {{ promotion.getPromotionName }}
+                                            </td>
+                                            <td>
+                                                {% if promotion.getCampaign != null %}
+                                                    {{ promotion.getCampaign.getCampaignName }}
+                                                {% else %}
+                                                    NOT SET
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ promotion.getTrafficSource.getTrafficSourceCompanyName }}
+                                            </td>
+                                            <td>
+                                                {{ promotion.getTrackingUrl }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('staff-campaigns_edit-promotion', { 'id': promotion.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,55 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customer.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_business_customer_representative' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Business Customer Representative
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Business Customer Representative		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new business customer representative to the system
+{% endblock %}
+
+{% block page_content -%}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Representative</legend>
+             {{ form_row(form.business_customer_representative_first_name) }}
+             {{ form_row(form.business_customer_representative_surname) }}
+          </fieldset>
+          <fieldset>
+             <legend class="text-muted">Business Customer</legend>
+             {{ form_row(form.business_customer) }}
+          </fieldset>
+        {{ form_rest(form) }}
+    </form>
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer_business-customer-representative') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

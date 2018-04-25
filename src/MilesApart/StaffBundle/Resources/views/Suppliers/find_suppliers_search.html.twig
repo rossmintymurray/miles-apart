@@ -1,0 +1,98 @@
+{# Create table for suppliers #}
+	<h3>{{ supplier_count }} Matched suppliers</h3>
+
+	<div id="suppliers_big_table">
+		<table class="table table-striped text-center">
+		    <thead>
+		        <tr class="text-center">
+		            <th class="text-left">Supplier name</th>
+		            <th class="text-center">Account number</th>
+		            <th class="text-center">Phone</th>
+		            <th class="text-center">Fax</th>
+		            <th class="text-center">Email</th>
+		            <th class="text-center">Actions</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    
+
+			{% for entity in entities %}
+				<tr>
+					<td class="text-left">
+						<a href="{{ path('staff-suppliers_view-supplier', {'id': entity.getId()}) }}">
+							{{ entity.getSupplierName() }}
+						</a>
+					</td>
+					<td>
+						{{ entity.getSupplierAccountNumber() }}
+					</td>
+					<td>
+						<a href="tel:{{ entity.getSupplierPhone() }}">
+							{{ entity.getSupplierPhone() }}
+						</a>
+					</td>
+					<td>
+						{{ entity.getSupplierFax() }}
+					</td>
+
+					{% if entity.getSupplierOrderingEmail != null %}
+		                {% set sendMail = entity.getSupplierOrderingEmail() %}
+					{% else %}
+		                {% set sendMail = entity.getSupplierInfoEmail() %}
+					{% endif %}
+
+		            <td>
+		                <a href="mailto:{{ sendMail }}">
+		                	{{ sendMail }}
+		                </a>
+		            </td>
+		            <td>
+		                <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Rep">
+		                	<span class="glyphicon glyphicon-user"></span>
+		                </a>
+		                <a href="{{ path('staff-suppliers_edit-supplier', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+		                	<span class="glyphicon glyphicon-pencil"></span>
+		                </a>
+		                <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" >
+		                	<span class="glyphicon glyphicon-print"></span>
+		                </a>
+		                <a href="tel:{{ entity.getSupplierPhone() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Call">
+		                	<span class="glyphicon glyphicon-phone"></span>
+		                </a>
+		                <a href="mailto:{{sendMail}}"class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Email">
+		                	<span class="glyphicon glyphicon-envelope"></span>
+		                </a>
+		                <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+		                	<span class="glyphicon glyphicon-trash"></span>
+		                </a>
+		            </td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div id="suppliers_list">
+		{# Create table for suppliers #}
+		    <table class="table table-striped text-center">
+		        <thead>
+		            <tr class="text-center">
+		                <th class="text-left">Supplier name</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        
+
+		    	{% for entity in entities %}
+		    		<tr>
+		    			<td class="text-left">
+		    				<a href="{{ path('staff-suppliers_view-supplier', {'id': entity.getId()}) }}">
+		    					{{ entity.getSupplierName() }}
+		    				</a>
+		    			</td>
+		    		</tr>
+		    	{% endfor %}
+		    </tbody>
+		</table>
+	</div>
+	

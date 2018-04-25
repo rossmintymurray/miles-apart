@@ -1,0 +1,24 @@
+@media print {
+    #page_break {
+    	page-break-after: always;
+    }
+    
+
+   
+
+    
+    
+
+}
+
+body {
+		text-align:left;
+		font-family: Helvetica Neue;
+		width:100%;
+    margin:0px;
+
+	}
+
+
+
+

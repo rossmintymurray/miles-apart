@@ -1,0 +1,146 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/finances.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'finances_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Finances
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Finances			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing campaigns and analyse previous/existing campaigns
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'finance_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_finance') }}">Finances overview</a>
+    </li>
+
+    {#Create the daily take left nav #}
+     <li class="nav-header">Daily Take</li>
+     <li {% if current_page == 'daily_take' %} class="active" {% endif %}>
+        <a href="{{ path('finance_daily-take') }}">View daily takes</a>
+    </li>
+    <li {% if current_page == 'new_daily_take' %} class="active" {% endif %}>
+        <a href="{{ path('finance_daily-take_new') }}">New daily take</a>
+    </li>
+
+    {#Create the daily take business premises left nav #}
+     <li class="nav-header">Daily Take Business Premises</li>
+     <li {% if current_page == 'daily_take_business_premises' %} class="active" {% endif %}>
+        <a href="{{ path('finance_daily-take-business-premises') }}">View daily take business premises</a>
+    </li>
+    <li {% if current_page == 'new_daily_take_business_premises' %} class="active" {% endif %}>
+        <a href="{{ path('finance_daily-take-business-premises_new') }}">New daily take business premises</a>
+    </li>
+
+    {#Create the VAT rate left nav #}
+     <li class="nav-header">VAT Rate</li>
+     <li {% if current_page == 'vat_rate' %} class="active" {% endif %}>
+        <a href="{{ path('finance_vat-rate') }}">View VAT rates</a>
+    </li>
+    <li {% if current_page == 'new_vat_rate' %} class="active" {% endif %}>
+        <a href="{{ path('finance_vat-rate_new') }}">New VAT rate</a>
+    </li>
+
+    {#Create the VAT rate type left nav #}
+     <li class="nav-header">VAT Rate Type</li>
+     <li {% if current_page == 'vat_rate_type' %} class="active" {% endif %}>
+        <a href="{{ path('finance_vat-rate-type') }}">View VAT types</a>
+    </li>
+    <li {% if current_page == 'new_vat_rate_type' %} class="active" {% endif %}>
+        <a href="{{ path('finance_vat-rate-type_new') }}">New VAT type</a>
+    </li>
+
+    {#Create the supplier invoice left nav #}
+     <li class="nav-header">Supplier Invoice</li>
+     <li {% if current_page == 'supplier_invoice' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice') }}">View supplier invoices</a>
+    </li>
+    <li {% if current_page == 'new_supplier_invoice' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice_new') }}">New supplier invoice</a>
+    </li>
+
+    {#Create the supplier invoice state left nav #}
+     <li class="nav-header">Supplier Invoice State</li>
+     <li {% if current_page == 'supplier_invoice_state' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-state') }}">View supplier invoice states</a>
+    </li>
+    <li {% if current_page == 'new_supplier_invoice_state' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-state_new') }}">New supplier invoice state</a>
+    </li>
+
+    {#Create the supplier invoice payment left nav #}
+     <li class="nav-header">Supplier Invoice Payment</li>
+     <li {% if current_page == 'supplier_invoice_payment' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-payment') }}">View supplier invoice payments</a>
+    </li>
+    <li {% if current_page == 'new_supplier_invoice_payment' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-payment_new') }}">New supplier invoice payment</a>
+    </li>
+
+    {#Create the supplier invoice product left nav #}
+     <li class="nav-header">Supplier Invoice Product</li>
+     <li {% if current_page == 'supplier_invoice_product' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-product') }}">View supplier invoice products</a>
+    </li>
+    <li {% if current_page == 'new_supplier_invoice_product' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-product_new') }}">New supplier invoice product</a>
+    </li>
+
+    {#Create the supplier invoice purchase order left nav #}
+     <li class="nav-header">Supplier Invoice Purchase Order</li>
+     <li {% if current_page == 'supplier_invoice_purchase_order' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-purchase-order') }}">View supplier invoice purchase order</a>
+    </li>
+    <li {% if current_page == 'new_supplier_invoice_purchase_order' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-invoice-purchase-order_new') }}">New supplier invoice purchase order</a>
+    </li>
+
+    {#Create the supplier payment left nav #}
+     <li class="nav-header">Supplier Payment</li>
+     <li {% if current_page == 'supplier_payment' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-payment') }}">View supplier payments</a>
+    </li>
+    <li {% if current_page == 'new_supplier_payment' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-payment_new') }}">New supplier payment</a>
+    </li>
+
+    {#Create the supplier payment type left nav #}
+     <li class="nav-header">Supplier Payment Type</li>
+     <li {% if current_page == 'supplier_payment_type' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-payment-type') }}">View supplier payment types</a>
+    </li>
+    <li {% if current_page == 'new_supplier_payment_type' %} class="active" {% endif %}>
+        <a href="{{ path('finance_supplier-payment-type_new') }}">New supplier payment type</a>
+    </li>
+
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

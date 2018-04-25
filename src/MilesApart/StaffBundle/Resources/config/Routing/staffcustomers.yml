@@ -1,0 +1,42 @@
+staff-customers_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Customers:notifications" }
+                
+staff-customers_new-customer:
+    pattern:  /new-customer
+    defaults: { _controller: "MilesApartStaffBundle:Customers:newcustomer" }
+
+staff-customers_create-new-customer:
+    pattern:  /new-customer/create
+    defaults: { _controller: "MilesApartStaffBundle:Customers:createnewcustomer" }
+
+staff-customers_view-customers:
+    pattern:  /view-customers
+    defaults: { _controller: "MilesApartStaffBundle:Customers:viewcustomers" }
+
+staff-customers_view-customers-search:
+    pattern:  /view-customers/search
+    defaults: { _controller: "MilesApartStaffBundle:Customers:viewcustomerssearch" }
+
+staff-customers_edit-customer:
+    pattern:  /edit-customer/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Customers:editcustomer" }
+
+staff-customers_update-customer:
+    pattern:  /edit-customer/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Customers:updatecustomer" }
+
+staff-customers_view-customer:
+    pattern:  /view-customer/{customer_id}
+    defaults: { _controller: "MilesApartStaffBundle:Customers:viewcustomer" }
+
+
+staff-customers_take-contact:
+    pattern:  /take-contact
+    defaults: { _controller: "MilesApartStaffBundle:Customers:takecontact" }
+
+staff-customers_make-contact:
+    pattern:  /make-contact
+    defaults: { _controller: "MilesApartStaffBundle:Customers:makecontact" }
+
+

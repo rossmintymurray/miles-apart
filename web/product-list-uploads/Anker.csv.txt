@@ -1,0 +1,6 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+10 Christmas Crackers ,5012128407383,CTCF,5.25,Anker
+12 Christmas Crackers,5012128363948,KTCO,5.00,Anker
+6 Christmas Mini Crackers,5012128407130,CICU,1.00,Anker
+Hessian Christmas Sack,5012128430619,SHEC,3.50,Anker
+Santa's Legs Double Bottle Bags,5012128358043,SBTL,1.99,Anker

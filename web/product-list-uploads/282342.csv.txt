@@ -1,0 +1,75 @@
+Code,Description,Barcode,Type,Inner,Outer,Total,Cases,OrderPrice
+7660, A4 Soft Touch Notebook 4 Rustic colours,5013922076607,0,12,24,24,1,2.28
+7661,A5 Soft Touch Notebook 4 Rustic colours,5013922076614,0,12,48,48,1,1.28
+7662, Slim Soft Touch Notebook 4 Rustic colours,5013922076621,0,24,48,48,1,0.78
+7663/48     ,Pocket Soft Touch Note book 4 rustic colours,5013922076638,0,24,48,48,1,0.5
+7664, A4 Soft Touch Notebook 4 Pastel colours,5013922076645,0,12,24,24,1,2.28
+7665,A5 Soft Touch Notebook 4 Pastel colours,5013922076652,0,12,48,48,1,1.28
+7666,Slim Soft Touch Notebook 4 Pastel colours,5013922076669,0,24,48,48,1,0.78
+7667/48     ,Pocket Soft Touch Note book 4 pastel colours,5013922076676,0,24,48,48,1,0.5
+9291,20cm Glow Sticks x 15,5013922092911,0,24,144,144,1,0.5
+3134, 200 of 36 x 89mm Address Labels Rolls,5013922031347,0,12,72,72,1,0.48
+3135,"Multi purpose labels 21-up 210, 65 x 39mm",5013922031354,0,12,72,72,1,0.48
+7023,Children's Playing Cards Pack of 4 games,5013922070230,O,12,48,48,1,0.48
+9281,Magic Bubbles 60ml,5013922092812,O,24,96,96,1,0.12
+1102/72,20 fine tip Fibre colouring Pens,5013922011028,O,12,72,72,1,0.32
+1106/10,10 Thick & Thin Fibre Pen,5013922011066,O,12,96,96,1,0.48
+6838,20 Full Size Colour Pencils Colour therapy,5013922068381,O,12,48,48,1,0.48
+6005/72,2 x 40ml White PVA Glue Bottles,5013922060057,O,12,72,72,1,0.33
+5457,6 x 25ml Craft Paint Pots,5013922054575,O,12,48,48,1,0.48
+5126,12 Natural Artist Brushes,5013922051260,O,12,48,48,1,0.65
+5125,12 Artist Natural Bristle brushes,5013922051253,O,12,48,48,1,1.20
+5123,4 Chunky plastic handle Brushes,5013922051239,O,12,72,72,1,0.48
+5924,20 Sheets A4 Matt Photo Paper,5013922059242,O,12,48,48,1,0.98
+5286/48,10 Sheets A3 Pastel Card,5013922052861,O,12,48,48,1,0.48
+6221/48,50 assorted Fluorescent Stars,5013922062211,O,12,48,48,1,0.50
+6218,20  Fluorescent  Stars 15 x 15 cm,5013922062181,O,12,48,48,1,0.45
+6215,20 Fluorescent Flashes 20 x 15cm,5013922062150,O,12,48,48,1,0.45
+6219,40  Fluorescent  Stars 10 x 10 cm,5013922062198,O,12,48,48,1,0.45
+6216,40 Fluorescent Flashes 15 x 10 cm,5013922062167,O,12,48,48,1,0.45
+6220,60 Fluorescent Stars 7.5 x 7.5cm,5013922062204,O,12,48,48,1,0.45
+6217,60 Fluorescent  Flashes 10 x 7.5cm,5013922062174,O,12,48,48,1,0.45
+6840,Superior Colouring Book 80 GSM,5013922068404,O,12,48,48,1,0.50
+5138/48,Acrylic Paints 10 x 6ml tubes,5013922051383,O,12,48,48,1,0.50
+5136,Oil Paints 10 x 6Ml tubes,5013922051369,O,12,72,72,1,0.50
+1037,5 Ball Point Pens,5013922010373,O,12,72,72,1,0.48
+1036/48,4 Roller ball Pens,5013922010366,O,12,48,48,1,0.50
+1010,"4 Hand Writing Pens,",5013922010106,O,12,48,48,1,0.48
+1033,10 Technoline Pens Black ink,5013922010335,O,12,48,48,1,0.48
+1225,6 Gel Pens,5013922012254,O,12,72,72,1,0.48
+1157,5 Rapid Dry Permanent Markers,5013922011578,O,12,72,72,1,0.48
+5635,"8 Multi-Coloured PermanentMarkers",5013922056357,O,12,48,48,1,0.48
+5633,2 permanent Fabric Marker Pens,5013922056333,O,12,48,48,1,0.45
+1141,3 Chunky Dry-Wipe Board Markers,5013922011417,O,12,72,72,1,0.50
+6034,7 Piece Stationery Set,5013922060347,O,12,72,72,1,0.48
+9191,"Push Pins Appx 50, AssortedColours.",5013922091914,O,12,96,96,1,0.38
+6330,"Dual Magnifying glass 45mm &100mm",5013922063300,O,12,72,72,1,0.48
+6086,"2 Hole Paper Punch AssortedColours",5013922060866,O,12,72,72,1,0.55
+6165,"Scissors 10"" Multi Purpose S/S",5013922061658,O,12,48,48,1,0.88
+6166/48,"Scissors 8.5"" Multi Purpose",5013922061665,O,12,48,48,1,0.55
+6167/72,"Scissors 5.5"" Multi Purpose",5013922061672,O,12,72,72,1,0.38
+6011,"Invisible Easy Tear Tape 2 18mm x33m rolls",5013922060118,O,12,72,72,1,0.48
+6155/48,"2 rolls Double Sided & 24 of25x25mm pads.",5013922061559,O,12,48,48,1,0.48
+6030/72,5 by 3gm tubes Super Glue,5013922060309,O,12,72,72,1,0.50
+5638,Hook & Loop Self adhesive,5013922056388,O,12,48,48,1,0.48
+3251/96,"Reporter Notepad 160 Pages50gsm",5013922032511,O,12,96,96,1,0.28
+4004,Jotter Block 400 sheets In Plastic case,5013922040042,O,12,48,48,1,0.48
+5095,A4 White Card 30 x 150 gsm Sheets,5013922050959,O,12,48,48,1,0.48
+4061/48,"Invoice Book, 100 sets                       ",5013922040615,O,12,48,48,1,0.55
+4056/96,10 Clear plastic Punched pockets      ,5013922040561,O,12,96,96,1,0.16
+4055,80 Clear plastic Punched pockets      ,5013922040554,O,5,30,30,1,0.95
+6706,A4 Notebook 120 Pages Spots design,5013922067063,O,12,36,36,1,0.80
+6707,A5 Notebook 120 Pages Spots design,5013922067070,O,12,48,48,1,0.50
+6703,A4 Notebook 120 Pages Retro band design,5013922067032,O,12,36,36,1,0.80
+6704,A5 Notebook  120 Pages Retro band design,5013922067049,O,12,48,48,1,0.50
+4670,"15 C4 White peel & seal Envelopes   80gsm",5013922046709,O,20,80,80,1,0.48
+4671,15 C4 Manila P/S Envelopes 80gsm ,5013922046716,O,20,80,80,1,0.48
+4672,"30 C5 White peal & seal Envelopes80gsm",5013922046723,O,10,80,80,1,0.48
+4673,"30 C5 Manila peal & seal Envelopes80gsm",5013922046730,O,10,80,80,1,0.48
+4674/48,"50 DL White peal & seal Envelopes80gsm",5013922046747,O,12,48,48,1,0.48
+4678,"50 C6 White peal & seal Envelopes80gsm",5013922046785,O,12,72,72,1,0.48
+5160/48,100m ball of white String,5013922051604,O,12,48,48,1,0.48
+4251/48,100 Money Wallets 70 x 105mm,5013922042510,O,12,48,48,1,0.48
+4238,Bubble Envelope Size J - Bulk,5013922042381,O,1,50,50,1,0.35
+4239,Bubble Envelope Size K - Bulk,5013922042398,O,1,50,50,1,0.35
+4219,"5 Bubble Envelopes Size C 150 x215",5013922042190,O,1,24,24,1,0.46

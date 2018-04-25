@@ -1,0 +1,87 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/complete_stocktake.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'complete_stocktake' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	<div class="row">
+		<div class="col-md-10">
+    		<h1>Complete stocktake</h1>
+    	</div>
+
+    	<div class="col-md-2">
+    		<a class="btn btn-sm btn-success col-xs-12" href="{{ path('staff-products_confirm-stocktake-completion') }}">Confirm completion</a>
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-4">
+    		<p>{{ stocktake.stocktakeproduct|length }} total of items</p>
+    	</div>
+    	<div class="col-md-4">
+    		<p>{{ stocktake_unique|length }} total Amazon items</p>
+    	</div>
+    	<div class="col-md-4">
+    	</div>
+    </div>
+
+    <div id="row">
+    	<div class="col-md-12">
+    		<h4>Items</h4>
+    		<table class="table table-striped small existing_products" id="existing_unprinted_prices">
+				<thead>
+				    <tr>
+				    	<th>Item Name</th>
+				    	<th>Item code</th>
+				        <th>Price</th>
+				        <th>Location</th>
+				        <th>Qty</th>
+				    </tr>   
+				</thead>
+				<tbody>
+					{% for stocktake_product in stocktake.stocktakeproduct %}
+						<tr>
+							<td>{{ stocktake_product.product.productname }}</td>
+							<td>{{ stocktake_product.product.productsuppliercode }}</td>
+							<td>{{ stocktake_product.product.currentpricedisplay }}</td>
+							<td>{{ stocktake_product.stocklocationshelf.stocklocationshelfcode }}</td>
+							<td>{{ stocktake_product.stocktakeproductqty }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+    	</div>
+
+    	
+
+    	<div class="col-md-12">
+    		<h4>Amazon items (unique)</h4>
+    		<table class="table table-striped small existing_products" id="existing_unprinted_prices">
+				<thead>
+				    <tr>
+				    	<th>Item Name</th>
+				    	<th>Item code</th>
+				        <th>Price</th>
+				        <th>Location</th>
+				        <th>Qty</th>
+				    </tr>   
+				</thead>
+				<tbody>
+					{% for stocktake_product in stocktake_unique %}
+						<tr>
+							<td>{{ stocktake_product.product.product.productname }}</td>
+							<td>{{ stocktake_product.product.product.productsuppliercode }}</td>
+							<td>{{ stocktake_product.product.product.currentpricedisplay }}</td>
+							<td>{{ stocktake_product.product.stocklocationshelf.stocklocationshelfcode }}</td>
+							<td>{{ stocktake_product.qty }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+    	</div>
+    </div>
+
+{% endblock %}

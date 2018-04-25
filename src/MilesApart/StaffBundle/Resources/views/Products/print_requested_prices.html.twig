@@ -1,0 +1,160 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'print_prices_and_labels' %}
+
+
+{% block page_name %}
+    Print Requested Prices
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	<div class="row">
+        <div class="col-md-10 col-xs-9">
+            <h3>Prices to Print</h3>
+        </div>
+        <div class="col-md-2 col-xs-3">
+            <a class="btn btn-default col-md-12 col-xs-12 success-colour" href="{{ path('staff-products_print-outstanding-prices') }}" target="_blank" role="button">
+                <span class="glyphicon glyphicon-print"></span> <span class="hide_on_xs">Print Prices</span> 
+            </a>
+        </div>
+    </div>
+   
+<h5>{{ print_request_types|length }} price types.</h5>
+
+	{# Show by price type #}
+	{% for unique_entity in print_request_types %}
+
+		
+		<div class="row">
+	        <div class="col-md-9 col-xs-8">
+	            <h4>{{ unique_entity.getPrintRequestTypeName }} <span class="text-muted"> - {{ unique_entity.getPrintRequestTotalUnprinted }} prices | {{(unique_entity.getPrintRequestTotalUnprinted / unique_entity.getPrintRequestTypeNumberPerPage)|round(0, 'floor') }} full pages | {{ unique_entity.getPrintRequestTypeNumberPerPage - unique_entity.getPrintRequestTotalUnprinted % unique_entity.getPrintRequestTypeNumberPerPage }} more for full page </span></h4>
+	        </div>
+	        <div class="col-md-3 col-xs-4">
+	        	{% if unique_entity.getPrintRequestTypeName == 'Shelf Front Label Md Full' %}
+	        		<a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="javascript:;" onclick="printPriceLabelMediumFull();" role="button">
+	                	<span class="glyphicon glyphicon-print"></span> <span class="hide_on_xs">Print {{ unique_entity.getPrintRequestTypeName }}s</span> 
+	            	</a>
+
+	            {% elseif unique_entity.getPrintRequestTypeName == 'Hook Label' %}
+	            	<a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="javascript:;" onclick="printHookLabel();" role="button">
+	                	<span class="glyphicon glyphicon-print"></span> <span class="hide_on_xs">Print {{ unique_entity.getPrintRequestTypeName }}s</span> 
+	            	</a>
+
+	        	{% else %}
+
+	            	<a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="{{ path('staff-products_print-outstanding-prices', { 'price_type': unique_entity.getId }) }}" target="_blank" role="button">
+	                	<span class="glyphicon glyphicon-print"></span> <span class="hide_on_xs">Print {{ unique_entity.getPrintRequestTypeName }}s</span> 
+	            	</a>
+	            {% endif %}
+
+	        </div>
+	    </div>
+		
+	    {#
+	    *
+	    * THIS IS THE TABLE FOR PRODUCTs
+	    *
+	    #}
+	    {# Set up the existing products table #}
+	    <h5>Products</h5>
+	    <table class="table table-striped small existing_products" id="existing_unprinted_prices">
+	        <thead>
+	            <tr>
+	                <th>Product name</th>
+	                <th>Price</th>
+	                <th>Print Qty</th>
+	                <th>Product Code</th>
+	                <th class="hide_on_xs">Barcode</th>
+	                <th>Supplier</th>
+	            </tr>
+	                
+	        </thead>
+	        <tbody>
+	            {% for entity in unique_entity.getPrintRequest %}
+	            	{% if entity.getPrintRequestPrinted == NULL and entity.getProduct != NULL %}
+	            			                
+	            		<tr id="product_row_{{ entity.getId }}">
+		                    <td>
+		                        {{ entity.getProduct.getProductName }} 
+		                    </td>
+		                    <td>
+		                        {{ entity.getProduct.getCurrentPriceDisplay }}
+		                    </td>
+		                    <td>
+		                        {{ entity.getPrintRequestQty }}
+		                    </td>
+		                    <td>
+		                        {{ entity.getProduct.getProductSupplierCode }}
+		                    </td>
+		                     <td class="hide_on_xs">
+		                        {{ entity.getProduct.getProductBarcode }}
+		                    </td>
+		                    
+		                    <td>
+		                        {% for suppliers in entity.getProduct.getProductSupplier %}
+		                            {{ suppliers.getSupplier.getSupplierName }}
+		                        {% endfor %}
+		                    </td>
+		                    
+		                </tr>
+		            {% endif %}
+	            	
+	            {% endfor %}
+	        </tbody>
+	    </table>
+
+	    {#
+	    *
+	    * THIS IS THE TABLE FOR PRODUCT GROUPS
+	    *
+	    #}
+	    {# Set up the existing products table #}
+	    <h5>Product groups</h5>
+	    <table class="table table-striped small existing_products" id="existing_unprinted_prices">
+	        <thead>
+	            <tr>
+	                <th>Product group name</th>
+	                <th>Default Price</th>
+	                <th>Print Qty</th>
+	                <th class="hide_on_xs">Barcode</th>
+	            </tr>
+	                
+	        </thead>
+	        <tbody>
+	            {% for entity in unique_entity.getPrintRequest %}
+	            	{% if entity.getPrintRequestPrinted == NULL and entity.getProductGroup != NULL %}
+	            		<tr id="product_row_{{ entity.getId }}">
+		                    <td>
+		                        {{ entity.getProductGroup.getProductGroupName }} 
+		                    </td>
+		                    <td>
+		                        {{ entity.getProductGroup.getProductGroupDefaultPriceDisplay }}
+		                    </td>
+		                    <td>
+		                        {{ entity.getPrintRequestQty }}
+		                    </td>
+		                
+		                    <td class="hide_on_xs">
+		                        {{ entity.getProductGroup.getProductGroupBarcode }}
+		                    </td>
+		                </tr>
+		            {% endif %}
+	            	
+	            {% endfor %}
+	        </tbody>
+	    </table>
+
+	{% endfor %}
+
+    <h3>Previously Printed</h3>
+
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}

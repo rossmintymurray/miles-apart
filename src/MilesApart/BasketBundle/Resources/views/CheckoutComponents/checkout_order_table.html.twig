@@ -1,0 +1,131 @@
+
+<div class="row">
+    <div class="large-12 columns">
+        <h2 class="underline">Your Order</h2>
+        <table id="checkout_order_table">
+            {# Create the table header #}
+            <thead>
+                <tr>
+                    <th scope="column" colspan="2">Item</th>
+                    <th scope="column" class="text-center">Price</th>
+                    <th scope="column" class="text-center">Qty</th> 
+                    <th scope="column" class="text-center">Total</th>
+                </tr>
+            </thead>
+
+            {# For each item in the basket #}
+            {% for entity in basket.getbasketproduct %}
+                
+                {# Div for the checkout item row #}
+                <tr>
+                    <td>
+                        {# Show image #}
+                        {% for image in entity.getproduct.getproductimage %}
+                   
+                            {# If there is a product image with main image set #}
+                            {% if image.productimageismain == 1 %}
+
+                                {# Set the image name #}
+                                {% set photo_path = 'images/products/'~image.productimagepath %}
+                       
+                        
+                                <img alt="{{ image.productimagetitle }}" src="{{ photo_path|apply_filter('public_product_thumb') }}" class="product_thumbnail_image large-12" />
+                           
+                       
+                            {% endif %}
+
+                        {% endfor %}
+                    </td>
+
+                    <td class="text-left">
+                        {{ entity.getProduct.getProductName }}
+                        
+                    </td>
+
+                    <td class="text-center">
+                        {{ entity.getProduct.getCurrentPriceDisplay }}
+                    </div>
+
+                    <td class="text-center">
+                        {{ entity.getBasketProductQuantity }}
+                    </td>
+
+                    <td class="text-center">
+                        {{ entity.getBasketProductTotalPriceDisplay }}
+                    </td>
+                </tr>
+            {% endfor %}  
+
+            {# Create the total row #}
+            <tr>
+                <th colspan="3" class="text-right">
+                   Items subtotal
+                </th>
+                <th class="text-center">
+                   {{ basket.getBasketTotalQuantity }}
+                </th>
+                <th class="text-center" id="subtotal">
+                   {{ basket.getBasketTotalPriceDisplay }}
+                </th>  
+            </tr>     
+            
+            {# Check if customer order is set #}
+            {% if customer_order is defined %}
+                {# Check if shioping has been set #}
+                {% if customer_order.deliveryoption is defined %}
+                    {# Create the shipping row #}
+                    <tr id="shipping_charges_table_row">
+                        <th colspan="3" class="text-right">
+                           Shipping charges
+                        </th>
+                        <th>
+                        </th>
+                        <th class="text-center">
+                           {{ customer_order.getCustomerOrderShippingPaidDisplay }}
+                        </th>  
+                    </tr>     
+
+                    {# Create the grand total row #}
+                    <tr id="grand_total_table_row">
+                        <th colspan="3" class="text-right">
+                           Grand total
+                        </th>
+                        <th>
+                        </th>
+                        <th class="text-center">
+                           {{ customer_order.getGrandTotalDisplay }}
+                        </th>  
+                    </tr> 
+                {% endif %}
+            {% else %}    
+            
+
+                {# Create the empty shipping row #}
+                <tr id="shipping_charges_table_row" class="hidden_table_row">
+                    <th colspan="3" class="text-right">
+                       Shipping charges
+                    </th>
+                    <th>
+                    </th>
+                    <th class="text-center">
+                       
+                    </th>  
+                </tr>     
+
+                {# Create the grand total row #}
+                <tr id="grand_total_table_row" class="hidden_table_row">
+                    <th colspan="3" class="text-right">
+                       Grand total
+                    </th>
+                    <th>
+                    </th>
+                    <th class="text-center">
+                       
+                    </th>  
+                </tr> 
+                
+            {% endif %}
+        </table>
+    </div>
+</div>
+

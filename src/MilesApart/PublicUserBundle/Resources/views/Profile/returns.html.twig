@@ -1,0 +1,70 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Returns
+{% endblock %}
+
+{% block left_menu %}
+	
+	{% set current_page = "returns" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+	{% if pager|length > 0 %}
+		{# Show the returns #}
+		<table style="width:100%">
+	        {# Create the table header #}
+	        <thead>
+	            <tr>
+	            	<th scope="column" class="text-left">Returned date</th>
+	                <th scope="column" class="text-left">Product ID</th>
+	                <th scope="column" class="text-left">Product Name</th>
+	                <th scope="column" class="text-left">Price</th>
+	                <th scope="column" class="text-center">Qty returned</th> 
+	                <th scope="column" class="text-center">Total</th>
+	                <th scope="column" class="text-center">Order ID</th>
+	                <th scope="column" class="text-center">State</th>
+	       
+	            </tr>
+	        </thead>
+	        <tbody>
+				{# Create the table #}
+				{% for return in pager %}
+					<tr>
+						<td class="text-left">{{ return.returnedproductdatecreated|date('d/m/y') }}</td>
+						<td class="text-left">{{ return.customerorderproduct.product.id }}</td>
+						<td class="text-left">{{ return.customerorderproduct.product.productmarketingname }}</td>
+						<td class="text-left">{{ return.customerorderproduct.product.currentpricedisplay }}</td>
+						<td class="text-center">{{ return.returnedproductquantity }}</td>
+						<td class="text-center">{{ return.returnedproducttotalpricedisplay }}</td>
+						<td class="text-center">{{ return.customerorderproduct.customerorder.id }}</td>
+						<td class="text-center">
+							{% if return.returnedproductstate != null %}
+								{{ return.returnedproductstate.returnedproductstate }}
+							{% else %}
+								State not set
+							{% endif %}
+						</td>
+						
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{# Check if pagination needed and if so, create the pagination links #}
+		{% block pagination_links %}
+		  {% if pager.haveToPaginate %}
+		    {{ pagerfanta(pager, 'foundation', pagerfanta_opts) }}
+		  {% endif %} 
+		{% endblock %}
+		
+	{% else %}
+		{# Say there are no returns #}
+		<p>There have been no returns made against your account.</p>
+	{% endif %}
+
+{% endblock fos_user_content %}

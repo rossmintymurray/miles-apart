@@ -1,0 +1,57 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/pick.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'view_manifests' %}
+
+{% block page_name %}
+    View Royal Mail Manifests
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	
+		{% if manifests|length > 0 %}
+			<table class="table table-striped text-center">
+		    <thead>
+		        <tr>
+		           	<th width="10%" class="text-center">ID</th>
+					<th width="45%">Shipments</th>
+					<th width="10%" class="text-center">Status</th>
+					<th width="10%" class="text-center">Date Created</th>
+					<th width="10%" class="text-center">Print</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+					
+					{% for manifest in manifests %}
+						<tr>
+							<td class="text-center"><a href="{{ path('staff-royalmail_view-manifest-details', {'manifest_id': manifest.getId()}) }}">{{ manifest.id }}</a></td>
+							<td class="text-left">{{ manifest.royalmailshipment|length }}</td>
+							<td>
+								{% if manifest.shippingmanifeststate.id == 1 %}
+									<span class="label label-warning">{{ manifest.shippingmanifeststate.shippingmanifeststate }}</span>
+								{% else %}
+									<span class="label label-success">{{ manifest.shippingmanifeststate.shippingmanifeststate }}</span>
+								{% endif %}
+							</td>
+							<td>{{ manifest.shippingmanifestdatecreated|date('d/m/Y')}}</td>
+							<td><a href="{{ path('staff-royalmail_print-individual-manifest', {'manifest_id': manifest.getId()}) }}" class="btn-sm btn-primary">Print</a></td>
+							
+
+							
+						</tr>
+					{% endfor %}
+
+					
+
+				</tbody>
+			</table>
+		{% else %}
+			<h4>There are no outstanding shipments</h4>
+		{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

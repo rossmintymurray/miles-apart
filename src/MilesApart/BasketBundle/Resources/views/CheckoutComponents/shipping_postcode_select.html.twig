@@ -1,0 +1,14 @@
+ <option>Please select your address</option>
+    {% for address in chunks %}
+        <option>
+            {# Split the address up #}
+            {% set add = address|split(';') %}
+            {% for a in add %}
+                {% set d = a|split('|') %}
+                {% for c in d %}
+                    {{ c }}
+                {% endfor %}
+            {% endfor %}
+            - {{ xml.Address1 }}, {{xml.Address2 }}, {{ xml.Town }}
+        </option>
+    {% endfor %}

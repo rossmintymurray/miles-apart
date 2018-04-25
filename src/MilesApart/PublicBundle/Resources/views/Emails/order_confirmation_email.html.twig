@@ -1,0 +1,256 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_name %}
+	Miles Apart Order Confirmation
+{% endblock %}
+
+{% block email_title %}
+	Thank you for your order.
+{% endblock %}
+
+{% block email_intro %}
+	Your order number is <b>{{ customer_order.id }}</b>.
+{% endblock %}
+
+{% block email_content %}
+	
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th>
+					      	<p>Your order is now being processed and will be dispatched within 24 hours.</p>
+							<p>Please contact us at <a href="mailto:customersupport@miles-apart.com">customersupport@miles-apart.com</a> if you have any queries regarding your order.</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+		
+	
+	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="10px" style="font-size:10px;line-height:10px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+    
+    
+    <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="15px" style="font-size:15px;line-height:15px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+	
+	
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th>
+					      	<h5>Order Details</h5>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="small-6 large-4 columns first">
+	    		<table>
+	    			<tr>
+	    				<th>
+					      	<p>Billing To:</p>
+					      	{% if customer_order.billingaddress != null %}
+								<p style="font-size:14px">{{ customer_order.billingaddress.customeraddressline1 }}<br />
+									{{ customer_order.billingaddress.customeraddressline2 }}<br />
+									{{ customer_order.billingaddress.customeraddresstown }}<br />
+									{{ customer_order.billingaddress.customeraddresscounty }}<br />
+									{{ customer_order.billingaddress.customeraddresspostcode }}<br />
+								</p>
+							{% else %}
+								<p style="font-size:14px">No billing address set</p>
+							{% endif %}
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+		   
+		    <th class="small-6 large-4 columns">
+		    	<table>
+		    		<tr>
+		    			<th>
+					    	<p>Delivery To:</p>
+							<p style="font-size:14px">{{ customer_order.deliveryaddress.customeraddressline1 }}<br />
+								{{ customer_order.deliveryaddress.customeraddressline2 }}<br />
+								{{ customer_order.deliveryaddress.customeraddresstown }}<br />
+								{{ customer_order.deliveryaddress.customeraddresscounty }}<br />
+								{{ customer_order.deliveryaddress.customeraddresspostcode }}<br />
+							</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+
+			<th class="small-12 large-4 columns last">
+				<table>
+					<tr>
+						<th>
+							<p>Delivery Option:</p>
+							<p style="font-size:14px">Royal Mail {{ customer_order.deliveryoption.postagetype.postagetypename }}
+							</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+	  	</tr>
+	</table>
+			
+
+	<table class="row">
+	  	<tr>
+	  		<th class="columns first last">
+	    		<table>
+					<tr style="background-color:#292929;color:#fff;padding:5px 3px 5px 3px">
+						<th style="padding:5px 3px 5px 6px;color:#fff;font-size:13px">Code</th>
+						<th style="padding:5px 3px 5px 3px;color:#fff;font-size:13px">Description</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Price</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Qty</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Total</th>
+					</tr>
+
+					{% for product in customer_order.customerorderproduct %}
+						{% if loop.index is divisible by(2) %}
+							<tr style="background-color:#fff;padding:5px 3px 5px 3px">
+						{% else %}
+							<tr style="background-color:#ebebeb;">
+						{% endif %}
+
+							<td style="padding:5px 3px 5px 6px;font-size:13px">{{ product.product.productsuppliercode }}</td>
+							<td style="padding:5px 3px 5px 3px;font-size:13px">{{ product.product.productname }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.product.currentpricedisplay }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.customerorderproductquantity }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.customerorderproducttotalpricedisplay }}</td>
+						</tr>
+					{% endfor %}
+					
+					<tr style="background-color:#e0e0e0">
+						<th colspan="4" style="text-align:right;padding:5px 3px 5px 3px;font-size:13px">Sub-total</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ customer_order.getCustomerOrderTotalPriceDisplay }}</th>
+					</tr>
+					<tr>
+						<th colspan="4" style="text-align:right;padding:5px 3px 5px 3px;font-size:13px">Shipping charges </th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ customer_order.getCustomerOrderShippingPaidDisplay }}</th>
+					</tr>
+					<tr  style="background-color:#d6d6d6">
+						<th colspan="4" style="text-align:right;padding:5px 3px 5px 3px;font-size:13px"><b>Grand total </b></th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;font-size:13px"><b>{{ customer_order.getGrandTotalDisplay }}</b></th>
+					</tr>
+				</table>
+				<table class="spacer">
+                    <tbody>
+                      	<tr>
+                        	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+                      	</tr>
+                    </tbody>
+                </table>
+			</th>
+		</tr>
+	</table>
+			
+    
+    
+    <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+			
+
+
+	
+	<table class="row">
+	  	<tr>
+	  		<th class="small-3 large-3 columns first">
+	  			<table>
+	    			<tr>
+	    				<th>
+	    					<a href="http://www.miles-apart.com"><img src="http:/localhost:8888/Miles-Apart/web/images/email/OfflineLogoTransparent.png"></a>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+			<th class="small-9 large-9 columns last">
+				<table>
+					<tr>
+						<th>
+							<p style="-webkit-hyphens:manual;-moz-hyphens:manual;hyphens:manual;font-size:12px">
+								Miles Apart is based in Amesbury, Wiltshire with two shops and our head office in the town. We also have a shop in Westbury, also in Wiltshire. Stocking a huge range of products at fair prices, we are a family business with over 25 years experience.
+							</p>
+							
+							<p style="font-size:10px">&copy;{{ 'now'|date('Y') }} Miles Apart
+							</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+	  	</tr>
+	</table>
+			
+{% endblock %}
+
+{% block email_callout %}
+{% endblock %}
+
+{% block email_footer %}
+{% endblock %}

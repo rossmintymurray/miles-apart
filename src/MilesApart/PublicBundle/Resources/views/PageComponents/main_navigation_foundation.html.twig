@@ -1,0 +1,189 @@
+<div class="row">
+ 	<div class="medium-12 columns">
+  
+		<div class="contain-to-grid">
+
+			<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+		                        
+				<ul class="title-area">
+					<li class="name">
+						<div class="hide-for-large-up">
+							<h1><a class="menuTog" href="#">Browse Our Products</a></h1>
+						</div>
+					</li>
+					<li class="toggle-topbar menu-icon">
+						<a href="#"><span></span></a>
+					</li>
+				</ul>
+		            
+			    <!-- Collect the nav links, forms, and other content for toggling - this will be collapsed on mobile devices-->
+			    <section class="top-bar-section">
+			    	<div class="center_topbar">
+			      	<ul class="full_width">
+			            <!-- list elements -->
+
+			            {# Set the colour to 0 #}
+			            {% set colour_number = 1 %} 
+			            {# Get the main categories and display #}
+						{% for entity in navigation_categories %}
+						    {% if entity.categorytype.categorytypename is sameas ("Main") %}
+						    	{# Show the main category item #}
+						    	<li class="has-dropdown {% if entity.categoryslug == main_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'main_category': entity.CategorySlug }) }}" data-toggle="dropdown" class="dropdown-toggle colour_{{ colour_number }}">{{ entity.categoryname }}</a>
+						    		{% set colour_number = colour_number + 1 %}
+
+						    		<ul class="dropdown m-menu">
+						    			<li class="dropdown_padding">
+			                                <div class="row collapse">
+
+								    			{# Get the subcategory items #}
+								    			{% for sub_entity in navigation_categories %}
+								    				{% if sub_entity.categorytype.categorytypename is sameas ("Sub") and sub_entity.parent.id is sameas (entity.id) %}
+
+								    					{# Show the sub category item #}
+						    					
+				                                        {% if sub_entity.categoryname is sameas ("Puzzles By Picture") %} 
+				                                        	<div class="medium-6 columns nav_columns">
+				                                        		<p class="nav_title {% if sub_entity.categoryslug == sub_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'sub_category': sub_entity.categoryslug, 'main_category': entity.categoryslug }) }}">{{ sub_entity.categoryname }}</a></p>
+					                                            
+					                                            <ul>
+
+						                                            {# Create new row for multiple puzzles by picture categories #}
+						                                            <div class="row collapse">
+						                                            	<div class="medium-4 columns">
+
+						                                            	
+
+							                                            	{% set specific_count = 0 %}
+							                                            	{# Get the specific category items #}
+							                                            	{% for specific_entity in navigation_categories %}
+							                                            		{% if specific_entity.categorytype.categorytypename is sameas ("Specific") and specific_entity.parent.id is sameas (sub_entity.id) %}
+
+							                                            			{# Show the specific category item #}
+							                                            			<li class="{% if specific_entity.categoryslug == specific_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'specific_category': specific_entity.categoryslug, 'sub_category': sub_entity.categoryslug, 'main_category': entity.categoryslug }) }}">{{ specific_entity.categoryname }}</a></li>
+
+							                                            			{% set specific_count = specific_count + 1 %}
+
+
+							                                            			{# Close the row if 6th item #}
+							                                            			{% if specific_count == 6 %}
+								                                            			{% set specific_count = 0 %}
+								                                            			
+									                                            			
+									                                        			</div>
+									                                        		
+							                                            				<div class="medium-4 columns">	
+
+						                                            				{% endif %}
+
+
+							                                            		{% endif %}
+							                                            	{% endfor %}
+
+							                                            </div>
+
+							                                            
+
+							                                        </div>
+
+
+					                                            </ul>
+					                                        </div>
+				                                        
+				                                        {# Show the sub category item #}
+						    					
+				                                        {% elseif sub_entity.categoryname is sameas ("Party Accessories") %} 
+				                                        	<div class="medium-4 columns nav_columns">
+				                                        		<p class="nav_title {% if sub_entity.categoryslug == sub_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'sub_category': sub_entity.categoryslug, 'main_category': entity.categoryslug }) }}">{{ sub_entity.categoryname }}</a></p>
+					                                            <ul>
+						                                            {# Create new row for multiple puzzles by picture categories #}
+						                                            <div class="row collapse">
+						                                            	<div class="medium-6 columns">
+
+						                                            	
+
+							                                            	{% set specific_count = 0 %}
+							                                            	{# Get the specific category items #}
+							                                            	{% for specific_entity in navigation_categories %}
+							                                            		{% if specific_entity.categorytype.categorytypename is sameas ("Specific") and specific_entity.parent.id is sameas (sub_entity.id) %}
+
+							                                            			{# Show the specific category item #}
+							                                            			<li class="{% if specific_entity.categoryslug == specific_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'specific_category': specific_entity.categoryslug, 'sub_category': sub_entity.categoryslug, 'main_category': entity.categoryslug }) }}">{{ specific_entity.categoryname }}</a></li>
+
+							                                            			{% set specific_count = specific_count + 1 %}
+
+
+							                                            			{# Close the row if 6th item #}
+							                                            			{% if specific_count == 6 %}
+								                                            			{% set specific_count = 0 %}
+								                                            			
+									                                            			
+									                                        			</div>
+									                                        		
+							                                            				<div class="medium-6 columns">	
+
+						                                            				{% endif %}
+
+
+							                                            		{% endif %}
+							                                            	{% endfor %}
+							                                            </div>
+						                                            </div>
+					                                            </ul>
+					                                        </div>
+				                                        {% else %}
+
+				                                        	<div class="medium-2 columns nav_columns">
+				                                        	<ul>
+					                                            <li class="nav_title {% if sub_entity.categoryslug == sub_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'sub_category': sub_entity.categoryslug, 'main_category': entity.categoryslug }) }}">{{ sub_entity.categoryname }}</a></li></ul>
+					                                            <ul>
+
+					                                            	{# Get the specific category items #}
+					                                            	{% for specific_entity in navigation_categories %}
+					                                            		{% if specific_entity.categorytype.categorytypename is sameas ("Specific") and specific_entity.parent.id is sameas (sub_entity.id) %}
+
+					                                            			{# Show the specific category item #}
+					                                            			<li class="{% if specific_entity.categoryslug == specific_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'specific_category': specific_entity.categoryslug, 'sub_category': sub_entity.categoryslug, 'main_category': entity.categoryslug }) }}">{{ specific_entity.categoryname }}</a></li>
+
+					                                            		{% endif %}
+					                                            	{% endfor %}
+					                                            </ul>
+
+					                                        </div>
+
+				                                        {% endif %}
+
+			                                        {% endif %}
+
+					                			{% endfor %}
+
+					                		</div><!-- end row -->
+
+					                	</li><!-- end grid demo -->
+
+					                </ul><!-- end drop down menu -->
+			                    
+			                    </li><!-- end list elements -->
+
+			                {% endif %}
+
+					    {% endfor %}
+
+					    <!-- Add the Season Nav link -->
+	                    {# Check that there is a season to show #}
+	                    {% if current_season is defined %}
+	                    	{% if current_season|length > 0 %}
+		                    	<li><a class="season_nav_link {{ current_season.0.seasonslug }}" href="{{ path('miles_apart_public_homepage') }}">{{ current_season.0.seasonname }}</a></li>
+		                    {% endif %}
+	                    {% endif %}
+
+					</ul>
+				</div>
+		    	</section>
+
+		{# End of navigation #}
+			</nav>
+		</div>
+	</div>
+</div>
+
+		               

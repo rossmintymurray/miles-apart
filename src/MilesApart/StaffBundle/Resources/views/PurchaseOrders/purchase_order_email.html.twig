@@ -1,0 +1,274 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_title %}
+	Purchase Order from Miles Apart
+{% endblock %}
+
+{% block email_header %}
+	Purchase Order from Miles Apart
+{% endblock %}
+
+{% block email_intro %}
+	Please process the following purchase order from Miles Apart, sent at {{ "now"|date("g:ia \\o\\n jS F Y") }}.
+{% endblock %}
+
+{% block email_content %}
+	<table class="row">
+	  	<tr>
+	  		<th class="small-6 large-4 columns first">
+	    		<table>
+	    			<tr>
+	    				<th>
+					      	<table  border="0" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Supplier:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								{{ purchase_order.supplier.suppliername }}
+							</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">Account Number:</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ purchase_order.supplier.supplieraccountnumber }}
+							</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">PO Number:</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ purchase_order.id }}
+							</td>
+						</tr>
+						
+					</table>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+		   
+		    <th class="small-6 large-4 columns">
+		    	<table>
+		    		<tr>
+		    			<th>
+					    	<table border="0" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Invoice To:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td >
+								Miles Apart
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Westcroft
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Boscombe Village
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Salisbury
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Wiltshire
+							</td>
+						</tr>
+						<tr>
+							<td>
+								SP4 0AB
+							</td>
+						</tr>
+					</table>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+
+			<th class="small-12 large-4 columns last">
+				<table>
+					<tr>
+						<th>
+							<table border="0" valign="top" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Deliver To:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								Miles Apart
+							</td>
+						</tr>
+						<tr>
+							<td>
+								28 Salisbury Street
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Amesbury
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Wiltshire
+							</td>
+						</tr>
+						<tr>
+							<td>
+								SP4 7HD
+							</td>
+						</tr>
+					</table>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+	  	</tr>
+	</table>
+
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+
+	{# Make the table #}
+	<table class="row">
+	  	<tr>
+	  		<th class="columns first last">
+	    		<table>
+					<tr style="background-color:#292929;color:#fff;padding:5px 3px 5px 3px">
+						<th style="padding:5px 3px 5px 6px;color:#fff;font-size:13px">Code</th>
+						<th style="padding:5px 3px 5px 3px;color:#fff;font-size:13px">Product name</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Unit Qty</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Inner Qty</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Outers Qty</th>
+					</tr>
+
+					{% for purchase_order_product in purchase_order.getpurchaseorderproduct %}
+						{% if loop.index is divisible by(2) %}
+							<tr style="background-color:#fff;padding:5px 3px 5px 3px">
+						{% else %}
+							<tr style="background-color:#ebebeb;">
+						{% endif %}
+
+							<td style="padding:5px 3px 5px 6px;font-size:13px">{{ purchase_order_product.product.productsuppliercode }}</td>
+							<td style="padding:5px 3px 5px 3px;font-size:13px">{{ purchase_order_product.product.productname }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ purchase_order_product.purchaseorderproductquantity }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ purchase_order_product.purchaseorderproductinners }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ purchase_order_product.purchaseorderproductouters }}</td>
+						</tr>
+					{% endfor %}
+			
+				</table>
+				<table class="spacer">
+                    <tbody>
+                      	<tr>
+                        	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+                      	</tr>
+                    </tbody>
+                </table>
+			</th>
+		</tr>
+	</table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+    <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	<p>This purchase order was sent by <b>{{ app.security.getToken().getUser().getEmployee().getEmployeeFullName() }}</b> on <b>{{ "now"|date("jS F Y \\a\\t g:ia") }}</b>.</p>
+							<p>Please dispatch ASAP and <b>please book in on 01980 626880</b>.
+							<p>Please send order confirmation to <a href="mailto:accounts@miles-apart.com">accounts@miles-apart.com</a>.</p>
+							<p>Please notify of any price increases or any other issues, such as if you are unable to process orders by email or if a different address should be used, at this address: <a href="mailto:purchaseorders@miles-apart.com">purchaseorders@miles-apart.com</a>.</p> 
+							<p>Many thanks.</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+
+
+{% endblock %}

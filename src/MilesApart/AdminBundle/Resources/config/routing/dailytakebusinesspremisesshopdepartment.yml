@@ -1,0 +1,33 @@
+finance_daily-take-business-premises-shop-department:
+    path:     /{page}
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_daily-take-business-premises-shop-department_show:
+    path:     /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:show" }
+
+finance_daily-take-business-premises-shop-department_new:
+    path:     /new
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:new" }
+
+finance_daily-take-business-premises-shop-department_create:
+    path:     /create
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:create" }
+    requirements: { _method: post }
+
+finance_daily-take-business-premises-shop-department_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:edit" }
+
+finance_daily-take-business-premises-shop-department_update:
+    path:     /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:update" }
+    requirements: { _method: post|put }
+
+finance_daily-take-business-premises-shop-department_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesShopDepartment:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,206 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/process_purchase_order_csv.html.twig #}
+{% extends 'MilesApartStaffBundle::report_print_layout.html.twig' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block report_page_name %}
+    Purchase Order
+{% endblock %}
+
+{# Set the dpage  #}
+{% block report_date_range %}
+    <h2>Fax to <b>{{ purchase_order.supplier.supplierfax }}</b>
+{% endblock %}
+
+{% block print_page_data %}
+
+  <div class="row">
+		        <div class="col-md-10 col-xs-9">
+		            <h4>PO for {{ purchase_order.supplier.suppliername }}. <small class="text-muted">Fax to <b>{{ purchase_order.supplier.supplierfax }}</b></small></h4>
+		        </div>
+
+		        <div class="col-md-2 col-xs-3">
+		        	{# Show the totals #}
+		        	
+			        
+		        </div>
+	    	</div>
+	    	<div class="col-xs-12">
+	    		<p>Please process the following purchase order from Miles Apart, sent at {{ "now"|date("g:ia \\o\\n jS F Y") }}.</p>
+
+	    		<table border="0" cellpadding="5" cellspacing="0" width="100%" style="font-size:16px">
+		<tbody>
+			<tr>
+				<td valign="top" width="34%">
+					<table  border="0" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Supplier:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								{{ purchase_order.supplier.suppliername }}
+							</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">Account Number:</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ purchase_order.supplier.supplieraccountnumber }}
+							</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">PO Number:</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ purchase_order.id }}
+							</td>
+						</tr>
+						
+					</table>
+				</td>
+
+				</td>
+				<td valign="top" width="33%">
+					<table border="0" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Invoice To:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td >
+								Miles Apart
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Westcroft
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Boscombe Village
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Salisbury
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Wiltshire
+							</td>
+						</tr>
+						<tr>
+							<td>
+								SP4 0AB
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td valign="top" width="33%">
+					<table border="0" valign="top" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Deliver To:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								Miles Apart
+							</td>
+						</tr>
+						<tr>
+							<td>
+								28 Salisbury Street
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Amesbury
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Wiltshire
+							</td>
+						</tr>
+						<tr>
+							<td>
+								SP4 7HD
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="8"></td>
+			</tr>
+			
+
+		</tbody>
+	</table>
+		    {# Set up the existing products table #}
+		    <table class="table table-striped small existing_products" id="existing_purchase_order_{{ purchase_order.id }}" style="font-size:16px">
+		        <thead>
+		            <tr>
+		            	<th style="font-size:14px">#</th>
+		            	<th>Product Code</th>
+		                <th>Product name</th>
+		                <th>Ordered Qty</th>
+		                <th class="hide_on_xs">Barcode</th>
+		                <th>Supplier</th>
+		                
+		                
+		        </thead>
+		        <tbody>
+		            {% for purchase_order_product in purchase_order.purchaseorderproduct %}
+		            	{% if purchase_order_product.purchaseorder.id == purchase_order.id %}
+			                <tr id="product_row_{{ purchase_order.id }}">
+			                	<td style="font-size:16px">{{ loop.index }}</td>
+			                	<td>
+			                        {{ purchase_order_product.getProduct.getProductSupplierCode }}
+			                    </td>
+			                    <td>
+			                        {{ purchase_order_product.getProduct.getProductName }}
+			                    </td>
+			                  	<td>
+			                        {{ purchase_order_product.getPurchaseOrderProductQuantity }}
+			                    </td>
+			                    
+			                     <td class="hide_on_xs">
+			                        {{ purchase_order_product.getProduct.getProductBarcode }}
+			                    </td>
+			                    
+			                    <td>
+			                        {% for suppliers in purchase_order_product.getProduct.getProductSupplier %}
+			                            {{ suppliers.getSupplier.getSupplierName }}
+			                        {% endfor %}
+			                    </td>
+			                    
+			                </tr>
+			            {% endif %}
+		            {% endfor %}
+		        </tbody>
+		    </table>
+
+		    <p>This purchase order contains <b>{{ purchase_order.purchaseorderproduct|length }} product</b> and was sent by <b>{{ app.security.getToken().getUser().getEmployee().getEmployeeFullName() }}</b> on <b>{{ "now"|date("jS F Y \\a\\t g:ia") }}</b>.</p>
+							<p>Please dispatch ASAP and <b>please book in on 01980 626880</b>.
+							<p>Please send order confirmation to <a href="mailto:accounts@miles-apart.com">accounts@miles-apart.com</a>.</p>
+							
+							<p>Many thanks.</p>
+{% endblock %}

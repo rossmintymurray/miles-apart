@@ -1,0 +1,31 @@
+staff-royalmail_complete-shipment:
+    pattern:  /complete-shipment/{order_id}
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:completeShipment" }
+
+staff-royalmail_print-manifest:
+    pattern:  /print-manifest
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:printManifest" }
+
+staff-royalmail_view-manifest:
+    pattern:  /view-manifest
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:viewManifest" }
+
+staff-royalmail_view-manifest-details:
+    pattern:  /view-manifest-details/{manifest_id}
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:viewManifestDetails" }
+
+staff-royalmail_print-individual-manifest:
+    pattern:  /print-individual-manifest/{manifest_id}
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:printindividualmanifest" }
+
+staff-royalmail_view-shipments:
+    pattern:  /view-shipments
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:viewshipments" }
+
+staff-royalmail_view-shipment-details:
+    pattern:  /view-shipment-details/{shipment_id}
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:viewshipmentdetails" }
+
+staff-royalmail_cancel-shipment:
+    pattern:  /cancel-shipment/{shipment_number}
+    defaults: { _controller: "MilesApartStaffBundle:RoyalMail:cancelshipment" }

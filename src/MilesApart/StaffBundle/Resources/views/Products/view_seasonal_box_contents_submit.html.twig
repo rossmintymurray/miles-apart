@@ -1,0 +1,19 @@
+	{{ seasonal_storage_box.seasonalstorageboxcode }}
+	<table class="table table-striped small existing_products" id="existing_unprinted_prices">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Supplier</th>
+      		</tr>
+        </thead>
+        <tbody>
+        
+		{% for stocktake_product in seasonal_storage_box.getSeasonalStorageBoxProduct %}
+			<tr><td>{{ stocktake_product.getProduct.getProductName }}</td><td>{{ stocktake_product.seasonalstorageboxproductqty }}</td><td>{{ stocktake_product.getProduct.getCurrentPrice }}</td><td>{% if stocktake_product.getProduct.getDefaultProductSupplier.getSupplier.getSupplierName is defined %} {{ stocktake_product.getProduct.getDefaultProductSupplier.getSupplier.getSupplierName }} {% else %} Supplier not set {% endif %}</td></tr>
+			
+		{% endfor %}
+
+		</tbody>
+    </table>

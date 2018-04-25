@@ -1,0 +1,137 @@
+staff-campaigns_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:notifications" }
+                
+staff-campaigns_new-campaign:
+    pattern:  /new-campaign
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:newcampaign" }
+
+staff-campaigns_create-new-campaign:
+    pattern:  /new-campaign/create
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:createnewcampaign" }
+
+staff-campaigns_view-campaigns:
+    pattern:  /view-campaign
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:viewcampaigns" }
+
+staff-campaigns_edit-campaign:
+    pattern:  /edit-campaign/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:editcampaign" }
+
+staff-campaigns_update-campaign:
+    pattern:  /edit-campaign/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:updatecampaign" }
+
+staff-campaigns_new-promotion:
+    pattern:  /new-promotion
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:newpromotion" }
+
+staff-campaigns_create-new-promotion:
+    pattern:  /new-promotion/create
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:createnewpromotion" }
+
+staff-campaigns_view-promotions:
+    pattern:  /view-promotions
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:viewpromotions" }
+
+staff-campaigns_edit-promotion:
+    pattern:  /edit-promotion/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:editpromotion" }
+
+staff-campaigns_update-promotion:
+    pattern:  /edit-promotion/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:updatepromotion" }
+
+staff-campaigns_analyse-campaigns:
+    pattern:  /analyse-campaigns
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:analysecampaigns" }
+
+
+
+staff-campaigns_new-promotion-type:
+    pattern:  /new-promotion-type
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:newpromotiontype" }
+
+staff-campaigns_create-new-promotion-type:
+    pattern:  /new-promotion-type/create
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:createnewpromotiontype" }
+
+staff-campaigns_view-promotion-types:
+    pattern:  /view-promotion-types
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:viewpromotiontypes" }
+
+staff-campaigns_edit-promotion-type:
+    pattern:  /edit-promotion-type/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:editpromotiontype" }
+
+staff-campaigns_update-promotion-type:
+    pattern:  /edit-promotion-type/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:updatepromotiontype" }
+
+
+staff-campaigns_new-campaign-type:
+    pattern:  /new-campaign-type
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:newcampaigntype" }
+
+staff-campaigns_create-new-campaign-type:
+    pattern:  /new-campaign-type/create
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:createnewcampaigntype" }
+
+staff-campaigns_view-campaign-types:
+    pattern:  /view-campaign-types
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:viewcampaigntypes" }
+
+staff-campaigns_edit-campaign-type:
+    pattern:  /edit-campaign-type/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:editcampaigntype" }
+
+staff-campaigns_update-campaign-type:
+    pattern:  /edit-campaign-type/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:updatecampaigntype" }
+
+
+staff-campaigns_new-traffic-source-type:
+    pattern:  /new-traffic-source-type
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:newtrafficsourcetype" }
+
+staff-campaigns_create-new-traffic-source-type:
+    pattern:  /new-traffic-source-type/create
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:createnewtrafficsourcetype" }
+
+staff-campaigns_view-traffic-source-types:
+    pattern:  /view-traffic-source-types
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:viewtrafficsourcetypes" }
+
+staff-campaigns_edit-traffic-source-type:
+    pattern:  /edit-traffic-source-type/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:edittrafficsourcetype" }
+
+staff-campaigns_update-traffic-source-type:
+    pattern:  /edit-traffic-source-type/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:updatetrafficsourcetype" }
+
+
+staff-campaigns_new-traffic-source:
+    pattern:  /new-traffic-source
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:newtrafficsource" }
+
+staff-campaigns_create-new-traffic-source:
+    pattern:  /new-traffic-source/create
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:createnewtrafficsource" }
+
+staff-campaigns_view-traffic-sources:
+    pattern:  /view-traffic-sources
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:viewtrafficsources" }
+
+staff-campaigns_edit-traffic-source:
+    pattern:  /edit-traffic-source/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:edittrafficsource" }
+
+staff-campaigns_update-traffic-source:
+    pattern:  /edit-traffic-source/{id}/update
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:updatetrafficsource" }
+
+
+staff-campaigns_vanity-url-check:
+    pattern:  /vanity-url-check
+    defaults: { _controller: "MilesApartStaffBundle:Campaigns:vanityurlcheck" }

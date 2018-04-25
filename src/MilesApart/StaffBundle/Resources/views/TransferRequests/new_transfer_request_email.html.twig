@@ -1,0 +1,70 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_name %}
+	New Transfer Request
+{% endblock %}
+
+{% block email_title %}
+	New Transfer Request
+{% endblock %}
+
+{% block email_intro %}
+	A new transfer request has been received from <b>{{ transfer_request.getBusinessPremises.getBusinessPremisesName }}</b> on {{ transfer_request.getTransferRequestDateCreated|date("F jS \\a\\t g:ia") }}.
+{% endblock %}
+
+{% block email_content %}
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th>
+							To see the request please click the link below.<br />
+							<a href="{{ path('staff-transfer-requests_view-request-details', {'transfer_request_id': transfer_request.getId}) }}">View new request</a>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="columns first last">
+	    		<table>
+					<tr style="background-color:#292929;color:#fff;padding:5px 3px 5px 3px">
+						<th style="padding:5px 3px 5px 6px;color:#fff;font-size:13px">Code</th>
+						<th style="padding:5px 3px 5px 3px;color:#fff;font-size:13px">Description</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Qty</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px">Supplier</th>
+					</tr>
+
+					{% for product in transfer_request.producttransferrequest %}
+						{% if loop.index is divisible by(2) %}
+							<tr style="background-color:#fff;padding:5px 3px 5px 3px">
+						{% else %}
+							<tr style="background-color:#ebebeb;">
+						{% endif %}
+
+							<td style="padding:5px 3px 5px 6px;font-size:13px">{{ product.product.productsuppliercode }}</td>
+							<td style="padding:5px 3px 5px 3px;font-size:13px">{{ product.product.productname }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.producttransferrequestqty }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.product.defaultproductsupplierobject.suppliershortname }}</td>
+						</tr>
+					{% endfor %}
+				
+				</table>
+				<table class="spacer">
+                    <tbody>
+                      	<tr>
+                        	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+                      	</tr>
+                    </tbody>
+                </table>
+			</th>
+		</tr>
+	</table>
+
+{% endblock %}

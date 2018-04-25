@@ -1,0 +1,37 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'edit_' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}Edit{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+Edit 		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Add new and make changes to existing suppliers and supplier representatives
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('category_product-category') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

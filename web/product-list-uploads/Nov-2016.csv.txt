@@ -1,0 +1,41 @@
+Name,Code,Barcode,Price,Weight,Pices,Width,Height,Length,Cat,Cost
+Hen Friends by Tracy Hall,001080,5060002001080,10.5,820,1000,380,270,55,Animals/Contry & Farming,5.25
+Happy Campers by Michael Durkin,003831,5060002003831,10.5,850,1000,380,270,55,Humour,5.25
+In The Mood by Czes Pachela,004036,5060002004036,10.5,850,1000,380,270,55,Nostalgia,5.25
+On Silent Wings by Kim Taylor,000366,5060002000366,10.5,840,1000,380,270,55,Animals,5.25
+No. 8 - Park & Rides by Ray Cresswell,003503,5060002003503,10.5,840,1000,380,270,55,Nostalgia,5.25
+Wildlife by Peter Annable,001134,5060002001134,10.5,800,1000,380,270,55,Animals,5.25
+The Village Store by Bob Hersey,001110,5060002001110,10.5,800,1000,380,270,55,Nostalgia,5.25
+The Trout Pool by Trevor Mitchell,001004,5060002001004,10.5,800,1000,380,270,55,Country & Farming,5.25
+Spring Morning by Trevor Mitchell,000939,5060002000939,10.5,800,1000,380,270,55,Country & Farming,5.25
+Spitfires Safely Home by Stephen Brown ,001356,5060002001356,10.5,800,1000,380,270,55,Military,5.25
+Almost Teatime by Czes Pachela,003961,5060002003961,10.5,800,1000,380,270,55,Nostalgia/Sport,5.25
+Butterflies by Peter Annable ,000861,5060002000861,10.5,800,1000,380,270,55,Animals,5.25
+Car Boot Sale by Linda Birkinshaw,003602,5060002003602,10.5,800,1000,380,270,55,Nost,5.25
+Crafty Corner by Tracy Hall,003992,5060002003992,10.5,800,1000,380,270,55,Nostalgia,5.25
+Dad's Shed by Michael Herring,001318,5060002001318,10.5,800,1000,380,270,55,Nostalgia,5.25
+Farmyard Companions by Anthony Forster,001325,5060002001325,10.5,800,1000,380,270,55,Country & Farming,5.25
+Farm Shop by Tracy Hall,001257,5060002001257,10.5,800,1000,380,270,55,country & Farming,5.25
+Flower Show by Tracy Hall,003619,5060002003619,10.5,800,1000,380,270,55,Country & Farming / Flowers,5.25
+ Fresh Pastures by Anthony Forster,001042,5060002001042,10.5,800,1000,380,270,55,Country & Farming,5.25
+Getting Up Steam by Mike Kipling ,001332,5060002001332,10.5,800,1000,380,270,55,Transport,5.25
+Green Fingers by Tracy Hall,001493,5060002001493,10.5,800,1000,380,270,55,Gardens ,5.25
+Happy Hens by Tracy Hall,001295,5060002001295,10.5,800,1000,380,270,55,Country & Farmyard,5.25
+Ideal Home by Tracy Hall,003640,5060002003640,10.5,800,1000,380,270,55,Nostalgia / Still Life ,5.25
+Final Approach by Keith Stapleton,003510,5060002003510,10.5,800,500XL,380,270,55,ilitary,5.25
+Head Over Heels by Tracy Hall ,003893,5060002003893,10.5,800,500XL,380,270,55,Shopping,5.25
+Wait For Us by Keith Stapleton,003466,5060002003466,7.8,510,250XL,380,270,55,Nostalgia/Transport,3.90
+Wisteria Cottage by Keith Stapleton,003473,5060002003473,7.8,510,250XL,380,270,55,Cottages/ Flowers / Nostalgia,3.90
+King of the Castle by Keith Stapleton,003435,5060002003435,7.8,510,250XL,380,270,55,Animals / Flowers,3.90
+Starry Night by Susan Ridyard,003442,5060002003442,7.8,510,250XL,380,270,55,Nostalgia / Snowy,3.90
+Family Day Out by Czes Pachela ,003404,5060002003404,7.8,510,250XL,380,270,55,,3.90
+Fill Her Up Please! By Keith Stapleton,003411,5060002003411,7.8,510,250XL,380,270,55,Nostalgia/Transport,3.90
+Harbour Lights by Keith Stapleton,003428,5060002003428,7.8,510,250XL,380,270,55,Sea Harbours,3.90
+Scarecrow Fair by Czes Pachela,003558,5060002003558,10.5,850,500XL,380,270,55,Nostalgia,5.25
+Sports Mixture by Czes Pachela ,003916,5060002003916,10.5,850,500XL,380,270,55,Sports,5.25
+Learn to Paint by Tracy Hall,003527,5060002003527,10.5,850,500XL,380,270,55,Scenic,5.25
+Steady As She Goes! By Keith Stapleton,003923,5060002003923,10.5,850,500XL,380,270,55,Sea Harbours,5.25
+Travellers Rest by Keith Stapleton,003572,5060002003572,10.5,850,500XL,380,270,55,Pubs / Nostalgia,5.25
+Poppy's Piglets by Keith Stapleton,003534,5060002003534,10.5,850,500XL,380,270,55,Country & Farmin,5.25
+A to Z of Rail by Beryl & Graham Peters ,003718,5060002003718,10.5,850,500XL,380,270,55,Transport,5.25
+Puss 'n' Boots by Tracy Hall,003541,5060002003541,10.5,850,500XL,380,270,55,Animals,5.25

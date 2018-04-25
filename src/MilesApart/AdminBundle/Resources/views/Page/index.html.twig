@@ -1,0 +1,42 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'index' %}
+{% set current_page = 'index' %}
+
+{% block body %}
+    <h4>ISys introduction...</h4>
+    
+{% endblock %}
+
+{% block sidebar %}
+    <h2>Quick Links</h2>
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list homepage_left_nav">
+    <li class="nav-header">Overview pages</li>
+    <li {% if current_page == 'supplier_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_pickpack') }}">Customer Orders</a>
+    </li>
+ 	<li><a href="{{ path('miles_apart_admin_product') }}">Products</a></h4></li>
+    <li><a  href="{{ path('miles_apart_admin_customer') }}">Customers</a></li>
+    <li><a  href="{{ path('miles_apart_admin_campaign') }}">Campaigns</a></li>
+    <li><a  href="{{ path('miles_apart_admin_finance') }}">Finances</a></li>
+    <li><a  href="{{ path('miles_apart_admin_business') }}">Business</a></li>
+    <li><a  href="{{ path('miles_apart_admin_goodsin') }}">Goods in</a></li>
+    <li><a  href="{{ path('miles_apart_admin_hr') }}">HR</a></li>
+    <li><a  href="{{ path('miles_apart_admin_procurement') }}">Procurement</a></li>
+    <li><a  href="{{ path('miles_apart_admin_webmanagement') }}">Website management</a></li>
+    <li><a  href="{{ path('miles_apart_admin_supplier') }}">Suppliers</a></li>
+    
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <a href="#" onclick="errorAlert();">Click</a>
+{% endblock %}

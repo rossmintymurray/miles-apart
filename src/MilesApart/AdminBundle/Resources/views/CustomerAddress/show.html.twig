@@ -1,0 +1,87 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customer.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'all_employees' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.customeraddressname }} - Employee
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.customeraddressname }} - Employee           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View employee details
+{% endblock %}
+
+{% block page_content -%}
+<h2>{{ entity.customeraddressname }}</h2>
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Customer address name</th>
+                <td>{{ entity.customeraddressname }}</td>
+            </tr>
+            <tr>
+                <th>Customer address line 1</th>
+                <td>{{ entity.customeraddressline1 }}</td>
+            </tr>
+            <tr>
+                <th>Customer address line 2</th>
+                <td>{{ entity.customeraddressline2 }}</td>
+            </tr>
+            <tr>
+                <th>Customer address town</th>
+                <td>{{ entity.customeraddresstown }}</td>
+            </tr>
+            <tr>
+                <th>Customer address county</th>
+                <td>{{ entity.customeraddresscounty }}</td>
+            </tr>
+            <tr>
+                <th>Customer address postcode</th>
+                <td>{{ entity.customeraddresspostcode }}</td>
+            </tr>
+            <tr>
+                <th>Customer address notes</th>
+                <td>{{ entity.customeraddressnotes }}</td>
+            </tr>
+            <tr>
+                <th>Customer address is billing</th>
+                <td>{{ entity.customeraddressisbilling }}</td>
+            </tr>
+            <tr>
+                <th>Customer address date created</th>
+                <td>{{ entity.customeraddressdatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Customer address date modified</th>
+                <td>{{ entity.customeraddressdatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer_customer-address') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('customer_customer-address_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

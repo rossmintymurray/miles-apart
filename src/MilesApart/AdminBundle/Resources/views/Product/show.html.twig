@@ -1,0 +1,118 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'product' %}
+
+{# Set the page title #}
+{% block title %}
+     {{ entity.productname }} - Product
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.productname }} - Product   
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View employee details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Product name</th>
+                <td>{{ entity.productname }}</td>
+            </tr>
+            <tr>
+                <th>Product slug</th>
+                <td>{{ entity.productslug }}</td>
+            </tr>
+            <tr>
+                <th>Product introduction</th>
+                <td>{{ entity.productintroduction }}</td>
+            </tr>
+            <tr>
+                <th>Product description</th>
+                <td>{{ entity.productdescription }}</td>
+            </tr>
+            <tr>
+                <th>Product weight</th>
+                <td>{{ entity.productweight }}</td>
+            </tr>
+            <tr>
+                <th>Product width</th>
+                <td>{{ entity.productwidth }}</td>
+            </tr>
+            <tr>
+                <th>Product height</th>
+                <td>{{ entity.productheight }}</td>
+            </tr>
+            <tr>
+                <th>Product depth</th>
+                <td>{{ entity.productdepth }}</td>
+            </tr>
+            <tr>
+                <th>Product added date</th>
+                <td>{{ entity.productdatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Product updated date</th>
+                <td>{{ entity.productdatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Product supplier code</th>
+                <td>{{ entity.productsuppliercode }}</td>
+            </tr>
+            <tr>
+                <th>Product brand</th>
+                <td>{{ entity.brand.brandname }}</td>
+            </tr>
+            <tr>
+                <th>Product outer barcode</th>
+                <td>{{ entity.productouterbarcode }}</td>
+            </tr>
+            <tr>
+                <th>Product inner barcode</th>
+                <td>{{ entity.productinnerbarcode }}</td>
+            </tr>
+            <tr>
+                <th>Product barcode</th>
+                <td>{{ entity.productbarcode }}</td>
+            </tr>
+            <tr>
+                <th>Product outer quantity</th>
+                <td>{{ entity.productouterquantity }}</td>
+            </tr>
+            <tr>
+                <th>Product inner quantity</th>
+                <td>{{ entity.productinnerquantity }}</td>
+            </tr>
+            <tr>
+                <th>Product pack quantity</th>
+                <td>{{ entity.productpackquantity }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('product_product_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

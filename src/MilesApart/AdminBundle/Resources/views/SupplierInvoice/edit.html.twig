@@ -1,0 +1,61 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/finance.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'supplier_invoice' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+  Edit Supplier Invoice
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+  Edit Supplier Invoice		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Edit existing Supplier Invoice
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Invoice Details</legend>
+            {{ form_row(edit_form.supplier_invoice_code) }}
+            {{ form_row(edit_form.supplier_invoice_date) }}
+          </fielset>
+          <fieldset>
+            <legend class="text-muted">Supplier</legend>
+            {{ form_row(edit_form.supplier) }}
+          </fielset>
+          <fieldset>
+            <legend class="text-muted">Invoice State</legend>
+            {{ form_row(edit_form.supplier_invoice_state) }}
+            </fieldset>
+        {{ form_rest(edit_form) }}
+    </form>
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('finance_supplier-invoice') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

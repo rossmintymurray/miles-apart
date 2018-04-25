@@ -1,0 +1,82 @@
+{# Data rows 
+{% if response is not defined %}
+    <div id="first_wrapper">
+        <p>Response is not defined</p>
+    </div>
+{% else %}
+
+<div>
+    #}
+    <div id="first_wrapper">
+
+    	<h3>Upload Results</h3>
+    	<h4>Successful</h4>
+
+    	<h5>{{ flash }}</h5>
+    	<h5>{{ added }} products added to the database</h5>
+    	<h5>{{ notAdded }} products were not added to the database</h5>
+        <h5>{{ cost_change_count }} product costs have been updated</h5>
+        <h5>{{ inner_barcode_change_count }} product inner barcodes have been updated</h5>
+        <h5>{{ outer_barcode_change_count }} product outer barcodes have been updated</h5>
+        <h5>{{ inner_quantity_change_count }} product inner quantities have been updated</h5>
+        <h5>{{ outer_quantity_change_count }} product outer quantities have been updated</h5>
+        <h5>{{ weight_change_count }} product weights have been updated</h5>
+        <h5>{{ height_change_count }} product heights have been updated</h5>
+        <h5>{{ width_change_count }} product widths have been updated</h5>
+        <h5>{{ depth_change_count }} product depths have been updated</h5>
+        <h5>{{ product_pack_quantity_change_count }} product pack quantities have been updated</h5>
+    </div>
+    
+    <div id="duplicates_wrapper">
+    
+    	<h4>Duplicates</h4>
+        
+         <table class="table table-striped table-bordered small" id="import_table">
+            <thead>
+                {# Header array - set count #}
+                {% for headers in duplicates|slice(0, 1) %}
+                    <tr>
+                        {% for header in headers %}
+                         {% for header_value in header|keys %}
+                                <th class="droppable" id="{{ header_value }}">
+                                    {{ header_value }}
+                                </th>
+                                {% endfor %}
+                        {% endfor %}
+                    </tr>
+                    
+                {% endfor %}
+            </thead>
+
+            <tbody>
+                {# Data rows #}
+                {% for k, items in duplicates %}
+                    {% for  item in items %}
+                        <tr>
+                            
+                            {% for key, item_values in item %}
+                                <td>
+                                    
+                                    {# csvArray[k][key]|keys  #}
+                                    {# If the values are equal, print in green #}
+                                    {% if csvArray[k][key] ==  item_values %}
+                                        <span class="matching_new">{{ csvArray[k][key] }}</span><br />
+                                        <span class="matching_existing">{{ item_values }}</span>
+                                        <p>Tick</p>
+                                    {# if the values are not equal highlight #}
+                                    {% else %}
+                                        <span class="not_matching_new">{{ csvArray[k][key] }}</span><br />
+                                        <span class="not_matching_existing">{{ item_values }}</span>
+                                        <p>!</p>
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

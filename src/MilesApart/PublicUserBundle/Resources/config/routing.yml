@@ -1,0 +1,84 @@
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
+
+#*****************************************
+# 
+# Routing for aditional profile tasks (outside scope of FOS)
+#
+#*****************************************
+miles_apart_public_user_bundle_current_orders:
+    pattern:  user/current-orders/{page}
+    defaults: { _controller: "MilesApartPublicUserBundle:User:currentorders", page:1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_user_bundle_previous_orders:
+    pattern:  user/previous-orders/{page}
+    defaults: { _controller: "MilesApartPublicUserBundle:User:previousorders", page:1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_user_bundle_returns:
+    pattern:  user/returns/{page}
+    defaults: { _controller: "MilesApartPublicUserBundle:User:returns", page:1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_user_bundle_addresses:
+    pattern:  user/addresses
+    defaults: { _controller: "MilesApartPublicUserBundle:User:addresses" }
+
+miles_apart_public_user_bundle_address_submit:
+    pattern:  user/addresses/submit
+    defaults: { _controller: "MilesApartPublicUserBundle:User:adddresssubmit" }
+
+miles_apart_public_user_bundle_new_address:
+    pattern:  user/new-address
+    defaults: { _controller: "MilesApartPublicUserBundle:User:newaddress" }
+
+miles_apart_public_user_bundle_view_order:
+    pattern:  user/view-order/{customer_order_id}
+    defaults: { _controller: "MilesApartPublicUserBundle:User:vieworder" }
+
+miles_apart_public_user_bundle_print_invoice:
+    pattern:  user/print-invoice/{customer_order_id}
+    defaults: { _controller: "MilesApartPublicUserBundle:User:printinvoice" }
+
+miles_apart_public_user_bundle_product_return:
+    pattern:  user/product-return/{customer_order_product_id}
+    defaults: { _controller: "MilesApartPublicUserBundle:User:productreturn" }
+
+miles_apart_public_user_bundle_product_return_submit:
+    pattern:  user/product-return/{customer_order_product_id}/submit
+    defaults: { _controller: "MilesApartPublicUserBundle:User:productreturnsubmit" }
+
+miles_apart_public_user_bundle_product_return_completion:
+    pattern:  user/product-return/{customer_order_product_id}/completion
+    defaults: { _controller: "MilesApartPublicUserBundle:User:productreturncompletion" }
+
+miles_apart_public_user_bundle_update_address_defaults:
+    pattern:  user/update-address-defaults
+    defaults: { _controller: "MilesApartPublicUserBundle:User:updateaddressdefaults" }
+
+miles_apart_public_user_bundle_delete_address:
+    pattern:  user/delete-address
+    defaults: { _controller: "MilesApartPublicUserBundle:User:deleteaddress" }

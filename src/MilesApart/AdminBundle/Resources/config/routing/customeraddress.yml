@@ -1,0 +1,33 @@
+customer_customer-address:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer_customer-address_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:show" }
+
+customer_customer-address_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:new" }
+
+customer_customer-address_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:create" }
+    requirements: { _method: post }
+
+customer_customer-address_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:edit" }
+
+customer_customer-address_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:update" }
+    requirements: { _method: post|put }
+
+customer_customer-address_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:CustomerAddress:delete" }
+    requirements: { _method: post|delete }

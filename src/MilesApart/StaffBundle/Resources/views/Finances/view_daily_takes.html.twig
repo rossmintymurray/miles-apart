@@ -1,0 +1,537 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/view_daily_takes.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'view_daily_takes' %}
+
+{% block page_name %}
+	View daily takes
+{% endblock %}
+
+{% block header_right_content %}
+	
+	<div id="date-range">
+        <div id="date-range-field" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+          	<span></span>
+          	<a href="#">&#9660;</a>
+        </div>
+        <button class="btn btn-xs btn-primary col-md-12" onclick="applyDateSelection()">Apply</button>
+		<div id="datepicker-calendar"></div>
+	<!--<div class="col-md-5">
+    	<div class="form-group">
+    		<label class="sr-only" for="startdatepicker">Start date</label>
+    		<input type="text" class="form-control col-md-12" id="startdatepicker" placeholder="Start date">
+    	</div>
+    </div>
+    <div class="col-md-2">
+    	<span class="glyphicon glyphicon-minus" aria-hidden="true">
+    </div>
+
+	<div class="col-md-5">
+		<div class="form-group">
+			<label class="sr-only" for="enddatepicker">End date</label>
+			<input type="text" class="form-control col-md-12" id="enddatepicker" placeholder="End date">
+		</div>
+	</div>
+
+	<div id="compare_date_fields">
+		<div class="col-md-5">
+	    	<div class="form-group">
+	    		<label class="sr-only" for="comparestartdatepicker">Start date</label>
+	    		<input type="text" class="form-control col-md-12" id="comparestartdatepicker" placeholder="Compare start">
+	    	</div>
+	    </div>
+	    <div class="col-md-2">
+	    	<span class="glyphicon glyphicon-minus" aria-hidden="true">
+	    </div>
+
+		<div class="col-md-5">
+			<div class="form-group">
+				<label class="sr-only" for="compareenddatepicker">End date</label>
+				<input type="text" class="form-control col-md-12" id="compareenddatepicker" placeholder="Compare end">
+			</div>
+		</div>
+	</div>
+		
+	<div class="col-md-12">
+		<div class="checkbox">
+		    <label>
+		      Compare <input type="checkbox" class="form-control" name="compare" id="compare" onchange="toggleCompareDatePicker()"/> 
+		    </label>
+  		</div>
+	</div>
+	<div class="col-md-offset-11 col-md-1">
+		-->
+	</div>
+	
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	{# Set up handling for date range picker #}
+	<script>
+		$(function() {
+			$( "#startdatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	
+		$(function() {
+			$( "#enddatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+
+		$(function() {
+			$( "#comparestartdatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	
+		$(function() {
+			$( "#compareenddatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	</script>
+	
+<div id="ajax_content">
+	<div class="row">
+	<div class="col-md-10">
+		{# Create tabs for navigation of sections #}
+		
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#take" role="tab" data-toggle="tab">Take</a></li>
+		  <li role="presentation"><a href="#departments" role="tab" data-toggle="tab">Departments</a></li>
+		  <li role="presentation"><a href="#receipts" role="tab" data-toggle="tab">Receipts</a></li>
+		  <li role="presentation"><a href="#payments" role="tab" data-toggle="tab">Payments</a></li>
+		</ul>
+	</div>
+	<div class="col-md-2">
+		<a href="{{ path('staff-finances_print-daily-takes') }}" target="_blank" class="btn btn-primary col-md-12">Print Report</a>
+	</div>
+</div>
+	<div id="daily_takes_ajax_content">{# Create the tab panes to be hidden and shown #}
+		<div class="tab-content">
+		  	<div role="tabpanel" class="tab-pane active" id="take">
+			  	<h3><span class="text-muted">Take for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+
+			    <div id="graph_container"></div>
+			    <script type="text/javascript">
+			    	{{ chart(chart) }}
+				</script>
+
+				<div class="daily_take_aggregate_info_panel">
+					<div class="well well-lg">
+						<div class="row">
+							<div class="col-md-2">
+								<h6 class="small text-muted">Total Take</h6>
+								<h2>&pound;{{ period_take_total|number_format(2, '.', ',') }}</h2>
+								{% for daily_take_day in daily_take %}
+									
+								{% endfor %}
+							</div>
+							<div class="col-md-2">
+								<h6 class="small text-muted">Transactions</h6>
+								<h2>{{ period_transactions_total|number_format(0, '.', ',') }}</h2>
+							</div>
+							<div class="col-md-2">
+								<h6 class="small text-muted">Ave. spend per transaction</h6>
+								<h2>&pound;{{ period_spend_per_transaction|number_format(2, '.', ',') }}</h2>
+
+							</div>
+							<div class="col-md-3">
+								<h6 class="small text-muted">Increase/decrease previous month</h6>
+								
+								{# Calculate the increase value #}
+
+								<h3>&pound;{{ (period_take_total - previous_month_total_take)|number_format(2, '.', ',') }} | <span class="text-muted">
+									{% if period_take_total > 0 %}
+										{{ (((period_take_total - previous_month_total_take) / period_take_total) * 100)|number_format(2, '.', ',') }}
+									{% endif %}%</span></h3>
+							</div>
+							<div class="col-md-3">
+								<h6 class="small text-muted">Increase/decrease previous year</h6>
+								<h3>&pound;{{ (period_take_total - previous_year_total_take)|number_format(2, '.', ',') }} | <span class="text-muted">
+									{% if period_take_total > 0 %}
+										{{ (((period_take_total - previous_year_total_take) / period_take_total) * 100)|number_format(2, '.', ',') }}
+									{% endif %}%</span></h3>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+				<div id="daily_take_business_premises">
+
+
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="well well-lg">
+									<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': '26-amesbury' } )}}">26 Amesbury</a></h3>
+									<h6 class="small text-muted">Total take</h6>
+									<h2>&pound;{{ twenty_six_amesbury_period_take_total|number_format(2, '.', ',') }}</h2>
+									
+									<h6 class="small">Transactions</h6>
+									<h2>{{ twenty_six_amesbury_period_transactions_total|number_format(0, '.', ',') }}</h2>
+									
+									<h6 class="small">Spend per transaction</h6>
+									<h2>&pound;{{ twenty_six_amesbury_period_spend_per_transaction|number_format(2, '.', ',') }}</h2>
+									
+									<h6 class="small">Compared to last 30 days</h6>
+									<h3>&pound;{{ (twenty_six_amesbury_period_take_total - previous_month_twenty_six_amesbury_total_take)|number_format(2, '.', ',') }} | 
+
+										<span class="text-muted">
+											{% if twenty_six_amesbury_period_take_total > 0 %}
+												{{ (((twenty_six_amesbury_period_take_total - previous_month_twenty_six_amesbury_total_take) / twenty_six_amesbury_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h3>
+
+									
+									<h6 class="small">Compared to period last year</h6>
+									<h4>&pound;{{ (twenty_six_amesbury_period_take_total - previous_year_twenty_six_amesbury_total_take)|number_format(2, '.', ',') }} | 
+										<span class="text-muted">
+											{% if twenty_six_amesbury_period_take_total > 0 %}
+												{{ (((twenty_six_amesbury_period_take_total - previous_year_twenty_six_amesbury_total_take) / twenty_six_amesbury_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h4>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div id="twenty_six_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_two) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="well well-lg">
+									<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': '28-amesbury' } )}}">28 Amesbury</a></h3>
+									<h6 class="small text-muted">Total Take</h6>
+									<h2>&pound;{{ twenty_eight_amesbury_period_take_total|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Transactions</h6>
+									<h2>{{ twenty_eight_amesbury_period_transactions_total|number_format(0, '.', ',') }}</h2>
+									<h6 class="small">Spend per transaction</h6>
+									<h2>&pound;{{ twenty_eight_amesbury_period_spend_per_transaction|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Compared to last 30 days</h6>
+									<h3>&pound;{{ (twenty_eight_amesbury_period_take_total - previous_month_twenty_eight_amesbury_total_take)|number_format(2, '.', ',') }} | 
+
+										<span class="text-muted">
+											{% if twenty_eight_amesbury_period_take_total > 0 %}
+												{{ (((twenty_eight_amesbury_period_take_total - previous_month_twenty_eight_amesbury_total_take) / twenty_eight_amesbury_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h3>
+									<h6 class="small">Compared to period last year</h6>
+									<h4>&pound;{{ (twenty_eight_amesbury_period_take_total - previous_year_twenty_eight_amesbury_total_take)|number_format(2, '.', ',') }} | 
+										<span class="text-muted">
+											{% if twenty_eight_amesbury_period_take_total > 0 %}
+												{{ (((twenty_eight_amesbury_period_take_total - previous_year_twenty_eight_amesbury_total_take) / twenty_eight_amesbury_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h4>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div id="twenty_eight_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_three) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="well well-lg">
+									<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': 'westbury' } )}}">Westbury</a></h3>
+									<h6 class="small text-muted">Total Take</h6>
+									<h2>&pound;{{ westbury_period_take_total|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Transactions</h6>
+									<h2>{{ westbury_period_transactions_total|number_format(0, '.', ',') }}</h2>
+									<h6 class="small">Spend per transaction</h6>
+									<h2>&pound;{{ westbury_period_spend_per_transaction|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Compared to last 30 days</h6>
+									<h3>&pound;{{ (westbury_period_take_total - previous_month_westbury_total_take)|number_format(2, '.', ',') }} | 
+
+										<span class="text-muted">
+											{% if westbury_period_take_total > 0 %}
+												{{ (((westbury_period_take_total - previous_month_westbury_total_take) / westbury_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h3>
+									<h6 class="small">Compared to period last year</h6>
+									<h4>&pound;{{ (westbury_period_take_total - previous_year_westbury_total_take)|number_format(2, '.', ',') }} | 
+										<span class="text-muted">
+											{% if westbury_period_take_total > 0 %}
+												{{ (((westbury_period_take_total - previous_year_westbury_total_take) / westbury_period_take_total) * 100)|number_format(2, '.', ',') }}%
+											{% endif %}</span>
+									</h4>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div id="westbury_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_four) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					{# SECTION FOR ONLINE #}
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="well well-lg">
+									<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': '28-amesbury' } )}}">MA Website</a></h3>
+									<h6 class="small text-muted">Total Take</h6>
+									<h2>&pound;{{ ma_website_period_take_total|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Transactions</h6>
+									<h2>{{ ma_website_period_transactions_total|number_format(0, '.', ',') }}</h2>
+									<h6 class="small">Spend per transaction</h6>
+									<h2>&pound;{{ ma_website_period_spend_per_transaction|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Compared to last 30 days</h6>
+									<h3>&pound;{{ (ma_website_period_take_total - previous_month_ma_website_total_take)|number_format(2, '.', ',') }} | 
+
+										<span class="text-muted">
+											{% if ma_website_period_take_total > 0 %}
+												{{ (((ma_website_period_take_total - previous_month_ma_website_total_take) / ma_website_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h3>
+									<h6 class="small">Compared to period last year</h6>
+									<h4>&pound;{{ (ma_website_period_take_total - previous_year_ma_website_total_take)|number_format(2, '.', ',') }} | 
+										<span class="text-muted">
+											{% if ma_website_period_take_total > 0 %}
+												{{ (((ma_website_period_take_total - previous_year_ma_website_total_take) / ma_website_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h4>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div id="ma_website_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_four_one) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+
+					{# SECTION FOR AMAZON #}
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="well well-lg">
+									<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': '28-amesbury' } )}}">Amazon Online</a></h3>
+									<h6 class="small text-muted">Total Take</h6>
+									<h2>&pound;{{ amazon_period_take_total|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Transactions</h6>
+									<h2>{{ amazon_period_transactions_total|number_format(0, '.', ',') }}</h2>
+									<h6 class="small">Spend per transaction</h6>
+									<h2>&pound;{{ amazon_period_spend_per_transaction|number_format(2, '.', ',') }}</h2>
+									<h6 class="small">Compared to last 30 days</h6>
+									<h3>&pound;{{ (amazon_period_take_total - previous_month_amazon_total_take)|number_format(2, '.', ',') }} | 
+
+										<span class="text-muted">
+											{% if amazon_period_take_total > 0 %}
+												{{ (((amazon_period_take_total - previous_month_amazon_total_take) / amazon_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h3>
+									<h6 class="small">Compared to period last year</h6>
+									<h4>&pound;{{ (amazon_period_take_total - previous_year_amazon_total_take)|number_format(2, '.', ',') }} | 
+										<span class="text-muted">
+											{% if amazon_period_take_total > 0 %}
+												{{ (((amazon_period_take_total - previous_year_amazon_total_take) / amazon_period_take_total) * 100)|number_format(2, '.', ',') }}
+											{% endif %}%</span>
+									</h4>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div id="amazon_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_four_two) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					{# Area to show profit totals #}
+					<div class="row">
+						<div class="col-md-12">
+							<div class="well">
+								<h4>Online profit totals</h4>
+								<div class="row">
+									<div class="col-md-2">
+										<h6 class="text-muted">Amazon</h6>
+										<h2>£{{ amazon_period_profit }} </h2>
+									</div>
+
+									<div class="col-md-2">
+										<h6 class="text-muted">MA Online</h6>
+										<h2>£{{ ma_period_profit }}</h2>
+									</div>
+
+									<div class="col-md-2">
+										<h6 class="text-muted">Total</h6>
+										<h2>£{{ amazon_period_profit + ma_period_profit }}</h2>
+									</div>
+
+									<div class="col-md-3">
+										<h6 class="text-muted">Ross' Share</h6>
+										<h1>£{{ (amazon_period_profit + ma_period_profit) /2 }}</h1>
+									</div>
+
+									<div class="col-md-3">
+										<h6 class="text-muted">Mum's Share</h6>
+										<h1>£{{ (amazon_period_profit + ma_period_profit) /2 }}</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					{% for order in ma_customer_orders %}
+						
+						{{ order.orderprofit }}<br />
+					{% endfor %}
+
+					{% for order in amazon_customer_orders %}
+						
+						{{ order.orderprofit }}<br />
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+		  	<div role="tabpanel" class="tab-pane" id="departments">
+		  		<h3><span class="text-muted">Departments for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+		  		<div class="row">
+		  			<div id="westbury_departments_graph_container" class="col-md-11"></div>
+		  		</div>
+		  		<script type="text/javascript">
+					    	{{ chart(chart_five) }}
+				</script>	
+			</div>
+
+		  	<div role="tabpanel" class="tab-pane" id="receipts">
+		  		<h3><span class="text-muted">Receipts for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+		  		<div class="row">
+			  		<div id="petty_cash_graph_container" class="col-md-11"></div>
+			  		<script type="text/javascript">
+						    	{{ chart(chart_six) }}
+							</script>
+		  		</div>
+		  	</div>
+
+		  	<div role="tabpanel" class="tab-pane" id="payments">
+		  		<h3><span class="text-muted">Payments for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+		  		<div class="row">
+			  		<div id="employee_payment_graph_container" class="col-md-11"></div>
+			  		<script type="text/javascript">
+						{{ chart(chart_seven) }}
+					</script>
+		  		</div>
+		  	</div>
+		</div>
+	</div>
+</div> 
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+<script>
+
+function applyDateSelection() {
+	dates = $('#datepicker-calendar').DatePickerGetDate();
+	 submitDatePickerSelections(dates[0]);
+	
+	
+}
+	$( window ).load(function() {
+   
+    	
+		var from = new Date("{{ start_date|date('Y-m-d')}}");
+        var to = new Date("{{ end_date|date('Y-m-d')}}");
+        
+        $('#datepicker-calendar').DatePicker({
+          inline: true,
+          date: [from, to],
+          calendars: 3,
+          mode: 'range',
+          current: new Date(to.getFullYear(), to.getMonth() - 1, 1),
+          onChange: function(dates,el) {
+            // update the range display
+            $('#date-range-field span').text(dates[0].getDate()+' '+dates[0].getMonthName(true)+', '+dates[0].getFullYear()+' - '+
+                                        dates[1].getDate()+' '+dates[1].getMonthName(true)+', '+dates[1].getFullYear());
+            //setTimeout(submitDatePickerSelections(dates), 20000);
+          }
+        });
+
+        $('#datepicker-calendar').hide();
+        
+        // initialize the special date dropdown field
+        $('#date-range-field span').text(from.getDate()+' '+from.getMonthName(true)+', '+from.getFullYear()+' - '+
+                                        to.getDate()+' '+to.getMonthName(true)+', '+to.getFullYear());
+        
+        // bind a click handler to the date display field, which when clicked
+        // toggles the date picker calendar, flips the up/down indicator arrow,
+        // and keeps the borders looking pretty
+        $('#date-range-field').bind('click', function(){
+        	
+          $('#datepicker-calendar').toggle();
+
+          
+          if($('#date-range-field a').text().charCodeAt(0) == 9660) {
+            // switch to up-arrow
+            $('#date-range-field a').html('&#9650;');
+            $('#date-range-field').css({borderBottomLeftRadius:0, borderBottomRightRadius:0});
+            $('#date-range-field a').css({borderBottomRightRadius:0});
+          } else {
+            // switch to down-arrow
+            $('#date-range-field a').html('&#9660;');
+            $('#date-range-field').css({borderBottomLeftRadius:5, borderBottomRightRadius:5});
+            $('#date-range-field a').css({borderBottomRightRadius:5});
+          }
+          return false;
+        });
+        
+        // global click handler to hide the widget calendar when it's open, and
+        // some other part of the document is clicked.  Note that this works best
+        // defined out here rather than built in to the datepicker core because this
+        // particular example is actually an 'inline' datepicker which is displayed
+        // by an external event, unlike a non-inline datepicker which is automatically
+        // displayed/hidden by clicks within/without the datepicker element and datepicker respectively
+        $('html').click(function() {
+          if($('#datepicker-calendar').is(":visible")) {
+            $('#datepicker-calendar').hide();
+            $('#date-range-field a').html('&#9660;');
+            $('#date-range-field').css({borderBottomLeftRadius:5, borderBottomRightRadius:5});
+            $('#date-range-field a').css({borderBottomRightRadius:5});
+          }
+        });
+        
+        // stop the click propagation when clicking on the calendar element
+        // so that we don't close it
+        $('#datepicker-calendar').click(function(event){
+          event.stopPropagation();
+        });
+      });
+      /* End special page widget */
+    </script>
+
+{% endblock %}

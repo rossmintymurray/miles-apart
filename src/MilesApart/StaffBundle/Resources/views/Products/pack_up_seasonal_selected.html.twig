@@ -1,0 +1,81 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'notifications' %}
+
+{# Set the dynamic content for this template #}
+
+{% block page_name %}
+    <h1>Pack Up Seasonal</h1>
+{% endblock %}
+
+{% block page_content %}
+    
+
+    
+
+    <b>{{ season.getSeasonName }}</b> pack up from <b>{{ business_premises.getBusinessPremisesName }}</b>.
+
+    <div class="row">
+	    <div class="col-md-10">
+	    	<h3>Select Box</h3>
+	    </div>
+	    <div class="col-md-2">
+	    	<button class="btn btn-default col-md-12" onclick="newSeasonalStorageBox('local')">
+	    		New Box - Local
+	    	</button>
+            <button class="btn btn-default col-md-12" onclick="newSeasonalStorageBox()">
+                New Box - Shared
+            </button>
+	    </div>
+	</div>
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+
+            <legend class="text-muted">Box Barcode</legend>
+            {{ form_row(form.seasonal_storage_box_code) }}
+        </fieldset>
+        
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+
+    
+    <img id="barcode" />
+   
+
+	
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_seasonalstoragebox_seasonal_storage_box_code').val(bar);
+
+            //Submit the form
+            $( "#milesapart_staffbundle_seasonalstoragebox_seasonal_storage_box_form" ).submit();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#milesapart_staffbundle_seasonalstoragebox_seasonal_storage_box_code').focus();
+        }
+    </script>
+{% endblock %}

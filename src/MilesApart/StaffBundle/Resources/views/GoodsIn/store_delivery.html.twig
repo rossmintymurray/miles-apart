@@ -1,0 +1,125 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'goods_in' %}
+{% set current_page = 'store_delivery' %}
+
+{% block page_name %}
+    Store delivery
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    
+    <p class="lead">Scan the shelf first and then the product you are storing.</p>
+  {# Create and show the form #}
+    <form class="form-horizontal admin_form" method="post" name="store_delivery_form">
+      <fieldset>
+        <div class="form-group">
+            <label for="store_delivery_barcode_input" class="control-label col-md-4 col-xs-12 col-xs-12">Barcode</label>
+            <input type="text" name="store_delivery_barcode_input" id="store_delivery_barcode_input" class="add_product_to_list_product_barcode form-control col-md-4 col-sm-12 col-xs-12" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+            <div class="form_submit"><button type="submit" id="milesapart_staffbundle_store_delivery_submit" name="milesapart_staffbundle_storedelivery[submit]" class="btn btn-primary col-md-offset-4 col-md-4 col-xs-12">Submit</button></div>
+        </fieldset>  
+    </form>
+
+    {# Check that there are lines to store #}
+    {% if supplier_delivery.SupplierDeliveryLinesToStore is defined %}
+        
+        <h5>There are {{ supplier_delivery.SupplierDeliveryLinesToStore }} lines to store for this delivery.</h5>
+
+        {# Show the table header #}
+        <table class="table table-striped small existing_products" id="existing_transfer_request_products" style="margin-top:20px">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product Code</th>
+                    <th>Product name</th>
+                    
+                    <th class="text-center">Qty To Store</th>
+                    <th class="hide_on_xs text-center">Barcode</th>
+                </tr>
+                    
+            </thead>
+            <tbody>
+                {% for product in supplier_delivery.supplierdeliveryproduct %}
+
+                    {# Check if the product has any qty to be stored #}
+                    {% if product.supplierdeliveryqtytostore != 0 %}
+                        {# Check if the delivery note qty is equal to the delivered qty, show green if true #}
+                        {% if product.stocklocationshelfproductsent|length > 0  %}
+
+                            {# Set total sent to 0 for the loop #}
+                            {% set total = 0 %}
+                            {% for productsent in product.stocklocationshelfproductsent %}
+                                {% set total = total + productsent.stocklocationshelfproductsentqty %}
+                            {% endfor %}
+
+                            {% if  total == product.supplierdeliveryqtytostore %}
+                                <tr id="product_row_{{ product.getId }}" class="table_row_green">
+                            {% else %}
+                                <tr id="product_row_{{ product.getId }}" class="table_row_amber">
+                            {% endif %}
+                        {% else %}
+                            <tr id="product_row_{{ product.getId }}">
+                        {% endif %}
+                         <td>
+                            {{ loop.index }}
+                        </td>
+                        <td>
+                            {{ product.getProduct.getProductSupplierCode }}
+                        </td>
+                        <td>
+                            {{ product.getProduct.getProductName }}
+                        </td>
+                        
+                        <td class="text-center">
+                            {{ product.getSupplierDeliveryqtytostore }}
+                        </td>
+                        
+                        <td class="hide_on_xs text-center">
+                            {{ product.getProduct.getProductBarcode }}
+                        </td>
+                        
+                        </tr>
+                    {% endif %}
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {# If there are no lines to store #}
+    {% else %}
+        <h5>There are no products to store for this delivery.</h5>
+    {% endif %}
+   
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+    function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#store_delivery_barcode_input').val(bar);
+
+            //Submit the form
+            processStoreDeliveryForm();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#store_delivery_barcode_input').focus();
+        }
+    </script>
+{% endblock %}

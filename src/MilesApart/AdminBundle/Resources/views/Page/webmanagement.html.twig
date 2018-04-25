@@ -1,0 +1,84 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/web-management.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'webmanagement' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'webmanagement_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Website Management
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Website Management			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Make changes to the pages on the website - which modules are displayed, number on rotator etc
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    {#Create the overview nav #}
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'webmanagement_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_webmanagement') }}">Web management overview</a>
+    </li>
+
+    {#Create the access left nav #}
+     <li class="nav-header">Access Right</li>
+     <li {% if current_page == 'access_rights' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_access-right') }}">View access rights</a>
+    </li>
+    <li {% if current_page == 'new_access_right' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_access-right_new') }}">New access right</a>
+    </li>
+
+    {#Create the admin user left nav #}
+     <li class="nav-header">Admin User</li>
+     <li {% if current_page == 'admin_user' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_admin-user') }}">View admin users</a>
+    </li>
+    <li {% if current_page == 'new_admin_user' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_admin-user_new') }}">New admin user</a>
+    </li>
+
+    {#Create the admin user type left nav #}
+     <li class="nav-header">Admin User Type</li>
+     <li {% if current_page == 'admin_user_type' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_admin-user-type') }}">View admin user types</a>
+    </li>
+    <li {% if current_page == 'new_admin_user_type' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_admin-user-type_new') }}">New admin user type</a>
+    </li>
+
+    {#Create the admin user type access right left nav #}
+     <li class="nav-header">Admin User Type Access Type</li>
+     <li {% if current_page == 'admin_user_type_access_right' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_admin-user-type-access-right') }}">View admin user type access rights</a>
+    </li>
+    <li {% if current_page == 'new_admin_user_type_access_right' %} class="active" {% endif %}>
+        <a href="{{ path('website-management_admin-user-type-access-right_new') }}">New admin user type access right</a>
+    </li>
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}
+

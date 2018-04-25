@@ -1,0 +1,33 @@
+business_competitor:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+        
+business_competitor_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:show" }
+
+business_competitor_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:new" }
+
+business_competitor_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:create" }
+    requirements: { _method: post }
+
+business_competitor_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:edit" }
+
+business_competitor_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:update" }
+    requirements: { _method: post|put }
+
+business_competitor_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:Competitor:delete" }
+    requirements: { _method: post|delete }

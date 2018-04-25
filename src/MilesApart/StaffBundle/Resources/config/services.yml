@@ -1,0 +1,7 @@
+parameters:
+#    miles_apart_staff.example.class: MilesApart\StaffBundle\Example
+
+services:
+#    miles_apart_staff.example:
+#        class: %miles_apart_staff.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

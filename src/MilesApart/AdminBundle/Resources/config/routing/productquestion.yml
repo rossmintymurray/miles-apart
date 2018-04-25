@@ -1,0 +1,33 @@
+product_product-question:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+        
+product_product-question_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:show" }
+
+product_product-question_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:new" }
+
+product_product-question_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:create" }
+    requirements: { _method: post }
+
+product_product-question_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:edit" }
+
+product_product-question_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:update" }
+    requirements: { _method: post|put }
+
+product_product-question_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ProductQuestion:delete" }
+    requirements: { _method: post|delete }

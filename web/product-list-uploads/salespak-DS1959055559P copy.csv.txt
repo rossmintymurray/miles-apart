@@ -1,0 +1,58 @@
+Description,Barcode,Price,SupplierCode,Desc,PR,P
+10880: Crystal 6.5L Box & Lid Clear,5038135108808,£1.10,10880,Crystal 6.5L Box & Lid Clear,1.1,1.10
+14000: Crystal 10L Box & Lid Clear,5038135140006,£1.50,14000,Crystal 10L Box & Lid Clear,1.5,1.50
+10850: Crystal 16L Box & Lid Clear,5038135108501,£1.80,10850,Crystal 16L Box & Lid Clear,1.8,1.80
+10840: Crystal 24L  Box & Lid Clear,5038135108402,£2.10,10840,Crystal 24L  Box & Lid Clear,2.1,2.10
+11315: Crystal 80L Box & Lid Clear,5038135113154,£4.00,11315,Crystal 80L Box & Lid Clear,£4.00,4.00
+14025: Crystal 60Ltr Box & Lid  Clear,5038135140259,£4.15,14025,Crystal 60Ltr Box & Lid  Clear,4.15,4.15
+11500: Crystal 110L Box & Lid Clear,5038135115004,£6.50,11500,Crystal 110L Box & Lid Clear,6.5,6.50
+12070: Crystal 160L Box & Lid Clear,5038135120701,£8.50,12070,Crystal 160L Box & Lid Clear,8.5,8.50
+11320:  Crystal (CD) Shallow Shelf  Box & Lid Clear,5038135113208,£1.95,11320, Crystal (CD) Shallow Shelf  Box & Lid Clear,1.95,1.95
+11325:  Crystal (DVD) Deep Shelf  Box & Lid Clear,5038135113253,£2.25,11325, Crystal (DVD) Deep Shelf  Box & Lid Clear,2.25,2.25
+11873:  SS Set  2 Large Handy Baskets Pink/Blue/Lime Mix,5038135118739,£0.95,11873, SS Set  2 Large Handy Baskets Pink/Blue/Lime Mix,0.95,0.95
+11874: SS Set3 Med  Handy Baskets Pink/Blue/Lime Mix,5038135118746,£0.85,11874,SS Set3 Med  Handy Baskets Pink/Blue/Lime Mix,0.85,0.85
+11875:  SS Set5 Sm Handy Baskets Pink/Blue/Lime Mix,5038135118753,12                           £0.85                  £10.20,11875, SS Set5 Sm Handy Baskets Pink/Blue/Lime Mix,0.85 ,0.85
+15900: Uni Set  2 Large Handy Baskets Clear,5038135159008,12                           £0.95                  £11.40,15900,Uni Set  2 Large Handy Baskets Clear,0.95 ,0.95
+15925: Uni Set  3 Medium Handy Baskets Clear,5038135159251,20                            £0.85                  £17.00,15925,Uni Set  3 Medium Handy Baskets Clear,0.85 ,0.85
+15950: Uni Set  5 Small  Handy Baskets Clear,5038135159503,12                           £0.85                  £10.20,15950,Uni Set  5 Small  Handy Baskets Clear,0.85 ,0.85
+18025: 1.02  Food Locker 500ml Rectangular Clear/White,5038135180255,16                           £0.55                   £8.80,18025,1.02  Food Locker 500ml Rectangular Clear/White,0.55 ,0.55
+18100: 2.02 Food Locker 600ml Square Clear/White,5038135181009,16                           £0.60                   £9.60,18100,2.02 Food Locker 600ml Square Clear/White,0.60 ,0.60
+18150: 2.04 Food Locker 1.5L Square Clear/White,5038135181504,8                      £0.90                   £7.20,18150,2.04 Food Locker 1.5L Square Clear/White,0.90 ,0.90
+18625: 7.03 Food Locker 4.1L Rectangular Clear/White,5038135186257,4                       £1.45                   £5.80,18625,7.03 Food Locker 4.1L Rectangular Clear/White,1.45 ,1.45
+18700: 8.02 Food Locker 4.2L Rectangular Clear/ White,5038135187001,4                       £1.50                   £6.00,18700,8.02 Food Locker 4.2L Rectangular Clear/ White,1.50 ,1.50
+20017: Eden  Pack of 3 Seed Trays Black,5038135200175,12                            £1.15                        £13.80,20017,Eden  Pack of 3 Seed Trays Black,1.15 ,1.15
+29454: Flexi-Store 8L Graduated Round Tub  Blue,5038135294549,6                       £1.25                    £7.50,29454,Flexi-Store 8L Graduated Round Tub  Blue,1.25 ,1.25
+29450: Flexi-Store 8L Graduated Round Tub  Mocha,5038135294501,6                       £1.25                    £7.50,29450,Flexi-Store 8L Graduated Round Tub  Mocha,1.25 ,1.25
+29452:  Flexi-Store 8L Graduated Round Tub Graphite,5038135294525,6                       £1.45                   £8.70,29452, Flexi-Store 8L Graduated Round Tub Graphite,1.45 ,1.45
+29604: Flexi-Store 15L Graduated Round Tub  Blue,5038135296048,6                        £1.75                   £10.50,29604,Flexi-Store 15L Graduated Round Tub  Blue,1.75 ,1.75
+29600: Flexi-Store 15L Graduated Round Tub Mocha,5038135296000,6                        £1.75                   £10.50,29600,Flexi-Store 15L Graduated Round Tub Mocha,1.75 ,1.75
+29602: Flexi-Store 15L Graduated Round Tub Graphite,5038135296024,6                        £1.75                   £10.50,29602,Flexi-Store 15L Graduated Round Tub Graphite,1.75 ,1.75
+16875: Casa 5Lt Bucket Silver,5038135168758,12                            £1.00                   £12.00,16875,Casa 5Lt Bucket Silver,1.00 ,1.00
+16879: Casa 5Lt Bucket Mocha,5038135168796,12                            £1.00                   £12.00,16879,Casa 5Lt Bucket Mocha,1.00 ,1.00
+20403: Car  Klean Jumbo  Car  Sponge,5038135204036,24                            £0.45                  £10.80,20403,Car  Klean Jumbo  Car  Sponge,0.45 ,0.45
+21045: Cleaning Broom  with  Handle Stiff   Graphite,5038135210457,24                            £1.30                   £31.20,21045,Cleaning Broom  with  Handle Stiff   Graphite,1.30 ,1.30
+21135:  Cleaning 30cm Window Blade  Graphite,5038135211355,24                            £0.58                  £13.92,21135, Cleaning 30cm Window Blade  Graphite,0.58 ,0.58
+21122:  Cleaning Scrub Brush Graphite,5038135211225,12                           £0.52                   £6.24,21122, Cleaning Scrub Brush Graphite,0.52 ,0.52
+12735: Casa Medium Dish Drainer Ice White,5038135127359,12                            £1.00                   £12.00,12735,Casa Medium Dish Drainer Ice White,1.00 ,1.00
+16902: Casa Small  Cutlery Tray  Ice White,5038135169021,6                      £0.80                   £4.80,16902,Casa Small  Cutlery Tray  Ice White,0.80 ,0.80
+11755:  Casa 50L  Swing  Bin Silver,5038135117558,6                      £4.60                  £27.60,11755, Casa 50L  Swing  Bin Silver,4.60 ,4.60
+17079: Casa 50L  Swing  Bin Duck  Egg Blue,5038135170799,6                      £4.60                  £27.60,17079,Casa 50L  Swing  Bin Duck  Egg Blue,4.60 ,4.60
+17053: Casa 25L Swing  Bin Duck  Egg Blue,5038135170539,8                      £3.20                  £25.60,17053,Casa 25L Swing  Bin Duck  Egg Blue,3.20 ,3.20
+17028: Casa 15L Swing  Bin Duck  Egg Blue,5038135170287,10                           £2.35                  £23.50,17028,Casa 15L Swing  Bin Duck  Egg Blue,2.35 ,2.35
+12378: Cuisine 2L FridgeJug/StoreContainer & Lid Clear/IceWhite,5038135123788,12                            £1.00                   £12.00,12378,Cuisine 2L FridgeJug/StoreContainer & Lid Clear/IceWhite,1.00 ,1.00
+12203: Cuisine 15L Large Square Food Box & Lid Clear/Ice White,5038135122033,10                            £1.95                   £19.50,12203,Cuisine 15L Large Square Food Box & Lid Clear/Ice White,1.95 ,1.95
+12374: Cuisine 2.7L Rect Food Box & Lid Clear/Ice White,5038135123740,12                           £0.78                   £9.36,12374,Cuisine 2.7L Rect Food Box & Lid Clear/Ice White,0.78 ,0.78
+12371:  Cuisine 1.2L Rect Food Box & Lid Clear/Ice White ,5038135123719,24                            £0.49                  £11.76,12371, Cuisine 1.2L Rect Food Box & Lid Clear/Ice White ,0.49 ,0.49
+20128: Laundry Pk20 Plastic Pegs Assorted,5038135201288,48                     £0.52                  £24.96,20128,Laundry Pk20 Plastic Pegs Assorted,0.52 ,0.52
+10653: Laundry 15m Steel Core Clothes Line Assorted,5038135106539,15                           £0.75                   £11.25,10653,Laundry 15m Steel Core Clothes Line Assorted,0.75 ,0.75
+10656: Laundry 25m Steel Core Clothes Line Assorted,5038135106569,12                            £1.25                    £15.00,10656,Laundry 25m Steel Core Clothes Line Assorted,1.25 ,1.25
+10655: Laundry 20m Plastic Core Clothes Line Assorted,5038135106552,15                           £0.85                  £12.75,10655,Laundry 20m Plastic Core Clothes Line Assorted,0.85 ,0.85
+11580: Casa 10L Bucket Silver,5038135115806,12                            £1.20                    £14.40,11580,Casa 10L Bucket Silver,1.20 ,1.20
+17402: Casa 10L Bucket Mocha,5038135174025,12                            £1.20                    £14.40,17402,Casa 10L Bucket Mocha,1.20 ,1.20
+11335: Casa 16L Bucket Silver,5038135113352,12                            £1.75                    £21.00,11335,Casa 16L Bucket Silver,1.75 ,1.75
+11585: Casa 16L Mop Bucket Silver,5038135115851,8                      £2.40                  £19.20,11585,Casa 16L Mop Bucket Silver,2.40 ,2.40
+17452: Casa 16L Mop Bucket Mocha,5038135174520,8                      £2.40                  £19.20,17452,Casa 16L Mop Bucket Mocha,2.40 ,2.40
+"20307: Set  of 2 Eden  18.5cm (7"") Plant Pots Terracotta",5038135203077,24                            £0.65                  £15.60,20307,"Set  of 2 Eden  18.5cm (7"") Plant Pots Terracotta",0.65 ,0.65
+"20306: Set  of 3 Eden  15.7cm (6"")  Plant Pots Terracotta",5038135203060,24                            £0.56                  £13.44,20306,"Set  of 3 Eden  15.7cm (6"")  Plant Pots Terracotta",0.56 ,0.56
+"20305: Set  of 4 Eden  13cm (5"") Plant Pots Terracotta",5038135203053,24                            £0.58                  £13.92,20305,"Set  of 4 Eden  13cm (5"") Plant Pots Terracotta",0.58 ,0.58
+"20304: Set  of 6 Eden  10.5cm (4"") Plant Pots Terracotta",5038135203046,24                            £0.54                  £12.96,20304,"Set  of 6 Eden  10.5cm (4"") Plant Pots Terracotta",0.54 ,0.54

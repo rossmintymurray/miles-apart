@@ -1,0 +1,109 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/start_stocktake.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'start_stocktake' %}
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    Start Stocktake
+{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="lead">This stocktake was started on: {{ stocktake.stocktakestartdate|date("jS F Y") }}</p>
+            </div>
+
+            <div class="col-md-3">
+                <a class="btn btn-sm btn-info col-xs-12" href="{{ path('staff-products_start-stocktake-new') }}">New stocktake</a>
+            </div>
+
+            <div class="col-md-3">
+                <a class="btn btn-sm btn-success col-xs-12" href="{{ path('staff-products_complete-stocktake') }}">Complete stocktake</a>
+            </div>
+        </div>
+
+    </div>
+	<p class="lead">Scan the shelf first and any products on the shelf afterwards.</p>
+	{# Create and show the form #}
+    <form class="form-horizontal admin_form" method="post" name="stocktake_form">
+    	<fieldset>
+    		<div class="form-group">
+		        <label for="stocktake_barcode_input" class="control-label col-md-4 col-sm-12 col-xs-12">Barcode</label>
+		        <input type="text" name="stocktake_barcode_input" id="stocktake_barcode_input" class="add_product_to_list_product_barcode form-control col-md-4 col-sm-12 col-xs-12" />
+		    </div>
+	    </fieldset>
+
+	    <div class="form-group" style="display:none;" id="stocktake_search_field">
+		        <label for="stocktake_search_input" class="control-label col-md-4 col-sm-12 col-xs-12">Search query</label>
+		        <input type="text" name="stocktake_search_input" id="stocktake_search_input" class="add_product_to_list_product_name form-control col-md-4 col-sm-12 col-xs-12" />
+		    </div>
+	    </fieldset>
+
+	    <fieldset>
+            <div class="form_submit"><button type="submit" id="milesapart_staffbundle_start_stocktake_submit" name="milesapart_staffbundle_startstocktake[submit]" class="btn btn-primary col-md-offset-4 col-md-3 col-xs-12">Submit</button></div>
+        </fieldset>  
+    </form>
+
+    <div id="found_products_display"></div>
+
+    <div id="add_to_transfer_request">
+        <div id="loadingImage" style="display: none"></div>
+    </div>
+    <div class="border-top"></div>
+    <div class="row">
+        <div class="col-md-10 col-xs-9">
+            <div id="shelf_info"></div>
+        </div>
+        <div class="col-md-2 col-xs-3">
+            
+        </div>
+    </div>
+    
+    {# Set up the existing products table #}
+    <table class="table table-striped small existing_products" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Counted Qty</th>
+                <th>Product Code</th>
+                <th class="hide_on_xs">Barcode</th>
+                <th>Supplier</th>
+                
+                
+        </thead>
+        <tbody>
+        </tbody>
+        
+    </table>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+     
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#stocktake_barcode_input').val(bar);
+
+            //Submit the form
+            processStocktakeForm();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#stocktake_barcode_input').focus();
+        }
+    </script>
+{% endblock %}

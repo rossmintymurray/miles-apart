@@ -1,0 +1,33 @@
+hr_employee-wage-rate-job-role:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+hr_employee-wage-rate-job-role_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:show" }
+
+hr_employee-wage-rate-job-role_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:new" }
+
+hr_employee-wage-rate-job-role_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:create" }
+    requirements: { _method: post }
+
+hr_employee-wage-rate-job-role_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:edit" }
+
+hr_employee-wage-rate-job-role_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:update" }
+    requirements: { _method: post|put }
+
+hr_employee-wage-rate-job-role_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRateJobRole:delete" }
+    requirements: { _method: post|delete }

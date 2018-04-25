@@ -1,0 +1,77 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/find_supplier.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'view_product_groups' %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    View Product Groups
+{% endblock %}
+
+{% block page_content %}
+
+		    {# Create table for product groups #}
+		    <table class="table table-striped text-center">
+		        <thead>
+		            <tr class="text-center">
+		                <th class="text-left">Product group name</th>
+		                <th class="text-center">Default price</th>
+		                <th class="text-center">Barcode</th>
+		                <th class="text-center">Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        
+
+		    	{% for entity in pager %}
+		    		<tr>
+		    			<td class="text-left">
+		    				{{ entity.getProductGroupName() }}
+		    			</td>
+		    			<td>
+		    				{{ entity.getProductGroupDefaultPriceDisplay() }}
+		    			</td>
+		    			<td>
+		    				{{ entity.getProductGroupBarcode() }}
+		    			</td>
+		    			<td class="text-left">
+		                    <!-- Split button -->
+							<div class="btn-group col-sm-12">
+								<button type="button" class="btn btn-primary col-sm-10">Print</button>
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 4)">SEL Small</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 1)">SEL Medium</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 7)">SEL Large</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 3)">Hook Hanger</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 26)">Hook Label</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 2)">Price A4 Portrait</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 8)">Price A4 Landscape</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 9)">Price A5 Portrait</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 5)">Price A5 Landscape</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 10)">Price A6 Portrait</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 6)">Price A6 Landscape</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 11)">Price A7 Portrait</a></li>
+									<li><a href="javascript:;" onclick="addProductGroupToPrintRequest({{ entity.getId() }}, 12)">Price A7 Landscape</a></li>
+									
+
+								</ul>
+							</div>
+		                   
+		                </td>
+		    		</tr>
+		    	{% endfor %}
+		    	</tbody>
+		    </table>
+		</div>
+
+{% endblock %}

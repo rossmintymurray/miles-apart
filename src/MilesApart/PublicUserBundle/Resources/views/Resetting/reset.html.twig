@@ -1,0 +1,20 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Reset your account password
+{% endblock %}
+
+{% block fos_user_content %}
+	<div class="row">
+		<div class="large-8 columns">
+			
+			<p>Please enter your new password to complete the password reset.</p>
+			
+			{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+		</div>
+	</div>
+
+{% endblock fos_user_content %}

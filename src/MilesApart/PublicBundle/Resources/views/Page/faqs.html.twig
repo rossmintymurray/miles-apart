@@ -1,0 +1,161 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Frequently Asked Questions
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<p class="lead">Below are answers to our most common queries. If you still need help please <a href="{{ path('miles_apart_public_contact_us') }}">contact us</a>.
+	<div class="faq_questions">
+    	<h4>Orders</h4>
+    	<ul>
+    		<li><a href="#1">What payment methods do you accept?</a></li>
+    		<li><a href="#2">Can I change my order once it has been placed?</a></li>
+    		<li><a href="#3">Do you sell gift vouchers/cards?</a></li>
+    		<li><a href="#4">How do I redeem a gift voucher?</a></li>
+    		<li><a href="#5">How do I redeem  promotion code?</a></li>
+    	</ul>
+
+    	<h4>Postage</h4>
+    	<ul>
+    		<li><a href="#6">How much do you charge for delivery?</a></li>
+    		<li><a href="#7">Can I track my order?</a></li>
+    		<li><a href="#8">How long will my order take to arrive?</a></li>
+    		<li><a href="#9">Do you deliver to international addresses?</a></li>
+    		<li><a href="#10">I was not in when you tried to deliver, what happens now?</a></li>
+    		<li><a href="#11">Can I send a parcel to an address different to my billing address?</a></li>
+    	</ul>
+
+    	<h4>Returns</h4>
+    	<ul>
+    		<li><a href="#12">How do I return an item?</a></li>
+    		<li><a href="#13">Can I return an item I purchased online to a store?</a></li>
+    		<li><a href="#14">How am I refunded for an item I return?</a></li>
+    	</ul>
+
+    	<h4>Your Account</h4>
+    	<ul>
+    		<li><a href="#15">What is my username?</a></li>
+    		<li><a href="#16">I have forgottem my password, how do I sign in?</a></li>
+    		<li><a href="#17">Do I have to create an account to place an order?</a></li>
+    		<li><a href="#18">What are the benefits of creating an account?</a></li>
+    	</ul>
+
+    	<h4>Stores</h4>
+    	<ul>
+    		<li><a href="#19">Are all of the products on your website available in your stores?</a></li>
+    		<li><a href="#20">How do I find your stores?</a></li>
+    	</ul>
+
+    	<h4>Security</h4>
+    	<ul>
+    		<li><a href="#21">Is it safe to shop on your website?</a></li>
+    		<li><a href="#22">How do you protect my details?</a></li>
+    	</ul>
+    </div>
+
+    <div class="faq_answers">
+    	<h3>Answers</h3>
+    	
+    	<h4>Orders</h4>
+    	<dl>
+    		<dt id="1">What payment methods do you accept?</dt>
+    		<dd>We accept paypal and all major credit &amp; debit cards. We are sorry but we are unable to accept payments over the phone, by BACS transfer or by cheque</dd>
+    		
+    		<dt id="2">Can I change my order once it has been placed?</dt>
+    		<dd>Unfortunately we are unable to make changes to your order once it has been placed. Please use the <a href="{{ path('miles_apart_public_contact_us') }}">contact us form</a> to cancel you current order after which a new one can be placed. Please be aware, if the order has already been dispatched we can only cancel the order after it has been returned to us and we are unable to return postage fees.</dd>
+
+    		<dt id="3">Do you sell gift vouchers/cards?</dt>
+    		<dd>Currently we do not sell gift vouchers though we intend to in the near future.</dd>
+    		
+    		<dt id="4">How do I redeem a gift voucher?</dt>
+    		<dd>Unfortunately we are currently unable to accept gift vouchers for online payment. Gift vouchers that have been won in local charity events/raffles can only be redeemed in one of <a href="{{ path('miles_apart_public_our_stores') }}">our stores.</a></dd>
+
+    	</dl>
+
+    	<h4>Postage</h4>
+    	<dl>
+    		<dt id="6">How much do you charge for delivery?</dt>
+    		<dd>All orders shipped to mainland UK with a value over £30 qualify for free second class delivery. Orders less than £30 will be charged at the rate we are charged by our logistics company. For more details and specific charges please see our <a href="{{ path('miles_apart_public_delivery_information') }}">delivery information</a> page.</dd>
+
+    		<dt id="7">Can I track my order?</dt>
+    		<dd>
+    			<p>If you have regsitered with us or created an account when you ordered you see the state of your order by going to <a href="{{ path('fos_user_profile_show') }}">your account</a> page (you will be asked to sign in if you are not already).</p> 
+    			<p>If you haven't registered please <a href="{{ path('miles_apart_public_contact_us') }}">contact us</a> and be sure to add your order reference number.</p>
+    		</dd>
+
+    		<dt id="8">How long will my order take to arrive?</dt>
+    		<dd>Your order will be dispatched within 24 hours. Delivery times will depend on the postage type selected at checkout. </dd>
+
+    		<dt id="9">Do you deliver to international addresses?</dt>
+    		<dd>Unfortunately we do not currently deliver to international addresses.</dd>
+
+    		<dt id="10">I was not in when you tried to deliver, what happens now?</dt>
+    		<dd>The courier, Royal Mail, should have left a card for you which you can use to pick up the item from your local mail sorting office. We are sorry but we are unable to provide a second delivery service.</dd>
+
+    		<dt id="11">Can I send a parcel to an address different to my billing address?</dt>
+    		<dd>It is possible to send parcels to any address other than the billing address. Please select this at the checkout.</dd>
+    	</dl>
+
+    	<h4>Returns</h4>
+    	<dl>
+    		<dt id="12">How do I return an item?</dt>
+    		<dd>Items can be returned to us within 14 days of delivery. Please complete our <a href="{{ path('miles_apart_public_returns_policy') }}">returns form</a> and follow the instructions provided. For more information, please see our <a href="{{ path('miles_apart_public_returns_policy') }}">returns policy</a>.</dd>
+
+    		<dt id="13">Can I return an item I purchased online to a store?</dt>
+    		<dd>Yes, you can return any item purchased online to one of our stores within 14 days of delivery. We will need your packing slip so we can process the return for you. Please be aware that during busy periods it may not be possible to process the return while you wait, meaning there will be a delay of up to 2 days before your purchase is refunded to your account.</dd>
+
+    		<dt id="14">How am I refunded for an item I return?</dt>
+    		<dd>Your refund, minus and postage costs, will be paid back onto the card/paypal account that you paid with when you placed the order.</dd>
+    	</dl>
+
+    	<h4>Your Account</h4>
+    	<dl>
+    		<dt id="15">What is my username?</dt>
+    		<dd>Your username is the email address you used when you registered/created an account after placing an order.</dd>
+
+    		<dt id="16">I have forgotten my password, how do I sign in?</dt>
+    		<dd>Please use the <a href="{{ path('fos_user_resetting_request')}}">'Forgotten Password'</a> process to recover your account. You must have access to the email address you used when you registered.
+    		
+    		<dt id="17">Do I have to create an account to place an order?</dt>
+    		<dd>
+    			<p>No, you are able to checkout without creating an account, just leave the 'Create account' option unchecked at the checkout.</p>
+    			<p>If you do wish to create an account when placing an order, check the 'Create account' option and fill in the password field and an account will be created for you. You will need to activate your account by clicking on the link in the email we send you before you can log in.</p>
+    		</dd>
+    		<dt id="18">What are the benefits of creating an account?</dt>
+    		<dd>
+    			<p>If you craete an account you will be able to create wish lists, see previous orders, store delivery and billing address details and checkout faster.</p>
+    			<p>If you have opted in to receive them you will also be sent exclusive offers and discounts to be used on our website.</p>
+    		</dd>
+    	</dl>
+
+    	<h4>Stores</h4>
+    	<dl>
+    		<dt id="19">Are all of the products on your website available in your stores?</dt>
+    		<dd>Unfortunately we are unable to provide all of the items found on our website for sale in our stores.</dd>
+    		
+    		<dt id="20">How do I find your stores?</dt>
+    		<dd>Please see <a href="{{ path('miles_apart_public_our_stores') }}">our stores</a> page for addresses, maps and opening times of our stores.</dd>
+    	</dl>
+
+    	<h4>Security</h4>
+    	<dl>
+    		<dt id="21">Is it safe to shop on your website?</dt>
+    		<dd>Yes, it is safe to shop on our website.</dd>
+    		<dt id="22">How do you protect my details?</dt>
+    		<dd>
+    			<p>We encrypt all traffic to and from our website so people can't eavesdrop on any information you send us. Passwords are encrypted, meaning your account is safe in our database.</p>
+    			<p>We use a globally recognised card processing gateway that is fully PCI DSS compliant, meaning we never store your card detals, but out source this to a highly respected company that handles over 1 million transactions per day to keep your details safe.</p>
+    		</dd> 
+    	</dl>
+    </div>
+
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+    <li class="heading">FAQs</li>
+{% endblock %}

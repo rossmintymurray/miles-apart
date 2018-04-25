@@ -1,0 +1,174 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/customers.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'customers' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'customers_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Customers
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Customers			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing customers and customer accounts
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'customers_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_customer') }}">Customers overview</a>
+    </li>
+    
+    {# Create the customer nav #}
+     <li class="nav-header">Customer</li>
+     <li {% if current_page == 'customer' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer') }}">View customers</a>
+    </li>
+    <li {% if current_page == 'new_customer' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer_new') }}">New customer</a>
+    </li>
+
+    {# Create the customer type nav #}
+     <li class="nav-header">Customer Type</li>
+     <li {% if current_page == 'customer_type' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-type') }}">View customer types</a>
+    </li>
+    <li {% if current_page == 'new_customer_type' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-type_new') }}">New customer type</a>
+    </li>
+
+    {# Create the customer address nav #}
+     <li class="nav-header">Customer Address</li>
+     <li {% if current_page == 'customer_address' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-address') }}">View customer addresses</a>
+    </li>
+    <li {% if current_page == 'new_customer_address' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-address_new') }}">New customer address</a>
+    </li>
+
+    {# Create the personal customer nav #}
+     <li class="nav-header">Personal Customer</li>
+     <li {% if current_page == 'personal_customer' %} class="active" {% endif %}>
+        <a href="{{ path('customer_personal-customer') }}">View personal customers</a>
+    </li>
+    <li {% if current_page == 'new_personal_customer' %} class="active" {% endif %}>
+        <a href="{{ path('customer_personal-customer_new') }}">New personal customer</a>
+    </li>
+
+    {# Create the business customer nav #}
+     <li class="nav-header">Business Customer</li>
+     <li {% if current_page == 'business_customer' %} class="active" {% endif %}>
+        <a href="{{ path('customer_business-customer') }}">View business customers</a>
+    </li>
+    <li {% if current_page == 'new_business_customer' %} class="active" {% endif %}>
+        <a href="{{ path('customer_business-customer_new') }}">New business customer</a>
+    </li>
+
+    {# Create the business customer representative nav #}
+     <li class="nav-header">Business Customer Representative</li>
+     <li {% if current_page == 'business_customer_representative' %} class="active" {% endif %}>
+        <a href="{{ path('customer_business-customer-representative') }}">View business customer representatives</a>
+    </li>
+    <li {% if current_page == 'new_business_customer_representative' %} class="active" {% endif %}>
+        <a href="{{ path('customer_business-customer-representative_new') }}">New business customer representative</a>
+    </li>
+
+    {# Create the customer interaction nav #}
+     <li class="nav-header">Customer Interaction</li>
+     <li {% if current_page == 'customer_interaction' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction') }}">View customer interactions</a>
+    </li>
+    <li {% if current_page == 'new_customer_interaction' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction_new') }}">New customer interaction</a>
+    </li>
+
+    {# Create the customer interaction reason nav #}
+     <li class="nav-header">Customer Interaction Reason</li>
+     <li {% if current_page == 'customer_interaction_reason' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction-reason') }}">View customer interaction reasons</a>
+    </li>
+    <li {% if current_page == 'new_customer_interaction_reason' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction-reason_new') }}">New customer interaction reason</a>
+    </li>
+
+    {# Create the customer interaction resolution nav #}
+     <li class="nav-header">Customer Interaction Resolution</li>
+     <li {% if current_page == 'customer_interaction_resolution' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction-resolution') }}">View customer interaction resolutions</a>
+    </li>
+    <li {% if current_page == 'new_customer_interaction_resolution' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction-resolution_new') }}">New customer interaction resolution</a>
+    </li>
+
+    {# Create the customer interaction type nav #}
+     <li class="nav-header">Customer Interaction Type</li>
+     <li {% if current_page == 'customer_interaction_type' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction-type') }}">View customer interaction types</a>
+    </li>
+    <li {% if current_page == 'new_customer_interaction_type' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-interaction-type_new') }}">New customer interaction type</a>
+    </li>
+
+    {# Create the customer opt in nav #}
+     <li class="nav-header">Customer Opt In</li>
+     <li {% if current_page == 'customer_opt_in' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-opt-in') }}">View customer opt ins</a>
+    </li>
+    <li {% if current_page == 'new_customer_opt_in' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-opt-in_new') }}">New customer opt in</a>
+    </li>
+
+    {# Create the customer opt in type nav #}
+     <li class="nav-header">Customer Opt In Type</li>
+     <li {% if current_page == 'customer_opt_in_type' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-opt-in-type') }}">View customer opt in types</a>
+    </li>
+    <li {% if current_page == 'new_customer_opt_in_type' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-opt-in-type_new') }}">New customer opt in type</a>
+    </li>
+
+    {# Create the customer wish list nav #}
+     <li class="nav-header">Customer Wish List</li>
+     <li {% if current_page == 'customer_wish_list' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-wish-list') }}">View customer wish lists</a>
+    </li>
+    <li {% if current_page == 'new_customer_wish_list' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-wish-list_new') }}">New customer wish list</a>
+    </li>
+
+    {# Create the customer wish list product nav #}
+     <li class="nav-header">Customer Wish List Product</li>
+     <li {% if current_page == 'customer_wish_list_product' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-wish-list-product') }}">View customer wish list products</a>
+    </li>
+    <li {% if current_page == 'new_customer_wish_list_product' %} class="active" {% endif %}>
+        <a href="{{ path('customer_customer-wish-list-product_new') }}">New customer wish list product</a>
+    </li>
+     
+
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

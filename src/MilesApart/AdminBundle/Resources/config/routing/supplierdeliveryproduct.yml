@@ -1,0 +1,33 @@
+goods-in_supplier-delivery-product:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+goods-in_supplier-delivery-product_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:show" }
+
+goods-in_supplier-delivery-product_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:new" }
+
+goods-in_supplier-delivery-product_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:create" }
+    requirements: { _method: post }
+
+goods-in_supplier-delivery-product_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:edit" }
+
+goods-in_supplier-delivery-product_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:update" }
+    requirements: { _method: post|put }
+
+goods-in_supplier-delivery-product_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDeliveryProduct:delete" }
+    requirements: { _method: post|delete }

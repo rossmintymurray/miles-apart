@@ -1,0 +1,82 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/hr.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'procurement' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'procurement_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Procurement
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Procurement			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing purchaser orders and send purchase orders to suppliers.
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'procurement_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_procurement') }}">Procurement overview</a>
+    </li>
+
+    {#Create the purchase order left nav #}
+     <li class="nav-header">Purchase Order</li>
+     <li {% if current_page == 'purchase_order' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_purchase-order') }}">View purchase orders</a>
+    </li>
+    <li {% if current_page == 'new_purchase_order' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_purchase-order_new') }}">New purchase order</a>
+    </li>
+
+    {#Create the purchase order state left nav #}
+     <li class="nav-header">Purchase Order State</li>
+     <li {% if current_page == 'purchase_order_state' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_purchase-order-state') }}">View purchase order states</a>
+    </li>
+    <li {% if current_page == 'new_purchase_order_state' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_purchase-order-state_new') }}">New purchase order state</a>
+    </li>
+
+    {#Create the purchase order product left nav #}
+     <li class="nav-header">Purchase Order Product</li>
+     <li {% if current_page == 'purchase_order_product' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_purchase-order-product') }}">View purchase order products</a>
+    </li>
+    <li {% if current_page == 'new_purchase_order_product' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_purchase-order-product_new') }}">New purchase order product</a>
+    </li>
+
+    {#Create the logistics company left nav #}
+     <li class="nav-header">Logistics Company</li>
+     <li {% if current_page == 'logistics_company' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_logistics-company') }}">View logistics company</a>
+    </li>
+    <li {% if current_page == 'new_logistics_company' %} class="active" {% endif %}>
+        <a href="{{ path('procurement_logistics-company_new') }}">New logistics company</a>
+    </li>
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

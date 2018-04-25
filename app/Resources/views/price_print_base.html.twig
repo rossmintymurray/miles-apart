@@ -1,0 +1,64 @@
+{# app/Resources/views/print_base.html.twig 
+
+This is the foundation page for all other PRINT pages on the site #}
+<!DOCTYPE html>
+<html lang="en">
+    <!--Create the document head-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+
+        {# Create generic header #}
+        <title></title>
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        
+            
+            
+            <link href="{{ asset('css/staff_styles.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/print_styles.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/price_print_styles.css') }}" type="text/css" rel="stylesheet" />
+            
+        {# Include stylesheets #}
+        {% block stylesheets %}
+        {% endblock %}
+
+    </head>
+    
+    <body>
+        <div class="container admin_layout_grid">
+                
+                </div>
+
+
+
+                <!--Row for main page content-->
+                <div class="row">
+
+                    
+                    <div class="col-md-12">
+                        <section class="main-col">
+
+                            <!--Page lead content-->
+                            {% block page_lead %}{% endblock %}
+                            
+                
+                            <!--Dynamic content of main content area-->
+                            {% block print_page_content %}{% endblock %}
+                            
+                            {% block pagination_links %}{% endblock %}
+
+                        </section>
+                    </div>
+                    
+                </div>
+            </div>
+        <!--Close the main page wrap-->
+        </div>
+
+        
+    </body>
+</html>
+
+

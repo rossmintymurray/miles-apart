@@ -1,0 +1,383 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::checkout_page_layout.html.twig' %}
+
+{% if submitted == false %}
+    {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{% block page_title %}
+    Shipping Details
+     
+{% endblock %}
+
+{% block checkout_progress_bar %}
+     {# Create checkout progress #}
+    <div id="progress_bar_container">
+        <div class="row text-center collapse">
+            {# Progress bar #}
+            <div class="large-10 small-10 columns large-offset-1 small-offset-1">
+                <div class="progress success radius">
+                    <span class="meter" style="width: 33%"></span>
+                </div>
+            </div>
+
+            {# Progress stages numbers #}
+            <div id="progress_bar_numbers_wrapper">
+                <div class="large-3 small-3 columns">
+                    <span class="progress_bar_numbers done">1</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers active">2</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">3</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">4</span>
+                </div>
+            </div>
+
+            {# Progress stages text#}
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Shopping basket</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text active">Delivery details</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text">Payment</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text">Complete</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_content %}
+
+   
+    <h2 class="underline">Delivery details</h2>
+
+    {# Flashbag messages #}
+    {% for flashMessage in app.session.flashbag.get('checkout-error') %}
+                    
+        <div class="alert-box alert">
+            {{ flashMessage }}
+        </div>
+
+    {% endfor %}
+
+    {# Shipping addess form #}
+    <div id="shipping_address_postcode_form">
+
+    
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+                
+                <div class="row">
+                    <div class="large-9 columns">
+
+                        <h4>Your Contact Details</h4>
+                        
+                        {# Business customer button #}
+                        <div class="row">
+                                <div class="smmall-12 medium-offset-5 medium-7 columns">
+                                    <input type="checkbox" id="business_customer_toggle" />
+                                    <label for="business_customer">Are you a business customer?</label>
+                                    <p class="form_subtext">Please check this box if you are a representative for a business, school, charity or other organisation.</p>
+                                </div>
+                            </div>
+
+                            
+                            {# Personal customer form elements #}
+                            <div class="personal_customer_form">
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.personal_customer.personal_customer_first_name) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.personal_customer.personal_customer_first_name) }}
+                                        {{ form_errors(form.customer.personal_customer.personal_customer_first_name) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.personal_customer.personal_customer_surname) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.personal_customer.personal_customer_surname) }}
+                                        {{ form_errors(form.customer.personal_customer.personal_customer_surname) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.personal_customer.personal_customer_email_address) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.personal_customer.personal_customer_email_address) }}
+                                        {{ form_errors(form.customer.personal_customer.personal_customer_email_address) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# Business customer form elements #}
+                            <div class="business_customer_representative_form">
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.business_customer.business_customer_name) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.business_customer.business_customer_name) }}
+                                        {{ form_errors(form.customer.business_customer.business_customer_name) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.business_customer.business_customer_representative.business_customer_representative_first_name) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.business_customer.business_customer_representative.business_customer_representative_first_name) }}
+                                        {{ form_errors(form.customer.business_customer.business_customer_representative.business_customer_representative_first_name) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.business_customer.business_customer_representative.business_customer_representative_surname) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.business_customer.business_customer_representative.business_customer_representative_surname) }}
+                                        {{ form_errors(form.customer.business_customer.business_customer_representative.business_customer_representative_surname) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 medium-5 columns">
+                                        {{ form_label(form.customer.business_customer.business_customer_representative.business_customer_representative_email_address) }}
+                                    </div>
+                                    <div class="small-12 medium-7 columns">
+                                        {{ form_widget(form.customer.business_customer.business_customer_representative.business_customer_representative_email_address) }}
+                                        {{ form_errors(form.customer.business_customer.business_customer_representative.business_customer_representative_email_address) }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <h4> Delivery Address</h4>
+
+                            
+
+                            <div class="row">
+                                <div class="small-12 medium-5 columns">
+                                    {{ form_label(form.delivery_address.customer_address_postcode) }}
+                                </div>
+                                <div class="small-7 medium-4 columns">
+                                    {{ form_widget(form.delivery_address.customer_address_postcode) }}
+                                    {{ form_errors(form.delivery_address.customer_address_postcode) }}
+                                </div>
+
+                                <div class="small-5 medium-3 columns">
+                                    <button class="button tiny small-12" id="shipping_find_address">Find Address</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="small-12 medium-7 medium-offset-5 columns">
+                                    <select class="small-12 columns hide" id="shipping_address_select">
+                                        <option>Loading addresses...</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="small-12 medium-5 columns">
+                                    {{ form_label(form.delivery_address.customer_address_line_1) }}
+                                </div>
+                                <div class="small-12 medium-7 columns">
+                                    {{ form_widget(form.delivery_address.customer_address_line_1) }}
+                                    {{ form_errors(form.delivery_address.customer_address_line_1) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="small-12 medium-5 columns">
+                                    {{ form_label(form.delivery_address.customer_address_line_2) }}
+                                </div>
+                                <div class="small-12 medium-7 columns">
+                                    {{ form_widget(form.delivery_address.customer_address_line_2) }}
+                                    {{ form_errors(form.delivery_address.customer_address_line_2) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="small-12 medium-5 columns">
+                                    {{ form_label(form.delivery_address.customer_address_town) }}
+                                </div>
+                                <div class="small-12 medium-7 columns">
+                                    {{ form_widget(form.delivery_address.customer_address_town) }}
+                                    {{ form_errors(form.delivery_address.customer_address_town) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="small-12 medium-5 columns">
+                                    {{ form_label(form.delivery_address.customer_address_county) }}
+                                </div>
+                                <div class="small-12 medium-7 columns">
+                                    {{ form_widget(form.delivery_address.customer_address_county) }}
+                                    {{ form_errors(form.delivery_address.customer_address_county) }}
+                                </div>
+                            </div>
+
+                            <h4> Billing Address</h4>
+
+                            <div class="row"> 
+                                <div class="small-12 medium-offset-5 medium-7 columns">
+                                    {{ form_widget(form.delivery_address.customer_address_is_billing) }}
+                                    {{ form_label(form.delivery_address.customer_address_is_billing) }}
+                                    {{ form_errors(form.delivery_address.customer_address_is_billing) }}
+                                    <p class="form_subtext">Please uncheck this box if your billing address is different to your delivery address.</p>
+                                </div>
+                            </div>
+                            <div id="billing_address_hidden">
+                                {% if form.billing_address is defined %}
+                                    <div class="row">
+                                        <div class="small-12 medium-5 columns">
+                                            {{ form_label(form.billing_address.customer_address_postcode) }}
+                                        </div>
+                                        <div class="small-7 medium-4 columns">
+                                            {{ form_widget(form.billing_address.customer_address_postcode) }}
+                                            {{ form_errors(form.billing_address.customer_address_postcode) }}
+                                        </div>
+
+                                        <div class="small-5 medium-3 columns">
+                                            <button class="button tiny small-12" id="shipping_billing_find_address">Find Address</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="small-12 medium-7 medium-offset-5 columns">
+                                            <select class="small-12 columns hide" id="shipping_billing_address_select">
+                                                <option>Loading addresses...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="small-12 medium-5 columns">
+                                            {{ form_label(form.billing_address.customer_address_line_1) }}
+                                        </div>
+                                        <div class="small-12 medium-7 columns">
+                                            {{ form_widget(form.billing_address.customer_address_line_1) }}
+                                            {{ form_errors(form.billing_address.customer_address_line_1) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="small-12 medium-5 columns">
+                                            {{ form_label(form.billing_address.customer_address_line_2) }}
+                                        </div>
+                                        <div class="small-12 medium-7 columns">
+                                            {{ form_widget(form.billing_address.customer_address_line_2) }}
+                                            {{ form_errors(form.billing_address.customer_address_line_2) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="small-12 medium-5 columns">
+                                            {{ form_label(form.billing_address.customer_address_town) }}
+                                        </div>
+                                        <div class="small-12 medium-7 columns">
+                                            {{ form_widget(form.billing_address.customer_address_town) }}
+                                            {{ form_errors(form.billing_address.customer_address_town) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="small-12 medium-5 columns">
+                                            {{ form_label(form.billing_address.customer_address_county) }}
+                                        </div>
+                                        <div class="small-12 medium-7 columns">
+                                            {{ form_widget(form.billing_address.customer_address_county) }}
+                                            {{ form_errors(form.billing_address.customer_address_county) }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            
+                       
+                            <h4> Delivery Options</h4>
+
+                            <div class="row">
+                                <div class="small-12 medium-5 columns">
+                                    <div class="hide-for-small-only">
+                                        {{ form_label(form.delivery_option) }}
+                                    </div>
+                                </div>
+                                <div class="small-12 medium-7 columns ">
+                                    
+                                    {% for key, delivery_option_choice in form.delivery_option.children %}
+                                        <p class="delivery_options">
+                                            {{ form_widget(delivery_option_choice) }}
+                                            {% if loop.index == 1 %}
+                                                <b>Royal Mail 2nd Class - {{ form_label(delivery_option_choice) }}</b><br />
+                                                <span class="form_subtext radio_subtext">Royal Mail aims to deliver all 2nd Class post on the 3rd working day after dispatch.</small>
+                                            {% else %}
+                                                <b>Royal Mail 1st Class - {{ form_label(delivery_option_choice) }}</b><br />
+                                                <span class="form_subtext radio_subtext">Royal Mail aims to deliver all 1st Class post the next working day after dispatch.</small>
+                                            {% endif %}
+                                            {{ form_errors(delivery_option_choice) }}
+                                        </p>
+                                    {% endfor %}
+                                    
+                                    {#{{ form_widget(form.delivery_option) }}#}
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    {{ form_row(form.submit) }}
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                
+                   
+                
+            </div>
+            
+            {{ form_rest(form) }}
+       
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+{% block right_column %}
+    <div id="sticky" class="sticky-element">
+        <div class="sticky-anchor">
+        </div>
+        <div class="sticky-content">
+            {% include 'MilesApartBasketBundle:CheckoutComponents:checkout_order_table.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('public_components/js/miles_apart_basket.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,33 @@
+customer-order_postage-band:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer-order_postage-band_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:show" }
+
+customer-order_postage-band_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:new" }
+
+customer-order_postage-band_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:create" }
+    requirements: { _method: post }
+
+customer-order_postage-band_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:edit" }
+
+customer-order_postage-band_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:update" }
+    requirements: { _method: post|put }
+
+customer-order_postage-band_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:PostageBand:delete" }
+    requirements: { _method: post|delete }

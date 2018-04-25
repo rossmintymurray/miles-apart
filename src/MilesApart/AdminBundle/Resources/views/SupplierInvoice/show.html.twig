@@ -1,0 +1,54 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/finance.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'supplier_invoice' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.supplierinvoicecode }} - Supplier Invoice
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.supplierinvoicecode }} - Supplier Invoice           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Supplier Invoice details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier invoice code</th>
+                <td>{{ entity.supplierinvoicecode }}</td>
+            </tr>
+            <tr>
+                <th>Supplier invoice date</th>
+                <td>{{ entity.supplierinvoicedate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('finance_supplier-invoice') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('finance_supplier-invoice_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

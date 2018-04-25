@@ -1,0 +1,12 @@
+staff-website-management_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:WebsiteManagement:notifications" }
+                
+staff-website-management_edit-page:
+    pattern:  /edit-page
+    defaults: { _controller: "MilesApartStaffBundle:WebsiteManagement:editpage" }
+
+staff-website-management_empty-cache:
+    pattern:  /empty-cache
+    defaults: { _controller: "MilesApartStaffBundle:WebsiteManagement:emptycache" }
+

@@ -1,0 +1,15 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Reset your account password
+{% endblock %}
+
+{% block fos_user_content %}
+<p>
+{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}
+</p>
+
+{% endblock %}

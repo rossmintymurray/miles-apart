@@ -1,0 +1,33 @@
+goods-in_stock-location-product-sent:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+goods-in_stock-location-product-sent_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:show" }
+
+goods-in_stock-location-product-sent_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:new" }
+
+goods-in_stock-location-product-sent_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:create" }
+    requirements: { _method: post }
+
+goods-in_stock-location-product-sent_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:edit" }
+
+goods-in_stock-location-product-sent_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:update" }
+    requirements: { _method: post|put }
+
+goods-in_stock-location-product-sent_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:StockLocationProductSent:delete" }
+    requirements: { _method: post|delete }

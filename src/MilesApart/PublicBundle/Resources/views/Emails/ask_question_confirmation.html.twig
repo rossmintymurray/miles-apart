@@ -1,0 +1,149 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_name %}
+	Miles Apart Question Confirmation
+{% endblock %}
+
+{% block email_title %}
+	Thank you for your question.
+{% endblock %}
+
+{% block email_intro %}
+	We will answer as soon as we can.
+{% endblock %}
+
+{% block email_content %}
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="15px" style="font-size:15px;line-height:15px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+	
+	
+	
+			
+    
+    
+    <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th>
+	    					<p>You asked the following question:<br />
+	    					<i>"{{ product_question.getProductQuestionText }}"</i> </p>
+					      	<p>We will try to get back to you the same day but it may take up to 24 hours to receive a response.</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+		
+	
+	
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="15px" style="font-size:15px;line-height:15px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+	
+	
+	
+			
+    
+    
+    <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+			
+
+
+	
+	<table class="row">
+	  	<tr>
+	  		<th class="small-3 large-3 columns first">
+	  			<table>
+	    			<tr>
+	    				<th>
+	    					<a href="http://www.miles-apart.com"><img src="http:/localhost:8888/Miles-Apart/web/images/email/OfflineLogoTransparent.png"></a>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+			<th class="small-9 large-9 columns last">
+				<table>
+					<tr>
+						<th>
+							<p style="-webkit-hyphens:manual;-moz-hyphens:manual;hyphens:manual;font-size:12px">
+								Miles Apart is based in Amesbury, Wiltshire with two shops and our head office in the town. We also have a shop in Westbury, also in Wiltshire. Stocking a huge range of products at fair prices, we are a family business with over 25 years experience.
+							</p>
+							
+							<p style="font-size:10px">&copy;{{ 'now'|date('Y') }} Miles Apart
+							</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+	  	</tr>
+	</table>
+			
+{% endblock %}
+
+{% block email_callout %}
+{% endblock %}
+
+{% block email_footer %}
+{% endblock %}

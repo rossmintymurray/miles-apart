@@ -1,0 +1,33 @@
+campaign_traffic-source-promotion:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+campaign_traffic-source-promotion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:show" }
+
+campaign_traffic-source-promotion_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:new" }
+
+campaign_traffic-source-promotion_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:create" }
+    requirements: { _method: post }
+
+campaign_traffic-source-promotion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:edit" }
+
+campaign_traffic-source-promotion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:update" }
+    requirements: { _method: post|put }
+
+campaign_traffic-source-promotion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:TrafficSourcePromotion:delete" }
+    requirements: { _method: post|delete }

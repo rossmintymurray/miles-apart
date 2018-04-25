@@ -1,0 +1,43 @@
+miles_apart_seller:
+    resource: "@MilesApartSellerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+miles_apart_basket:
+    resource: "@MilesApartBasketBundle/Resources/config/routing.yml"
+    prefix:   /basket/
+
+miles_apart_admin:
+    resource: "@MilesApartAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+    defaults:  { _section:    admin }
+
+miles_apart_staff:
+    resource: "@MilesApartStaffBundle/Resources/config/routing.yml"
+    prefix:   /staff/
+    defaults:  { _section:    staff }
+
+miles_apart_public_user:
+        resource: "@MilesApartPublicUserBundle/Resources/config/routing.yml"
+
+miles_apart_public:
+    resource: "@MilesApartPublicBundle/Resources/config/routing.yml"
+    prefix:   /
+    defaults:  { _section:    public }
+
+my_barcode_display:
+    resource: "@MopaBarcodeBundle/Resources/config/routing/barcode_display.yml"
+    prefix:   /mop/
+
+_imagine:
+    resource: .
+    type:     imagine
+
+
+
+oneup_uploader:
+    resource: .
+    type: uploader
+
+snowcap_im:
+  resource: "@SnowcapImBundle/Resources/config/routing.yml"
+

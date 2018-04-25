@@ -1,0 +1,17 @@
+<div id="page_footer">
+    <p class="text-center" style="font-size:22px">
+        {% if order.customerordersource != null %}
+            {% if order.customerordersource.id == 2 %}
+                Thank you for your Amazon order
+            {% else %}
+                Thank you for your order
+            {% endif %}
+        {% else %}
+            Thank you for your order
+        {% endif %}
+    </p>
+    <div style="border-top:4px solid #7f7f7f;"></div>
+    <p class="text-center" style="font-size:22px;margin-top:10px">Miles Apart</p>
+    <p class="text-center" style="font-size:18px">Westcroft, Boscombe Village, Salisbury, Wiltshire, SP4 0AB</p>
+    <p class="text-center" style="font-size:16px;margin-bottom:0px">VAT Number: 132 7800 31</p>
+</div>

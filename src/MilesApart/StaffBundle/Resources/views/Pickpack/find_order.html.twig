@@ -1,0 +1,54 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/pick.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'find_order' %}
+
+{% block page_name %}
+    Find Order
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <fieldset>
+                    <legend class="text-muted">Order number</legend>
+                    {{ form_row(form.id) }}
+                </fieldset>
+                {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_pick_id').val(bar);
+
+            //Submit the form
+            $("form[name='milesapart_staffbundle_findorder']").submit();
+
+            return true;
+        }
+    </script>
+{% endblock %}

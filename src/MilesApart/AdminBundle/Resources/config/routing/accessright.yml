@@ -1,0 +1,33 @@
+website-management_access-right:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+        
+website-management_access-right_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:show" }
+
+website-management_access-right_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:new" }
+
+website-management_access-right_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:create" }
+    requirements: { _method: post }
+
+website-management_access-right_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:edit" }
+
+website-management_access-right_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:update" }
+    requirements: { _method: post|put }
+
+website-management_access-right_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:AccessRight:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,3 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+1.65mm Diameter Trimmer Line,5013478561800,SLI65CP,1.25,Bonnington
+Pack 2 Rat Glue Trap,5013478120052,PEST9,1.25,Bonnington

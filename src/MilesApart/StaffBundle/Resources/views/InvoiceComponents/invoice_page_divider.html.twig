@@ -1,0 +1,21 @@
+
+
+    </tbody>
+    </table>
+
+    <div id="page_number" style="text-align:right;">
+        <h4 style="font-size:14px;margin-bottom:0px">Page {{ current_page + 1 }} of {{ number_of_pages }}</h4>
+    </div>
+
+</div>
+<div class="page_break"></div>
+<div class="invoice_contents" style="min-height:1300px">
+    <h2 style="margin-top:70px;margin-bottom:40px">Invoice (cont)</h2>
+    <table class="table table-striped text-center" style="border:none">
+
+    {# Table header #}
+    {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_table_header.html.twig' %}
+
+
+    <tbody>
+   

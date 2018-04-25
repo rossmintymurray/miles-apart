@@ -1,0 +1,153 @@
+<div class="tab-content">
+  	<div role="tabpanel" class="tab-pane active" id="take">
+	  	<h3><span class="text-muted">Take for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+
+	    <div id="graph_container"></div>
+	    <script type="text/javascript">
+	    	{{ chart(chart) }}
+		</script>
+
+		<div class="daily_take_aggregate_info_panel">
+			<div class="well well-lg">
+				<div class="row">
+					<div class="col-md-2">
+						<h6 class="small text-muted">Total Take</h6>
+						<h1>&pound;{{ period_take_total|number_format(0, '.', ',') }}</h1>
+						{% for daily_take_day in daily_take %}
+							
+						{% endfor %}
+					</div>
+					<div class="col-md-2">
+						<h6 class="small text-muted">Transactions</h6>
+						<h1>{{ period_transactions_total }}</h1>
+					</div>
+					<div class="col-md-2">
+						<h6 class="small text-muted">Ave. spend per transaction</h6>
+						<h1>&pound;{{ period_spend_per_transaction|number_format(2, '.', ',') }}</h1>
+
+					</div>
+					<div class="col-md-3">
+						<h6 class="small text-muted">Increase/decrease previous month</h6>
+						<h1>- &pound;{{ 69.90|number_format(2, '.', ',') }}</h1>
+
+					</div>
+					<div class="col-md-3">
+						<h6 class="small text-muted">Increase/decrease previous year</h6>
+						<h1>NA</h1>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div id="daily_take_business_premises">
+
+
+			<div class="view_business_premises">
+				<h4>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="well well-lg">
+							<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': '26-amesbury' } )}}">26 Amesbury</a></h3>
+							<h6 class="small text-muted">Total take</h6>
+							<h1>&pound;{{ twenty_six_amesbury_period_take_total }}</h1>
+							<h6 class="small">Transactions</h6>
+							<h1>{{ twenty_six_amesbury_period_transactions_total }}</h1>
+							<h6 class="small">Spend per transaction</h6>
+							<h1>&pound;{{ twenty_six_amesbury_period_spend_per_transaction|number_format(2, '.', ',') }}</h1>
+							<h6 class="small">Compared to last 30 days</h6>
+							<h1>&plus; &pound;30</h1>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div id="twenty_six_graph_container"></div>
+						<script type="text/javascript">
+					    	{{ chart(chart_two) }}
+						</script>
+					</div>
+				</div>
+			</div>
+
+			<div class="view_business_premises">
+				<h4>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="well well-lg">
+							<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': '28-amesbury' } )}}">28 Amesbury</a></h3>
+							<h6 class="small text-muted">Total Take</h6>
+							<h1>&pound;{{ twenty_eight_amesbury_period_take_total }}</h1>
+							<h6 class="small">Transactions</h6>
+							<h1>{{ twenty_eight_amesbury_period_transactions_total }}</h1>
+							<h6 class="small">Spend per transaction</h6>
+							<h1>&pound;{{ twenty_eight_amesbury_period_spend_per_transaction|number_format(2, '.', ',') }}</h1>
+							<h6 class="small">Compared to last 30 days</h6>
+							<h1>&plus; &pound;30</h1>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div id="twenty_eight_graph_container"></div>
+						<script type="text/javascript">
+					    	{{ chart(chart_three) }}
+						</script>
+					</div>
+				</div>
+			</div>
+
+			<div class="view_business_premises">
+				<h4>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="well well-lg">
+							<h3><a href="{{ path('staff-finances_view-daily-takes-business-premises', { 'business_premises': 'westbury' } )}}">Westbury</a></h3>
+							<h6 class="small text-muted">Total Take</h6>
+							<h1>&pound;{{ westbury_period_take_total }}</h1>
+							<h6 class="small">Transactions</h6>
+							<h1>{{ westbury_period_transactions_total }}</h1>
+							<h6 class="small">Spend per transaction</h6>
+							<h1>&pound;{{ westbury_period_spend_per_transaction|number_format(2, '.', ',') }}</h1>
+							<h6 class="small">Compared to last 30 days</h6>
+							<h1>&plus; &pound;30</h1>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div id="westbury_graph_container"></div>
+						<script type="text/javascript">
+					    	{{ chart(chart_four) }}
+						</script>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+  	<div role="tabpanel" class="tab-pane" id="departments">
+  		<h3><span class="text-muted">Departments for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+  		<div class="row">
+  			<div id="westbury_departments_graph_container" class="col-md-11"></div>
+  		</div>
+  		<script type="text/javascript">
+			    	{{ chart(chart_five) }}
+		</script>	
+	</div>
+
+  	<div role="tabpanel" class="tab-pane" id="receipts">
+  		<h3><span class="text-muted">Receipts for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+  		<div class="row">
+	  		<div id="petty_cash_graph_container" class="col-md-11"></div>
+	  		<script type="text/javascript">
+				    	{{ chart(chart_six) }}
+					</script>
+  		</div>
+  	</div>
+
+  	<div role="tabpanel" class="tab-pane" id="payments">
+  		<h3><span class="text-muted">Payments for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+  		<div class="row">
+	  		<div id="employee_payment_graph_container" class="col-md-11"></div>
+	  		<script type="text/javascript">
+				{{ chart(chart_seven) }}
+			</script>
+  		</div>
+  	</div>

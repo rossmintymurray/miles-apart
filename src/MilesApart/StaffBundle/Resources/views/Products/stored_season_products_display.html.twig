@@ -1,0 +1,61 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'show_price' %}
+
+{% block page_name %}
+    Stored Season Products Display
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{# Set count variables #}
+{% set total_value = 0 %}
+{% set total_qty = 0 %}
+
+
+
+	
+	<table class="table table-striped small existing_products" id="existing_unprinted_prices">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Shelf</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Supplier</th>
+
+      		</tr>
+        </thead>
+        <tbody>
+        
+		{% for stocktake_product in season.getStoredSeasonStock %}
+            
+			<tr>
+                <td>{{ stocktake_product.product_name }}</td>
+                <td>{{ stocktake_product.box }}</td>
+                <td>{{ stocktake_product.qty }}</td>
+                <td>£{{ stocktake_product.price }}</td>
+                <td>{% if stocktake_product.supplier is defined %} {{ stocktake_product.supplier }} {% else %} Supplier not set {% endif %}</td>
+            </tr>
+
+            {% set total_value = total_value + stocktake_product.price * stocktake_product.qty %}
+			{% set total_qty = total_qty + stocktake_product.qty %}
+		{% endfor %}
+
+        <tr>
+            <td>{{ season.getStoredSeasonStockProductCount }}</td>
+            <td>{{ total_qty }}</td>
+        </tr>
+		</tbody>
+    </table>
+
+
+
+
+<h1>&pound;{{ total_value }}</h1>
+<h1>{{ total_qty }}</h1>
+{% endblock %}

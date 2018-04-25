@@ -1,0 +1,39 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/new_campaign.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'new_campaign_type' %}
+
+{% block page_name %}
+    New campaign type
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Campaign type</legend>
+            {{ form_row(form.campaign_type_name) }}
+           
+        </fieldset>
+        
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

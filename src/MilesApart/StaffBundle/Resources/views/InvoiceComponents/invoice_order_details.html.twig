@@ -1,0 +1,84 @@
+<div id="invoice_inner" style="margin-top:50px">
+    <div id="inner_wrapper">
+
+        <div id="order_details" style="margin-bottom:10px">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 style="font-size:16px" class="light-grey">Billed to:</h4>
+
+                    <address style="line-height:28px;font-size:21px">
+                        {% if order.billingaddress != null %}
+                     
+                            <strong>{{ order.billingaddress.customeraddresscontactfullname }}</strong><br />
+                            {{ order.billingaddress.customeraddressline1 }}<br />
+                     
+                            {% if order.billingaddress.customeraddressline2 != null %}
+                                {{ order.billingaddress.customeraddressline2 }}<br />
+                            {% endif %}
+                     
+                            {{ order.billingaddress.customeraddresstown }}<br />
+                            {{ order.billingaddress.customeraddresscounty }}<br />
+                            {{ order.billingaddress.customeraddresspostcode }}<br />
+                  
+                        {% else %}
+                     
+                            <strong>{{ order.deliveryaddress.customeraddresscontactfullname }}</strong><br />
+                            {{ order.deliveryaddress.customeraddressline1 }}<br />
+                     
+                            {% if order.deliveryaddress.customeraddressline2 != null %}
+                                {{ order.deliveryaddress.customeraddressline2 }}<br />
+                            {% endif %}
+                     
+                            {{ order.deliveryaddress.customeraddresstown }}<br />
+                            {{ order.deliveryaddress.customeraddresscounty }}<br />
+                            {{ order.deliveryaddress.customeraddresspostcode }}<br />
+                  
+                        {% endif %}
+                    </address>
+                </div>
+
+                <div class="col-md-4">
+                    <h4 style="font-size:16px" class="light-grey">Shipping to:</h4>
+
+                    <address style="line-height:28px;font-size:21px">
+                        {% if order.deliveryaddress != null %}
+                            <strong>{{ order.deliveryaddress.customeraddresscontactfullname }}</strong><br />
+                            {{ order.deliveryaddress.customeraddressline1 }}<br />
+                            {% if order.deliveryaddress.customeraddressline2 != null %}
+                                {{ order.deliveryaddress.customeraddressline2 }}<br />
+                            {% endif %}
+                            {{ order.deliveryaddress.customeraddresstown }}<br />
+                            {{ order.deliveryaddress.customeraddresscounty }}<br />
+                            {{ order.deliveryaddress.customeraddresspostcode }}<br />
+
+                        {% else %}
+                            As billing
+                        {% endif %}
+                    </address>
+                </div>
+         
+
+                <div class="col-md-4" style="height:140px;">
+                    <h4 style="font-size:15px" class="light-grey">Order details:</h4>
+
+                    <h3>#{{ order.id }}</h3>
+
+
+                    {% if order.customerordersource != null %}
+                        {% if order.customerordersource.id == 2 %}
+                            <p style="margin:0px 0px 0px 0px;padding:5px 0px 0px 0px; font-size:10px" class="light-grey">Amazon Order ID:</p>
+                            <h5 style="margin:5px 0px 15px 0px">{{ order.amazonorder.amazonorderid }}</h5>
+                        {% endif %}
+                    {% endif %}
+               
+                    <p style="margin:0px 0px 0px 0px;padding:0px 0px 0px 0px; font-size:10px" class="light-grey">Order placed:</p>
+                    <h4>{{ order.customerorderdatecreated|date('jS F Y') }}</h4>
+               
+                    {# order barcode #}
+                    <img style="margin-top:10px;margin-left:-10px" class="order_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code128', order.id, {'barcodeOptions': {'barHeight' : 15, drawText : false}, 'rendererOptions': {'width':175, 'height':15}}) }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

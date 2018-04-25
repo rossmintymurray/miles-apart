@@ -1,0 +1,33 @@
+business_stocktake:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+business_stocktake_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:show" }
+
+business_stocktake_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:new" }
+
+business_stocktake_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:create" }
+    requirements: { _method: post }
+
+business_stocktake_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:edit" }
+
+business_stocktake_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:update" }
+    requirements: { _method: post|put }
+
+business_stocktake_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:Stocktake:delete" }
+    requirements: { _method: post|delete }

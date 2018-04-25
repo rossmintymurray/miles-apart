@@ -1,0 +1,33 @@
+procurement_logistics-company:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+procurement_logistics-company_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:show" }
+
+procurement_logistics-company_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:new" }
+
+procurement_logistics-company_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:create" }
+    requirements: { _method: post }
+
+procurement_logistics-company_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:edit" }
+
+procurement_logistics-company_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:update" }
+    requirements: { _method: post|put }
+
+procurement_logistics-company_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:LogisticsCompany:delete" }
+    requirements: { _method: post|delete }

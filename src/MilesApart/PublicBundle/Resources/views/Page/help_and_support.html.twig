@@ -1,0 +1,35 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Help &amp; Support
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+    <p class="lead"></p>
+
+    <div class="row">
+    	<div class="large-6 columns">
+    		<div class="panel text-center hero_panel">
+    			<h3>Frequently Asked Questions</h3>
+    			<p class="lead">For detailed answers to the most common questions</p> 
+    			<a href="{{ path('miles_apart_public_faqs') }}" class="button small">FAQ Page</a>
+    		</div>
+    	</div>
+    	<div class="large-6 columns">
+    		<div class="panel text-center hero_panel">
+    			<h3>Contact Us</h3>
+    			<p class="lead">If you need more help, please don't hesitate to ask</p>
+    			<a href="{{ path('miles_apart_public_contact_us') }}" class="button small">Contact Us Form</a>
+    		</div>
+    	</div>
+    </div>
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Help &amp; Support</li>
+	<li><a href="#help_options">Help Options</a></li>
+{% endblock %}

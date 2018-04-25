@@ -1,0 +1,33 @@
+product_product-feature:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_product-feature_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:show" }
+
+product_product-feature_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:new" }
+
+product_product-feature_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:create" }
+    requirements: { _method: post }
+
+product_product-feature_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:edit" }
+
+product_product-feature_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:update" }
+    requirements: { _method: post|put }
+
+product_product-feature_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ProductFeature:delete" }
+    requirements: { _method: post|delete }

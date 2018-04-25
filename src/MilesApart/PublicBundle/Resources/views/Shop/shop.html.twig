@@ -1,0 +1,102 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::shop_page_layout.html.twig' %}
+
+{# Create the page title for HTML title tag #}
+{% block page_title %}
+    Shop - 
+    {# Check the level and show category levels accordingly #}
+    {% if main_category_name is not null %}
+        {{ main_category_name }} 
+    {% endif %}
+
+    {% if sub_category_name is not null %}
+        - {{ sub_category_name }} 
+    {% else %}
+        - All
+    {% endif %}
+
+    {% if specific_category_name is not null %}
+        - {{ specific_category_name }} 
+    {% else %}
+        - All
+    {% endif %}
+
+{% endblock %}
+
+{% if current_page is not defined %}
+  {% set current_page = 'shop' %}
+
+{% endif %}
+
+
+{# Create main page content #}
+{% block page_content %}
+
+
+    {# Check if categories need to be displayed #}
+    {% if level == 0 %}
+       
+        {# Call the categories display area controller #}
+        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}
+
+    {# Check if categories need to be displayed #}
+    {% elseif level == 1 %}
+       
+        {# Call the categories display area controller #}
+        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}
+    
+    {# If category display is true #}
+    {% elseif level == 2 %}
+        
+        {# Call the categories display area controller #}
+        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}
+    
+    {# If category products display is true #}
+    {% else %}
+        
+        {# Call the view port header #}
+        {% include 'MilesApartPublicBundle:Shop:view_port_header.html.twig' %}
+
+        <div id="product_display_area_wrapper">
+            {# Call the thumbnail controller #}
+            {{ render(controller('MilesApartPublicBundle:Shop:productsdisplayarea',  {'specific_category':category, 'products_per_page':null, 'page': page, 'attributes': attributes}) ) }}
+        </div>
+
+    {% endif %}
+   
+  
+   
+{% endblock %}
+
+{% block pagination_links %}
+    <div id="pagination_area"></div>   
+  
+{% endblock %}
+
+{% block attributes_filter %}
+    {% if level == 3 %}
+        {# Include the attributes filter #}
+        {{ render(controller('MilesApartPublicBundle:Shop:getAttributesOwningProducts',  {'specific_category':category, 'products_per_page':null, 'page': page, 'attributes': attributes}) ) }}
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        var attributes = {{ attributes|json_encode|raw }};
+
+        urlToCall = "{{ path('miles_apart_public_product_display_area', {'specific_category' : category.categoryslug} ) }}";
+
+        window.onload(viewPortOptions(urlToCall));
+
+        $(document).ready(function(){
+
+            //Script to handle the ... creation
+            $(".wrapper").dotdotdot({
+                height      : 60,
+            });
+        
+        });
+    
+</script>
+{% endblock %}

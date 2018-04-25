@@ -1,0 +1,218 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::checkout_page_layout.html.twig' %}
+
+{% block page_title %}
+    Shipping Details
+     
+{% endblock %}
+
+{% block checkout_progress_bar %}
+    {# Create checkout progress #}
+    <div id="progress_bar_container">
+        <div class="row text-center collapse">
+            {# Progress bar #}
+            <div class="large-10 small-10 columns large-offset-1 small-offset-1">
+                <div class="progress success radius">
+                    <span class="meter" style="width: 66%"></span>
+                </div>
+            </div>
+
+            {# Progress stages numbers #}
+            <div id="progress_bar_numbers_wrapper">
+                <div class="large-3 small-3 columns">
+                    <span class="progress_bar_numbers done">1</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers done">2</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers active">3</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">4</span>
+                </div>
+            </div>
+
+            {# Progress stages text#}
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Shopping basket</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Delivery details</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text active">Payment</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text">Complete</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_content %}
+
+    
+  
+    <h2 class="underline">Payment</h2>
+    
+    
+        
+    {# Flashbag messages #}
+    {% for flashMessage in app.session.flashbag.get('payment-error') %}
+                    
+        <div class="alert-box alert">
+            Payment error, please retry - {{ flashMessage }}
+            
+        </div>
+
+    {% endfor %}
+    <form data-abide id="cardForm" action="{{ path('miles_apart_basket_checkout_complete') }}">
+        <div class="row">
+            <div class="small-12 medium-4 medium-push-7 medium-offset-1 columns">
+                <div class="vertical_divider hide-for-small-only"></div>
+                <h4 class="payment_headers">Pay by PayPal</h4>
+                <div id="paypal_button" class="small-12"></div>
+                <p><small>Once you have logged in to your PayPal account, please click the 'Pay Now' button below.</small></p>
+            </div>
+
+            <div class="small-12 medium-7 medium-pull-5 columns">
+                <h4 class="payment_headers">Pay by card</h4>
+                <div class="row">
+                    <div class="small-12 medium-4 columns">
+
+                        <label class="hosted-field--label right inline responsive_form_label" for="card-number">
+                            Card Number 
+                        </label>
+                    </div>
+                    <div class="small-12 medium-8 columns">
+                        <div id="card-number"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 medium-4 columns">
+                        <label class="hosted-field--label right inline responsive_form_label" for="expiration-date">
+                            Expiration Date
+                        </label>
+                    </div>
+                    <div class="small-12 medium-8 columns">
+                        <div id="expiration-date" class="hosted-field"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 medium-4 columns">
+                        <label class="hosted-field--label right inline responsive_form_label" for="cvv">
+                            CVV
+                        </label>
+                    </div>
+                    <div class="small-12 medium-8 columns">
+                        <div id="cvv" class="hosted-field"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 medium-4 columns">
+                        <label class="hosted-field--label right inline responsive_form_label" for="postal-code"> 
+                            Postal Code
+                        </label>
+                    </div>
+                    <div class="small-12 medium-8 columns">
+                        <div id="postal-code" class="hosted-field"></div>
+                    </div>
+            
+                </div>
+            </div>
+
+            
+                
+            <div class="clearfix"></div>
+            <div class="small-12 columns">
+                <footer class="panel__footer">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <button class="pay-button button small small-12">Pay Now</button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </form>
+    
+       
+
+    
+
+    
+    
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    /*
+ * Function to handle Braintree payments 
+ */
+braintree.setup("{{ clientToken }}", "custom", {
+    id: "cardForm",
+    hostedFields: {
+        number: {
+            selector: "#card-number",
+            placeholder: '1111 1111 1111 1111'
+        },
+        cvv: {
+            selector: "#cvv",
+            placeholder: '111'
+        },
+        expirationDate: {
+            selector: "#expiration-date",
+            placeholder: 'MM/YY'
+        },
+        postalCode: {
+            selector: '#postal-code',
+            placeholder: 'XX1 1XX'
+        }
+    },
+    paypal: {
+        container: 'paypal_button',
+        amount: '{{ basket.baskettotalprice }}',
+        currency: 'GBP',
+        locale: 'en_gb',
+        singleUse: false, // Required
+        enableShippingAddress: true,
+        button: {
+          type: 'checkout'
+        }
+                    
+    },
+    
+    onFieldEvent: function (event) {
+        if (event.type === 'focus') {
+            // Handle focus
+            alert(this);
+        } else if (event.type === 'blur') {
+            // Handle blur
+        } else if (event.type === 'fieldStateChange') {
+            // Handle a change in validation or card type
+            console.log(event.isValid); // true|false
+            if (event.card) {
+                console.log(event.card.type);
+                // visa|master-card|american-express|diners-club|discover|jcb|unionpay|maestro
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
+
+{% block right_column %}
+    {% include 'MilesApartBasketBundle:CheckoutComponents:checkout_order_table.html.twig' %}
+{% endblock %}
+

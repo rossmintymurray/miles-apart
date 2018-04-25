@@ -1,0 +1,33 @@
+customer_customer-opt-in:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer_customer-opt-in_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:show" }
+
+customer_customer-opt-in_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:new" }
+
+customer_customer-opt-in_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:create" }
+    requirements: { _method: post }
+
+customer_customer-opt-in_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:edit" }
+
+customer_customer-opt-in_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:update" }
+    requirements: { _method: post|put }
+
+customer_customer-opt-in_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:CustomerOptIn:delete" }
+    requirements: { _method: post|delete }

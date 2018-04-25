@@ -1,0 +1,55 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customerorder.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'postage_band' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.id }} - Postage Band
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.id }} - Postage Band           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Postage Band details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Postage band min weight</th>
+                <td>{{ entity.postagebandminweight }}</td>
+            </tr>
+            <tr>
+                <th>Postage band max weight</th>
+                <td>{{ entity.postagebandmaxweight }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer-order_postage-band') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('customer-order_postage-band_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

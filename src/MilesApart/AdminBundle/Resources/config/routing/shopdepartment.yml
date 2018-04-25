@@ -1,0 +1,33 @@
+category_shop-department:
+    path:     /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:index", page:1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+category_shop-department_show:
+    path:     /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:show" }
+
+category_shop-department_new:
+    path:     /new
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:new" }
+
+category_shop-department_create:
+    path:     /create
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:create" }
+    requirements: { _method: post }
+
+category_shop-department_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:edit" }
+
+category_shop-department_update:
+    path:     /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:update" }
+    requirements: { _method: post|put }
+
+category_shop-department_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ShopDepartment:delete" }
+    requirements: { _method: post|delete }

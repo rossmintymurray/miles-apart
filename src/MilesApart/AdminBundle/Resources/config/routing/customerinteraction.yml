@@ -1,0 +1,33 @@
+customer_customer-interaction:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer_customer-interaction_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:show" }
+
+customer_customer-interaction_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:new" }
+
+customer_customer-interaction_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:create" }
+    requirements: { _method: post }
+
+customer_customer-interaction_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:edit" }
+
+customer_customer-interaction_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:update" }
+    requirements: { _method: post|put }
+
+customer_customer-interaction_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:CustomerInteraction:delete" }
+    requirements: { _method: post|delete }

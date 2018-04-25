@@ -1,0 +1,33 @@
+product_attribute-unit-of-measurement:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_attribute-unit-of-measurement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:show" }
+
+product_attribute-unit-of-measurement_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:new" }
+
+product_attribute-unit-of-measurement_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:create" }
+    requirements: { _method: post }
+
+product_attribute-unit-of-measurement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:edit" }
+
+product_attribute-unit-of-measurement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:update" }
+    requirements: { _method: post|put }
+
+product_attribute-unit-of-measurement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:AttributeUnitOfMeasurement:delete" }
+    requirements: { _method: post|delete }

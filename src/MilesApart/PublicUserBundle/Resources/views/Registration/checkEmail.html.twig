@@ -1,0 +1,12 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Registration
+{% endblock %}
+
+{% block fos_user_content %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+{% endblock fos_user_content %}

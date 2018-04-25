@@ -1,0 +1,58 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'work_week' %}
+
+{# Set the page title #}
+{% block title %}
+    Show Work Week
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    Show Work Week           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View work week details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Work week number</th>
+                <td>{{ entity.workweeknumber }}</td>
+            </tr>
+            <tr>
+                <th>Work week start date</th>
+                <td>{{ entity.workweekstartdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Work week end date</th>
+                <td>{{ entity.workweekenddate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hr_work-week') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('hr_work-week_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

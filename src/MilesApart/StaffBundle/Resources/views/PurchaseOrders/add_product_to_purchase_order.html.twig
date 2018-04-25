@@ -1,0 +1,158 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/add_product_to_purchase_order.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'add_product_to_purchase_order' %}
+
+{% block page_name %}
+	Add product to purchase order
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    <div id="test"></div>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            {{ form_row(form.product_barcode) }}
+            {{ form_row(form.product_supplier_code) }}
+            {{ form_row(form.product_name) }}
+
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+    <div id="found_products_display"></div>
+
+    <div id="add_to_transfer_request">
+        <div id="loadingImage" style="display: none"></div>
+    </div>
+    <div class="border-top"></div>
+    <h3>Outstanding purchase orders</h3>
+    <div id="outstanding_purchase_orders">
+	    {# For each supplier with an outstanding order #}
+	    {% for purchase_order in purchase_orders %}
+		    <div class="row">
+		        <div class="col-md-10 col-xs-9">
+		        	{# Check if supplier exists for the product #}
+
+		            <h4 style="float:left;margin-right:5px;margin-bottom:0px;">
+		            	{% if purchase_order.supplier != NULL %}
+		            		{{ purchase_order.supplier.suppliername }}
+		            	{% else %} 
+		            		Unknown supplier
+		            	{% endif %}
+		            </h4>
+            			<div style="margin-top:6px;" class="xs_clear"><small class="text-muted">Total: <b>{{ purchase_order.getPurchaseOrderCurrentTotalDisplay }}</b> | Difference: <b>£{{ purchase_order.getPurchaseOrderMinimumOrderValueDifference }}</b></small></div>
+            		
+		        </div>
+
+		        <div class="col-md-2 col-xs-3">
+		        	{# Show the totals #}
+		        	
+		        	{# Use JS to Check the min order value #}
+		        	
+		        	<a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="javascript:;" onclick="sendPurchaseOrder({{ purchase_order.getId }})" role="button">
+		                <span class="glyphicon glyphicon-export"></span> <span class="hide_on_xs">Send order</span> 
+		            </a>
+			        
+		        </div>
+	    	</div>
+		    {# Set up the existing products table #}
+		    <table class="table table-striped small existing_products" id="existing_purchase_order_{{ purchase_order.id }}">
+		        <thead>
+		            <tr>
+		            	<th width="10%" class="text-left">Code</th>
+		                <th width="25%" class="text-left">Product name</th>
+		                <th width="10%" class="text-center">Outers Qty</th>
+		                <th width="10%" class="text-center">Inners Qty</th>
+		                <th width="10%" class="text-center">Unit Qty</th>
+		                <th width="10%" class="text-center hide_on_xs">Unit Cost</th>
+		                <th width="10%" class="text-center">Total Cost</th>
+		                <th class="hide_on_xs text-center" width="15%" >Barcode</th>
+		               
+		                
+		                
+		        </thead>
+		        <tbody>
+		            {% for purchase_order_product in purchase_order_products %}
+		            	{% if purchase_order_product.purchaseorder.id == purchase_order.id %}
+
+			                <tr id="product_row_{{ entity.getId }}">
+			                	<td class="text-left">
+			                        {{ purchase_order_product.getProduct.getProductSupplierCode }}
+			                    </td>
+			                    <td class="text-left">
+			                        {{ purchase_order_product.getProduct.getProductName }}
+			                    </td>
+			                    <td class="text-center">
+			                        {{ purchase_order_product.getPurchaseOrderProductOuters }}
+			                    </td>
+			                    <td class="text-center">
+			                        {{ purchase_order_product.getPurchaseOrderProductInners }}
+			                    </td>
+			                    <td class="text-center">
+			                        {{ purchase_order_product.getPurchaseOrderProductQuantity }}
+			                    </td>
+			                    <td class="text-center">
+			                        {{ purchase_order_product.getProduct.getCurrentCostDisplay }}
+			                    </td>
+			                  	
+			                    <td class="hide_on_xs text-center">
+			                        {{ purchase_order_product.getPurchaseOrderProductCostTotalDisplay }}
+			                    </td>
+			                    
+			                     <td class="hide_on_xs text-center">
+			                        {{ purchase_order_product.getProduct.getProductBarcode }}
+			                    </td>
+			                    
+			                    
+			                </tr>
+			            {% endif %}
+		            {% endfor %}
+		        </tbody>
+		    </table>
+		{% endfor %}
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+     
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_addproducttopurchaseorder_product_barcode').val(bar);
+
+            //Submit the form
+            processAddProductToPurchaseOrderAdd();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#milesapart_staffbundle_producttransferrequest_product_barcode').focus();
+        }
+    </script>
+{% endblock %}

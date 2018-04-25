@@ -1,0 +1,175 @@
+/*
+Styles for different price types
+*/
+
+
+  @page {
+    size: 210mm 297mm; /* landscape */
+    /* you can also specify margins here: */
+    margin: 13mm 0mm 10mm 3mm;
+  }
+
+
+
+body  
+{ 
+    /* this affects the margin on the content before sending to printer */ 
+    margin-top: 0mm;
+    margin-left:0mm;  
+} 
+
+
+div {
+      page-break-inside: avoid;
+    }
+
+.margin-right div{
+margin-right:3mm;
+
+}
+/* Med shelf front card */
+.shelf_front_medium_main_wraper {
+	position:relative;
+	background-repeat: no-repeat;
+	width:66mm;
+	height:38mm;
+	
+	float:left;
+
+}
+
+.shelf_front_medium_logo {
+	position:absolute;
+	top:4mm;
+	right:2mm;
+	width:8mm;
+
+}
+
+.shelf_front_medium_supplier {
+	position:absolute;
+	font-size:7pt;
+	text-align:left;
+	top:5mm;
+	color:#959494;
+	font-weight:300;
+	letter-spacing:0mm;
+	margin:0mm 2mm 0mm 2mm;
+}
+
+.shelf_front_medium_product_name {
+	position:absolute;
+	font-size:13.5pt;
+	height:19mm;
+	overflow:hidden;
+	text-align:left;
+	top:10mm;
+	color:#000000;
+	font-weight:500;
+	letter-spacing:-0.2mm;
+	margin:0mm 2mm 0mm 2mm;
+	width:30mm;
+}
+
+.shelf_front_medium_price {
+
+	position:absolute;
+	top:-1mm;
+	left:30mm;
+	font-size:38pt;
+	width:38mm;
+	text-align:center;
+	color:#000000;
+	font-weight:500;
+  	letter-spacing: -0.23mm;
+}
+
+h4.shelf_front_medium_price_as_marked {
+	position:absolute;
+	top:3mm;
+	left:30mm;
+	font-size:18pt;
+	width:38mm;
+	text-align:center;
+	color:#000000;
+	font-weight:400;
+  	letter-spacing: -0.23mm;
+}
+
+.shelf_front_medium_price_subtitle {
+	position:absolute;
+	z-index:9999;
+	font-size:6pt;
+	width:40%;
+	text-align:right;
+	top:22mm;
+	right:2mm;
+	color:#959494;
+	font-weight:500;
+	letter-spacing:0mm;
+	background-color:white;
+}
+
+.shelf_front_medium_barcode {
+	position:absolute;
+	z-index:9999;
+	font-size:4pt;
+	width:38mm;
+	height:5mm;
+	text-align:left;
+	top:30mm;
+	left:-5mm;
+	color:#525252;
+	font-weight:500;
+	letter-spacing:0mm;
+	float:left;
+	margin:0mm 5mm 0mm 5mm;
+	overflow:hidden;
+}
+
+.shelf_front_medium_barcode img {
+	width:36mm;
+	height:5mm;
+	position:absolute;
+	top:0mm;
+
+
+}
+
+
+.shelf_front_medium_supplier_code {
+	position:absolute;
+	z-index:9999;
+	font-size:5.5pt;
+	width:100%;
+	text-align:right;
+	bottom:5mm;
+	color:#525252;
+	font-weight:500;
+	letter-spacing:0mm;
+	margin:0mm 10mm 0mm 10mm;
+	width:70mm;
+	right:-7mm;
+
+	
+
+}
+
+.shelf_front_medium_header_shop {
+
+	position:absolute;
+	right:8mm;
+	top:22mm;
+	
+	z-index:9999;
+	color:#525252;
+	font-weight:500;
+
+}
+.shelf_front_medium_footer_text {
+
+	position:absolute;
+	right:18mm;
+	bottom:4mm;
+	font-weight:300;
+}

@@ -1,0 +1,33 @@
+finance_expenses-company:
+    path:     /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_expenses-company_show:
+    path:     /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:show" }
+
+finance_expenses-company_new:
+    path:     /new
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:new" }
+
+finance_expenses-company_create:
+    path:     /create
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:create" }
+    requirements: { _method: post }
+
+finance_expenses-company_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:edit" }
+
+finance_expenses-company_update:
+    path:     /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:update" }
+    requirements: { _method: post|put }
+
+finance_expenses-company_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ExpensesCompany:delete" }
+    requirements: { _method: post|delete }

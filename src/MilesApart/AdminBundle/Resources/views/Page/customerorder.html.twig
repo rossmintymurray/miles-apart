@@ -1,0 +1,118 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/customers.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'customer_orders' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'customer_orders_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Customer Orders
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Customer Orders			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing customer orders
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'customer_orders_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_customerorder') }}">Customer orders overview</a>
+    </li>
+
+     {# Create the customer order nav #}
+     <li class="nav-header">Customer Order</li>
+     <li {% if current_page == 'customer_order' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_customer-order') }}">View customer orders</a>
+    </li>
+    <li {% if current_page == 'new_customer_order' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_customer-order_new') }}">New customer order</a>
+    </li>
+
+    {# Create the customer order product nav #}
+     <li class="nav-header">Customer Order Product</li>
+     <li {% if current_page == 'customer_order_product' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_customer-order-product') }}">View customer order products</a>
+    </li>
+    <li {% if current_page == 'new_customer_order_product' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_customer-order-product_new') }}">New customer order product</a>
+    </li>
+
+    {# Create the customer order state nav #}
+     <li class="nav-header">Customer Order State</li>
+     <li {% if current_page == 'customer_order_state' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_customer-order-state') }}">View customer order states</a>
+    </li>
+    <li {% if current_page == 'new_customer_order_state' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_customer-order-state_new') }}">New customer order state</a>
+    </li>
+
+    {# Create the packing box size nav #}
+     <li class="nav-header">Packing Box Size</li>
+     <li {% if current_page == 'packaging_box_size' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_packaging-box-size') }}">View packing box sizes</a>
+    </li>
+    <li {% if current_page == 'new_packaging_box_size' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_packaging-box-size_new') }}">New packing box size</a>
+    </li>
+
+    {# Create the postage band nav #}
+     <li class="nav-header">Postage Band</li>
+     <li {% if current_page == 'postage_band' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_postage-band') }}">View postage bands</a>
+    </li>
+    <li {% if current_page == 'new_postage_band' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_postage-band_new') }}">New postage band</a>
+    </li>
+
+    {# Create the postage band dispatch logistics nav #}
+     <li class="nav-header">Postage Band Dispatch Logistics</li>
+     <li {% if current_page == 'postage_band_dispatch_logistics' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_postage-band-dispatch-logistics') }}">View postage band dispatch logistics</a>
+    </li>
+    <li {% if current_page == 'new_postage_band_dispatch_logistics' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_postage-band-dispatch-logistics_new') }}">New postage band dispatch logistics</a>
+    </li>
+
+    {# Create the returned product nav #}
+     <li class="nav-header">Returned Product</li>
+     <li {% if current_page == 'returned_product' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_returned-product') }}">View returned products</a>
+    </li>
+    <li {% if current_page == 'new_returned_product' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_returned-product_new') }}">New returned product</a>
+    </li>
+
+    {# Create the returned reason nav #}
+     <li class="nav-header">Returned Reason</li>
+     <li {% if current_page == 'returned_reason' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_returned-reason') }}">View returned reasons</a>
+    </li>
+    <li {% if current_page == 'new_returned_reason' %} class="active" {% endif %}>
+        <a href="{{ path('customer-order_returned-reason_new') }}">New returned reason</a>
+    </li>
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

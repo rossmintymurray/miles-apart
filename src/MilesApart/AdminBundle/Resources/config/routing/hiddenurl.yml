@@ -1,0 +1,33 @@
+campaign_hidden-url:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+campaign_hidden-url_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:show" }
+
+campaign_hidden-url_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:new" }
+
+campaign_hidden-url_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:create" }
+    requirements: { _method: post }
+
+campaign_hidden-url_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:edit" }
+
+campaign_hidden-url_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:update" }
+    requirements: { _method: post|put }
+
+campaign_hidden-url_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:HiddenURL:delete" }
+    requirements: { _method: post|delete }

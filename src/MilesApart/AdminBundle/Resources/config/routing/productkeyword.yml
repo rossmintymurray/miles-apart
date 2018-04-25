@@ -1,0 +1,33 @@
+product_product-keyword:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_product-keyword_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:show" }
+
+product_product-keyword_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:new" }
+
+product_product-keyword_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:create" }
+    requirements: { _method: post }
+
+product_product-keyword_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:edit" }
+
+product_product-keyword_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:update" }
+    requirements: { _method: post|put }
+
+product_product-keyword_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ProductKeyword:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,33 @@
+business_stock-location:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+business_stock-location_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:show" }
+
+business_stock-location_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:new" }
+
+business_stock-location_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:create" }
+    requirements: { _method: post }
+
+business_stock-location_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:edit" }
+
+business_stock-location_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:update" }
+    requirements: { _method: post|put }
+
+business_stock-location_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:StockLocation:delete" }
+    requirements: { _method: post|delete }

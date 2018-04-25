@@ -1,0 +1,110 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'employee' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.employeefirstname }} {{ entity.employeesurname }} - Employee
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.employeefirstname }} {{ entity.employeesurname }} - Employee          
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View employee details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Employee first name</th>
+                <td>{{ entity.employeefirstname }}</td>
+            </tr>
+            <tr>
+                <th>Employee surname</th>
+                <td>{{ entity.employeesurname }}</td>
+            </tr>
+            <tr>
+                <th>Employee address 1</th>
+                <td>{{ entity.employeeaddress1 }}</td>
+            </tr>
+            <tr>
+                <th>Employee address 2</th>
+                <td>{{ entity.employeeaddress2 }}</td>
+            </tr>
+            <tr>
+                <th>Employee town</th>
+                <td>{{ entity.employeetown }}</td>
+            </tr>
+            <tr>
+                <th>Employee county</th>
+                <td>{{ entity.employeecounty }}</td>
+            </tr>
+            <tr>
+                <th>Employee postcode</th>
+                <td>{{ entity.employeepostcode }}</td>
+            </tr>
+            <tr>
+                <th>Employee landline phone</th>
+                <td>{{ entity.employeelandlinephone }}</td>
+            </tr>
+            <tr>
+                <th>Employee mobile phone</th>
+                <td>{{ entity.employeemobilephone }}</td>
+            </tr>
+            <tr>
+                <th>Employee email</th>
+                <td>{{ entity.employeeemail }}</td>
+            </tr>
+            <tr>
+                <th>Employee national insurance number</th>
+                <td>{{ entity.employeenationalinsurancenumber }}</td>
+            </tr>
+            <tr>
+                <th>Employee contracted weekly hours</th>
+                <td>{{ entity.employeecontractedweeklyhours }}</td>
+            </tr>
+            <tr>
+                <th>Employee date of birth</th>
+                <td>{{ entity.employeedateofbirth|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Employee starting date</th>
+                <td>{{ entity.employeestartingdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Employee leaving date</th>
+                <td>{{ entity.employeeleavingdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Employee tax code</th>
+                <td>{{ entity.employeetaxcode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hr_employee') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('hr_employee_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

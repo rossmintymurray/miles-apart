@@ -1,0 +1,435 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::report_print_layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'print_daily_takes' %}
+
+{# Set the page name #}
+{% block report_page_name %}
+	Daily Take Data 
+{% endblock %}
+
+{% block report_date_range %}
+	<h3>{{ start_date|date('D jS F Y') }} - {{ end_date|date('D jS F Y') }}</h3>
+{% endblock %}
+{# Set the page introduction #}
+{% block page_introduction %}
+	Complete daily take data including wages &amp; expenses.
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block print_page_data %}
+	{# Create columns for each shop #}
+	<section class="section">
+		<div class="row">
+	    	<div class="col-md-12">
+				<h2 class="section_header">Premises Takes</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% for business_prem in business_premises %}
+				
+				<div class="col-md-6">
+					<div class="well">
+						<div class="row">
+							<div class="col-md-8">
+								<h2 class="text-left">{{ business_prem.getBusinessPremisesName }}</h2>
+							</div>
+							<div class="col-md-4">
+								<button href="#bp_{{ business_prem.id }}_contents" class="btn btn-default col-md-12" data-toggle="collapse">Show by day</button>
+		    				</div>
+		    			</div>
+		    			<div id="bp_{{ business_prem.id }}_contents" class="collapse">
+							<table class="table table-striped small"> 
+							    <thead>
+							        <tr>
+							            <th width="100" class="date_column">Take</th>
+							            <th class="text-center money_column">Z Cash</th>
+							            <th class="text-center money_column">Z Card</th>
+							            <th class="text-center money_column">Total</th>
+							            <th class="text-center money_column">Renum Cash</th>
+							            <th class="text-center money_column">Renum Card</th>
+							            <th class="text-center money_column">Renum Total</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        
+							        {% for take in business_prem.getDailyTakeBusinessPremises %}
+							    		
+							            <tr>
+							                
+							                <td><b>{{ take.getDailyTake.getDailyTakeDate|date('D jS M') }}</b></td>
+							                <td class="text-center">{{ take.getZReadingCash|number_format(2, '.', ',') }}</td>
+							                <td class="text-center">{{ take.getZReadingCard|number_format(2, '.', ',') }}</td>
+							                <td class="text-center"><b>{{ take.getTotalZ|number_format(2, '.', ',') }}</b></td>
+							                <td class="text-center">{{ take.getRenumerationCash|number_format(2, '.', ',') }}</td>
+											<td class="text-center">{{ take.getRenumerationCard|number_format(2, '.', ',') }}</td>
+							                <td class="text-center"><b>{{ take.getTotalRenumeration|number_format(2, '.', ',') }}</b></td>
+							            </tr>
+
+							        {% endfor %}
+							        <tr>
+							                
+						                <td><b>{{ business_prem.getDailyTakeBusinessPremises|length }} Days</b></td>
+						                <td class="text-center">{{ business_prem.getPeriodZReadingCash|number_format(2, '.', ',') }}</td>
+						                <td class="text-center">{{ business_prem.getPeriodZReadingCard|number_format(2, '.', ',') }}</td>
+						                <td class="text-center"><b>{{ business_prem.getPeriodTotalZ|number_format(2, '.', ',') }}</b></td>
+						                <td class="text-center">{{ business_prem.getPeriodRenumerationCash|number_format(2, '.', ',') }}</td>
+						                <td class="text-center">{{ business_prem.getPeriodRenumerationCard|number_format(2, '.', ',') }}</td>
+						                <td class="text-center"><b>{{ business_prem.getPeriodTotalRenumeration|number_format(2, '.', ',') }}</b></td>
+						            </tr>
+							        
+							    </tbody>
+							</table>
+						</div>
+					
+					
+						<div class="row">
+							<div class="col-md-12">
+								<h4>Take</h4>
+							</div>
+							<div class="col-md-4">
+								<h5 class="text-muted">Total</span>
+								<h3>{{ business_prem.getPeriodTotalZ|number_format(2, '.', ',') }}</h3>
+							</div>
+							<div class="col-md-4">
+								<h5 class="text-muted">Cash</h5>
+								<h3>{{ business_prem.getPeriodZReadingCash|number_format(2, '.', ',') }}</h3>
+							</div>
+							<div class="col-md-4">
+								<h5 class="text-muted">Card</h5>
+								<h3>{{ business_prem.getPeriodZReadingCard|number_format(2, '.', ',') }}</h3>
+							</div>
+						
+							<div class="col-md-12">
+								<h4>Renumeration</h4>
+							</div>
+							<div class="col-md-4">
+								<h5 class="text-muted">Total</h5>
+								<h3>{{ business_prem.getPeriodTotalRenumeration|number_format(2, '.', ',') }}</h3>
+							</div>
+							<div class="col-md-4">
+								<h5 class="text-muted">Cash</h5>
+								<h3>{{ business_prem.getPeriodRenumerationCash|number_format(2, '.', ',') }}</h3>
+							</div>
+							<div class="col-md-4">
+								<h5 class="text-muted">Card</h5>
+								<h3>{{ business_prem.getPeriodRenumerationCard|number_format(2, '.', ',') }}</h3>
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+
+				</div>
+			
+			{% endfor %}
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well">
+					<div class="row">
+						<div class="col-md-4">
+							<h4 class="text-muted">Total</h4>
+							<h1>&pound;{{ business.getPeriodTotalZ|number_format(2, '.', ',') }}</h1>
+						</div>
+
+						<div class="col-md-4">
+							<h4 class="text-muted">Cash</h4>
+							<h1>&pound;{{ business.getPeriodZReadingCash|number_format(2, '.', ',') }}</h1>
+						</div>
+						<div class="col-md-4">
+							<h4 class="text-muted">Card</h4>
+							<h1>&pound;{{ business.getPeriodZReadingCard|number_format(2, '.', ',') }}</h1>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+	{# Wages section #}
+	<section class="section">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="section_header">Wages</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% set wage_bill = 0 %}
+			{% for employee in employees %}
+				<div class="col-md-4">
+					<div class="well">
+						<div class="row">
+							<div class="col-md-6">
+								<h3 class="text-left">{{ employee.getEmployeeFullName }}</h3>
+							</div>
+							<div class="col-md-6">
+								<button href="#ep_{{ employee.id }}_contents" class="btn btn-default btn-sm col-md-12" data-toggle="collapse">Show payments</button>
+		    				</div>
+		    			</div>
+		    			<div id="ep_{{ employee.id }}_contents" class="collapse">
+							<table class="table table-striped small"> 
+							    <thead>
+							        <tr>
+							        	<th>ID</th>
+							            <th>Date</th>
+							            <th class="text-center">Hours</th>
+							            <th class="text-center">Pay</th>
+							            
+							            
+							        </tr>
+							    </thead>
+							    <tbody>
+							        
+							        {% for employee_payment in employee.getEmployeePayment %}
+							    		
+							            <tr>
+							                <td>{{ employee_payment.getid }}</td>
+							                <td><b>{{ employee_payment.getDailyTakeBusinessPremises.getDailyTake.getDailyTakeDate|date('D jS M') }}</b></td>
+							                <td class="text-center">
+							                	{{ employee_payment.getEmployeePaymentTotalHoursDisplay }} {% if employee_payment.getIsEmployeePaymentHoliday == true %}*{% endif %}
+							                </td>
+							                <td class="text-center">{{ employee_payment.getEmployeePaymentTotal|number_format(2, '.', ',') }}</td>
+							                
+							                
+							            </tr>
+							            {# Add to the wage total #}
+										{% set wage_bill = wage_bill + employee_payment.getEmployeePaymentTotal  %}
+							        {% endfor %}
+						
+							    </tbody>
+							</table>
+						</div>
+
+						
+						<div class="row">
+							{# Display the standard rate hours #}
+							<div class="col-md-12">
+								<h4>Standard rate</h4>
+							</div>
+							<div class="col-md-6">
+
+								<h5 class="text-muted" style="padding-bottom:10px">Worked</h5>
+								<h4>{{ employee.getPeriodStandardRateHours }} <span class="small text-muted">hours</span></h4>
+								<h3>&pound;{{ employee.getPeriodWagePayment|number_format(2, '.', ',') }}</h3>
+							</div>
+							<div class="col-md-6">
+								{% if employee.getPeriodStandardRateHolidayHours > 0 %}
+									<h5 class="text-muted" style="padding-bottom:10px">Holiday</h5>
+									<h4>{{ employee.getPeriodStandardRateHolidayHours }} <span class="small text-muted">hours</span></h4>
+									<h3>&pound;{{ employee.getPeriodHolidayPayment|number_format(2, '.', ',') }}</h3>
+								{% else %}
+
+									<h5 class="text-muted">No Holiday</h5>
+								{% endif %}
+
+							</div>
+							<div class="clearfix"></div>
+							{# Display the alternate rate hours #}
+							{% if employee.getPeriodAlternateRateHours > 0 %}
+								<div class="col-md-12">
+									<h4>Alternate rate</h4>
+								</div>
+								<div class="col-md-6">
+
+							
+								
+									<h5 class="text-muted" style="padding-bottom:10px">Worked</h5>
+									<h4>{{ employee.getPeriodAlternateRateHours }} <span class="small text-muted">hours</span></h4>
+									<h3>&pound;{{ employee.getPeriodAlternateRatePayment|number_format(2, '.', ',') }}</h3>
+								
+								</div>
+								<div class="col-md-6">
+
+									{% if employee.getPeriodAlternateRateHolidayHours > 0 %}
+										<h5 class="text-muted" style="padding-bottom:10px">Holiday</h5>
+										<h4>{{ employee.getPeriodAlternateRateHolidayHours }} <span class="small text-muted">hours</span></h4>
+										<h3>&pound;{{ employee.getPeriodAlternateRateHolidayPayment|number_format(2, '.', ',') }}</h3>
+									{% endif %}
+								</div>
+							{% endif %}
+							<div class="clearfix"></div>
+
+							{% if employee.getPeriodStatutoryPayment > 0 %}
+								<div class="col-md-12">
+									<h4>Statutory Payments</h4>
+								</div>
+								<div class="col-md-12">
+
+							
+								
+									{% for statutory_payment in employee.getEmployeeStatutoryPayment %}
+										{% if statutory_payment.getEmployeeStatutoryPaymentWeekEndDate|date('Y-m-d') > start_date|date('Y-m-d') and statutory_payment.getEmployeeStatutoryPaymentWeekEndDate|date('Y-m-d') < end_date|date('Y-m-d') %}
+					 
+											<h3>&pound;{{ statutory_payment.getEmployeeStatutoryPaymentValue|number_format(2, '.', ',') }}</h3>
+										{% endif %}
+									{% endfor %}
+								
+								</div>
+							{% endif %}
+
+							<div class="col-md-12">
+								<div class="well">
+									<h4 class="text-muted">Grand Total</h4>
+									<div class="row">
+										<div class="col-md-6">
+											<h4>{{ employee.getPeriodStandardRateHours + employee.getPeriodStandardRateHolidayHours + employee.getPeriodAlternateRateHours + employee.getPeriodAlternateRateHolidayHours}} <span class="small text-muted">hours</span></h4>
+										</div>
+										<div class="col-md-6">
+											<h3>&pound;{{ employee.getPeriodWagePayment + employee.getPeriodHolidayPayment }}</h3>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
+				{% if loop.index is divisible by(3) %}
+					<div class="clearfix"></div>
+
+					
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well">
+					<h5 class="text-muted">Total Wage Bill</h5>
+					<div class="row">
+						<div class="col-md-4">
+							<h2>&pound;{{ wage_bill|number_format(2, '.', ',') }}</h2>
+						</div>
+						<div class="col-md-4">
+							<h2>{{ (wage_bill / business.getPeriodTotalZ * 100)|number_format(2, '.', ',') }} % of total take</h2>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+    </section>
+    <div class="clearfix"></div>
+    
+
+
+<section class="section">
+    	<div class="row">
+	    	<div class="col-md-12">
+				<h2 class="section_header">Petty Cash</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% for business_prem in business_premises %}
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-8">
+							<h4 class="text-left">{{ business_prem.getBusinessPremisesName }}</h4>
+						</div>
+						<div class="col-md-4">
+							<button href="#pc_{{ business_prem.id }}_contents" class="btn btn-default btn-sm col-md-12" data-toggle="collapse">Show all</button>
+	    				</div>
+	    			</div>
+		    			
+		    		<div id="pc_{{ business_prem.id }}_contents" class="collapse">
+
+
+					
+						<table class="table table-striped small"> 
+						    <thead>
+						        <tr>
+						            <th>Date</th>
+						            <th>Type</th>
+						            <th class="text-center">Amount</th>
+						            
+						        </tr>
+						    </thead>
+						    <tbody>
+						        
+						        {% for take in business_prem.getDailyTakeBusinessPremises %}
+
+						    		{% for petty_cash in take.getDailyTakeBusinessPremisesPettyCash %}
+							            <tr>
+							                
+							                <td><b>{{ take.getDailyTake.getDailyTakeDate|date('D jS M') }}</b></td>
+							                
+							                
+							                <td><b>{{ petty_cash.getExpensesType.getExpensesTypeName }}</b></td>
+							                <td class="text-center">{{ petty_cash.getPettyCashValue|number_format(2, '.', ',') }}</td>
+							            </tr>
+
+						        	{% endfor %}
+						        {% endfor %}
+						        <tr>
+							                
+					                <td><b></b></td>
+					                
+					                
+					                <td class="text-center"><b>Total</b></td>
+					                <td class="text-center"><b>{{ business_prem.getPeriodTotalPettyCash|number_format(2, '.', ',') }}</b></td>
+					            </tr>
+
+						    </tbody>
+						</table>
+					</div>
+					
+					<div class="well">
+						<div class="row">
+							<div class="col-md-4">
+								<h5 class="text-muted">Total</span>
+								<h3>{{ business_prem.getPeriodTotalPettyCash|number_format(2, '.', ',') }}</h3>
+							</div>
+							
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+				</div>
+			{% endfor %}
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well">
+					<div class="row">
+						<div class="col-md-2">
+							<h4 class="text-muted">Total Petty Cash</h4>
+							<h1>&pound;{{ business.getPeriodTotalPettyCash|number_format(2, '.', ',') }}</h1>
+						</div>
+						<div class="col-md-10">
+							{% for expenses_type in expenses_types %}
+								<div class="col-md-3">
+									<h4 class="text-muted">
+										{{ expenses_type.getExpensesTypeName }}
+									</h4>
+									<h2>&pound;{{ expenses_type.getPeriodTotalPettyCashType|number_format(2, '.', ',') }}</h2>
+								</div>
+								{% if loop.index is divisible by(4) %}
+									<div class="clearfix"></div>
+
+									
+								{% endif %}
+							{% endfor %}
+						</div>
+
+						
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+{% endblock %}

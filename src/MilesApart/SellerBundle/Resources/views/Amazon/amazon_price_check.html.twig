@@ -1,0 +1,50 @@
+{# src/MilesApart/StaffBundle/Resources/views/Sellers/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'sellers' %}
+{% set current_page = 'amazon_price_check' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+   	<h1>Amazon Price Check</h1>
+	{% if product is defined %}
+		{{ product|ladybug_dump }}
+	{% endif %}
+
+	{% if price is defined %}
+		<h4>Lowest Price - £{{price}}</h4>
+		<h4>Shipping - £{{ shipping }}</h4>
+		<h4>Lowest Total Price - £{{ total }}</h4>
+	{% endif %}
+
+  	<div class="row">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <fieldset>
+                    <legend class="text-muted">Product</legend>
+                    {{ form_row(form.product_barcode) }}
+                </fieldset>
+                {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_sellerbundle_amazonpricecheck_product_barcode').val(bar);
+
+            //Submit the form
+            $("form[name='milesapart_sellerbundle_amazonpricecheck']").submit();
+
+            return true;
+        }
+    </script>
+{% endblock %}

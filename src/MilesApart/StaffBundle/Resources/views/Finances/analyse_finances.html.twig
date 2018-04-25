@@ -1,0 +1,254 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/view_daily_takes.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'analyse_finances' %}
+
+{% block page_name %}
+	Analyse Finances
+{% endblock %}
+
+{% block header_right_content %}
+	
+	<div id="date-range">
+            <div id="date-range-field" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+              <span></span>
+              <a href="#">&#9660;</a>
+            </div>
+            <button class="btn btn-xs btn-primary col-md-12" onclick="applyDateSelection()">Apply</button>
+	<div id="datepicker-calendar"></div>
+	<!--<div class="col-md-5">
+    	<div class="form-group">
+    		<label class="sr-only" for="startdatepicker">Start date</label>
+    		<input type="text" class="form-control col-md-12" id="startdatepicker" placeholder="Start date">
+    	</div>
+    </div>
+    <div class="col-md-2">
+    	<span class="glyphicon glyphicon-minus" aria-hidden="true">
+    </div>
+
+	<div class="col-md-5">
+		<div class="form-group">
+			<label class="sr-only" for="enddatepicker">End date</label>
+			<input type="text" class="form-control col-md-12" id="enddatepicker" placeholder="End date">
+		</div>
+	</div>
+
+	<div id="compare_date_fields">
+		<div class="col-md-5">
+	    	<div class="form-group">
+	    		<label class="sr-only" for="comparestartdatepicker">Start date</label>
+	    		<input type="text" class="form-control col-md-12" id="comparestartdatepicker" placeholder="Compare start">
+	    	</div>
+	    </div>
+	    <div class="col-md-2">
+	    	<span class="glyphicon glyphicon-minus" aria-hidden="true">
+	    </div>
+
+		<div class="col-md-5">
+			<div class="form-group">
+				<label class="sr-only" for="compareenddatepicker">End date</label>
+				<input type="text" class="form-control col-md-12" id="compareenddatepicker" placeholder="Compare end">
+			</div>
+		</div>
+	</div>
+		
+	<div class="col-md-12">
+		<div class="checkbox">
+		    <label>
+		      Compare <input type="checkbox" class="form-control" name="compare" id="compare" onchange="toggleCompareDatePicker()"/> 
+		    </label>
+  		</div>
+	</div>
+	<div class="col-md-offset-11 col-md-1">
+		
+	</div>-->
+	
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	{# Set up handling for date range picker #}
+	<script>
+		$(function() {
+			$( "#startdatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	
+		$(function() {
+			$( "#enddatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+
+		$(function() {
+			$( "#comparestartdatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	
+		$(function() {
+			$( "#compareenddatepicker" ).datepicker({
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	</script>
+	
+<div id="ajax_content">
+	<div class="row">
+	<div class="col-md-10">
+		{# Create tabs for navigation of sections #}
+		
+		<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" class="active"><a href="#take" role="tab" data-toggle="tab">Take</a></li>
+		  
+		</ul>
+	</div>
+	<div class="col-md-2">
+		<a href="{{ path('staff-finances_print-daily-takes') }}" target="_blank" class="btn btn-primary col-md-12">Print Report</a>
+	</div>
+</div>
+	<div id="daily_takes_ajax_content">{# Create the tab panes to be hidden and shown #}
+		<div class="tab-content">
+		  	<div role="tabpanel" class="tab-pane active" id="take">
+			  	<h3><span class="text-muted">Take for period</span> {{ start_date|date("jS \\o\\f M Y")}} <span class="text-muted">-</span> {{ end_date|date("jS \\o\\f M Y")}}</h3>
+
+			    <div id="graph_container"></div>
+			    <script type="text/javascript">
+			    	{{ chart(chart) }}
+				</script>
+
+				
+				<div id="daily_take_business_premises">
+
+
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							
+							<div class="col-md-12">
+								<div id="twenty_six_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_two) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							
+							<div class="col-md-12">
+								<div id="twenty_eight_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_three) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					<div class="view_business_premises">
+						<h4>
+						<div class="row">
+							
+							<div class="col-md-12">
+								<div id="westbury_graph_container"></div>
+								<script type="text/javascript">
+							    	{{ chart(chart_four) }}
+								</script>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			{% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+function applyDateSelection() {
+	dates = $('#datepicker-calendar').DatePickerGetDate();
+	 submitAnalyseFinancesDatePickerSelections(dates[0]);
+	
+	
+}
+	$( window ).load(function() {
+   
+    	
+		var from = new Date("{{ start_date|date('Y-m-d')}}");
+        var to = new Date("{{ end_date|date('Y-m-d')}}");
+        
+        $('#datepicker-calendar').DatePicker({
+          inline: true,
+          date: [from, to],
+          calendars: 3,
+          mode: 'range',
+          current: new Date(to.getFullYear(), to.getMonth() - 1, 1),
+          onChange: function(dates,el) {
+            // update the range display
+            $('#date-range-field span').text(dates[0].getDate()+' '+dates[0].getMonthName(true)+', '+dates[0].getFullYear()+' - '+
+                                        dates[1].getDate()+' '+dates[1].getMonthName(true)+', '+dates[1].getFullYear());
+            //setTimeout(submitDatePickerSelections(dates), 20000);
+          }
+        });
+
+        $('#datepicker-calendar').hide();
+        
+        // initialize the special date dropdown field
+        $('#date-range-field span').text(from.getDate()+' '+from.getMonthName(true)+', '+from.getFullYear()+' - '+
+                                        to.getDate()+' '+to.getMonthName(true)+', '+to.getFullYear());
+        
+        // bind a click handler to the date display field, which when clicked
+        // toggles the date picker calendar, flips the up/down indicator arrow,
+        // and keeps the borders looking pretty
+        $('#date-range-field').bind('click', function(){
+        	
+          $('#datepicker-calendar').toggle();
+
+          
+          if($('#date-range-field a').text().charCodeAt(0) == 9660) {
+            // switch to up-arrow
+            $('#date-range-field a').html('&#9650;');
+            $('#date-range-field').css({borderBottomLeftRadius:0, borderBottomRightRadius:0});
+            $('#date-range-field a').css({borderBottomRightRadius:0});
+          } else {
+            // switch to down-arrow
+            $('#date-range-field a').html('&#9660;');
+            $('#date-range-field').css({borderBottomLeftRadius:5, borderBottomRightRadius:5});
+            $('#date-range-field a').css({borderBottomRightRadius:5});
+          }
+          return false;
+        });
+        
+        // global click handler to hide the widget calendar when it's open, and
+        // some other part of the document is clicked.  Note that this works best
+        // defined out here rather than built in to the datepicker core because this
+        // particular example is actually an 'inline' datepicker which is displayed
+        // by an external event, unlike a non-inline datepicker which is automatically
+        // displayed/hidden by clicks within/without the datepicker element and datepicker respectively
+        $('html').click(function() {
+          if($('#datepicker-calendar').is(":visible")) {
+            $('#datepicker-calendar').hide();
+            $('#date-range-field a').html('&#9660;');
+            $('#date-range-field').css({borderBottomLeftRadius:5, borderBottomRightRadius:5});
+            $('#date-range-field a').css({borderBottomRightRadius:5});
+          }
+        });
+        
+        // stop the click propagation when clicking on the calendar element
+        // so that we don't close it
+        $('#datepicker-calendar').click(function(event){
+          event.stopPropagation();
+        });
+      });
+      /* End special page widget */
+    </script>
+
+{% endblock %}

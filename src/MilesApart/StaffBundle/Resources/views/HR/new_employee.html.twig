@@ -1,0 +1,94 @@
+{# src/MilesApart/StaffBundle/Resources/views/HR/all_employees.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'hr' %}
+{% set current_page = 'new_employee' %}
+
+{% block page_name %}
+    New employee
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+       <fieldset>
+            <legend class="text-muted">Name</legend>
+                {{ form_row(form.employee_first_name) }}
+                {{ form_row(form.employee_surname) }}
+              {{ form_row(form.employee_date_of_birth)  }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Contact</legend>
+            {{ form_row(form.employee_mobile_phone) }}
+            {{ form_row(form.employee_landline_phone) }}
+            {{ form_row(form.employee_email) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Address</legend>
+            {{ form_row(form.employee_address_1) }}
+            {{ form_row(form.employee_address_2) }}
+            {{ form_row(form.employee_town) }}
+            {{ form_row(form.employee_county) }}
+            {{ form_row(form.employee_postcode) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Tax</legend>
+            {{ form_row(form.employee_national_insurance_number) }}
+            {{ form_row(form.employee_tax_code) }}
+            {{ form_row(form.employee_starting_date)  }}
+            {{ form_row(form.employee_leaving_date)  }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Hours</legend>
+
+            <div id="hours" data-prototype="{{ macros.widget_prototype(form.employee_contracted_hours, 'Remove contracted hours')|escape }}">
+                {% for widget in form.employee_contracted_hours.children %}
+                    {{ macros.widget_prototype(widget, 'Remove contracted hours') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="hours">Add contracted hours</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Job Role</legend>
+
+            <div id="job_roles" data-prototype="{{ macros.widget_prototype(form.employee_job_role_employee, 'Remove job role')|escape }}">
+                {% for widget in form.employee_job_role_employee.children %}
+                    {{ macros.widget_prototype(widget, 'Remove job role') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="job_roles">Add job role</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+{% endblock %}

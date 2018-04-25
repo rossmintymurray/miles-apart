@@ -1,0 +1,61 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customer.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_customer_address' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Customer Address
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Customer Address	
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new customer address to the system
+{% endblock %}
+
+{% block page_content -%}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Customer Address</legend>
+            {{ form_row(form.customer_address_name) }}
+            {{ form_row(form.customer_address_line_1) }}
+            {{ form_row(form.customer_address_line_2) }}
+            {{ form_row(form.customer_address_town) }}
+            {{ form_row(form.customer_address_county) }}
+            {{ form_row(form.customer_address_postcode) }}
+          </fieldset>
+          <fieldset>
+            <legend class="text-muted">Address Details</legend>
+            {{ form_row(form.customer_address_notes) }}
+            {{ form_row(form.customer_address_is_billing) }}
+            {{ form_row(form.customer) }}
+          </fieldset>
+        {{ form_rest(form) }}
+    </form>
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer_customer-address') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

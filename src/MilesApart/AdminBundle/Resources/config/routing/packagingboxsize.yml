@@ -1,0 +1,33 @@
+customer-order_packaging-box-size:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer-order_packaging-box-size_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:show" }
+
+customer-order_packaging-box-size_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:new" }
+
+customer-order_packaging-box-size_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:create" }
+    requirements: { _method: post }
+
+customer-order_packaging-box-size_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:edit" }
+
+customer-order_packaging-box-size_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:update" }
+    requirements: { _method: post|put }
+
+customer-order_packaging-box-size_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:PackagingBoxSize:delete" }
+    requirements: { _method: post|delete }

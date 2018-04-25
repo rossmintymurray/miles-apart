@@ -1,0 +1,67 @@
+staff-business_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Business:notifications" }
+  
+staff-business_new-business-premises:
+    pattern:  /new-business-premises
+    defaults: { _controller: "MilesApartStaffBundle:Business:newbusinesspremises" }
+
+staff-business_new-business-premises-submit:
+    pattern:  /new-business-premises/submit
+    defaults: { _controller: "MilesApartStaffBundle:Business:newbusinesspremisessubmit" }
+
+staff-business_edit-business-premises:
+    pattern:  /edit-business-premises/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Business:editbusinesspremises" }
+    requirements:
+        _method:  GET|POST
+
+staff-business_edit-business-premises-submit:
+    pattern:  /edit-business-premises/{id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:Business:editbusinesspremisessubmit" }
+    requirements:
+        _method:  PUT|GET
+
+staff-business_view-business-premises:
+    pattern:  /view-business-premises
+    defaults: { _controller: "MilesApartStaffBundle:Business:viewbusinesspremises" }
+
+staff-business_new-stock-location:
+    pattern:  /new-stock-location
+    defaults: { _controller: "MilesApartStaffBundle:Business:newstocklocation" }
+
+staff-business_new-stock-location-submit:
+    pattern:  /new-stock-location/submit
+    defaults: { _controller: "MilesApartStaffBundle:Business:newstocklocationsubmit" }
+
+staff-business_edit-stock-location:
+    pattern:  /edit-stock-location
+    defaults: { _controller: "MilesApartStaffBundle:Business:editstocklocation" }
+
+staff-business_edit-stock-location-submit:
+    pattern:  /edit-stock-location/submit
+    defaults: { _controller: "MilesApartStaffBundle:Business:editstocklocationsubmit" }
+
+staff-business_view-stock-locations:
+    pattern:  /view-stock-location
+    defaults: { _controller: "MilesApartStaffBundle:Business:viewstocklocation" }
+
+staff-business_new-stock-location-shelf:
+    pattern:  /new-stock-location-shelf
+    defaults: { _controller: "MilesApartStaffBundle:Business:newstocklocationshelf" }
+
+staff-business_new-stock-location-shelf-submit:
+    pattern:  /new-stock-location-shelf/submit
+    defaults: { _controller: "MilesApartStaffBundle:Business:newstocklocationshelfsubmit" }
+
+staff-business_edit-stock-location-shelf:
+    pattern:  /edit-stock-location-shelf
+    defaults: { _controller: "MilesApartStaffBundle:Business:editstocklocationshelf" }
+
+staff-business_edit-stock-location-shelf-submit:
+    pattern:  /edit-stock-location-shelf/submit
+    defaults: { _controller: "MilesApartStaffBundle:Business:editstocklocationshelfsubmit" }
+
+staff-business_view-stock-location-shelves:
+    pattern:  /view-stock-location-shelves
+    defaults: { _controller: "MilesApartStaffBundle:Business:viewstocklocationshelves" }

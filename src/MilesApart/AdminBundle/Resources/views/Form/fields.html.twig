@@ -1,0 +1,25 @@
+{# src/MilesApart/AdminBundle/Resources/views/Form/fields.html.twig #}
+{# Field template for form on first time through #}
+{% block form_row %}
+	{% spaceless %}
+		{# Create the group for each input so bootstrap groups together #}
+		<div class="form-group">
+	    	{{ form_label(form) }}
+	    	{{ form_widget(form) }}
+
+	    	{# Create the form errors and display if validation fails #}
+	    	<div class="form-error col-md-7 col-md-offset-4">
+	    		{{ form_errors(form) }}
+	    	</div>
+    	</div>
+	{% endspaceless %}
+{% endblock form_row %}
+
+
+{% block button_row %}
+{% spaceless %}
+  
+        {{ form_widget(form) }}
+   
+{% endspaceless %}
+{% endblock button_row %}

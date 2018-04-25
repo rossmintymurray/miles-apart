@@ -1,0 +1,54 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customerorder.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'returned_product' %}
+
+{# Set the page title #}
+{% block title %}
+    - Returned Product
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    - Returned Product           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Returned Product details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Return processed</th>
+                <td>{{ entity.returnprocessed }}</td>
+            </tr>
+            <tr>
+                <th>Return notes</th>
+                <td>{{ entity.returnnotes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer-order_returned-product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('customer-order_returned-product_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

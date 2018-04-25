@@ -1,0 +1,95 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/procurement.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'logistics_company' %}
+
+{# Set the page title #}
+{% block title %}
+    - Logistics Company
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    - Logistics Company           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Logistics Company details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company name</th>
+                <td>{{ entity.logisticscompanyname }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company address line 1</th>
+                <td>{{ entity.logisticscompanyaddressline1 }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company address line 2</th>
+                <td>{{ entity.logisticscompanyaddressline2 }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company address town</th>
+                <td>{{ entity.logisticscompanyaddresstown }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company address county</th>
+                <td>{{ entity.logisticscompanyaddresscounty }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company address country</th>
+                <td>{{ entity.logisticscompanyaddresscountry }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company address postcode</th>
+                <td>{{ entity.logisticscompanyaddresspostcode }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company phone</th>
+                <td>{{ entity.logisticscompanyphone }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company fax</th>
+                <td>{{ entity.logisticscompanyfax }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company email</th>
+                <td>{{ entity.logisticscompanyemail }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company date created</th>
+                <td>{{ entity.logisticscompanydatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Logistics company date modified</th>
+                <td>{{ entity.logisticscompanydatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('procurement_logistics-company') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('procurement_logistics-company_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

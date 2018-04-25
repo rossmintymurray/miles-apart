@@ -1,0 +1,15 @@
+<ul class="side-nav">
+	<li {% if current_page == "account_home" %} class="active" {% endif %}><a href="{{ path('fos_user_profile_show') }}">Account home</a></li>
+	<li class="divider"></li>
+	<li {% if current_page == "current_orders" %} class="active" {% endif %}><a href="{{ path('miles_apart_public_user_bundle_current_orders') }}">Current orders</a></li>
+	<li {% if current_page == "previous_orders" %} class="active" {% endif %}><a href="{{ path('miles_apart_public_user_bundle_previous_orders') }}">Previous orders</a></li>
+	<li {% if current_page == "returns" %} class="active" {% endif %}><a href="{{ path('miles_apart_public_user_bundle_returns') }}">Returns</a></li>
+	<li class="divider"></li>
+	
+	<li {% if current_page == "edit_details" %} class="active" {% endif %}><a href="{{ path('fos_user_profile_edit') }}">Edit details</a></li>
+	<li {% if current_page == "change_password" %} class="active" {% endif %}><a href="{{ path('fos_user_change_password') }}">Change password</a></li>
+	<li {% if current_page == "edit_addresses" %} class="active" {% endif %}><a href="{{ path('miles_apart_public_user_bundle_addresses') }}">Addresses</a></li>
+
+	
+	
+</ul>

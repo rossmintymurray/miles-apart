@@ -1,0 +1,60 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/view_campaigns.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'view_promotions' %}
+
+{% block page_name %}
+    View promotions
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {% if entities|length > 0 %}
+        <table class="table table-striped small" id="existing_transfer_request_products">
+            <thead>
+                <tr>
+                    <th>Promotion Name</th>
+                    <th>Campaign</th>
+                    <th>Traffic Source</th>
+                    <th>URL</th>
+                    <th>Edit</th>
+
+                </tr>
+                    
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>
+                            {{ entity.getPromotionName }}
+                        </td>
+                        <td>
+                            {% if entity.getCampaign != null %}
+                                {{ entity.getCampaign.getCampaignName }}
+                            {% else %}
+                                NOT SET
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ entity.getTrafficSource.getTrafficSourceCompanyName }}
+                        </td>
+                        <td>
+                            {{ entity.getTrackingUrl }}
+                        </td>
+                        <td>
+    	                    <a href="{{ path('staff-campaigns_edit-promotion', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit">
+    	                    	<span class="glyphicon glyphicon-pencil"></span>
+    	                    </a>
+    	                </td>
+                 
+                      
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are currently no promotions set up in the database.</p>
+    {% endif %}
+{% endblock %}

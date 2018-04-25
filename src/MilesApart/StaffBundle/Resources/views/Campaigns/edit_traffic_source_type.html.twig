@@ -1,0 +1,40 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/new_campaign.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'edit_traffic_source_type' %}
+
+{% block page_name %}
+    Edit traffic source type
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Name</legend>
+            {{ form_row(edit_form.traffic_source_type_name) }}
+            {{ form_row(edit_form.traffic_source_type_description) }}
+           
+        </fieldset>
+        
+        <fieldset>
+            {{ form_row(edit_form.submit) }}
+        </fieldset>
+        {{ form_rest(edit_form) }}
+    {{ form_end(edit_form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

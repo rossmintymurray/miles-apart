@@ -1,0 +1,153 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/new.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'new_product' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	New Product
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	New Product		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+   	Complete the form below to add a new product to the system
+{% endblock %}
+
+{% block page_content -%}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Name &amp; Description</legend>
+            {{ form_row(form.product_name) }}
+            {{ form_row(form.brand) }}
+            {{ form_row(form.product_introduction) }}
+            {{ form_row(form.product_description) }}
+            {{ form_row(form.is_product_online) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Individual Pack Measurements</legend>
+            {{ form_row(form.product_weight) }}
+            {{ form_row(form.product_width) }}
+            {{ form_row(form.product_height) }}
+            {{ form_row(form.product_depth) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Codes</legend>
+            {{ form_row(form.product_supplier_code) }}
+            {{ form_row(form.product_outer_barcode) }}
+            {{ form_row(form.product_inner_barcode) }}
+            {{ form_row(form.product_barcode) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Quantities</legend>
+            {{ form_row(form.product_outer_quantity) }}
+            {{ form_row(form.product_inner_quantity) }}
+            {{ form_row(form.product_pack_quantity) }}
+            {{ form_row(form.vat_rate_type) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Features</legend>
+             <div id="product_features" data-prototype="{{ macros.widget_prototype(form.product_feature, 'Remove feature')|escape }}">
+                {% for widget in form.product_feature.children %}
+                    {{ macros.widget_prototype(widget, 'Remove feature') }}
+                {% endfor %}
+            </div>
+            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_features">Add feature</a>
+
+            
+            
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Images</legend>
+             <div id="product_images" data-prototype="{{ macros.widget_prototype(form.product_image, 'Remove image')|escape }}">
+                {% for widget in form.product_image.children %}
+                    {{ macros.widget_prototype(widget, 'Remove image') }}
+                {% endfor %}
+            </div>
+            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_images">Add image</a>
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Categories</legend>
+            <div id="categories" data-prototype="{{ macros.widget_prototype(form.category, 'Remove category')|escape }}">
+                
+
+                {% for widget in form.category.children %}
+                        
+                    <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="categories">Add category</a>
+                    {{ macros.widget_prototype(widget, 'Remove category') }}
+                {% endfor %}
+            
+
+            </div>
+            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="categories">Add category</a>
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Seasons</legend>
+            <div id="seasons" data-prototype="{{ macros.widget_prototype(form.season, 'Remove season')|escape }}">
+                {% for widget in form.season.children %}
+                    {{ macros.widget_prototype(widget, 'Remove season') }}
+                {% endfor %}
+            </div>
+            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="seasons">Add season</a>
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Attributes</legend>
+            <div id="attributes" data-prototype="{{ macros.widget_prototype(form.attribute_value, 'Remove attribute')|escape }}">
+                {% for widget in form.attribute_value.children %}
+                    {{ macros.widget_prototype(widget, 'Remove attribute') }}
+                {% endfor %}
+            </div>
+            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="attributes">Add attribute</a>
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Keywords</legend>
+            <div id="keywords" data-prototype="{{ macros.widget_prototype(form.keyword, 'Remove keyword')|escape }}">
+                {% for widget in form.keyword.children %}
+                    {{ macros.widget_prototype(widget, 'Remove keyword') }}
+                {% endfor %}
+            </div>
+            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="keywords">Add keyword</a>
+        </fieldset>
+
+
+
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_product') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+
+
+   
+{% endblock %}

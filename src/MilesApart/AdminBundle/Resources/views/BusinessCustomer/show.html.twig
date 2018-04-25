@@ -1,0 +1,55 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customer.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'business_customer' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.businesscustomername }} - Business Customer
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.businesscustomername }} - Business Customer           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View business customer details
+{% endblock %}
+
+{% block page_content -%}
+
+<h2>{{ entity.businesscustomername }}</h2>
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Business customer name</th>
+                <td>{{ entity.businesscustomername }}</td>
+            </tr>
+            <tr>
+                <th>Business customer vat number</th>
+                <td>{{ entity.businesscustomervatnumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer_business-customer') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('customer_business-customer_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,99 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'goods_in' %}
+{% set current_page = 'new_supplier_delivery_product' %}
+
+{% block page_name %}
+    Book in delivery
+{% endblock %}
+
+{% block header_right_content %}
+
+    <a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="{{ path('staff-goods-in_complete_delivery_note', {'supplier_delivery_id': supplier_delivery_id }) }}" role="button">
+        Complete delivery note
+    </a>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Delivery Product Details</legend>
+            {{ form_row(form.product_supplier_code) }}
+            {{ form_row(form.supplier_delivery_note_qty) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+   
+    {{ form_end(form) }}
+
+ 
+    {# Existing items on delivery note #}
+    {% if supplier_delivery.supplierdeliveryproduct|length > 0 %}
+
+        {# Show the table header #}
+        <table class="table table-striped small existing_products" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product Code</th>
+                <th>Product name</th>
+                
+                <th>Qty</th>
+                <th class="hide_on_xs">Barcode</th>
+                
+                
+        </thead>
+        <tbody>
+            {% for product in supplier_delivery.supplierdeliveryproduct %}
+                <tr id="product_row_{{ product.getId }}">
+                     <td>
+                        {{ loop.index }}
+                    </td>
+                    <td>
+                        {{ product.getProduct.getProductSupplierCode }}
+                    </td>
+                    <td>
+                        {{ product.getProduct.getProductName }}
+                    </td>
+                    
+                    <td>
+                        {{ product.getSupplierDeliveryNoteQty }}
+                    </td>
+                    
+                     <td class="hide_on_xs">
+                        {{ product.getProduct.getProductBarcode }}
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block javascripts %}
+
+    <script>
+       window.onload = function() {
+         var input = document.getElementById("milesapart_staffbundle_newdeliveryproduct_product_supplier_code").focus();
+            }     
+    </script>
+{% endblock %}

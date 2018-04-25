@@ -1,0 +1,55 @@
+{# Basket popup that appears when the basket bar is hovered over and when a product is added to the basket #}
+
+{# Create wrapper for the basket popup #}
+<div id="basket_contents_popup_wrapper">
+
+	{# Create the flash message div (with info such as item added, item removed, qty changed etc) #}
+	<div id="basket_contents_popup_flash_message">
+		
+		{# For error messages #}
+		{% for flashMessage in app.session.flashbag.get('admin-error') %}                  
+            <p class="text-danger">{{ flashMessage }}</p> 
+        {% endfor %}
+
+        {# For success messages #}
+        {% for flashMessage in app.session.flashbag.get('admin-notice') %}
+            <p class="text-success">{{ flashMessage }}</p>
+        {% endfor %}
+
+	</div>
+
+	{# Check if basket is null (there is no basket yet) #}
+	{% if basket != null %}
+		<h3>Basket</h3>
+		<p>{{ basket.getBasketProduct|length }} items</p>
+		{# Check if items in the basket #}
+		{% if basket.getBasketProduct|length > 0 %}
+			{# Create the table for the items #}
+			<table id="shopping_basket_table">
+				<tr>
+					<th>Item name</th>
+					<th>Qty</th>
+					<th>Total</th>
+				</tr>
+				{% for item in basket.getBasketProduct %}
+					<tr>
+						<td>{{ item.getId }}</td>
+						<td>{{ item.getProduct.getId }}</td>
+						<td>{{ item.getProduct.getProductName }}</td>
+						<td>{{ item.getBasketProductQuantity }}</td>
+						<td></td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+
+	{% else %}
+		<h3>No basket</h3>
+	{% endif %}
+		
+	<a href="{{ path('miles_apart_basket_empty') }}">Empty</a>
+	{# Create the checkout link  #}
+	<div id="basket_contents_popup_checkout_link">
+		<a href="#">Checkout</a>
+	</div>
+</div>

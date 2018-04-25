@@ -1,0 +1,102 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::checkout_page_layout.html.twig' %}
+
+{% block page_title %}
+    Start Checkout
+     
+{% endblock %}
+
+
+{% block checkout_progress_bar %}
+
+    {# Create checkout progress #}
+    <div id="progress_bar_container">
+        <div class="row text-center collapse">
+            {# Progress bar #}
+            <div class="large-10 small-10 columns large-offset-1 small-offset-1">
+                <div class="progress success radius">
+                   
+                </div>
+            </div>
+
+            {# Progress stages numbers #}
+            <div id="progress_bar_numbers_wrapper">
+                <div class="large-3 small-3 columns">
+                    <span class="progress_bar_numbers active">1</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">2</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">3</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">4</span>
+                </div>
+            </div>
+
+            {# Progress stages text#}
+            <div class="large-3 small-3 columns">
+                <p class="progress_bar_stages_text active">Shopping basket</p>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <p class="progress_bar_stages_text">Delivery details</p>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <p class="progress_bar_stages_text">Payment</p>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <p class="progress_bar_stages_text">Complete</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block page_content %}
+     
+
+     <h2 class="underline">Checkout</h2>
+    {# Show the form #}
+
+    {# If the user is logged in, allow to proceed to shiping #}
+    {% if app.user %}
+        <a href="{{ path('miles_apart_basket_checkout_shipping') }}" class="button small-12">Checkout as {{ app.security.getToken().getUser().getFirstName() }}</a>
+        <p class="text-left signout_text"><a href="{{ path('fos_user_security_logout') }}">Not {{ app.security.getToken().getUser().getFirstName() }}, sign in as different user.</a></p>
+    {% else %}
+
+        
+       <div class="row">
+        <div class="medium-5 columns">
+            <div class="checkout_start_checkout_form_wrapper">
+                <h4>Existing Customers</h4>
+                {#{% render url('fos_user_security_login', {'checkout': true}) %}#}
+                {% render (controller("MilesApartPublicUserBundle:Security:login", { 'checkout' : true })) %}
+            </div>
+        </div>
+
+        <div class="medium-5 columns">
+            <div class="checkout_start_checkout_form_wrapper">
+                <h4>New Customers</h4>
+            
+                <a href="{{ path('miles_apart_basket_checkout_shipping') }}" class="button small-12">Checkout as Guest</a>
+                
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block right_column %}
+    {% include 'MilesApartBasketBundle:CheckoutComponents:checkout_order_table.html.twig' %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Return completion
+	
+{% endblock %}
+
+{% block left_menu %}
+	
+	{% set current_page = "view_order" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+	<p>To complete your return, please follow the instructions below.</p>
+	<ol class="spaced_list">
+		<li>Please pack all your items securely and write your order number (<b>{{ customer_order_product.customerorder.id }}</b>) on the outside of the package.</li>
+		<li>Send your package using your preferred courier, ensuring you obtain proof of postage.</li>
+		<li>Send to the following address:
+			<address>
+				<b>Return address:</b><br />
+				Miles Apart - Web Returns<br />
+				26 Salisbury Street<br />
+				Amesbury<br />
+				Wiltshire<br />
+				SP4 7HD
+			</address>
+		</li>
+		<li>When your package has been received and checked off a refund will be credited to your account. NOTE: Postage costs will only be refunded if the product is faulty.</li>
+	</ol>
+
+	<p>Should you have any issues, please <a href="{{ path('miles_apart_public_contact_us') }}"> contact us</a>.</p>
+
+
+
+{% endblock fos_user_content %}

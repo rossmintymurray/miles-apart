@@ -1,0 +1,77 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/process_purchase_order_csv.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'process_purchase_order_csv' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    Send Purchase Order - Sent
+{% endblock %}
+
+
+
+{% block page_content %}
+
+  <div class="row">
+		        <div class="col-md-10 col-xs-9">
+		            <h4>{{ purchase_order.supplier.suppliername }} <small class="text-muted">Total: {{ purchase_order.getPurchaseOrderCurrentTotalDisplay }} | Difference: {{ purchase_order.getPurchaseOrderMinimumOrderValueDifference }}</small></h4>
+		        </div>
+
+		        <div class="col-md-2 col-xs-3">
+		        	{# Show the totals #}
+		        	
+		        	{# Use JS to Check the min order value #}
+		        	
+		        	<a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="{{ path('staff-purchase-orders_print-purchase-order', { 'id': purchase_order.id }) }}" role="button">
+		                <span class="glyphicon glyphicon-print"></span> <span class="hide_on_xs">Print</span> 
+		            </a>
+			        
+		        </div>
+	    	</div>
+		    {# Set up the existing products table #}
+		    <table class="table table-striped small existing_products" id="existing_purchase_order_{{ purchase_order.id }}">
+		        <thead>
+		            <tr>
+		                <th>Product name</th>
+		                <th>Price</th>
+		                <th>Ordered Qty</th>
+		                <th>Product Code</th>
+		                <th class="hide_on_xs">Barcode</th>
+		                <th>Supplier</th>
+		                
+		                
+		        </thead>
+		        <tbody>
+		            {% for purchase_order_product in purchase_order.purchaseorderproduct %}
+		            	{% if purchase_order_product.purchaseorder.id == purchase_order.id %}
+			                <tr id="product_row_{{ purchase_order.id }}">
+			                    <td>
+			                        {{ purchase_order_product.getProduct.getProductName }}
+			                    </td>
+			                    <td>
+			                        {{ purchase_order_product.getProduct.getCurrentPriceDisplay }}
+			                    </td>
+			                  	<td>
+			                        {{ purchase_order_product.getPurchaseOrderProductQuantity }}
+			                    </td>
+			                    <td>
+			                        {{ purchase_order_product.getProduct.getProductSupplierCode }}
+			                    </td>
+			                     <td class="hide_on_xs">
+			                        {{ purchase_order_product.getProduct.getProductBarcode }}
+			                    </td>
+			                    
+			                    <td>
+			                        {% for suppliers in purchase_order_product.getProduct.getProductSupplier %}
+			                            {{ suppliers.getSupplier.getSupplierName }}
+			                        {% endfor %}
+			                    </td>
+			                    
+			                </tr>
+			            {% endif %}
+		            {% endfor %}
+		        </tbody>
+		    </table>
+{% endblock %}

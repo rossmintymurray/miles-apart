@@ -1,0 +1,30 @@
+finance_employee-payment:
+    path:     /
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:index" }
+
+finance_employee-payment_show:
+    path:     /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:show" }
+
+finance_employee-payment_new:
+    path:     /new
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:new" }
+
+finance_employee-payment_create:
+    path:     /create
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:create" }
+    requirements: { _method: post }
+
+finance_employee-payment_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:edit" }
+
+finance_employee-payment_update:
+    path:     /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:update" }
+    requirements: { _method: post|put }
+
+finance_employee-payment_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmployeePayment:delete" }
+    requirements: { _method: post|delete }

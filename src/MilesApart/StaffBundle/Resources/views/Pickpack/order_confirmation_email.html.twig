@@ -1,0 +1,203 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
+
+{% block email_name %}
+	Miles Apart Order Confirmation
+{% endblock %}
+
+{% block email_title %}
+	New web order has been received.
+{% endblock %}
+
+{% block email_intro %}
+	New order number is <b>{{ customer_order.id }}</b>.
+{% endblock %}
+
+{% block email_content %}
+	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="10px" style="font-size:10px;line-height:10px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+    
+    
+    <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="15px" style="font-size:15px;line-height:15px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th>
+					      	<h5>Order Details</h5>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+
+	<table class="row">
+	  	<tr>
+	  		<th class="small-6 large-4 columns first">
+	    		<table class="four columns">
+	    			<tr>
+	    				<th>
+					      	<p>Billing To:</p>
+					      	{% if customer_order.billingaddress != null %}
+								<p style="font-size:14px">{{ customer_order.billingaddress.customeraddressline1 }}<br />
+									{{ customer_order.billingaddress.customeraddressline2 }}<br />
+									{{ customer_order.billingaddress.customeraddresstown }}<br />
+									{{ customer_order.billingaddress.customeraddresscounty }}<br />
+									{{ customer_order.billingaddress.customeraddresspostcode }}<br />
+								</p>
+							{% else %}
+								<p style="font-size:14px">No billing address set</p>
+							{% endif %}
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+		   
+		    <th class="small-6 large-4 columns">
+		    	<table>
+		    		<tr>
+		    			<th>
+					    	<p>Delivery To:</p>
+							<p style="font-size:14px">{{ customer_order.deliveryaddress.customeraddressline1 }}<br />
+								{{ customer_order.deliveryaddress.customeraddressline2 }}<br />
+								{{ customer_order.deliveryaddress.customeraddresstown }}<br />
+								{{ customer_order.deliveryaddress.customeraddresscounty }}<br />
+								{{ customer_order.deliveryaddress.customeraddresspostcode }}<br />
+							</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+
+			<th class="small-6 large-4 columns last">
+				<table>
+					<tr>
+						<th>
+							<p>Delivery Options:</p>
+							<p style="font-size:14px">Royal Mail {{ customer_order.deliveryoption.postagetype.postagetypename }}
+							</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+	  	</tr>
+	</table>
+			
+
+	
+	<table class="row">
+	  	<tr>
+	  		<th class="columns first last">
+	    		<table>
+					<tr style="background-color:#292929;color:#fff;padding:5px 3px 5px 3px">
+						<th style="padding:5px 3px 5px 6px;color:#fff;font-size:13px" width="15%">Code</th>
+						<th style="padding:5px 3px 5px 3px;color:#fff;font-size:13px" width="45%">Description</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px" width="15%">Price</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px" width="10%">Qty</th>
+						<th style="text-align:center;padding:5px 3px 5px 3px;color:#fff;font-size:13px" width="15%">Total</th>
+					</tr>
+
+					{% for product in customer_order.customerorderproduct %}
+						{% if loop.index is divisible by(2) %}
+							<tr style="background-color:#fff;padding:3px 3px 3px 3px">
+						{% else %}
+							<tr style="background-color:#ebebeb;padding:3px 3px 3px 3px">
+						{% endif %}
+
+							<td style="padding:5px 3px 5px 6px;font-size:13px">{{ product.product.productsuppliercode }}</td>
+							<td style="padding:5px 3px 5px 3px;font-size:13px">{{ product.product.productname }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.product.currentpricedisplay }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.customerorderproductquantity }}</td>
+							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.customerorderproducttotalpricedisplay }}</td>
+						</tr>
+					{% endfor %}
+					
+					<tr style="background-color:#e0e0e0;padding:5px 3px 5px 3px">
+						<td colspan="4" style="text-align:right;padding:5px 3px 5px 3px;font-size:13px">Sub-total</td>
+						<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ customer_order.getCustomerOrderTotalPriceDisplay }}</td>
+					</tr>
+					<tr>
+						<td colspan="4" style="text-align:right;padding:5px 3px 5px 3px;font-size:13px">Shipping charges </td>
+						<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ customer_order.getCustomerOrderShippingPaidDisplay }}</td>
+					</tr>
+					<tr  style="background-color:#d6d6d6;padding:5px 3px 5px 3px">
+						<td colspan="4" style="text-align:right;padding:5px 3px 5px 3px;font-size:13px"><b>Grand total </b></td>
+						<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px"><b>{{ customer_order.getGrandTotalDisplay }}</b></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+			
+	 <table class="row">
+	  	<tr>
+	  		<th class="small-12 large-12 columns first last">
+	    		<table>
+	    			<tr>
+	    				<th style="border-bottom:2px solid #008CBA;">
+					      	
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+	    	</th>
+	    </tr>
+	</table>
+        	
+	<table class="spacer">
+        <tbody>
+          	<tr>
+            	<th height="20px" style="font-size:20px;line-height:20px;">&#xA0;</th>
+          	</tr>
+        </tbody>
+    </table>
+	</div>
+{% endblock %}
+
+{% block email_callout %}
+{% endblock %}
+
+{% block email_footer %}
+{% endblock %}

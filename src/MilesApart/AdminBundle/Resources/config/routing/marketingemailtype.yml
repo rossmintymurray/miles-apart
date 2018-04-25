@@ -1,0 +1,33 @@
+campaign_marketing-email-type:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+campaign_marketing-email-type_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:show" }
+
+campaign_marketing-email-type_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:new" }
+
+campaign_marketing-email-type_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:create" }
+    requirements: { _method: post }
+
+campaign_marketing-email-type_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:edit" }
+
+campaign_marketing-email-type_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:update" }
+    requirements: { _method: post|put }
+
+campaign_marketing-email-type_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:MarketingEmailType:delete" }
+    requirements: { _method: post|delete }

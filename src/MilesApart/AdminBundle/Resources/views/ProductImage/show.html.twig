@@ -1,0 +1,67 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'product_image' %}
+
+{# Set the page title #}
+{% block title %}
+    Product Image
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    Product Image           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View product image details
+{% endblock %}
+
+{% block page_content -%}
+            
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Product_image_url</th>
+                <td>{{ entity.productimagepath }}</td>
+            </tr>
+            <tr>
+                <th>Product_image_title</th>
+                <td>{{ entity.productimagetitle }}</td>
+            </tr>
+            <tr>
+                <th>Product_image_description</th>
+                <td>{{ entity.productimagedescription }}</td>
+            </tr>
+            <tr>
+                <th>Product_image_is_main</th>
+                <td>{{ entity.productimageismain }}</td>
+            </tr>
+            <tr>
+                <th>Product_image_upload_date</th>
+                <td>{{ entity.productimagedatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_product-image') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('product_product-image_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

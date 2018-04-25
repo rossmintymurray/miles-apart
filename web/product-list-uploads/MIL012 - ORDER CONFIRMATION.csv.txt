@@ -1,0 +1,59 @@
+Item,Description,Quantity,UnitPrice, Disc. % , Tax Rate , Net ,Barcode
+10835,Crystal 3.5L Box & Lid Clear,24,1.00,0.00%, Std Rate , £24.00 ,5038135108358
+10840,Crystal 24L Box & Lid Clear,20,2.10,0.00%, Std Rate , £42.00 ,5038135108402
+10850,Crystal 16L Box & Lid Clear,20,1.80,0.00%, Std Rate , £36.00 ,5038135108501
+10860,Crystal 32L U/bed Box & Lid Clear,40,2.75,0.00%, Std Rate , £110.00 ,5038135108600
+10870,Crystal 45L Box & Lid Clear,20,3.45,0.00%, Std Rate , £69.00 ,5038135108709
+10890,Crystal 35L Box & Lid Clear,20,2.65,0.00%, Std Rate , £53.00 ,5038135108907
+11265,Casa 28cm Round Bowl Silver,12,0.57,0.00%, Std Rate , £6.84 ,5038135112652
+11270,Casa 32cm Round Bowl Silver,12,0.67,0.00%, Std Rate , £8.04 ,5038135112706
+11585,Casa 16L Mop Bucket Silver,8,2.40,0.00%, Std Rate , £19.20 ,5038135115851
+11735,Eden 12L General Purpose Bucket Black,25,0.75,0.00%, Std Rate , £18.75 ,5038135117350
+11965,Casa 32cm Square Bowl Calico,12,0.75,0.00%, Std Rate , £9.00 ,5038135119651
+11970,Casa 38cm Rectangular Bowl Calico,12,0.84,0.00%, Std Rate , £10.08 ,5038135119705
+12180,Cuisine 2L Mixing Bowl Clear,12,0.48,0.00%, Std Rate , £5.76 ,5038135121807
+12203,Cuisine 15L Large Square Food Box & Lid Clear/Ice White,5,1.95,0.00%, Std Rate , £9.75 ,5038135122033
+12290,Cuisine 1L Measuring Jug Clear,24,0.45,0.00%, Std Rate , £10.80 ,5038135122903
+12291,Cuisine 2L Measuring Jug Clear,18,0.63,0.00%, Std Rate , £11.34 ,5038135122910
+12373,Cuisine 2L Rect Food Box & Lid Clear/Ice White,10,0.63,0.00%, Std Rate , £6.30 ,5038135123733
+12374,Cuisine 2.7L Rect Food Box & Lid Clear/Ice White,12,0.78,0.00%, Std Rate , £9.36 ,5038135123740
+12376,Cuisine 4.5L Rect Food Box & Lid Clear/Ice White,7,1.00,0.00%, Std Rate , £7.00 ,5038135123764
+12377,Cuisine 6L Rect Food Box & Lid Clear/Ice White,5,1.10,0.00%, Std Rate , £5.50 ,5038135123771
+12395,Cuisine 2.5L Cereal Dispenser Clear/Ice White,10,0.90,0.00%, Std Rate , £9.00 ,5038135123955
+12396,Cuisine 5L Cereal Dispenser Clear/Ice White,10,1.15,0.00%, Std Rate , £11.50 ,5038135123962
+12523,Casa 32cm Square Bowl Ice White,12,0.75,0.00%, Std Rate , £9.00 ,5038135125232
+13430,Cat Litter Tray Assorted,12,1.00,0.00%, Std Rate , £12.00 ,5038135134302
+14000,Crystal 10L Box & Lid Clear,20,1.50,0.00%, Std Rate , £30.00 ,5038135140006
+14025,Crystal 60Ltr Box & Lid  Clear,24,4.15,0.00%, Std Rate , £99.60 ,5038135140259
+14100,Crystal 133L Box & Lid Clear,4,8.50,0.00%, Std Rate , £34.00 ,5038135141003
+17128,Casa 28cm Round Bowl Duck Egg Blue,12,0.57,0.00%, Std Rate , £6.84 ,5038135171284
+17153,Casa 32cm Round Bowl Duck Egg Blue,12,0.67,0.00%, Std Rate , £8.04 ,5038135171536
+17176,Casa 36cm Round Bowl Chilli Red,12,0.84,0.00%, Std Rate , £10.08 ,5038135171765
+17227,Casa 38cm Rectangular Bowl Duck Egg Blue,12,0.84,0.00%, Std Rate , £10.08 ,5038135172274
+17452,Casa 16L Mop Bucket Mocha,8,2.40,0.00%, Std Rate , £19.20 ,5038135174520
+18000,1.01 Food Locker 300ml Rectangular Clear/White,24,0.48,0.00%, Std Rate , £11.52 ,5038135180002
+20140,Small Folding Step Stool,12,2.95,0.00%, Std Rate , £35.40 ,5038135201400
+20141,Tall Folding Step Stool,8,4.50,0.00%, Std Rate , £36.00 ,5038135201417
+20565,Wham Roma Small Beaker Clear,24,0.40,0.00%, Std Rate , £9.60 ,5038135205651
+21000,Cleaning Dustpan & Brush Soft  Graphite,24,0.66,0.00%, Std Rate , £15.84 ,5038135210006
+21015,Cleaning Dustpan & Brush Stiff  Graphite,24,0.66,0.00%, Std Rate , £15.84 ,5038135210150
+21105,Cleaning Fantail Dishbrush  Graphite,24,0.35,0.00%, Std Rate , £8.40 ,5038135211058
+21122,Cleaning Scrub Brush Graphite,12,0.52,0.00%, Std Rate , £6.24 ,5038135211225
+25500,Studio Basket 1.01 Square Ice White,12,0.38,0.00%, Std Rate , £4.56 ,5038135255007
+25525,Studio Basket 3.01 Rectangular Ice White,12,0.45,0.00%, Std Rate , £5.40 ,5038135255250
+25550,Studio Basket 2.01 Rectangular Ice White,12,0.48,0.00%, Std Rate , £5.76 ,5038135255502
+25575,Studio Basket 4.02 Rectangular Ice White,12,1.00,0.00%, Std Rate , £12.00 ,5038135255755
+25600,Studio Basket 5.02 Rectangular Ice White,6,1.75,0.00%, Std Rate , £10.50 ,5038135256004
+25650,Studio Basket 5.01 Rectangular Ice White,12,1.50,0.00%, Std Rate , £18.00 ,5038135256509
+29453,Flexi-Store 8L Graduated Round Tub Red,6,1.25,0.00%, Std Rate , £7.50 ,5038135294532
+29455,Flexi-Store 8L Graduated Round Tub Green,6,1.25,0.00%, Std Rate , £7.50 ,5038135294556
+29503,Flexi-Store 40L Graduated Round Tub  Red,6,3.00,0.00%, Std Rate , £18.00 ,5038135295034
+29505,Flexi-Store 40L Graduated Round Tub Green,6,3.00,0.00%, Std Rate , £18.00 ,5038135295058
+29553,Flexi-Store 25L Graduated Round Tub Red,6,2.25,0.00%, Std Rate , £13.50 ,5038135295539
+29555,Flexi-Store 25L Graduated Round Tub Green,6,2.25,0.00%, Std Rate , £13.50 ,5038135295553
+29603,Flexi-Store 15L Graduated Round Tub Red,6,1.75,0.00%, Std Rate , £10.50 ,5038135296031
+29605,Flexi-Store 15L Graduated Round Tub Green,6,1.75,0.00%, Std Rate , £10.50 ,5038135296055
+39500,15cm Deep Round Cake/Cheese Dome Aluminium/Clear,6,3.25,0.00%, Std Rate , £19.50 ,5038135395000
+39525,10cm Round Cake/Cheese Dome Aluminium/Clear,8,2.95,0.00%, Std Rate , £23.60 ,5038135395253
+39575,Cupcake Caddy Aluminium/Clear,4,4.25,0.00%, Std Rate , £17.00 ,5038135395758
+56225,Wham Essentials 12 Cup Muffin Tin,12,2.50,0.00%, Std Rate , £30.00 ,5038135562259

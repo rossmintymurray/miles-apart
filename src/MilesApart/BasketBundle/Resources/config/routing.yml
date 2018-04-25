@@ -1,0 +1,69 @@
+miles_apart_basket_add_from_shop:
+    path:     /shop-add/{main_category_slug}/{sub_category_slug}/{specific_category_slug}/{id}
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:shopadd", page: 1, specific_category: null, sub_category: null, main_category: null   }
+  
+miles_apart_basket_add_from_product:
+    path:     /product-add/{id}
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:productadd"  }
+
+miles_apart_basket_ajax_add:
+    path:     /ajax-add
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:ajaxadd"  }
+    requirements:
+        _method:  GET|POST
+
+miles_apart_basket_remove_product:
+    path:     /remove_product/{id}
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:removeproduct"  }
+
+miles_apart_basket_remove_one_product:
+    path:     /remove_one_product/{id}
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:removeoneproduct"  }
+
+miles_apart_basket_contents:
+    path:     /contents
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:contents"  }
+
+miles_apart_basket_empty:
+    path:     /empty
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:shopempty"  }
+
+miles_apart_ajax_basket_empty:
+    path:     /basket-empty
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:basketempty"  }
+
+miles_apart_basket_save_to_wish_list:
+    path:     /save-to-wish-list
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:savetowishlist"  }
+
+miles_apart_basket_checkout_start:
+    path:     /checkout/start
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:checkoutstart"  }
+
+miles_apart_basket_checkout_shipping:
+    path:     /checkout/shipping
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:checkoutshipping"  }
+
+miles_apart_basket_checkout_shipping_select_address:
+    path:     /checkout/shipping/select-address
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:findaddresspage"  }
+
+miles_apart_basket_checkout_shipping_get_addresses:
+    path:     /checkout/shipping/get-postcode-addresses
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:getpostcodeaddresses"  }
+    
+miles_apart_basket_checkout_payment:
+    path:     /checkout/payment
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:checkoutpayment"  }
+
+miles_apart_basket_checkout_complete:
+    path:     /checkout/complete
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:checkoutcomplete"  }
+
+miles_apart_post_order_create_account:
+    path:     /checkout/create-account
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:postordercreateaccount"  }
+
+miles_apart_post_order_create_account_submit:
+    path:     /checkout/create-account/submit
+    defaults: { _controller: "MilesApartBasketBundle:Checkout:postordercreateaccountsubmit"  }

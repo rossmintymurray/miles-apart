@@ -1,0 +1,122 @@
+{# src/MilesApart/StaffBundle/Resources/views/HR/view_employees.html.twig #}
+{% extends 'MilesApartStaffBundle::business_headed.html.twig' %}
+
+{% block page_header_text %}
+    Statement of Employment | Printed on {{ "now"|date('jS F Y') }}
+{% endblock %}
+
+{% block page_title %}
+    Statement of Employment
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block print_page_content %}
+    <div id="container" style="margin-left:80px;margin-right:80px;margin-top:10px;">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Employee</h4>
+                <p><span class="lead">{{ employee.getEmployeeFullName }}</span><br />
+                {{ employee.getEmployeeAddress1 }}, 
+                    {% if employee.getEmployeeAddress2 != null %}
+                        {{ employee.getEmployeeAddress2 }},
+                    {% endif %}
+
+                    {{ employee.getEmployeeTown }},
+                    {{ employee.getEmployeeCounty }},
+                    {{ employee.getEmployeePostcode }}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h4>Employer</h4>
+                <p><span class="lead">Lynda Miles T/A Miles Apart</span><br />
+                Westcroft, Boscombe Village, Salisbury, Wiltshire, SP4 0AB
+                </p>
+            </div>
+        </div>
+
+        {# Statement terms #}
+        
+        	<ol style="margin-top:30px">
+        		<li>The commencement date of your employment with Miles Apart is/was <b>{{ employee.getEmployeeStartingDate|date('jS F Y') }}</b>.</li>
+
+                <li>
+                    The commencement date of the contract terms this statement defines is <b>
+
+                    {% if date(employee.getCurrentContractedHours.getEmployeeContractedHoursValidFrom) < date(employee.getCurrentJobRole.getCurrentWageRateObject.getEmployeeWageRateDateCreated) %}
+                        {{ employee.getCurrentJobRole.getCurrentWageRateObject.getEmployeeWageRateDateCreated|date('jS F Y') }}
+                    {% else %}
+                        {{ employee.getCurrentContractedHours.getEmployeeContractedHoursValidFrom|date('jS F Y') }}{% endif %}</b>. This document supercedes all previous statements of employment for the employee named above.
+                </li>
+
+                 
+                {% if employee.getCurrentContractedHours.getBusinessPremises.getBusinessPremisesName == "26 Amesbury" %}
+
+                    <li>Your place of work is <b>26 Salisbury Street, Amesbury</b>. You will occasionally be required to work in adjoining 28 Salisbury Street. No travel costs will be paid by Miles Apart and a parking space is not guaranteed. In rare instances you may be offered work at 15 High Street, Westbury or Westcroft, Boscombe Village but it will be your choice whether or not you accept this. Renumeration for travel and parking will be paid by Miles Apart on these occaisions.</li>
+                {% elseif employee.getCurrentContractedHours.getBusinessPremises.getBusinessPremisesName == "28 Amesbury"%}
+                    
+                    <li>Your place of work is <b>28 Salisbury Street, Amesbury</b>. You will occasionally be required to work in adjoining 26 Salisbury Street. No travel costs will be paid by Miles Apart and a parking space is not guaranteed. In rare instances you may be offered work at 15 High Street, Westbury or Westcroft, Boscombe Village but it will be your choice whether or not you accept this. Renumeration for travel and parking will be paid by Miles Apart on these occaisions.</li>
+
+                {% elseif employee.getCurrentContractedHours.getBusinessPremises.getBusinessPremisesName == "Westbury"%}
+                    
+                    <li>Your place of work is <b>15 High Street, Westbury</b>. No travel costs will be paid by Miles Apart and a parking space is not provided.</li>
+                {% endif %}
+
+
+        		<li>Your contracted average weekly working hours is <b>{{ employee.getCurrentContractedHoursDisplay }} hours</b>. Overtime may be offered, sometimes at short notice. It will be your choice if you work any overtime and the rate of pay is the same as your stadard rate, shown below.</li>
+
+        		<li>Your hourly rate is <b>&pound;{{ employee.getCurrentJobRole.getCurrentWageRate }} per hour</b>. This will be reviewed annually.</li>
+
+        		<li>If Miles Apart makes an overpayment to you to which you are not entitled you agree to allow the Miles Apart to recover the overpayment by deductions from your wages or other payments due to you.</li>
+
+        		<li>You will take payment weekly on last day you work, in arrears by cash. Your payroll will be calculated on a monthly basis, with tax calculated on the last Saturday of each month.</li>
+
+        		<li>Miles Apart annual leave (paid holiday) year runs from the 1st of November to the 31st of October. You are entitled to <b>5.6 weeks annual holiday</b>, on a pro-rata basis. Eg {{ employee.getCurrentContractedHoursDisplay }} hours x 5.6 weeks = {{ employee.getCurrentContractedHoursDisplay * 5.6 }} hours holiday pay (if you were to work these hours for the duration of the annual leave year). The entire entitlement must be taken within the holiday year it is earned and can not be carried over. Payment in lieu of holiday is only possible in the case of employment ending. Any unused holliday will be allocated by management and you must take it at the allocated time. Public holidays are included in the entitlement and must be taken as such if the holiday falls on your shift. {% if employee.getCurrentContractedHours.getBusinessPremises.getBusinessPremisesName != "Westbury"%} The week 25th December - 1 January is a designated holiday for all employees, you must take a week holiday during this period.{% endif %}</li>
+
+                <li>Annual leave will be designated on a first come, first serve basis. Whilst we will endevour to provide you with the time off you request, this may not always be possible if other staff members have already requested holiday at the same time. You must get express permission from Lyn before you are able to take holiday. No holiday can be taken during the months of November and December (up to and including 24th December).</li>
+
+        		<li>You are obliged to give Miles Apart <b>two weeks notice</b> to terminate your contract of employment. Miles Apart will give you <b>two weeks notice</b> to terminate your contract, except in the case of serious misconduct (theft, assault etc), where immediate dismissal would follow.</li>
+
+        		<li>Miles Apart do not currently run a pension scheme.</li>
+
+        		<li>You are expected to carry yourself in keeping with your job role - in dress, hygiene and language.</li>
+
+        		<li>Should the need for disciplinary action be deemed necessary, this action will be discussed with the employee. An exception to this is serious misconduct which will result in immediate dismissal.</li>
+
+        		<li>If you have a grievance in relation to your employment, you should take this up immediately with Lyn or Ella so the situation can be resolved.</li>
+
+        		<li>You are required to report any sickness absence as soon as is practicably possible to Lyn on 07787 852756 or Ella on 07974 320116.</li>
+
+                <li>You are only entitled to a 20 minute break if you are working a shift of 6 or more hours. Thus, you will only be allowed a break if you are working a full day shift. If you are not working 6 hours or more in a day you will not be given a smoking/food break.</li>
+
+                <li>Tea/coffee will be provided first thing, mid-morning, lunchtime and mid-afternoon. For those employees working less than 6 hours you may bring something to discretely eat while working at the till.</li>
+
+        		<li>Smoking inside any business premises is prohibited. Smoking is allowed outside during your break but please be respectful of others when you smoke.</li>
+
+        		<li>In the course of your employment you may have access to confidential material both in paper and electronic form. On no account should this information be divulged to any person outside of the business.</li>
+
+        	</ol>
+
+            {#<div id="page_break"></div>#}
+
+        	<h3 style="margin-top:30px">Form of Acceptence</h3>
+        	<p>I accept this appointment and understand the particulars of employment as stated herein:</p>
+        	<div class="row">
+                <div class="col-md-6">
+                    <h4>Employee</h4>
+                </div>
+                <div class="col-md-6">
+        	       <h4>Employer</h4>
+               </div>
+           </div>
+           <div class="row" style="margin-top:110px">
+                <div class="col-md-6">
+                    <h6>{{ employee.getEmployeeFullName }}</h6>
+                </div>
+                <div class="col-md-6">
+                   <h6>Lyn Miles</h6>
+               </div>
+           </div>
+
+        
+    </div>
+{% endblock %}

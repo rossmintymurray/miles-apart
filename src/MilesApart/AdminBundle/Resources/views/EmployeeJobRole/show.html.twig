@@ -1,0 +1,55 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'employee_job_role' %}
+
+{# Set the page title #}
+{% block title %}
+    - Employee Job Role
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    - Employee Job Role           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Employee Job Role details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Employee job role title</th>
+                <td>{{ entity.employeejobroletitle }}</td>
+            </tr>
+            <tr>
+                <th>Employee job role overview</th>
+                <td>{{ entity.employeejobroleoverview }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hr_employee-job-role') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('hr_employee-job-role_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

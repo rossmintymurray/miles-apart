@@ -1,0 +1,287 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'goods_in' %}
+{% set current_page = 'process_delivery' %}
+
+{% block page_name %}
+    Process Delivery
+{% endblock %}
+
+{% block header_right_content %}
+
+    <button class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour margin_bottom" onclick="completeDeliveryProcess()">
+        Complete delivery process
+    </button>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Create and show the form #}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Delivered Product</legend>
+            {{ form_row(form.product_barcode) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+   
+    {{ form_end(form) }}
+
+    {# Show the content of the delivery note #}
+    {# Existing items on delivery note #}
+    {% if supplier_delivery.supplierdeliveryproduct|length > 0 %}
+
+        {# Show the table header #}
+        <table class="table table-striped small existing_products" id="existing_transfer_request_products" style="margin-top:20px">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product Code</th>
+                <th>Product name</th>
+                
+                <th class="text-center">Qty</th>
+                <th class="text-center">Remaining</th>
+                <th class="hide_on_xs text-center">Barcode</th>
+            </tr>
+                
+        </thead>
+        <tbody>
+            {% for product in supplier_delivery.supplierdeliveryproduct %}
+                {# Check if the delivery note qty is equal to the delivered qty, show green if true #}
+                 {% if product.getSupplierDeliveryQtyDelivered != NULL %}
+                    {% if product.getSupplierDeliveryQtyDelivered == product.getSupplierDeliveryNoteQty %}
+                        <tr id="product_row_{{ product.getId }}" class="table_row_green">
+                    {% else %}
+                        <tr id="product_row_{{ product.getId }}" class="table_row_amber">
+                    {% endif %}
+                {% else %}
+                    <tr id="product_row_{{ product.getId }}">
+                {% endif %}
+                 <td>
+                    {{ loop.index }}
+                </td>
+                <td>
+                    {{ product.getProduct.getProductSupplierCode }}
+                </td>
+                <td>
+                    {{ product.getProduct.getProductName }}
+                </td>
+                
+                <td class="text-center">
+                    {{ product.getSupplierDeliveryNoteQty }}
+                </td>
+                <td class="text-center">
+                    {{ product.getSupplierDeliveryQtyRemaining }}
+                </td>
+                
+                 <td class="hide_on_xs text-center">
+                    {{ product.getProduct.getProductBarcode }}
+                </td>
+                
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+     
+    <script>
+        //Set up the form submission handler
+        window.onload = function() {
+          $("form[name='milesapart_staffbundle_processsupplierdeliveryproduct']").submit(function(e){
+     
+             e.preventDefault(); //prevent submit
+             processDeliveryNoteProductScan();
+             
+          });
+        };
+
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_processsupplierdeliveryproduct_product_barcode').val(bar);
+
+            //Submit the form
+            processDeliveryNoteProductScan();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#milesapart_staffbundle_processsupplierdeliveryproduct_product_barcode').focus();
+        }
+
+        function processDeliveryNoteProductScan() {
+            //Take the barcode, make ajax call to check it exists and return the options screen
+            var barcode = $('#milesapart_staffbundle_processsupplierdeliveryproduct_product_barcode').val();
+
+            //Call the serverr code and return the formatted table from in html
+            $.ajax({
+                type: "POST",
+                url: "{{supplier_delivery.id }}/submit",
+                dataType: 'html',
+                data: { barcode : barcode },
+                success: function(data){
+                 
+
+                  //Show the product display
+                  $('#popup_form_response').css({
+                      "height": "98%",
+                      "max-height": "98%",
+                      "margin-top": "160px"
+                    });
+                  $('#popup_form_response_content').html(data);
+                  $('#popup_form_response').slideDown();
+
+                }, 
+                fail: function() {
+                    alert('failed');
+                }
+            });
+
+        }
+
+        function processDeliveryNoteProductDelivered(supplier_delivery_product_id) {
+            //Take the barcode, make ajax call to marke the product as delivered.
+
+            //Get the form values
+            var delivered_qty_unit = $('#delivered_qty_unit').val();
+            var delivered_qty_inners = $('#delivered_qty_inners').val();
+            var delivered_qty_outers = $('#delivered_qty_outers').val();
+
+            var new_price = $('#new_price').val();
+
+            var store_qty_unit = $('#store_qty_unit').val();
+            var store_qty_inners = $('#store_qty_inners').val();
+            var store_qty_outers = $('#store_qty_outers').val();
+
+            $('#popup_form_response').slideUp();
+
+            $.ajax({
+                type: "POST",
+                url: "{{supplier_delivery.id }}/submit/confirm",
+                dataType: 'json',
+                data: { delivered_qty_unit : delivered_qty_unit, delivered_qty_inners: delivered_qty_inners, delivered_qty_outers: delivered_qty_outers, new_price: new_price, store_qty_unit: store_qty_unit, store_qty_inners: store_qty_inners, store_qty_outers: store_qty_outers, supplier_delivery_product_id: supplier_delivery_product_id },
+                success: function(data){
+                 
+
+                    if(data['success'] == true) {
+                        //Check if all products were delivered
+                        var row = '#product_row_' + supplier_delivery_product_id + ' td';
+                        
+                        if(data['qty_remaining'] == 0) {
+                            //highlight the row green
+                           
+                            $(row).css({
+                                "background-color": "",
+                                "background-color": "#71a01e",
+                                "color": "#fff",
+
+                            });
+
+                            //Change the value to 0
+                            $(row + ":nth-child(5)").html(data['qty_remaining']);
+
+                        } else {
+                            //Not all products have been delivered so highlight amber
+                            
+                            $(row).css({
+                                "background-color": "",
+                                "background-color": "#eca41c",
+                                "color": "#fff",
+
+                            });
+
+                            //Change the value to remaining
+                           
+                            var cell = row + ":nth-child(5)";
+                            $(cell).html(data['qty_remaining']);
+                        }
+                        
+                    } 
+
+                }, 
+                fail: function() {
+                    alert('failed');
+                }
+            });
+
+             
+        }
+
+        function completeDeliveryProcess() {
+            //Check if all products have been delivered
+            $.ajax({
+                type: "POST",
+                url: "{{supplier_delivery.id }}/complete",
+                dataType: 'json',
+                data: {  },
+                success: function(data){
+                 
+
+                    if(data['success'] == true) {
+                        //If yes, mark as complete
+                        alert("Delivery has been marked complete.");
+                        
+                    } else {
+                        //If no, show alert box highlighting missing products, asking if ok to send email to supplier
+                        if (confirm('Products are missing, would you like to email supplier with shortage details?')) {
+                            //If yes, generate ajax call to send to supplier
+                             $.ajax({
+                                type: "POST",
+                                url: "{{supplier_delivery.id }}/complete/send-email",
+                                dataType: 'json',
+                                data: {  },
+                                success: function(data){
+                                    if(data['success'] == true) {
+                                        alert("Supplier has been emailed.");
+                                        alert(data['undelivered_array'].toString());
+                                    } else {
+                                        alert("There has been a problem sending the email.");
+                                    }
+
+                                }, 
+                                fail: function() {
+                                    alert('failed');
+                                }
+                            });
+                        } else {
+                            alert("Supplier will not be emailed.");
+                        }
+                    }
+
+                }, 
+                fail: function() {
+                    alert('failed');
+                }
+            });
+            
+
+
+           
+
+             
+
+             
+        }
+    </script>
+{% endblock %}

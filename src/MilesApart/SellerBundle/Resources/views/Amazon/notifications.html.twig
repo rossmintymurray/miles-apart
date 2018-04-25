@@ -1,0 +1,21 @@
+{# src/MilesApart/StaffBundle/Resources/views/Sellers/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'sellers' %}
+{% set current_page = 'notifications' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <h1>Supplier notifications</h1>
+
+    <h3>Suppliers by Pending Deliveries</h3>
+
+    <h3>Suppliers by Purchase Orders Pending</h3>
+
+    <h3>Suppliers by Stockouts</h3>
+
+    <h3>Suppliers by Returns</h3>
+
+   
+{% endblock %}

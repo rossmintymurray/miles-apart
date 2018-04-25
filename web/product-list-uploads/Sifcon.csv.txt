@@ -1,0 +1,5 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+Hamdmade Wooden Star Wreath ,5024418906155,XMR0252,3.00,Sifcon
+Hanging Decoration - Wooden Star & Heart,5024418888208,XMN0220,1.25,Sifcon
+Hnging White Wooden Decoration - Tree & Star,5024418555292,FG2011,1.99,Sifcon
+Wreath Craft Embelishment,5024418649564,XM1680,1.25,Sifcon

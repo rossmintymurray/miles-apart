@@ -1,0 +1,33 @@
+campaign_promotion-visit:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+campaign_promotion-visit_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:show" }
+
+campaign_promotion-visit_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:new" }
+
+campaign_promotion-visit_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:create" }
+    requirements: { _method: post }
+
+campaign_promotion-visit_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:edit" }
+
+campaign_promotion-visit_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:update" }
+    requirements: { _method: post|put }
+
+campaign_promotion-visit_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:PromotionVisit:delete" }
+    requirements: { _method: post|delete }

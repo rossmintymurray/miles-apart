@@ -1,0 +1,55 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customerorder.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'customer_order_product' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.id }} - Customer Order Product
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.id }} - Customer Order Product           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Customer Order Product details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Customer order product state modified</th>
+                <td>{{ entity.customerorderproductstatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Customer order product quantity</th>
+                <td>{{ entity.customerorderproductquantity }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer-order_customer-order-product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('customer-order_customer-order-product_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

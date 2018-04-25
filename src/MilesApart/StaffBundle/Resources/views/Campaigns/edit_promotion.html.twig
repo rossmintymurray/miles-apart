@@ -1,0 +1,62 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/new_campaign.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'edit_promotion' %}
+
+{% block page_name %}
+    Edit promotion
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Promotion Details</legend>
+            {{ form_row(edit_form.campaign) }}
+        </fieldset>
+        
+        <fieldset>
+            <legend class="text-muted">Promotion Details</legend>
+            {{ form_row(edit_form.promotion_name) }}
+            {{ form_row(edit_form.promotion_start_date) }}
+            {{ form_row(edit_form.promotion_end_date) }}
+            {{ form_row(edit_form.promotion_type) }}
+        </fieldset>
+        
+        <fieldset>
+            <legend class="text-muted">URLs</legend>
+            {{ form_row(edit_form.promotion_landing_page) }}
+            {{ form_row(edit_form.vanity_url_append_text) }}
+        </fieldset>
+
+         <fieldset>
+            <legend class="text-muted">Traffic source</legend>
+            {{ form_row(edit_form.traffic_source) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">On completion </legend>
+            {{ form_row(form.promotion_total_cost) }}
+        </fieldset>
+        
+        <fieldset>
+            {{ form_row(edit_form.submit) }}
+        </fieldset>
+        {{ form_rest(edit_form) }}
+    {{ form_end(edit_form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

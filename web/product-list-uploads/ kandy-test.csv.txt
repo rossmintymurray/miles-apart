@@ -1,0 +1,2 @@
+  co,desc,inner,outer,cost,innerp,barcode
+TY13,3pc DIG OUT DINO KIT IN PRINTED BOX,24,24,2.4,57.6,504555

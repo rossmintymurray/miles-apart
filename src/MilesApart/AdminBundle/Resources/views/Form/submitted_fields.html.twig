@@ -1,0 +1,47 @@
+{# src/MilesApart/AdminBundle/Resources/views/Form/fields.html.twig #}
+{# Form has failed validation so show correct fiedlds and validation errors #}
+{% block form_row %}
+	{% spaceless %}
+	
+	{# Check if the input has an error and therefore failed validation #}
+		{% if errors|length > 0 %}
+			
+			{# Errors exist so render row with error class #}
+		    <div class="form-group has-error">
+		        {{ form_label(form) }}
+		 		{{ form_widget(form) }}
+		 		{# Display the error #}
+			     <div class="form-error col-md-7 col-md-offset-4">
+			        {{ form_errors(form) }}
+			    </div>
+		    </div>
+		 
+		{# There are no errors #}   
+		{% else %}
+
+			{# The filed passed validation and is not empty #}
+			{% if form.vars.value is not sameas ("") %}
+			    <div class="form-group has-success">
+			        {{ form_label(form) }}
+			        
+			        {{ form_widget(form) }}
+			        <div class="form-error col-md-7 col-md-offset-4">
+			        	{{ form_errors(form) }}
+			    	</div>
+			    </div>
+			{% else %}
+
+				{# The filed passed validation as it was nit required but is empty  #}
+				 <div class="form-group has-warning">
+				        {{ form_label(form) }}
+				        
+				        {{ form_widget(form) }}
+				        <div class="form-error col-md-7 col-md-offset-4">
+				        	{{ form_errors(form) }}
+				    	</div>
+				    </div>
+			{% endif %}
+		{% endif %}
+
+	{% endspaceless %}
+{% endblock form_row %}

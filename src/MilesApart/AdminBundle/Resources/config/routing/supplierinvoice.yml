@@ -1,0 +1,33 @@
+finance_supplier-invoice:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_supplier-invoice_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:show" }
+
+finance_supplier-invoice_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:new" }
+
+finance_supplier-invoice_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:create" }
+    requirements: { _method: post }
+
+finance_supplier-invoice_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:edit" }
+
+finance_supplier-invoice_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:update" }
+    requirements: { _method: post|put }
+
+finance_supplier-invoice_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:SupplierInvoice:delete" }
+    requirements: { _method: post|delete }

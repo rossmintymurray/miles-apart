@@ -1,0 +1,202 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'new_product' %}
+
+{% block page_name %}
+    Edit Product
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Create and show the form #}
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+
+        
+        <fieldset>
+            <legend class="text-muted">Barcode</legend>
+            {{ form_row(edit_form.product_barcode) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Name & Code</legend>
+            {{ form_row(edit_form.product_name) }}
+            {{ form_row(edit_form.product_supplier_code) }}
+        </fieldset>
+       <fieldset>
+            <legend class="text-muted">Price</legend>
+             <div id="prices" data-prototype="{{ macros.widget_prototype(edit_form.product_price, 'Remove price')|escape }}">
+                {% for product_price in edit_form.product_price %}
+                    {{ form_widget(edit_form.product_price.vars.prototype)|e }}
+                    <li>{{ form_row(edit_form.product_price) }}</li>
+
+                {% endfor %}
+
+                
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="prices">Add price</a>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Suppliers & Costs</legend>
+
+            <div id="costs" data-prototype="{{ macros.widget_prototype(edit_form.product_supplier, 'Remove cost')|escape }}">
+                {% for product_supplier in edit_form.product_supplier %}
+                    {{ form_widget(edit_form.product_supplier.vars.prototype)|e }}
+                    <li>{{ form_row(edit_form.product_supplier) }}</li>
+                    
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="costs">Add cost</a>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Brand & VAT</legend>
+            {{ form_row(edit_form.brand) }}
+            {{ form_row(edit_form.vat_rate_type) }}
+
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Web Required Fields</legend>
+            {{ form_row(edit_form.is_product_online) }}
+            {{ form_row(edit_form.product_introduction) }}
+            {{ form_row(edit_form.product_description) }}
+            {{ form_row(edit_form.product_weight) }}
+            {{ form_row(edit_form.product_width) }}
+            {{ form_row(edit_form.product_height) }}
+            {{ form_row(edit_form.product_depth) }}
+            {{ form_row(edit_form.product_pack_quantity) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Features</legend>
+
+            <div id="features" data-prototype="{{ macros.widget_prototype(edit_form.product_feature, 'Remove feature')|escape }}">
+                {% for widget in edit_form.product_feature.children %}
+                    {{ macros.widget_prototype(widget, 'Remove feature') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="features">Add feature</a>
+            </div>
+        
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Attributes</legend>
+
+            <div id="attributes" data-prototype="{{ macros.widget_prototype(edit_form.attribute_value, 'Remove attribute')|escape }}">
+                {% for widget in edit_form.attribute_value.children %}
+                    {{ macros.widget_prototype(widget, 'Remove attribute') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="attributes">Add attribute</a>
+            </div>
+        
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Keywords</legend>
+
+            <div id="keywords" data-prototype="{{ macros.widget_prototype(edit_form.keyword, 'Remove keyword')|escape }}">
+                {% for widget in edit_form.keyword.children %}
+                    {{ macros.widget_prototype(widget, 'Remove keyword') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="keywords">Add keyword</a>
+            </div>
+        
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Inventory Requirements</legend>
+            {{ form_row(edit_form.product_outer_quantity) }}
+            {{ form_row(edit_form.product_inner_quantity) }}
+            {{ form_row(edit_form.product_outer_barcode) }}
+            {{ form_row(edit_form.product_inner_barcode) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Categories</legend>
+
+            <div id="categories" data-prototype="{{ macros.widget_prototype(edit_form.category, 'Remove category')|escape }}">
+                {% for petty_cash in edit_form.category %}
+                    {{ form_widget(edit_form.category.vars.prototype)|e }}
+                    <li>{{ form_row(edit_form.category) }}</li>
+                {% endfor %}
+                {% for widget in edit_form.category.children %}
+                    {{ macros.widget_prototype(widget, 'Remove category') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="categories">Add category</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Seasons</legend>
+
+            <div id="seasons" data-prototype="{{ macros.widget_prototype(edit_form.season, 'Remove season')|escape }}">
+                {% for widget in edit_form.season.children %}
+                    {{ macros.widget_prototype(widget, 'Remove season') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="seasons">Add season</a>
+            </div>
+        
+        </fieldset>
+
+       
+
+        <fieldset>
+            {{ form_row(edit_form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(edit_form) }}
+    
+    {{ form_end(edit_form) }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function onScanAppBarCodeData(bar,t,sid)
+{
+//'bar' is the retrieved Barcode
+//The below function will set the edit_form field
+//named 'barcode' to the value of 'bar'
+$('#milesapart_staffbundle_newproduct_product_barcode').val(bar);
+
+$('#milesapart_staffbundle_newproduct_product_barcode').change(function() {
+    $('#milesapart_staffbundle_newproduct_product_name').focus();
+});
+
+
+
+return true;
+}
+
+$( "#milesapart_staffbundle_newproduct_product_name" ).on( "blur", function() {
+var cp_value= $(this).val().toTitleCase() ;
+$(this).val(cp_value );
+});
+
+$( "#milesapart_staffbundle_newproduct_product_supplier_code" ).on( "blur", function() {
+  $( this ).val(function( i, val ) {
+    return val.toUpperCase();
+  });
+});
+
+
+</script>
+{% endblock %}

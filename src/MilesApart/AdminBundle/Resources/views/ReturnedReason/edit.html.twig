@@ -1,0 +1,53 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customerorder.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'returned_reason' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+  Edit Returned Reason
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+  Edit Returned Reason		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Edit existing Returned Reason
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Returned Reason</legend>
+            {{ form_row(edit_form.returned_reason) }}
+            {{ form_row(edit_form.returned_reason_description) }}
+            </fieldset>
+        {{ form_rest(edit_form) }}
+    </form>
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer-order_returned-reason') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

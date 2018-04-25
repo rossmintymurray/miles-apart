@@ -1,0 +1,122 @@
+SupplierCode,Name,Bvarcode
+2,Alyssum Carpet of Snow,8711117402503
+4,Antirrhinum Tom Thumb Mixd,8711117405207
+5,Aster Colour Carpet Mixed ,8711117410003
+6,Aster Ostrich Plume Mixed,8711117412502
+7,Aubretia Large Flower,8711117529200
+8,Begonia Semperflorens Mix ,8711117406501
+9,Bellis Perenis,8711117501008
+10,Busy Lizzie Dwarf F2 Mixed,8711117438007
+12,Calendula Art Shades,8711117408505
+13,Californian Poppy Esch Mixed,8711117429005
+14,Candytuft Fairy,8711117436706
+17,Cornflower Polka Dot ,8711117417507
+18,Cosmea,8711117422501
+19,Dahlia Unwins,8711117424000
+22,Forget Me Not Indigo ,8711117511007
+23,Foxglove Excelsior Mixed,8711117509004
+24,Geranium F2 Mixed,8711117456407
+25,Godetia Double Azalea Mixed,8711117431800
+26,Gypsophilia Elegans White,8711117433002
+27,Kids - Heartsease Johnny Jump Up,8711117519805
+29,Impatiens Walleriana Mixed,8711117437901
+30,Larkspur Giant Imperial Mix,8711117425205
+31,Lavender,8711117113508
+32,Lavetera Silver Cup,8711117443209
+33,Limnanthes 'Poached Egg',8711117443506
+35,Lobelia Colour cascade,8711117446200
+36,Lobelia Crystal Palace ,8711117445203
+37,Lobelia Sapphire ,8711117446002
+38,Kids - Lupin Blue,8711117447405
+39,Lupin Russells Hybrid,8711117542001
+40,Marigold African Cracker Jack,8711117473701
+41,Marigold french dwarf double,8711117475002
+42,Marigold petite mixed,8711117478508
+43,Mesembryanthemum,8711117449003
+44,Morning Glory Heavenly Blue,8711117439202
+46,Nasturtium empress of india,8711117481508
+48,Nasturtium Tall,8711117480006
+49,Nasturtium Tom Thumb,8711117481003
+50,Nemesia Carnival ,8711117451006
+52,Night scented stock,8711117448907
+53,Pansy Swiss Giant,8711117516002
+54,Pansy Winter Flowering,8711117515203
+55,Petunia F2 Colorama Mixed,8711117456902
+58,Poppy Shirley Red,8711117454700
+60,Stock Ten Weeks,8711117448501
+61,Sunflower Dwarf Sunspot,8711117434603
+63,Sunflower Giant Single ,8711117434207
+64,Kids - Tallest Sunflower,8711117434221
+65,Sweet Pea Bijou,8711117441007
+67,Sweet Pea Giant Waved,8711117441519
+68,Sweet Pea Royal Blue,8711117442509
+72,Sweet Pea Spencer Mixed,8711117441502
+73,Sweet William Single,8711117506508
+74,Tagetes Golden Gem,8711117479703
+75,Virginian Stock ,8711117418009
+111,Aubergine Black Beauty  ,8711148409458
+112,Beetroot Boltardy,8711117209805
+115,Beetroot Detroit 3,8711117210504
+116,Broccoli Autumn Calabrese,8711117223504
+117,Broccoli Early Purple Sprouting ,8711148409397
+118,Brussel Sprout Groninger,8711117234005
+120,Cabbage Cabeza Negra 2 ,8711148409403
+122,Cabbage Savoy  Ormskirk,8711148409410
+124,Cabbage Greyhound,8711117237501
+125,Capsicum C/Fornican Wonder,8711117243601
+127,Carrot Autumn King Late,8711117295006
+128,Carrot Chantenay Red Cored 2 ,8711148409427
+129,Carrot Early Nantes 2,8711117293507
+131,Cauliflower All Year Round,8711117221708
+133,Celery Pascal,8711117274001
+134,Chilli Cayenne,8711117245001
+135,Chilli Habanero ,8711148409441
+136,Chilli Jalapeno ,8711148409434
+138,Courgette Black Beauty,8711117296003
+139,Cress Common,8711117287001
+140,Cucumber Marketer,8711117218302
+141,Curly Kale Westland Autumn ,8711148409465
+143,Leek Musselburgh,8711117250005
+144,Lettuce All Year Round,8711117262503
+145,Lettuce Cos Paris White ,8711148409472
+146,Lettuce French Salad Leaves Mixed,8711117268802
+148,Lettuce Little Gem,8711117264118
+152,Onion Ailsa Craig ,8711148409489
+153,Onion Brunswick,8711117289005
+155,Onion White Lisbon,8711117288503
+156,Pak Choi White Stemmed ,8711148409496
+157,Parsnip White Gem,8711117244509
+158,Radish French Breakfast,8711117256700
+159,Radish Mixed,8711117256007
+160,Rockette Suzette,8711117259947
+163,Spinach Beet Perpetual,8711117275008
+165,Swede Best of All,8711117240907
+166,Sweetcorn Golden Bantam,8711117242000
+168,Cherry Tomato Cerise,8711117282600
+171,Tomato Moneymaker,8711117284505
+172,Tomato Roma ,8711148409502
+174,Turnip Purple Top White Globe,8711117259701
+175,Basil,8711117101505
+176,Lemon Basil ,8711148409519
+178,Chives,8711117102502
+180,Coriander,8711117112006
+181,Cumin ,8711148409526
+186,Mint,8711117117001
+187,Oregano,8711117115502
+188,Parsley Moss Curled 2,8711117246503
+189,Parsley Plain Leaved,8711117246008
+190,Rosemary,8711117118503
+191,Sage,8711117119005
+193,Thyme,8711117122500
+195,Broad Bean Bunyards Exhibition ,8711148409533
+198,Runner Bean Scarlet Emperor ,8711148409540
+199,Runner Bean White Emergo ,8711148409557
+201,Dwarf French Bean Purple Queen ,8711148409564
+206,Pea Kelvedon Wonder ,8711148409571
+207,Pea Hurst Green Shaft ,8711148409588
+210,Kids - Alpine Strawberry,8711117200000
+211,Kids - Carrot Paris Market Round,8711117293200
+212,Kids - Cress Curled,8711117287308
+213,Kids - Pumpkin Jack O'Lantern,8711117247753
+214,Kids - Runner Bean Painted Lady,8711117300106
+216,Kids - Water Melon Crimson Sweet,8711117242901

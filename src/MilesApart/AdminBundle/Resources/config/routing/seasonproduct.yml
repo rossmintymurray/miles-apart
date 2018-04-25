@@ -1,0 +1,33 @@
+category_season-product:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+category_season-product_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:show" }
+
+category_season-product_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:new" }
+
+category_season-product_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:create" }
+    requirements: { _method: post }
+
+category_season-product_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:edit" }
+
+category_season-product_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:update" }
+    requirements: { _method: post|put }
+
+category_season-product_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:SeasonProduct:delete" }
+    requirements: { _method: post|delete }

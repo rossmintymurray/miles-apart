@@ -1,0 +1,33 @@
+customer-order_returned-product:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer-order_returned-product_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:show" }
+
+customer-order_returned-product_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:new" }
+
+customer-order_returned-product_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:create" }
+    requirements: { _method: post }
+
+customer-order_returned-product_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:edit" }
+
+customer-order_returned-product_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:update" }
+    requirements: { _method: post|put }
+
+customer-order_returned-product_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ReturnedProduct:delete" }
+    requirements: { _method: post|delete }

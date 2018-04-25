@@ -1,0 +1,116 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/find_product.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'find_products' %}
+
+{% block page_name %}
+	Find product
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {# Create the form to find supplier #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+       {# Create and show the new admin user type #}
+        <fieldset>
+            
+            {{ form_row(form.product_barcode) }}
+            
+        </fieldset> 
+        <fieldset>
+            
+            {{ form_row(form.product_name) }}
+        </fieldset> 
+        <fieldset>
+            
+            {{ form_row(form.product_supplier_code) }}
+           
+        </fieldset> 
+
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>  
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+    
+
+    <div id="suppliers_table">
+
+    	<h3>{{ product_count }} products found</h3>
+
+	    {# Create table for suppliers #}
+	    <table class="table table-striped text-center">
+	        <thead>
+	            <tr class="text-center">
+	                <th class="text-left">Product Name</th>
+	                <th class="text-center">Cost</th>
+	                <th class="text-center">Price</th>
+	                <th class="text-center">Markup</th>
+	                <th class="text-center">In Stock</th>
+	                <th class="text-center">Supplier Code</th>
+	                <th class="text-left">Supplier</th>
+	                <th class="text-center">Actions</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        
+
+	    	{% for entity in products %}
+	    		<tr>
+	    			<td class="text-left">
+	    				<a href="{{ path('staff-products_view-product', {'id': entity.getId()}) }}">
+	    					{{ entity.getProductName() }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				{{ entity.getCurrentCostDisplay() }}
+	    			</td>
+	    			<td>
+	    				{{ entity.getCurrentPriceDisplay() }}
+	    			</td>
+	    			<td>
+	    				{{ entity.getCurrentMarkUpDisplay() }}
+	    			</td>
+	    			<td>
+	    				{{ entity.getCurrentStockLevel() }}
+	    			</td>
+	    			<td>
+	    				{{ entity.getProductSupplierCode() }}
+	    			</td>
+	    	        <td class="text-left">
+	                    {% if entity.getDefaultProductSupplierObject.getSupplierName is defined %}
+	                    	{{ entity.getDefaultProductSupplierObject.getSupplierShortName }}
+	                    {% endif %}
+	                </td>
+	                <td>
+	                    
+	                    <a href="{{ path('staff-products_edit-product', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+	                    
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+	                    	<span class="glyphicon glyphicon-trash"></span>
+	                    </a>
+	                </td>
+	    		</tr>
+	    	{% endfor %}
+	    	</tbody>
+	    </table>
+	</div>
+{% endblock %}
+

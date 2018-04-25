@@ -1,0 +1,73 @@
+staff-hr_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:HR:notifications" }
+                
+staff-hr_view-employees:
+    pattern:  /view-employees
+    defaults: { _controller: "MilesApartStaffBundle:HR:viewemployees" }
+
+staff-hr_view-employee-details:
+    pattern:  /view-employee-details/{id}
+    defaults: { _controller: "MilesApartStaffBundle:HR:viewemployeedetails" }
+    requirements:
+        _method:  PUT|GET
+
+staff-hr_new-employee:
+    pattern:  /new-employee
+    defaults: { _controller: "MilesApartStaffBundle:HR:newemployee" }
+
+staff-hr_new-employee-submit:
+    pattern:  /new-employee/submit
+    defaults: { _controller: "MilesApartStaffBundle:HR:newemployeesubmit" }
+
+staff-hr_edit-employee:
+    pattern:  /edit-employee/{id}
+    defaults: { _controller: "MilesApartStaffBundle:HR:editemployee" }
+    requirements:
+        _method:  PUT|GET
+
+staff-hr_edit-employee-submit:
+    pattern:  /edit-employee/{id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:HR:editemployeesubmit" }
+    requirements:
+        _method:  PUT|GET
+
+staff-hr_new-admin-user:
+    pattern:  /new-admin-user
+    defaults: { _controller: "MilesApartStaffBundle:HR:newadminuser" }
+
+staff-hr_new-admin-user-submit:
+    pattern:  /new-admin-user/submit
+    defaults: { _controller: "MilesApartStaffBundle:HR:newadminusersubmit" }
+
+staff-hr_add-work-week:
+    pattern:  /add-work-week
+    defaults: { _controller: "MilesApartStaffBundle:HR:addworkweek" }
+
+staff-hr_start-payroll:
+    pattern:  /start-payroll
+    defaults: { _controller: "MilesApartStaffBundle:HR:startpayroll" }
+
+staff-hr_wage-settings:
+    pattern:  /wage-settings
+    defaults: { _controller: "MilesApartStaffBundle:HR:wagesettings" }
+    requirements:
+        _method:  PUT|GET
+
+staff-hr_job-role-settings:
+    pattern:  /job-role-settings
+    defaults: { _controller: "MilesApartStaffBundle:HR:jobrolesettings" }
+    requirements:
+        _method:  PUT|GET
+
+staff-hr_statement-of-employment:
+    pattern:  /statement-of-employment/{id}
+    defaults: { _controller: "MilesApartStaffBundle:HR:printstatementofemployment", id: null }
+    requirements:
+        _method:  PUT|GET
+
+staff-hr_holiday-request-form:
+    pattern:  /holiday-request-form/{id}
+    defaults: { _controller: "MilesApartStaffBundle:HR:holidayrequestform", id: null }
+    requirements:
+        _method:  PUT|GET

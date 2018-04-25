@@ -1,0 +1,57 @@
+Code,Description,Barcode,Type,inner,outer,Tot Qty,UntPrc,Ord Prc(£)
+GSNETT,4 x 2m Garden Pond Netting,5013478555779,O,12,12,12,2.50,2.50
+E415X,15m Standard Garden Hose,5013478210937,O,8,8,8,2.95,2.95
+B609CP,Metal Watering Can Rose,5013478450593,O,12,48,48,0.75,0.75
+645SNCP,Spray Gun Set,5013478551771,O,12,24,24,1.55,1.55
+ADLR,Adjustable Lawn Rake,5013478663764,O,12,12,12,2.00,2.00
+GB1,Heavy Duty Garden Refuse Bag,5013478562388,O,12,12,12,2.55,2.55
+GB2,Garden Refuse Bag,5013478557544,O,24,48,48,0.55,0.55
+GB3,Heavy Duty Pop Up Garden Refuse Bag,5013478557551,O,12,12,12,2.10,2.10
+CANE1,20 Pack of 60cm Split Green Garden Canes,5013478122124,O,24,24,24,0.52,0.52
+HDNT250,250m Heavy Duty Natural Twine,5013478114457,O,12,12,12,1.50,1.50
+HDGJ,Green Jute Twine,5013478663641,O,12,48,48,0.52,0.52
+HDPT,200m Polypropylene Twine,5013478114464,O,36,36,36,0.82,0.82
+TRAY3,3 Pack Plant Pot Trays to fit up to 20cm(8in),5013478116994,O,24,24,24,0.52,0.52
+TRAY4,2 pk Plant Pot Trays to fit up to 26cm(10in),5013478117007,O,24,24,24,0.52,0.52
+U100,Compact Umbrella,5013478137548,O,48,48,48,1.00,1.00
+BF027,Green Standard Bird Nut Feeder,5013478140234,O,12,12,12,0.50,0.50
+BF007,Nut feeder with squirrel guard,5013478555328,O,6,6,6,2.50,2.50
+BF007S,Seed Feeder with Squirrel Guard,5013478117748,O,6,6,6,2.50,2.50
+BF007FB,Suet Fat Ball Feeder with Squirrel Guard,5013478117731,O,6,6,6,2.50,2.50
+BF016,Suet Cake Feeder,5013478112132,O,12,12,12,0.50,0.50
+BFSET4,Suet Cake Feeder with Suet Cake Feed,5013478131676,O,12,12,12,1.00,1.00
+BF10N,1kg Bag of Nuts,5013478150646,O,12,12,12,2.00,1.75
+BF36KGS,3.6kg Bag Wild Bird Seed,5013478138088,O,3,3,12,1.45,1.45
+BF10UB,10 pack of Suet Fat Balls,5013478150653,O,12,12,48,0.50,0.50
+BFSC04,Suet Cake with Wild Berries,5013478115669,O,24,24,24,0.50,0.50
+BFMW03,80g Bag Dried Mealworms Wild Bird Feed,5013478132529,O,60,60,60,0.75,0.75
+BFWF02,0.9kg Bag Robin Feed,5013478115768,O,6,6,12,1.00,1.00
+BFWF01,0.9kg Bag High Energy Wild Bird Feed,5013478115751,O,6,6,24,1.00,1.00
+PEST10,6 Pack Fly Paper Strips,5013478120069,O,24,48,48,0.50,0.50
+GSTH02,Traditional Wooden Thermometer,5013478555809,O,12,24,24,0.52,0.52
+BBDOG,Pack of 100 Disposable Doggy Poop Bags,5013478116727,O,24,24,24,0.50,0.50
+PEST11,4 Pack Plastic Fly Swats,5013478120076,O,24,48,48,0.50,0.50
+BBRS1,20 Pack of Blue Ultra Strong 40L Rubble Sacks,5013478119490,O,10,10,10,1.50,1.48
+BB5WB,5 Pack of Black Quality 440L Wheelie Bin Line,5013478130839,O,20,20,20,0.50,0.50
+BB50S,50 Pack of White Value 30L Swing Bin Liners,5013478125897,O,20,20,20,0.50,0.50
+BB100P,100 Pack of Value White 12L Pedal Bin Liners,5013478125903,O,20,20,20,0.50,0.50
+VBM,2 Pack Vacuum Storage Bags 70cmx90cm,5013478137593,O,12,24,24,1.55,1.55
+VBS,3 Pack Vacuum Storage Bag 50cmx70cm,5013478137586,O,12,24,24,1.55,1.55
+KGV2,100 Pack Powdered Vinyl Disposable Gloves - M,5013478118721,O,10,10,20,2.00,2.00
+KGV3,100 Pack Powdered Vinyl Disposable Gloves - L,5013478118738,O,10,10,20,2.00,2.00
+KGV4,100 Pack Powdered Vinyl Disposable Gloves - X,5013478118745,O,10,10,10,2.00,2.00
+KGV6,100 Pk Powder Free Vinyl Disposable Gloves -,5013478118769,O,10,10,20,2.00,2.00
+KGV7,100 Pk Powder Free Vinyl Disposable Gloves -,5013478118776,O,10,10,20,2.00,2.00
+KGV8,100 Pk Powder Free Vinyl Disposable Gloves -,5013478118783,O,10,10,10,2.00,2.00
+KC45FB,45 Pack of Extra Large Food Freezer Bags,5013478125934,O,20,20,20,0.50,0.50
+KC200FB,200 Pack of Large Sandwich Food Freezer Bags,5013478125958,O,20,20,20,0.50,0.50
+KC400FB,400 Pack of Medium Food Freezer Bags,5013478125972,O,20,20,20,0.50,0.50
+KCFOIL45,45cm x 15m Catering Aluminium Kitchen Foil,5013478111487,O,12,12,12,1.00,1.00
+KCF23,3 Pack of Extra Large Foil Pie Dishes,5013478119933,O,24,24,48,0.50,0.50
+KC15PB,15 Pack 6 inch White Polystyrene Disposable B,5013478124944,O,24,24,24,0.50,0.50
+MICRO4P,4 pack of 1L Food Containers,5013478150462,O,24,24,24,0.50,0.50
+MICROC,5 Pack of Microwave Food Containers with Lids,5013478119254,O,24,24,24,0.52,0.52
+KCF18,5 Pack of Jumbo Foil Food Containers With Lid,5013478119889,O,12,12,12,0.99,0.99
+KCF17,12 Pack of Small Foil Food Containers with Li,5013478119872,O,48,48,48,0.50,0.50
+KCF1,9 Pack of Medium Foil Food Containers and Lid,5013478557827,O,24,24,24,0.50,0.50
+KCF2,6 Pack of Large Foil Food Containers with Lid,5013478557834,O,12,12,12,0.50,0.50

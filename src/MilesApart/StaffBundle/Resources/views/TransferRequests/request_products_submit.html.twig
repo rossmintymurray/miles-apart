@@ -1,0 +1,24 @@
+{# Table row for newly added product #}
+{% for e in entity %}
+	<tr class="new-table-add">
+		<td>
+			{{ e.getProductName }}
+		</td>
+		<td>
+			{{ product_transfer_request.getProductTransferRequestQty }}
+		</td>
+		<td>
+			{{ product_transfer_request.getProduct.getProductSupplierCode }}
+		</td>
+		<td class="hide_on_xs_jquery">
+			{{ product_transfer_request.getProduct.getProductBarcode }}
+		</td>
+		<td>
+			{% for ps in e.getProductSupplier %}
+				{{ ps.getSupplier.getSupplierName }}
+			{% endfor %}
+		</td>
+	</tr>
+ {% endfor %}
+
+

@@ -1,0 +1,42 @@
+{# Import macro for prototype forms #}
+{% import '::prototype_macro.html.twig' as macros %}
+	
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+			<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        
+	        {# Modal title #}
+	        <div class="row">
+		   		<div class="col-md-12">	
+		   			<h4 class="modal-title" id="myModalLabel">{% block modal_title %}Modal Title{% endblock %}</h4>
+		   		</div>
+		   	</div>
+		   	<div class="row">
+		   		<div class="col-md-10">		
+		   			<h3>{% block product_name %}{% endblock %}</h3>
+		   		</div>
+		   		<div class="col-md-2">
+		   			{% block product_image %}{% endblock %}
+		   		</div>
+		   	</div>
+	        
+		</div>
+		<div class="modal-body">
+			{% block modal_content %}<p>One fine body&hellip;</p>{% endblock %}
+			</div>
+			<div class="modal-footer">
+				{% block modal_footer %}
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    			<button type="button" class="btn btn-primary">Save changes</button>
+    		{% endblock %}
+			</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+
+<script>
+	{% block Modal_javascripts %}{% endblock %}
+	initialiseFormCollections();
+</script>
+

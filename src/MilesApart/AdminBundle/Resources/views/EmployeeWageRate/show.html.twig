@@ -1,0 +1,59 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'employee_wage_rate' %}
+
+{# Set the page title #}
+{% block title %}
+    - Employee Wage Rate
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    - Employee Wage Rate           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Employee Wage Rate details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Employee wage rate hourly rate</th>
+                <td>{{ entity.employeewageratehourlyrate }}</td>
+            </tr>
+            <tr>
+                <th>Employee wage rate date created</th>
+                <td>{{ entity.employeewageratedatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Employee wage rate date effective</th>
+                <td>{{ entity.employeewageratedateeffective|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hr_employee-wage-rate') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('hr_employee-wage-rate_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

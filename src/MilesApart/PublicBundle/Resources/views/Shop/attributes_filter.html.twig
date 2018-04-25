@@ -1,0 +1,55 @@
+<div class="hide-for-large-up">
+
+	<button class="button small small-12" id="show_filters_button" onclick="showMobileFilters()">Show Filters</button>
+</div>
+<div class="show-for-large-up" id="product_filters">
+	{# Iterate over the array keys (for each attribute) #}
+	{% for key, attribute in attribute_values_array %}
+
+		{% set show_more = false %}
+		{% set show_total = 0 %}
+
+		{# Create the div to hold the attribute values #}
+		<div class="attribute_values_wrapper" id="wrapper_{{key}}">
+			<form id="attribute_filter" action="{{ path('miles_apart_public_shop', {'main_category': main_category_slug, 'sub_category' : sub_category_slug, 'specific_category' : specific_category_slug} )}}" method="get">
+			<h5>{{ key }}</h5>
+
+			{% for attribute_value in attribute %}
+
+				{# Check if loop index is over 10 #}
+				{% if loop.index == 11 %}
+					<div id="{{key}}_div" class="hidden">
+				{% endif %}
+				
+				<p>{{ attribute_value.attributevalue }} <input type="checkbox" name="{{ attribute_value.attribute.attributeslug }}[]" value="{{ attribute_value.attributevalueslug}}" 
+					{% for attributes_value in attributes %}
+						{% for value in attributes_value %}
+							{% if value == attribute_value.attributevalueslug %}
+								checked="checked"
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+					/>
+				</p>
+				{% if loop.index > 10 and loop.last %}
+					{# Define variables fo links #}
+					{% set show_more = true %}
+					{% set show_total = loop.index - 10 %}
+					</div>
+				{% endif %}
+			{% endfor %}
+
+			{# Show more link #}
+			{% if show_more == true %}
+				<a href="javascript:;" onclick="loadMoreAttributeFeatures('{{ key }}')" id="{{ key }}_link">See {{ show_total }} more</a> 
+			{% endif %}
+
+			<div class="clearfix"></div>
+		</div>
+	{% endfor %}
+
+	<input type="submit" class="button small small-12" value="Apply Filters" />
+
+
+	</form>
+</div>

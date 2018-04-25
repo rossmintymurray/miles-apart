@@ -1,0 +1,128 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/process_product_list_csv.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'process_product_list_csv' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    Process product list CSV 
+{% endblock %}
+
+{# Set the page sub header #}
+{% block page_sub_header %}
+    Add product list or catalogue data to the system
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-7 col-sm-6 col-xs-6">
+            <h2>Attributes</h2>
+            <p>Drag the attributes to the table headers of the imported data to map.
+            <h3>Required Attributes</h3>
+            <ul class="list-inline csv_mapping_list csv_mapping_list_required">
+                <li class="draggable3" class="ui-state-default" id="product_name">
+                    Product Name
+                </li>
+            </ul>
+
+            <h3>Optional Attributes</h3>
+            <ul class="list-inline csv_mapping_list">
+                <li class="draggable3" class="ui-state-default btn btn-warning" id="product_barcode">
+                    Product Barcode
+                </li>
+                <li class="draggable3"  class="ui-state-default" id="product_supplier_code">
+                    Product Supplier Code
+                </li>
+                <li class="draggable3" class="ui-state-default" id="product_outer_barcode">
+                   Product Outer Barcode
+                </li>
+                <li class="draggable3" id="product_inner_barcode">
+                    Product Inner Barcode
+                </li>
+                <li class="draggable3" id="product_outer_quantity">
+                   Product Outer Quantity
+                </li>
+                <li class="draggable3" id="product_inner_quantity">
+                    Product Inner Quantity
+                </li>
+                <li class="draggable3" id="product_cost">
+                    Product Cost
+                </li>
+                <li class="draggable3" id="product_price">
+                    Product Price
+                </li>
+                <li class="draggable3" id="product_weight">
+                    Product Weight
+                </li>
+                <li class="draggable3" id="product_height">
+                    Product Height
+                </li>
+                <li class="draggable3" id="product_depth">
+                    Product Depth
+                </li>
+                <li class="draggable3" id="product_width">
+                    Product Width
+                </li>
+                <li class="draggable3" id="product_pack_quantity">
+                    Product Pack Quantity
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-md-5 col-sm-6 col-xs-6">
+            <h2>Details</h2>
+            <h4><small>Supplier name:</small><br /> {{ supplier.suppliername }}</h4>
+            <h4><small>Items to import:</small><br /> </h4>
+            <button class="btn btn-primary" onclick="submitProductListCSV()">Submit</button>
+            <div id="save_csv_test">
+                <div id="loadingImage" style="display: none">
+                    <img src="{{ asset('images/icons/ajax-loader.gif') }}" alt="Ajax Loader" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="import_area">
+        <h2>Data to import</h2>
+
+        <table class="table table-striped table-bordered" id="import_table">
+            <thead>
+                {# Header array - set count #}
+                {% for headers in csvArray|slice(0, 1) %}
+                    <tr>
+                        {% for header in headers|keys %}
+
+                                
+                                <th class="droppable" id="{{ header }}">
+                                    {{ header }}
+                                </th>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </thead>
+
+            <tbody>
+                {# Data rows #}
+                {% for items in csvArray %}
+                    <tr>
+                        {% for item in items %}
+                            <td>
+                                {{ item }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}

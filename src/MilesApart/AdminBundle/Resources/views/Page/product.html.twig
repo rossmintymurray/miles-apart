@@ -1,0 +1,182 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/products.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'product_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Products
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Products			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing suppliers and supplier representatives
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'product_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_product') }}">Product overview</a>
+    </li>
+
+    {#Create the product left nav #}
+     <li class="nav-header">Product</li>
+     <li {% if current_page == 'product' %} class="active" {% endif %}>
+        <a href="{{ path('product_product') }}">View products</a>
+    </li>
+    <li {% if current_page == 'new_product' %} class="active" {% endif %}>
+        <a href="{{ path('product_product_new') }}">New product</a>
+    </li>
+
+    {#Create the product cost left nav #}
+     <li class="nav-header">Product Cost</li>
+     <li {% if current_page == 'product_cost' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-cost') }}">View product costs</a>
+    </li>
+    <li {% if current_page == 'new_product_cost' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-cost_new') }}">New product cost</a>
+    </li>
+
+    {#Create the product left nav #}
+     <li class="nav-header">Product Image</li>
+     <li {% if current_page == 'product_image' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-image') }}">View product images</a>
+    </li>
+    <li {% if current_page == 'new_product_image' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-image_new') }}">New product image</a>
+    </li>
+
+    {#Create the attribute left nav #}
+     <li class="nav-header">Attribute</li>
+     <li {% if current_page == 'attribute' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute') }}">View attributes</a>
+    </li>
+    <li {% if current_page == 'new_attribute' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute_new') }}">New attribute</a>
+    </li>
+
+    {#Create the attribute value left nav #}
+     <li class="nav-header">Attribute Value</li>
+     <li {% if current_page == 'attribute_value' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute-value') }}">View attribute values</a>
+    </li>
+    <li {% if current_page == 'new_attribute_value' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute-value_new') }}">New attribute value</a>
+    </li>
+
+    {#Create the attribute value left nav #}
+     <li class="nav-header">Attribute Value Product</li>
+     <li {% if current_page == 'attribute_value_product' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute-value-product') }}">View attribute value product</a>
+    </li>
+    <li {% if current_page == 'new_attribute_value_product' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute-value-product_new') }}">New attribute value product</a>
+    </li>
+
+    {#Create the attribute unit of measurement left nav #}
+     <li class="nav-header">Attribute Unit Of Measurement</li>
+     <li {% if current_page == 'attribute_unit_of_measurement' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute-unit-of-measurement') }}">View units of measurement</a>
+    </li>
+    <li {% if current_page == 'new_attribute_unit_of_measurement' %} class="active" {% endif %}>
+        <a href="{{ path('product_attribute-unit-of-measurement_new') }}">New unit of measurement</a>
+    </li>
+
+    {#Create the brand left nav #}
+     <li class="nav-header">Brand</li>
+     <li {% if current_page == 'brand' %} class="active" {% endif %}>
+        <a href="{{ path('product_brand') }}">View brands</a>
+    </li>
+    <li {% if current_page == 'new_brand' %} class="active" {% endif %}>
+        <a href="{{ path('product_brand_new') }}">New brand</a>
+    </li>
+
+    {#Create the product question left nav #}
+     <li class="nav-header">Product Question</li>
+     <li {% if current_page == 'product_question' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-question') }}">View product questions</a>
+    </li>
+    <li {% if current_page == 'new_product_question' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-question_new') }}">New product question</a>
+    </li>
+    
+    {#Create the product answer left nav #}
+     <li class="nav-header">Product Answer</li>
+     <li {% if current_page == 'product_answer' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-answer') }}">View product answers</a>
+    </li>
+    <li {% if current_page == 'new_product_answer' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-answer_new') }}">New product answer</a>
+    </li>
+
+    {#Create the transfer request left nav #}
+     <li class="nav-header">Transfer Request</li>
+     <li {% if current_page == 'transfer_request' %} class="active" {% endif %}>
+        <a href="{{ path('product_transfer-request') }}">View transfer requests</a>
+    </li>
+    <li {% if current_page == 'new_transfer_request' %} class="active" {% endif %}>
+        <a href="{{ path('product_transfer-request_new') }}">New transfer request</a>
+    </li>
+
+    {#Create the transfer request state left nav #}
+     <li class="nav-header">Transfer Request State</li>
+     <li {% if current_page == 'transfer_request_state' %} class="active" {% endif %}>
+        <a href="{{ path('product_transfer-request-state') }}">View transfer request states</a>
+    </li>
+    <li {% if current_page == 'new_transfer_request_state' %} class="active" {% endif %}>
+        <a href="{{ path('product_transfer-request-state_new') }}">New transfer request state</a>
+    </li>
+
+    {#Create the product transfer request left nav #}
+     <li class="nav-header">Product Transfer Request</li>
+     <li {% if current_page == 'product_transfer_request' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-transfer-request') }}">View product transfer requests</a>
+    </li>
+    <li {% if current_page == 'new_product_transfer_request' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-transfer-request_new') }}">New product transfer request</a>
+    </li>
+
+    {#Create the product transfer request state left nav #}
+     <li class="nav-header">Product Transfer Request State</li>
+     <li {% if current_page == 'product_transfer_request_state' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-transfer-request-state') }}">View product transfer request states</a>
+    </li>
+    <li {% if current_page == 'new_product_transfer_request_state' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-transfer-request-state_new') }}">New product transfer request state</a>
+    </li>
+    
+    {#Create the product supplier left nav #}
+     <li class="nav-header">Product Supplier</li>
+     <li {% if current_page == 'product_supplier' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-supplier') }}">View product suppliers</a>
+    </li>
+    <li {% if current_page == 'new_product_supplier' %} class="active" {% endif %}>
+        <a href="{{ path('product_product-supplier_new') }}">New product supplier</a>
+    </li>
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}
+

@@ -1,0 +1,185 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'add_product_to_print_list' %}
+
+{% block page_name %}
+    {{ business_premises.getBusinessPremisesName}} - Add Product To Print List 
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+   
+    <h3>Select the print type</h3>
+    <form class="form-horizontal admin_form add_product_to_list_form" name="print_request_type_form">
+        <fieldset>
+            <div class="form-group">
+                <label for="print_request_type" class="col-md-4 col-xs-12 control-label">Print type</label>
+                <select onchange="updatePrintRequestType()" class="col-md-3 col-xs-12 form-control" name="print_request_type" id="print_request_type">
+                    <option value="" disabled selected>Please select...</option>
+                    {% for print_request_type in print_request_types %}
+                        <option id="{{print_request_type.getId }}">{{ print_request_type.getPrintRequestTypeName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </fieldset>
+    </form>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            {{ form_row(form.product_barcode) }}
+            {{ form_row(form.product_name) }}
+
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+    <div id="found_products_display"></div>
+
+    <div id="add_to_transfer_request">
+        <div id="loadingImage" style="display: none"></div>
+    </div>
+    <div class="border-top"></div>
+    <div class="row">
+        <div class="col-md-10 col-xs-9">
+            <h3>Prices To Be Printed</h3>
+        </div>
+    </div>
+    {# Set up the existing products table #}
+    <table class="table table-striped small existing_products" id="existing_unprinted_prices">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Print Qty</th>
+                <th>Product Code</th>
+                <th class="hide_on_xs">Barcode</th>
+                <th>Supplier</th>
+                
+                
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+
+                {# If its a product #}
+                {% if entity.getProduct != null %}
+                    <tr id="product_row_{{ entity.getId }}">
+                        <td>
+                            {{ entity.getProduct.getProductName }}
+                        </td>
+                        <td>
+                            {{ entity.getProduct.getCurrentPriceDisplay }}
+                        </td>
+                        <td>
+                            {{ entity.getPrintRequestQty }}
+                        </td>
+                        <td>
+                            {{ entity.getProduct.getProductSupplierCode }}
+                        </td>
+                         <td class="hide_on_xs">
+                            {{ entity.getProduct.getProductBarcode }}
+                        </td>
+                        
+                        <td>
+                            {% for suppliers in entity.getProduct.getProductSupplier %}
+                                {{ suppliers.getSupplier.getSupplierName }}
+                            {% endfor %}
+                        </td>
+                        
+                    </tr>
+                {% else %}
+                    {# If it's a product group #}
+                    <tr id="product_row_{{ entity.getId }}">
+                        <td>
+                            {{ entity.getProductGroup.getProductGroupName }}
+                        </td>
+                        <td>
+                            {{ entity.getProductGroup.getProductGroupDefaultPriceDisplay }}
+                        </td>
+                        <td>
+                            {{ entity.getPrintRequestQty }}
+                        </td>
+                        <td>
+                            N/A
+                        </td>
+                         <td class="hide_on_xs">
+                            {{ entity.getProductGroup.getProductGroupBarcode }}
+                        </td>
+                        
+                        <td>
+                            N/A
+                        </td>
+                        
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+     
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_addproducttolist_product_barcode').val(bar);
+
+            
+            //Submit the form
+            processAddProductToPrintListAdd();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#milesapart_staffbundle_addproducttolist_product_barcode').focus();
+        }
+
+        function updatePrintRequestType() {
+            
+            //Get the print request type id
+            var printRequestId = $('#print_request_type').val();
+           
+            $.ajax({
+            type: "POST",
+            url: "./../update-print-request-type",
+            dataType: "html",
+            data: {printRequestId : printRequestId},
+            success : function(data) 
+            {
+               
+              
+
+            
+            }, 
+            fail: function() {
+               alert('failed');
+            }
+         });
+        }
+    </script>
+{% endblock %}

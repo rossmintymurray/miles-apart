@@ -1,0 +1,42 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{#{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+#}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'price_check' %}
+
+
+{% block page_name %}
+    New Price
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Create and show the form #}
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_pricecheck_product_barcode').val(bar);
+
+            //Submit the form
+            document.forms[0].submit();
+
+            return true;
+        }
+    </script>
+{% endblock %}

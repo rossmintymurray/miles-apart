@@ -1,0 +1,33 @@
+hr_employee-wage-rate:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+hr_employee-wage-rate_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:show" }
+
+hr_employee-wage-rate_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:new" }
+
+hr_employee-wage-rate_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:create" }
+    requirements: { _method: post }
+
+hr_employee-wage-rate_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:edit" }
+
+hr_employee-wage-rate_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:update" }
+    requirements: { _method: post|put }
+
+hr_employee-wage-rate_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWageRate:delete" }
+    requirements: { _method: post|delete }

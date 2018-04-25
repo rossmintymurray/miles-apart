@@ -1,0 +1,316 @@
+staff-products_price-check:
+    pattern:  /price-check
+    defaults: { _controller: "MilesApartStaffBundle:Products:pricecheck" }
+
+staff-products_price-check-submit:
+    pattern:  /price-check-submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:pricechecksubmit" }
+    requirements: { _method: post|get }
+
+staff-products_print-prices-and-labels:
+    pattern:  /print-prices-and-labels
+    defaults: { _controller: "MilesApartStaffBundle:Products:printpricesandlabels" }
+
+staff-products_print-requested-prices:
+    pattern:  /print-requested-prices
+    defaults: { _controller: "MilesApartStaffBundle:Products:printrequestedprices" }
+
+staff-products_print-outstanding-prices:
+    pattern:  /print-outstanding-prices/{price_type}
+    defaults: { _controller: "MilesApartStaffBundle:Products:printoutstandingprices", price_type: null }
+
+staff-products_new-price:
+    pattern:  /new-price
+    defaults: { _controller: "MilesApartStaffBundle:Products:newprice" }
+
+staff-products_new-price-submit:
+    pattern:  /new-price-submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:newpricesubmit" }
+
+staff-products_update-price:
+    pattern:  /update-price
+    defaults: { _controller: "MilesApartStaffBundle:Products:updateprice" }
+
+staff-products_update-short-name-and-subtitle:
+    pattern:  /update-short-name-and-subtitle
+    defaults: { _controller: "MilesApartStaffBundle:Products:updateshortnameandsubtitle" }
+
+staff-products_update-supplier:
+    pattern:  /update-supplier
+    defaults: { _controller: "MilesApartStaffBundle:Products:updatesupplier" }
+
+staff-products_new-product:
+    pattern:  /new-product
+    defaults: { _controller: "MilesApartStaffBundle:Products:newproduct" }
+
+staff-products_find-product:
+    pattern:  /find-product
+    defaults: { _controller: "MilesApartStaffBundle:Products:findproduct" }
+
+staff-products_find-product-submit:
+    pattern:  /find-product-submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:findproductsubmit" }
+
+staff-products_edit-product:
+    pattern:  /edit-product/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Products:editproduct" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_view-product:
+    pattern:  /view-product/{id}
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewproduct" }
+    requirements:
+        _method:  GET|POST|PUT
+
+staff-products_view-product_image-upload:
+    pattern:  /view-product/{id}/upload-image
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewproductimageupload" }
+    requirements:
+        _method:  GET|POST|PUT
+
+staff-products_view-product-submit:
+    pattern:  /view-product/{id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewproductsubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_edit-product-submit:
+    pattern:  /edit-product/{id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:editproductsubmit" }
+    requirements:
+        _method:  GET|POST|PUT
+
+staff-products_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:Products:notifications" }
+
+staff-products_new-product-submit:
+    pattern:  /new-product-submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:newproductsubmit" }
+
+staff-products_import-product-list-csv:
+    pattern:  /csv-import/import
+    defaults: { _controller: "MilesApartStaffBundle:Products:importproductlistcsv" }
+
+staff-products_process-product-list-csv:
+    pattern:  /csv-import/process
+    defaults: { _controller: "MilesApartStaffBundle:Products:processproductlistcsv" }
+
+staff-products_dedupe-product-list-csv:
+    pattern:  /csv-import/dedupe
+    defaults: { _controller: "MilesApartStaffBundle:Products:dedupeproductlistcsv" }
+
+staff-products_csv-import-mapping:
+    pattern:  /csv-import/mapping
+    defaults: { _controller: "MilesApartStaffBundle:Products:newcsvmapping" }
+
+staff-products_view-stockouts:
+    pattern:  /view-stockouts
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewstockouts" }
+
+staff-products_start-stocktake:
+    pattern:  /start-stocktake
+    defaults: { _controller: "MilesApartStaffBundle:Products:startstocktake" }
+
+staff-products_start-stocktake-new:
+    pattern:  /start-stocktake/new
+    defaults: { _controller: "MilesApartStaffBundle:Products:startstocktakenew" }
+
+staff-products_start-stocktake-process:
+    pattern:  /start-stocktake/process
+    defaults: { _controller: "MilesApartStaffBundle:Products:startstocktakeprocess" }
+
+staff-products_add-stocktake-product-submit:
+    pattern:  /add-stocktake-product/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:addstocktakeproductsubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_add-stocktake-product-submit-new-product:
+    pattern:  /add-stocktake-product/submit-new-product
+    defaults: { _controller: "MilesApartStaffBundle:Products:addstocktakeproductsubmitnewproduct" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_stocktake-product-new-qty:
+    pattern:  /add-stocktake-product/submit-new-qty
+    defaults: { _controller: "MilesApartStaffBundle:Products:stocktakeproductnewqty" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_view-stocktakes:
+    pattern:  /view-stocktakes
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewstocktakes" }
+
+staff-products_complete-stocktake:
+    pattern:  /complete-stocktake
+    defaults: { _controller: "MilesApartStaffBundle:Products:completestocktake" }
+
+staff-products_confirm-stocktake-completion:
+    pattern:  /complete-stocktake/confirm
+    defaults: { _controller: "MilesApartStaffBundle:Products:confirmcompletestocktake" }
+
+staff-products_process-returns:
+    pattern:  /process-returns
+    defaults: { _controller: "MilesApartStaffBundle:Products:processreturns" }
+
+staff-products_process-returns-submit:
+    pattern:  /process-returns/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:processreturnssubmit" }
+        
+staff-products_select-stock-take-shelf:
+    pattern:  /select-stocktake-shelf
+    defaults: { _controller: "MilesApartStaffBundle:Products:selectstocktakeshelf" }
+
+staff-products_pack-up-seasonal:
+    pattern:  /pack-up-seasonal
+    defaults: { _controller: "MilesApartStaffBundle:Products:packupseasonal" }
+
+staff-products_view-seasonal-box-contents:
+    pattern:  /pack-up-seasonal/box-contents
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewseasonalboxcontents" }
+
+staff-products_view-seasonal-box-contents-submit:
+    pattern:  /pack-up-seasonal/box-contents/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewseasonalboxcontentssubmit" }
+
+staff-products_stored-season-products:
+    pattern:  /pack-up-seasonal/stored-season-products
+    defaults: { _controller: "MilesApartStaffBundle:Products:storedseasonproducts" }
+
+staff-products_stored-season-products-display:
+    pattern:  /pack-up-seasonal/stored-season-products-display
+    defaults: { _controller: "MilesApartStaffBundle:Products:storedseasonproductsdisplay" }
+
+staff-products_stored-season-products-empty:
+    pattern:  /pack-up-seasonal/empty-box
+    defaults: { _controller: "MilesApartStaffBundle:Products:emptyseasonalstoragebox" }
+
+staff-products_pack-up-seasonal-submit:
+    pattern:  /pack-up-seasonal/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:packupseasonalsubmit" }
+
+staff-products_seasonal-storage-box-select-submit:
+    pattern:  /pack-up-seasonal/seasonal-storage-box-select/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:seasonalstorageboxselectsubmit" }
+
+staff-products_add-product-to-seasonal-storage-box:
+    pattern:  /pack-up-seasonal/add-product-to-seasonal-storage-box
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoseasonalstoragebox" }
+    
+staff-products_new-seasonal-storage-box:
+    pattern:  /pack-up-seasonal/new-seasonal-storage-box
+    defaults: { _controller: "MilesApartStaffBundle:Products:newseasonalstoragebox" }
+    
+staff-products_add-product-to-seasonal-storage-box-submit:
+    pattern:  /pack-up-seasonal/add-product-to-seasonal-storage-box/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoseasonalstoragebox" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_seasonal-storage-box-new-qty:
+    pattern:  /pack-up-seasonal/add-product-to-seasonal-storage-box/submit-new-qty
+    defaults: { _controller: "MilesApartStaffBundle:Products:seasonalstorageboxproductnewqty" }
+
+staff-products_seasonal-storage-box-new-product:
+    pattern:  /pack-up-seasonal/add-product-to-seasonal-storage-box/submit-new-product
+    defaults: { _controller: "MilesApartStaffBundle:Products:seasonalstorageboxproductnewproduct" }
+
+staff-products_add-stocktake-seasonal-storage-box:
+    pattern:  /add-stocktake-seasonal-storage-box/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:addstocktakeseasonalstoragebox" }
+    requirements:
+        _method:  GET|POST
+
+staff-products-multiple-products-select-submit:
+    pattern:  /pack-up-seasonal/add-product-to-seasonal-storage-box/submit-multiple-products
+    defaults: { _controller: "MilesApartStaffBundle:Products:seasonalstorageboxmultipleproductsselectsubmit" }
+
+staff-products-multiple-products-product-search:
+    pattern:  /pack-up-seasonal/product-search
+    defaults: { _controller: "MilesApartStaffBundle:Products:productsearch" }
+
+staff-products_add-product-to-print-list-business-premises-selected:
+    pattern:  /add-product-to-print-list/select-premises/{business_premises_slug}
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoprintlistbusinesspremisesselected" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_add-product-to-print-list-submit:
+    pattern:  /add-product-to-print-list/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoprintlistsubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_get-outstanding-medium-price-label:
+    pattern:  /get-outstanding-medium-price-label
+    defaults: { _controller: "MilesApartStaffBundle:Products:getoutstandingmediumpricelabel" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_get-outstanding-hook-label:
+    pattern:  /get-outstanding-hook-label
+    defaults: { _controller: "MilesApartStaffBundle:Products:getoutstandinghooklabel" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_add-product-to-print-list:
+    pattern:  /add-product-to-print-list
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoprintlist" }
+
+staff-products_update-print-request-type:
+    pattern:  /add-product-to-print-list/update-print-request-type
+    defaults: { _controller: "MilesApartStaffBundle:Products:updateprintrequesttype" }
+
+staff-products_add-product-to-print-list-new-qty:
+    pattern:  /add-product-to-print-list/submit-new-qty
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoprintlistnewqty" }
+
+staff-products_add-product-to-print-list-new-product:
+    pattern:  /add-product-to-print-list/submit-new-product
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoprintlistnewproduct" }
+
+staff-products_add-product-to-print-list-multiple-products:
+    pattern:  /add-product-to-print-list/submit-multiple-products
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproducttoprintlistmultipleproductsselectsubmit" }
+
+staff-products_add-product-to-print-list-multiple-products-product-search:
+    pattern:  /add-product-to-print-list/product-search
+    defaults: { _controller: "MilesApartStaffBundle:Products:productsearch" }
+
+staff-products_new-product-image:
+    pattern:  /new-product-image
+    defaults: { _controller: "MilesApartStaffBundle:Products:newproductimage" }
+
+staff-products_new-product-group:
+    pattern:  /new-product-group
+    defaults: { _controller: "MilesApartStaffBundle:Products:newproductgroup" }
+
+staff-products_new-product-group-submit:
+    pattern:  /new-product-group-submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:newproductgroupsubmit" }
+
+staff-products_view-product-groups:
+    pattern:  /view-product-groups
+    defaults: { _controller: "MilesApartStaffBundle:Products:viewproductgroups" }
+
+staff-products_add-product-group-to-print-request:
+    pattern:  /add-product-group-to-print-request
+    defaults: { _controller: "MilesApartStaffBundle:Products:addproductgrouptoprintrequest" }
+
+staff-products_answer-question:
+    pattern:  /answer-question
+    defaults: { _controller: "MilesApartStaffBundle:Products:answerproductquestion" }
+
+staff-products_answer-question-submit:
+    pattern:  /answer-question/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:answerproductquestionsubmit" }
+
+staff-products_approve-review:
+    pattern:  /approve-review
+    defaults: { _controller: "MilesApartStaffBundle:Products:approvereview" }
+
+staff-products_approve-review-submit:
+    pattern:  /approve-review/submit
+    defaults: { _controller: "MilesApartStaffBundle:Products:approvereviewsubmit" }

@@ -1,0 +1,73 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/find_supplier.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'customers' %}
+{% set current_page = 'view_customer' %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    View Customer
+{% endblock %}
+
+{% block page_content %}
+    
+   	<div class="row">
+	   	<div class="col-md-4">
+	   		<div class="well">
+	   			<h4>Name</h4>
+	   			{{ customer|ladybug_dump }}
+	   		</div>
+	   	</div>
+
+	   	<div class="col-md-4">
+	   		<div class="well">
+	   			<h4>Joined</h4>
+	   		</div>
+	   	</div>
+
+	   	<div class="col-md-4">
+	   		<div class="well">
+	   			<h4>J</h4>
+	   		</div>
+	   	</div>
+	</div>
+
+	<div class="row">
+	   	<div class="col-md-12">
+	   		<div class="well">
+	   			<h4>Orders</h4>
+	   		</div>
+	   	</div>
+
+	   	<div class="col-md-6">
+	   		<div class="well">
+	   			<h4>Contact</h4>
+	   		</div>
+	   	</div>
+	</div>
+
+	<div class="row">
+
+	   	<div class="col-md-6">
+	   		<div class="well">
+	   			<h4>Addresses</h4>
+	   			<div class="row">
+		   			{% for address in customer.customeraddress %}
+		   				<div class="col-md-4">
+			   				<address>
+			   					{{ address.customeraddressline1 }}<br />
+			   					{{ address.customeraddressline2 }}<br />
+			   					{{ address.customeraddresstown }}<br />
+			   					{{ address.customeraddresscounty }}<br />
+			   					{{ address.customeraddresspostcode }}
+			   				</address>
+			   			</div>
+		   			{% endfor %}
+			   	</div>
+	   		</div>
+	   	</div>
+	</div>
+
+{% endblock %}

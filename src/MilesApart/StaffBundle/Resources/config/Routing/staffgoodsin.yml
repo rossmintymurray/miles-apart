@@ -1,0 +1,79 @@
+staff-goods-in_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:notifications" }
+                
+staff-goods-in_new-delivery-note:
+    pattern:  /new-delivery-note
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:newdeliverynote" }
+
+staff-goods-in_new-delivery-note-submit:
+    pattern:  /new-delivery-note/submit
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:newdeliverynotesubmit" }
+
+staff-goods-in_add-products-to-delivery-note:
+    pattern:  /new-delivery-note/{supplier_delivery_id}/add-products/
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:addproductstodeliverynote" }
+
+staff-goods-in_add-products-to-delivery-note-submit:
+    pattern:  /new-delivery-note/{supplier_delivery_id}/add-products/submit
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:addproductstodeliverynoteprocess" }
+
+staff-goods-in_complete_delivery_note:
+    pattern:  /new-delivery-note/{supplier_delivery_id}/complete
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:completedeliverynote" }
+
+staff-goods-in_view-delivery-note:
+    pattern:  /view-delivery-note/{supplier_delivery_id}
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:viewdeliverynote" }
+
+staff-goods-in_process-delivery:
+    pattern:  /process-delivery/{supplier_delivery_id}
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:processdelivery" }
+
+staff-goods-in_process-delivery-submit:
+    pattern:  /process-delivery/{supplier_delivery_id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:processdeliverysubmit" }
+
+staff-goods-in_process-delivery-submit-confirm:
+    pattern:  /process-delivery/{supplier_delivery_id}/submit/confirm
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:processdeliverysubmitconfirm" }
+
+staff-goods-in_complete_delivery_note_process:
+    pattern:  /process-delivery/{supplier_delivery_id}/complete
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:processdeliverycomplete" }
+
+staff-goods-in_complete_delivery_note_process_send_email:
+    pattern:  /process-delivery/{supplier_delivery_id}/complete/send-email
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:processdeliverycompletesendemail" }
+
+staff-goods-in_book-in-delivery:
+    pattern:  /book-in-delivery
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:bookindelivery" }
+
+staff-goods-in_view-deliveries:
+    pattern:  /view-deliveries
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:viewdeliveries" }
+
+staff-goods-in_book-in-delivery-submit:
+    pattern:  /book-in-delivery/submit
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:bookindeliverysubmit" }
+
+staff-goods-in_store-deliveries:
+    pattern:  /store-deliveries
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:storedeliveries" }
+
+staff-goods-in_store-delivery:
+    pattern:  /store-delivery/delivery/{supplier_delivery_id}
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:storedeliverydeliveryselected" }
+
+staff-goods-in_store-delivery-submit:
+    pattern:  /store-delivery/delivery/{supplier_delivery_id}/submit
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:storedeliverysubmit" }
+
+staff-goods-in_store-delivery-process:
+    pattern:  /store-delivery/store-delivery-process
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:storedeliveryprocess" }
+
+staff-goods-in_select-storage-shelf:
+    pattern:  /store-delivery/select-storage-shelf
+    defaults: { _controller: "MilesApartStaffBundle:GoodsIn:selectstorageshelf" }

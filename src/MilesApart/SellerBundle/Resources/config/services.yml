@@ -1,0 +1,7 @@
+parameters:
+#    miles_apart_seller.example.class: MilesApart\SellerBundle\Example
+
+services:
+#    miles_apart_seller.example:
+#        class: %miles_apart_seller.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

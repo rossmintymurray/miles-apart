@@ -1,0 +1,70 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/products.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'category' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'category_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Categories
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Categories			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing main, sub and specific categories
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'category_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_category') }}">Category overview</a>
+    </li>
+
+    {#Create the main category left nav #}
+     <li class="nav-header">Category</li>
+     <li {% if current_page == 'category' %} class="active" {% endif %}>
+        <a href="{{ path('category_category') }}">View categories</a>
+    </li>
+    <li {% if current_page == 'new_category' %} class="active" {% endif %}>
+        <a href="{{ path('category_category_new') }}">New category</a>
+    </li>
+
+    {#Create the main category left nav #}
+     <li class="nav-header">Season</li>
+     <li {% if current_page == 'season' %} class="active" {% endif %}>
+        <a href="{{ path('category_season') }}">View seasons</a>
+    </li>
+    <li {% if current_page == 'new_season' %} class="active" {% endif %}>
+        <a href="{{ path('category_season_new') }}">New season</a>
+    </li>
+
+    
+
+    
+
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}
+

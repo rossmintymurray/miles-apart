@@ -1,0 +1,50 @@
+{# src/MilesApart/StaffBundle/Resources/views/layout.html.twig #}
+{% extends '::print_base.html.twig' %}
+
+{# Include stylesheets #}
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/business_headed.css') }}">
+{% endblock %}
+
+{% block page_header %}
+
+	{# Header goes here #}
+	<div class="row" style="margin-top:-90px">
+		<div class="col-md-12">
+			<img src="{{ asset('images/web/business_header_header.png') }}" alt="Business Header Header"   style="display: block;" />
+		</div>
+		<div class="col-md-12">
+			<h4 style="margin-top:-48px;margin-left:70px">{% block page_header_text %}{% endblock %}</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h1 style="margin-top:60px;font-size:60px;border-bottom:0px" class="text-center">
+				{% block page_title %}
+				{% endblock %}
+			</h1>
+		</div>
+	</div>
+{% endblock %}
+
+
+
+{% block print_page_content %}
+	
+    
+{% endblock %}
+
+
+{% block print_page_footer %}
+	<div id="footer_container">
+		<div class="row">
+			<div class="col-md-12">
+				<img src="{{ asset('images/web/business_headed_footer.png') }}" alt="Business Header Footer"   style="display: block;" />
+			</div>
+			<div class="col-md-12">
+				<h4 style="margin-top:-48px;margin-left:70px">{% block page_footer_text %}{% endblock %}</h4>
+			</div>
+		</div>
+	</div>
+    
+{% endblock %}

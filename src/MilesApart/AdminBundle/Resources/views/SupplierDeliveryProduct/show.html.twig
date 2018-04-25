@@ -1,0 +1,54 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/procurement.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'supplier_delivery_product' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.id }} - Supplier Delivery Product
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.id }} - Supplier Delivery Product           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Supplier Delivery Product details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier delivery note qty</th>
+                <td>{{ entity.supplierdeliverynoteqty }}</td>
+            </tr>
+            <tr>
+                <th>Supplier delivery qty delivered</th>
+                <td>{{ entity.supplierdeliveryqtydelivered }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('goods-in_supplier-delivery-product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('goods-in_supplier-delivery-product_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

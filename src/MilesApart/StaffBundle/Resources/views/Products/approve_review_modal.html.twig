@@ -1,0 +1,36 @@
+{# Create the wrapper to hold the form for answering questions #}
+{# src/MilesApart/StaffBundle/Resources/views/Sellers/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::modal_layout.html.twig' %}
+
+{# Set the dynamic content for this template #}
+{% block modal_title %}
+    
+{% endblock %}
+
+{% block product_name %}
+    Approve Review Modal
+{% endblock %}
+
+
+{% block modal_content %}
+
+
+    <div id="ask_question_modal_content">
+        <h2 id="modalTitle"></h2>
+        <p class="lead">Please answer the question using the form below.</p>
+        <h5>{{ product_review.getProductReviewTitle }} - {{ product_review.getProductReviewRating }}</h5>
+        <p>{{ product_review.getProductReviewContent }}</p>
+        
+       
+    </div>
+
+{% endblock %}
+    
+{% block modal_footer %}
+   <a href="#" class="btn btn-primary col-xs-12" onclick="submitApproveReviewModal({{ product_review.getId }})">Approve Review</a>
+{% endblock %}
+
+{% block modal_javascripts %}
+    submitAnswerQuestionModal();
+{% endblock %}
+    

@@ -1,0 +1,33 @@
+hr_employee-work-week:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+hr_employee-work-week_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:show" }
+
+hr_employee-work-week_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:new" }
+
+hr_employee-work-week_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:create" }
+    requirements: { _method: post }
+
+hr_employee-work-week_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:edit" }
+
+hr_employee-work-week_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:update" }
+    requirements: { _method: post|put }
+
+hr_employee-work-week_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmployeeWorkWeek:delete" }
+    requirements: { _method: post|delete }

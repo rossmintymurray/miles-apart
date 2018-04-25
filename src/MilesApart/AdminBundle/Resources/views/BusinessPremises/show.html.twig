@@ -1,0 +1,78 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/business.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'business_premises' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.businesspremisesname }} - Business Premises
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.businesspremisesname }} - Business Premises          
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View business premises details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Business premises name</th>
+                <td>{{ entity.businesspremisesname }}</td>
+            </tr>
+            <tr>
+                <th>Business premises address line 1</th>
+                <td>{{ entity.businesspremisesaddressline1 }}</td>
+            </tr>
+            <tr>
+                <th>Business premises address line 2</th>
+                <td>{{ entity.businesspremisesaddressline2 }}</td>
+            </tr>
+            <tr>
+                <th>Business premises town</th>
+                <td>{{ entity.businesspremisestown }}</td>
+            </tr>
+            <tr>
+                <th>Business premises county</th>
+                <td>{{ entity.businesspremisescounty }}</td>
+            </tr>
+            <tr>
+                <th>Business premises postcode</th>
+                <td>{{ entity.businesspremisespostcode }}</td>
+            </tr>
+            <tr>
+                <th>Business premises phone</th>
+                <td>{{ entity.businesspremisesphone }}</td>
+            </tr>
+            <tr>
+                <th>Business premises email</th>
+                <td>{{ entity.businesspremisesemail }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('business_business-premises') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('business_business-premises_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

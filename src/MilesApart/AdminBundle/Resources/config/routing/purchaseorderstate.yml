@@ -1,0 +1,33 @@
+procurement_purchase-order-state:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+procurement_purchase-order-state_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:show" }
+
+procurement_purchase-order-state_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:new" }
+
+procurement_purchase-order-state_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:create" }
+    requirements: { _method: post }
+
+procurement_purchase-order-state_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:edit" }
+
+procurement_purchase-order-state_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:update" }
+    requirements: { _method: post|put }
+
+procurement_purchase-order-state_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrderState:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,60 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/new_supplier.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'suppliers' %}
+{% set current_page = 'new_supplier' %}
+
+{% block page_name %}
+    New supplier
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Create and show the form #}
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Supplier name</legend>
+            {{ form_row(edit_form.supplier_name) }}
+            {{ form_row(edit_form.supplier_type) }}
+            {{ form_row(edit_form.supplier_account_number) }}
+            {{ form_row(edit_form.supplier_minimum_order_value) }}
+            {{ form_row(edit_form.supplier_minimum_order_format) }}
+        </fieldset>
+        <fieldset>
+        	<legend class="text-muted">Supplier address</legend>
+            {{ form_row(edit_form.supplier_address_1) }}
+            {{ form_row(edit_form.supplier_address_2) }}
+            {{ form_row(edit_form.supplier_town) }}
+            {{ form_row(edit_form.supplier_county) }}
+            {{ form_row(edit_form.supplier_postcode) }}
+            {{ form_row(edit_form.supplier_country) }}
+        </fieldset>
+        <fieldset>
+        	<legend class="text-muted">Supplier contact details</legend>
+            {{ form_row(edit_form.supplier_phone) }}
+            {{ form_row(edit_form.supplier_fax) }}
+            {{ form_row(edit_form.supplier_ordering_email) }}
+            {{ form_row(edit_form.supplier_info_email) }}
+            {{ form_row(edit_form.supplier_website) }}
+            
+        </fieldset>
+
+        <fieldset>
+            {{ form_row(edit_form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(edit_form) }}
+    
+    {{ form_end(edit_form) }}
+{% endblock %}

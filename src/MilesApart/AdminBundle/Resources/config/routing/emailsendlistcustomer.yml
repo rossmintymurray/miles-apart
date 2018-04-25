@@ -1,0 +1,33 @@
+campaign_email-send-list-customer:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+campaign_email-send-list-customer_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:show" }
+
+campaign_email-send-list-customer_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:new" }
+
+campaign_email-send-list-customer_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:create" }
+    requirements: { _method: post }
+
+campaign_email-send-list-customer_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:edit" }
+
+campaign_email-send-list-customer_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:update" }
+    requirements: { _method: post|put }
+
+campaign_email-send-list-customer_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:EmailSendListCustomer:delete" }
+    requirements: { _method: post|delete }

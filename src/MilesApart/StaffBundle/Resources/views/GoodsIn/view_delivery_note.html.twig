@@ -1,0 +1,66 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'goods_in' %}
+{% set current_page = 'view_delivery_note' %}
+
+{% block page_name %}
+    View delivery note
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Check if existing deliveries exist and show only if they do #}
+    <div class="well">
+        <div class="row">
+            <div class="col-md-8">
+                <h3>{{ supplier_delivery.supplier.suppliername }}</h3>
+            </div>
+        </div>
+    </div>
+
+    {# Show existing un-delivered deliveries #}
+    <table class="table table-striped small" id="existing_supplier_deliveries">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Expected Qty</th>
+                <th>Delivered Qty</th>
+                <th>Carton Qty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supplierproduct in supplier_delivery.supplierdeliveryproduct %}
+                <tr>
+                    <td>
+                        {{ loop.index }}
+                    </td>
+                    <td>
+                        {{ supplierproduct.product.productsuppliercode }}
+                    </td>
+                    <td>
+                        {{ supplierproduct.product.productname }}
+                    </td>
+                    <td>
+                        {{ supplierproduct.supplierdeliverynoteqty }}
+                    </td>
+                    <td>
+                        {{ supplierproduct.supplierdeliveryqtydelivered }}
+                    </td>
+                    <td>
+                        {{ supplierproduct.product.productouterquantity }}
+                    </td>
+                    
+                    
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+{% endblock %}

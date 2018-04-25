@@ -1,0 +1,73 @@
+{# src/MilesApart/StaffBundle/Resources/views/HR/view_employees.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'categories' %}
+{% set current_page = 'view_seasons' %}
+
+{% block page_name %}
+    View seasons
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    <div id="suppliers_table">
+
+    	<h3>{{ entities|length }} Total current seasons</h3>
+
+	    {# Create table for suppliers #}
+	    <table class="table table-striped text-center">
+	        <thead>
+	            <tr class="text-center">
+	                <th width="20%" class="text-left">Season name</th>
+	                <th width="10%" class="text-center">Code</th>
+	                <th width="10%" class="text-center">Colour</th>
+	                <th width="15%" class="text-center">Start date</th>
+	                <th width="15%" class="text-center">End date</th>
+	                <th width="15%" class="text-center">Purchase start</th>
+	                <th width="15%" class="text-center">Actions</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        
+
+	    	{% for entity in entities %}
+	    		<tr>
+	    			<td class="text-left">
+	    				<a href="{{ path('staff-categories_edit-season', {'id': entity.getId()}) }}">
+	    					{{ entity.seasonname }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				{{ entity.seasoncode }}
+	    			</td>
+	    			<td style="background-color:#{{ entity.seasonbackgroundcolour }}">
+	    				{{ entity.seasonbackgroundcolour }}
+	    			</td>
+	    			<td>
+	    				{{ entity.seasonstartdate|date("jS F ") }}
+	    			</td>
+	    			<td>
+	    				{{ entity.seasonenddate|date("jS F ") }}
+	    			</td>
+	    			<td>
+	    				{{ entity.seasonpurchasestockstart|date("jS F ") }}
+	    			</td>
+	    			
+	    			
+
+	                <td>
+	                    <a href="{{ path('staff-categories_edit-season', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+	                  
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+	                    	<span class="glyphicon glyphicon-trash"></span>
+	                    </a>
+	                </td>
+	    		</tr>
+	    	{% endfor %}
+	    	</tbody>
+	    </table>
+{% endblock %}

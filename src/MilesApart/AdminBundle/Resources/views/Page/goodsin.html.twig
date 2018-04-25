@@ -1,0 +1,74 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/goods-in.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'goodsin' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'goodsin_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Goods-In
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Goods-In			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Book in deliveries and take delivery of goods
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'goodsin_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_goodsin') }}">Goods-in overview</a>
+    </li>
+
+    {# Create the stock location product sent nav #}
+     <li class="nav-header">Stock Location Product Sent</li>
+     <li {% if current_page == 'stock_location_product_sent' %} class="active" {% endif %}>
+        <a href="{{ path('goods-in_stock-location-product-sent') }}">View stock location product sent</a>
+    </li>
+    <li {% if current_page == 'new_stock_location_product_sent' %} class="active" {% endif %}>
+        <a href="{{ path('goods-in_stock-location-product-sent_new') }}">New stock location product sent</a>
+    </li>
+
+    {# Create the supplier delivery nav #}
+     <li class="nav-header">Supplier Delivery</li>
+     <li {% if current_page == 'supplier_delivery' %} class="active" {% endif %}>
+        <a href="{{ path('goods-in_supplier-delivery') }}">View supplier deliveries</a>
+    </li>
+    <li {% if current_page == 'new_supplier_delivery' %} class="active" {% endif %}>
+        <a href="{{ path('goods-in_supplier-delivery_new') }}">New supplier delivery</a>
+    </li>
+
+    {# Create the supplier delivery product nav #}
+     <li class="nav-header">Supplier Delivery Product</li>
+     <li {% if current_page == 'supplier_delivery_product' %} class="active" {% endif %}>
+        <a href="{{ path('goods-in_supplier-delivery-product') }}">View supplier delivery products</a>
+    </li>
+    <li {% if current_page == 'new_supplier_delivery_product' %} class="active" {% endif %}>
+        <a href="{{ path('goods-in_supplier-delivery-product_new') }}">New supplier delivery product</a>
+    </li>
+
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

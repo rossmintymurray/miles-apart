@@ -1,0 +1,20 @@
+{# Set the photo path #}
+{% set photo_path = 'images/products/'~product_image.productimagepath %}
+
+{# Set up lightbox #}
+<ul class="clearing-thumbs clearing-feature" data-clearing>
+
+    {% for image in product_image.product.productimage %}
+
+
+        <li {% if image.id == product_image.id %} class="clearing-featured-img" {% endif %}>
+            <a href="{{ asset('images/products/')~image.productimagepath }}">
+                <img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="col-sm-4 col-md-4 col-xs-6 col-lg-9" id="product_page_main_image" {% if image.id == product_image.id %} data-existing-id="{{ image.id }}" {% endif %}>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<script>
+	$(document).foundation('clearing', 'reflow');
+</script>

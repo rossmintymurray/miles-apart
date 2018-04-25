@@ -1,0 +1,14 @@
+Description,Desc,Barcode,Qty,Cost,LineCost,ProductCode
+11495: Crystal 62L Box & Lid Clear,Crystal 62L Box & Lid Clear,5038135114953,20                            £4.95                  £99.00,4.95 ,,11495
+14100: Crystal 133L Box & Lid Clear,Crystal 133L Box & Lid Clear,5038135141003,8                      £8.50                  £68.00,8.50 ,,14100
+20140: Small  Folding Step Stool,Small  Folding Step Stool,5038135201400,12                           £2.95                  £35.40,2.95 ,,20140
+11285:  Casa 38cm Rectangular Bowl Silver, Casa 38cm Rectangular Bowl Silver,5038135112850,12                           £0.84                  £10.08,0.84 ,,11285
+17226: Casa 38cm Rectangular Bowl Chilli Red,Casa 38cm Rectangular Bowl Chilli Red,5038135172267,12                           £0.84                  £10.08,0.84 ,,17226
+17227: Casa 38cm Rectangular Bowl Duck  Egg Blue,Casa 38cm Rectangular Bowl Duck  Egg Blue,5038135172274,12                           £0.84                  £10.08,0.84 ,,17227
+12524: Casa 38cm Rectangular Bowl Ice White,Casa 38cm Rectangular Bowl Ice White,5038135125249,12                           £0.84                  £10.08,0.84 ,,12524
+11766:  Laundry Set  of 20  Soft Rubber Grip Pegs Assorted, Laundry Set  of 20  Soft Rubber Grip Pegs Assorted,5038135117664,24                            £1.00                   £24.00,1.00 ,,11766
+12379: Cuisine Set  4 300ml Round Food Box & Lid Clear/IceWhite,Cuisine Set  4 300ml Round Food Box & Lid Clear/IceWhite,5038135123795,12                           £0.95                  £11.40,0.95 ,,12379
+20117:  Cuisine 400ml Screw Top  Beaker Clear/Ice White, Cuisine 400ml Screw Top  Beaker Clear/Ice White,5038135201172,24                            £0.52                  £12.48,0.52 ,,20117
+11315: Crystal 80L Box & Lid Clear,Crystal 80L Box & Lid Clear,5038135113154,20                            £4.00                  £80.00,4.00 ,,11315
+10850: Crystal 16L Box & Lid Clear,Crystal 16L Box & Lid Clear,5038135108501,20                            £1.80                   £36.00,1.80 ,,10850
+10840: Crystal 24L Box & Lid Clear,Crystal 24L Box & Lid Clear,5038135108402,10                            £2.10                    £21.00,2.10 ,,10840

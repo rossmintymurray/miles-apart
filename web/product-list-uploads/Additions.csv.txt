@@ -1,0 +1,25 @@
+Code,Desc,Outer,out,cost,totcost,barcode,inner,outer
+1000,12 x 96x121x41mm Foil Tray with Lids,48,48 packs,0.53, £25.44 ,5012145 000628,NA,05012145 009805
+1032,18 x 111dia 22mm deep 4oz Round Foil Pie Dish,40,40 packs,0.53, £21.20 ,5012145 000116,NA,05012145 009911
+1322,"2 x 35"" 90cm square Paper Tablecovers Pink",40,4 x 10 packs,0.52, £20.80 ,5012145 002882,5012145 005357,05012145 004251
+1341,"54"" 135cm square Plastic Tablecover Apple Red",48,4 x 12 packs,0.42, £20.16 ,5012145 003544,5012145 006880,05012145 003902
+1350,"54"" 135cm square Plastic Tablecover Pastel Blue",48,4 x 12 packs,0.42, £20.16 ,5012145 003612,5012145 006965,05012145 003988
+1412,"12 x 9"" 23cm Foam Plates",60,12 x 5 packs,0.56, £33.60 ,5012145 000550,5012145 006033,05012145 009010
+1728,"8 x Tray Papers   9"" x 15"" 23 x 38cm ",120,12 x10 packs,0.36, £43.20 ,5012145 001236,5012145 006248,05012145 007160
+77015-03,"Festive Green 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948179,NA,30048419948170
+77015-05,"Orange 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948193,NA,30048419948194
+77015-109,"Baby Pink 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948209,NA,30048419948200
+77015-08,"Frosty White 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948223,NA,30048419948224
+77015-09,"Sunshine Yellow 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948230,NA,30048419948231
+77015-10,"Jet Black 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948247,NA,30048419948248
+77015-103,"Bright Pink 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419530527,NA,30048419530528
+77015-11,"Powder Blue 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948254,NA,30048419948255
+77015-18,"Silver 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419483496,NA,30048419483497
+77015-19,"Gold 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419489146,NA,30048419489147
+77015-25,"Purple 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419051107,NA,30048419051108
+77015-40,"Apple Red 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419497011,NA,30048419497012
+77015-53,"Kiwi Green 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.27 ,0048419156208,NA,30048419156209
+77015-54,"Caribbean Blue 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419156475,NA,30048419156476
+77015-57,"Vanilla Cream 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419483489,NA,30048419483480
+77015-61,"Magenta 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419490319,NA,30048419490310
+77015-74,"Flag Navy Blue 54"" x 108"" Rect Plastic Tablecover",12,6 x 12 packs,0.42, £30.24 ,0048419948278,NA,30048419948279

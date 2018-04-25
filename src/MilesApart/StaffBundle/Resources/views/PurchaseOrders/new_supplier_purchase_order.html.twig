@@ -1,0 +1,40 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/new_supplier_purchase_order.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'new_supplier_purchase_order' %}
+
+{% block page_name %}
+    Supplier purchase order
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Check if purchase order has been set #}
+    
+        <h3>Select a supplier to create order for:</h3>
+
+        {# Create and show the form #}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {# Create and show the new admin user type #}
+            <fieldset>
+                <legend class="text-muted">Supplier</legend>
+                {{ form_row(form.supplier) }}
+               
+            </fieldset>
+               
+            
+            {{ form_rest(form) }}
+        
+        {{ form_end(form) }}
+    
+
+   
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}

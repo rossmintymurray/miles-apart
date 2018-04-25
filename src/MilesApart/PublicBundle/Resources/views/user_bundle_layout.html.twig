@@ -1,0 +1,76 @@
+{# src/MilesApart/PublicBundle/Resources/views/about_page_layout.html.twig #}
+{% extends '::public_base_foundation.html.twig' %}
+
+{% block body %}
+    
+    {# Create the breadcrumbs wrapper #}
+    <div class="row show-on-medium-up">
+        <div class="large-12 columns">
+        	{% block breadcrumb %}
+                {{ wo_render_breadcrumbs() }}
+            {% endblock %}
+        </div>
+    </div>
+
+    {# Main content row #}
+    <div class="row">
+
+        {# Create the right column #}
+        <div class="large-3 columns">
+            {% block left_menu %}
+            {% endblock %}
+        </div>
+
+    	{# Create the about text column #}
+        <div class="large-9 columns" >
+
+            <!--Info box area placeholder for success/failure messages  (flash messages) -->
+            {% for flashMessage in app.session.flashbag.get('public-error') %}
+                <div class="flashbag">
+                    <div data-alert class="alert-box alert radius">
+                        {{ flashMessage }}
+                        <a href="#" class="close">&times;</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {# Flash message for success #}
+            {% for flashMessage in app.session.flashbag.get('public-success') %}
+                <div class="flashbag">
+                    <div data-alert class="alert-box success radius">
+                        {{ flashMessage }}
+                        <a href="#" class="close">&times;</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {# Create divs to split the title into 2 columns #}
+            {% block page_title_wrapper %}
+                {# Create the page title #}
+                <div class="row">
+                    <div class="medium-8 columns">
+                        <h1>
+            	    		{% block page_title %}
+            	    		{% endblock %}
+                		</h1>
+                    </div>
+                    <div class="medium-4 columns">
+                        {% block title_right %}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+              
+
+    		{# Create page content #}
+    		{% block page_content %}
+
+    		{% endblock %}
+
+    	{# End of about us text column #}
+    	</div>
+
+    {# End of the main content row #}
+    </div>
+
+{% endblock %}

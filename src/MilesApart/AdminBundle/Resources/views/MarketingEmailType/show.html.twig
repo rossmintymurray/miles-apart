@@ -1,0 +1,62 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/campaign.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'marketing_email_type' %}
+
+{# Set the page title #}
+{% block title %}
+    - Marketing Email Type
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    - Marketing Email Type           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Marketing Email Type details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Marketing email type name</th>
+                <td>{{ entity.marketingemailtypename }}</td>
+            </tr>
+            <tr>
+                <th>Marketing email type description</th>
+                <td>{{ entity.marketingemailtypedescription }}</td>
+            </tr>
+            <tr>
+                <th>Marketing email type stylesheet url</th>
+                <td>{{ entity.marketingemailtypestylesheeturl }}</td>
+            </tr>
+            <tr>
+                <th>Marketing email type template url</th>
+                <td>{{ entity.marketingemailtypetemplateurl }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('campaign_marketing-email-type') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('campaign_marketing-email-type_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

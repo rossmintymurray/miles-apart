@@ -1,0 +1,41 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/process_purchase_order_confirmation.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'process_purchase_order_confirmation' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    Process purchase order confirmation
+{% endblock %}
+
+{# Set the page sub header #}
+{% block page_sub_header %}
+    Add purchase order confirmation data to the system
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Select supplier</legend>
+            {{ form_row(form.supplier) }}
+          
+        </fieldset>
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+    
+    {# This is div for existing unconfirmed purchase orders #}
+    <div id="purchase_order_confirmation_supplier_selected_content"></div>
+
+    {# This is div for content that uploads or adds new confirm content #}
+    <div id="purchase_order_confirmation_supplier_confirm_content"></div>
+{% endblock %}

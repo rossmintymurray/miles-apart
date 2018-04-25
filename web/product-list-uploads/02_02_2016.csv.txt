@@ -1,0 +1,2 @@
+StockCode,Description,Barcode,Outer,Inner,Quantity,Price, Line Price
+TT10101,160MM Test Pliers,7903366101012,48,6,6,1.5,9

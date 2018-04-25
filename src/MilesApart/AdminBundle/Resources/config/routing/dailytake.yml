@@ -1,0 +1,33 @@
+finance_daily-take:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_daily-take_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:show" }
+
+finance_daily-take_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:new" }
+
+finance_daily-take_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:create" }
+    requirements: { _method: post }
+
+finance_daily-take_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:edit" }
+
+finance_daily-take_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:update" }
+    requirements: { _method: post|put }
+
+finance_daily-take_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:DailyTake:delete" }
+    requirements: { _method: post|delete }

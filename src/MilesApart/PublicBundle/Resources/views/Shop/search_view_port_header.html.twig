@@ -1,0 +1,48 @@
+{# Include the display port header #}
+<div class="row">
+    <div class="medium-12 columns">
+        <div class="product_view_port_bar">
+            <div class="row">
+                <div id="product_view_port_bar_items" class="medium-4 columns show-for-medium-up">
+                    <p>{{ results_count }} items match your search for '{{ search_string }}'</p>
+                </div>
+                <div class="product_view_port_bar_per_page small-5 medium-3 columns">
+                    <div class="row collapse">
+                        
+                        <div class="small-4 columns">
+                            <select id="view_port_products_per_page">
+                                <option {% if per_page == 12 %} selected="selected" {% endif %} value="12">12</option>
+                                <option {% if per_page == 24 %} selected="selected" {% endif %} value="24">24</option>
+                                <option {% if per_page == 48 %} selected="selected" {% endif %}value="48">48</option>
+                                <option {% if per_page == 96 %} selected="selected" {% endif %}value="96">96</option>
+                            </select>
+                        </div>
+                        <div class="small-8 columns">
+                          <label for="right-label" class="left inline">per page</label>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="product_view_port_bar_sort small-7 medium-3 columns">
+                    <div class="row collapse">
+                        <div class="small-4 columns">
+                          <label for="right-label" class="right inline">sort by</label>
+                        </div>
+                        <div class="small-8 columns">
+                            <select id="view_port_sort_by">
+                                <option {% if order_by == 'a_to_z' %} selected="selected" {% endif %} value="a_to_z">A to Z</option>
+                                <option {% if order_by == 'low_to_high' %} selected="selected" {% endif %} value="low_to_high">Price: Low to High</option>
+                                <option {% if order_by == 'high_to_low' %} selected="selected" {% endif %} value="high_to_low">Price: High to Low</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="product_view_port_bar_icons medium-2 columns show-for-large-up">
+                     <a href="#" id="listview" class="switcher active-button"><i class="fi-list-thumbnails right"></i></a>
+                    <a href="#" id="gridview" class="switcher"><i class="fi-thumbnails right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

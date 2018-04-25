@@ -1,0 +1,97 @@
+{# src/MilesApart/StaffBundle/Resources/views/HR/view_employees.html.twig #}
+{% extends 'MilesApartStaffBundle::business_headed.html.twig' %}
+
+{% block page_header_text %}
+    Holiday Request Form | Printed on {{ "now"|date('jS F Y') }}
+{% endblock %}
+
+{% block page_title %}
+    Holiday Request Form
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block print_page_content %}
+    <div id="container" style="margin-left:80px;margin-right:80px;margin-top:10px;">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Request employee</h4>
+                <h2>{{ employee.getEmployeeFullName }}</h2>
+                <p>
+                    {{ employee.getEmployeeAddress1 }}, 
+                    {% if employee.getEmployeeAddress2 != null %}
+                        {{ employee.getEmployeeAddress2 }},
+                    {% endif %}
+
+                    {{ employee.getEmployeeTown }},
+                    {{ employee.getEmployeeCounty }},
+                    {{ employee.getEmployeePostcode }}
+                </p>
+            </div>
+    
+        
+        
+            <div class="col-md-4">
+                <h4>YTD Taken Holiday - {{ employee.getTakenHolidayHours }}</h4>
+
+                <h4>YTD Remaining Holiday - {{ employee.getRemainingHolidayHoursProjected }}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>New Request</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Holiday details</h3>
+                        <ul style="line-height:3em; font-size:1.3em;list-style:none;text-align:right" >
+                            <li>Holiday start date</li>
+                            <li>Holiday end date</li>
+                            <li>Total days</li>
+                            <li>Total hours taken</li>
+                            <li>Signed by employee</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul style="line-height:3em; font-size:1.3em;list-style:none;text-align:left;margin-top:32px" >
+                            <li>_______________________________</li>
+                            <li>_______________________________</li>
+                            <li>_____________</li>
+                            <li>_____________</li>
+                            <li>_______________________________</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Authorisation</h3>
+                        <ul style="line-height:3em; font-size:1.3em;list-style:none;text-align:right">
+                            <li>Authorised by</li>
+                            <li>Signed</li>
+                            <li>Dated</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul style="line-height:3em; font-size:1.3em;list-style:none;text-align:left;margin-top:32px" >
+                            <li>_______________________________</li>
+                            <li>_______________________________</li>
+                            <li>_____________</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Notes</h3>
+                <ol style="margin-left:20px">
+                    <li>Whilst we will make every effort to grant your holiday request it may not be possible if another employee has booked off the same dates.</li>
+                    <li>In the case that two employees request the same dates off, and that only cover for one is available, only the employee who requested the holiday on the earlier date will be granted the time off.</li>
+                </ol>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}

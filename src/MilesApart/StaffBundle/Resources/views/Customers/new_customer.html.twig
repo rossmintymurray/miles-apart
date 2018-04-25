@@ -1,0 +1,80 @@
+{# src/MilesApart/StaffBundle/Resources/views/Customers/new_customer.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'customers' %}
+{% set current_page = 'new_customer' %}
+
+{% block page_name %}
+    New customer
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Shipping addess form #}
+    <div id="new_customer_form">
+		{{ form_start(form) }}
+            {{ form_errors(form) }}
+				
+			{# Business customer button #}
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <input type="checkbox" id="business_customer_toggle" />
+                    <label for="business_customer">Is the customer a business customer?</label>
+                    <p class="form_subtext">Please check this box if the customer is a representative for business, school, charity or other organisation.</p>
+                </div>
+            </div>
+
+                            
+            {# Personal customer form elements #}
+            <div class="personal_customer_form">
+                <fieldset>
+            		<legend class="text-muted">Personal Customer</legend>
+                	{{ form_row(form.personal_customer.personal_customer_first_name) }}
+                	{{ form_row(form.personal_customer.personal_customer_surname) }}
+                   	{{ form_row(form.personal_customer.personal_customer_email_address) }}
+                </fieldset>
+            </div>
+
+            {# Business customer form elements #}
+            <div class="business_customer_representative_form">
+            	<fieldset>
+            		<legend class="text-muted">Business Customer</legend>
+	               	{{ form_row(form.business_customer.business_customer_name) }}
+	                {{ form_row(form.business_customer.business_customer_representative.business_customer_representative_first_name) }}
+	                {{ form_row(form.business_customer.business_customer_representative.business_customer_representative_surname) }}
+	                {{ form_row(form.business_customer.business_customer_representative.business_customer_representative_email_address) }}
+	            </fieldset>
+            </div>
+
+
+            {# Add the macro to add customer addresses #}
+            <fieldset>
+                <legend class="text-muted">Customer Address</legend>
+                <div id="customer_addresses" data-prototype="{{ macros.widget_prototype(form.customer_address, 'Remove customer address')|escape }}">
+                    {% for widget in form.customer_address.children %}
+                        
+                        {{ macros.widget_prototype(widget, 'Remove promotion') }}
+                        
+                    {% endfor %}
+                </div>
+
+                <div class="prototype_add_button">
+                    <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="customer_addresses">Add customer address</a>
+                </div> 
+            </fieldset>
+                
+           	{{ form_row(form.submit) }}
+                
+           	{{ form_rest(form) }}
+       
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

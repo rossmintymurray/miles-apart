@@ -1,0 +1,31 @@
+{# src/MilesApart/StaffBundle/Resources/views/layout.html.twig #}
+{% extends '::print_base.html.twig' %}
+
+{# Include stylesheets #}
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/print_report_styles.css') }}">
+{% endblock %}
+
+{% block page_header %}
+	{# Header goes here #}
+	<div class="row">
+		<div class="col-md-8">
+
+			<h1>
+				{% block report_page_name %}
+				{% endblock %}
+			</h1>
+		</div>
+		<div class="col-md-4">
+			{% block report_date_range %}
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block print_page_content %}
+	
+    {% block print_page_data %}
+
+    {% endblock %}
+{% endblock %}

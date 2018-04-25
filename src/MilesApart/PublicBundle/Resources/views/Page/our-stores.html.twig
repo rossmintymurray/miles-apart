@@ -1,0 +1,264 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'our_stores' %}
+    
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+
+
+{# Set the page title, for header and html title tag #}
+{% block page_title_wrapper %}
+    <div class="row">
+        <div class="large-4 columns">
+
+   	        <h1>Our Stores</h1>
+        </div>
+
+        <div class="large-8 columns show-for-medium-up">
+
+            <p class="lead text-right panel radius">For general enquiries please email <a href="mailto:info@miles-apart.com">info@miles-apart.com</a>.</p>
+        </div>
+    </div>  
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+    {# Create the shop information display #}
+    <div class="show-for-small-only">
+        <p class="lead text-left panel radius" style="margin-top:1.5rem;">For general enquiries please email <a href="mailto:info@miles-apart.com">info@miles-apart.com</a>.</p>
+    </div>
+        <div class="large-12 columns">
+            <div class="section_header"></div>
+            <h3 class="text-center section_header_text"><span>Amesbury</span></h3>
+            <div class="row shop_area">
+                
+                {# Show the shop image #}
+                <div class="large-5 columns">
+                    <div class="google_map">
+                        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2501.559316332252!2d-1.7832363481305007!3d51.17191334289701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4873e5f0b99bc907%3A0xe8036ab65cfe5196!2sMiles+Apart!5e0!3m2!1sen!2suk!4v1455098403667" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                {# Show the shop info #}
+                <div class="large-7 columns">
+                    <h4 class="text-center">26 Salisbury Street</h4>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <address>
+                                Amesbury<br />
+                                Wiltshire<br />
+                                SP4 7HD<br />
+                            </address>
+                            <address>
+                                <strong class="phone">Phone:</strong><br />
+                                <a href="tel:01980626880">01980 626880</a><br />
+                                <strong class="phone">Email:</strong><br />
+                                <a href="mailto:26amesbury@miles-apart.com" class="small-email">26amesbury@miles-apart.com</a>
+                            </address>
+                        </div>
+
+                
+                        <div class="small-12 large-6 columns">
+                            <table class="small-12 large-12 our_stores_opening_times">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">Monday</td>
+                                        <td class="text-center">8.30am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Tuesday</td>
+                                        <td class="text-center">8.30am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Wednesday</td>
+                                        <td class="text-center">8.30am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Thursday</td>
+                                        <td class="text-center">8.30am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Friday</td>
+                                        <td class="text-center">8.30am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Saturday</td>
+                                        <td class="text-center">8.30am - 5pm</td>
+                                    </tr>
+                                    {#Check the date, if Nov or Dec, show that it is open, if not show that it will be open #}
+                                    {% if ("now"|date('m-d') > '11-01') and ("now"|date('m-d') < '12-24') %}
+                                        <tr>
+                                            <td class="text-left">Sunday</td>
+                                            <td class="text-center">10am - 3pm</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td class="text-left">Sunday</td>
+                                            <td class="text-center">Closed<br/>(10am - 3pm in Nov & Dec)</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row shop_area">
+
+                {# Shopw the shop image #}
+                 <div class="large-5 columns">
+                    <div class="google_map">
+                        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2501.559316332252!2d-1.7832363481305007!3d51.17191334289701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4873e5f0b99bc907%3A0xe8036ab65cfe5196!2sMiles+Apart!5e0!3m2!1sen!2suk!4v1455098403667" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                {# Show the shop info #}
+                <div class="large-7 columns">
+                    <h4 class="text-center">28 Salisbury Street</h4>
+                   
+                
+
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <address>
+                                Amesbury<br />
+                                Wiltshire<br />
+                                SP4 7HD<br />
+                            </address>
+                            <address class="phone">
+                                <strong class="phone">Phone:</strong><br />
+                                <a href="tel:01980626060">01980 626060</a><br />
+                                <strong class="phone">Email:</strong><br />
+                                <a href="mailto:28amesbury@miles-apart.com" class="small-email">28amesbury@miles-apart.com</a>
+                            </address>
+                        </div>
+                   
+                
+
+                        <div class="small-12 large-6 columns">
+                            <table class="small-12 large-12 our_stores_opening_times">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">Monday</td>
+                                        <td class="text-center">8.45am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Tuesday</td>
+                                        <td class="text-center">8.45am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Wednesday</td>
+                                        <td class="text-center">8.45am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Thursday</td>
+                                        <td class="text-center">8.45am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Friday</td>
+                                        <td class="text-center">8.45am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Saturday</td>
+                                        <td class="text-center">8.45am - 5pm</td>
+                                    </tr>
+                                   {#Check the date, if Nov or Dec, show that it is open, if not show that it will be open #}
+                                    {% if ("now"|date('m-d') > '11-01') and ("now"|date('m-d') < '12-24') %}
+                                        <tr>
+                                            <td class="text-left">Sunday</td>
+                                            <td class="text-center">10am - 3pm</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td class="text-left">Sunday</td>
+                                            <td class="text-center">Closed<br/>(10am - 3pm in Nov & Dec)</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="section_header" id="westbury"></div>
+            <h3 class="text-center section_header_text"><span>Westbury</span></h3>
+
+            <div class="row shop_area">
+                <div class="large-5 columns">
+                    <div class="google_map">
+                        <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1248.3657756535233!2d-2.184884132610323!3d51.26085189077723!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xbfc009bec83f7457!2sMiles+Apart!5e0!3m2!1sen!2suk!4v1455098023568" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="large-7 columns">
+                    <h4 class="text-center">15 High Street</h4>
+                    
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <address>
+                                Westbury<br />
+                                Wiltshire<br />
+                                BA13 3BN<br />
+                            </address>
+                            <address class="phone">
+                                <strong class="phone">Phone:</strong><br />
+                                <a href="tel:01373822225">01373 822225</a><br/>
+                                <strong class="phone">Email:</strong><br />
+                                <a href="mailto:westbury@miles-apart.com" class="small-email">westbury@miles-apart.com</a>
+                            </address>
+                        </div>
+
+                        <div class="small-12 large-6 columns">
+                            <table class="small-12 large-12 our_stores_opening_times">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">Monday</td>
+                                        <td class="text-center">9am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Tuesday</td>
+                                        <td class="text-center">9am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Wednesday</td>
+                                        <td class="text-center">9am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Thursday</td>
+                                        <td class="text-center">9am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Friday</td>
+                                        <td class="text-center">9am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Saturday</td>
+                                        <td class="text-center">9am - 5pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Sunday</td>
+                                        <td class="text-center">Closed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+        </div>
+    </div>
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Our Stores</li>
+	<li><a href="#amesbury">Amesbury</a></li>
+    <li><a href="#westbury">Westbury</a></li>
+{% endblock %}

@@ -1,0 +1,143 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/review_purchase_orders.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'review_purchase_orders' %}
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    Review purchase orders
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <h4>Outstanding Purchase Orders</h4>
+    {# Set up the existing products table #}
+    <table class="table table-striped small" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>PO #</th>
+                <th>Purchase Order Date Created</th>
+                <th>Supplier</th>
+                <th>Purchase Order State</th>
+                <th>Number Of Products</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody>
+            {% for purchase_order in outstanding_purchase_orders %}
+                
+                <tr data-href="{{ path('staff-purchase-orders_view-purchase-order-details', {'purchase_order_id': purchase_order.getId}) }}">
+                    <td>
+                        {{ purchase_order.getId }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getPurchaseOrderDateCreated|date("D jS M Y") }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getSupplier.getSupplierName }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getPurchaseOrderState.getPurchaseOrderState }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getTotalProducts }}
+                    </td>
+                    <td>
+                        <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-list-alt"></span></a>
+                        <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-barcode"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Incomplete Purchase Orders</h4>
+    {# Set up the existing products table #}
+    <table class="table table-striped small" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>PO #</th>
+                <th>Purchase Order Date Created</th>
+                <th>Supplier</th>
+                <th>Purchase Order State</th>
+                <th>Number Of Products</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody>
+            {% for purchase_order in incomplete_purchase_orders %}
+                <tr data-href="{{ path('staff-purchase-orders_view-purchase-order-details', {'purchase_order_id': purchase_order.getId}) }}">
+                    <td>
+                        {{ purchase_order.getId }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getPurchaseOrderDateCreated|date("D jS M Y") }}
+                    </td>
+                    <td>
+                        {% if purchase_order.getSupplier != null %}
+                            {{ purchase_order.getSupplier.getSupplierName }}
+                        {% else %}
+                            Supplier Unknown
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ purchase_order.getPurchaseOrderState.getPurchaseOrderState }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getTotalProducts }}
+                    </td>
+                    <td>
+                        <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-list-alt"></span></a>
+                        <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-barcode"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Completed Purchase Orders</h4>
+    {# Set up the existing products table #}
+    <table class="table table-striped small" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>PO #</th>
+                <th>Purchase Order Date Created</th>
+                <th>Supplier</th>
+                <th>Purchase Order State</th>
+                <th>Number Of Products</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody>
+            {% for purchase_order in completed_purchase_orders %}
+                <tr data-href="{{ path('staff-purchase-orders_view-purchase-order-details', {'purchase_order_id': purchase_order.getId}) }}">
+                     <td>
+                        {{ purchase_order.getId }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getPurchaseOrderDateCreated|date("D jS M Y") }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getSupplier.getSupplierName }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getPurchaseOrderState.getPurchaseOrderState }}
+                    </td>
+                    <td>
+                        {{ purchase_order.getTotalProducts }}
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,74 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/taxonomy.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'season' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.seasonname }} - Season
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.seasonname }} - Season        
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View season details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Season name</th>
+                <td>{{ entity.seasonname }}</td>
+            </tr>
+            <tr>
+                <th>Season start date</th>
+                <td>{{ entity.seasonstartdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Season end date</th>
+                <td>{{ entity.seasonenddate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Season purchase stock start</th>
+                <td>{{ entity.seasonpurchasestockstart|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Season purchase stock deadline</th>
+                <td>{{ entity.seasonpurchasestockdeadline|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Season slug</th>
+                <td>{{ entity.seasonslug }}</td>
+            </tr>
+            <tr>
+                <th>Season image path</th>
+                <td>{{ entity.seasonimagepath }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('category_season') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('category_season_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

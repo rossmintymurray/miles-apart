@@ -1,0 +1,23 @@
+{# Create prototype macro #}
+{% macro widget_prototype(widget, remove_text) %}
+    {% if widget.vars.prototype is defined %}
+        {% set form = widget.vars.prototype %}
+        {% set name = widget.vars.prototype.vars.name %}
+
+    {% else %}
+        {% set form = widget %}
+        {% set name = widget.vars.id %}
+    {% endif %}
+
+    <div class="prototype_data_content" data-content="{{ name }}">
+        {{ form_widget(form) }}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="form_feedback_div" id="{{ name }}"></div>
+            </div>
+        </div>
+        <div class="prototype_remove_button"><a class="btn-remove btn btn-danger col-md-3 col-md-offset-4 btn-xs" data-related="{{ name }}">{{ remove_text }}</a></div>
+    </div>
+{% endmacro %}
+
+

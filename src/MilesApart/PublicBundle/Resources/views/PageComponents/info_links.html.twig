@@ -1,0 +1,47 @@
+<div class="show-for-large-up">
+	<div class="contain-to-grid info-links">
+		<nav class="top-bar info-links" data-topbar role="navigation">
+			<ul class="title-area">
+				<li class="name">
+
+					{# If the user is logged in, show the name in the welcome #}
+					{% if app.user %}
+					 	
+						<h6 class="info-links-welcome">Hello 
+							
+								{{ app.security.getToken().getUser().getFirstName() }},
+							
+							welcome back</h6>
+					{% else %}
+						<h6 class="info-links-welcome">Welcome to Miles Apart</h6>
+					{% endif %}
+
+				</li>
+			</ul>
+
+		  	<section class="top-bar-section info-links-section">
+			    <!-- Right Nav Section -->
+			    <ul class="right">
+					<li class="active"><a href="{{ path('miles_apart_public_our_stores') }}">Our Stores</a></li>
+					<li class="divider"></li>
+					<li class="active"><a href="{{ path('miles_apart_public_delivery_information') }}">Delivery Information</a></li>
+					<li class="divider"></li>
+					<li class="active"><a href="{{ path('miles_apart_public_contact_us') }}">Contact Us</a></li>
+					<li class="divider"></li>
+					<li class="active"><a href="{{ path('miles_apart_public_help_and_support') }}">Help &amp; Support</a></li>
+					<li class="divider"></li>
+
+					{# If the user is logged in, show the link for account and log out #}
+					{% if app.user %}
+						<li class="active"><a href="{{ path('fos_user_profile_show') }}">Your Account</a></li>
+						<li class="divider"></li>
+						<li class="active"><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+					{% else %}
+						<li class="active"><a href="{{ path('miles_apart_public_login_or_register') }}">Login / Register</a></li>
+					{% endif %}
+			    </ul>
+		  	</section>
+		</nav>
+	</div>
+	<div class="clearfix"></div>
+</div>

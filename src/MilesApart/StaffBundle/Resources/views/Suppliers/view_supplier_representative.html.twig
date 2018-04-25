@@ -1,0 +1,15 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/new_representative.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'suppliers' %}
+{% set current_page = 'new_representative' %}
+
+{% block page_name %}
+	View supplier representative
+{% endblock %}
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {{ supplier_representative.getSupplierRepresentativeFullName }}
+{% endblock %}

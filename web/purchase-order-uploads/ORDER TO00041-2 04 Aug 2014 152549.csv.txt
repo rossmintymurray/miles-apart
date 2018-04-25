@@ -1,0 +1,140 @@
+#,Code,Description,Inner,UPC,Barcode,Cases,Units,Price,NettValue
+1,FNSTP,Frozen Sticker Pad,12,24,5012128424458,1,24,0.58,13.92
+2,SPSTP,Spiderman Sticker Pad,12,24,5012128423932,1,24,0.58,13.92
+3,SPCRP,Spiderman Carry Pack,10,20,5012128424007,1,20,1.1,22
+4,FNBUP,Frozen Busy Pack,12,24,5012128424519,1,24,0.9,21.6
+5,CBR/3,Colouring- Large Chalk Board&6 Chalk,,12,5012128413285,3,36,1.1,39.6
+6,VIPN,Stat-Vintage 3 Ballpoint Pens In Box,12,24,5012128416446,1,24,0.48,11.52
+7,WOGF,Stat-Photo A5nbook X2design Dogfathr,12,24,5012128414671,1,24,0.54,12.96
+8,SCOW,Stat-Font Design 5 Balpoint Pens,12,24,5012128415630,1,24,0.48,11.52
+9,SLNB,Stat-Slogans A5 Notebook 80sh 70gsm,,24,5012128415432,1,24,0.54,12.96
+10,SLPC,Stat- Slogan Retangle Pencil Case,12,24,5012128414725,1,24,0.5,12
+11,PSPQ,Glitter Princess Stat Set,12,24,5012128415487,1,24,0.52,12.48
+12,QWAU/1,Stat-A5 Tribal&Stripe Notebk 80shs,,24,5012128384899,1,24,1,24
+13,WRK/3,"Stat Jotter Block, White, 700 Sheets",12,36,5012128087219,1,36,0.48,17.28
+14,KKG/2,Stat Copier Paper - 90 Sheet - 70gsm,,32,5012128087370,2,64,0.51,32.64
+15,VTR/3,Stat Laminating Pouches Pack Of 18,12,24,5012128091018,1,24,1.07,25.68
+16,LCO/4,"Stat,6x4' Photo Paper,Gloss,36 Sheet",24,48,5012128136467,1,48,0.48,23.04
+17,LNO/4,"Stat,A4 Photo Paper,Gloss,9 Sheet",24,48,5012128136450,1,48,0.48,23.04
+18,LOM/4,"Stat,A4 Photo Paper,Matt,9 Sheet",24,48,5012128136481,1,48,0.48,23.04
+19,XGQ/3,Stat A4 Display Book 40 X Pocket Cdu,12,24,5012128117213,1,24,0.72,17.28
+20,EVA/1,"Stat Foolscap Clipboard, 4 X Colours",,36,5012128465215,1,36,0.5,18
+21,EGP/3,Stat 10 Pocket Expanding File,12,24,5012128018305,1,24,1.1,26.4
+22,EXP/1,Stat 6 Pocket Expanding File,,30,5012128052347,1,30,0.57,17.1
+23,EXGO/1,"Stat Box File, Elastic Corners",,24,5012128360435,1,24,0.65,15.6
+24,LTT/1,"Stat 2 X Letter Tray, 2 X Colours",,12,5012128572005,1,12,1.99,23.88
+25,DOCC/5,Stat 5xdocument Wallet,24,48,5012128270444,1,48,0.48,23.04
+26,RAO/3,"Stat Lever Arch, 4 X Mixed Colours",,24,5012128087417,1,24,0.85,20.4
+27,UGO/6,"Stat A5 Ruled Notepad, 170 Sheet",10,20,5012128082887,1,20,0.52,10.4
+28,UGC/3,"Stat 4 X Chunky Jotters, 40 Sheets",24,48,5012128082764,1,48,0.45,21.6
+29,STNM/1,Stat 10 X Mini Memo Pads 50 Sheet,12,24,5012128370274,1,24,0.46,11.04
+30,AAIA,Stat- 60 Sh Combination Pad,12,24,5012128415913,1,24,0.52,12.48
+31,PFEN/4,Stat Pens - 4 Soft Grip Pens,24,48,5012128233593,1,48,0.5,24
+32,LAUN/3,Stat Pens- 2 Laundry Pen With Labels,12,24,5012128323744,1,24,0.46,11.04
+33,WHI/1,Stat Pens-4 White Board Markers,,36,5012128123443,1,36,0.48,17.28
+34,BQV/2,Stat- Bingo Marker 40ml In Cdu,24,48,5012128064333,1,48,0.24,11.52
+35,MGU/4,Stat Pens-8pearl/Met Gel Pens,24,48,5012128082146,1,48,0.48,23.04
+36,TDV/1,Stat-Tape       Dispenser,12,24,5012128052880,2,48,0.62,29.76
+37,STT/2,Stat-Staples 26/6 X 5000,20,40,5012128579004,1,40,0.3,12
+38,STTT/2,Stat-Stapler In Pp Box In Black,24,48,5012128385001,1,48,0.98,47.04
+39,CFCF/2,Stat Correction Set,24,48,5012128359965,1,48,0.5,24
+40,PII/3,Craft-18pcs Jumbo Pipe Cleaners,12,36,5012128109454,1,36,0.5,18
+41,HOI,Craft-Activity Craft Fun Pack,12,48,5012128099298,1,48,0.5,24
+42,GLVV,Craft-250ml White Kraft Glue,12,24,5012128388651,2,48,0.49,23.52
+43,ESQ/2,Craft-9 Piece Glitter Glue,12,48,5012128088780,1,48,0.5,24
+44,POMR,Craft - Pk Assorted Rainbow Pom Poms,18,36,5012128384004,1,36,0.5,18
+45,POMG,Craft - Mix Pk Gitter Pom Poms,18,36,5012128384035,4,144,0.5,72
+46,FEAT,Craft-Mixed Pack Of Feathers,18,36,5012128383960,2,72,0.5,36
+47,PCLN,Craft- 50 Pipe Cleaners Assorted,18,36,5012128383991,1,36,0.5,18
+48,ACTP/4,Craft-Assorted Craft Pack,24,48,5012128225741,1,48,0.5,24
+49,BKC/1,Colouring - 15 Jumbo Chalks,,12,5012128432132,1,12,0.5,6
+50,BKC/2,Colouring - 15 Jumbo Chalks,,12,5012128432132,2,24,0.5,12
+51,PDIA,Craft-30 Diagnal Stripe Pipe Cleaner,18,36,5012128393105,1,36,0.5,18
+52,PBZ,Paint - 4 Chunky Paint Brushes,12,48,5012128516269,1,48,0.5,24
+53,PCAY,Paint - Alphabet Sponges,,24,5012128269523,1,24,0.5,12
+54,SMK,Paint - Play Apron,12,36,5012128539312,1,36,0.57,20.52
+55,PMBE,"Paint-Pyo Money Box,Bear,Snail,Bee",,24,5012128390357,1,24,0.95,22.8
+56,PBOY,Paint-Make Your Own Figurines (Boys),,24,5012128344503,1,24,0.53,12.72
+57,PMOL,Paint-Make Your Own Figurines(Girls),,24,5012128343025,1,24,0.53,12.72
+58,CDT/3,Clay & Dough - 10 Clrd Dough Stick,12,36,5012128423406,1,36,0.5,18
+59,SPEN/1,Colouring - 5 Stamper Pens,12,36,5012128344268,1,36,0.52,18.72
+60,PWI/6,"Act- Pastel Card, A4 12 Sheets",,24,5012128096266,2,48,0.5,24
+61,PVR/2,"Act- Black Card, A4, 20 Sheets",,36,5012128109416,1,36,0.52,18.72
+62,PVO/3,Act Gold&Silver Mirror Card A4 12sh,6,30,5012128109393,1,30,0.5,15
+63,PVI/2,"Act-Coloured Mirror Card,A4,12 Sheet",12,36,5012128109386,1,36,0.5,18
+64,STFA,Sticker Pad - Reward Stickers X 10,,24,5012128265372,1,24,0.5,12
+65,TFFY,Educational - An&Frm Trumps Tin Cdu,24,48,5012128386756,1,48,0.5,24
+66,TFMO,Educational - Mns&Fry Snap Card Tin,24,48,5012128386732,1,48,0.5,24
+67,DIPT,Stat-Dino Pencils X6 Eraser Tops,24,48,5012128415739,1,48,0.52,24.96
+68,SSAS,Spots And Stripes A4 Notebook,,24,5012128415661,1,24,1,24
+69,SSNK,Stat-Spots&Stripes Slim Nbook W/Pen,12,24,5012128415715,1,24,0.52,12.48
+70,WDVE,Stat-A5 Glitter Dye Cute Notebk 60sh,12,24,5012128415821,1,24,0.54,12.96
+71,PWOD/1,Paint - Myo Wooden Puzzle - 4 Des,,24,5012128195563,2,48,0.82,39.36
+72,CARG,Games - 3 X Card Games In A Pk,12,36,5012128388460,1,36,0.53,19.08
+73,LMAT,Createthelook-Designyourownfashrange,12,36,5012128390371,1,36,0.53,19.08
+74,MYJS,Jewellery- Myo Sets (3 Designs),12,48,5012128343926,1,48,0.53,25.44
+75,ABIO/2,Jewellery- Myo Sets (3 Designs) Cdu,24,48,5012128182150,1,48,0.54,25.92
+76,CAPK,Racecar - 3d Paper Racecars,12,24,5012128396007,1,24,1,24
+77,CAUV,Racecar - Sketchbook Portfolio,12,24,5012128395963,1,24,0.5,12
+78,DZIG,Dinosaurs-Play & Learn Trumps,,24,5012128399299,1,24,0.5,12
+79,DOZU,Dinosaurs-Stationery Set,12,24,5012128399220,1,24,0.5,12
+80,DFLY,Dinosaurs-Colour Your Own Gliders,12,24,5012128399206,1,24,0.5,12
+81,DTAT,Dinosaurs-Hand Tattoo's,,24,5012128399275,1,24,0.5,12
+82,DBOL,Dinosaurs-Make Your Own Figures,,24,5012128399190,1,24,0.53,12.72
+83,DJHW,Dinosaurs-Wooden Puzzles- Twin Pack,12,24,5012128399121,1,24,1.5,36
+84,TJM/1,Frm Styrene  Clip 16x20in (40x50cms),,5,5012128620034,2,10,2.04,20.4
+85,BLHT/1,Frm - Flat Blk 4x6ins (10x15cms),12,36,5012128367885,1,36,0.44,15.84
+86,FNBL,"8x10"" Flat Mirror Black & White",,6,5012128402210,1,6,1.2,7.2
+87,FNWT,"8x10"" Pine Wood Mirror",,6,5012128402234,1,6,1.2,7.2
+88,PJON/1,Pirate - 20 X 2ply Napkins,12,24,5012128348600,1,24,0.5,12
+89,CASN/1,Princess - 20 X 2ply Napkins,12,24,5012128348440,1,24,0.5,12
+90,CASU/1,Princess - 1 X Plastic Table Cloth,24,48,5012128348488,1,48,0.5,24
+91,CASM/1,Princess - Banner Pack,24,48,5012128353468,1,48,0.5,24
+92,CASS/1,"Princess - 8 X 9"" Paper Plates",,24,5012128348426,1,24,0.5,12
+93,CARH,Princess - 8 X Paper Bowls,,24,5012128391194,1,24,0.5,12
+94,CASC/1,Princess - 8 X 9oz Cups,,24,5012128348433,1,24,0.38,9.12
+95,CAPT,Princess - 20 X Plastic Loot Bags,24,48,5012128391750,1,48,0.49,23.52
+96,CASB/2,Princess - 5 X Blow Bubble Pots,12,48,5012128348464,1,48,0.5,24
+97,CASW/1,Princess - 14 X Printed Balloons,24,48,5012128353505,1,48,0.5,24
+98,CAPG,Princess - 6 X Mini Notepads 30 Shts,24,48,5012128392627,1,48,0.5,24
+99,CAPC,Princess - 6 X Plastic Wands,24,48,5012128392573,1,48,0.5,24
+100,CAPE,Princess - 6 X Plst Tiara Hair Comb,24,48,5012128392597,1,48,0.52,24.96
+101,CAPA,Princess - 6 X Eraser Tops+pencils,24,48,5012128392566,1,48,0.52,24.96
+102,CARA,Princess - 10 Invites & 10 Thankyou,24,48,5012128390883,1,48,0.49,23.52
+103,PJOP/1,"Pirate - 8 X 9"" Paper Plates",,24,5012128348587,1,24,0.5,12
+104,PAHP,Pirate - 8 X Paper Bowls,,24,5012128391187,1,24,0.5,12
+105,PJOO/1,Pirate - 8 X 9oz Cups,,24,5012128348594,1,24,0.38,9.12
+106,PJPG/1,Pirate - Banner Pack,24,48,5012128353574,1,48,0.5,24
+107,PJOY/1,Pirate - 1 X Plastic Table Cloth,24,48,5012128348648,1,48,0.5,24
+108,PAHN,Pirate - 20 X Plastic Loot Bags,24,48,5012128390890,1,48,0.49,23.52
+109,PJOR/2,Pirate - 5 X Blow Bubble Pots,12,48,5012128348624,1,48,0.5,24
+110,PJPF/1,Pirate - 14 X Printed Balloons,24,48,5012128353406,1,48,0.5,24
+111,PAGR,Pirate - 6 X Mini Notepads 30 Shts,24,48,5012128392672,1,48,0.5,24
+112,PAGH,Pirate - 6 X Eraser Tops & Pencils,24,48,5012128392641,1,48,0.52,24.96
+113,PJOB/1,Pirate - 6 X Plastic Medals,24,48,5012128353222,1,48,0.52,24.96
+114,PAHO,Pirate - 10 Invites & 10 Thankyou,24,48,5012128390906,1,48,0.49,23.52
+115,CELL,H/S Large Bag - Celebrate X2 Designs,12,48,5012128376689,1,48,0.45,21.6
+116,CBRB,"Bottle Bag-Celebrate, 2 Designs",6,48,5012128410901,1,48,0.3,14.4
+117,Y4GM123C,36/3m Classic Male Wrap 51gsm Lwc,,36,5012213229166,1,36,0.46,16.56
+118,SDPM,Wrap 3m - Female Designs X 4,,48,5012128312151,1,48,0.46,22.08
+119,Y4GM123A,36/3m Traditional Female Wrap 51gsm,,36,5012213229142,1,36,0.46,16.56
+120,Y4GM123B,36/3m Contempory Female Wrap 51gsm,,36,5012213229159,1,36,0.46,16.56
+121,Y4GM123E,36/3m Happy Birthday Wrap 51gsm Lwc,,36,5012213229197,1,36,0.46,16.56
+122,Y4GM123F,36/3m Brights Mix Wrap 51gsm Lwc,,36,5012213229203,1,36,0.46,16.56
+123,BYBA,"Pepperpot, Babys Print Kit, Girl",6,24,5012128398551,1,24,3.1,74.4
+124,BAJA,"Perpperpot, Babys Print Kit, Boy",6,24,5012128398490,1,24,3.1,74.4
+125,2410/PEXAR,Peppa Pig Xmas Artist Pad,6,12,9780857264107,1,12,1.95,23.4
+126,PVRL/4,Stat-Pens 4 Handwriting Pens,24,48,5012128263644,1,48,0.5,24
+127,CMDL/3,Stat 5 X Dl Carry Folders,24,48,5012128263910,1,48,0.5,24
+128,AAKU,Stat-3 Carry Folders & Punched Holes,,24,5012128415944,1,24,0.52,12.48
+129,AAJL,Stat- 12 A4 Pp Dividers,,24,5012128415951,1,24,0.45,10.8
+,,,,,,Sum = 142,Sum = 4618,,"Sum = 2,659.98"
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

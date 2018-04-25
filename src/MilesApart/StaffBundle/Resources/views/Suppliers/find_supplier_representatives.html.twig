@@ -1,0 +1,94 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/find_representative.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'suppliers' %}
+{% set current_page = 'find_representative' %}
+
+{% block page_name %}
+	Find representative
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+	{# Create the form to find supplier reps by supplier#}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Supplier representative name</legend>
+            {{ form_row(form.supplier_representative_full_name) }}
+        </fieldset> 
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+    
+
+    <div id="supplier_representatives_table">
+
+    	<h3>{{ supplier_representative_count }} Total representatives</h3>
+
+	    {# Create table for suppliers #}
+	    <table class="table table-striped text-center">
+	        <thead>
+	            <tr class="text-center">
+	            	<th class="text-left">Representative name</th>
+	                <th class="text-left">Supplier name</th>
+	                <th class="text-center">Mobile</th>
+	                <th class="text-center">Email</th>
+	                <th class="text-center">Actions</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        
+
+	    	{% for entity in entities %}
+	    		<tr>
+	    			<td class="text-left">
+	    				<a href="{{ path('staff-suppliers_view-supplier-representative', {'id': entity.getId()}) }}">{{ entity.getSupplierRepresentativeFullName() }}</a>
+	    			</td>
+	    			<td>
+	    				{{ entity.getSupplier().getSupplierName() }}
+	    			</td>
+	    			<td>
+	    				<a href="tel:{{ entity.getSupplierRepresentativeMobileNumber() }}">{{ entity.getSupplierRepresentativeMobileNumber() }}</a>
+	    			</td>
+	                <td>
+	                    <a href="mailto:{{ entity.getSupplierRepresentativeEmail() }}">{{ entity.getSupplierRepresentativeEmail() }}</a>
+	                </td>
+	                <td>
+	                    <a href="{{ path('staff-suppliers_edit-supplier-representative', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" >
+	                    	<span class="glyphicon glyphicon-print"></span>
+	                    </a>
+	                    <a href="tel:{{ entity.getSupplierRepresentativeMobileNumber() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Call">
+	                    	<span class="glyphicon glyphicon-phone"></span>
+	                    </a>
+	                    <a href="mailto:{{ entity.getSupplierRepresentativeEmail() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Email">
+	                    	<span class="glyphicon glyphicon-envelope"></span>
+	                    </a>
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+	                    	<span class="glyphicon glyphicon-trash"></span>
+	                    </a>
+	                </td>
+	    		</tr>
+	    	{% endfor %}
+	    	</tbody>
+	    </table>
+	</div>
+
+<script>$(function () { $("[data-toggle='tooltip']").tooltip(); });</script>
+{% endblock %}

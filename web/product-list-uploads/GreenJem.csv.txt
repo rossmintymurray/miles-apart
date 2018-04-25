@@ -1,0 +1,4 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+Tradesmans Heavy Duty Utility Knife,5034537018561,HWTMHDUK,4.99,Green Jem
+300mm x 5mm Natural Cable Ties,5034537004137,HWCT300N,1.25,Green Jem
+Retractable Utility Knife,5034537012750,HWRUT,1.25,Green Jem

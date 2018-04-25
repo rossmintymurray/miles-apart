@@ -1,0 +1,54 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/finance.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'vat_rate' %}
+
+{# Set the page title #}
+{% block title %}
+    Show VAT Rate
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    Show VAT Rate          
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View VAT rate details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Vat rate value</th>
+                <td>{{ entity.vatratevalue }}</td>
+            </tr>
+            <tr>
+                <th>Vat effective date</th>
+                <td>{{ entity.vateffectivedate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('finance_vat-rate') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('finance_vat-rate_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

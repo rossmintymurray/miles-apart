@@ -1,0 +1,162 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/pick.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'view_shipments' %}
+
+{% block page_name %}
+    View Royal Mail Shipment Details
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Shipment #{{ shipment.id }}</h2>
+		</div>
+		<div class="col-md-3">
+			<h3>Status:
+			{% if shipment.royalmailshipmentstate.id == 1 or shipment.royalmailshipmentstate.id == 2 %}
+				<span class="label label-info">{{ shipment.royalmailshipmentstate.royalmailshipmentstate }}</span>
+			{% endif %}
+
+			{% if shipment.royalmailshipmentstate.id == 3  %}
+				<span class="label label-success">{{ shipment.royalmailshipmentstate.royalmailshipmentstate }}</span>
+			{% endif %}
+
+			{% if shipment.royalmailshipmentstate.id == 4 or shipment.royalmailshipmentstate.id == 5 %}
+				<span class="label label-warning">{{ shipment.royalmailshipmentstate.royalmailshipmentstate }}</span>
+			{% endif %}
+
+			{% if shipment.royalmailshipmentstate.id == 6  %}
+				<span class="label label-danger">{{ shipment.royalmailshipmentstate.royalmailshipmentstate }}</span>
+			{% endif %}
+		
+		</h3>
+		</div>
+		<div class="col-md-3">
+			<div class="btn-group col-md-12">
+				{% if shipment.royalmailshipmentstate.id == 3  %}
+					<button disabled="disabled" type="button" class="btn btn-primary dropdown-toggle col-md-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+					Actions <span class="caret"></span>
+					</button>
+				{% else %}
+					<button type="button" class="btn btn-primary dropdown-toggle col-md-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+					Actions <span class="caret"></span>
+					</button>
+				{% endif %}
+				<ul class="dropdown-menu">
+					<li><a href="#">Recall</a></li>
+					<li><a href="#">Update</a></li>
+					{# Check that the shipment has been allocated #}
+					{% if shipment.royalmailshipmentstate.id != 6 %}
+						<li><a href="{{ path('staff-royalmail_cancel-shipment', {'shipment_number': shipment.royalmailshipmentnumber }) }}">Cancel</a></li>
+					{% endif %}
+					<li><a href="#" onclick="reprintShipmentLabel({{ shipment.id }});">Reprint Label</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-md-3">
+			<h3>Order Address</h3>
+			<address>
+				{{ shipment.customerorder.deliveryaddress.customeraddresscontactfullname }}<br />
+				{{ shipment.customerorder.deliveryaddress.customeraddressline1 }}<br />
+				{% if shipment.customerorder.deliveryaddress.customeraddressline2 != null %}
+					{{ shipment.customerorder.deliveryaddress.customeraddressline2 }}<br />
+				{% endif %}
+				{{ shipment.customerorder.deliveryaddress.customeraddresstown }}<br />
+				{{ shipment.customerorder.deliveryaddress.customeraddresspostcode }}
+			</address>
+		</div>
+
+		<div class="col-md-3">
+			<h3>Shipment Address</h3>
+			
+			{% if array.0.createShipmentResponse.completedShipmentInfo.requestedShipment is defined %}
+	
+				<address>
+					{{ array.0.createShipmentResponse.completedShipmentInfo.requestedShipment.recipientContact.name }}<br />
+					{{ array.0.createShipmentResponse.completedShipmentInfo.requestedShipment.recipientAddress.addressLine1 }}<br />
+					{% if array.0.createShipmentResponse.completedShipmentInfo.requestedShipment.recipientAddress.addressLine2[0] is defined %}
+						{{ array.0.createShipmentResponse.completedShipmentInfo.requestedShipment.recipientAddress.addressLine2[0] }}<br />
+					{% endif %}
+					{{ array.0.createShipmentResponse.completedShipmentInfo.requestedShipment.recipientAddress.postTown }}<br />
+					{{ array.0.createShipmentResponse.completedShipmentInfo.requestedShipment.recipientAddress.postcode }}
+				</address>
+			{% endif %}
+		</div>
+		<div class="col-md-6">
+			<h5>Customer Order #{{ shipment.customerorder.id }}</h5>
+			<h5>Royal Mail Shipment #{{ shipment.royalmailshipmentnumber }}</h5>
+			<h5>Created Date {{ shipment.royalmailshipmentdatecreated|date('d M Y') }}</h5>
+			<h5>Modified Date {{ shipment.royalmailshipmentdatemodified|date('d M Y') }}</h5>
+		</div>
+	</div>
+	<div class="row">
+
+		<div class="col-md-4">
+			<div class="well">
+				<h3>Errors</h3>
+				{% for error in shipment.royalmailshipmentwarning %}
+					{% if error.royalmailshipmentwarningtype.id == 3 %}
+						<p><b>{{ error.royalmailshipmentwarningcode }}</b> - {{ error.royalmailshipmentwarningdescription }}</p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="well">
+				<h3>Warnings</h3>
+				{% for error in shipment.royalmailshipmentwarning %}
+					{% if error.royalmailshipmentwarningtype.id == 1 %}
+						<p><b>{{ error.royalmailshipmentwarningcode }}</b> - {{ error.royalmailshipmentwarningdescription }}</p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="well">
+				<h3>Faults</h3>
+				{% for error in shipment.royalmailshipmentwarning %}
+					{% if error.royalmailshipmentwarningtype.id == 2 %}
+						<p><b>{{ error.royalmailshipmentwarningcode }}</b> - {{ error.royalmailshipmentwarningdescription }}</p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="well">
+		<div class="row">
+			<div class="col-md-8">
+				<h2>Raw XML - Create Shipment</h2>
+			</div>
+			<div class="col-md-4">
+				<button href="#raw_xml_shipment" class="btn btn-default col-md-12" data-toggle="collapse">Show</button>
+    		</div>
+    	</div>
+
+    	<div id="raw_xml_shipment" class="collapse">
+			<pre>{{ shipment.royalmailcreateshipmentresponserawxml }}</pre>
+		</div>
+	</div>
+	
+	<div class="well">
+		<div class="row">
+			<div class="col-md-8">
+				<h2>Raw XML - Label</h2>
+			</div>
+			<div class="col-md-4">
+				<button href="#raw_xml_label" class="btn btn-default col-md-12" data-toggle="collapse">Show</button>
+    		</div>
+    	</div>
+
+    	<div id="raw_xml_label" class="collapse">
+			<pre>{{ shipment.royalmailcreatelabelresponserawxml }}</pre>
+		</div>
+	</div>
+{% endblock %}

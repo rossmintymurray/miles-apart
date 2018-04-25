@@ -1,0 +1,98 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/supplier.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'supplier' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.suppliername }} - Supplier
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.suppliername }} - Supplier          
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View supplier details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier name</th>
+                <td>{{ entity.suppliername }}</td>
+            </tr>
+            <tr>
+                <th>Supplier address 1</th>
+                <td>{{ entity.supplieraddress1 }}</td>
+            </tr>
+            <tr>
+                <th>Supplier address 2</th>
+                <td>{{ entity.supplieraddress2 }}</td>
+            </tr>
+            <tr>
+                <th>Supplier town</th>
+                <td>{{ entity.suppliertown }}</td>
+            </tr>
+            <tr>
+                <th>Supplier county</th>
+                <td>{{ entity.suppliercounty }}</td>
+            </tr>
+            <tr>
+                <th>Supplier postcode</th>
+                <td>{{ entity.supplierpostcode }}</td>
+            </tr>
+            <tr>
+                <th>Supplier country</th>
+                <td>{{ entity.suppliercountry }}</td>
+            </tr>
+            <tr>
+                <th>Supplier phone</th>
+                <td>{{ entity.supplierphone }}</td>
+            </tr>
+            <tr>
+                <th>Supplier fax</th>
+                <td>{{ entity.supplierfax }}</td>
+            </tr>
+            <tr>
+                <th>Supplier ordering email</th>
+                <td>{{ entity.supplierorderingemail }}</td>
+            </tr>
+            <tr>
+                <th>Supplier info email</th>
+                <td>{{ entity.supplierinfoemail }}</td>
+            </tr>
+            <tr>
+                <th>Supplier website</th>
+                <td>{{ entity.supplierwebsite }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ entity.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('supplier_supplier') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('supplier_supplier_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

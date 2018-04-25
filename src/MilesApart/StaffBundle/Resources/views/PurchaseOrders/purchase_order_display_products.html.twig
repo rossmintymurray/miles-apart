@@ -1,0 +1,409 @@
+{# Create the modal #}
+{# Call the thumbnail controller #}
+<div class="row">
+  {# Create column for left thumbnails (there will be a second div for current purchase order). #}
+  <div class="col-sm-12 col-md-8 col-xs-12 col-lg-8">
+    {% for entity in product_suppliers %} 
+      <div class="col-sm-4 col-md-4 col-xs-6 col-lg-4">
+
+        {# Create the thumbnail #}
+        <div class="thumbnail" id="thumbnail_{{ entity.product.id }}">
+
+          {# Check if there is an image for the product #}
+          {% if entity.product.productimage|length > 0 %}
+
+            {# Check if there is an image for the product #}
+            {% for image in entity.product.productimage %}
+              {# Check if there is a main image #}
+              {% if image.productimageismain == 1 %}
+                
+                {# Show the main image #}
+                <a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}"><img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="purchase_order_product_thumbnail col-md-12" /></a>
+                
+              {% endif %}
+            {% endfor %}
+
+          {# If there is no image #}
+          {% else %}
+            <a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}"><img src="{{ asset('images/web/thumbnail-placeholder.gif') }}" alt="Thumbnail placeholder" class="purchase_order_product_thumbnail col-md-12"/></a>
+          {% endif %}
+         
+              <div class="caption">
+                <div class="thumbnail_product_name">
+                  <h4><a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}">{{ entity.product.productname }}</a></h4>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-4 col-xs-4">
+                    <p class="thumbnail_sub_header">Cost:</p>
+                    <h4>{{ entity.product.currentcostdisplay }}</h4>
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <p class="thumbnail_sub_header">Price:</p>
+                    <h4>{{ entity.product.currentpricedisplay }}</h4>
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <p class="thumbnail_sub_header">In stock:</p>
+                    <h4>{{ entity.product.currentstocklevel }}</h4>
+                  </div>
+                </div>
+                <div class="row" style="margin-top:5px">
+                  <div class="col-md-6 col-xs-6">
+                    <p class="thumbnail_sub_header">Supplier Code:</p>
+                    <h4>{{ entity.product.productsuppliercode }}</h4>
+                  </div>
+                  <div class="col-md-6 col-xs-6">
+                    <div class="row">
+                       <div class="col-md-6 col-xs-6">
+                          <p class="thumbnail_sub_header">Inner Qty:</p>
+                          <h4>{{ entity.product.productinnerquantity }}</h4>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                          <p class="thumbnail_sub_header">Outer Qty:</p>
+                          <h4>{{ entity.product.productouterquantity }}</h4>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="thumbnail_buttons">
+                  <p><a href="{{ path('staff-purchase-orders_add-product-to-purchase-order-shopping-basket', { 'id': entity.product.id }) }}" class="btn btn-primary btn-sm add_product_link" id="{{ entity.product.id }}" role="button">Order one case</a> <button type="button" class="btn btn-default btn-sm more_info_link" id="{{ entity.product.id }}">More info</button></p>
+                </div>
+           
+            </div>
+          </div>
+        </div>
+
+        {% if loop.index is divisible by(3) %}
+            <div class="clearfix"></div>
+        {% endif %}
+      {% endfor %}
+
+
+  </div> 
+<div id="modal_holder"></div>
+  {# Create column for rightpurchase orer contents and info. #}
+  <div class="col-sm-12 col-md-4 col-xs-12 col-lg-4">
+    
+    <div id="purchase_order_shopping_basket" class="well">
+      {% if purchase_orders == null %}
+        <h4> No existing purchase order</h4>
+        <p>Just add a product to create one for this supplier</p>
+      {% endif %}
+          
+
+        {% for purchase_order in purchase_orders %}
+          <div class="row" id="shopping_basket_wrapper">
+            <div class="col-md-9">
+              <h4>Existing purchase order</h4>
+            </div>
+            <div class="col-md-3">
+              <a class="btn btn-small success-colour" role="button" href="javascript:;" onclick="sendPurchaseOrder({{ purchase_order.getId }})">Send</a>
+            </div>
+          </div>
+          <p><span class="text-muted">Started on:</span> {{ purchase_order.purchaseorderdatecreated|date("d M Y g:i a") }}</p>
+          <p><span class="text-muted">Difference to minimum order value:</span> <span id="purchase_order_difference">{{ purchase_order.getpurchaseorderminimumordervaluedifferencedisplay }}</span></p>
+          <p><span class="text-muted">Running total:</span> <span id="purchase_order_running_total">{{ purchase_order.purchaseordercurrenttotaldisplay }}</span></p>
+          <table class="table table-striped text-center table_small">
+            <thead>
+                <tr class="text-center">
+                  <th class="text-left">Code</th>
+                    <th class="text-left">Name</th>
+                    <th class="text-center">Outers</th>
+                    <th class="text-center">Inners</th>
+                    <th class="text-center">Unit</th>
+                    <th class="text-center" style="min-width:70px">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+          {% for purchase_order_product in purchase_order.getpurchaseorderproduct %}
+            {# Update the thumbnail class to show the product is in the basket #}
+            <script>
+              //Find the product thumbnail.
+              //Set the id 
+              var product_thumb_id = "#thumbnail_{{purchase_order_product.product.id}}";
+              //Set the selected class.
+              $(product_thumb_id).addClass("selected_thumbnail");
+
+              //Change the add button text.
+              var buttonId = "#{{purchase_order_product.product.id}}";
+              $(buttonId).html("Add another");
+              
+            </script>
+            <tr id="product_row_{{ purchase_order_product.id }}">
+              <td>
+                {{ purchase_order_product.product.productsuppliercode }}
+              </td>
+              <td class="text-left">
+                <a href="javascript:;" class="more_info_link" id="{{ purchase_order_product.product.id }}">
+                  {{ purchase_order_product.product.productname }}
+                </a>
+              </td>
+              
+              <td>
+                {{ purchase_order_product.purchaseorderproductouters }}
+              </td>
+              <td>
+                {{ purchase_order_product.purchaseorderproductinners }}
+              </td>
+              <td>
+                {{ purchase_order_product.purchaseorderproductquantity }}
+              </td>
+              <td>
+                  
+                <a href="javascript:;" onclick="actionLinkMinus({{ purchase_order_product.getId }});" class="table-glyphicon action_link_minus" data-toggle="tooltip" data-placement="top" title="Edit" >
+                  <span class="glyphicon glyphicon-minus"></span>
+                </a>
+
+                <a href="javascript:;" onclick="actionLinkPlus({{ purchase_order_product.product.getId }});" class="table-glyphicon action_link_plus" data-toggle="tooltip" data-placement="top" title="Edit">
+                  <span  class="glyphicon glyphicon-plus"></span>
+                </a>
+                
+                <a href="javascript:;" onclick="actionLinkDelete({{ purchase_order_product.getId }});" class="table-glyphicon action_link_delete" data-toggle="tooltip" data-placement="top" title="Delete">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+<script>
+
+$('#purchase_order_shopping_basket').affix({
+      offset: {
+        top: 260
+      }
+}); 
+
+//When the add to purchase order more info is clicked, call the function to show the modal.
+  $(".more_info_link").click(function(event){
+    
+    //Set the id of the product whose link was clicked.
+    var id = event.target.id;
+
+    //Call ajax function to get the product, add it to the purchase order and return success or failure, and data, on the product added.
+    $.ajax({
+        type: "POST",
+        url: 'purchase-order-product-more-info',
+        dataType: 'json',
+        data: { id : id  },
+        success: function(data){
+
+          //Set the modal data and show.
+          {# Create the modal #}
+          var modal = "<div class=\"modal fade\" id=\"modal_" + id + "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"><div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><h4 class=\"modal-title\" id=\"myModalLabel\">" + data['product_name'] + "</h4></div><div class=\"modal-body\"><h5>Supplier</h5><h5>Order Quantities</h5><h5>Update Costs</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button><button type=\"button\" class=\"btn btn-primary\">Order & Close</button></div></div></div></div>";
+
+          $('#modal_holder').html(modal);
+          $('#modal_' + id).modal();
+        }, 
+        fail: function() {
+          alert('Ajax failed');
+        }
+
+    //End of AJAX function
+    });
+  });
+
+
+  //When the add to purchase order link is clicked, call the function to add it to basket.
+  $(".add_product_link").click(function(event){
+    
+    //Set the id of the product whose link was clicked.
+    var id = event.target.id;
+
+    //Call ajax function to get the product, add it to the purchase order and return success or failure, and data, on the product added.
+   
+    $.ajax({
+        type: "POST",
+        url: 'add-product-to-purchase-order-shopping-basket',
+        dataType: 'json',
+        data: { id : id  },
+        success: function(data){
+
+              //Update the thumbnail colour.
+              $("#thumbnail_" + id).addClass('selected_thumbnail');
+              //Change the text on the button
+              $("#" + id).html('Add another');
+              //Create the table row for basket.
+              var formRow = "<tr id=\"product_row_" + data['product_id'] + "\" class=\"new-table-add\"><td class=\"text-left\">" + data['product_supplier_code'] + "</td><td class=\"text-left\"><a class=\"more_info_link\" id=\"" + data['prod_id'] + "\">" + data['product_name'] + "</a></td><td>" + data['purchase_order_product_outers'] + "</td><td>" + data['purchase_order_product_inners'] + "</td><td>" + data['product_qty'] + "</td><td><a href=\"javascript:;\" class=\"table-glyphicon action_link_minus\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Minus\" onclick=\"actionLinkMinus(" + data['product_id'] + ");\"><span class=\"glyphicon glyphicon-minus\"></span></a><a href=\"javascript:;\" class=\"table-glyphicon action_link_plus\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Add\"  onclick=\"actionLinkPlus(" + data['prod_id'] + ");\"><span class=\"glyphicon glyphicon-plus\" ></span></a><a href=\"javascript:;\" class=\"table-glyphicon action_link_delete\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Delete\" onclick=\"actionLinkDelete(" + data['product_id'] + ");\"><span class=\"glyphicon glyphicon-trash\"></span></a></td></tr>";
+
+
+                  //Check if PO exists. 
+
+
+              //Check if purchase order id exists. (This sets up individual tables for the add product to purchase order page).
+              if(data['new_table'] == true) {
+                
+                  
+                  var table = "<div class=\"row\"><div class=\"col-md-9\"><h4>Existing purchase order</h4></div><div class=\"col-md-3\"><a class=\"btn btn-small success-colour\" role=\"button\" href=\"javascript:;\" onclick=\"sendPurchaseOrder(" + data['purchase_order_id'] + ")\">Send</a></div></div><p><span class=\"text-muted\">Started on:</span> " + data['purchase_order_date_created'] + "</p><p><span class=\"text-muted\">Difference to minimum order value:</span> <span id=\"purchase_order_difference\">" + data['difference_to_minimum_value'] + "</span></p><p><span class=\"text-muted\">Running total:</span> <span id=\"purchase_order_running_total\">" + data['purchase_order_current_total_display'] + "</span></p><table class=\"table table-striped text-center table_small\"><thead><tr class=\"text-center\"><th class=\"text-center\">Code</th><th class=\"text-left\">Name</th><th class=\"text-center\">Outers</th><th class=\"text-center\">Inners</th><th class=\"text-center\">Unit</th><th class=\"text-center\" style=\"min-width:70px\">Actions</th></tr></thead><tbody></tbody></table>";
+                    
+                  $('#purchase_order_shopping_basket').html(table).each(function() {
+                    $(formRow).prependTo("table > tbody").find('*').effect("highlight", {color:"#71a01e"}, 2000);
+                  });
+
+                    
+                  
+                
+
+              } else {
+                //If existing product is true, update the qty
+                if (data['existing_product'] == true) {
+                  //Create the table row id.
+                  var row_id = "#product_row_" + data['product_id'];
+
+                  $(row_id + " :nth-child(5)").html(data['product_qty']);
+                  $(row_id + " td:nth-child(3)").html(data['purchase_order_product_outers']);
+                  $(row_id + " td:nth-child(4)").html(data['purchase_order_product_inners']);
+
+
+                  $(row_id).find("*").effect("highlight", {color:"#71a01e"}, 2000);
+                //If not existing, prepend the row.
+                } else {
+
+                  //Otherwise add to the single table.
+                  $(formRow).prependTo("table > tbody").find('*').effect("highlight", {color:"#71a01e"}, 2000);
+                }
+
+                //Update the running total and difference figures.
+                $('#purchase_order_running_total').html(data['purchase_order_current_total_display']);
+                $('#purchase_order_difference').html(data['difference_to_minimum_value']);
+
+              }
+                
+         
+         //AJAX function, end of success 
+        }, 
+        fail: function() {
+          alert('Ajax failed');
+        }
+
+   //End of AJAX function
+    });
+
+    //Return false so the link doesn't fire.
+    return false;
+  });
+
+function actionLinkMinus(id) {
+   
+    //Call ajax function to get the purchase order product and minus one from the total.
+    $.ajax({
+        type: "POST",
+        url: 'minus-product-from-purchase-order-shopping-basket',
+        dataType: 'json',
+        data: { id : id  },
+        success: function(data){
+
+          //Create the table row id.
+          var row_id = "#product_row_" + data['product_id'];
+
+          $(row_id + " :nth-child(5)").html(data['product_qty']);
+          $(row_id + " td:nth-child(3)").html(data['purchase_order_product_outers']);
+          $(row_id + " td:nth-child(4)").html(data['purchase_order_product_inners']);
+
+          $(row_id).find("*").effect("highlight", {color:"#71a01e"}, 2000);
+
+          //Update the running total and difference figures.
+          $('#purchase_order_running_total').html(data['purchase_order_current_total_display']);
+          $('#purchase_order_difference').html(data['difference_to_minimum_value']);
+
+        },
+        fail: function() {
+          alert('Ajax failed');
+        }
+
+    //End of AJAX function
+    });
+
+    return false;
+  }
+
+//When the add to purchase order more info is clicked, call the function to show the modal.
+  function actionLinkPlus(id) {
+   
+    //Call ajax function to get the product, add it to the purchase order and return success or failure, and data, on the product added.
+    $.ajax({
+        type: "POST",
+        url: 'add-product-to-purchase-order-shopping-basket',
+        dataType: 'json',
+        data: { id : id  },
+        success: function(data){
+
+          //Create the table row id.
+          var row_id = "#product_row_" + data['product_id'];
+
+          $(row_id + " :nth-child(5)").html(data['product_qty']);
+          $(row_id + " td:nth-child(3)").html(data['purchase_order_product_outers']);
+          $(row_id + " td:nth-child(4)").html(data['purchase_order_product_inners']);
+
+
+          $(row_id).find("*").effect("highlight", {color:"#71a01e"}, 2000);
+
+          //Update the running total and difference figures.
+          $('#purchase_order_running_total').html(data['purchase_order_current_total_display']);
+          $('#purchase_order_difference').html(data['difference_to_minimum_value']);
+
+        },
+        fail: function() {
+          alert('Ajax failed');
+        }
+
+    //End of AJAX function
+    });
+
+    return false;
+  }
+
+
+  
+
+
+  function actionLinkDelete(id) {
+   
+    //Call ajax function to get the product, add it to the purchase order and return success or failure, and data, on the product added.
+    $.ajax({
+        type: "POST",
+        url: 'delete-product-from-purchase-order-shopping-basket',
+        dataType: 'json',
+        data: { id : id  },
+        success: function(data){
+
+          
+          //Create the table row id.
+          var row_id = "#product_row_" + data['product_id'];
+
+          //Delete the table row
+          $(row_id).remove();
+
+
+         
+          //Delete the green box surrounding thumbnail
+          $("#thumbnail_" + data['prod_id']).removeClass('selected_thumbnail');
+
+          //Update the running total and difference figures.
+          $('#purchase_order_running_total').html(data['purchase_order_current_total_display']);
+          $('#purchase_order_difference').html(data['difference_to_minimum_value']);
+       
+
+        },
+        fail: function() {
+          alert('Ajax failed');
+        }
+
+    //End of AJAX function
+    });
+
+    return false;
+  }
+
+
+  
+
+
+</script>
+

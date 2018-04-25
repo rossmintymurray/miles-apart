@@ -1,0 +1,59 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::shop_page_layout.html.twig' %}
+
+{# Create the page title for HTML title tag #}
+{% block page_title %}
+    Search Results - '{{ search_string }}'
+
+{% endblock %}
+
+
+
+
+{# Create main page content #}
+{% block page_content %}
+
+    {# Call the view port header #}
+    {% include 'MilesApartPublicBundle:Shop:search_view_port_header.html.twig' %}
+   
+    {# Call the search results products #}
+    <div id="product_display_area_wrapper">
+        {{ render(controller('MilesApartPublicBundle:Shop:searchresultsdisplayarea',  {'search_string': search_string, 'products_per_page':per_page, 'page': page, 'attributes': attributes}) ) }}
+    </div>
+    
+{% endblock %}
+
+{% block pagination_links %}
+    <div id="pagination_area"></div>   
+  
+{% endblock %}
+
+{% block attributes_filter %}
+    
+    {# Include the attributes filter #}
+    {{ render(controller('MilesApartPublicBundle:Shop:getSearchAttributesOwningProducts',  {'search_string': search_string, 'products_per_page':per_page, 'page': page, 'attributes': attributes}) ) }}
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        urlToCall = "{{ path('miles_apart_public_search_results_display_area', {'search_string': search_string, 'specific_category': null} ) }}";
+
+        window.onload(viewPortOptions(urlToCall));
+
+        //Script to handle the ... creation
+        $(document).ready(function() {
+            $(".wrapper").dotdotdot({
+                height      : 60,
+            });
+
+            if (Foundation.utils.is_large_up()) {
+            } else {
+                makeGridview();
+            }
+        });
+
+        
+    </script>
+{% endblock %}

@@ -1,0 +1,134 @@
+staff-purchase-orders_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:notifications" }
+
+staff-purchase-orders_add-product-to-purchase-order:
+    pattern:  /add-product-to-purchase-order
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:addproducttopurchaseorder" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_add-product-to-purchase-order-submit:
+    pattern:  /add-product-to-purchase-order/submit
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:addproducttopurchaseordersubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_add-product-to-purchase-order-find-product:
+    pattern:  /add-product-to-purchase-order/find-product
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:addproducttopurchaseorderfindproduct" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_add-product-to-purchase-order-submit-new-product:
+    pattern:  /add-product-to-purchase-order/submit-new-product
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:addproducttopurchaseordersubmitnewproduct" }
+    requirements:
+        _method:  GET|POST
+
+staff-products_add-product-to-purchase-order-product-new-qty:
+    pattern:  /add-product-to-purchase-order/submit-new-qty
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:addproducttopurchaseordernewqty" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_new-supplier-purchase-order:
+    pattern:  /new-supplier-purchase-order
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:newsupplierpurchaseorder" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_select-supplier-for-purchase-order:
+    pattern:  /new-supplier-purchase-order/select-supplier
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:selectsupplierforpurchaseorder" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_select-supplier-for-purchase-order-process:
+    pattern:  /new-supplier-purchase-order/edit-order
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:selectsupplierforpurchaseorderprocess" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_add-product-to-purchase-order-shopping-basket:
+    pattern:  /add-product-to-purchase-order-shopping-basket
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:addproducttopurchaseordershoppingbasket" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_minus-product-from-purchase-order-shopping-basket:
+    pattern:  /minus-product-from-purchase-order-shopping-basket
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:minusproductfrompurchaseordershoppingbasket" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_delete-product-from-purchase-order-shopping-basket:
+    pattern:  /delete-product-from-purchase-order-shopping-basket
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:deleteproductfrompurchaseordershoppingbasket" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_purchase-order-product-more-info:
+    pattern:  /purchase-order-product-more-info
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:purchaseorderproductmoreinfo" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_send-purchase-order:
+    pattern:  /send-purchase-order/{id}
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:sendpurchaseorder" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_print-purchase-order:
+    pattern:  /print-purchase-order/{id}
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:printpurchaseorder" }
+    requirements:
+        _method:  GET|POST
+
+staff-purchase-orders_send-purchase-order-post:
+    pattern:  /send-purchase-order
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:sendpurchaseorderpost" }
+    requirements:
+        _method:  GET|POST
+                
+staff-purchase-orders_review-purchase-orders:
+    pattern:  /review-purchase-orders
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:reviewpurchaseorders" }
+
+staff-purchase-orders_view-purchase-order-details:
+    pattern:  /view-purchase-order-details/{purchase_order_id}
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:viewpurchaseorderdetails" }
+
+staff-purchase-orders_process-purchase-order-confirmation:
+    pattern:  /process-purchase-order-confirmation
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:processpurchaseorderconfirmation" }
+
+staff-products_process-purchase-order-supplier-select:
+    pattern:  /process-purchase-order-confirmation/supplier-select
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:processpurchaseorderconfirmationsupplierselect" }
+
+staff-products_process-purchase-order-confirmation-upload-csv:
+    pattern:  /process-purchase-order-confirmation/upload-csv
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:processpurchaseorderconfirmationuploadcsv" }
+
+staff-products_process-purchase-order-confirmation-manual-input:
+    pattern:  /process-purchase-order-confirmation/manual-input/{id}
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:processpurchaseorderconfirmationmanualinput", id: null }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+staff-products_process-purchase-order-confirmation-manual-input-submit:
+    pattern:  /process-purchase-order-confirmation/manual-input-submit
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:processpurchaseorderconfirmationmanualinputsubmit"}
+
+staff-products_process-purchase-order-csv:
+    pattern:  /import-purchase-order-csv/process
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:processpurchaseordercsv" }
+
+staff-products_supplier-code-check:
+    pattern:  /supplier-code-check
+    defaults: { _controller: "MilesApartStaffBundle:PurchaseOrders:suppliercodecheck" }
+    requirements:
+        _method:  GET|POST

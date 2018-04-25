@@ -1,0 +1,8 @@
+parameters:
+#    miles_apart_public.example.class: MilesApart\PublicBundle\Example
+
+services:
+    miles_apart_public.form.type.milesapart_publicbundle_main_search_form:
+        class: MilesApart\PublicBundle\Form\MainSearchType
+        tags:
+            - { name: form.type, alias: milesapart_publicbundle_main_search_form }

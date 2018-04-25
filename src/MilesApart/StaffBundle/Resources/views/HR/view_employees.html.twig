@@ -1,0 +1,136 @@
+{# src/MilesApart/StaffBundle/Resources/views/HR/view_employees.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'hr' %}
+{% set current_page = 'view_employees' %}
+
+{% block page_name %}
+	View employees
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    <div id="suppliers_table">
+
+    	<h3>{{ employee_count }} Total current employees</h3>
+
+	    {# Create table for suppliers #}
+	    <table class="table table-striped text-center">
+	        <thead>
+	            <tr class="text-center">
+	                <th width="25%" class="text-left">Employee name</th>
+	                <th width="20%" class="text-center">NI number</th>
+	                <th width="15%" class="text-center">Landline</th>
+	                <th width="15%" class="text-center">Mobile</th>
+	                <th width="10%" class="text-center">Holiday</th>
+	                <th width="15%" class="text-center">Actions</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        
+
+	    	{% for entity in current_employees %}
+	    		<tr>
+	    			<td class="text-left">
+	    				<a href="{{ path('staff-hr_view-employee-details', {'id': entity.getId()}) }}">
+	    					{{ entity.getEmployeeFullName() }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				{{ entity.getEmployeeNationalInsuranceNumber() }}
+	    			</td>
+	    			<td>
+	    				<a href="tel:{{ entity.getEmployeeLandlinePhone() }}">
+	    					{{ entity.getEmployeeLandlinePhone() }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				<a href="tel:{{ entity.getEmployeeMobilePhone() }}">
+	    					{{ entity.getEmployeeMobilePhone() }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				{{ entity.getRemainingHolidayHoursProjected }}
+	    			</td>
+
+	                <td>
+	                    <a href="{{ path('staff-hr_edit-employee', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" >
+	                    	<span class="glyphicon glyphicon-print"></span>
+	                    </a>
+	                    <a href="tel:{{ entity.getEmployeeMobilePhone() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Call">
+	                    	<span class="glyphicon glyphicon-phone"></span>
+	                    </a>
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+	                    	<span class="glyphicon glyphicon-trash"></span>
+	                    </a>
+	                </td>
+	    		</tr>
+	    	{% endfor %}
+	    	</tbody>
+	    </table>
+
+	    <h3>{{ past_employee_count }} Total past employees</h3>
+
+	    {# Create table for suppliers #}
+	    <table class="table table-striped text-center">
+	        <thead>
+	            <tr class="text-center">
+	                <th width="30%" class="text-left">Employee name</th>
+	                <th width="20%" class="text-center">NI number</th>
+	                <th width="15%" class="text-center">Mobile</th>
+	                <th width="15%" class="text-center">Landline</th>
+	                <th width="20%" class="text-center">Actions</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        
+
+	    	{% for entity in past_employees %}
+	    		<tr>
+	    			<td class="text-left">
+	    				<a href="{{ path('staff-hr_view-employee-details', {'id': entity.getId()}) }}">
+	    					{{ entity.getEmployeeFullName() }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				{{ entity.getEmployeeNationalInsuranceNumber() }}
+	    			</td>
+	    			<td>
+	    				<a href="tel:{{ entity.getEmployeeLandlinePhone() }}">
+	    					{{ entity.getEmployeeLandlinePhone() }}
+	    				</a>
+	    			</td>
+	    			<td>
+	    				<a href="tel:{{ entity.getEmployeeMobilePhone() }}">
+	    					{{ entity.getEmployeeMobilePhone() }}
+	    				</a>
+	    			</td>
+
+	                <td>
+	                    <a href="{{ path('staff-hr_edit-employee', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" >
+	                    	<span class="glyphicon glyphicon-print"></span>
+	                    </a>
+	                    <a href="tel:{{ entity.getEmployeeMobilePhone() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Call">
+	                    	<span class="glyphicon glyphicon-phone"></span>
+	                    </a>
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+	                    	<span class="glyphicon glyphicon-trash"></span>
+	                    </a>
+	                </td>
+	    		</tr>
+	    	{% endfor %}
+	    	</tbody>
+	    </table>
+
+	</div>
+
+<script>$(function () { $("[data-toggle='tooltip']").tooltip(); });</script>
+{% endblock %}

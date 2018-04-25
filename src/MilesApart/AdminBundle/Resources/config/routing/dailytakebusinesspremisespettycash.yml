@@ -1,0 +1,33 @@
+finance_daily-take-business-premises-petty-cash:
+    path:     /{page}
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_daily-take-business-premises-petty-cash_show:
+    path:     /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:show" }
+
+finance_daily-take-business-premises-petty-cash_new:
+    path:     /new
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:new" }
+
+finance_daily-take-business-premises-petty-cash_create:
+    path:     /create
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:create" }
+    requirements: { _method: post }
+
+finance_daily-take-business-premises-petty-cash_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:edit" }
+
+finance_daily-take-business-premises-petty-cash_update:
+    path:     /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:update" }
+    requirements: { _method: post|put }
+
+finance_daily-take-business-premises-petty-cash_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:DailyTakeBusinessPremisesPettyCash:delete" }
+    requirements: { _method: post|delete }

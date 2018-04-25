@@ -1,0 +1,23 @@
+{# Defines the layout of product thumbnails on the shop page #}
+<div class="row">
+  {% for entity in pager %} 
+  <div class="col-sm-4 col-md-4 col-xs-6 col-lg-4">
+    <div class="thumbnail">
+      {% for image in entity.productimage %}
+        {% if image.productimageismain == 1 %}
+          <div class="row">
+            <img src="{{ asset('images/products/')~image.productimagepath }}" class="col-md-12 col-sm-12 col-xs-12" alt="{{ image.productimagedescription}}" >
+          </div>
+        {% endif %}
+        {% endfor %}
+        <div class="caption">
+          <h4>{{ entity.productname }}</h4>
+          
+          <p>{{ entity.productintroduction|length > 50 ? entity.productintroduction|slice(0, 50) ~ '...' : entity.productintroduction  }}</p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" id="{{ entity.id }}" class="btn btn-default add_to_basket_button" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+</div>

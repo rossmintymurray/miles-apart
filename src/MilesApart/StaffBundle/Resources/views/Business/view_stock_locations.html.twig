@@ -1,0 +1,54 @@
+{# src/MilesApart/StaffBundle/Resources/views/Business/new_premises.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'business' %}
+{% set current_page = 'new_premises' %}
+
+{% block page_name %}
+	View stock locations
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+
+     <table class="table table-striped small" id="existing_transfer_request_products">
+        <thead>
+            <tr>
+                <th>Stock Location Name</th>
+                <th>Business Premises</th>
+                <th>Code</th>
+                <th>Actions</th>
+            </tr>
+                
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>
+                        {{ entity.getStockLocationName }}
+                    </td>
+                    <td>
+                        {{ entity.getBusinessPremises.getBusinessPremisesName }}
+                    </td>
+                    <td>
+                        {{ entity.getStockLocationCode  }}
+                    </td>
+                    <td>
+	                    
+	                    <a href="{{ path('staff-business_edit-stock-location', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
+	                    	<span class="glyphicon glyphicon-pencil"></span>
+	                    </a>
+	                    
+	                    <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Delete">
+	                    	<span class="glyphicon glyphicon-trash"></span>
+	                    </a>
+	                </td>
+                  
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

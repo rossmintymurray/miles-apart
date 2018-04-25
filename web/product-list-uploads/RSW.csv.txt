@@ -1,0 +1,3 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+6 Mini Foil Christmas Crackers,5015302127756,XM2775,3.99,RSW
+12 Family Christmas Crackers,5015302128715,XM2871,4.99,RSW

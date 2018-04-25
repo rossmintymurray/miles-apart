@@ -1,0 +1,112 @@
+Description,Barcode
+Knitting Needles 2.75mm-25cm,5018306775206
+Knitting Needles 3.00mm-25cm,5018306775305
+Knitting Needles 3.25mm-25cm,5018306775404
+Knitting Needles 3.75mm-25cm,5018306775602
+Knitting Needles 4.00mm-25cm,5018306775701
+Knitting Needles 4.50mm-25cm,5018306775800
+Knitting Needles 5.00mm-25cm,5018306775909
+Knitting Needles 5.50mm-25cm,5018306776005
+Knitting Needles 6.00mm-25cm,5018306776111
+Knitting Needles 6.50mm-25cm,5018306776401
+Knitting Needles 7.00mm-25cm,5018306776500
+Knitting Needles 7.50mm-25cm,5018306776609
+Knitting Needles 8.00mm-25cm,5018306776210
+Knitting Needles 9.00mm-25cm,5018306776906
+Knitting Needles 10.00mm-25cm,5018306777309
+Knitting Needles 2.25mm-30cm,5018306776807
+Knitting Needles 2.75mm-30cm,5018306776807
+Knitting Needles 3.00mm-30cm,5018306777101
+Knitting Needles 3.25mm-30cm,5018306777200
+Knitting Needles 3.75mm-30cm,5018306777408
+Knitting Needles 4.00mm-30cm,5018306777507
+Knitting Needles 4.50mm-30cm,5018306777606
+Knitting Needles 5.00mm-30cm,5018306777705
+Knitting Needles 5.50mm-30cm,5018306777804
+Knitting Needles 6.00mm-30cm,5018306777903
+Knitting Needles 6.50mm-30cm,5018306778009
+Knitting Needles 7.00mm-30cm,5018306778108
+Knitting Needles 7.50mm-30cm,5018306778207
+Knitting Needles 8.00mm-30cm,5018306778306
+Knitting Needles 9.00mm-30cm,5018306778412
+Knitting Needles 10.00mm-30cm,5018306778504
+Knitting Needles 12.00mm-30cm,501306778610
+Knitting Needles 15.00mm -30cm,501360778719
+Knitting Needles 20.00mm -30cm,901003326758
+Knitting Needles 2.25mm-35cm,5018306779204
+Knitting Needles 2.75mm-35cm,5018306779402
+Knitting Needles 3.00mm-35cm,5018306779501
+Knitting Needles 3.25mm-35cm,5018306779600
+Knitting Needles 3.75mm-35cm,5018306779808
+Knitting Needles 4.00mm-35cm,5018306779907
+Knitting Needles 4.50mm-35cm,5018306780002
+Knitting Needles 5.00mm-35cm,5018306780101
+Knitting Needles 5.50mm-35cm,5018306780200
+Knitting Needles 6.00mm-35cm,5018306780309
+Knitting Needles 6.50mm-35cm,5018306780408
+Knitting Needles 7.00mm-35cm,5018306780507
+Knitting Needles 7.50mm-35cm,5018306780606
+Knitting Needles 8.00mm-35cm,5018306780705
+Knitting Needles 9.00mm-35cm,5018306780811
+Knitting Needles 10.00mm-35cm,5018306780903
+Knitting Needles 12.00mm-35cm,5018306781009
+Knitting Needles 15.00mm -35cm,5018306781108
+Knitting Needles 20.00mm -35cm,8901003336726
+Knitting Needles 20.00mm - 40cm,8901003346725
+Double Pointed Needles Set of 4 2.75mm ,5018306783201
+Double Pointed Needles Set of 4 3.00mm ,5018306783300
+Double Pointed Needles Set of 4 3.25mm ,5018306783409
+Double Pointed Needles Set of 4 3.75mm ,5018306783607
+Double Pointed Needles Set of 4 4.00mm ,5018306783706
+Double Pointed Needles Set of 4 4.50mm ,5018306783805
+Circular Knitting Needles 2.75mm,5018306784901
+Circular Knitting Needles 3.00mm,5018306785007
+Circular Knitting Needles 3.25mm,5018306785106
+Circular Knitting Needles 3.75mm,5018306785304
+Circular Knitting Needles 4.00mm,5018306785403
+Circular Knitting Needles 4.50mm,5018306785502
+Circular Knitting Needles 5.00mm,5018306785601
+Circular Knitting Needles 7.50mm,5018306786103
+Bamboo Knitting Needles 3.00mm,5018306772007
+Bamboo Knitting Needles 3.25mm,5018306772106
+Bamboo Knitting Needles 3.75mm,5018306772205
+Bamboo Knitting Needles 4.00mm,5018306772304
+Bamboo Knitting Needles 4.50mm,5018306772403
+Bamboo Knitting Needles 5.00mm,5018306772502
+Bamboo Knitting Needles 5.50mm,5018306772601
+Bamboo Knitting Needles 6.00mm,5018306772700
+Bamboo Knitting Needles 6.50mm,5018306772809
+Bamboo Knitting Needles 7.00mm,5018306772908
+Bamboo Knitting Needles 8.00mm,5018306773004
+KNITTERS NEEDLES,5018306788305
+CABLE NEEDLES,5018306788107
+ROW COUNTERS,5018306788404
+ROW COUNTERS LARGE,5018306788503
+STITCH HOLDERS,5018306788602
+STITCH HOLDERS LARGE,5018306788800
+STITCH MARKERS,5018306791114
+POINT PROTECTOR LGE,5018306791107
+POINT PROTECTOR SMALL,5018306790902
+CH/NEEDLES,5018306787902
+CH/NEEDLES CARDED,5018306791206
+KNITTING GAUGES,5018306788206
+FRENCH DOLLIES,5018306790704
+POMPOM MAKER,5018306790803
+ Crochet Hooks 0.75mm,5018306789302
+ Crochet Hooks 1mm,5018306786401
+ Crochet Hooks 1.25mm,5018306789500
+ Crochet Hooks 1.5mm,5018306789609
+ Crochet Hooks 1.75mm,5018306789708
+ Crochet Hooks 2mm,5018306786707
+ Crochet Hooks 2.5mm,5018306786806
+ Crochet Hooks 3mm,5018306786905
+ Crochet Hooks 3.5mm,5018306787001
+ Crochet Hooks 4mm,5018306787100
+ Crochet Hooks 4.5mm,5018306787209
+ Crochet Hooks 5mm,5018306787308
+ Crochet Hooks 5.5mm,5018306787407
+ Crochet Hooks 6mm,5018306787506
+ Crochet Hooks 7mm,5018306786301
+ Crochet Hooks 8mm,5018306786400
+ Crochet Hooks 9mm,5018306786509
+ Crochet Hooks 10mm,5018306786608

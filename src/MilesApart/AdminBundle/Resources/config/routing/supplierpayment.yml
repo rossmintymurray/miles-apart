@@ -1,0 +1,33 @@
+finance_supplier-payment:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+finance_supplier-payment_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:show" }
+
+finance_supplier-payment_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:new" }
+
+finance_supplier-payment_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:create" }
+    requirements: { _method: post }
+
+finance_supplier-payment_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:edit" }
+
+finance_supplier-payment_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:update" }
+    requirements: { _method: post|put }
+
+finance_supplier-payment_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:SupplierPayment:delete" }
+    requirements: { _method: post|delete }

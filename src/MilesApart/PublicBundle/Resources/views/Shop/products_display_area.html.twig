@@ -1,0 +1,135 @@
+<div id="loader_wrapper">
+    <div id="loader">
+        <img style="width:40px" alt="AJAX Loading GIF" src="{{ asset('images/icons/ajax_loader_lg.gif') }}"  />
+    </div>
+</div>
+
+{# Call the thumbnail controller #}
+<ul class="row grid" id="display_area">
+    {% for entity in pager %} 
+        <li class="small-6 medium-3 columns left">
+            <div class="prod_disp_wrapper thumbnail">
+                <div class="row_wrapper">
+                    <div class="prod_left">
+                        {# Show image #}
+                        {% for image in entity.productimage %}
+                            
+                            {# If there is a product image with main image set #}
+                            {% if image.productimageismain == true %}
+
+                                {# Set the image name #}
+                                {% set photo_path = 'images/products/'~image.productimagepath %}
+                                <a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}">
+                                    
+                                    <img alt="{{ image.productimagetitle }}" src="{{ photo_path|apply_filter('public_product_thumb') }}" class="product_thumbnail_image small-12" />
+                                    
+                                </a>
+                            {% endif %}
+
+                        {% endfor %}
+                        
+                        {# If there is no product image, show the placeholder image #}
+                        {% if entity.productimage|length == 0 %}
+                            
+                            {# Show placeholder image #}
+                            <a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}">
+                                <img src="{{ asset('images/web/placeholder_thumb.jpg') }}" alt="Thumbnail placeholder" class="small-12"/>
+                            </a>
+                        {% endif %}
+
+                    </div>
+                    <div class="prod_center text-center">
+                        
+
+                        {# Product name #}
+                        <h5 class="thumbnail_product_name"><a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}">{{ entity.productmarketingname }}</a></h5>
+                        
+                        <p class="thumbnail_product_sub_name search_results_sub_title sub_name">{{ entity.getProductMarketingSubName }}</p>
+
+                        <p class="product_description hidden"> <span class="wrapper">{{ entity.productdescription }}<a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}"></span><br/>More info</a></p>
+                           
+                    </div>
+                    <div class="prod_right">
+                        {# Product price #}
+                        
+
+                        {# Check if price is sale price #}
+                        {% if entity.productpricebydate("now"|date("Y-m-d H:i:s")).productpriceisspecial == true %}
+
+                           {# Is sale price #}
+                            <div class="row">
+                                {# Show old prices crossed through #}
+                                <div class="small-6 columns text-right">
+                                    <span class="price_title">Was</span>
+                                    <span class="original_price shop_price">{{ entity.getPreSalePriceDisplay }}</span>
+                                </div>
+
+                                {# Show sale price #}
+                                <div class="small-6  columns text-left ">
+                                    <span class="price_title">Now</span>
+                                    <span class="sale_price shop_price">{{ entity.getCurrentPriceDisplay }}</span>
+                                </div>
+                            </div>
+                         
+                         {# Not sale price so show the current price #}
+                         {% else %}
+                            <h3 class="thumbnail_price search_results_price small-12 shop_price">{{ entity.getCurrentPriceDisplay }}</h3>
+                        {% endif %}
+
+                        {# Add to basket link, need to check if in basket and show add another if it is #}
+                        <p><a href="{{ path('miles_apart_basket_add_from_shop', { 'id': entity.getId, 'specific_category_slug': specific_category.categoryslug, 'sub_category_slug': specific_category.parent.categoryslug, 'main_category_slug':specific_category.parent.parent.categoryslug}) }}" id="{{ entity.id }}" class="button tiny small-12 add_to_basket_from_shop success" role="button" style="margin-bottom:0.5rem">Add to basket</a>
+
+
+                        <a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}" id="{{ entity.id }}" class="button tiny small-12 secondary more-info hidden" role="button">More Info</a></p>
+                    </div>
+                </div>
+            </div>
+           
+        </li>
+
+        {# Clearfix if loop index is divisable by 4 #}
+        {% if loop.index is divisible by(4) %}
+            <div class="hide-for-small-only">
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+
+        {# Clearfix if loop index is divisable by 2 (for mobile) #}
+        {% if loop.index is divisible by(2) %}
+            <div class="show-for-small-only">
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    
+</div>
+
+
+{% block javascripts %}
+    <script>
+        if ({{ product_count }} == 1) {
+            var count = {{ product_count }} + " item";
+        } else {
+            var count = {{ product_count }} + " items";
+        }
+        document.getElementById("product_view_port_bar_items").getElementsByTagName( 'p' )[0].innerHTML = count;
+    </script>
+    <script>
+   window.onload = function(){
+
+        var pager_links = '{{ pagerfanta(pager, 'foundation', {'routeName': 'miles_apart_public_shop', 'routeParams' : routeParams } ) }}';
+        
+        updatePagination(pager_links);
+    }
+
+    function updatePagination(pager_links) {
+        
+    
+        document.getElementById("pagination_area").innerHTML = pager_links;
+    }
+
+    var pager_links = '{{ pagerfanta(pager, 'foundation', {'routeName': 'miles_apart_public_shop', 'routeParams' : routeParams } ) }}';
+    updatePagination(pager_links);
+
+    </script>
+{% endblock %}

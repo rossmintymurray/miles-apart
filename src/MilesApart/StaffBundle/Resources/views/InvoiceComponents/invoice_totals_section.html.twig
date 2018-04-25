@@ -1,0 +1,46 @@
+{# Calculate the vat rates #}
+{% if vat_rate_for_orders is defined %}
+    {% set vat_multiplier = attribute(vat_rate_for_orders, order.id) %}
+{% endif %}
+
+{# Display the totals #}
+<table class="table table-striped text-center" style="width:400px;float:right;margin-top:20px;border:none">
+    <thead>
+        <tr class="light-grey-bg" style="border:none">
+            <th colspan="4" style="border:none" class="text-center light-grey-bg">Totals</th>
+        </tr>
+        <tr class="light-grey-bg" style="border:none">
+            <th colspan="1" style="border:none" class="text-center light-grey-bg"></th>
+            <th colspan="1" style="border:none" class="text-center light-grey-bg">Ex. VAT</th>
+            <th colspan="1" style="border:none" class="text-center light-grey-bg">VAT</th>
+            <th colspan="1" style="border:none" class="text-center light-grey-bg">Inc. VAT</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {# Create the total bar #}
+        <tr style="border:none">
+            <td style="border:none" class="text-right">Total</td>
+            <td style="border:none">£{{ (order.getCustomerOrderTotalPrice / vat_multiplier)|round(2) }}</td>
+            <td style="border:none">£{{ order.getCustomerOrderTotalPrice - (order.getCustomerOrderTotalPrice / vat_multiplier)|round(2) }}</td>
+            <td style="border:none">{{ order.getCustomerOrderTotalPriceDisplay }}</td>
+        </tr>
+  
+        {# Create the shipping bar #}
+        <tr style="border:none">
+            <td style="border:none" class="text-right">Shipping</td>
+            <td style="border:none">£{{ (order.getCustomerOrderShippingPaid / vat_multiplier)|round(2) }}</td>
+            <td style="border:none">£{{ order.getCustomerOrderShippingPaid - (order.getCustomerOrderShippingPaid / vat_multiplier)|round(2) }}</td>
+            <td style="border:none">{{ order.getCustomerOrderShippingPaidDisplay }}</td>
+        </tr>
+
+        {# Create the grand total bar #}
+        <tr style="border:none" class="very-light-grey-bg">
+            <td style="border:none" class="text-right very-light-grey-bg">Grand Total</td>
+            <td style="border:none" class="very-light-grey-bg">£{{ (order.grandtotal / vat_multiplier)|round(2) }}</td>
+            <td style="border:none" class="very-light-grey-bg">£{{ order.grandtotal - (order.grandtotal / vat_multiplier)|round(2) }}</td>
+            <td style="border:none" class="very-light-grey-bg"><b>{{ order.grandtotaldisplay }}</b></td>
+        </tr>
+
+    </tbody>
+</table>

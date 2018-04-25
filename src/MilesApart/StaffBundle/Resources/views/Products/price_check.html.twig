@@ -1,0 +1,62 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'price_check' %}
+
+
+{% block page_name %}
+    Price Check
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {# Check if the product could not be found #}
+    {% if product_not_found == true %}
+        <p class="lead text-danger">The product can not be found</p>
+    {% endif %}
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+    {% if submitted == true %}
+        {{ form_errors(form) }}
+    {% endif %}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Barcode</legend>
+            {{ form_row(form.product_barcode) }}
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_pricecheck_product_barcode').val(bar);
+
+            //Submit the form
+            $("form[name='milesapart_staffbundle_pricecheck']").submit();
+
+            return true;
+        }
+    </script>
+{% endblock %}

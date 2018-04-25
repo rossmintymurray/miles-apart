@@ -1,0 +1,30 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted is defined %}
+   	{% form_theme form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{% block page_title %}
+	Edit your details
+{% endblock %}
+
+{% block left_menu %}
+	{% set current_page = "edit_details" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+{% endblock %}
+
+{% block fos_user_content %}
+	<p>Please complete the form below to change your details.
+	<div class="row">
+		<div class="large-8 columns">
+			{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+		</div>
+	</div>
+
+{% endblock fos_user_content %}

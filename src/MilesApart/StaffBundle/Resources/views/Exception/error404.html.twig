@@ -1,0 +1,13 @@
+{% extends '::public_base_foundation.html.twig' %}
+
+{% block body %}
+	<div  class="row">
+        <div class="small-12 medium-10 medium-offset-2 columns">
+        	<div class="page_error_wrapper">
+			    <h1>Oops!</h1>
+			    <h2>Sorry, the page you requested cannot be found</h2>
+			    <p class="lead">We have been notifed of the issue and will rectify as soon as possible. If you have typed the URL please check that it is correct or<a href="{{ path('miles_apart_public_contact_us') }}"> contact us</a> for more information.</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

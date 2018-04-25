@@ -1,0 +1,186 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartStaffBundle::email_layout.html.twig' %}
+
+{% block email_title %}
+	Delivery {{ supplier_delivery.supplierdeliverynotenumber }} Shortages
+{% endblock %}
+
+{% block email_header %}
+	Delivery {{ supplier_delivery.supplierdeliverynotenumber }} Shortages
+{% endblock %}
+
+{% block email_intro %}
+	We have received delivery from you today ({{ "now"|date("g:ia \\o\\n jS F Y") }}) but the folloing products were missing. Please could you arrange for a credit to be raised on our account for the items listed below. If there are any issues please contact us on 01980 626880.
+{% endblock %}
+
+{% block email_content %}
+	
+	<table border="0" cellpadding="5" cellspacing="0" width="100%">
+		<tbody>
+			<tr>
+				<td valign="top" width="50%">
+					<table  border="0" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Supplier:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								{{ supplier_delivery.supplier.suppliername }}
+							</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">Account Number:</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ supplier_delivery.supplier.supplieraccountnumber }}
+							</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td>
+								<font size="1">Delivery Note No:</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{ supplier_delivery.supplierdeliverynotenumber }}
+							</td>
+						</tr>
+						
+					</table>
+				</td>
+
+				</td>
+				<td valign="top" width="50%">
+					<table border="0" cellpadding="2" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<font size="1">Credit To:</font>
+							</td>
+						</tr>
+						<tr>	
+							<td >
+								Miles Apart
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Westcroft
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Boscombe Village
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Salisbury
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Wiltshire
+							</td>
+						</tr>
+						<tr>
+							<td>
+								SP4 0AB
+							</td>
+						</tr>
+					</table>
+				</td>
+				
+			</tr>
+			<tr>
+				<td height="8"></td>
+			</tr>
+			
+
+		</tbody>
+	</table>
+	 
+	{# Make the table #}
+	<table border="0" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr style="background-color:#EBEBEB">
+            	<th width="5%" align="center">Code</th>
+                <th width="50%" align="left">Product name</th>
+                
+                
+                <th width="15%" align="center">Undelivered Unit Qty</th>
+                <th width="15%" align="center">Undelivered Inner Qty</th>
+                <th width="15%" align="center">Undelivered Outers Qty</th>
+
+                
+            </tr>
+        </thead>
+        <tbody>
+
+
+
+			{# For each purchase order product in purchase order print out the row #}
+			{% for undelivered_product in undelivered_array %}
+				{% if loop.index is odd %}
+					<tr id="product_row_{{ undelivered_product.id }}" style="background-color:#f9f9f9;">
+				{% else %}
+					<tr id="product_row_{{ undelivered_product.id }}" style="background-color:#ffffff;">
+				{% endif %}
+					<td align="center">
+						{{ undelivered_product.product.productsuppliercode }}
+					</td>
+					<td align="left">
+						{{ undelivered_product.product.productname }}
+					</td>
+					<td align="center">
+						{{ undelivered_product.getSupplierDeliveryQtyRemaining }}
+					</td>
+					<td align="center">
+						{{ undelivered_product.getSupplierDeliveryProductInnersRemaining }}
+					</td>
+					<td align="center">
+						{{ undelivered_product.getSupplierDeliveryProductOutersRemaining }}
+					</td>
+					
+		        </tr>
+			{% endfor %}
+
+			{# Create the totals row #}
+			<tr style="background-color:#EBEBEB">
+				
+			</tr>
+			
+	{# End the table #}
+		</tbody>
+	</table>
+
+	<table>
+		<tr>
+		<td height="8"></td>
+		</tr>
+		
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td width="100%">
+							
+							<p>Many thanks.</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+{% endblock %}

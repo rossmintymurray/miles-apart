@@ -1,0 +1,64 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/customer.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'customer_address' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+  Edit Customer Address
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+  Edit Customer Address	
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Edit existing customer address
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Customer Address</legend>
+            {{ form_row(edit_form.customer_address_name) }}
+            {{ form_row(edit_form.customer_address_line_1) }}
+            {{ form_row(edit_form.customer_address_line_2) }}
+            {{ form_row(edit_form.customer_address_town) }}
+            {{ form_row(edit_form.customer_address_county) }}
+            {{ form_row(edit_form.customer_address_postcode) }}
+          </fieldset>
+          <fieldset>
+            <legend class="text-muted">Address Details</legend>
+            {{ form_row(edit_form.customer_address_notes) }}
+            {{ form_row(edit_form.customer_address_is_billing) }}
+            {{ form_row(edit_form.customer) }}
+          </fieldset>
+        {{ form_rest(edit_form) }}
+    </form>
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer_customer-address') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

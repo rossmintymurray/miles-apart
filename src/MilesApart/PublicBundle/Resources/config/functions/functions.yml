@@ -1,0 +1,10 @@
+##########################################
+# Replace product page product image 
+##########################################
+functions-replace_product_page_product_image:
+    pattern:   /replace-product-page-product-image/{id}
+    defaults: { _controller: MilesApartPublicBundle:Functions:replaceproductpageproductimage }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+

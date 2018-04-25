@@ -1,0 +1,19 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+12 x 32mm Dual Suction Hooks,5025301766702,76670,1.00,Benross
+40pc Suction Cup Light Hooks,5025301731502,73150,1.00,Benross
+65cm Combination Chain Lock,5025301103309,10330,1.25,Benross
+20mm Brass Padlock,5025301105808,10580,0.75,Benross
+3 Wheel Combination Lock,5025301108106,10810,0.75,Benross
+"16"" Bicycle Pump ",5025301823900,82390,1.50,Benross
+16 Suction Hooks ,5025301617004,61700,1.25,Benross
+Cable Tidy Kit,5025301162306,16230,1.25,Benross
+4 x Clear Pygmy Light Bulbs,5025301406509,40650,1.00,Benross
+3 x 50W GU10 Halogen Light Bulbs,5025301485900,48590,2.25,Benross
+Television Extension Kit,5025301441104,44110,3.99,Benross
+300 Degree Clear Oven Lamp,5025301406608,40660,1.00,Benross
+2 Way Telephone Adaptor,5025301440503,44050,1.00,Benross
+3M Computer Modem Lead ,5025301441609,44160,1.00,Benross
+Smoke Alarm,5025301411510,41150,2.50,Benross
+Emulsion & Gloss Mini Roller Set,5025301119508,11950,1.25,Benross
+12pc Reflector Set ,5025301229504,22950,1.25,Benross
+180pc Spring & Flat Washers,5025301110505,11050,1.25,Benross

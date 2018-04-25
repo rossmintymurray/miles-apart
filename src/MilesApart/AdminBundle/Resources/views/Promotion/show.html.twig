@@ -1,0 +1,79 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/campaign.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'promotion' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.promotionname }} - Promotion
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.promotionname }} - Promotion           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Promotion details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Promotion name</th>
+                <td>{{ entity.promotionname }}</td>
+            </tr>
+            <tr>
+                <th>Promotion start date</th>
+                <td>{{ entity.promotionstartdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Promotion end date</th>
+                <td>{{ entity.promotionenddate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Promotion introduction</th>
+                <td>{{ entity.promotionintroduction }}</td>
+            </tr>
+            <tr>
+                <th>Promotion description</th>
+                <td>{{ entity.promotiondescription }}</td>
+            </tr>
+            <tr>
+                <th>Promotion objective</th>
+                <td>{{ entity.promotionobjective }}</td>
+            </tr>
+            <tr>
+                <th>Promotion date created</th>
+                <td>{{ entity.promotiondatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Promotion date modified</th>
+                <td>{{ entity.promotiondatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('campaign_promotion') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('campaign_promotion_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

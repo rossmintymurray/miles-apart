@@ -1,0 +1,558 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{% macro widget_prototype_top_level(widget, remove_text) %}
+    {% if widget.vars.prototype is defined %}
+        {% set form = widget.vars.prototype %}
+        {% set name = widget.vars.prototype.vars.name %}
+
+    {% else %}
+        {% set form = widget %}
+        {% set name = widget.vars.id %}
+    {% endif %}
+
+     <div class="prototype_data_content" data-content="{{ name }}">
+        {{ form_widget(form) }}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="form_feedback_div" id="{{ name }}"></div>
+            </div>
+        </div>
+       
+    </div>
+    
+{% endmacro %}
+
+{% macro widget_prototype_lower_level(widget, remove_text) %}
+    {% if widget.vars.prototype is defined %}
+        {% set form = widget.vars.prototype %}
+        {% set name = widget.vars.prototype.vars.name %}
+
+    {% else %}
+        {% set form = widget %}
+        {% set name = widget.vars.id %}
+    {% endif %}
+
+     <div class="prototype_data_content" data-content="{{ name }}">
+        {{ form_widget(form) }}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="form_feedback_div" id="{{ name }}"></div>
+            </div>
+        </div>
+        <div class="prototype_remove_button"><a class="btn-remove btn btn-danger col-md-3 col-md-offset-4 btn-xs" data-related="{{ name }}">{{ remove_text }}</a></div>
+    </div>
+{% endmacro %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'show_price' %}
+
+{% block page_name %}
+    View Product
+{% endblock %}
+
+{% block header_right_content %}
+    <div class="btn-group" style="float:right;margin-top:20px">
+      <button class="btn btn-default" type="button">
+         <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+      </button>
+      <button class="btn btn-default" type="button">
+       <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </button>
+      
+    </div>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <h2>{{ product.productname }}</h2>
+    {# Create tabs for navigation of sections #}
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#overview" role="tab" data-toggle="tab">Overview</a></li>
+      <li role="presentation"><a href="#general" role="tab" data-toggle="tab">General</a></li>
+      <li role="presentation"><a href="#seo" role="tab" data-toggle="tab">SEO</a></li>
+      <li role="presentation"><a href="#price" role="tab" data-toggle="tab">Price</a></li>
+      <li role="presentation"><a href="#categories" role="tab" data-toggle="tab">Categories</a></li>
+      <li role="presentation"><a href="#attributes_features" role="tab" data-toggle="tab">Attributes &amp; Features</a></li>
+      <li role="presentation"><a href="#associations" role="tab" data-toggle="tab">Associations</a></li>
+      <li role="presentation"><a href="#images" role="tab" data-toggle="tab">Images</a></li>
+      <li role="presentation"><a href="#order_history" role="tab" data-toggle="tab">Order History</a></li>
+      <li role="presentation"><a href="#inventory" role="tab" data-toggle="tab">Inventory</a></li>
+      <li role="presentation"><a href="#suppliers" role="tab" data-toggle="tab">Suppliers &amp; Cost</a></li>
+      <li role="presentation"><a href="#reviews_questions" role="tab" data-toggle="tab">Reviews &amp; Questions</a></li>
+
+    </ul>
+
+    <div id="daily_takes_ajax_content">{# Create the tab panes to be hidden and shown #}
+        
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="overview">
+
+                <div class="row edit_product_panel">
+                    <div class="col-sm-4 col-md-3 col-xs-4 col-lg-3">
+                        <h3>Overview</h3>
+                        {#Show product image #}
+                        {% for image in product.productimage %}
+                            {% if image.productimageismain == 1 %}
+                                <img src="{{ asset('images/products/')~image.productimagepath }}" class="col-xs-12" alt="{{ image.productimagedescription}}">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-sm-8 col-md-9 col-xs-8 col-lg-9">
+                        {#Show product price #}
+                                    
+                        <h1><span class="text-muted" style="font-size:12px">Price</span> {{ product.getCurrentPriceDisplay }}</h1>      
+                   
+                        <h1><span class="text-muted" style="font-size:12px">Cost</span> {{ product.getCurrentCostDisplay }}</h1>
+                        
+
+                        <h1><span class="text-muted" style="font-size:12px">Stock</span>{{ product.getCurrentStockLevel }}</h1> 
+                        {{ form_row(form.is_product_online) }}
+                        {{ form_row(form.is_product_on_amazon) }}
+                         {{ form_row(form.is_product_discontinued) }}
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="general">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <h3>Change general top-level info</h3>
+                         
+                            {# Create and show the new admin user type #}
+                            <fieldset>
+                               
+                                {{ form_row(form.product_name) }}
+                                {{ form_row(form.product_marketing_name) }}
+                                {{ form_row(form.product_marketing_sub_name) }}
+                                {{ form_row(form.short_name) }}
+                                {{ form_row(form.print_subtitle) }}
+                                {{ form_row(form.product_introduction) }}
+                                {{ form_row(form.product_description) }}
+                           
+                            </fieldset>
+
+                             <fieldset>
+                               
+                                {{ form_row(form.product_weight) }}
+                                {{ form_row(form.product_width) }}
+                                {{ form_row(form.product_height) }}
+                                {{ form_row(form.product_depth) }}
+                                {{ form_row(form.product_supplier_code) }}
+                            {{ form_row(form.vat_rate_type) }}
+                            {{ form_row(form.brand) }}
+                            </fieldset>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="seo">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <h3>Change SEO settings for this product</h3>
+                        <h6>Title and slug are set automatically depemnding on marketing name, brand and product code.</h6>
+                        <h5>Title - <b>{{ product.producttitle }}</b></h5>
+                        <h5>Slug - <b>{{ product.productslug }}</b></h5>
+                        
+                        <div class="spacer"></div>
+                        <h3>Meta description</h3>
+                         {{ form_row(form.product_meta_description) }}
+
+                        <div class="spacer"></div>
+                        <h3>Keywords</h3>
+
+                        <div id="product_keywords" data-prototype="{{ macros.widget_prototype(form.keyword, 'Remove keyword')|escape }}">
+                           
+                            {% for widget in form.keyword.children %}
+                                {{ form_row(widget) }}
+                                {{ macros.widget_prototype(form.keyword, 'Remove keyword') }}
+                            {% endfor %}
+                        </div>
+           
+                        <div class="prototype_add_button">
+                            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_keywords">New keyword</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="spacer"></div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="price">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <h3>Current price: 
+                            {{ product.getCurrentPriceDisplay }}
+                        </h3>
+                        <p>To change prices and see price history for this product.</p>
+                        <fieldset>
+                             
+                            
+                        
+                              
+                        
+                        <div id="product_prices" data-prototype="{{ macros.widget_prototype(form.product_price, 'Remove price')|escape }}">
+                            <div class="hidden">
+                {% for widget in form.product_price.children %}
+                    {{ form_row(widget) }}
+                    {{ macros.widget_prototype(form.product_price, 'Remove price') }}
+                {% endfor %}
+            </div>
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_prices">New price</a>
+            </div>
+        </fieldset>
+                        <h3>Previous prices</h3>
+                        {# Create table for prices #}
+                        <table class="table table-striped small existing_products" id="existing_unprinted_prices">
+                            <thead>
+                                <tr>
+                                    <th>Price</th>
+                                    <th>Date Set</th>
+                                    <th>Date Expired</th>
+                                    
+                                    
+                                    
+                            </thead>
+                            <tbody>
+                                {% for price in product.productprice %}
+                                    <tr><td>{{ price.productpricevalue}}</td><td>{{ price.productpricevalidfrom|date("d M Y")}}</td><td>{{ price.productpricevaliduntil|date("d M Y")}}</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="categories">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <p>To allocate and update categories this product belongs to.</p>
+                        
+                        {{ form_row(form.product_default_category) }}
+                        {{ form_row(form.category) }}
+                    </div>
+
+               
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="attributes_features">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <h3>Attributes</h3>
+                        <p>To change attributes (eg volume, weight, pieces, scale) of the product.</p>
+                        <div id="product_attributes" data-prototype="{{ macros.widget_prototype(form.attribute_value, 'Remove attribute')|escape }}">
+                           
+                            {% for widget in form.attribute_value.children %}
+                                {{ form_row(widget) }}
+                                {{ macros.widget_prototype(form.attribute_value, 'Remove attribute') }}
+                            {% endfor %}
+                        </div>
+           
+                        <div class="prototype_add_button">
+                            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_attributes">New attribute</a>
+                        </div>
+                       
+                        <div class="clearfix"></div>
+                        <h3>Features</h3>
+                        <p>To change features (eg text description bullets) of the product.</p>
+                        <div id="product_features" data-prototype="{{ macros.widget_prototype(form.product_feature, 'Remove feature')|escape }}">
+                           
+                            {% for widget in form.product_feature.children %}
+                                {{ form_row(widget) }}
+                                {{ macros.widget_prototype(form.product_feature, 'Remove feature') }}
+                            {% endfor %}
+                        </div>
+           
+                        <div class="prototype_add_button">
+                            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_features">New feature</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="associations">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <p>To set associations of the product to similar products and related products.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="images">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-8">
+
+                        {% if product.productimage|length > 0 %}
+                       
+                            {% for image in form.product_image %}
+                                
+                                {% set photo_path = 'images/products/'~image.vars.value.getProductImagePath %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="{{ photo_path|apply_filter('public_product_thumb') }}"/>
+                                    </div>
+                                    <div class="col-md-8">
+                                
+                                        {{ form_errors(image) }}
+                                        {{ form_widget(image) }}
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                            {% endfor %}
+
+                        
+                            
+                        {% else %}
+
+                            <h3>No Images</h3>
+                            <p>There are currently no images for this product, please add them to the box on the right.</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-4">
+                        
+                        <div class="well">
+                            
+
+                            <form action="{{ path('staff-products_view-product_image-upload', {id: product.id}) }}" method="post" class="dropzone">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="order_history">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                        <p>To view the occasions this product has been previously ordered.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="inventory">
+                <div class="row edit_product_panel">
+                    {{ form_row(form.product_barcode) }}
+                    {{ form_row(form.product_inner_barcode) }}
+                    {{ form_row(form.product_outer_barcode) }}
+                    {{ form_row(form.product_outer_quantity) }}
+                    {{ form_row(form.product_inner_quantity) }}
+                    {{ form_row(form.product_pack_quantity) }}
+                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+
+                        {# Show the current stock levels #}
+                        <div class="jumbotron">
+                          <h1>Current stock level: {{ product.getCurrentStockLevel }}</h1>
+                        </div>
+                    
+                        <div class="col-sm-12 col-md-6 col-xs-12 col-lg-4 well">
+                            {# Show stock take history #}
+                            <h4>Stocktake history</h4>
+                            <table class="table table-striped text-center">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="text-center">Stocktake date</th>
+                                        <th class="text-center">Stocktake qty</th>
+                                        <th class="text-center">Difference from previous</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stocktake in product.getStocktakeProduct %}
+                                        <tr>
+                                            <td>{{ stocktake.getStocktake.getStocktakeCompletedDate|date("d M Y") }}</td>
+                                            <td>{{ stocktake.getStocktakeProductQty }}</td>
+                                            <td>?</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-xs-12 col-lg-4 well">
+                            {# Show stock take history #}
+                            <h4>Stock in</h4>
+                            <table class="table table-striped text-center">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="text-center">Stock in date</th>
+                                        <th class="text-center">Stock in qty</th>
+                                        <th class="text-center">Location sent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stock_in in product.getSupplierDeliveryProduct %}
+                                        <tr>
+                                            <td>{{ stock_in.getSupplierDelivery.getDeliveredDatetime|date("d M Y") }}</td>
+                                            <td>{% for shelf in stock_in.getStockLocationShelfProductSent %}
+                                                    {{ shelf.getStockLocationShelfProductSentQty }}
+                                                {% endfor %}
+                                            </td>
+                                            <td>?</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-xs-12 col-lg-4 well">
+                            {# Show stock take history #}
+                            <h4>Stock out</h4>
+                            <table class="table table-striped text-center">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th class="text-center">Stock out date</th>
+                                        <th class="text-center">Stock out qty</th>
+                                        <th class="text-center">Stock out type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stocktake in product.getStocktakeProduct %}
+                                        <tr>
+                                            <td>{{ stocktake.getStocktake.getStocktakeCompletedDate|date("d M Y") }}</td>
+                                            <td>{{ stocktake.getStocktakeProductQty }}</td>
+                                            <td>?</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="suppliers">
+                <div class="row edit_product_panel">
+                    <div class="col-sm-12 col-md-6 col-xs-12 col-lg-6">
+                        <p>View and add suppliers and costs of this product.</p>
+                        <h5>Primary supplier:</h3>
+                        <h4>{% for supplier in product.getProductSupplier %}
+                               {{ supplier.getSupplier.getSupplierName }}
+                            {% endfor %}
+                        </h4>
+
+                        <h5>Assign new suppliers</h5>
+                        <p>Form to add supplier product.</p>
+                        
+                        {# Embed suppliers #}
+                        <div id="product_suppliers" data-prototype="{{ _self.widget_prototype_top_level(form.product_supplier, 'Remove supplier')|escape }}">
+                       
+                            {% for widget in form.product_supplier.children %}
+                                {{ form_row(widget) }}
+
+                                {# Embed supplier costs #}
+                                {# For each supplier product #}
+                                {% for prod_cost in form.product_supplier.children %}
+                                    <div id="product_costs" data-prototype="{{ _self.widget_prototype_lower_level(prod_cost.product_cost, 'Remove costs')|escape }}">
+                                    
+                                    
+                                        {% for widget2 in prod_cost.product_cost.children %}
+                                            {{ form_row(widget2) }}
+                                            {{ macros.widget_prototype(prod_cost.product_cost, 'Remove cost') }}
+                                        {% endfor %}
+                                    {% endfor %}
+
+                                    <div class="prototype_add_button">
+                            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_costs">New cost</a>
+                        </div>
+                                </div>
+                                {{ macros.widget_prototype(form.product_supplier, 'Remove supplier') }}
+                            {% endfor %}
+
+
+                        </div>
+                        <div class="prototype_add_button">
+                            <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_suppliers">New supplier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+
+            <div role="tabpanel" class="tab-pane" id="reviews_questions">
+                <div class="row edit_product_panel">
+                    <div class="col-xs-12 ">
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <h3>Questions</h3>
+
+                                <div id="product_questions" data-prototype="{{ macros.widget_prototype(form.product_question, 'Remove question')|escape }}">
+                                    
+                                    {% for widget in form.product_question.children %}
+                                        {{ form_row(widget) }}
+                                        {{ macros.widget_prototype(form.product_question, 'Remove question') }}
+
+                                    {% endfor %}
+                                </div>
+                            
+                                <div class="prototype_add_button">
+                                    <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_questions">New question</a>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-md-6">
+
+                                <h3>Reviews</h3>
+                                    
+                                <div id="product_reviews" data-prototype="{{ _self.widget_prototype_top_level(form.product_review, 'Remove review')|escape }}">
+                               
+                                    {% for widget in form.product_review.children %}
+                                        {{ form_row(widget) }}
+                                        {{ macros.widget_prototype(form.product_review, 'Remove review') }}
+
+                                    {% endfor %}
+                                </div>
+                            
+                                <div class="prototype_add_button">
+                                    <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="product_questions">New review</a>
+                                </div>
+       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+     <link href="{{ asset('css/dropzone.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+
+{% block javascripts %}
+     <script src="{{ asset('js/dropzone.js') }}" type="text/javascript"></script>
+{% endblock %}

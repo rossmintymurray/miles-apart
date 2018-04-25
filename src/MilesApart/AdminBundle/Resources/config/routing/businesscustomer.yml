@@ -1,0 +1,33 @@
+customer_business-customer:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer_business-customer_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:show" }
+
+customer_business-customer_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:new" }
+
+customer_business-customer_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:create" }
+    requirements: { _method: post }
+
+customer_business-customer_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:edit" }
+
+customer_business-customer_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:update" }
+    requirements: { _method: post|put }
+
+customer_business-customer_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:BusinessCustomer:delete" }
+    requirements: { _method: post|delete }

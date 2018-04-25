@@ -1,0 +1,33 @@
+hr_employee:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:Employee:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+hr_employee_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:Employee:show" }
+
+hr_employee_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:Employee:new" }
+
+hr_employee_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:Employee:create" }
+    requirements: { _method: post }
+
+hr_employee_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:Employee:edit" }
+
+hr_employee_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:Employee:update" }
+    requirements: { _method: post|put }
+
+hr_employee_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:Employee:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,62 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/taxonomy.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'category' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.categoryname }} - Category
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.categoryname }} - Category          
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View category details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Category name</th>
+                <td>{{ entity.categoryname }}</td>
+            </tr>
+            <tr>
+                <th>Category slug</th>
+                <td>{{ entity.categoryslug }}</td>
+            </tr>
+            <tr>
+                <th>Category image path</th>
+                <td>{{ entity.categoryimagepath }}</td>
+            </tr>
+            <tr>
+                <th>Category description</th>
+                <td>{{ entity.categorydescription }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('category_category') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('category_category_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

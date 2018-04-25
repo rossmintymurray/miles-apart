@@ -1,0 +1,64 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/hr.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'employee_holiday' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+  Edit Employee Holiday
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+  Edit Employee Holiday	
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Edit existing Employee Holiday
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Holiday Dates</legend>
+            {{ form_row(edit_form.employee) }}
+          </fieldset>
+          <fieldset>
+            <legend class="text-muted">Holiday Dates</legend>
+            {{ form_row(edit_form.employee_holiday_start_date) }}
+            {{ form_row(edit_form.employee_holiday_end_date) }}
+          </fieldset>
+          <fieldset>
+            <legend class="text-muted">Authorisation</legend>
+            {{ form_row(edit_form.employee_holiday_authorised) }}
+            {{ form_row(edit_form.employee_holiday_authorised_by) }}
+            </fieldset>
+        {{ form_rest(edit_form) }}
+    </form>
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hr_employee-holiday') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

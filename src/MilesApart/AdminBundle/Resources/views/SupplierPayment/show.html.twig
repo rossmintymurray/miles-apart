@@ -1,0 +1,62 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/finance.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'supplier_payment' %}
+
+{# Set the page title #}
+{% block title %}
+    {{ entity.supplierpaymentdatepaid|date('Y-m-d H:i:s') }} - Supplier Payment
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    {{ entity.supplierpaymentdatepaid|date('Y-m-d H:i:s') }} - Supplier Payment           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View Supplier Payment details
+{% endblock %}
+
+{% block page_content -%}
+
+    <table class=\"table table-hover table-bordered table-striped main_content_table show_table\">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Supplier payment amount</th>
+                <td>{{ entity.supplierpaymentamount }}</td>
+            </tr>
+            <tr>
+                <th>Supplier payment date paid</th>
+                <td>{{ entity.supplierpaymentdatepaid|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Supplier invoice date created</th>
+                <td>{{ entity.supplierinvoicedatecreated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Supplier invoice date modified</th>
+                <td>{{ entity.supplierinvoicedatemodified|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('finance_supplier-payment') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('finance_supplier-payment_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

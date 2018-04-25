@@ -1,0 +1,68 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'purchase_order_details' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    View Purchase Order Details 
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    
+        <h4>{{ purchase_order[0].getPurchaseOrder.getSupplier.getSupplierName }} - {{ purchase_order[0].getPurchaseOrder.getPurchaseOrderDateCreated|date ("D M Y") }}</h4>
+
+        {# Set up the existing products table #}
+        <table class="table table-striped small" id="existing_transfer_request_products">
+            <thead>
+                <tr>
+                    <th>Supplier Code</th>
+                    <th>Product Name</th>
+                    <th class="text-center">Requested Qty</th>
+                    <th class="hide-on-print">Barcode</th>
+                    <th class="text-center">Cost</th>
+                    <th class="text-center">Price</th>
+                    <th class="hide-on-print">Actions</th>
+                </tr>
+                    
+            </thead>
+            <tbody>
+                
+                {% for purchase_order_product in purchase_order %}
+                    <tr>
+                        <td>
+                            {{ purchase_order_product.getProduct.getProductSupplierCode }}
+                        </td>
+                        <td>
+                            {{ purchase_order_product.getProduct.getProductName }}
+                        </td>
+                        <td class="text-center">
+                            {{ purchase_order_product.getPurchaseOrderProductQuantity }}
+                        </td>
+                        <td class="hide-on-print">
+                            {{ purchase_order_product.getProduct.getProductBarcode }}
+                        </td>
+                        <td class="text-center">
+                            {{ purchase_order_product.getProduct.getCurrentCostDisplay }}
+                            
+                        </td>
+                        <td class="text-center">
+                            {{ purchase_order_product.getProduct.getCurrentPriceDisplay }}
+                            
+                        </td>
+                        <td class="hide-on-print">
+                            <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-list-alt"></span></a>
+                            <a href="#edit" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-barcode"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   
+
+{% endblock %}

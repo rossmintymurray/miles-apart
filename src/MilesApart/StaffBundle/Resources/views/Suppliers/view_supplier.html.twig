@@ -1,0 +1,197 @@
+{# src/MilesApart/StaffBundle/Resources/views/Suppliers/new_representative.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'suppliers' %}
+{% set current_page = 'new_representative' %}
+
+{# Set the dynamic content for this template #}
+{% block page_name %}
+    View Supplier
+{% endblock %}
+
+{% block page_content %}
+
+	{# Set up two column #}
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>{{ supplier.getSupplierName }}</h2>
+		</div>
+
+		<div class="col-md-3 col-md-push-9">
+			<div class="well">
+		    	<h5>Supplier Details:</h5>
+		    	{% if supplier.supplierphone != NULL %}
+			    	<p><span class="small">Phone</span><br />
+			    		<span class="lead"><a href="tel:{{ supplier.supplierphone }}">{{ supplier.supplierphone }}</a></span>
+			    	</p>
+			    {% endif %}
+			    
+			    {% if supplier.supplierfax != NULL %}
+			    	<p><span class="small">Fax</span><br />
+			    		<span class="lead">{{ supplier.supplierfax }}</span>
+			    	</p>
+			    {% endif %}
+
+		    	{% if supplier.supplierorderingemail != NULL %}
+			    	<p><span class="small">Ordering</span><br />
+			    		<span><a href="mailto:{{ supplier.supplierorderingemail }}">{{ supplier.supplierorderingemail }}</a></span>
+			    	</p>
+			    {% endif %}
+		    	{% if supplier.supplierinfoemail != NULL %}
+			    	<p><span class="small">Info</span><br />
+			    		<span><a href="mailto:{{ supplier.supplierinfoemail }}">{{ supplier.supplierinfoemail }}</a></span>
+			    	</p>
+		    	{% endif %}
+		    	<p><span class="small">Address</span><br />
+			    	<address>
+			    		{{ supplier.getSupplierName }}<br />
+			    		{{ supplier.supplieraddress1}}<br />
+				    	{{ supplier.supplieraddress2 }}<br />
+				    	{{ supplier.suppliertown }}<br />
+				    	{{ supplier.suppliercounty }}<br />
+				    	{{ supplier.supplierpostcode }}<br />
+				    	{{ supplier.suppliercountry }}<br />
+			    	</address>
+		    	</p>
+
+		    	{% if supplier.supplierrepresentative|length > 0 %}
+			    	<p style="padding-top:10px;border-top:1px solid #e3e3e3"><span class="small">Rep</span><br />
+			    		{% for supplier_representative in supplier.supplierrepresentative %}
+				    		<span class="lead">{{ supplier_representative.getSupplierRepresentativeFullName }}</span><br />
+				    		{% if supplier_representative.getSupplierRepresentativeMobileNumber != NULL %}
+						    	<p><span class="small">Mobile</span><br />
+						    		<span class="lead"><a href="mailto:{{ supplier_representative.getSupplierRepresentativeMobileNumber }}">{{ supplier_representative.getSupplierRepresentativeMobileNumber}}</a></span>
+						    	</p>
+				    		{% endif %}
+
+				    		{% if supplier_representative.getSupplierRepresentativeEmail != NULL %}
+						    	<p><span class="small">Email</span><br />
+						    		<span><a href="mailto:{{ supplier_representative.getSupplierRepresentativeEmail }}">{{ supplier_representative.getSupplierRepresentativeEmail }}</a></span>
+						    	</p>
+				    		{% endif %}
+				    		
+
+				    	{% endfor %}
+					    	
+			    	</p>
+			    {% endif %}
+
+		    	<div class="btn-group btn-block">
+					<button type="button" class="btn btn-success dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Actions <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="{{ path('staff-suppliers_view-supplier-products', {'id': supplier.getId()}) }}">View All Products</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="{{ path('staff-purchase-orders_new-supplier-purchase-order', {'id': supplier.getId()}) }}">New Purchase Order</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="{{ path('staff-products_import-product-list-csv')}}">New CSV Import</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="{{ path('staff-goods-in_new-delivery-note') }}">New Delivery Note</a></li>
+					</ul>
+				</div>
+			</div>
+	    	
+	    </div>
+    
+	    <div class="col-md-9 col-md-pull-3">
+	    	{# Check if there are deliveries before showing #}
+		    {% if supplier.supplierdelivery|length > 0 %}
+		    	<h3>Pending Deliveries</h3>
+
+		    	<table class="table table-striped text-center">
+				    <thead>
+				        <tr class="text-center">
+				            <th class="text-left">Booked in date</th>
+				            <th class="text-center">Courier</th>
+				            <th class="text-center">Contact</th>
+				            <th class="text-center">Number</th>
+				            <th class="text-center">Status</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+
+				    	{% for delivery in supplier.supplierdelivery %}
+
+				    		{# Pending deliveries display #}
+				    		<tr>
+				    			<td class="text-left">{{ delivery.bookedindate|date('d M Y') }}</td>
+				    			<td>{{ delivery.logisticscompany.logisticscompanyname }}</td>
+				    			<td>{{ delivery.contactname }}</td>
+				    			<td><a href="tel:{{ delivery.contactphonenumber }}">{{ delivery.contactphonenumber }}</a></td>
+				    			<td></td>
+				    		</tr>
+				    	{% endfor %}
+				    </tbody>
+		    	</table>
+
+		    {% endif %}
+
+			{# Check if there are purchase orders before showing #}
+		    {% if supplier.purchaseorder|length > 0 %}
+		    	<h3>Purchase Orders</h3>
+		    	{% for purchase_order in supplier.purchaseorder %}
+		    		<div class="well">
+		    			<div class="row">
+		    				<div class="col-md-9">
+
+			    				<h4>PO Number - {{ purchase_order.id }} | {{ purchase_order.purchaseorderdatecreated|date('D jS M Y') }} | {{ purchase_order.purchaseorderstate.purchaseorderstate }} | {{ purchase_order.purchaseorderproduct|length }} items</h4>
+			    			</div>
+			    			<div class="col-md-3">
+
+			    				<a href="#po_{{ purchase_order.id }}_contents" class="btn btn-default col-md-12" data-toggle="collapse">Show PO contents</a>
+			    			</div>
+			    		</div>
+			    		<div id="po_{{ purchase_order.id }}_contents" class="collapse">
+				    		<table class="table table-striped text-center">
+							    <thead>
+							        <tr class="text-center">
+							            <th class="text-left" width="20%">Product Code</th>
+							            <th class="text-left" width="50%">Name</th>
+							            <th class="text-center" width="15%">Qty Ordered</th>
+							            <th class="text-center" width="15%">Outer Qty Ordered</th>
+							            
+							        </tr>
+							    </thead>
+							    <tbody>
+
+							    	{% for purchase_order_product in purchase_order.purchaseorderproduct %}
+
+							    		{# Pending deliveries display #}
+							    		<tr>
+							    			<td class="text-left">{{ purchase_order_product.product.productsuppliercode }}</td>
+							    			<td class="text-left">{{ purchase_order_product.product.productname }}</td>
+							    			<td>{{ purchase_order_product.purchaseorderproductquantity }}</td>
+							    			
+							    			<td>{% if purchase_order_product.product.productouterquantity > 0 %}
+							    					{{ purchase_order_product.purchaseorderproductquantity / purchase_order_product.product.productouterquantity }}
+							    				{% endif %}
+							    			</td>
+							    		</tr>
+							    	{% endfor %}
+							    </tbody>
+					    	</table>
+					    </div>
+
+					</div>
+
+		    	{% endfor %}
+		    {% endif %}
+
+		    {# Check if there are products with 0 stock before showing #}
+		    {% if supplier.purchaseorder|length > 0 %}
+		    	<h3>Stockouts</h3>
+		    	{% for purchase_order in supplier.purchaseorder %}
+		    		{{ purchase_order.purchaseorderdatecreated|date('M Y') }}
+		    	{% endfor %}
+		    {% endif %}
+
+		    <h3>Returns</h3>
+	    </div>
+
+
+	    
+	</div>
+
+{% endblock %}

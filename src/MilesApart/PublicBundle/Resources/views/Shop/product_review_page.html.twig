@@ -1,0 +1,456 @@
+{# src/MilesApart/PublicBundle/Resources/views/Shop/product_review_page.html.twig #}
+{% extends 'MilesApartPublicBundle::product_page_layout.html.twig' %}
+
+{% block page_title %}
+    {{ entity.producttitle }}   
+{% endblock %}
+
+{% block page_content %}
+ 
+    {# Create the row for two columns #}
+    <div class="row">
+
+        {# Right column content (price and add to cart button) #}
+        <div class="large-4 large-push-8 columns">
+
+            {# Show the mobile images area #}
+            <div class="row hide-for-large-up">
+                <div class="small-12 columns">
+                    <div id="mobile-product-images" class="owl-carousel owl-theme">
+                        {% for image in entity.productimage %}
+                            {% if image.productimageismain == 1 %} 
+                                <div class="item">
+                                    <img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="large-12">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for image in entity.productimage %}
+                            {% if image.productimagewebdisplay == true and image.productimageismain == false %}
+                                <div class="item">
+                                    <img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="large-12">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>      
+
+            {# Product name and code #}
+            <div class="row show-for-large-up">
+                <div class="large-7 columns">
+                    
+                </div>
+                <div class="large-5 columns">
+                    <img src="{{ asset('images/brands/'~entity.brand.brandlogoimagepath) }}" class="product_page_main_brand_logo large-12"/>
+                </div>
+            </div>
+            
+            <h1 class="product_page_product_name">{{ entity.productmarketingname }}</h1>
+            <h2 class="subheader product_page_product_subheader">{{ entity.productmarketingsubname }}</h2>
+
+            
+
+            <p>{{ entity.productintroduction }}</p>
+            {# Show the brand logo #}
+            
+            
+            
+          
+            <div class="row">
+                <div class="large-12 columns">
+
+        
+                    {# Show the attributes #}
+                    <p class="product_page_attributes">
+                        {% for attribute in entity.attributevalue %}
+                            {{ attribute.attribute.attributename }}: <b>{{ attribute.attributevalue }} </b><br />
+                        {% endfor %}
+                    </p>
+
+                </div>
+                <div class="large-12 columns">
+
+                    <p class="product_page_price">{{ entity.currentpricedisplay }}</p>
+                    <a href="{{ path('miles_apart_basket_add_from_product', { 'id': entity.getId }) }}" id="{{ entity.id }}" class="button success small small-12 add_to_basket_from_product" role="button">Add to basket</a>
+                    <p class="product_codes">Product code: MA-{{ entity.id }} / SC-{{ entity.productsuppliercode }}</p>
+
+                    <div class="homepage_header"></div>
+
+                    <h4 style="margin-top:1rem">Delivery</h4>
+                    <p>Free 2nd class delivery for all orders over £30. If order is under £30, delivery for this product will cost:
+                        <ul style="margin-left:2rem">
+                            {# Get the postage cost array and display #}
+
+                            <li>1<sup>st</sup> Class - £{{postage_options.first_class_postage}}</li>
+                            <li>2<sup>nd</sup> Class - £{{postage_options.second_class_postage}}</li>
+                            
+                        </ul>
+                        Please select delivery option when you checkout. The cost of delivery will be added at the checkout.
+                    </p>
+
+                    
+                    <div class="homepage_header"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="large-8 large-pull-4 columns">
+
+            
+
+            {# Show the images #}
+            {# Images wrapper #}
+            <div class="row show-for-large-up">
+                
+                {# Check if there is only one image for the product, if so, show this large #}
+                {% if entity.productimage|length == 1 %}
+                    
+                    {% for image in entity.productimage %}
+                        <div class="large-10 columns">
+                            <div id="loadingDiv" class="large-10 columns">
+                                <img src="{{ asset('images/icons/ajax-loader.gif') }}" />
+                            </div>
+
+
+                            <div class="large-12" id="product_display_page_image_wrapper">
+                                {# Set up lightbox #}
+                                <ul class="clearing-thumbs clearing-feature" data-clearing>
+                                    <li class="clearing-featured-img">
+                                        <a href="{{ asset('images/products/')~image.productimagepath }}">
+                                            <img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="col-sm-4 col-md-4 col-xs-6 col-lg-9" id="product_page_main_image" data-existing-id="{{ image.id }}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+
+                     <div class="large-10 columns">
+                        <div id="loadingDiv" class="medium-10 columns">
+                            <img src="{{ asset('images/icons/ajax-loader.gif') }}" />
+                        </div>
+
+                        <div class="large-12" id="product_display_page_image_wrapper">
+                            {# Set up lightbox #}
+                            <ul class="clearing-thumbs clearing-feature" data-clearing>
+
+                                {% for image in entity.productimage %}
+                        
+                           
+                                    <li {% if image.productimageismain == 1 %} class="clearing-featured-img" {% endif %} id="list_image_{{ image.id }}">
+                                        <a href="{{ asset('images/products/')~image.productimagepath }}" data-existing-id="{{ image.id }}">
+
+                                            <img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="col-sm-4 col-md-4 col-xs-6 col-lg-9">
+
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                            
+                        
+                    
+                {% endif %}
+                     
+                {# Show the thumbnails #}       
+                {% for image in entity.productimage %}
+                    {% if image.productimagewebdisplay == true %}
+                        <div class="large-2 columns">
+                            <a href="#" class="product_page_product_thumbnail" id="{{ image.id }}" data-path="{{ asset('images/products/')~image.productimagepath }}">
+                                <img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="product_page_thumb_image col-sm-4 col-md-4 col-xs-6 col-lg-3">
+                            </a>
+                        </div>
+
+                    {% endif %}
+                        
+                        
+                {% endfor %}
+            
+            {# End of the product images div #}
+            </div>
+
+            {# Create the links under the images #}
+            <div class="row">
+                {# Sharing links #}
+
+                {# Facebook #}
+                <div class="small-2 columns">
+                    <a href="#" id="FBShare" class="button tiny medium-12 facebook_button share" role="button" data-share-url="{{ entity.productslug }}"><img src="{{ asset('images/icons/share/facebook.png') }}" class="share_botton_icon"><span class="show-for-large-up">Share</span></a>
+                </div>
+                
+                {# Twitter #}
+                <div class="small-2 columns">
+                    <a href="https://twitter.com/intent/tweet?text=http://www.miles-apart.com/product/{{ entity.productslug }}" target="_blank" class="button tiny medium-12 twitter_button share" role="button" ><img src="{{ asset('images/icons/share/twitter.png') }}" class="share_botton_icon"><span class="show-for-large-up">Tweet</span></a>
+                </div>
+
+                {# Google + #}
+                <div class="small-2 columns">
+                    <a href="https://plus.google.com/share?url=http://www.miles-apart.com/product/{{ entity.productslug }}&media={{ entity.productmarketingname}}" target="_blank" class="button tiny medium-12 google_button share" role="button" ><img src="{{ asset('images/icons/share/google.png') }}" class="share_botton_icon"><span class="show-for-large-up">Google+</span></a>
+                </div>
+
+                {# Pintrest + #}
+                <div class="small-2 columns">
+                    <a href="https://pinterest.com/pin/create/button/?url=http://www.miles-apart.com/product/{{ entity.productslug }}&media=http://www.miles-apart.com/images/products/{{ entity.productmainimagepath}}&description={{ entity.productdescription }}" target="_blank" class="button tiny medium-12 pinterest_button share" role="button" ><img src="{{ asset('images/icons/share/pinterest.png') }}" class="share_botton_icon"><span class="show-for-large-up">Pinterest</span></a>
+                </div>
+
+                {# Email #}
+                <div class="small-2 columns">
+                    <a href="mailto:test@tes?&subject={{ entity.productmarketingname}}&body=this%20is%20the%20content%20of%20the%20email" class="button secondary tiny medium-12 share" role="button" ><img src="{{ asset('images/icons/share/email.png') }}" class="share_botton_icon"><span class="show-for-large-up">Email</span></a>
+                </div>
+
+                {# Wishlist link #}
+                <div class="small-2 columns">
+                    <a href="#" class="button tiny medium-12 wish_list_button share" role="button"><img src="{{ asset('images/icons/share/wish.png') }}" class="share_botton_icon "><span class="show-for-large-up">Wish list</span></a>
+                </div>
+
+            </div>
+            
+
+            <ul class="tabs show-for-medium-up" id="product_details_tabs" data-tab>
+                <li class="tab-title active"><a href="#panel11">Product Information</a></li>
+                <li class="tab-title"><a href="#panel21">Questions</a></li>
+                <li class="tab-title"><a href="#panel31">Reviews</a></li>
+                <li class="tab-title"><a href="#panel41">Returns</a></li>
+                <li class="tab-title"><a href="#panel51">Brand</a></li>
+            </ul>
+
+            <dl class="accordion" data-accordion>
+                <dd class="accordion-navigation">
+                    <a href="#panel11" class="show-for-small-only">Product Information</a>
+
+                    <div class="content active" id="panel11">
+                        <div class="content-box section-box">
+                            <div class="homepage_header"></div>
+                            <h4 class="text-center homepage_header_text"><span>Features</span></h4>
+                            <ul class="product_feature">
+
+                                {% for feature in entity.productfeature %}
+                                    <li>{{ feature.productfeaturetext }}</li>
+                                {% endfor %}
+                            </ul>
+
+                            <div class="homepage_header"></div>
+                            <h4 class="text-center homepage_header_text"><span>Overview</span></h4>
+                            <p>{{ entity.productintroduction }}</p>
+
+                            <p>{{ entity.productdescription }}</p>
+
+                            
+                        </div>
+
+                    </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                    {# Questions & answers panel #}
+                    <a href="#panel21" class="show-for-small-only">Questions</a>
+
+                    <div class="content" id="panel21">
+                        <div class="content-box section-box">
+                            <div class="large-8 columns">
+                                    <h4>Questions</h4>
+                                </div>
+                                <div class="large-4 columns">
+                                    <a href="#" class="button small small-12" data-reveal-id="ask_question_modal" role="button" >Ask a question</a>
+                                </div>
+
+                            {# Check if any questions have been asked #}
+                            {% if entity.getAnsweredProductQuestion|length > 0 %}
+                                {% for question in entity.getAnsweredProductQuestion %}
+                                    <p>{{ question.productquestiontext }}</p>
+
+                                    {# Check if there is an answer for the question #}
+                                    {% if question.productanswer %}
+                                        <p>{{ question.productanswer.productanswertext }}</p>
+                                        
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                            
+                        </div>
+                    </div>
+                </dd>
+
+                
+
+                <dd class="accordion-navigation">
+                    <a href="#panel31" class="show-for-small-only">Reviews</a>
+
+                    <div class="content" id="panel31">
+                        <div class="content-box section-box">
+                            <div class="row">
+                                <div class="large-8 columns">
+                                    <h4>Customer Reviews</h4>
+                                    {{ entity.averagereviewrating|star_rating }} - {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews
+                                </div>
+                                <div class="large-4 columns">
+                                    <a href="#" class="button small small-12" role="button" >Add your review</a>
+                                </div>
+                            </div>
+
+
+
+                            {# Check for reviews #}
+                            {% if entity.productreview|length > 0 %}
+                                {% for review in entity.productreview %}
+                                    <h6>{{ review.productreviewrating|star_rating }} <b>{{ review.productreviewtitle }}</b></h6>
+                                    <span class="small">by 
+                                        {% for personal in review.customer.personalcustomer %}
+                                            <b>{{ personal.personalcustomerfirstname }} {{ personal.personalcustomersurname }}</b>
+                                        {% endfor %}
+                                        on {{ review.productreviewdatecreated|date('jS M Y')}}
+                                    </span>
+                                    <p>{{ review.productreviewcontent }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>There are currently no reviews for this product.</p>
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                    <a href="#panel41" class="show-for-small-only">Delivery & Returns</a>
+
+                    <div class="content" id="panel41">
+                        <div class="content-box section-box">
+                            <div class="homepage_header"></div>
+                            <h4 class="text-center homepage_header_text"><span>Delivery Options</span></h4>
+                                
+                            <p>All products displayed on the website are currently in-stock and will be dispatched within 1 working day.</p>
+
+                            <div class="row">
+                                <div class="large-10 columns">
+                                    
+                                    <p>Free Royal Mail 2nd Class delivery for all orders over £30.</p>
+                                    
+                                    <p>If you wish to have first class ddelivery the cost of Second class delivery will be deducted from this</p>
+                                </div>
+                                <div class="large-2 columns">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+
+                <dd class="accordion-navigation">
+                    <a href="#panel51" class="show-for-small-only">Brand</a>
+
+                    <div class="content" id="panel51">
+                        <div class="content-box section-box">
+                            <div class="row">
+                                <div class="large-9 columns">
+                                    <h3>{{ entity.brand.brandname }}</h3>
+                                </div>
+                                <div class="large-3 columns">
+                                    <img src="{{ asset('images/brands/'~entity.brand.brandlogoimagepath) }}" class="large-12"/>
+                                </div>
+                            </div>
+
+                            <p class="lead">{{ entity.brand.brandintroduction }}</p>
+
+                            {% for paragraph in entity.brand.branddescriptionparagraph %}
+                                <p>{{ paragraph.branddescriptionparagraphtext }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+
+        </div>
+    </div>
+    {# Product information #}
+    <div class="row">
+        
+
+        <div class="large-4 columns">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+  
+    {# Create the modal form for adding questions #}
+    <div id="ask_question_modal" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <div id="loader_wrapper">
+            <div id="loader">
+                <img style="width:40px" alt="AJAX Loading GIF" src="{{ asset('images/icons/ajax_loader_lg.gif') }}"  />
+            </div>
+        </div>
+        <div id="ask_question_modal_content">
+            <h2 id="modalTitle">Ask a Question</h2>
+            <p class="lead">Please ask your question using the form below.</p>
+            {{ form_start(ask_question_form) }}
+            {{ form_errors(ask_question_form) }}
+
+            {# Create and show the new admin user type #}
+            
+                {{ form_row(ask_question_form.question_name) }}
+                {{ form_row(ask_question_form.question_email) }}
+                {{ form_row(ask_question_form.product_question_text) }}
+                {{ form_row(ask_question_form.recaptcha) }}
+
+            
+                {{ form_row(ask_question_form.submit) }}
+               
+            
+                {{ form_rest(ask_question_form) }}
+        
+            {{ form_end(ask_question_form) }}
+            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(".product_page_product_thumbnail").click(function() {
+            //Check that the image is not already shown
+            var thumbnailId = $( this ).attr('id');
+            var imageId = $(".clearing-featured-img").attr("id");
+            imageId = imageId.replace ( /[^\d.]/g, '' );
+            //If the clearing featured image is equal to the thumbnail id
+          
+            
+            if(imageId != thumbnailId) {
+                
+                //Get the id of the main image currently being shown.
+                var main_image_id = "#list_image_"+imageId;
+                
+                $(main_image_id).removeClass('clearing-featured-img');
+                $(main_image_id).fadeOut(600);
+
+                //changeProductPageProductImage(path, id);
+
+                //Make new image display.
+                var to_display_image = "#list_image_"+thumbnailId;
+                $(to_display_image).addClass('clearing-featured-img');
+                $(to_display_image).fadeIn(600);
+                $(document).foundation('clearing', 'reflow');
+            }
+            return false;
+            
+        });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $("#FBShare").click(function() {
+            url_append = $(this).data("share-url");
+            window.open("http://www.facebook.com/sharer/sharer.php?u=http://www.miles-apart.com/product/"+url_append, "", "width=200,height=100");
+        });
+
+    });
+
+</script>
+
+
+
+{% endblock %}
+
+

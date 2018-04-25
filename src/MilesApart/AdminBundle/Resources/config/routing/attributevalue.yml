@@ -1,0 +1,33 @@
+product_attribute-value:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_attribute-value_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:show" }
+
+product_attribute-value_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:new" }
+
+product_attribute-value_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:create" }
+    requirements: { _method: post }
+
+product_attribute-value_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:edit" }
+
+product_attribute-value_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:update" }
+    requirements: { _method: post|put }
+
+product_attribute-value_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:AttributeValue:delete" }
+    requirements: { _method: post|delete }

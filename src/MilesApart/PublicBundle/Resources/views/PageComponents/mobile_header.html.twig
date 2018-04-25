@@ -1,0 +1,113 @@
+{# Create header row #}
+<div class="hide-for-large-up">
+    <div class="mobile_top_bar">
+        <div class="row">
+            
+            {# Create logo #}
+            <div class="small-3 large-3 columns">
+                <a href="{{ path('miles_apart_public_homepage') }}">
+                    <img src="{{ asset('images/logos/dark_bg/MALogo_NoText_80x42.png') }}" class="miles-apart-logo-main" alt="Miles Apart main logo" />
+                </a>
+                
+            </div>
+
+            <div class="small-9 columns">
+                <div class="row mobile_icons collapse">
+                    <div class="small-3 columns">
+                        <a href="{{ path('miles_apart_public_our_stores') }}" class="mobile_icon_links">
+                            <i class="fi-home {% if active_page == 'our_stores' %} active_page {% endif %}"></i><br />
+                            <span {% if active_page == 'our_stores' %} class="active_page" {% endif %}>Stores</span>
+                        </a>
+                    </div>
+                    <div class="small-3 columns">
+                        <a href="{{ path('miles_apart_public_contact_us') }}" class="mobile_icon_links">
+                            <i class="fi-mail {% if active_page == 'contact_us' %} active_page {% endif %}"></i><br />
+                            <span {% if active_page == 'contact_us' %} class="active_page" {% endif %}>Contact</span>
+                        </a>
+                    </div>
+                    <div class="small-3 columns">
+                        <a href="{{ path('fos_user_profile_show') }}" class="mobile_icon_links">
+                            <i class="fi-torso {% if active_page == 'account' %} active_page {% endif %}"></i><br />
+                            <span {% if active_page == 'account' %} class="active_page" {% endif %}>Account</span>
+                        </a>
+                    </div>
+                    <div class="small-3 columns">
+                        <a href="#" onclick="mobileBasketToggle()" class="mobile_icon_links">
+                            {% if basket|length > 0 %}
+                                <span class="round label" id="mobile_header_basket_label" style>{{ basket.getBasketTotalQuantity }}</span>
+                            {% endif %}
+                            <img src="{{ asset('images/icons/shopping-basket-sm.png')}}" /><br />
+
+                            <span>Basket</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+    <div id="mobile_basket_outer_wrapper">
+            <div class="row">
+                <div class="small-12 columns">
+                    <div class="row">
+                        <div class="small-9 columns mobile_basket_wrapper">
+                            <div class="mobile_basket_text">
+                                {% if basket|length > 0 %}
+                                    <p><strong id="mobile_button_basket_quantity">{{ basket.getBasketTotalQuantity }}</strong> {% if basket.getBasketTotalQuantity > 1 %} items{% else %} item{% endif %}, <strong id="mobile_button_basket_price">{{ basket.getBasketTotalPriceDisplay}}</strong></p>
+                                {% else %}
+                                    <p>No items</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="small-3 columns mobile_basket_link_wrapper">
+                            <div class="mobile_basket_link">
+                                <a href="{{ path('miles_apart_basket_checkout_start') }}" class="mobile_icon_links">
+                                    <i class="fi-dollar-bill"></i><br />
+                                    Checkout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <div class="row">    
+        <div id="mobile_search_wrapper">
+            {# Create the search bar #}
+            <div class="small-12 columns">
+               
+
+                 <form action="{{ path('miles_apart_public_search_results') }}" novalidate method="get">
+                    <div class="row collapse">
+                        
+                        <div class="small-10 columns">
+                           <input type="text" id="query" name="query" required="required" class="mobile-search-bar" placeholder="Search..." 
+                            
+                            {# Replace search bar placeholder with value if it is set #}
+                            {% if search_string is defined %}
+                                value="{{ search_string }}"
+                            {% endif %}
+
+                            {# Delete search string iof it is set when the user selects the search #}
+                            onfocus="if (this.value == '{{ search_string }}') {this.value = ''; this.style.color='#333333'}" onblur="if (this.value == '') {this.value = '{{ search_string }}'; this.style.color='#333333';}"
+                            />
+                        </div>
+                        <div class="small-2 columns">
+                            <a href="#" type="submit" class="button postfix mobile-search-bar-button"></a>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>   
+
+            
+        </div>
+
+    {# End header row #}
+    </div>
+</div>

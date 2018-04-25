@@ -1,0 +1,33 @@
+supplier_supplier-discount:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+supplier_supplier-discount_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:show" }
+
+supplier_supplier-discount_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:new" }
+
+supplier_supplier-discount_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:create" }
+    requirements: { _method: post }
+
+supplier_supplier-discount_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:edit" }
+
+supplier_supplier-discount_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:update" }
+    requirements: { _method: post|put }
+
+supplier_supplier-discount_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:SupplierDiscount:delete" }
+    requirements: { _method: post|delete }

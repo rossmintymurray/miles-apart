@@ -1,0 +1,66 @@
+{# src/MilesApart/StaffBundle/Resources/views/Campaigns/new_campaign.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+{% set current_page = 'new_campaign' %}
+
+{% block page_name %}
+    New campaign
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+         <fieldset>
+            <legend class="text-muted">Campaign Details</legend>
+            {{ form_row(form.campaign_name) }}
+            {{ form_row(form.campaign_start_date) }}
+            {{ form_row(form.campaign_end_date) }}
+            {{ form_row(form.campaign_introduction) }}
+            {{ form_row(form.campaign_description) }}
+            {{ form_row(form.campaign_objective) }}
+            {{ form_row(form.campaign_type) }}
+        </fieldset>
+        
+        <fieldset>
+            <legend class="text-muted">Promotion</legend>
+            <div id="promotions" data-prototype="{{ macros.widget_prototype(form.promotion, 'Remove promotion')|escape }}">
+                {% for widget in form.promotion.children %}
+                    
+                    {{ macros.widget_prototype(widget, 'Remove promotion') }}
+                    
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div id="vanity_url_check_response"></div>
+                </div>
+            </div>
+
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="promotions">Add promotion</a>
+            </div> 
+        </fieldset>
+
+        
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}

@@ -1,0 +1,33 @@
+business_business-premises:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+business_business-premises_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:show" }
+
+business_business-premises_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:new" }
+
+business_business-premises_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:create" }
+    requirements: { _method: post }
+
+business_business-premises_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:edit" }
+
+business_business-premises_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:update" }
+    requirements: { _method: post|put }
+
+business_business-premises_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:BusinessPremises:delete" }
+    requirements: { _method: post|delete }

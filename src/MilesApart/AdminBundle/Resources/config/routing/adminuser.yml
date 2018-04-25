@@ -1,0 +1,33 @@
+website-management_admin-user:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+website-management_admin-user_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:show" }
+
+website-management_admin-user_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:new" }
+
+website-management_admin-user_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:create" }
+    requirements: { _method: post }
+
+website-management_admin-user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:edit" }
+
+website-management_admin-user_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:update" }
+    requirements: { _method: post|put }
+
+website-management_admin-user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:AdminUser:delete" }
+    requirements: { _method: post|delete }

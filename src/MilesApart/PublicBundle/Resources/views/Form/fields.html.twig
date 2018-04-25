@@ -1,0 +1,122 @@
+{# src/MilesApart/AdminBundle/Resources/views/Form/fields.html.twig #}
+{# Field template for form on first time through #}
+{% block form_row %}
+	{% spaceless %}
+		{# Create the group for each input so foundation groups together #}
+		<div>
+	    	{{ form_label(form) }}
+	    	{{ form_widget(form) }}
+
+	    	{# Create the form errors and display if validation fails #}
+	    	<small class="form-error col-md-7 col-md-offset-4">
+	    		{{ form_errors(form) }}
+	    	</small>
+    	</div>
+	{% endspaceless %}
+{% endblock form_row %}
+
+
+{% block button_row %}
+{% spaceless %}
+  
+        {{ form_widget(form) }}
+   
+{% endspaceless %}
+{% endblock button_row %}
+
+{%- block form_start -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form data-abide name="{{ name }}" method="{{ form_method|lower }}"{% if action != '' %} action="{{ action }}"{% endif %}{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{%- endblock form_start -%}
+
+
+{% block form_label %}
+    {% if label is not sameas(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% if label_format is defined %}
+                {% if label_format is not empty %}
+                    {% set label = label_format|replace({
+                        '%name%': name,
+                        '%id%': id,
+                    }) %}
+                {% else %}
+                    {% set label = name|humanize %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        {% if errors|length > 0 %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' error')|trim}) %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    {% endif %}
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    
+    {% if errors|length > 0 %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} class="error" {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% else %}
+    	<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    	
+    	
+	{% endif %}
+{% endblock form_widget_simple %}
+
+
+{% block date_widget %}
+{% spaceless %}
+    {% if widget == 'single_text' %}1
+        {{ block('field_widget') }}
+    {% else %}
+        {% if errors|length > 0 %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form.date.year) }}
+                {{ form_errors(form.date.month) }}
+                {{ form_errors(form.date.day) }}
+                {{ form_widget(form.date.year) }}
+                {{ form_widget(form.date.month) }}
+                {{ form_widget(form.date.day) }}
+            
+            </div>
+
+        {% else %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form.date.year) }}
+                {{ form_errors(form.date.month) }}
+                {{ form_errors(form.date.day) }}
+                {{ form_widget(form.date.year) }}
+                {{ form_widget(form.date.month) }}
+                {{ form_widget(form.date.day) }}
+                <small class="error">Please enter a valid date.</small>
+            </div>
+        {% endif %}
+
+    {% endif %}
+{% endspaceless %}
+{% endblock date_widget %}
+
+
+{% block textarea_widget %}
+	{% if errors|length > 0 %}
+    	<textarea {{ block('widget_attributes') }} class="error">{{ value }}</textarea>
+    {% else %}
+    	<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    	<small class="error">Text cannot be blank.</small>
+    {% endif %}
+{% endblock textarea_widget %}
+

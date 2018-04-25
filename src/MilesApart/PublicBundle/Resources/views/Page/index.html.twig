@@ -1,0 +1,59 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::homepage_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+    Homepage
+{% endblock %}
+
+{# Set the homepage title to add the address #}
+{% block homepage_title %}
+    | Amesbury &amp; Westbury, Wiltshire
+{% endblock %}
+
+{# Set the page content #}  
+{% block page_content %}
+   
+    {# Set up the carousel and img columns #}
+    <div class="row homepage-carousel-banners">
+        <div class="small-12 medium-8 large-8 columns">
+            {# Include the carosel #}
+            {% include 'MilesApartPublicBundle:PageComponents:homepage_carousel.html.twig' %}
+        </div>
+
+        <div class="hide-for-small-only medium-4 large-4 columns carousel-side-images">
+            <div class="carousel_sub_image_wrapper">
+                <a href="{{ path('miles_apart_public_shop', {'main_category': 'home-garden', 'sub_category': 'office-stationery' }) }}">
+                    <h2 class="carousel_sub_images_overlay_text">Stationery</h2>
+                </a>
+                <a href="{{ path('miles_apart_public_shop', {'main_category': 'home-garden', 'sub_category': 'office-stationery' }) }}">
+                    <img class="carousel-sub-images" src="{{ asset('images/homepage/stationery.jpg') }}" alt="Stationery">
+                </a>
+            </div>
+            <div class="carousel_sub_image_wrapper">
+                <a href="{{ path('miles_apart_public_shop', {'main_category': 'diy-tools-hardware'}) }}">
+                    <h2 class="carousel_sub_images_overlay_text">Tools</h2>
+                </a>
+                <a href="{{ path('miles_apart_public_shop', {'main_category': 'diy-tools-hardware' }) }}">
+                    <img class="carousel-sub-images" src="{{ asset('images/homepage/tools.jpg') }}" alt="Tools">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {# Call the staff picks products controller #}
+    {{ render(controller('MilesApartPublicBundle:PageComponents:staffPickProducts')) }}
+
+    {# Call the new products controller #}
+    {{ render(controller('MilesApartPublicBundle:PageComponents:newProducts')) }}
+
+
+    {# Set up the 'our story section' #}
+    {# Include the stores div #}
+    {% include 'MilesApartPublicBundle:PageComponents:homepage_our_story.html.twig' %}
+
+        
+	{# Include the stores div #}
+    {% include 'MilesApartPublicBundle:PageComponents:homepage_stores_display.html.twig' %}
+
+{% endblock %}

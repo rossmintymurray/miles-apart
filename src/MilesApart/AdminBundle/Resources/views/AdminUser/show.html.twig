@@ -1,0 +1,55 @@
+{# src/MilesApart/AdminBundle/Resources/views/Employees/show.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/webmanagement.html.twig' %}
+
+{# Set  current page for interface highlighting #}
+{% set current_page = 'admin_user' %}
+
+{# Set the page title #}
+{% block title %}
+    Show Admin User
+{% endblock%}
+
+{# Set the page header #}
+{% block page_name %}
+    Show Admin User           
+{% endblock %}   
+
+{# Set the page sub header #}
+{% block page_introduction %}
+    View admin user details
+{% endblock %}
+
+{% block page_content -%}
+
+
+    <table class="table table-hover table-bordered table-striped main_content_table show_table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Admin user username</th>
+                <td>{{ entity.username }}</td>
+            </tr>
+            <tr>
+                <th>Admin user password</th>
+                <td>{{ entity.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('website-management_admin-user') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('website-management_admin-user_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

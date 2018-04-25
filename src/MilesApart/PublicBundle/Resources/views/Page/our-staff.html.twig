@@ -1,0 +1,39 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Our Staff
+{% endblock %}
+
+
+{# Set the page content #}
+{% block page_content %}
+	<div class="row text-center">
+		<div class="large-4 large-offset-4">
+			<h4>Lyn Miles</h4>
+			<img src="lyn" class="large-12" />
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row text-center">
+		<div class="large-4 columns">
+			<h4>Ella Keable</h4>
+			<img src="ella" class="large-12" />
+		</div>
+		<div class="large-4 columns">
+			<h4>Ross Murray</h4>
+			<img src="ross" class="large-12" />
+		</div>
+	</div>
+
+    
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Our Staff</li>
+	<li><a href="#introduction">26 Salisbury Street - Amesbury</a></li>
+	<li><a href="#introduction">28 Salisbury Street - Amesbury</a></li> 
+	<li><a href="#introduction">15 High Street - Amesbury</a></li>  	
+{% endblock %}

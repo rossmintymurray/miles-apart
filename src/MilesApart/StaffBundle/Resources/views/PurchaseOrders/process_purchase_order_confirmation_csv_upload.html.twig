@@ -1,0 +1,18 @@
+<h2>Please select file for upload</h2>
+
+    {# Create and show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <fieldset>
+            <legend class="text-muted">CSV File</legend>
+            {{ form_row(form.file) }}
+          
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}

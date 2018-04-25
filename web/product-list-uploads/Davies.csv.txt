@@ -1,0 +1,15 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+10 Wire Ties with Fir Effect,5013206153451,54516,0.80,Davies Products
+Snowflake Window Decorations,5013206146668,54290,1.00,Davies Products
+Cute Wooden Santa Key,5013206126714,54188,1.25,Davies Products
+Door Hanger - Red Green Gold ,5013206154625,54555,1.00,Davies Products
+Door Hanger - Silver ,5013206154595,54554,1.00,Davies Products
+Door Hanger - Red White ,5013206154656,54556,1.00,Davies Products
+Hanging Flashing Snowflke ,5013206125076,54135,1.25,Davies Products
+2 Berry Picks ,5013206151860,54463,1.00,Davies Products
+Door Hanger - Gold ,5013206034378,53562,1.00,Davies Products
+Fuzzy Polar Bear ,5013206150900,54431,1.00,Davies Products
+2 Snowmen,5013206149744,54393,1.00,Davies Products
+6 Snowflake Decorations ,5013206054956,53681,1.00,Davies Products
+2 Snowmen Baubles,5013206149744,54393,1.00,Davies Products
+2 Hanging Snowmen,5013206150870,54430,1.25,Davies Products

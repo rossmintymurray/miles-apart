@@ -1,0 +1,41 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+"4"" G Clamp",5017403322900,CL290,3.10,Hamble
+"10""/250mm Locking Pliers",5017403621058,PL105,3.10,Hamble
+60W Glue Gun,5017403073765,GG202,5.50,Hamble
+30W Soldering Iron,5017403911524,SI102,4.50,Hamble
+Junior Hacksaw and Blade Set,5017403812395,HK239,1.00,Hamble
+3pc File Set,5017403078265,FS206,2.99,Hamble
+"72"" Heavy Duty Cable Lock",5017403019466,BH216,2.25,Hamble
+Heavy Duty Revolving Leather Punch,5017403025801,RLP102,2.25,Hamble
+"10""/250mm Water Pump Pliers",5017403621065,PL106,2.10,Hamble
+"250mm/10"" Waterpump Pliers",5017403038078,PL107,2.10,Hamble
+Orange Handled Hacksaw,5017403812388,HK238,1.50,Hamble
+"1"" x 15' Ratchet Tie Down",5017403071471,BD337,1.10,Hamble
+"72"" Bungee Cord",5017403039853,BD401,1.25,Hamble
+"14"" Bicycle Pump",5017403971511,BP201,1.50,Hamble
+2pc Luggage Combination Padlock Set ,5017403082231,PD125,1.00,Hamble
+6pc Straight Shank Twist Drill Set - HSS,5017403221265,DB134,1.20,Hamble
+"6"" Carpenters Pincers",5017403071068,PI121,1.50,Hamble
+3pc Chisel Set ,5017403383031,CH303,2.00,Hamble
+3pc Scraper Set ,5017403015192,SCR308,1.25,Hamble
+"6"" Long Nose Pliers",5017403044215,PL002,1.10,Hamble
+"6"" Combination Pliers",5017403044208,PL001,1.25,Hamble
+In-Ear Headphones,5017403068297,IP116,1.25,Hamble
+"6"" Side Cutting Pliers",5017403044222,PL003,1.10,Hamble
+5M x 19mm Tape Measure with Protective Cover,5017403032410,TM230,1.25,Hamble
+115mm Metal Grinding Disc,5017403153351,AG202,1.00,Hamble
+5pc Combination Spanner Set,5017403382607,WR260,2.00,Hamble
+14pc Hexagon Key Set,5017403392309,BB-WR230,1.25,Hamble
+6pc Transparent Snap-Off Knife Set ,5017403013372,BB-KN325,,Hamble
+Wallpaper Hanging Brush,5017403071129,ZZ802,1.50,Hamble
+"3"" No Bristle Loss Pain Brush",5017403065715,ZZ115,1.80,Hamble
+30pc Disposable Shoe Covers ,5017403040057,DS154,1.10,Hamble
+Safety Goggles,5017403971023,SG102,1.00,Hamble
+"4"" No Bristle Loss Paint Brush",5017403065722,ZZ116,2.20,Hamble
+Wire Brush with Grip Handle,5017403012849,BB-WB147,1.00,Hamble
+2pc Paint Scraper Set,5017403078104,SCR310,1.99,Hamble
+10 Carpenters Pencils,5017403361022,BB-CP100,1.99,Hamble
+8pc Micro Clamp Set,5017403012887,CL098,1.00,Hamble
+"4pc 3.5"" Nylon Spring Clamp Set",5017403321002,CL100,1.00,Hamble
+Window Scraper,5017403933120,SCR312,1.00,Hamble
+4 Row Plastic Wire Brush with Scraper,5017403321521,WB144,1.10,Hamble

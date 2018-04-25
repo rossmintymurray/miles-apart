@@ -1,0 +1,242 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Addresses
+{% endblock %}
+
+
+{% block title_right %}
+	<a href="javascript:;" onclick="toggleNewAddressDisplay()" class="button info secondary small-12">Add a new address</a>
+{% endblock %}
+
+{% block left_menu %}
+	{% set current_page = "addresses" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+
+	{# Hide the address form and add toggle link #}
+    <div id="new_address" class="hidden">
+    					           
+        {{ form_start(form) }}       
+		<div class="row">
+		    <div class="large-9 columns">
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.customer_address_postcode) }}
+		            </div>
+		            <div class="small-4 columns">
+		                {{ form_widget(form.customer_address_postcode) }}
+		                {{ form_errors(form.customer_address_postcode) }}
+		            </div>
+
+		            <div class="small-3 columns">
+		                <button class="button tiny small-12" id="shipping_find_address">Find Address</button>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="small-7 small-offset-5 columns">
+		                <select class="small-12 columns hide" id="shipping_address_select">
+		                    <option>Loading addresses...</option>
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.customer_address_line_1) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.customer_address_line_1) }}
+		                {{ form_errors(form.customer_address_line_1) }}
+		            </div>
+		        </div>
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.customer_address_line_2) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.customer_address_line_2) }}
+		                {{ form_errors(form.customer_address_line_2) }}
+		            </div>
+		        </div>
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.customer_address_town) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.customer_address_town) }}
+		                {{ form_errors(form.customer_address_town) }}
+		            </div>
+		        </div>
+
+		        <div class="row">
+		            <div class="small-5 columns">
+		                {{ form_label(form.customer_address_county) }}
+		            </div>
+		            <div class="small-7 columns">
+		                {{ form_widget(form.customer_address_county) }}
+		                {{ form_errors(form.customer_address_county) }}
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<div class="row">
+	        <div class="large-9 columns">
+	            <div class="row"> 
+	                <div class="small-offset-5 small-7 columns">
+	                    {{ form_widget(form.customer_address_is_billing) }}
+	                    {{ form_label(form.customer_address_is_billing) }}
+	                    {{ form_errors(form.customer_address_is_billing) }}
+	                    <p class="form_subtext">Please uncheck this box if this is not your billing address.</p>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="row">
+	        <div class="large-9 columns">
+	            <div class="row"> 
+	                <div class="small-offset-5 small-7 columns">
+	
+	     				{{ form_row(form.submit) }}
+	     			</div>
+	     		</div>
+	     	</div>
+	     </div>
+	     {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+	   
+     	
+	</div>
+	
+	<div class="row">
+		{% if user.customer.activecustomeraddress|length > 0 %}
+			<div class="large-12 columns">
+				<p>The following addresses are saved on your account. To add a new address, click the button below. You can select your billing address and postage address, or add new ones, when you place an order.</p>
+			</div>
+			<div class="clearfix"></div>
+			{% for address in user.customer.activecustomeraddress %}
+			
+				<div class="large-3 small-6 columns">
+					<div class="panel address_display_panel form_text" id="panel_{{ address.id }}">
+						
+						{# Show defaul label if set #}
+						<span class="small-12 round success label default_delivery_label {% if address.customeraddressdefaultdelivery != true %} hidden{% endif %}" id="default_delivery_label_{{ address.id }}" style="margin-bottom:0.5em">Default delivery address</span>
+						<span class="small-12 round success label default_billing_label {% if address.customeraddressisbilling != true %} hidden{% endif %}" id="default_billing_label_{{ address.id }}" style="margin-bottom:0.5em">Default billing address</span>	
+
+						{% if address.customeraddressname != null %}
+							<b>{{ address.customeraddressname }}</b><br />
+						{% endif %}
+						{{ address.customeraddressline1 }}<br />
+						{% if address.customeraddressline2 != null %}
+							{{ address.customeraddressline2 }}<br />
+						{% endif %}
+						{{ address.customeraddresstown }}<br />
+						{{ address.customeraddresscounty }}<br />
+						{{ address.customeraddresspostcode }}<br />
+
+						<button href="#" data-dropdown="drop_{{ address.id }}" aria-controls="drop_{{ address.id }}" aria-expanded="false" class="button dropdown button tiny small-12 billing_address_select" style="margin-top:1rem;margin-bottom:0">Edit address</button><br>
+						<ul id="drop_{{ address.id }}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						  	<li><a href="javascript:;" onclick="updateAddressDefaults('delivery', {{ address.id }})">Set as default delivery</a></li>
+						  	<li><a href="javascript:;" onclick="updateAddressDefaults('billing', {{ address.id }})">Set as default billing</a></li>
+						  	<li><a href="javascript:;" onclick="deleteAddress({{ address.id }})">Remove address</a></li>
+						</ul>
+					</div>
+				</div>
+			
+		        {% if loop.index is divisible by(4) %}
+		            <div class="clearfix"></div>
+		        {% endif %}
+			{% endfor %}
+		{% else %}
+			<div id="no_address_text">
+				<p>You currently have no saved addresses. <a href="javascript:;" onclick="toggleNewAddressDisplay()">Add an address.</a></p>
+			</div>
+		{% endif %}
+	</div>
+
+	
+
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+	<script>
+		function toggleNewAddressDisplay() {
+        	
+        	if ($('#new_address').css("display") == "none") {
+        		$("#new_address").show();
+        		$("#no_address_text").hide();
+
+        		//If any addresses are selected, deselect them 
+        		$( ".delivery_address_select" ).each(function() {
+			    if($( this ).hasClass( "success" )) {
+			    	$( this ).removeClass( "success" );
+			    	$(this).text("Select address");
+			    }
+			});
+        	} else {
+        		$("#new_address").hide();
+        		$("#no_address_text").show();
+        	}
+
+        	return false;    	
+	    }
+
+
+	    //Function to update address 
+	    function updateAddressDefaults(addressType, addressId) {
+	    
+	    	//Call the AJAX code to update the database 
+	    	$.ajax({
+		        type: "POST",
+		        url: "./update-address-defaults",
+		        dataType: 'json',
+		        data: { addressType : addressType, addressId: addressId },
+		        success: function(data){
+		            
+		            //Upate the display of the defaul label
+		            //Remove the existing label 
+		            $(".default_"+addressType+"_label").hide();
+
+		            //Find the div to put the new label
+		            $("#default_"+addressType+"_label_"+addressId).show();
+		        }, 
+		        fail: function() {
+		            alert('failed');
+		        }
+		  	});
+
+	    }
+
+	    //Function to update address 
+	    function deleteAddress(addressId) {
+	    	
+	    	//Call the AJAX code to update the database 
+	    	$.ajax({
+		        type: "POST",
+		        url: "./delete-address",
+		        dataType: 'json',
+		        data: { addressId: addressId },
+		        success: function(data){
+		            
+		            //Remove the address from display
+		            $("#panel_" + addressId).hide();
+		        }, 
+		        fail: function() {
+		            alert('failed');
+		        }
+		  });
+
+	    }
+	   </script>
+{% endblock %}

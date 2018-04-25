@@ -1,0 +1,541 @@
+<!-- app/Resources/views/admin_base.html.twig 
+
+
+This is the foundation page for all other ADMIN pages on the site -->
+{# Import macro for prototype forms #}
+{% import '::prototype_macro.html.twig' as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <!--Create the document head-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <title>{% block title %}Homepage{% endblock %} | Miles Apart ISys Staff</title>
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% block stylesheets %}
+        {% endblock %}
+            
+        <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />
+        
+        <!--Include sticky footer styles-->
+         <link href="{{ asset('css/staff_sticky_footer.css') }}" type="text/css" rel="stylesheet" />
+
+         <!--
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/flick/jquery-ui.css">-->
+         <link rel="stylesheet" href="{{ asset('css/jquery-ui-mod.css') }}">
+        <!--Include admin stylesheet.--> 
+        
+        <script src="{{ asset('js/jquery-1.11.1.js') }}" type="text/javascript"></script>
+        {#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>#}
+        <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/swipetrack.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/vendor/jquery.ui.widget.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.iframe-transport.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.fileupload.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/highcharts.js') }}"></script>
+        <script src="{{ asset('js/CODE128.js') }}"></script>
+        <script src="{{ asset('js/JsBarcode.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/datepicker.js') }}"></script>
+        <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script> 
+
+        <!--<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>-->
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/clean.css') }}" />
+        <!--<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">-->
+        <link href="{{ asset('css/staff_styles.css') }}" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('sweetalert2/sweetalert2.css') }}">
+        {# Include Dymo framework for printing address labels #}
+        <script src="{{ asset('js/DYMO.Label.Framework.latest.js') }}" type="text/javascript" charset="UTF-8"> </script>
+        
+        <script src="{{ asset('js/miles_apart_staff_product_helper_functions.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/miles_apart_staff_functions.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/miles_apart_dymo.js') }}" type="text/javascript"></script>
+        <script>
+        </script>
+        <script src="{{ asset('js/miles_apart_staff.js') }}"  data-environment="{{ app.environment }}"></script>
+        
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div id="loadingImage" style="display: none">
+            <img src="{{ asset('images/icons/ajax-loader.gif') }}" alt="Ajax Loader" />
+        </div>
+        
+        <div class="modal fade" id="amazon_product_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        </div>
+        
+        <div id="popup_price_input" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="popup_price_input_modal_title">Please update the price.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="popup_price_input_form">
+                            <h6>Response</h6>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <span id="popup_price_input_submit">
+                            <button type="button" class="btn btn-success">Save changes</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup_form_response">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="popup_form_response_content">
+                            <h6>Response</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Create the main page wrap so the footer sticks-->
+        <div id="wrap">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container admin_layout_grid">
+                    <div class="row">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand"  href="{{ path('miles_apart_staff_homepage') }}"><img src="{{ asset('images/logos/dark_bg/MALogo_NoText_50x26.png') }}"/></a>
+                        </div>
+
+                        {# If the is super-user, director or management show all links#}
+                        {% if app.security.getToken().getUser().getAdminUserType().getId == 1 or app.security.getToken().getUser().getAdminUserType().getId == 2 or app.security.getToken().getUser().getAdminUserType().getId == 3 %}
+                    
+                    
+                            <!-- Collect the nav links, forms, and other content for toggling - this will be collapsed on mobile devices-->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav navbar-right">
+                                    
+                                    <!--Show drop downs dependant on access rights of logged in user-->
+
+                                    <!--Pick and pack drop down-->
+                                    <li class="dropdown {% if active_page == 'pickpack' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-pickpack_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                             <li><a href="{{ path('staff-pickpack_find-order') }}">Find Order</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-pickpack_pick') }}">Pick</a></li>
+                                            <li><a href="{{ path('staff-pickpack_pack') }}">Pack</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-royalmail_view-shipments') }}">View Shipments</a></li>
+                                            <li><a href="{{ path('staff-royalmail_print-manifest') }}" target="_blank" >Print Manifest</a></li>
+                                            <li><a href="{{ path('staff-royalmail_view-manifest') }}" >View Manifests</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-pickpack_recall') }}">Recall</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Products drop down-->
+                                    <li class="dropdown {% if active_page == 'products' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-products_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_price-check') }}">Price Check</a></li>
+                                            <li><a href="{{ path('staff-products_add-product-to-print-list') }}">Request Prices & Labels</a></li>
+                                            <li><a href="{{ path('staff-products_print-requested-prices') }}">Print Requested Prices</a></li>
+                                            <li><a href="{{ path('staff-products_new-price') }}">New Price</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_import-product-list-csv') }}">Product list import CSV</a></li>
+                                            <li><a href="{{ path('staff-products_find-product') }}">Find product</a></li>
+                                            <li><a href="{{ path('staff-products_new-product') }}">New product</a></li>
+                                            
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_view-stockouts') }}">View stockouts</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_start-stocktake') }}">Start stocktake</a></li>
+                                            <li><a href="{{ path('staff-products_view-stocktakes') }}">View stocktakes</a></li>
+                                            <li><a href="{{ path('staff-products_start-stocktake') }}">Adjust stock level</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_process-returns') }}">Process returns</a></li>
+                                             <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_pack-up-seasonal') }}">Pack up seasonal</a></li>
+                                            <li><a href="{{ path('staff-products_view-seasonal-box-contents') }}">Seasonal box contents</a></li>
+                                            <li><a href="{{ path('staff-products_stored-season-products') }}">Stored season products</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-products_new-product-group') }}">New product group</a></li>
+                                            <li><a href="{{ path('staff-products_view-product-groups') }}">View product groups</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Transfer request drop down-->
+                                    <li class="dropdown {% if active_page == 'transfer_requests' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transfer Requests</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-transfer-requests_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-transfer-requests_request-products') }}">Request products</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-transfer-requests_view-requests') }}">View requests</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Categories drop down-->
+                                    <li class="dropdown {% if active_page == 'categories' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-categories_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-categories_new-category') }}">New category</a></li>
+                                            <li><a href="{{ path('staff-categories_view-categories') }}">View categories</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-categories_new-season') }}">New season</a></li>
+                                            <li><a href="{{ path('staff-categories_view-seasons') }}">View seasons</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-categories_new-brand') }}">New brand</a></li>
+                                            <li><a href="{{ path('staff-categories_view-brands') }}">View brands</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Customers drop down-->
+                                    <li class="dropdown {% if active_page == 'customers' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customers</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-customers_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-customers_new-customer') }}">New customer</a></li>
+                                            <li><a href="{{ path('staff-customers_view-customers') }}">View customers</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-customers_take-contact') }}">Take contact</a></li>
+                                            <li><a href="{{ path('staff-customers_make-contact') }}">Make contact</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Campaigns drop down-->
+                                    <li class="dropdown {% if active_page == 'campaigns' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-campaigns_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_new-campaign') }}">New campaign</a></li>
+                                            <li><a href="{{ path('staff-campaigns_view-campaigns') }}">View campaigns</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_new-promotion') }}">New promotion</a></li>
+                                            <li><a href="{{ path('staff-campaigns_view-promotions') }}">View promotions</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_analyse-campaigns') }}">Analyse campaigns</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_new-promotion-type') }}">New promotion type</a></li>
+                                            <li><a href="{{ path('staff-campaigns_view-promotion-types') }}">View promotion types</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_new-campaign-type') }}">New campaign type</a></li>
+                                            <li><a href="{{ path('staff-campaigns_view-campaign-types') }}">View campaign types</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_new-traffic-source') }}">New traffic source</a></li>
+                                            <li><a href="{{ path('staff-campaigns_view-traffic-sources') }}">View traffic sources</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-campaigns_new-traffic-source-type') }}">New traffic source type</a></li>
+                                            <li><a href="{{ path('staff-campaigns_view-traffic-source-types') }}">View traffic source types</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Finances drop down-->
+                                    <li class="dropdown {% if active_page == 'finances' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finances</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-finances_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-finances_process-daily-take') }}">Process daily take</a></li>
+                                            <li><a href="{{ path('staff-finances_view-daily-takes') }}">View daily takes</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-finances_import-invoice-csv') }}">Import invoice CSV</a></li>
+                                            <li><a href="{{ path('staff-finances_add-invoice') }}">Add invoice</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-finances_analyse-finances') }}">Analyse finances</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Business drop down-->
+                                    <li class="dropdown {% if active_page == 'business' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Business</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-business_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-business_new-business-premises') }}">New premises</a></li>
+                                            <li><a href="{{ path('staff-business_view-business-premises') }}">View premises</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-business_new-stock-location') }}">New Stock Location</a></li>
+                                            <li><a href="{{ path('staff-business_view-stock-locations') }}">View Stock Locations</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-business_new-stock-location-shelf') }}">New Shelf</a></li>
+                                            <li><a href="{{ path('staff-business_view-stock-location-shelves') }}">View Shelves</a></li>
+                                            
+                                            
+                                        </ul>
+                                    </li>
+
+                                    {#
+                                    <!--Goods In drop down-->
+                                    <li class="dropdown {% if active_page == 'goodsin' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Goods In</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('miles_apart_admin_goodsin') }}">Overview</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">New delivery</a></li>
+                                            <li><a href="#">Edit delivery</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Start goods receive</a></li>
+                                        </ul>
+                                    </li> #}
+
+                                    <!--HR drop down-->
+                                    <li class="dropdown {% if active_page == 'hr' %} active {% endif %}">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">HR</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-hr_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-hr_view-employees') }}">View employees</a></li>
+                                            <li><a href="{{ path('staff-hr_new-employee') }}">New employee</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-hr_new-admin-user') }}">New admin user</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-hr_add-work-week') }}">Add work week</a></li>
+                                            <li><a href="{{ path('staff-hr_start-payroll') }}">Start payroll</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-hr_wage-settings') }}">Wage settings</a></li>
+                                            <li><a href="{{ path('staff-hr_job-role-settings') }}">Job role settings</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Procurement drop down-->
+                                    <li class="dropdown {% if active_page == 'purchase_orders' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Purchase Orders</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-purchase-orders_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-purchase-orders_add-product-to-purchase-order') }}">Order by product</a></li>
+                                            <li><a href="{{ path('staff-purchase-orders_new-supplier-purchase-order') }}">Supplier purchase order</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-purchase-orders_process-purchase-order-confirmation') }}">Process purchase order confirmation</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-purchase-orders_review-purchase-orders') }}">Review purchase orders</a></li>
+                                            
+                                            
+                                        </ul>
+                                    </li>
+
+                                    {#
+                                    <!--Website management drop down-->
+                                    <li class="dropdown {% if active_page == 'website_management' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Web Management</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-website-management_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-website-management_edit-page') }}">Edit page</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-website-management_empty-cache') }}">Empty cache</a></li>
+                                            
+                                        </ul>
+                                    </li>
+        #}
+
+                                    <!--Goods In drop down-->
+                                    <li class="dropdown {% if active_page == 'goods_in' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Goods In</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-goods-in_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-goods-in_book-in-delivery') }}">Book in delivery</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-goods-in_view-deliveries') }}">View deliveries</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-goods-in_new-delivery-note') }}">New delivery note</a></li>
+                                           
+                                            <li><a href="{{ path('staff-goods-in_store-deliveries') }}">Store deliveries</a></li>
+                                        
+                                        </ul>
+                                    </li>
+
+                                    <!--Suppliers drop down-->
+                                    <li class="dropdown {% if active_page == 'suppliers' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('staff-suppliers_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-suppliers_find-suppliers') }}">Find supplier</a></li>
+                                            <li><a href="{{ path('staff-suppliers_new-supplier') }}">New supplier</a></li>
+                                            
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('staff-suppliers_find-supplier-representatives') }}">Find representative</a></li>
+                                            <li><a href="{{ path('staff-suppliers_new-supplier-representative') }}">New representative</a></li>
+                                            
+                                        </ul>
+                                    </li>
+
+                                    <!--Seller Integration-->
+                                    <li class="dropdown {% if active_page == 'sellers' %} active {% endif %}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sellers</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('miles_apart_seller_notifications') }}">Notifications</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ path('miles_apart_seller_amazon-total-price') }}">Check Amazon Price</a></li>
+                                            <li><a href="{{ path('miles_apart_seller_get-amazon-orders') }}">Get Amazon Orders</a></li>
+                                            
+                                            
+                                            
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+                
+      
+                
+                            
+             <div class="container admin_layout_grid">
+                <!--Row for page introduction-->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12">
+                            <div >
+                                <h1>{% block page_name %}Miles Apart ISys{% endblock %}<small class="page_sub_header">{% block page_sub_header %}{% endblock %}</small></h1>
+                                <h3 class="text-muted">{% block page_introduction %}{% endblock %}</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div id="row">  
+                                {% block header_right_content %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Row for breadcrumb-->
+                <div class="row">
+                    <div class="col-md-12">
+                        
+
+                            {% block breadcrumb %}
+                                {{ wo_render_breadcrumbs() }}
+                            {% endblock %}
+                          
+                        
+                    </div>
+                     
+
+                </div>
+
+
+                <!--Row for main page content-->
+                <div class="row">
+                    
+                    
+                    
+                    <div class="col-md-12">
+                        <section class="main-col">
+
+                            <!--Page lead content-->
+                            {% block page_lead %}{% endblock %}
+                            
+
+                           <!--Info box area placeholder for success/failure messages  (flash messages) -->
+                           
+
+                            {% for flashMessage in app.session.flashbag.get('admin-error') %}
+                                
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Submission error</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                    {{ flashMessage }}
+                                    </div>
+                                
+                                </div>
+                                
+                            {% endfor %}
+
+                            {% for flashMessage in app.session.flashbag.get('admin-warning') %}
+                                
+                                <div class="panel panel-warning">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Submission warning</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                    {{ flashMessage }}
+                                    </div>
+                                
+                                </div>
+                                
+                            {% endfor %}
+
+                            {% for flashMessage in app.session.flashbag.get('admin-notice') %}
+
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Submission success</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                    {{ flashMessage }}
+                                    </div>
+                                
+                                </div>
+                               
+                            {% endfor %}
+
+
+
+                            
+                            <!--Dynamic content of main content area-->
+                            {% block page_content %}{% endblock %}
+                            
+                            {% block pagination_links %}{% endblock %}
+
+                        </section>
+                    </div>
+                    
+                </div>
+            </div>
+        <!--Close the main page wrap-->
+        </div>
+
+        <!--Create the footer-->
+        <div id="footer">
+            <div class="container">
+                
+                    <div id="footer_text">
+                        <p class="text-muted credit bs-example"> Miles Apart &copy; 2013.</p>
+                         <p class="text-muted">Designed &amp; Developed By <a href="#">Minty Web Design.</a></p>   
+                        {% block footer %}
+                            
+                        {% endblock %}
+                    </div>
+            </div> 
+
+
+        </div>
+
+        
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

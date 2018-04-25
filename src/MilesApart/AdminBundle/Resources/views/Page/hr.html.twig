@@ -1,0 +1,121 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/hr.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'hr' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'hr_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	HR
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	HR			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing staff members and process payroll
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    {# Create the overview nav #}
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'hr_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_hr') }}">HR overview</a>
+    </li>
+
+    {# Create the employee nav #}
+     <li class="nav-header">Employee</li>
+     <li {% if current_page == 'employee' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee') }}">View employees</a>
+    </li>
+    <li {% if current_page == 'new_employee' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee_new') }}">New employee</a>
+    </li>
+    
+    {# Create the work week nav #}
+    <li class="nav-header">Work Weeks</li>
+    <li {% if current_page == 'work_week' %} class="active" {% endif %}>
+        <a href="{{ path('hr_work-week') }}">View work weeks</a>
+    </li>
+    <li {% if current_page == 'new_work_week' %} class="active" {% endif %}>
+        <a href="{{ path('hr_work-week_new') }}">Add new work week</a>
+    </li>
+
+    {# Create the employee work week nav #}
+    <li class="nav-header"> Employee Work Week</li>
+    <li {% if current_page == 'employee_work_week' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-work-week') }}">View employee work weeks</a>
+    </li>
+    <li {% if current_page == 'new_employee_work_week' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-work-week_new') }}">Add new employee work week</a>
+    </li>
+
+    {# Create the employee holiday nav #}
+     <li class="nav-header">Employee Holiday</li>
+     <li {% if current_page == 'employee_holiday' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-holiday') }}">View employee holidays</a>
+    </li>
+    <li {% if current_page == 'new_employee_holiday' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-holiday_new') }}">New employee holiday</a>
+    </li>
+
+    {# Create the employee job role nav #}
+     <li class="nav-header">Employee Job Role</li>
+     <li {% if current_page == 'employee_job_role' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-job-role') }}">View employee job roles</a>
+    </li>
+    <li {% if current_page == 'new_employee_job_role' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-job-role_new') }}">New employee job role</a>
+    </li>
+
+    {# Create the employee job role employee nav #}
+     <li class="nav-header">Employee Job Role Employee</li>
+     <li {% if current_page == 'employee_job_role_employee' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-job-role-employee') }}">View employee job role employees</a>
+    </li>
+    <li {% if current_page == 'new_employee_job_role_employee' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-job-role-employee_new') }}">New employee job role employee</a>
+    </li>
+
+    {# Create the employee wage rate nav #}
+     <li class="nav-header">Employee Wage Rate</li>
+     <li {% if current_page == 'employee_wage_rate' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-wage-rate') }}">View employee wage rates</a>
+    </li>
+    <li {% if current_page == 'new_employee_wage_rate' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-wage-rate_new') }}">New employee wage rate</a>
+    </li>
+
+    {# Create the employee wage rate job role  nav #}
+     <li class="nav-header">Employee Wage Rate Job Role </li>
+     <li {% if current_page == 'employee_wage_rate_job_role' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-wage-rate-job-role') }}">View employee job role wage rates</a>
+    </li>
+    <li {% if current_page == 'new_employee_wage_rate_job_role' %} class="active" {% endif %}>
+        <a href="{{ path('hr_employee-wage-rate-job-role_new') }}">New employee job role wage rate</a>
+    </li>
+
+
+  </ul>
+  {# End of nav block #}
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

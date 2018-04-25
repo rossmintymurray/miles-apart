@@ -1,0 +1,19 @@
+{% if loop.index is divisible by(2) %}
+    <tr style="border:none">
+        <td style="border:none" class="text-center very-light-grey-bg">{{ item.product.id }}</td>
+        <td style="border:none" class="text-left very-light-grey-bg">{{ item.product.productmarketingname }}</td>
+        <td style="border:none" class="text-center very-light-grey-bg">{{ item.product.currentpricedisplay }}</td>
+        <td style="border:none" class="text-center very-light-grey-bg">{{ item.customerorderproductquantity }}</td>
+        <td style="border:none" class="text-center very-light-grey-bg">£{{ item.customerorderproductquantity * item.product.currentpricedecimal }}</td>
+    </tr>
+{% else %}
+    <tr style="border:none">
+
+        <td style="border:none" class="text-center">{{ item.product.id }}</td>
+        <td style="border:none" class="text-left">{{ item.product.productmarketingname }}</td>
+        <td style="border:none" class="text-center">{{ item.product.currentpricedisplay }}</td>
+        <td style="border:none"class="text-center">{{ item.customerorderproductquantity }}</td>
+        <td style="border:none" class="text-center">£{{ item.customerorderproductquantity * item.product.currentpricedecimal }}</td>
+
+    </tr>
+{% endif %}

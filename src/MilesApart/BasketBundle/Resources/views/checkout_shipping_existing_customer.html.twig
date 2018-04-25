@@ -1,0 +1,409 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::checkout_page_layout.html.twig' %}
+
+{% if submitted == false %}
+    {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{% block page_title %}
+    Shipping Details
+     
+{% endblock %}
+
+{% block checkout_progress_bar %}
+    {# Create checkout progress #}
+    <div id="progress_bar_container">
+        <div class="row text-center collapse">
+            {# Progress bar #}
+            <div class="large-10 small-10 columns large-offset-1 small-offset-1">
+                <div class="progress success radius">
+                    <span class="meter" style="width: 33%"></span>
+                </div>
+            </div>
+
+            {# Progress stages numbers #}
+            <div id="progress_bar_numbers_wrapper">
+                <div class="large-3 small-3 columns">
+                    <span class="progress_bar_numbers done">1</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers active">2</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">3</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers">4</span>
+                </div>
+            </div>
+
+            {# Progress stages text#}
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Shopping basket</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text active">Delivery details</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text">Payment</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text">Complete</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_content %}
+    <h2 class="underline">Delivery details</h2>
+
+    {# Flashbag messages #}
+    {% for flashMessage in app.session.flashbag.get('checkout-error') %}            
+        <div class="alert-box alert">
+            {{ flashMessage }}   
+        </div>
+    {% endfor %}
+
+    {# Check for logged in user #}
+    {% if app.security.getToken().getUser() != null %}
+        {# Check for addresses #}
+        {% if app.security.getToken().getUser().getCustomer().getCustomerAddress()|length > 0 %}
+            {% set address_exists = true %}
+        {% else %}
+            {% set address_exists = false %}
+        {% endif %}
+    {% endif %}
+
+    {# Shipping addess form #}
+    <div id="shipping_address_postcode_form">  
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="large-12 columns">
+                <h4> Delivery Address</h4>
+
+                {% if address_exists == true %}
+                	<p class="form_text" id="delivery_instruction_text">Please select an address from below or <a href="#" class="add_new_address_link">add a new address</a>.</p>
+                	<div class="row" id="existing_addresses">
+                		
+						{# Show the existing addresses #}
+						{% for address in app.security.getToken().getUser().getCustomer().activecustomeraddress %}
+
+							<div class="small-6 large-3 columns">
+								<div id="delivery_address_{{ address.id }}" class="panel address_select_panel form_text {% if address.customeraddressdefaultdelivery == true %} default_delivery_address{% endif %}">
+								
+	    							{% if address.customeraddressname != null %}
+	    								<b>{{ address.customeraddressname }}</b><br />
+	    							{% endif %}
+	    							{{ address.customeraddressline1 }}<br />
+	    							{% if address.customeraddressline2 != null %}
+	    								{{ address.customeraddressline2 }}<br />
+	    							{% endif %}
+	    							{{ address.customeraddresstown }}<br />
+	    							{{ address.customeraddresscounty }}<br />
+	    							{{ address.customeraddresspostcode }}<br />
+	    							<a href="javascript:;" id="delivery_address_link_{{address.id}}" onclick="selectDeliveryAddress({{address.id}})" class="button tiny small-12 delivery_address_select">Select address</a>
+	    						</div>
+    						</div>
+
+                            {# Clearfix if loop index is divisable by 4 #}
+                            {% if loop.index is divisible by(4) %}
+                                <div class="hide-for-small-only">
+                                    <div class="clearfix"></div>
+                                </div>
+                            {% endif %}
+
+                            {# Clearfix if loop index is divisable by 2 (for mobile) #}
+                            {% if loop.index is divisible by(2) %}
+                                <div class="show-for-small-only">
+                                    <div class="clearfix"></div>
+                                </div>
+                            {% endif %}
+						{% endfor %}
+
+					</div>
+
+					{# Show button to add new address #}
+				
+					{# Hide the address form and add toggle link #}
+					<div id="new_delivery_address" class="hidden">
+				
+				{% endif %}
+        
+                <div class="row">
+                    <div class="large-9 columns">
+
+                        <div class="row">
+                            <div class="small-12 large-5 columns">
+                                {{ form_label(form.delivery_address.customer_address_postcode) }}
+                            </div>
+                            <div class="small-7 large-4 columns">
+                                {{ form_widget(form.delivery_address.customer_address_postcode) }}
+                                {{ form_errors(form.delivery_address.customer_address_postcode) }}
+                            </div>
+
+                            <div class="small-5 large-3 columns">
+                                <button class="button tiny small-12" id="shipping_find_address">Find Address</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="small-12 large-7 large-offset-5 columns">
+                                <select class="small-12 columns hide" id="shipping_address_select">
+                                    <option>Loading addresses...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="small-12 large-5 columns">
+                                {{ form_label(form.delivery_address.customer_address_line_1) }}
+                            </div>
+                            <div class="small-12 large-7 columns">
+                                {{ form_widget(form.delivery_address.customer_address_line_1) }}
+                                {{ form_errors(form.delivery_address.customer_address_line_1) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="small-12 large-5 columns">
+                                {{ form_label(form.delivery_address.customer_address_line_2) }}
+                            </div>
+                            <div class="small-12 large-7 columns">
+                                {{ form_widget(form.delivery_address.customer_address_line_2) }}
+                                {{ form_errors(form.delivery_address.customer_address_line_2) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="small-12 large-5 columns">
+                                {{ form_label(form.delivery_address.customer_address_town) }}
+                            </div>
+                            <div class="small-12 large-7 columns">
+                                {{ form_widget(form.delivery_address.customer_address_town) }}
+                                {{ form_errors(form.delivery_address.customer_address_town) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="small-12 large-5 columns">
+                                {{ form_label(form.delivery_address.customer_address_county) }}
+                            </div>
+                            <div class="small-12 large-7 columns">
+                                {{ form_widget(form.delivery_address.customer_address_county) }}
+                                {{ form_errors(form.delivery_address.customer_address_county) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+                {# Close the div if the addresses did exist #}
+                {% if address_exists == true %}
+                    </div>
+                {% endif %}
+
+                <h4> Billing Address</h4>
+                <div class="row">
+                    <div class="large-9 columns">
+                        <div class="row"> 
+                            <div class="small-12 large-offset-5 large-7 columns">
+                                {{ form_widget(form.delivery_address.customer_address_is_billing) }}
+                                {{ form_label(form.delivery_address.customer_address_is_billing) }}
+                                {{ form_errors(form.delivery_address.customer_address_is_billing) }}
+                                <p class="form_subtext">Please uncheck this box if your billing address is different to your delivery address.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+                <div id="billing_address_hidden">
+
+                	{% if address_exists == true %}
+                    	<p class="form_text" id="billing_instruction_text">Please select an address from below or <a href="#" class="add_new_billing_address_link">add a new address</a>.</p>
+                    	<div class="row" id="existing_billing_addresses">
+                    		
+    						{# Show the existing addresses #}
+    						{% for address in app.security.getToken().getUser().getCustomer().activecustomeraddress() %}
+
+    							<div class="large-3 small-6 columns">
+    								<div id="billing_address_{{ address.id }}" class="panel address_select_panel form_text {% if address.customeraddressisbilling == true %} default_billing_address{% endif %}">
+    								
+		    							{% if address.customeraddressname != null %}
+		    								<b>{{ address.customeraddressname }}</b><br />
+		    							{% endif %}
+		    							{{ address.customeraddressline1 }}<br />
+		    							{% if address.customeraddressline2 != null %}
+		    								{{ address.customeraddressline2 }}<br />
+		    							{% endif %}
+		    							{{ address.customeraddresstown }}<br />
+		    							{{ address.customeraddresscounty }}<br />
+		    							{{ address.customeraddresspostcode }}<br />
+		    							<a href="javascript:;"  id="billing_address_link_{{address.id}}" onclick="selectBillingAddress({{address.id}})" class="button tiny small-12 billing_address_select">Select address</a>
+		    						</div>
+	    						</div>
+                                
+                                {# Clearfix if loop index is divisable by 4 #}
+                                {% if loop.index is divisible by(4) %}
+                                    <div class="hide-for-small-only">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                {% endif %}
+
+                                {# Clearfix if loop index is divisable by 2 (for mobile) #}
+                                {% if loop.index is divisible by(2) %}
+                                    <div class="show-for-small-only">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                {% endif %}
+							{% endfor %}
+						</div>
+						
+						{# Hide the address form and add toggle link #}
+						<div id="new_billing_address" class="hidden">
+					{% endif %}
+                    {% if form.billing_address is defined %}
+                        <div class="row">
+                            <div class="large-9 columns">
+                                <div class="row">
+                                    <div class="small-12 large-5 columns">
+                                        {{ form_label(form.billing_address.customer_address_postcode) }}
+                                    </div>
+                                    <div class="small-7 large-4 columns">
+                                        {{ form_widget(form.billing_address.customer_address_postcode) }}
+                                        {{ form_errors(form.billing_address.customer_address_postcode) }}
+                                    </div>
+
+                                    <div class="small-5 large-3 columns">
+                                        <button class="button tiny small-12" id="shipping_billing_find_address">Find Address</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="small-12 large-7 large-offset-5 columns">
+                                        <select class="small-12 columns hide" id="shipping_billing_address_select">
+                                            <option>Loading addresses...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 large-5 columns">
+                                        {{ form_label(form.billing_address.customer_address_line_1) }}
+                                    </div>
+                                    <div class="small-12 large-7 columns">
+                                        {{ form_widget(form.billing_address.customer_address_line_1) }}
+                                        {{ form_errors(form.billing_address.customer_address_line_1) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 large-5 columns">
+                                        {{ form_label(form.billing_address.customer_address_line_2) }}
+                                    </div>
+                                    <div class="small-12 large-7 columns">
+                                        {{ form_widget(form.billing_address.customer_address_line_2) }}
+                                        {{ form_errors(form.billing_address.customer_address_line_2) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 large-5 columns">
+                                        {{ form_label(form.billing_address.customer_address_town) }}
+                                    </div>
+                                    <div class="small-12 large-7 columns">
+                                        {{ form_widget(form.billing_address.customer_address_town) }}
+                                        {{ form_errors(form.billing_address.customer_address_town) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="small-12 large-5 columns">
+                                        {{ form_label(form.billing_address.customer_address_county) }}
+                                    </div>
+                                    <div class="small-12 large-7 columns">
+                                        {{ form_widget(form.billing_address.customer_address_county) }}
+                                        {{ form_errors(form.billing_address.customer_address_county) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Close the div if the addresses did exist #}
+                {% if address_exists == true %}
+                    </div>
+                {% endif %}  
+               
+                <h4> Delivery Options</h4>
+                <div class="row">
+                    <div class="large-9 columns">
+                        <div class="row">
+                            <div class="hide-for-small-only">
+                                <div class="large-5 columns">
+                                    {{ form_label(form.delivery_option) }}
+                                </div>
+                            </div>
+                            <div class="small-12 large-7 columns ">
+                                
+                                {% for key, delivery_option_choice in form.delivery_option.children %}
+                                    <p class="delivery_options">
+                                        {{ form_widget(delivery_option_choice) }}
+                                        {% if loop.index == 1 %}
+                                            <b>Royal Mail 2nd Class - {{ form_label(delivery_option_choice) }}</b><br />
+                                            <span class="form_subtext radio_subtext">Royal Mail aims to deliver all 2nd Class post on the 3rd working day after dispatch.</small>
+                                        {% else %}
+                                            <b>Royal Mail 1st Class - {{ form_label(delivery_option_choice) }}</b><br />
+                                            <span class="form_subtext radio_subtext">Royal Mail aims to deliver all 1st Class post the next working day after dispatch.</small>
+                                        {% endif %}
+                                        {{ form_errors(delivery_option_choice) }}
+                                    </p>
+                                {% endfor %}
+                                
+                                {#{{ form_widget(form.delivery_option) }}#}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 columns">
+                        {{ form_row(form.submit) }}
+                    </div>
+                </div>
+            </div>   
+        </div>
+            
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+{% block right_column %}
+    <div id="sticky" class="sticky-element">
+        <div class="sticky-anchor">
+        </div>
+        <div class="sticky-content">
+            {% include 'MilesApartBasketBundle:CheckoutComponents:checkout_order_table.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('public_components/js/miles_apart_basket.js') }}"></script>
+{% endblock %}

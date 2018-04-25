@@ -1,0 +1,33 @@
+product_product-price:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+product_product-price_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:show" }
+
+product_product-price_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:new" }
+
+product_product-price_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:create" }
+    requirements: { _method: post }
+
+product_product-price_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:edit" }
+
+product_product-price_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:update" }
+    requirements: { _method: post|put }
+
+product_product-price_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:ProductPrice:delete" }
+    requirements: { _method: post|delete }

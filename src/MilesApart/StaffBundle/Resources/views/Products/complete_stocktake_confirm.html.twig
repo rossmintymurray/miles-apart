@@ -1,0 +1,20 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/complete_stocktake.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'complete_stocktake' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	<div class="row">
+		<div class="col-md-12">
+    		<h1>Complete stocktake</h1>
+    	</div>
+
+        <div class="col-md-12">
+            <p>X number of products have been uploaded to Amazon</p>
+        </div>
+    </div>
+
+{% endblock %}

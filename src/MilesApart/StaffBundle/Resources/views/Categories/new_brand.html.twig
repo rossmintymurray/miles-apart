@@ -1,0 +1,76 @@
+{# src/MilesApart/StaffBundle/Resources/views/Categories/new_category.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'categories' %}
+{% set current_page = 'new_brand' %}
+
+{% block page_name %}
+    New brand
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <fieldset>
+            <legend class="text-muted">Brand</legend>
+            {{ form_row(form.brand_name) }}
+            {{ form_row(form.brand_introduction) }}
+            {{ form_row(form.file) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Brand Description</legend>
+
+            <div id="brand_description_paragraphs" data-prototype="{{ macros.widget_prototype(form.brand_description_paragraph, 'Remove paragraph')|escape }}">
+                           
+                {% for widget in form.brand_description_paragraph.children %}
+                    {{ form_row(widget) }}
+                    {{ macros.widget_prototype(form.brand_description_paragraph, 'Remove paragraph') }}
+                {% endfor %}
+            </div>
+
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="brand_description_paragraphs">New brand description paragraph</a>
+            </div>
+        
+        </fieldset>
+        
+        <fieldset>
+            <legend class="text-muted">Brand features</legend>
+
+
+            <div id="brand_features" data-prototype="{{ macros.widget_prototype(form.brand_feature, 'Remove brand feature')|escape }}">
+                           
+                {% for widget in form.brand_feature.children %}
+                    {{ form_row(widget) }}
+                    {{ macros.widget_prototype(form.brand_feature, 'Remove brand feature') }}
+                {% endfor %}
+            </div>
+
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="brand_features">New brand feature</a>
+            </div>
+            
+            
+            
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    
+{% endblock %}
+
+{% block javascripts %}
+   
+{% endblock %}

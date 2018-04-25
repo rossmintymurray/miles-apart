@@ -1,0 +1,165 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Your Account
+{% endblock %}
+
+{% block left_menu %}
+	
+	{% set current_page = "account_home" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+	
+	<div class="row">
+		{# Name section #}
+		<div class="large-6 columns">
+			<div class="panel">
+				<h4>Your details</h4>
+				<p>
+					<b>Name:</b> {{ user.getFullName }}<br />
+					<b>Email:</b> {{ user.email }}<br />
+				</p>
+				<p><a href="{{ path('fos_user_profile_edit') }}">Edit details</a> | <a href="{{ path('fos_user_change_password') }}">Change password</a></p>
+			</div>
+		</div>
+		
+		{# Current addresses #}
+		<div class="large-6 columns">
+			<div class="panel">
+				<h4>Your addresses</h4>
+				 
+				{% if user.getCustomer.getActiveCustomerAddress|length == 0 %} 
+					<p>You have no saved addresses.</p>
+					<p><a href="{{ path('miles_apart_public_user_bundle_addresses') }}">Add addresses</a></p>
+				{% else %}
+					{# Iterate over the address to find the defaults #}
+					<div class="row">
+						{% for address in user.getCustomer.getActiveCustomerAddress %}
+							{# Billing address #}
+							{% if address.getCustomerAddressIsBilling == true %}
+								<div class="medium-6 columns">
+									<span class="small-12 round success label default_billing_label" style="margin-bottom:0.5em">Default billing address</span>
+									<p>
+										{{ address.getCustomerAddressLine1 }}</br />
+										{% if address.getCustomerAddressLine2 != null %}
+											{{ address.getCustomerAddressLine2 }}</br />
+										{% endif %}
+										{{ address.getCustomerAddressTown }}</br />
+										{{ address.getCustomerAddressCounty}}</br />
+										{{ address.getCustomerAddressPostcode }}</br />
+									</p>
+									
+								</div>
+							{% endif %}
+
+							{# Delivery address #}
+							{% if address.getCustomerAddressDefaultDelivery == true %}
+								<div class="medium-6 columns">
+									<span class="small-12 round success label default_billing_label" style="margin-bottom:0.5em">Default delivery address</span>
+									<p>
+										{{ address.getCustomerAddressLine1 }}</br />
+										{% if address.getCustomerAddressLine2 != null %}
+											{{ address.getCustomerAddressLine2 }}</br />
+										{% endif %}
+										{{ address.getCustomerAddressTown }}</br />
+										{{ address.getCustomerAddressCounty}}</br />
+										{{ address.getCustomerAddressPostcode }}</br />
+									</p>
+								</div>
+							{% endif %}
+							
+						{% endfor %}
+					</div>
+					<a href="{{ path('miles_apart_public_user_bundle_addresses') }}">Edit addresses</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		{# Current order #}
+		<div class="large-6 columns">
+			<div class="panel">
+				<h4>Current orders</h4>
+				{# If there is an order that is not complete, display.  Otherwise say there are none. #}
+				{# Check that there are current orders #}
+				{% if current_orders|length > 0 %}
+					<table style="width:100%">
+			            {# Create the table header #}
+			            <thead>
+			                <tr>
+			                    <th scope="column" class="text-left">Order #</th>
+			                    <th scope="column" class="text-left">Date placed</th>
+			                    <th scope="column" class="text-center">Total</th>
+			                    <th scope="column" class="text-center">Current state</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+							{# Create the table #}
+							{% for order in current_orders %}
+								<tr>
+									<td class="text-left"><a href="{{ path('miles_apart_public_user_bundle_view_order', { 'customer_order_id': order.id }) }}">{{ order.id }}</a></td>
+									<td class="text-left">{{ order.customerorderdatecreated|date('j M Y') }}</td>
+									<td class="text-center">£{{ order.customerordertotalpricepaid }}</td>
+									<td class="text-center">{{ order.customerorderstate.customerorderstate }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+					<p><a href="{{ path('miles_apart_public_user_bundle_current_orders') }}">See all current orders</a></p>
+
+				{% else %}
+					{# Show that there are no current orders #}
+					<p>You have no current orders.</p>
+				{% endif %}
+			</div>
+		</div>
+		
+		{# Number of previous orders #}
+		<div class="large-6 columns">
+			<div class="panel">
+				<h4>Previous orders</h4>
+				{# Check that there are current orders #}
+				{% if previous_orders|length > 0 %}
+					<table style="width:100%">
+			            {# Create the table header #}
+			            <thead>
+			                <tr>
+			                    <th scope="column" class="text-left">Order #</th>
+			                    <th scope="column" class="text-left">Date placed</th>
+			                    <th scope="column" class="text-center">Total</th>
+			                    <th scope="column" class="text-center">Current state</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+							{# Create the table #}
+							{% for order in previous_orders %}
+								<tr>
+									<td class="text-left"><a href="{{ path('miles_apart_public_user_bundle_view_order', { 'customer_order_id': order.id }) }}">{{ order.id }}</a></td>
+									<td class="text-left">{{ order.customerorderdatecreated|date('j M Y') }}</td>
+									<td class="text-center">£{{ order.customerordertotalpricepaid }}</td>
+									<td class="text-center">{{ order.customerorderstate.customerorderstate }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+					<p><a href="{{ path('miles_apart_public_user_bundle_previous_orders') }}">See all previous order</a></p>
+
+				{% else %}
+					{# Show that there are no current orders #}
+					<p>You have no previous orders.</p>
+				{% endif %}
+			
+			</div>
+		</div>
+	</div>
+
+	
+{% endblock fos_user_content %}

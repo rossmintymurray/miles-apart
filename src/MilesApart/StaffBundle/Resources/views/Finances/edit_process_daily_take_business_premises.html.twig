@@ -1,0 +1,154 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/process_daily_take.html.twig #}
+{% extends 'MilesApartStaffBundle::form_layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'process_daily_take_date' %}
+
+{% block page_name %}
+    Edit daily take <small>- {{ daily_take_date|date("l jS F Y") }} </small>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block form_content %}
+
+    {# Create and show the form #}
+    
+    
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Select Shop</legend>
+            {{ form_row(edit_form.business_premises) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Daily Take Amounts</legend>
+            
+            <div class="form-group">
+
+                {{ form_label(edit_form.z_reading_cash) }}
+                {{ form_errors(edit_form.z_reading_cash) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(edit_form.z_reading_cash) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(edit_form.z_reading_cash) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                {{ form_label(edit_form.z_reading_card) }}
+                {{ form_errors(edit_form.z_reading_card) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(edit_form.z_reading_card) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(edit_form.z_reading_card) }}
+                </div>
+            </div>
+
+            {{ form_row(edit_form.transactions) }}
+
+            
+
+            <div class="form-group">
+
+                {{ form_label(edit_form.counted_card) }}
+                {{ form_errors(edit_form.counted_card) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(edit_form.counted_card) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(edit_form.counted_card) }}
+                </div>
+            </div>
+            <div class="form-group">
+
+                {{ form_label(edit_form.counted_cash) }}
+                {{ form_errors(edit_form.counted_cash) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(edit_form.counted_cash) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(edit_form.counted_cash) }}
+                </div>
+            </div>
+
+            
+        </fieldset>
+
+
+        <fieldset>
+            <legend class="text-muted">Petty Cash</legend>
+             <ul id="daily_take_business_premises_petty_cashes" class="form_list" data-prototype="{{ macros.widget_prototype(edit_form.daily_take_business_premises_petty_cash, 'Remove department')|escape }}">
+                {% for petty_cash in edit_form.daily_take_business_premises_petty_cash %}
+                    {{ macros.widget_prototype(petty_cash, 'Remove petty cash') }}
+                {% endfor %}
+            </ul>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="daily_take_business_premises_petty_cashes">Add petty cash</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Departments</legend>
+             <ul id="daily_take_business_premises_shop_departments" class="form_list" data-prototype="{{ macros.widget_prototype(edit_form.daily_take_business_premises_shop_department, 'Remove department')|escape }}">
+                {% for shop_department in edit_form.daily_take_business_premises_shop_department %}
+                    {{ macros.widget_prototype(shop_department, 'Remove department') }}
+                {% endfor %}
+            </ul>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="daily_take_business_premises_shop_departments">Add department</a>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Employee Payment</legend>
+             <div id="employee_payments" data-prototype="{{ macros.widget_prototype(edit_form.employee_payment, 'Remove payment')|escape }}">
+                {% for employee_payment in edit_form.employee_payment %}
+                    {{ macros.widget_prototype(employee_payment, 'Remove payment') }}
+                {% endfor %}  
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="employee_payments">Add employee payment</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Employee Statutory Payment</legend>
+             <div id="employee_statutory_payments" data-prototype="{{ macros.widget_prototype(edit_form.employee_statutory_payment, 'Remove statutory payment')|escape }}">
+                {% for employee_statutory_payment in edit_form.employee_statutory_payment %}
+                    {{ macros.widget_prototype(employee_statutory_payment, 'Remove statutory payment') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="employee_statutory_payments">Add employee statutory payment</a>
+            </div>
+        
+        </fieldset>
+        <fieldset>
+
+            {#{{ form_row(form.submit) }}#}
+        </fieldset>    
+        
+        {{ form_rest(edit_form) }}
+    
+    {{ form_end(edit_form) }}
+{% endblock %}
+

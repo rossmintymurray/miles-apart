@@ -1,0 +1,2 @@
+Item,Description,Quantity,UnitPrice, Disc. % , Tax Rate , Net ,Barcode
+10835,Crystal 3.5L Box & Lid Clear,24,1,0.00%, Std Rate ,£24.00 ,5038135108358

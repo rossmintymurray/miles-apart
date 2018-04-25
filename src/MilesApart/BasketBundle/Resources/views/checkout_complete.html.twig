@@ -1,0 +1,87 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::checkout_page_layout.html.twig' %}
+
+{% block page_title %}
+    Shipping Details
+     
+{% endblock %}
+
+{% block checkout_progress_bar %}
+    {# Create checkout progress #}
+    <div id="progress_bar_container">
+        <div class="row text-center collapse">
+            {# Progress bar #}
+            <div class="large-10 small-10 columns large-offset-1 small-offset-1">
+                <div class="progress success radius">
+                    <span class="meter" style="width: 100%"></span>
+                </div>
+            </div>
+
+            {# Progress stages numbers #}
+            <div id="progress_bar_numbers_wrapper">
+                <div class="large-3 small-3 columns">
+                    <span class="progress_bar_numbers done">1</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers done">2</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers done">3</span>
+                </div>
+
+                <div class="large-3 small-3 columns">
+                     <span class="progress_bar_numbers done">4</span>
+                </div>
+            </div>
+
+            {# Progress stages text#}
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Shopping basket</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Delivery details</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Payment</span>
+            </div>
+
+            <div class="large-3 small-3 columns">
+                <span class="progress_bar_stages_text done">Complete</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_content %}
+    {# Create thank you message for the page #}
+    <h1>Thank you for your order</h1>
+    <h4>Your order number is: <b>{{ customer_order.id }}</b>.</h4>
+    <p>You will shortly receive a confirmation email at <b>{{ customer_order.customerorderemailaddress }}</b>. You will be sent another email when your order has been dispatched.</p>
+    <a href="{{ path('miles_apart_public_homepage') }}" class="button small-12 medium-4">Return to Shop</a>
+
+{% endblock %}
+
+
+{% block right_column %}
+    {# Check that the user is not logged in before showing them the registration link #}
+    {% if app.security.getToken().getUser() == null %}
+        <div class="panel">
+            <h4>Speed up your shopping experience</h4>
+            <p>Click the link below to create an account with us for the following benefits:
+                <ul>
+                    <li>Faster checkout process</li>
+                    <li>Save wish lists</li>
+                    <li>Receive special offers by email</li>
+                </ul>
+            </p>  
+            <a href="{{ path('miles_apart_post_order_create_account') }}" class="button small-12 medium-12 success">Create an account</a>
+        </div> 
+    {% endif %}
+
+{% endblock %}
+

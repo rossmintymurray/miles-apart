@@ -1,0 +1,33 @@
+procurement_purchase-order:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+procurement_purchase-order_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:show" }
+
+procurement_purchase-order_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:new" }
+
+procurement_purchase-order_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:create" }
+    requirements: { _method: post }
+
+procurement_purchase-order_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:edit" }
+
+procurement_purchase-order_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:update" }
+    requirements: { _method: post|put }
+
+procurement_purchase-order_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:PurchaseOrder:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,33 @@
+customer_customer-wish-list-product:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:index", page: 1 } 
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer_customer-wish-list-product_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:show" }
+
+customer_customer-wish-list-product_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:new" }
+
+customer_customer-wish-list-product_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:create" }
+    requirements: { _method: post }
+
+customer_customer-wish-list-product_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:edit" }
+
+customer_customer-wish-list-product_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:update" }
+    requirements: { _method: post|put }
+
+customer_customer-wish-list-product_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:CustomerWishListProduct:delete" }
+    requirements: { _method: post|delete }

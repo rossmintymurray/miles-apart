@@ -1,0 +1,74 @@
+<div class="hook_hanger_main_wraper">
+
+	<!-- MA Logo -->
+	<img class="hook_hanger_logo" src="{{ asset('images/logos/Small-Logo-No-Text.png') }}" />
+
+	{#
+	*
+	* AREA FOR PRODUCT 
+	*
+	#}
+	{% if entity.getProduct != NULL %}
+		<!-- Supplier text -->
+		<h6 class="hook_hanger_supplier">
+			{% for product_supplier in entity.getProduct.getProductSupplier %}
+				{% if product_supplier.getSupplier.getSupplierShortName is defined %}
+					{{ product_supplier.getSupplier.getSupplierShortName }}
+				{% else %}
+					{{ product_supplier.getSupplier.getSupplierName }}
+				{% endif %}
+				
+			{% endfor %}
+		</h6>
+
+		<!-- Main content -->
+		<h2 class="hook_hanger_product_name">{{ entity.getProduct.getProductName }}</h2>
+		
+		<h1 class="hook_hanger_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
+		
+		<!-- Grey sub text -->
+		<h4 class="hook_hanger_price_subtitle">{% if entity.getProduct.getPrintSubtitle != null %}   
+				{{ entity.getProduct.getPrintSubtitle }}
+			{% else %}
+				each
+			{% endif %}
+		</h4>
+
+		<!-- Barcode -->
+		{#{{mopa_barcode_url|replace({'{{region_top}}': region_top, '{{region_center}}': region_center})}}#}
+
+
+		<img class="hook_hanger_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
+		<h6 class="hook_hanger_barcode">{{ entity.getProduct.getProductBarcode }}</h6>
+
+		<!-- Supplier Code -->
+		<h6 class="hook_hanger_supplier_code">Supplier code: {{ entity.getProduct.getProductSupplierCode }}</h6>
+	{#
+	*
+	* AREA FOR PRODUCT GROUP
+	*
+	#}
+	{% elseif entity.getProductGroup != NULL %}
+		<!-- Main content -->
+		<h2 class="hook_hanger_product_name">
+			{{ entity.getProductGroup.getProductGroupName }}
+		</h2>
+
+		{% if entity.getProductGroup.getProductGroupDefaultPriceDisplay != NULL %}
+			<h1 class="hook_hanger_price">{{ entity.getProductGroup.getProductGroupDefaultPriceDisplay }}</h1>
+			<!-- Grey sub text -->
+			<h4 class="hook_hanger_price_subtitle">
+				Unless marked otherwise
+			</h4>
+		{% else %}
+			<h2>Please see product for price</h2>
+		{% endif %}
+
+		<!-- Barcode -->
+		<img class="hook_hanger_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
+
+		
+	{% endif %}
+
+
+</div>

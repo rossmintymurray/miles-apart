@@ -1,0 +1,137 @@
+{# src/MilesApart/StaffBundle/Resources/views/Products/find_products.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'add_product_to_seasonal_storage_box' %}
+
+{# Set the dynamic content for this template #}
+
+{% block page_name %}
+	Add Product to Seasonal Storage Box
+{% endblock %}
+
+{% block header_right_content %}
+	<button class="btn btn-default col-md-12 col-xs-12" onclick="window.history.back()" >Back to box selection</button>
+    <button class="btn btn-default col-md-12 col-xs-12" onclick="emptySeasonalStorageBox('{{ seasonal_storage_box.getSeasonalStorageBoxCode }}')" >Empty Box</button>
+
+{% endblock %}
+
+{% block page_content %}
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<div class="panel-title">
+				Box number <b>{{ seasonal_storage_box.getSeasonalStorageBoxCode }}</b> containing <b>{{ seasonal_storage_box.getSeason.getSeasonName }}</b> stock from <b>{{ seasonal_storage_box.getBusinessPremises.getBusinessPremisesName }}</b>.
+			</div>
+		</div>
+	</div>
+
+
+	{{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the add product to seasonal storage box type #}
+        <fieldset>
+            {{ form_row(form.product_barcode) }}
+            {{ form_row(form.product_name) }}
+
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.submit) }}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+
+    <div id="found_products_display"></div>
+
+    <div id="add_to_transfer_request">
+        <div id="loadingImage" style="display: none"></div>
+    </div>
+    <div class="border-top"></div>
+    <div class="row">
+        <div class="col-md-10 col-xs-9">
+            <h3>Seasonal Storage Box Products</h3>
+        </div>
+        <div class="col-md-2 col-xs-3">
+            <a class="btn btn-default col-md-12 col-xs-12 success-colour" href="" role="button">
+                <span class="glyphicon glyphicon-export"></span> <span class="hide_on_xs">Store Box</span> 
+            </a>
+        </div>
+    </div>
+    {# Set up the existing products table #}
+    <table class="table table-striped small existing_products" id="existing_seasonal_storage_box_products">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th class="hide_on_xs">Price</th>
+                <th>Qty</th>
+                <th>Product Code</th>
+                <th class="hide_on_xs">Barcode</th>
+                <th>Supplier</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in seasonal_storage_box_products %}
+                <tr id="product_row_{{ entity.getId }}">
+                    <td>
+                        {{ entity.getProduct.getProductName }}
+                    </td>
+                    <td class="hide_on_xs">
+                        {{ entity.getProduct.getCurrentPriceDisplay }}
+                    </td>
+                    <td>
+                        {{ entity.getSeasonalStorageBoxProductQty }}
+                    </td>
+                    <td>
+                        {{ entity.getProduct.getProductSupplierCode }}
+                    </td>
+                     <td class="hide_on_xs">
+                        {{ entity.getProduct.getProductBarcode }}
+                    </td>
+                    
+                    <td>
+                        {% for suppliers in entity.getProduct.getProductSupplier %}
+                            {{ suppliers.getSupplier.getSupplierShortName }}
+                        {% endfor %}
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+     
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_addproducttoseasonalstoragebox_product_barcode').val(bar);
+
+            //Submit the form
+            processSeasonalStorageBoxAdd();
+
+            return false;
+        }
+
+        if($(window).width() > 769) {
+
+            $('#milesapart_staffbundle_addproducttoseasonalstoragebox_product_barcode').focus();
+        }
+    </script>
+{% endblock %}

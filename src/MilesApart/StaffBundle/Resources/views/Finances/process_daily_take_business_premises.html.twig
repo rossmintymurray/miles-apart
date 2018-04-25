@@ -1,0 +1,352 @@
+{# src/MilesApart/StaffBundle/Resources/views/Finances/process_daily_take.html.twig #}
+{% extends 'MilesApartStaffBundle::form_layout.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'finances' %}
+{% set current_page = 'process_daily_take_date' %}
+
+{% block page_name %}
+    Process daily take
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block form_content %}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h2>{{ daily_take_date|date("l jS F Y") }}</h2>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    {{ form_start(previous_form) }}
+                        {{ form_errors(previous_form) }}
+                        {{ form_rest(previous_form) }}
+
+                    {{ form_end(previous_form) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_start(next_form) }}
+                        {{ form_errors(next_form) }}
+                        {{ form_rest(next_form) }}
+
+                    {{ form_end(next_form) }}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    {# Existing takes for this day #}
+    <div id="existing_daily_takes" style="margin-top:15px">
+        
+
+        {# Show the panels with existsing daily take business premises details #}
+        {% for daily_take_business_premises in existing_daily_take_business_premises %}
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                    <div class="col-md-11 col-sm-11">
+                        <h3 class="panel-title">{{ daily_take_business_premises.getBusinessPremises.getBusinessPremisesName}}</h3>
+                    </div>
+                    <div class="col-md-1 col-sm-1">
+                        <button class="btn btn-xs btn-default">
+                            <a href="{{ path('staff-finances_view-daily-takes-business-premises_edit', { 'id': daily_take_business_premises.getId() }) }}">Edit</a>
+                        </button>
+                    </div>
+                </div>
+                </div>
+                <div class="panel-body">
+                    <div class="existing_daily_take">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5>Daily Take Totals</h5>
+                                <table class="table table-striped text-center">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th></th>
+                                            <th class="text-center">Z Reading</th>
+                                            <th class="text-center">Counted</th>
+                                            <th class="text-center">Deductions</th>
+                                            <th class="text-center">Renumeration</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-right">Cash</td>
+                                            <td>&pound;{{ daily_take_business_premises.getZReadingCash}}</td>
+                                            <td>&pound;{{ daily_take_business_premises.getCountedCash}}</td>
+                                            <td>&pound;{{ daily_take_business_premises.getTotalDeductions }}</td>
+                                            <td>&pound;{{ daily_take_business_premises.getRenumerationCash}}</td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Card</td>
+                                            <td>&pound;{{ daily_take_business_premises.getZReadingCard}}</td>
+                                            <td>&pound;{{ daily_take_business_premises.getCountedCard}}</td>
+                                            <td>-</td>
+                                            <td>&pound;{{ daily_take_business_premises.getRenumerationCard}}</td>
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right"><strong>Total</strong></td>
+                                            <td><strong>&pound;{{ daily_take_business_premises.getTotalZ}}</strong></td>
+                                            <td><strong>&pound;{{ daily_take_business_premises.getTotalCounted}}</strong></td>
+                                            <td>&pound;{{ daily_take_business_premises.getTotalDeductions }}</td>
+                                            <td><strong>&pound;{{ daily_take_business_premises.getTotalRenumeration}}</strong></td>
+                                            
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-md-4 col-sm-4">
+                                <h5>Receipts</h5>
+                                {% if daily_take_business_premises.getDailyTakeBusinessPremisesPettyCash|length > 0 %}
+                                    <table class="table table-striped small"> 
+                                        <thead>
+                                            <tr>
+                                                <th>Type/Business</th>
+                                                <th class="text-center">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {% for daily_take_business_premises_petty_cash in daily_take_business_premises.getDailyTakeBusinessPremisesPettyCash %}
+                                        
+                                                <tr>
+                                                    
+                                                    <td>
+                                                        {% if daily_take_business_premises_petty_cash.getExpensesCompany.getExpensesCompanyName is defined %}
+                                                            {{ daily_take_business_premises_petty_cash.getExpensesCompany.getExpensesCompanyName }}
+                                                        {% else %}
+                                                            {{ daily_take_business_premises_petty_cash.getExpensesType.getExpensesTypeName }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="text-center">&pound;{{ daily_take_business_premises_petty_cash.getPettyCashValue }}</td>
+                                                </tr>   
+                                            {% endfor %}
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-center"><strong>&pound;{{ daily_take_business_premises.getTotalPettyCash }}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p class="small">No receipts have been added</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <h5>Employee Payments</h5>
+                                {% if daily_take_business_premises.getEmployeePayment|length > 0 %}
+                                    <table class="table table-striped small"> 
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th class="text-center">Payment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for employee_payment in daily_take_business_premises.getEmployeePayment %}
+                                                <tr>
+                                                    <td>{{ employee_payment.getEmployee.getEmployeeFullName }}</td>
+                                                    <td class="text-center">&pound;{{ employee_payment.getEmployeePaymentTotalDisplay }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-center"><strong>&pound;{{ daily_take_business_premises.getTotalEmployeePayment }}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p class="small">No employee payments have been added</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-4 col-sm-4">
+                                <h5>Employee Statutory Payments</h5>
+                                {% if daily_take_business_premises.getEmployeeStatutoryPayment|length > 0 %}
+                                    <table class="table table-striped small"> 
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th class="text-center">Payment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for employee_statutory_payment in daily_take_business_premises.getEmployeeStatutoryPayment %}
+                                                <tr>
+                                                    <td>{{ employee_statutory_payment.getEmployee.getEmployeeFullName }}</td>
+                                                    <td class="text-center">&pound;{{ employee_statutory_payment.getEmployeeStatutoryPaymentValue }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-center"><strong>&pound;{{ daily_take_business_premises.getTotalEmployeeStatutoryPayment }}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p class="small">No employee statutory payments have been added</p>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {# Create and show the new admin user type #}
+        <fieldset>
+            <legend class="text-muted">Select Shop</legend>
+            {{ form_row(form.business_premises) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Daily Take Amounts</legend>
+            
+            <div class="form-group">
+
+                {{ form_label(form.z_reading_cash) }}
+                {{ form_errors(form.z_reading_cash) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(form.z_reading_cash) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(form.z_reading_cash) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                {{ form_label(form.z_reading_card) }}
+                {{ form_errors(form.z_reading_card) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(form.z_reading_card) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(form.z_reading_card) }}
+                </div>
+            </div>
+
+            {{ form_row(form.transactions) }}
+
+            
+
+            <div class="form-group">
+
+                {{ form_label(form.counted_card) }}
+                {{ form_errors(form.counted_card) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(form.counted_card) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(form.counted_card) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                {{ form_label(form.counted_cash) }}
+                {{ form_errors(form.counted_cash) }}
+                <div class="input-group">
+                    <span class="input-group-addon">£</span>
+                    {{ form_widget(form.counted_cash) }}
+                </div>
+                <div class="form-error col-md-7 col-md-offset-4">
+                    {{ form_errors(form.counted_cash) }}
+                </div>
+            </div>
+
+            
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Petty Cash</legend>
+             <div id="daily_take_business_premises_petty_cashes" data-prototype="{{ macros.widget_prototype(form.daily_take_business_premises_petty_cash, 'Remove petty cash')|escape }}">
+                {% for widget in form.daily_take_business_premises_petty_cash.children %}
+                    {{ macros.widget_prototype(widget, 'Remove petty cash') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="daily_take_business_premises_petty_cashes">Add petty cash</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Departments</legend>
+             <div id="daily_take_business_premises_shop_departments" data-prototype="{{ macros.widget_prototype(form.daily_take_business_premises_shop_department, 'Remove department')|escape }}">
+                {% for widget in form.daily_take_business_premises_shop_department.children %}
+                    {{ macros.widget_prototype(widget, 'Remove department') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="daily_take_business_premises_shop_departments">Add department</a>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Employee Payment</legend>
+             <div id="employee_payments" data-prototype="{{ macros.widget_prototype(form.employee_payment, 'Remove payment')|escape }}">
+                {% for widget in form.employee_payment.children %}
+                    {{ macros.widget_prototype(widget, 'Remove payment') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="employee_payments">Add employee payment</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Employee Statutory Payment</legend>
+             <div id="employee_statutory_payments" data-prototype="{{ macros.widget_prototype(form.employee_statutory_payment, 'Remove statutory payment')|escape }}">
+                {% for widget in form.employee_statutory_payment.children %}
+                    {{ macros.widget_prototype(widget, 'Remove statutory payment') }}
+                {% endfor %}
+            </div>
+            <div class="prototype_add_button">
+                <a class="btn-add btn btn-default col-md-4 col-md-offset-4" data-target="employee_statutory_payments">Add employee statutory payment</a>
+            </div>
+        
+        </fieldset>
+
+        <fieldset>
+
+            {#{{ form_row(form.submit) }}#}
+        </fieldset>    
+        
+        {{ form_rest(form) }}
+    
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {# Check if sunday and alert if so #}
+    <script>
+        if('{{ daily_take_date|date("l") }}' == 'Sunday') {
+            alert("This is a sunday");
+        }
+    </script>
+{% endblock %}

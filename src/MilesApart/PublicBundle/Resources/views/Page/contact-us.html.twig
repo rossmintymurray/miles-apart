@@ -1,0 +1,88 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'contact_us' %}
+
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::form_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{# Set the page content #}
+{% block page_title %}
+    Contact Us
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<!--Info box area placeholder for success/failure messages  (flash messages) -->
+	            {% for flashMessage in app.session.flashbag.get('public-error') %}
+	                <div data-alert class="alert-box alert radius">
+	                    {{ flashMessage }}
+	                    <a href="#" class="close">&times;</a>
+	                </div>
+	            {% endfor %}
+
+	            {# Flash message for success #}
+	            {% for flashMessage in app.session.flashbag.get('public-success') %}
+	                <div data-alert class="alert-box success radius">
+	                    {{ flashMessage }}
+	                    <a href="#" class="close">&times;</a>
+	                </div>
+	            {% endfor %}
+	<div class="row">
+		<div class="large-12 columns">
+		    <div class="homepage_header"></div>
+		    <h3 class="text-center homepage_header_text"><span>Contact Form</span></h3>
+		</div>
+	</div>
+
+	
+    <p class="lead">Please complete the form below. We aim to respond to your message within 24 hours.</p>
+
+    <div class="row">
+    	<div class="large-7 large-offset-2 columns">
+
+		    {# Show the form #}
+		    {{ form_start(form) }}
+		        {{ form_errors(form) }}
+
+		       
+		            {{ form_row(form.contact_us_message_name) }}
+		            {{ form_row(form.contact_us_message_email_address) }}
+		            {{ form_row(form.contact_us_message_content) }}
+		        	<div style="margin-bottom:1rem">
+		        		{{ form_row(form.recaptcha) }}
+		        	</div>
+		            {{ form_row(form.submit) }}
+		        
+		        {{ form_rest(form) }}
+		   
+		    {{ form_end(form) }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-12 columns">
+		    <div class="homepage_header"></div>
+		    <h3 class="text-center homepage_header_text"><span>Contact Details</span></h3>
+		</div>
+	</div>
+	
+	{# Show alternative contact details #}
+	<p class="lead">Alternatively, please use the following contact details.</p>
+	<address class="large_address">
+		Miles Apart<br />
+		26 Salisbury Street<br />
+		Amesbury<br />
+		Wiltshire <br />
+		SP4 7HD<br />
+	</address>
+
+	<p class="lead">Please include your name and contact details so we can reply to your correspondence.</p>
+
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+   	<li class="heading">Contact Us</li>
+   	<li><a href="#contact_form">Contact Form</a></li>
+   	<li><a href="#contact_details">Contact Details</a></li>
+{% endblock %}

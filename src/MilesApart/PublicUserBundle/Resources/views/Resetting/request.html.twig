@@ -1,0 +1,20 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Reset your account password
+{% endblock %}
+
+{% block fos_user_content %}
+
+	<div class="row">
+		<div class="large-8 columns">
+			
+			<p>Please enter your email address below and follow the insructions on the email you receive.</p>
+			<p class="form_subtext">Please note, you must be able to access the email address that you registered with. If you cannot access it, please create a new account.</p>
+			{% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+		</div>
+	</div>
+{% endblock fos_user_content %}

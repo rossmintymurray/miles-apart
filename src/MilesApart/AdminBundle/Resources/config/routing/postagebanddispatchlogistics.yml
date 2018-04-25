@@ -1,0 +1,33 @@
+customer-order_postage-band-dispatch-logistics:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+customer-order_postage-band-dispatch-logistics_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:show" }
+
+customer-order_postage-band-dispatch-logistics_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:new" }
+
+customer-order_postage-band-dispatch-logistics_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:create" }
+    requirements: { _method: post }
+
+customer-order_postage-band-dispatch-logistics_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:edit" }
+
+customer-order_postage-band-dispatch-logistics_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:update" }
+    requirements: { _method: post|put }
+
+customer-order_postage-band-dispatch-logistics_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:PostageBandDispatchLogistics:delete" }
+    requirements: { _method: post|delete }

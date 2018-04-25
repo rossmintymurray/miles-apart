@@ -1,0 +1,57 @@
+staff-transfer-requests_notifications:
+    pattern:  /
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:notifications" }
+                
+
+
+staff-transfer-requests_request-products-business-premises-selected:
+    pattern:  /request-products/select-premises/{business_premises_slug}
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:requestproductsbusinesspremisesselected" }
+    requirements:
+        _method:  GET|POST
+
+staff-transfer-requests_request-products-submit:
+    pattern:  /request-products/submit
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:requestproductssubmit" }
+    requirements:
+        _method:  GET|POST
+
+staff-transfer-requests_view-requests:
+    pattern:  /view-requests
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:viewrequests" }
+
+staff-transfer-requests_request-products:
+    pattern:  /request-products
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:requestproducts" }
+
+staff-transfer-requests_add-product-group-to-transfer-request:
+    pattern:  /request-products/add-product-group-to-transfer-request
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:addproductgrouptotransferrequest" }
+
+staff-transfer-requests_submit-request:
+    pattern:  /submit/{transfer_request_id}
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:submittransferrequest" }
+    requirements:
+        _method:  GET|POST
+
+staff-transfer-requests_view-request-details:
+    pattern:  /view-requests/{transfer_request_id}
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:viewrequestdetails" }
+    requirements:
+        _method:  GET|POST
+
+staff-transfer-requests_request-products-new-qty:
+    pattern:  /request-products/submit-new-qty
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:requestproductsnewqty" }
+
+staff-transfer-requests_request-products-new-product:
+    pattern:  /request-products/submit-new-product
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:requestproductsnewproduct" }
+
+staff-transfer-requests_request-multiple-products:
+    pattern:  /request-products/submit-multiple-products
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:requestproductsmultipleproductsselectsubmit" }
+
+staff-transfer-requests_request-multiple-products-product-search:
+    pattern:  /request-products/product-search
+    defaults: { _controller: "MilesApartStaffBundle:TransferRequests:productsearch" }

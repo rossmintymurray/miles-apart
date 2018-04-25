@@ -1,0 +1,212 @@
+{# src/MilesApart/StaffBundle/Resources/views/TransferRequests/request_products.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'transfer_requests' %}
+{% set current_page = 'request_products' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    View Transfer Requests 
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {% if outstanding_transfer_requests|length > 0 %}
+        <h4>Outstanding requests</h4>
+         {% for transfer_request in outstanding_transfer_requests %}
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <h4>Number - {{ transfer_request.id }} | {{ transfer_request.getBusinessPremises.getBusinessPremisesName }} | {{ transfer_request.transferrequestdatecreated|date('D jS M Y') }} | {{ transfer_request.transferrequeststate.transferrequeststatename }} | {{ transfer_request.producttransferrequest|length }} items</h4>
+                    </div>
+                    <div class="col-md-2">
+
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-success dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Print</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Mark pulled</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Mark delivered</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <button href="#po_{{ transfer_request.id }}_contents" class="btn btn-default col-md-12" data-toggle="collapse">Show transfer request contents</button>
+                    </div>
+                </div>
+                <div id="po_{{ transfer_request.id }}_contents" class="collapse">
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="text-left" width="20%">Product Code</th>
+                                <th class="text-left" width="50%">Name</th>
+                                <th class="text-center" width="15%">Qty Ordered</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for product_transfer_request in transfer_request.producttransferrequest %}
+
+                                {# Pending deliveries display #}
+                                <tr>
+                                    <td class="text-left">{{ product_transfer_request.product.productsuppliercode }}</td>
+                                    <td class="text-left">{{ product_transfer_request.product.productname }}</td>
+                                    <td>{{ product_transfer_request.producttransferrequestqty }}</td>
+                                    
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+    
+    {# Check if there are purchase orders before showing #}
+    {% if incomplete_transfer_requests|length > 0 %}
+        <h4>Incomplete requests</h4>
+         {% for transfer_request in incomplete_transfer_requests %}
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <h4>Number - {{ transfer_request.id }} | {{ transfer_request.getBusinessPremises.getBusinessPremisesName }} | {{ transfer_request.transferrequestdatecreated|date('D jS M Y') }} | {{ transfer_request.transferrequeststate.transferrequeststatename }} | {{ transfer_request.producttransferrequest|length }} items</h4>
+                    </div>
+                    <div class="col-md-2">
+
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-success dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Mark sent</a></li>
+                                <li><a target="_blank" href="{{ path('staff-transfer-requests_view-request-details', { 'transfer_request_id': transfer_request.id } ) }}">Print</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Mark pulled</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Mark delivered</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <button href="#po_{{ transfer_request.id }}_contents" class="btn btn-default col-md-12" data-toggle="collapse">Show transfer request contents</button>
+                    </div>
+                </div>
+                <div id="po_{{ transfer_request.id }}_contents" class="collapse">
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="text-left" width="20%">Product Code</th>
+                                <th class="text-left" width="50%">Name</th>
+                                <th class="text-center" width="15%">Qty Ordered</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for product_transfer_request in transfer_request.producttransferrequest %}
+
+                                {# Pending deliveries display #}
+                                <tr>
+                                    <td class="text-left">{{ product_transfer_request.product.productsuppliercode }}</td>
+                                    <td class="text-left">{{ product_transfer_request.product.productname }}</td>
+                                    <td>{{ product_transfer_request.producttransferrequestqty }}</td>
+                                    
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+
+
+
+
+
+    
+    {% if completed_transfer_requests|length > 0 %}
+
+        <h4>Completed requests</h4>
+         {% for transfer_request in completed_transfer_requests %}
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <h4>Number - {{ transfer_request.id }} | {{ transfer_request.getBusinessPremises.getBusinessPremisesName }} | {{ transfer_request.transferrequestdatecreated|date('D jS M Y') }} | {{ transfer_request.transferrequeststate.transferrequeststatename }} | {{ transfer_request.producttransferrequest|length }} items</h4>
+                    </div>
+                    <div class="col-md-2">
+
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-success dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Print</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Mark pulled</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Mark delivered</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <button href="#po_{{ transfer_request.id }}_contents" class="btn btn-default col-md-12" data-toggle="collapse">Show transfer request contents</button>
+                    </div>
+                </div>
+                <div id="po_{{ transfer_request.id }}_contents" class="collapse">
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="text-left" width="20%">Product Code</th>
+                                <th class="text-left" width="50%">Name</th>
+                                <th class="text-center" width="15%">Qty Ordered</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for product_transfer_request in transfer_request.producttransferrequest %}
+
+                                {# Pending deliveries display #}
+                                <tr>
+                                    <td class="text-left">{{ product_transfer_request.product.productsuppliercode }}</td>
+                                    <td class="text-left">{{ product_transfer_request.product.productname }}</td>
+                                    <td>{{ product_transfer_request.producttransferrequestqty }}</td>
+                                    
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+{% endblock %}

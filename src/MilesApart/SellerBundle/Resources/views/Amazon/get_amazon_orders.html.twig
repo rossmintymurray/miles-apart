@@ -1,0 +1,14 @@
+{# src/MilesApart/StaffBundle/Resources/views/Sellers/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'sellers' %}
+{% set current_page = 'get_amazon_orders' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <h1>New Amazon Orders</h1>
+   
+   <p class="lead">{{ orders|length }} new orders have been added.</p>
+   
+{% endblock %}

@@ -1,0 +1,67 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Returns Policy
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+  	
+  	<div id="returns_for_purchases_made_instore">
+	  	<h4>Returns for Purchases Made Instore</h4>
+		
+		<p>If a product is returned to store in a new and saleable condition, as decided by the manager, a credit note or exchange will be offered.</p>
+
+		<p>Refunds can only be given for products that are faulty.</p>
+	</div>
+
+	<div id="returns_for_purchases_made_online">
+		<h4>Returns for Purchases Made Online</h4>
+		
+		<p>You have 14 days from the date you received an item to notify us that you wish to return it.</p>
+		
+		<p>To be eligible for a return, your item must be unused and in the same condition that you received it:
+			<ul>
+				<li>Your item must be in the original packaging.</li>
+				<li>Your must be able to provide us with the order number you received when the item was purchased.</li>
+			</ul>
+		</p>
+	</div>
+
+	<div id="refunds">
+		<h4>Refunds</h4>
+
+		<p>Once we receive your item, we will inspect it and notify you that we have received your item. We will immediately notify you on the status of your refund after inspecting the item.</p>
+
+		<p>When your return is approved, we will initiate a refund to your credit card (or original method of payment). You will receive the credit within a certain amount of days, depending on your card issuer's policies.</p>
+	</div>
+
+	<div id="shipping_fees">
+		<h4>Shipping Fees</h4>
+
+		<p>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non­refundable. When you receive a refund, it will only be to the value of the items that you ordered, excluding shipping.</p>
+	</div>
+
+	<div id="returns_for_faulty_goods">
+		<h4>Returns for Faulty Goods</h4>
+		<p>Although we take the utmost care to select suppliers to provde you with quality durable products, we do understand that sometimes things go wrong. In the case of you receiving a faulty item please inform us of the problem and we will arrange a replacement to be sent to you. We may request you to sent the faulty item back to us, the postage for which we will pay.</p>
+	</div>
+
+	<div id="contact_us">
+		<h4>Contact Us</h4>
+		<p>If you have any questions on how to return your item to us, please <a href="{{ path('miles_apart_public_contact_us') }}">contact us</a>.
+	</div>
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Returns Policy</li>
+	<li><a href="#returns_for_purchases_made_instore">Returns for Purchases Made Instore</a></li>
+	<li><a href="#returns_for_purchases_made_online">Returns for Purchases Made Instore</a></li>
+	<li><a href="#refunds">Refunds</a></li>
+	<li><a href="#shipping_fees">Shipping Fees</a></li>
+	<li><a href="#returns_for_faulty_goods">Returns for Faulty Goods</a></li>
+	<li><a href="#contact_us">Contact Us</a></li>
+{% endblock %}

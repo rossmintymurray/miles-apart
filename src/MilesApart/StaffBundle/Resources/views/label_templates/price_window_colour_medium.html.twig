@@ -1,0 +1,16 @@
+<div class="price_window_colour_medium_main_wraper">
+
+	<!-- The background image for the price type  -->
+	<img class="print_bg_img_pwcm" src="{{ asset('images/price_templates/Price-Window-Medium.jpg') }}" />
+	
+	<!-- Price -->
+	<h1 class="price_window_colour_medium_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
+	
+	<!-- Barcode -->
+	{#{{mopa_barcode_url|replace({'{{region_top}}': region_top, '{{region_center}}': region_center})}}#}
+
+
+	<img class="price_window_colour_medium_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
+
+	
+</div>

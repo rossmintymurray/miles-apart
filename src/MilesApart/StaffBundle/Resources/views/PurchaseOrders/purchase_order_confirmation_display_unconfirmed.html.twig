@@ -1,0 +1,45 @@
+{# Create table with unconfirmed purchase orders #}
+
+{% if purchase_orders|length > 0 %}
+
+    <h6>There are {{ purchase_orders|length }} unconfirmed purchase orders for this supplier.</h6>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date created</th>
+                <th>Number of lines</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {# Data rows #}
+            {% for purchase_order in purchase_orders %}
+                <tr>
+                    <td>{{ purchase_order.id }}</td>
+                    <td>{{ purchase_order.purchaseorderdatecreated|date('jS \\o\\f M Y') }}</td>
+                    <td>{{ purchase_order.purchaseorderproduct|length }}</td>
+                    <td><input type="checkbox" value="{{ purchase_order.id }}"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h5>Please select a purchase order above if it matches the one you are adding. Then upload or enter the details of the purchase order confirmation.</h5>
+{% else %}
+    <h5>Please upload or enter the details of the purchase order confirmation.</h5>
+
+{% endif %}
+
+<div class="row" style="margin-top:20px">
+    <div class="col-md-4 col-md-offset-1">
+        <a href="{{ path('staff-products_process-purchase-order-confirmation-upload-csv') }}" class="btn btn-primary col-md-12">Upload CSV</a>
+    </div>
+
+    <div class="col-md-4 col-md-offset-2">
+        <a href="javascript:;" onclick="submitPurchaseOrderConfirmationForManualInput()" class="btn btn-primary col-md-12">Manual Input</a>
+
+    </div>
+</div>

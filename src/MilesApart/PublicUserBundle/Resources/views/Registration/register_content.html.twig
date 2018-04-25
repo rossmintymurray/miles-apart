@@ -1,0 +1,168 @@
+{# Form template #}
+{% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+
+{# Business customer button #}
+<input type="checkbox" id="business_customer_toggle" />
+<label for="business_customer">Are you a business customer?</label>
+<p class="form_subtext">Please check this box if you are a representative for business, school, charity or other organisation.</p>
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" data-abide>
+    
+    {# Show the form #}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+            {# Personal customer form elements #}
+            <div class="personal_customer_form">
+
+           		<div class="row">
+           			<div class="large-6 columns">
+                		{{ form_row(form.personal_customer.personal_customer_first_name) }}
+                	</div>
+                	<div class="large-6 columns">
+                		{{ form_row(form.personal_customer.personal_customer_surname) }}
+                	</div>
+                </div>
+                
+            </div>
+
+            {# Business customer representative form elements #}
+
+            <div class="business_customer_representative_form">
+                {{ form_row(form.business_customer_representative.business_customer.business_customer_name) }}
+
+                <div class="row">
+                    
+
+                    <div class="large-6 columns">
+                        {{ form_row(form.business_customer_representative.business_customer_representative_first_name) }}
+                    </div>
+                    <div class="large-6 columns">
+                        {{ form_row(form.business_customer_representative.business_customer_representative_surname) }}
+                    </div>
+                </div>
+                
+            </div>
+
+
+            {{ form_row(form.email) }}
+
+            <div class="row">
+                <div class="large-6 columns">
+                    {{ form_row(form.plainPassword.first) }}
+                </div>
+                <div class="large-6 columns">
+                    {{ form_row(form.plainPassword.second) }}
+                </div>
+                
+            </div>
+           
+        
+        
+            {# Personal customer form elements #}
+            <div class="personal_customer_form">
+                {# Show the opts #}
+
+
+            	<div class="row">
+                	<div class="large-12 columns">
+        				<label><b>Contact Options</b></label>
+        				<div class="row">
+        					<div class="large-3 columns">
+        						{{ form_widget(form.personal_customer.personal_customer_email_opt_in) }}<label for="fos_user_registration_form_personal_customer_email_opt_in">Email</label>
+        					</div>
+        					<div class="large-3 columns">
+        						{{ form_widget(form.personal_customer.personal_customer_phone_opt_in) }}<label for="checkbox2">Phone</label>
+        					</div>
+        					<div class="large-3 columns">
+        						{{ form_widget(form.personal_customer.personal_customer_text_opt_in) }}<label for="checkbox3">Text</label>
+        					</div>
+        					<div class="large-3 columns">
+        						{{ form_widget(form.personal_customer.personal_customer_post_opt_in) }}<label for="checkbox4">Post</label>
+        					</div>
+        				</div>
+        		    </div>
+        		</div>
+                
+        		<p class="form_subtext">Please select the methods to which we are able to contact you. If you leave unchecked we will still contact you regarding purchases you have made or if there are any problems with your account.</p>
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label><b>Terms & Conditions</b></label>
+                       
+                        <div class="row">
+                            <div class="small-1 columns">
+                                {{ form_widget(form.personal_customer.personal_customer_terms_agreed) }}
+                            </div>
+
+                            <div class="small-11 columns">
+                                <label for="checkbox_terms" class="bottom_label"><label>I have read and agree to the <a href="{{ path('miles_apart_public_terms_and_conditions') }}">terms</a> and <a href="{{ path('miles_apart_public_privacy_and_cookie_policy') }}">privacy policy</a>.</label>
+                            </div>
+                        </div>
+                           
+                        
+                    </div>
+                </div>
+            </div>
+            {# Business customer representative form elements #}
+            <div class="business_customer_representative_form">
+                {# Show the opts #}
+
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label><b>Contact Options</b></label>
+                        <div class="row">
+                            <div class="large-3 columns">
+                                {{ form_widget(form.business_customer_representative.business_customer_representative_email_opt_in) }}<label for="fos_user_registration_form_personal_customer_email_opt_in">Email</label>
+                            </div>
+                            <div class="large-3 columns">
+                                {{ form_widget(form.business_customer_representative.business_customer_representative_phone_opt_in) }}<label for="checkbox2">Phone</label>
+                            </div>
+                            <div class="large-3 columns">
+                                {{ form_widget(form.business_customer_representative.business_customer_representative_text_opt_in) }}<label for="checkbox3">Text</label>
+                            </div>
+                            <div class="large-3 columns">
+                                {{ form_widget(form.business_customer_representative.business_customer_representative_post_opt_in) }}<label for="checkbox4">Post</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="form_subtext">Please select the methods to which we are able to contact you. If you leave unchecked we will still contact you regarding purchases you have made or if there are any problems with your account.</p>
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label><b>Terms & Conditions</b></label>
+                       
+                        <div class="row">
+                            <div class="small-1 columns">
+                                {{ form_widget(form.business_customer_representative.business_customer_representative_terms_agreed) }}
+                            </div>
+                            <div class="small-11 columns">
+                                <label class="bottom_label" for="fos_user_registration_form_personal_customer_personal_customer_terms_agreed">I have read and agree to the <a href="{{ path('miles_apart_public_terms_and_conditions') }}">terms</a> and <a href="{{ path('miles_apart_public_privacy_and_cookie_policy') }}">privacy policy</a>.</label>
+                            </div>
+                        </div>
+                           
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom:1rem">
+                {{ form_row(form.recaptcha) }}
+                <small class="error">Please enter a valid email address.</small>
+            </div>
+        {{ form_rest(form) }}
+        
+        <div class="clearfix"></div>
+        <input type="submit" class="button small-12 " value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+   
+    {{ form_end(form) }}
+
+
+    
+
+    <p class="form_subtext">* Your details will be stored in an industry standard User Management system</p>
+</form>

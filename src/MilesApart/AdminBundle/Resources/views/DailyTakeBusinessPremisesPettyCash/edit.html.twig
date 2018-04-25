@@ -1,0 +1,56 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/finance.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'daily_take_business_premises_petty_cash' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+  Edit Daily Take Business Premises Petty Cash
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+  Edit Daily Take Business Premises Petty Cash		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Edit existing Daily Take Business Premises Petty Cash
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Petty cash</legend>
+            {{ form_row(edit_form.petty_cash_value) }}
+            {{ form_row(edit_form.expenses_type) }}
+            {{ form_row(edit_form.expenses_company) }}
+            {{ form_row(edit_form.daily_take_business_premises) }}
+            </fieldset>
+        {{ form_rest(edit_form) }}
+    </form>
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('finance_daily-take-business-premises-petty-cash') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

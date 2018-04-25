@@ -1,0 +1,33 @@
+finance_vat-rate-type:
+    pattern:  /{page}
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:index", page: 1 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+        
+finance_vat-rate-type_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:show" }
+
+finance_vat-rate-type_new:
+    pattern:  /new
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:new" }
+
+finance_vat-rate-type_create:
+    pattern:  /create
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:create" }
+    requirements: { _method: post }
+
+finance_vat-rate-type_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:edit" }
+
+finance_vat-rate-type_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:update" }
+    requirements: { _method: post|put }
+
+finance_vat-rate-type_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "MilesApartAdminBundle:VATRateType:delete" }
+    requirements: { _method: post|delete }

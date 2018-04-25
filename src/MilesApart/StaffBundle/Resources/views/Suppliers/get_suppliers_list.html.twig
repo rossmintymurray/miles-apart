@@ -1,0 +1,8 @@
+{% for supplier in suppliers %}
+	{% if supplier.id == new_product_supplier_id %}
+		<option value="{{ supplier.id }}" selected>{{ supplier.suppliershortname }}</option>
+	{% else %}
+		<option value="{{ supplier.id }}" >{{ supplier.suppliershortname }}</option>
+	{% endif %}
+{% endfor %}
+	  

@@ -1,0 +1,73 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	{% if user.customer.currentcustomerorder|length < 2 %}
+		Current order
+	{% else %}
+		Current orders
+	{% endif %}
+{% endblock %}
+
+{% block left_menu %}
+	
+	{% set current_page = "current_orders" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+	{# If there is an order that is not complete, display.  Otherwise say there are none. #}
+	{# Check that there are current orders #}
+	{% if user.customer.currentcustomerorder|length > 0 %}
+		<p>The table below shows any orders you have placed that have not yet been delivered. If you can't find you order below please check the <a href="{{ path('miles_apart_public_user_bundle_previous_orders') }}">previous orders</a> page.</p>
+		<table style="width:100%">
+            {# Create the table header #}
+            <thead>
+                <tr>
+                    <th scope="column" class="text-left">Order #</th>
+                    <th scope="column" class="text-left">Date placed</th>
+                    <th scope="column" class="text-left show-for-medium-up">Date modified</th>
+                    <th scope="column" class="text-center show-for-medium-up">Items</th> 
+                    <th scope="column" class="text-center show-for-medium-up">Total</th>
+                    <th scope="column" class="text-center">Current state</th>
+                    <th scope="column" class="text-center">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+				{# Create the table #}
+				{% for order in pager %}
+					<tr>
+						<td class="text-left"><a href="{{ path('miles_apart_public_user_bundle_view_order', { 'customer_order_id': order.id }) }}">{{ order.id }}</a></td>
+						<td class="text-left">{{ order.customerorderdatecreated|date('g:ia - j M Y') }}</td>
+						<td class="text-left show-for-medium-up">{{ order.customerorderdatemodified|date('g:ia - j M Y') }}</td>
+						<td class="text-center show-for-medium-up">{{ order.orderitemqty }}</td>
+						<td class="text-center show-for-medium-up">£{{ order.customerordertotalpricepaid }}</td>
+						<td class="text-center">{{ order.customerorderstate.customerorderstate }}</td>
+						<td class="text-center">
+							<button href="#" data-dropdown="drop_{{ order.id }}" aria-controls="drop_{{ order.id }}" aria-expanded="false" class="button tiny dropdown no-padding">Select action</button><br>
+							<ul id="drop_{{ order.id }}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<li><a href="{{ path('miles_apart_public_user_bundle_view_order', { 'customer_order_id': order.id }) }}">View order</a></li>
+								<li><a href="{{ path('miles_apart_public_user_bundle_print_invoice', { 'customer_order_id': order.id }) }}" target="_blank">Print invoice</a></li>
+							</ul>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{# Check if pagination needed and if so, create the pagination links #}
+		{% block pagination_links %}
+		  {% if pager.haveToPaginate %}
+		    {{ pagerfanta(pager, 'foundation', pagerfanta_opts) }}
+		  {% endif %} 
+		{% endblock %}
+	{% else %}
+		{# Show that there are no current orders #}
+		<p>You have no current orders.</p>
+	{% endif %}
+
+
+{% endblock fos_user_content %}

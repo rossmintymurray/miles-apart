@@ -1,0 +1,190 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/campaigns.html.twig #}
+{% extends 'MilesApartAdminBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'campaigns' %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'campaigns_overview' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+	Campaigns
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+	Campaigns			
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Add new and make changes to existing campaigns and analyse previous/existing campaigns
+{% endblock %}
+
+{# Set the sub navigation items for this area of the site #}
+{% block left_nav %}
+  <ul class="nav nav-list">
+    <li class="nav-header">Overview</li>
+    <li {% if current_page == 'campaigns_overview' %} class="active" {% endif %}>
+        <a href="{{ path('miles_apart_admin_campaign') }}">Campaigns overview</a>
+    </li>
+
+    {# Create the promotion nav #}
+     <li class="nav-header">Promotion</li>
+     <li {% if current_page == 'promotion' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_promotion') }}">View promotions</a>
+    </li>
+    <li {% if current_page == 'new_promotion' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_promotion_new') }}">New promotion</a>
+    </li>
+
+    {# Create the promotion type nav #}
+     <li class="nav-header">Promotion Type</li>
+     <li {% if current_page == 'promotion_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_promotion-type') }}">View promotion types</a>
+    </li>
+    <li {% if current_page == 'new_promotion_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_promotion-type_new') }}">New promotion type</a>
+    </li>
+
+    {# Create the marketing email nav #}
+     <li class="nav-header">Marketing Email</li>
+     <li {% if current_page == 'marketing_email' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email') }}">View marketing emails</a>
+    </li>
+    <li {% if current_page == 'new_marketing_email' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email_new') }}">New marketing email</a>
+    </li>
+
+    {# Create the marketing email type nav #}
+     <li class="nav-header">Marketing Email Type</li>
+     <li {% if current_page == 'marketing_email_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-type') }}">View marketing email types</a>
+    </li>
+    <li {% if current_page == 'new_marketing_email_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-type_new') }}">New marketing email type</a>
+    </li>
+
+    {# Create the marketing email component nav #}
+     <li class="nav-header">Marketing Email Component</li>
+     <li {% if current_page == 'marketing_email_component' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-component') }}">View marketing email components</a>
+    </li>
+    <li {% if current_page == 'new_marketing_email_component' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-component_new') }}">New marketing email component</a>
+    </li>
+
+    {# Create the marketing email component type nav #}
+     <li class="nav-header">Marketing Email Component Type</li>
+     <li {% if current_page == 'marketing_email_component_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-component-type') }}">View marketing email component types</a>
+    </li>
+    <li {% if current_page == 'new_marketing_email_component_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-component-type_new') }}">New marketing email component type</a>
+    </li>
+
+    {# Create the marketing email send list nav #}
+     <li class="nav-header">Marketing Email Send List</li>
+     <li {% if current_page == 'marketing_email_send_list' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-send-list') }}">View marketing email send lists</a>
+    </li>
+    <li {% if current_page == 'new_marketing_email_send_list' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_marketing-email-send-list_new') }}">New marketing email send list</a>
+    </li>
+
+    {# Create the email send list nav #}
+     <li class="nav-header">Email Send List</li>
+     <li {% if current_page == 'email_send_list' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_email-send-list') }}">View email send lists</a>
+    </li>
+    <li {% if current_page == 'new_email_send_list' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_email-send-list_new') }}">New email send list</a>
+    </li>
+
+    {# Create the email send list customer nav #}
+     <li class="nav-header">Email Send List Customer</li>
+     <li {% if current_page == 'email_send_list_customer' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_email-send-list-customer') }}">View email send list customers</a>
+    </li>
+    <li {% if current_page == 'new_email_send_list_customer' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_email-send-list-customer_new') }}">New email send list customer</a>
+    </li>
+
+    {# Create the hidden url nav #}
+     <li class="nav-header">Hidden URL</li>
+     <li {% if current_page == 'hidden_url' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_hidden-url') }}">View hidden URLs</a>
+    </li>
+    <li {% if current_page == 'new_hidden_url' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_hidden-url_new') }}">New hidden URL</a>
+    </li>
+
+    {# Create the vanity url nav #}
+     <li class="nav-header">Vanity URL</li>
+     <li {% if current_page == 'vanity_url' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_vanity-url') }}">View vanity URLs</a>
+    </li>
+    <li {% if current_page == 'new_vanity_url' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_vanity-url_new') }}">New vanity URL</a>
+    </li>
+
+    {# Create the vanity url promotion nav #}
+     <li class="nav-header">Vanity URL Promotion</li>
+     <li {% if current_page == 'vanity_url_promotion' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_vanity-url-promotion') }}">View vanity URL promotions</a>
+    </li>
+    <li {% if current_page == 'new_vanity_url_promotion' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_vanity-url-promotion_new') }}">New vanity URL promotion</a>
+    </li>
+
+    {# Create the promotion visit nav #}
+     <li class="nav-header">Promotion Visit</li>
+     <li {% if current_page == 'promotion_visit' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_promotion-visit') }}">View promotion visits</a>
+    </li>
+    <li {% if current_page == 'new_promotion_visit' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_promotion-visit_new') }}">New promotion visit</a>
+    </li>
+
+    {# Create the traffic source nav #}
+     <li class="nav-header">Traffic Source</li>
+     <li {% if current_page == 'traffic_source' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_traffic-source') }}">View traffic sources</a>
+    </li>
+    <li {% if current_page == 'new_traffic_source' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_traffic-source_new') }}">New traffic source</a>
+    </li>
+
+    {# Create the traffic source type nav #}
+     <li class="nav-header">Traffic Source Type</li>
+     <li {% if current_page == 'traffic_source_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_traffic-source-type') }}">View traffic source types</a>
+    </li>
+    <li {% if current_page == 'new_traffic_source_type' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_traffic-source-type_new') }}">New traffic source type</a>
+    </li>
+
+    {# Create the traffic source promotion nav #}
+     <li class="nav-header">Traffic Source Promotion</li>
+     <li {% if current_page == 'traffic_source_promotion' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_traffic-source-promotion') }}">View traffic source promotions</a>
+    </li>
+    <li {% if current_page == 'new_traffic_source_promotion' %} class="active" {% endif %}>
+        <a href="{{ path('campaign_traffic-source-promotion_new') }}">New traffic source promotion</a>
+    </li>
+
+  </ul>
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+{% endblock %}
+
+{# Set the right sidebar content #}
+{% block sidebar_content %}
+
+{% endblock %}

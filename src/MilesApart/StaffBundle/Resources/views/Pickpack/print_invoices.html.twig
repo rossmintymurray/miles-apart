@@ -1,0 +1,64 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/notifications.html.twig #}
+{% extends 'MilesApartStaffBundle::invoice_layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'notifications' %}
+
+{# Set the dynamic content for this template #}
+
+
+{% block javascripts %}
+	<script>
+	window.print();
+		function printCompleteCallback() {
+		    var conf = confirm('Confirm printing of invoices have been successful?');
+		    if (conf) {
+		    	//Call AJAX to update the database to say all outstanding invoices up to the date/time of printing have been printed (possibly use an array of ids to ensure no errors.)
+		        //Create array of ids to send with ajax query
+		        var orderIdArray = [];
+		        {% for order in entities %}
+		        	//Push each order id into the array
+		        	orderIdArray.push('{{order.id}}');  
+				{% endfor %}
+
+				//Call ajax script to update array of ids to order state printed
+				var result = updateOrderStatePrinted(orderIdArray);
+
+				if(result = true) {
+		       		window.close();
+		       	} else {
+		       		alert("The order states were not updated, please try again.")
+		       	}
+		       
+		    }
+		}
+
+		
+		
+		setTimeout(printCompleteCallback, 4000);
+
+	function updateOrderStatePrinted(orderIdArray) {
+		$.ajax({
+			type: "POST",
+			url: './../pickpack/update-order-state/printed',
+			dataType: 'json',
+			data: { orderIdArray : orderIdArray },
+			success: function(data){
+				if(data['success'] == true) {
+					return true;
+				}
+				
+				
+			}, 
+	      	fail: function() {
+	         	return false;
+	      	}
+
+		//End of AJAX function
+		});
+
+	}
+		
+	</script>
+{% endblock %}

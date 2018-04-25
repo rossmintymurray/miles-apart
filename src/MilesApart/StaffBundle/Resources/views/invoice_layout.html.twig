@@ -1,0 +1,146 @@
+{# Header Section #}
+{% include 'MilesApartStaffBundle:InvoiceComponents:invoice_head.html.twig' %}
+
+<body style="margin: 0; padding: 0; font-family:Helvetica Neue, Helvetica, Sans Serif;color:#353535">
+    <div class="container">
+        <div class="row">
+      
+            {# Iterate over each order #}
+            {% for order_key, order in entities %}
+        
+                {% set current_page_array = attribute(page_array, order_key) %}
+
+                {# Calculate number of pages that each order will require #}
+                {% set number_of_pages = current_page_array|length  %}
+
+                
+
+                {# Set current page #}
+                {% set current_page = 0 %}
+                
+
+                {#
+                # Start of the page for each order
+                #}
+                <div id="invoice_wrapper" style="padding:80px 120px 0px 80px;">
+               
+                    {#
+                    # Start of the page for first page of order
+                    #}
+                  
+                    {# Header Section #}
+                    {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_header.html.twig' %}
+                     
+
+                    {# Order details section #}
+                    {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_order_details.html.twig' %}
+                        
+
+                  
+                    {# Invoice summary section #}
+                    <div class="row">
+                        <div id="order_contents" class="col-md-12" style="height:830px">
+                            <h2 style="font-weight:normal;margin-bottom:20px">Invoice summary</h2>
+
+                            <table class="table table-striped text-center" style="border:none">
+                                
+                                {# Table header #}
+                                {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_table_header.html.twig' %}
+                                
+                                <tbody>
+                          
+                                    {#################################
+                                    # Iterate over items in the table 
+                                    #################################}
+                                    {#Set the initial breakpoint #}
+                                    {# Get the break points from the page_array #}
+                                    {% set current_page_array = attribute(page_array, order_key) %}
+                                    {% set initial_break_point = attribute(current_page_array, current_page) %}
+
+                                   
+                                    {% for item in order.customerorderproduct %}
+                                        
+                                        {# Table row #}
+                                        {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_table_row.html.twig' %}
+
+
+                                        {#################################
+                                        # Code to handle new page/table creation must go here!!!!!
+                                        #################################}
+                                        {# Check if breakpoint exists #}
+                                        {% if break_point is defined %}
+                                            
+                                        {% else %}
+                                            {% set break_point = initial_break_point %}
+                                                
+                                        {% endif %}
+
+                                        {# Check the loop index, create new table if we go onto new page #}
+                                        {% if loop.index > break_point %}
+                                            {# Page divider #}
+                                            {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_page_divider.html.twig' %}
+                                            
+                                           
+                                            
+                                            {# Update the break point #}
+                                            {% set break_point = break_point + attribute(current_page_array, 1) %}
+                                                
+                                            {% set current_page = current_page + 1 %}
+                                        {% endif %}
+                                        
+                                        
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            {# Check if we need to put on new page #}
+                            {% if current_page_array|last == "totals" %}
+                                {# Show pto text #}
+                                <p style="float:right">Totals are on the next page</p>
+
+                                {# end order contents div #}
+                                </div>
+
+                                <div id="page_number" style="text-align:right;">
+                                    <h4 style="font-size:14px;margin-bottom:0px">Page {{ current_page + 1 }} of {{ number_of_pages }}</h4>
+                                </div>
+
+                                {% set current_page = current_page + 1 %}
+
+                                <div class="page_break"></div>
+                                {# Create totals div #}
+                                <div class="totals_div" style="min-height:1250px;margin-top:100px">
+                                    <h2 style="margin-top:70px;margin-bottom:40px">Invoice (cont)</h2>
+                            {% endif %}
+
+
+
+                            {# Invoice totals section #}
+                            {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_totals_section.html.twig' %}
+                        
+                        </div>
+                    </div>
+             
+                    {# Invoice footer section #}
+                    {% include 'MilesApartStaffBundle:InvoiceComponents:invoice_footer_section.html.twig' %}
+
+                    {# Only show page number if number of pages is > 1 #}
+                    {% if number_of_pages > 1 %}
+                       
+                        <div id="page_number" style="text-align:right;">
+                            <h4 style="font-size:14px;margin-bottom:0px">
+                                Page {{ current_page + 1 }} of {{ number_of_pages }}
+                            </h4>
+                        </div>
+                   
+                    {% endif %}
+                </div>
+
+            
+              
+            {% endfor %}
+        </div>
+    </div>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,89 @@
+{# src/MilesApart/PublicBundle/Resources/views/Page/index.html.twig #}
+{% extends 'MilesApartPublicBundle::about_page_layout.html.twig' %}
+
+{# Set the page title, for header and html title tag #}
+{% block page_title %}
+   	Delivery Information
+{% endblock %}
+
+{# Set the page content #}
+{% block page_content %}
+	<div class="introduction">
+	    <p class="lead">Outlined below is our approach to fair deliveries, ensuring you receive you products quickly, securely and at a fair price.</p>
+		<p>Products will be shipped for delivery within 24 hours of payment being received. You will be notified by email to inform you your order has been dispatched.</p>
+	</div>
+
+	<div id="uk">
+	    <h3>Postage to UK Mainland</h3>
+	    <p><b>All orders over &pound;30 will qualify for free 2nd class postage.</b> If you request 1st class postage and you order is over £30, we reduce the cost of 1st class postage by that of the second class postage. This will automatically be calculated when you checkout.</p>
+		<p>For all orders under &pound;30 the postage will be calculated during checkout and will depend on the size and weight of your order. This is calculated depend on Royal Mail's fees, outlined below.</p>
+		{# Table to show postage fees #}
+		<table class="large-12 columns">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Size</th>
+					<th class="text-center">Weight</th>
+					<th class="text-center">1st Class Price</th>
+					<th class="text-center">2nd Class Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#For each postage band print a row #}
+				{% for postage_band in postage_bands %}
+					<tr>
+						{# Check if the postage band type name has been set #}
+						{% if pbtn is defined %}
+							{# It has been set, make sure this one is not the same as last row #}
+							{% if pbtn != postage_band.postagebandtype.postagebandtypename %}
+								<td valign="top" rowspan="{{ postage_band.postagebandtype.postageband| length }}">{{ postage_band.postagebandtype.postagebandtypename }}</td>
+							{% endif %}
+						{% else %}
+							<td>{{ postage_band.postagebandtype.postagebandtypename }}</td>
+						{% endif %}
+						<td>
+							{{ postage_band.postagebandmaxlength }} x {{ postage_band.postagebandmaxwidth }} x {{ postage_band.postagebandmaxdepth }}mm
+						</td>
+						<td class="text-center">
+							{{ postage_band.postagebandmaxweight }}g
+						</td>
+						<td class="text-center">
+							{% for pbdl in postage_band.postagebanddispatchlogistics %}
+								{% if pbdl.postagetype.id == 1 %}
+									£{{ pbdl.postagebandprice }}
+								{% endif %}
+							{% endfor %}
+						</td>
+						<td class="text-center">
+							{% for pbdl in postage_band.postagebanddispatchlogistics %}
+								{% if pbdl.postagetype.id == 2 %}
+									£{{ pbdl.postagebandprice }}
+								{% endif %}
+							{% endfor %}
+						</td>
+					</tr>
+					{% set pbtn = postage_band.postagebandtype.postagebandtypename %}
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div id="international">
+		<h3>International Postage</h3>
+		<p>At present we are unable to offer international postage, though we hope to change this soon.</p>
+	</div>
+    
+    <div id="undelivered">
+	    <h3>Undelivered Items</h3>
+	    <p>All orders are tracked so we should be able to identify any problems and rectify them with minimal imapct on our customers. If you have not received an order that should have been delivered, please send an email to <a href="mailto:customersupport@miles-apart.com">customersupport@miles-apart.com</a> and we will work to resolve your issue.</p>
+	</div>
+	
+{% endblock %}
+
+{# Create the nav elements as list items, list is created in template #}
+{% block right_column %}
+	<li class="heading">Delivery Information</li>
+	<li><a href="#uk">Postage to UK</a></li>
+	<li><a href="#international">Intenational Postage</a></li>
+	<li><a href="#undelivered">Undelivered Items</a></li>
+{% endblock %}

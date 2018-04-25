@@ -1,0 +1,13 @@
+ItemName,Barcode,ProductCode,Price,Supplier
+12 Self Adhesive Hooks ,5050375044395,1511042A-36,1.20,151
+Magnetic 'L' Learner Plates,5050375009684,CP1037,1.25,151
+Twin Pack Foam Weather Strip,5050375039001,1511084,1.25,151
+Wallpaper Paste 6 Pint Pack,5013748000077,00007-25,1.00,151
+Mini Roller with 6 Foam Rollers,5050375037151,1511074,1.20,151
+20 Dust Masks ,5050375027138,1511041,1.20,151
+"3 Pack of 9"" Pain Roller Refills ",5050375037052,1511069,1.20,151
+2 Polythene Dust Sheets ,5050375037175,1511075,1.20,151
+Mini Roller & Tray Set,5050375050693,1511135,1.20,151
+Wooden Rat Trap,5050375050327,PS1004,1.20,151
+3 Pack of Wooden Mouse Traps,5050375050341,PS1001,1.20,151
+2 Pack of Metal Mouse Traps,5050375050389,PS1003,1.20,151

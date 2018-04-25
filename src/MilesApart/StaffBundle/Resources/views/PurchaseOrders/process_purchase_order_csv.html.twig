@@ -1,0 +1,109 @@
+{# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/process_purchase_order_csv.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'purchase_orders' %}
+{% set current_page = 'process_purchase_order_csv' %}
+
+{# Set the dpage name (H1 tag) #}
+{% block page_name %}
+    Process purchase order CSV
+{% endblock %}
+
+{# Set the page sub header #}
+{% block page_sub_header %}
+    Add CSV order confirmation data to the system
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-7">
+            <h2>Attributes</h2>
+            <h4>Required</h4>
+            <ul class="draggable3" class="list-inline">
+                <li>
+                    Product Name
+                </li>
+            </ul>
+
+            <h4>Optional</h4>
+            <ul class="list-inline">
+                <li class="draggable3" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                    Product Barcode
+                </li>
+                <li class="draggable3" class="btn btn-alert" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                    Product Supplier Code
+                </li>
+                <li class="draggable3" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                   Product Outer Barcode
+                </li>
+                <li class="draggable3">
+                    Product Inner Barcode
+                </li>
+                <li class="draggable3" >
+                   Product Outer Quantity
+                </li>
+                <li class="draggable3">
+                    Product Inner Quantity
+                </li>
+                <li class="draggable3">
+                    Product Cost
+                </li>
+                <li class="draggable3">
+                    Product Weight
+                </li>
+                <li class="draggable3">
+                    Product Height
+                </li>
+                <li class="draggable3">
+                    Product Depth
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <h2>Details</h2>
+        </div>
+    </div>
+
+
+    <h2>Data to import</h2>
+
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            {# Header array - set count #}
+            {% for headers in csvArray|slice(0, 1) %}
+                <tr>
+                    {% for header in headers|keys %}
+                            <th class="droppable" id="sortable">
+                                {{ header }}
+                            </th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </thead>
+
+        <tbody>
+            {# Data rows #}
+            {% for items in csvArray %}
+                <tr>
+                    {% for item in items %}
+                        <td>
+                            {{ item }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <h2>Dump</h2>
+    <p>
+        {{ dump(csvArray) }}
+    </p>
+
+    
+{% endblock %}

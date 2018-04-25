@@ -1,0 +1,149 @@
+##########################################
+# Import routing
+##########################################
+miles_apart_public_functions:
+    resource: "@MilesApartPublicBundle/Resources/config/functions/functions.yml"
+    prefix:   /functions
+
+##########################################
+# Routes
+##########################################
+miles_apart_public_homepage:
+    pattern:  /
+    defaults: { _controller: MilesApartPublicBundle:Page:index }
+
+miles_apart_public_terms_and_conditions:
+    pattern:  /terms-and-conditions
+    defaults: { _controller: MilesApartPublicBundle:Page:termsandconditions }
+
+miles_apart_public_privacy_and_cookie_policy:
+    pattern:  /privacy-and-cookie-policy
+    defaults: { _controller: MilesApartPublicBundle:Page:privacyandcookiepolicy }
+
+miles_apart_public_returns_policy:
+    pattern:  /returns-policy
+    defaults: { _controller: MilesApartPublicBundle:Page:returnspolicy }
+
+miles_apart_public_accessibility:
+    pattern:  /accessibility
+    defaults: { _controller: MilesApartPublicBundle:Page:accessibility }
+
+miles_apart_public_about_us:
+    pattern:  /about-us
+    defaults: { _controller: MilesApartPublicBundle:Page:aboutus }
+
+miles_apart_public_delivery_information:
+    pattern:  /delivery-information
+    defaults: { _controller: MilesApartPublicBundle:Page:deliveryinformation }
+
+miles_apart_public_our_stores:
+    pattern:  /our-stores
+    defaults: { _controller: MilesApartPublicBundle:Page:ourstores }
+
+miles_apart_public_our_staff:
+    pattern:  /our-staff
+    defaults: { _controller: MilesApartPublicBundle:Page:ourstaff }
+
+miles_apart_public_help_and_support:
+    pattern:  /help-and-support
+    defaults: { _controller: MilesApartPublicBundle:Page:helpandsupport }
+
+miles_apart_public_faqs:
+    pattern:  /faqs
+    defaults: { _controller: MilesApartPublicBundle:Page:faqs }
+
+miles_apart_public_returns_proceedure:
+    pattern:  /returns-proceedure
+    defaults: { _controller: MilesApartPublicBundle:Page:returnsproceedure }
+
+miles_apart_public_contact_us:
+    pattern:  /contact-us
+    defaults: { _controller: MilesApartPublicBundle:Page:contactus }
+
+miles_apart_public_contact_us_submit:
+    pattern:  /contact-us/submit
+    defaults: { _controller: MilesApartPublicBundle:Page:contactussubmit }
+
+miles_apart_public_login_or_register:
+    pattern:  /login-or-register
+    defaults: { _controller: MilesApartPublicBundle:Page:loginorregister }
+
+miles_apart_public_leave_feedback:
+    pattern:  /feedback
+    defaults: { _controller: MilesApartPublicBundle:Page:leavefeedback }
+
+miles_apart_public_feedback_submit:
+    pattern:  /feedback/submit
+    defaults: { _controller: MilesApartPublicBundle:Page:leavefeedbacksubmit }
+
+miles_apart_public_sitemap:
+    pattern:  /sitemap
+    defaults: { _controller: MilesApartPublicBundle:Page:sitemap }
+
+miles_apart_public_search_results:
+    pattern:  /search/{page}
+    defaults: { _controller: MilesApartPublicBundle:Shop:searchresults, page:1  }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_search_results_display_area:
+    pattern:  /search-results-display-area/{search_string}/{page}/{products_per_page}
+    defaults: { _controller: MilesApartPublicBundle:Shop:searchresultsdisplayarea, page:1, products_per_page:12 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_product_display_area:
+    pattern:  /product-display-area/{specific_category}/{page}/{products_per_page}
+    defaults: { _controller: MilesApartPublicBundle:Shop:productsdisplayarea, page:1, products_per_page:12 }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_product_page:
+    pattern:  /product/{slug}
+    defaults: { _controller: MilesApartPublicBundle:Shop:productpage, slug: null }
+
+miles_apart_public_product_review:
+    pattern:  /product-review/{id}
+    defaults: { _controller: MilesApartPublicBundle:Shop:productreview, slug: null }
+
+miles_apart_public_product_review_submit:
+    pattern:  /product-review-submit
+    defaults: { _controller: MilesApartPublicBundle:Shop:productreview }
+
+miles_apart_public_product_ask_product_question:
+    pattern:  /ask-product-question
+    defaults: { _controller: MilesApartPublicBundle:Shop:askproductquestion }
+
+miles_apart_public_shop:
+    pattern:  /category/{main_category}/{sub_category}/{specific_category}/{page}
+    defaults: { _controller: MilesApartPublicBundle:Shop:shop, page: 1, specific_category: null, sub_category: null, main_category: null }
+    requirements:
+        _method:  GET|POST
+        page: \d+
+
+miles_apart_public_settings_per_page:
+    pattern:  /settings/per-page/{per_page}
+    defaults: { _controller: MilesApartPublicBundle:Shop:settingsperpage}
+
+miles_apart_public_view_type:
+    pattern:  /settings/view_type/{view_type}
+    defaults: { _controller: MilesApartPublicBundle:Shop:settingsviewtype}
+
+miles_apart_public_settings_order_by:
+    pattern:  /settings/order-by/{order_by}
+    defaults: { _controller: MilesApartPublicBundle:Shop:settingsorderby}
+
+miles_apart_public_paypal_ipn:
+    pattern:  /function/paypal-ipn
+    defaults: { _controller: MilesApartPublicBundle:IPN:ipncall }
+
+
+##########################################
+# Routes for vanoty URL
+##########################################
+miles_apart_public_vanity_url:
+    pattern:  /{vanity_url}
+    defaults: { _controller: MilesApartPublicBundle:Page:vanityurl}

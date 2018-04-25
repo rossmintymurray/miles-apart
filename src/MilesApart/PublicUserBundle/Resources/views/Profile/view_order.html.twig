@@ -1,0 +1,112 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	View order
+	
+{% endblock %}
+
+{% block left_menu %}
+	
+	{% set current_page = "view_order" %}
+	{% include 'MilesApartPublicUserBundle:Profile:profile_side_nav.html.twig' %}
+
+{% endblock %}
+
+{% block fos_user_content %}
+	
+	<div class="panel">
+		<div class="row">
+			<div class="large-2 small-6 columns">
+				<small>Order #</small>
+				<h3>{{ customer_order.id}}</h3>
+			</div>
+			<div class="large-2 small-6 columns">
+				<small>Order date</small>
+				<h3>{{ customer_order.customerorderdatecreated|date('d/m/y') }}</h3>
+			</div>
+			<div class="large-2 small-6 columns">
+				<small>Items total</small>
+				<h3>{{ customer_order.getCustomerOrderTotalPriceDisplay}}</h3>
+			</div>
+			<div class="large-2 small-6 columns">
+				<small>Postage paid</small>
+				<h3>£{{ customer_order.customerordershippingpaid }}</h3>
+			</div>
+			<div class="large-2 small-6 columns">
+				<small>Total paid</small>
+				<h3>£{{ customer_order.customerordertotalpricepaid}}</h3>
+			</div>
+			
+			<div class="large-2 small-12 columns">
+				{% if customer_order.customerorderstate.id == 1 %}
+					<a class="button tiny disabled" style="margin-top:1.5rem" href="#">Print invoice</a>
+				{% else %}
+					<a class="button tiny" style="margin-top:1.5rem" target="_blank" href="{{ path('miles_apart_public_user_bundle_print_invoice', { 'customer_order_id': customer_order.id }) }}">Print invoice</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	
+	<table style="width:100%">
+        {# Create the table header #}
+        <thead>
+            <tr>
+                <th scope="column" class="text-left">Product ID</th>
+                <th scope="column" class="text-left">Product Name</th>
+                <th scope="column" class="text-left show-for-medium-up">Price</th>
+                <th scope="column" class="text-center show-for-medium-up">Qty</th> 
+                <th scope="column" class="text-center">Total</th>
+                <th scope="column" class="text-center">State</th>
+                <th scope="column" class="text-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+			{# Create the table #}
+			{% for customer_order_product in customer_order.customerorderproduct %}
+				<tr>
+					<td class="text-left">{{ customer_order_product.product.id }}</td>
+					<td class="text-left">{{ customer_order_product.product.productmarketingname }}</td>
+					<td class="text-left show-for-medium-up">£{{ customer_order_product.getCustomerOrderProductPrice }}</td>
+					<td class="text-center show-for-medium-up">{{ customer_order_product.customerorderproductquantity }}</td>
+					<td class="text-center">{{ customer_order_product.customerorderproducttotalpricedisplay }}</td>
+					{% if customer_order_product.customerorderproductstate == null %}
+						<td class="text-center" colspan="2">
+							Pending
+						</td>
+					{% else %}
+						<td class="text-center">
+							{{ customer_order_product.customerorderproductstate.customerorderproductstate }}
+						</td>
+						<td class="text-center">
+							{% if customer_order_product.customerorderproductstate != null %}
+								{% if customer_order_product.customerorderproductstate.id == 5 %}
+									{# Product has been returned so show returned state #}
+									{% for return in customer_order_product.returnedproduct %}
+										{{ return.returnedproductstate.returnedproductstate }}
+									{% endfor %}
+								{% else %}
+									<button href="#" data-dropdown="drop_{{ customer_order_product.id }}" aria-controls="drop_{{ customer_order_product.id }}" aria-expanded="false" class="button tiny dropdown no-padding">Select action</button><br>
+									<ul id="drop_{{ customer_order_product.id }}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+										{# Check the state of the order (if dispatched, show return, if not, show cancel #}
+										{% if customer_order.customerorderstate.id < 8 %}
+											<li><a href="#">No available actions</a></li>
+										{% elseif customer_order.customerorderstate.id == 8 %}
+											<li><a href="{{ path('miles_apart_public_user_bundle_product_return', { 'customer_order_product_id': customer_order_product.id }) }}">Return item</a></li>
+										{% endif %}
+									</ul>
+								{% endif %}
+							{% endif %}
+						</td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	
+
+
+{% endblock fos_user_content %}

@@ -1,0 +1,68 @@
+{# src/MilesApart/StaffBundle/Resources/views/Pickpack/pick.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'pickpack' %}
+{% set current_page = 'pixk' %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+	
+
+	
+	<div class="row" style="margin-top:30px">
+		<div id="order_contents" class="col-md-12" >
+			<div class="row">
+				<div class="col-md-10">
+					<h3><span class="text-muted">Order -</span> #<span id="pick_product_order_id">{{ order.id }}</span><span class="text-muted"> | Item Qty -</span> <span id="pick_product_item_qty">{{ order.getOrderItemQty }}</span><span class="text-muted"> | Product Qty -</span> <span id="pick_product_product_qty">{{ order.customerorderproduct|length }}</span><span class="text-muted"> | Products remaining - </span><span id="pick_product_remaining_qty">{{ order.getOrderRemainingPick }}</span></h3>
+				</div>
+				<div class="col-md-2">
+					<a href="{{ path('staff-pickpack_complete-order-pick', {'order_id': order.id }) }}" class="btn btn-success {% if order.getOrderRemainingPick != 0 %} disabled {% endif %} col-md-12" id="complete_order_pick_button" role="button">Complete order pick</a>
+				</div>
+			</div>
+
+			<div class="row">
+		        <div class="col-md-12">
+		            {{ form_start(form) }}
+		                {{ form_errors(form) }}
+		                <fieldset>
+		                    <legend class="text-muted"> Product</legend>
+		                    {{ form_row(form.product_barcode) }}
+		                </fieldset>
+		                {{ form_rest(form) }}
+		            {{ form_end(form) }}
+		        </div>
+		    </div>
+			
+			<table class="table table-striped text-center">
+		    <thead>
+		        <tr>
+		           	<th width="10%" class="text-center">Supplier Code</th>
+					<th width="50%">Name</th>
+					<th width="10%" class="text-center">Price</th>
+					<th width="10%" class="text-center">Price</th>
+					<th width="10%" class="text-center">Qty</th>
+					<th width="10%" class="text-center">Total</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+					
+					{% for item in order.customerorderproduct %}
+						<tr {% if item.customerorderproductstate.customerorderproductstate is defined %} class="table_row_green" {% endif %} id="{{ item.product.productbarcode }}">
+							<td class="text-center">{{ item.product.productsuppliercode }}</td>
+							<td class="text-left">{{ item.product.productname }}</td>
+							<td class="text-left">{{ item.product.productbarcode }}</td>
+							<td class="text-center">{{ item.product.currentpricedisplay }}</td>
+							<td class="text-center">{{ item.customerorderproductquantity }}</td>
+							<td class="text-center">£{{ item.customerorderproductquantity * item.product.currentpricedecimal }}</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{#Set active page for interface highlighting #}
+{% set active_page = 'account' %}
+
+{% extends "FOSUserBundle::template_layout.html.twig" %}
+
+{% block page_title %}
+	Registration
+{% endblock %}
+
+{% block fos_user_content %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.fullname }, 'FOSUserBundle') }}</p>
+    {% if app.session is not empty %}
+       <a href="{{ path('miles_apart_public_homepage') }}" class="button">Back to the homepage</a>
+    {% endif %}
+{% endblock fos_user_content %}

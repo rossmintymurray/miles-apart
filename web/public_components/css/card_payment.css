@@ -1,0 +1,147 @@
+
+/*--------------------
+GENERAL
+--------------------*/
+
+
+/*--------------------
+PANEL FORM
+--------------------*/
+
+.hosted-field {
+  height: 2.3125rem;
+  margin-bottom: 1em;
+  display: block;
+  background-color: transparent;
+  color: rgba(0, 0, 0, .87);
+  
+  border: 1px solid rgba(0, 0, 0, .26);
+  outline: 0;
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+  padding-left:5px;
+}
+
+
+.pay-button {
+  background: #008CBA;
+  color: #fff;
+  margin: 0 auto;
+  border: 0;
+ 
+  padding: 1em 3em;
+  font-size: 1em;
+  text-transform: uppercase;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .2);
+}
+
+#paypal_button{
+  
+}
+
+input[type="text"]:focus,
+.braintree-hosted-fields-focus {
+  box-shadow: 0 0 4px 1px #008CBA;
+  border: 1px solid rgba(0, 0, 0, .96);
+}
+
+ 
+
+#card-number {
+  height: 2.3125rem;
+  margin-bottom: 1em;
+  display: block;
+  background-color: transparent;
+  color: rgba(0, 0, 0, .87);
+  
+  border: 1px solid rgba(0, 0, 0, .26);
+  outline: 0;
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+  padding-left:5px;
+}
+
+#card-number.braintree-hosted-fields-focused {
+   box-shadow: 0 0 4px 1px #008CBA;
+  border: 1px solid rgba(0, 0, 0, .96);
+}
+
+
+#expiration-date {
+  height: 2.3125rem;
+  margin-bottom: 1em;
+  display: block;
+  background-color: transparent;
+  color: rgba(0, 0, 0, .87);
+  
+  border: 1px solid rgba(0, 0, 0, .26);
+  outline: 0;
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+  padding-left:5px;
+}
+
+#expiration-date.braintree-hosted-fields-focused {
+   box-shadow: 0 0 4px 1px #008CBA;
+  border: 1px solid rgba(0, 0, 0, .96);
+}
+
+
+#cvv {
+  height: 2.3125rem;
+  margin-bottom: 1em;
+  display: block;
+  background-color: transparent;
+  color: rgba(0, 0, 0, .87);
+  
+  border: 1px solid rgba(0, 0, 0, .26);
+  outline: 0;
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+  padding-left:5px;
+}
+
+#cvv.braintree-hosted-fields-focused {
+   box-shadow: 0 0 4px 1px #008CBA;
+  border: 1px solid rgba(0, 0, 0, .96);
+}
+
+
+#postal-code {
+  height: 2.3125rem;
+  margin-bottom: 1em;
+  display: block;
+  background-color: transparent;
+  color: rgba(0, 0, 0, .87);
+  
+  border: 1px solid rgba(0, 0, 0, .26);
+  outline: 0;
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+  padding-left:5px;
+}
+
+#postal-code.braintree-hosted-fields-focused {
+   box-shadow: 0 0 4px 1px #008CBA;
+  border: 1px solid rgba(0, 0, 0, .96);
+}

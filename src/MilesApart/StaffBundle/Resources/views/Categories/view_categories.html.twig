@@ -1,0 +1,29 @@
+{# src/MilesApart/StaffBundle/Resources/views/Categories/view_categories.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'categories' %}
+{% set current_page = 'view_categories' %}
+
+{% block page_name %}
+    View categories
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {% for entity in entities %}
+    	{% if entity.categorytype.id == 1 %}
+    		<h4><a href="{{ path('staff-categories_edit-category', {'id': entity.getId()}) }}">{{ entity.categoryname }}</a></h4>
+    		{% for subentity in entities %}
+    			{% if subentity.parent == entity %}
+    				<h5><a href="{{ path('staff-categories_edit-category', {'id': subentity.getId()}) }}">{{ subentity.categoryname }}</a></h5>
+    				{% for specificentity in entities %}
+    					{% if specificentity.parent == subentity %}
+    						<a href="{{ path('staff-categories_edit-category', {'id': specificentity.getId()}) }}">{{ specificentity.categoryname }}</a>
+    					{% endif %}
+    				{% endfor %}
+    			{% endif %}
+    		{% endfor %}
+    	{% endif %}
+    {% endfor %}
+{% endblock %}

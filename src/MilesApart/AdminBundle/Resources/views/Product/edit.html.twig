@@ -1,0 +1,116 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/product.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'product' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+    Edit Product
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+    Edit Product	
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+  Edit product details
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Name &amp; Description</legend>
+            {{ form_row(edit_form.product_name) }}
+            {{ form_row(edit_form.brand) }}
+            {{ form_row(edit_form.product_introduction) }}
+            {{ form_row(edit_form.product_description) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Individual Pack Measurements</legend>
+            {{ form_row(edit_form.product_weight) }}
+            {{ form_row(edit_form.product_width) }}
+            {{ form_row(edit_form.product_height) }}
+            {{ form_row(edit_form.product_depth) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Codes</legend>
+            {{ form_row(edit_form.product_supplier_code) }}
+            {{ form_row(edit_form.product_outer_barcode) }}
+            {{ form_row(edit_form.product_inner_barcode) }}
+            {{ form_row(edit_form.product_barcode) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Quantities</legend>
+            {{ form_row(edit_form.product_outer_quantity) }}
+            {{ form_row(edit_form.product_inner_quantity) }}
+            {{ form_row(edit_form.product_pack_quantity) }}
+            {{ form_row(edit_form.vat_rate_type) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Features</legend>
+            <ul class="features form_list" data-prototype="{{ form_widget(edit_form.product_feature.vars.prototype)|e }}">
+            {% for feature in edit_form.product_feature %}
+            {{ form_widget(edit_form.product_feature.vars.prototype)|e }}
+                
+                    <li>{{ form_row(edit_form.product_feature) }}</li>
+                
+                
+            {% endfor %}
+            </ul>
+        </fieldset>
+        <fieldset>
+            {{ form_row(edit_form.submit) }}
+        </fieldset>
+        {{ form_rest(edit_form) }}
+
+        {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product_product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Get the div that holds the collection of tags
+        var collectionHolder = $('ul.features');
+
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" class="add_feature_link btn btn-default col-md-4 col-md-offset-4">Add a feature</a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        jQuery(document).ready(function() {
+            // add the "add a tag" anchor and li to the tags ul
+            collectionHolder.append($newLinkLi);
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addFormElement(collectionHolder, $newLinkLi);
+            });
+        });
+    </script>
+{% endblock %}

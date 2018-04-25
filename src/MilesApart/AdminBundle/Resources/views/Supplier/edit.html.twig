@@ -1,0 +1,109 @@
+{# src/MilesApart/AdminBundle/Resources/views/Page/Employees/all.html.twig #}
+{% extends 'MilesApartAdminBundle::Page/supplier.html.twig' %}
+
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme edit_form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
+{# Check if the current page is set, if not set to overview #}
+{% if current_page is not defined %}
+  {% set current_page = 'supplier' %}
+{% endif %}
+
+{# Set the title of the page displayed in the browser #}
+{% block title %}
+    Edit Supplier
+{% endblock%}
+
+{# Set the header of the page #}
+{% block page_name %}
+    Edit Supplier 		
+{% endblock %}   
+
+{# Set the introduction of the page #}
+{% block page_introduction %}
+    Edit supplier details
+{% endblock %}
+
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+         <fieldset>
+            <legend class="text-muted">Name</legend>
+            {{ form_row(edit_form.supplier_name) }}
+            {{ form_row(edit_form.supplier_type) }}
+            {{ form_row(edit_form.supplier_account_number) }}
+        </fieldset>
+
+        <fieldset>
+            <legend class="text-muted">Address</legend>
+            {{ form_row(edit_form.supplier_address_1) }}
+            {{ form_row(edit_form.supplier_address_2) }}
+            {{ form_row(edit_form.supplier_town) }}
+            {{ form_row(edit_form.supplier_county) }}
+            {{ form_row(edit_form.supplier_postcode) }}
+            {{ form_row(edit_form.supplier_country) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Contact</legend>
+            {{ form_row(edit_form.supplier_phone) }}
+            {{ form_row(edit_form.supplier_fax) }}
+            {{ form_row(edit_form.supplier_ordering_email) }}
+            {{ form_row(edit_form.supplier_info_email) }}
+            {{ form_row(edit_form.supplier_website) }}
+        </fieldset>
+        <fieldset>
+            <legend class="text-muted">Representatives</legend>
+            <ul class="representatives form_list" data-prototype="{{ form_widget(edit_form.supplier_representative.vars.prototype)|e }}">
+            {% for representative in edit_form.supplier_representative %}
+                {{ form_widget(edit_form.supplier_representative.vars.prototype)|e }}
+                <li>{{ form_row(edit_form.supplier_representative) }}</li>
+            {% endfor %}
+            </ul>
+        </fieldset>
+        <fieldset>
+            {{ form_row(edit_form.submit) }}
+        </fieldset>
+        {{ form_rest(edit_form) }}
+   
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('supplier_supplier') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+     <script>
+        // Get the div that holds the collection of tags
+        var collectionHolder = $('ul.representatives');
+
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" class="add_feature_link btn btn-default col-md-4 col-md-offset-4">Add a representative</a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        jQuery(document).ready(function() {
+            // add the "add a tag" anchor and li to the tags ul
+            collectionHolder.append($newLinkLi);
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addFormElement(collectionHolder, $newLinkLi);
+            });
+        });
+    </script>
+{% endblock %}

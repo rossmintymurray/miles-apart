@@ -1,0 +1,82 @@
+{# src/MilesApart/StaffBundle/Resources/views/Product/price_check.html.twig #}
+{% extends 'MilesApartStaffBundle::layout.html.twig' %}
+
+{#Set active page for interface highlighting #}
+{% set active_page = 'products' %}
+{% set current_page = 'show_price' %}
+
+{% block page_name %}
+    Price Check
+{% endblock %}
+
+{# Set the dynamic content for this template #}
+{% block page_content %}
+    {% for product in entity %}
+        <h3>{{ product.productname }}</h3>
+        
+
+        <div class="row product_results_wrapper">
+            <div class="col-xs-6 col-lg-3">
+                {#Show product image #}
+                {% if product.productimage|length > 0 %}
+                    {% for image in product.productimage %}
+                        {% if image.productimageismain == 1 %}
+                            {% set photo_path = 'images/products/'~image.productimagepath %}
+                            <img alt="{{ image.productimagetitle }}" src="{{ photo_path|apply_filter('public_product_thumb') }}" class="col-xs-12" />
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <img src="{{ asset('images/web/thumbnail-placeholder.gif') }}" alt="Thumbnail placeholder" class="purchase_order_product_thumbnail"/>
+                {% endif %}
+            </div>
+
+            <div class="col-xs-6 col-lg-3">
+                {#Show product image #}
+                           
+                <h1><span class="text-muted" style="font-size:12px">Price</span> {{ product.getCurrentPriceDisplay }}</h1>      
+
+                <h1><span class="text-muted" style="font-size:12px">Stock</span> {{ product.getCurrentStockLevel }}</h1>
+                <h1><span class="text-muted" style="font-size:12px">Supplier ID</span> {{ product.getProductSupplierCode }}</h1>
+            </div>
+        </div>
+
+
+
+        {# Create and show the form #}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {# Create and show the new admin user type #}
+            <fieldset>
+                <legend class="text-muted">Check another price</legend>
+                {{ form_row(form.product_barcode) }}
+            </fieldset>
+            <fieldset>
+                {{ form_row(form.submit) }}
+            </fieldset>    
+            
+            {{ form_rest(form) }}
+        
+        {{ form_end(form) }}
+
+
+    {# End product for #}
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function onScanAppBarCodeData(bar,t,sid)
+        {
+            //'bar' is the retrieved Barcode
+            //The below function will set the form field
+            //named 'barcode' to the value of 'bar'
+            $('#milesapart_staffbundle_pricecheck_product_barcode').val(bar);
+
+            //Submit the form
+            $("form[name='milesapart_staffbundle_pricecheck']").submit();
+
+            return true;
+        }
+    </script>
+{% endblock %}
