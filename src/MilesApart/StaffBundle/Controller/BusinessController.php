@@ -21,7 +21,7 @@ use MilesApart\StaffBundle\Form\Business\StockLocationShelfEntryType;
 class BusinessController extends Controller
 {
     /*************************************************
-    * Business controller displays the functions and pages in business menu area
+    * Business controller displays the functions and pages in business menu are
     *************************************************/
     public function notificationsAction() 
     {
