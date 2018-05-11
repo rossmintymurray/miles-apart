@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ca101b5de3007945f442a56a6a9abc24",
-    "content-hash": "bfcfd43f3d6d5804262b463ea196e112",
+    "hash": "7adb477a1df14780e80387e9faba6b39",
+    "content-hash": "318238cd51d7de2f0d968101f789934b",
     "packages": [
         {
             "name": "avalanche123/imagine-bundle",
