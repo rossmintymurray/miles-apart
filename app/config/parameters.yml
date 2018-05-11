@@ -1,0 +1,55 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: '8889'
+    database_name: miles_apart
+    database_user: milesapart
+    database_password: Kfui6freShail4ap
+
+    mailer_transport: smtp
+    mailer_host: smtp.miles-apart.com
+    mailer_port: 25
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+
+    webmaster_mailer_user: webmaster
+    webmaster_mailer_password: Kfui6fre
+
+    customersupport_mailer_user: customersupport
+    customersupport_mailer_password: Kfui6fre
+    
+    marketing_mailer_user: sales
+    marketing_mailer_password: Kfui6fre
+
+    weborders_mailer_user: weborders
+    weborders_mailer_password: Shail4ap
+
+    useraccounts_mailer_user: useraccounts
+    useraccounts_mailer_password: Kfui6fre
+
+    system_mailer_user: system
+    system_mailer_password: Kfui6fre
+
+    purchaseorders_mailer_user: purchaseorders
+    purchaseorders_mailer_password: Kfui6fre
+
+
+    locale: en
+    secret: Kfui6freShail4ap
+
+    caponica_amazon_mws_config_uk:
+        seller_id:           A38J5HCNU7X658
+        access_key:          AKIAI6JA6YUFLEG2JVNA
+        secret_key:          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
+        application_name:    Miles Apart
+        application_version: 1.0
+        amazon_site:         UK
+
+    caponica_amazon_mws_config_de:
+        seller_id:           A1PA6795UKMFR9
+        access_key:          AKIAI6JA6YUFLEG2JVNA
+        secret_key:          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
+        application_name:    Miles Apart
+        application_version: 1.0
+
