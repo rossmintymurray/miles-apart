@@ -3,7 +3,7 @@ image: php:7.2
 
 pipelines:
     branches:
-        westcroft_garden_test:
+        miles_apart_test:
             - step:
                 script:
                     - apt-get update
@@ -15,7 +15,7 @@ pipelines:
                     - chmod +x ./composer.phar
                     - mv ./composer.phar /usr/local/bin/composer
                     - dep -f=./deploy/deploy.php deploy test
-        westcroft_garden_live:
+        miles_apart_live:
             - step:
                 script:
                     - apt-get update
