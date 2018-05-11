@@ -27,7 +27,6 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Mopa\Bundle\BarcodeBundle\MopaBarcodeBundle(),
             new MilesApart\BasketBundle\MilesApartBasketBundle(),
-            new SGK\BarcodeBundle\SGKBarcodeBundle(),
             new Flob\Bundle\FoundationBundle\FlobFoundationBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
