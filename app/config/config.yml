@@ -222,10 +222,6 @@ services:
         class:      %caponica_amazon_mws.client_pool.class%
         calls:
             - [ setConfig, [ %caponica_amazon_mws_config_uk% ]]
-    caponica_mws_amazon_pool_uk:
-        class:      %caponica_amazon_mws.amazon_pool.class%
-        calls:
-            - [ setConfig, [ %caponica_amazon_mws_config_uk% ]]
 
     umpirsky.mailer.message_file_logger:
         class: MessageFileLogger
