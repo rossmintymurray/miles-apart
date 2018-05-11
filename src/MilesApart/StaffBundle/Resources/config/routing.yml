@@ -33,58 +33,58 @@ miles_apart_staff_record_return_submit:
 #
 #*****************************************
 MilesApartStaffBundle_staff-pickpack:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffpickpack.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffpickpack.yml"
         prefix:   /pickpack
 
 MilesApartStaffBundle_staff-products:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffproducts.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffproducts.yml"
         prefix:   /products
 
 MilesApartStaffBundle_staff-transfer-requests:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/stafftransferrequests.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/stafftransferrequests.yml"
         prefix:   /transfer-requests
 
 MilesApartStaffBundle_staff-categories:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffcategories.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffcategories.yml"
         prefix:   /categories
         
 MilesApartStaffBundle_staff-customers:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffcustomers.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffcustomers.yml"
         prefix:   /customers
 
 MilesApartStaffBundle_staff-campaigns:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffcampaigns.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffcampaigns.yml"
         prefix:   /campaigns
 
 MilesApartStaffBundle_staff-finances:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/stafffinances.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/stafffinances.yml"
         prefix:   /finances
 
 MilesApartStaffBundle_staff-business:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffbusiness.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffbusiness.yml"
         prefix:   /business
 
 MilesApartStaffBundle_staff-hr:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffhr.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffhr.yml"
         prefix:   /hr
 
 MilesApartStaffBundle_staff-purchase-orders:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffpurchaseorders.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffpurchaseorders.yml"
         prefix:   /purchase-orders
 
 MilesApartStaffBundle_staff-website-management:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffwebsitemanagement.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffwebsitemanagement.yml"
         prefix:   /website-management
 
 MilesApartStaffBundle_staff-suppliers:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffsuppliers.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffsuppliers.yml"
         prefix:   /suppliers
 
 MilesApartStaffBundle_staff-goods-in:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffgoodsin.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffgoodsin.yml"
         prefix:   /goods-in
 
 MilesApartStaffBundle_staff-royalmail:
-        resource: "@MilesApartStaffBundle/Resources/config/routing/staffroyalmail.yml"
+        resource: "@MilesApartStaffBundle/Resources/config/Routing/staffroyalmail.yml"
         prefix:   /royal-mail
 
