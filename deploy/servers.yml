@@ -2,7 +2,7 @@ miles-apart.com:
   host: 192.168.1.1
   user: rossmurray
   stage: production
-  deploy_path: /var/www/miles-apart.co.uk
+  deploy_path: /var/www/miles-apart.com
   env:
     APP_ENV: prod
   branch: miles_apart_live
@@ -15,7 +15,7 @@ test.miles-apart.com:
   host: 192.168.1.1
   user: rossmurray
   stage: test
-  deploy_path: /var/www/test.miles-apart.co.uk
+  deploy_path: /var/www/test.miles-apart.com
   env:
       APP_ENV: prod
   branch: miles_apart_test
