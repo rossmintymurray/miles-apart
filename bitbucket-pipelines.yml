@@ -1,0 +1,29 @@
+# You can specify a custom docker image from Docker Hub as your build environment
+image: php:7.2
+
+pipelines:
+    branches:
+        westcroft_garden_test:
+            - step:
+                script:
+                    - apt-get update
+                    - apt-get --assume-yes install curl git -y
+                    - curl -LO https://deployer.org/deployer.phar
+                    - mv deployer.phar /usr/local/bin/dep
+                    - chmod +x /usr/local/bin/dep
+                    - curl -LO https://getcomposer.org/composer.phar
+                    - chmod +x ./composer.phar
+                    - mv ./composer.phar /usr/local/bin/composer
+                    - dep -f=./deploy/deploy.php deploy test
+        westcroft_garden_live:
+            - step:
+                script:
+                    - apt-get update
+                    - apt-get --assume-yes install curl git -y
+                    - curl -LO https://deployer.org/deployer.phar
+                    - mv deployer.phar /usr/local/bin/dep
+                    - chmod +x /usr/local/bin/dep
+                    - curl -LO https://getcomposer.org/composer.phar
+                    - chmod +x ./composer.phar
+                    - mv ./composer.phar /usr/local/bin/composer
+                    - dep -f=./deploy/deploy.php deploy production

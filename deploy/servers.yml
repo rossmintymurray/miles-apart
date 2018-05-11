@@ -1,0 +1,25 @@
+miles-apart.com:
+  host: 192.168.1.1
+  user: rossmurray
+  stage: production
+  deploy_path: /var/www/miles-apart.co.uk
+  env:
+    APP_ENV: prod
+  branch: miles_apart_live
+  identity_file:
+    public_key:  ~/.ssh/id_rsa.pub
+    private_key: ~/.ssh/id_rsa
+    password: 'Shail4ap'
+
+test.miles-apart.com:
+  host: 192.168.1.1
+  user: rossmurray
+  stage: test
+  deploy_path: /var/www/test.miles-apart.co.uk
+  env:
+      APP_ENV: prod
+  branch: miles_apart_test
+  identity_file:
+    public_key:  ~/.ssh/id_rsa.pub
+    private_key: ~/.ssh/id_rsa
+    password: 'Shail4ap'
