@@ -1,6 +1,6 @@
 {# Create table with unconfirmed purchase orders #}
 
-{% if purchase_orders|length > 0 %}
+{% if purchase_orders|default([])|length > 0 %}
 
     <h6>There are {{ purchase_orders|length }} unconfirmed purchase orders for this supplier.</h6>
 

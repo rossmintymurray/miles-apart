@@ -7,7 +7,7 @@
 	{% if basket is defined %}
 
 		{# Check if there are items in the basket #}
-		{% if basket|length > 0 %}
+		{% if basket|default([])|length > 0 %}
 			
 			{# Create the link button #}
 			<a href="{{ path('miles_apart_basket_checkout_start') }}" class="button split no-pip left-icon basket small-12 dropdown-btn" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button">
@@ -44,7 +44,7 @@
 					<h5 class="text-center">Your Basket Has <span id="popup_basket_quantity">{{ basket.getBasketTotalQuantity }}</span> {% if basket.getBasketProduct|length > 1 %} items {% else %} item{% endif %}</h5>
 
 					{# Check if items in the basket #}
-					{% if basket.getBasketProduct|length > 0 %}
+					{% if basket.getBasketProduct|default([])|length > 0 %}
 						{# Create the table for the items #}
 						<table id="basket_bar_table">
 							<thead>

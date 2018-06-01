@@ -10,7 +10,7 @@
         <div class="thumbnail" id="thumbnail_{{ entity.product.id }}">
 
           {# Check if there is an image for the product #}
-          {% if entity.product.productimage|length > 0 %}
+          {% if entity.product.productimage|default([])|length > 0 %}
 
             {# Check if there is an image for the product #}
             {% for image in entity.product.productimage %}

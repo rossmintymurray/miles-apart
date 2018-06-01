@@ -76,7 +76,7 @@
     {# Check for logged in user #}
     {% if app.security.getToken().getUser() != null %}
         {# Check for addresses #}
-        {% if app.security.getToken().getUser().getCustomer().getCustomerAddress()|length > 0 %}
+        {% if app.security.getToken().getUser().getCustomer().getCustomerAddress()|default([])|length > 0 %}
             {% set address_exists = true %}
         {% else %}
             {% set address_exists = false %}

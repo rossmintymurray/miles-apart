@@ -306,7 +306,7 @@
                 <div class="row edit_product_panel">
                     <div class="col-sm-12 col-md-12 col-xs-12 col-lg-8">
 
-                        {% if product.productimage|length > 0 %}
+                        {% if product.productimage|default([])|length > 0 %}
                        
                             {% for image in form.product_image %}
                                 

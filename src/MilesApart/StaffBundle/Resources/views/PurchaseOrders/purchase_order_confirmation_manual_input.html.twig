@@ -27,7 +27,7 @@
 {% block form_widget_simple %}
     {% set type = type|default('text') %}
     
-    {% if errors|length > 0 %}
+    {% if errors|default([])|length > 0 %}
         <input type="{{ type }}" {{ block('widget_attributes') }} class="error" {% if value is not empty %}value="{{ value }}" {% endif %}/>
     {% else %}
         <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>

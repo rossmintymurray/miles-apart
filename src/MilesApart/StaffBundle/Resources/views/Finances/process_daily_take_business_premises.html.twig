@@ -114,7 +114,7 @@
                             
                             <div class="col-md-4 col-sm-4">
                                 <h5>Receipts</h5>
-                                {% if daily_take_business_premises.getDailyTakeBusinessPremisesPettyCash|length > 0 %}
+                                {% if daily_take_business_premises.getDailyTakeBusinessPremisesPettyCash|default([])|length > 0 %}
                                     <table class="table table-striped small"> 
                                         <thead>
                                             <tr>
@@ -151,7 +151,7 @@
 
                             <div class="col-md-4 col-sm-4">
                                 <h5>Employee Payments</h5>
-                                {% if daily_take_business_premises.getEmployeePayment|length > 0 %}
+                                {% if daily_take_business_premises.getEmployeePayment|default([])|length > 0 %}
                                     <table class="table table-striped small"> 
                                         <thead>
                                             <tr>
@@ -179,7 +179,7 @@
 
                             <div class="col-md-4 col-sm-4">
                                 <h5>Employee Statutory Payments</h5>
-                                {% if daily_take_business_premises.getEmployeeStatutoryPayment|length > 0 %}
+                                {% if daily_take_business_premises.getEmployeeStatutoryPayment|default([])|length > 0 %}
                                     <table class="table table-striped small"> 
                                         <thead>
                                             <tr>

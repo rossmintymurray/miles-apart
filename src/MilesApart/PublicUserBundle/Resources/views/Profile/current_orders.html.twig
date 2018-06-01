@@ -21,7 +21,7 @@
 {% block fos_user_content %}
 	{# If there is an order that is not complete, display.  Otherwise say there are none. #}
 	{# Check that there are current orders #}
-	{% if user.customer.currentcustomerorder|length > 0 %}
+	{% if user.customer.currentcustomerorder|default([])|length > 0 %}
 		<p>The table below shows any orders you have placed that have not yet been delivered. If you can't find you order below please check the <a href="{{ path('miles_apart_public_user_bundle_previous_orders') }}">previous orders</a> page.</p>
 		<table style="width:100%">
             {# Create the table header #}

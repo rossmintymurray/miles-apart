@@ -88,7 +88,7 @@
 				<h4>Current orders</h4>
 				{# If there is an order that is not complete, display.  Otherwise say there are none. #}
 				{# Check that there are current orders #}
-				{% if current_orders|length > 0 %}
+				{% if current_orders|default([])|length > 0 %}
 					<table style="width:100%">
 			            {# Create the table header #}
 			            <thead>
@@ -126,7 +126,7 @@
 			<div class="panel">
 				<h4>Previous orders</h4>
 				{# Check that there are current orders #}
-				{% if previous_orders|length > 0 %}
+				{% if previous_orders|default([])|length > 0 %}
 					<table style="width:100%">
 			            {# Create the table header #}
 			            <thead>

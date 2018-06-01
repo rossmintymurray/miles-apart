@@ -11,7 +11,7 @@
 
 {# Set the dynamic content for this template #}
 {% block page_content %}
-    {% if entities|length > 0 %}
+    {% if entities|default([])|length > 0 %}
         <table class="table table-striped small" id="existing_transfer_request_products">
             <thead>
                 <tr>

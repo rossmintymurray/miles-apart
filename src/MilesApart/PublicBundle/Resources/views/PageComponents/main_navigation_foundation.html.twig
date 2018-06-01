@@ -171,7 +171,7 @@
 					    <!-- Add the Season Nav link -->
 	                    {# Check that there is a season to show #}
 	                    {% if current_season is defined %}
-	                    	{% if current_season|length > 0 %}
+	                    	{% if current_season|default([])|length > 0 %}
 		                    	<li><a class="season_nav_link {{ current_season.0.seasonslug }}" href="{{ path('miles_apart_public_homepage') }}">{{ current_season.0.seasonname }}</a></li>
 		                    {% endif %}
 	                    {% endif %}

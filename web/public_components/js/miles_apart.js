@@ -11,7 +11,7 @@ if (typeof environment === "undefined" ) {
 //Define the base URL that will be used for all calls - depending on environment
 //UPDATET HIS WHEN ON PRODUCTION SERVER
 if(environment == "dev") {
-    var globalBaseUrl = "http://localhost:8888/Miles-Apart/web/app_dev.php/";
+    var globalBaseUrl = "http://dev.miles-apart.com/app_dev.php/";
 } else if (environment == "test") {
     var globalBaseUrl = "http://test.miles-apart.com/";
 } else {

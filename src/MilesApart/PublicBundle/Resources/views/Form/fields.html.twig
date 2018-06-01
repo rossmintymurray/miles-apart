@@ -58,7 +58,7 @@
                 {% endif %}
             {% endif %}
         {% endif %}
-        {% if errors|length > 0 %}
+        {% if errors|default([])|length > 0 %}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' error')|trim}) %}
         {% endif %}
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
@@ -68,7 +68,7 @@
 {% block form_widget_simple %}
     {% set type = type|default('text') %}
     
-    {% if errors|length > 0 %}
+    {% if errors|default([])|length > 0 %}
         <input type="{{ type }}" {{ block('widget_attributes') }} class="error" {% if value is not empty %}value="{{ value }}" {% endif %}/>
     {% else %}
     	<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
@@ -83,7 +83,7 @@
     {% if widget == 'single_text' %}1
         {{ block('field_widget') }}
     {% else %}
-        {% if errors|length > 0 %}
+        {% if errors|default([])|length > 0 %}
             <div {{ block('widget_container_attributes') }}>
                 {{ form_errors(form.date.year) }}
                 {{ form_errors(form.date.month) }}
@@ -112,7 +112,7 @@
 
 
 {% block textarea_widget %}
-	{% if errors|length > 0 %}
+	{% if errors|default([])|length > 0 %}
     	<textarea {{ block('widget_attributes') }} class="error">{{ value }}</textarea>
     {% else %}
     	<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>

@@ -47,7 +47,7 @@
 		</div>
 	</div>
 	<h4>Manifest contains the following shipments</h4>
-	{% if manifest.royalmailshipment|length > 0 %}
+	{% if manifest.royalmailshipment|default([])|length > 0 %}
 		<table class="table table-striped text-center">
 	    <thead>
 	        <tr>

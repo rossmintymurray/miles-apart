@@ -33,7 +33,7 @@
                     </div>
                     <div class="small-3 columns">
                         <a href="#" onclick="mobileBasketToggle()" class="mobile_icon_links">
-                            {% if basket|length > 0 %}
+                            {% if basket|default([])|length > 0 %}
                                 <span class="round label" id="mobile_header_basket_label" style>{{ basket.getBasketTotalQuantity }}</span>
                             {% endif %}
                             <img src="{{ asset('images/icons/shopping-basket-sm.png')}}" /><br />
@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="small-9 columns mobile_basket_wrapper">
                             <div class="mobile_basket_text">
-                                {% if basket|length > 0 %}
+                                {% if basket|default([])|length > 0 %}
                                     <p><strong id="mobile_button_basket_quantity">{{ basket.getBasketTotalQuantity }}</strong> {% if basket.getBasketTotalQuantity > 1 %} items{% else %} item{% endif %}, <strong id="mobile_button_basket_price">{{ basket.getBasketTotalPriceDisplay}}</strong></p>
                                 {% else %}
                                     <p>No items</p>

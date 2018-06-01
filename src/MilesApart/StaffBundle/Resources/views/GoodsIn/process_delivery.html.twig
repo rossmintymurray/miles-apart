@@ -42,7 +42,7 @@
 
     {# Show the content of the delivery note #}
     {# Existing items on delivery note #}
-    {% if supplier_delivery.supplierdeliveryproduct|length > 0 %}
+    {% if supplier_delivery.supplierdeliveryproduct|default([])|length > 0 %}
 
         {# Show the table header #}
         <table class="table table-striped small existing_products" id="existing_transfer_request_products" style="margin-top:20px">

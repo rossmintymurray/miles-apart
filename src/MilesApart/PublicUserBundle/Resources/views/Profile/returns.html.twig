@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block fos_user_content %}
-	{% if pager|length > 0 %}
+	{% if pager|default([])|length > 0 %}
 		{# Show the returns #}
 		<table style="width:100%">
 	        {# Create the table header #}

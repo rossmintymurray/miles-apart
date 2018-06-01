@@ -23,7 +23,7 @@
 		<h3>Basket</h3>
 		<p>{{ basket.getBasketProduct|length }} items</p>
 		{# Check if items in the basket #}
-		{% if basket.getBasketProduct|length > 0 %}
+		{% if basket.getBasketProduct|default([])|length > 0 %}
 			{# Create the table for the items #}
 			<table id="shopping_basket_table">
 				<tr>

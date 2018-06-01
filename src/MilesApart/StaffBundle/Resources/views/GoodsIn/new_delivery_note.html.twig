@@ -19,7 +19,7 @@
 {# Set the dynamic content for this template #}
 {% block page_content %}
     {# Check if existing deliveries exist and show only if they do #}
-    {% if existing_supplier_deliveries|length > 0 %}
+    {% if existing_supplier_deliveries|default([])|length > 0 %}
         <h3>Existing delivery</h3>
         {# Show existing un-delivered deliveries #}
         <table class="table table-striped small" id="existing_supplier_deliveries">

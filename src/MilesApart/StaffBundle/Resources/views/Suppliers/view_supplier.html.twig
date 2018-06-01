@@ -55,7 +55,7 @@
 			    	</address>
 		    	</p>
 
-		    	{% if supplier.supplierrepresentative|length > 0 %}
+		    	{% if supplier.supplierrepresentative|default([])|length > 0 %}
 			    	<p style="padding-top:10px;border-top:1px solid #e3e3e3"><span class="small">Rep</span><br />
 			    		{% for supplier_representative in supplier.supplierrepresentative %}
 				    		<span class="lead">{{ supplier_representative.getSupplierRepresentativeFullName }}</span><br />
@@ -97,7 +97,7 @@
     
 	    <div class="col-md-9 col-md-pull-3">
 	    	{# Check if there are deliveries before showing #}
-		    {% if supplier.supplierdelivery|length > 0 %}
+		    {% if supplier.supplierdelivery|default([])|length > 0 %}
 		    	<h3>Pending Deliveries</h3>
 
 		    	<table class="table table-striped text-center">
@@ -129,7 +129,7 @@
 		    {% endif %}
 
 			{# Check if there are purchase orders before showing #}
-		    {% if supplier.purchaseorder|length > 0 %}
+		    {% if supplier.purchaseorder|default([])|length > 0 %}
 		    	<h3>Purchase Orders</h3>
 		    	{% for purchase_order in supplier.purchaseorder %}
 		    		<div class="well">
@@ -180,7 +180,7 @@
 		    {% endif %}
 
 		    {# Check if there are products with 0 stock before showing #}
-		    {% if supplier.purchaseorder|length > 0 %}
+		    {% if supplier.purchaseorder|default([])|length > 0 %}
 		    	<h3>Stockouts</h3>
 		    	{% for purchase_order in supplier.purchaseorder %}
 		    		{{ purchase_order.purchaseorderdatecreated|date('M Y') }}

@@ -12,7 +12,7 @@
 {# Set the dynamic content for this template #}
 {% block page_content %}
 	
-		{% if shipments|length > 0 %}
+		{% if shipments|default([])|length > 0 %}
 			<table class="table table-striped text-center">
 		    <thead>
 		        <tr>
