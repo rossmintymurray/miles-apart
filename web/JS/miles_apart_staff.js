@@ -11,7 +11,7 @@ if (typeof environment === "undefined" ) {
 if(environment == "dev") {
     var globalBaseUrl = "http://dev.miles-apart.com/app_dev.php/staff/";
 } else if (environment == "test") {
-    var globalBaseUrl = "http://test.miles-apart.com/staff/";
+    var globalBaseUrl = "http://test.miles-apart.com/app_dev.php/staff/";
 } else {
     var globalBaseUrl = "http://www.miles-apart.com/staff/";
 }
