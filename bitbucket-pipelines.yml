@@ -1,5 +1,5 @@
 # You can specify a custom docker image from Docker Hub as your build environment
-image: php:7.2
+image: php:7.1
 
 pipelines:
     branches:
@@ -15,6 +15,7 @@ pipelines:
                     - chmod +x ./composer.phar
                     - mv ./composer.phar /usr/local/bin/composer
                     - dep -f=./deploy/deploy.php deploy test
+                    - composer dump-autoload --optimize --no-dev --classmap-authoritative
         miles_apart_live:
             - step:
                 script:
@@ -27,3 +28,4 @@ pipelines:
                     - chmod +x ./composer.phar
                     - mv ./composer.phar /usr/local/bin/composer
                     - dep -f=./deploy/deploy.php deploy production
+                    - composer dump-autoload --optimize --no-dev --classmap-authoritative
