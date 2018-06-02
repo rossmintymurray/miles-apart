@@ -32,8 +32,13 @@ class PageController extends Controller
             $user = false;
         }
 
+        ob_start();
+        phpinfo();
+        $phpinfo = ob_get_clean();
+
         return $this->render('MilesApartPublicBundle:Page:index.html.twig', array(
             'user' => $user,
+            'phpinfo' => $phpinfo
         ));
     }
 
