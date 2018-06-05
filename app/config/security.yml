@@ -19,6 +19,7 @@ security:
         staff_area:
             pattern:   ^/staff
             http_basic: ~
+            provider: administrators
         main:
             pattern: ^/
             form_login:
