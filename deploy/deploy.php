@@ -43,12 +43,12 @@ task('database:migrate', function () {
 
 desc('Clear cache');
 task('deploy:cache:clear', function () {
-    run('{{app/console}} cache:clear --no-warmup');
+    run('{{app/console}} cache:clear --env=prod --no-warmup');
 });
 
 desc('Warm up cache');
 task('deploy:cache:warmup', function () {
-    run('{{app/console}} cache:warmup');
+    run('{{app/console}} --env=prod cache:warmup');
 });
 
 
