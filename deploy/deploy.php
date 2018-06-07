@@ -51,6 +51,10 @@ task('deploy:cache:warmup', function () {
     run('{{app/console}}  cache:warmup');
 });
 
+desc('Dump assetic');
+task('deploy:assetic:dump', function () {
+    run('{{app/console}}  assetic:dump --no-debug');
+});
 
 desc('Deploy project');
 task('deploy', [
@@ -65,6 +69,7 @@ task('deploy', [
     'deploy:vendors',
     'deploy:cache:clear',
     'deploy:cache:warmup',
+    'deploy:assetic:dump',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
