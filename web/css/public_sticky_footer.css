@@ -1,0 +1,172 @@
+
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -240px;
+        padding-bottom:150px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        min-height: 240px;
+      }
+      #footer {
+        background-color: #333333;
+      }
+
+.footer_logo {
+    width:110px;
+    margin-top:95px;
+}
+
+@media (max-width: 992px) {
+  .footer_logo {
+          margin-top:20px;
+        }
+      }
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: 0px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .footer_logo {
+          margin-top:20px;
+        }
+        
+      }
+
+/*Miles Apart Footer styles*/
+#footer_container {
+  margin:0px auto 0px auto;
+}
+#footer {
+  position:relative;
+    bottom:0px;
+    left:0;
+  margin-top:20px;
+  margin-bottom:0px;
+  margin-left:auto;
+  margin-right:auto;
+  padding:20px 30px 0px 30px; 
+  clear:both;
+  text-align:left;
+  font-size:1.2em;
+  z-index:300;
+  max-width:1200px;
+  color:#C2C2C2;
+  background-color:#333333;
+  box-shadow: 0px 0px 3px 1px #474747;
+  
+  -moz-box-shadow:inset 0px 0px 1px #e8e5c8;  
+    -webkit-box-shadow:inset 0px 0px 1px #e8e5c8;  
+    background-color:#333333;
+    width:100%;
+}
+
+.footer_links_column {
+  margin-bottom:15px;
+  margin-top:15px;
+  text-align:left;
+}
+
+.footer_links_column ul{
+  list-style:none;
+}
+
+
+
+.footer_links_column ul li a:link {
+color:#e0e0e0;
+text-decoration:none;
+}
+
+.footer_links_column ul li a:visited {
+color:#e0e0e0;
+text-decoration:none;
+}
+
+.footer_links_column ul li a:hover {
+color:#384275;
+text-decoration:none;
+}
+
+.footer_links_column ul li a:active {
+color:#282F53;
+text-decoration:none;
+}
+
+
+
+.footer_links_column ul li{
+    padding:4px 0px 4px 0px;
+}
+
+.footer_links_column ul li ul {
+    margin-top:5px;
+    margin-bottom:10px;
+    text-indent:0px;
+    padding-left:0px;
+}
+
+div.footer_links_column ul li ul li{
+  padding:2px 0px 2px 0px;
+    font-size:0.8em;
+    
+}
+
+.footer_links_column ul li ul li a:link {
+color:#CCCCCC;
+text-decoration:none;
+}
+
+.footer_links_column ul li ul li a:visited {
+color:#ACACAC;
+text-decoration:none;
+}
+
+.footer_links_column ul li ul li a:hover {
+color:#5C5C5C;
+text-decoration:none;
+}
+
+.footer_links_column ul li ul li a:active {
+color:#707070;
+text-decoration:none;
+}
+
+#footer_inside {
+    width:900px;
+    margin:10px auto 10px auto;
+    text-align:left;
+}
+
+#copyright {
+    font-size:0.7em;
+    clear:both;
+    position: relative;
+    top:-20px;
+    text-align:left;
+     
+     color:#5C5C5C;
+}
+
+.share_icons {
+  width:46px;
+}

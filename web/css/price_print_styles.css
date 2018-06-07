@@ -1,0 +1,1941 @@
+
+
+
+div {
+      page-break-inside: avoid;
+    }
+    
+
+
+/* Hook Hanger */
+.hook_hanger_main_wraper {
+	position:relative;
+	background-repeat: no-repeat;
+	width:4cm;
+	height:6cm;
+	border:1px solid #000;
+	float:left;
+	
+
+}
+
+.hook_hanger_logo {
+	position:absolute;
+	top:48px;
+	right:8px;
+	width:0.8cm;
+
+}
+
+.hook_hanger_supplier {
+	position:absolute;
+	font-size:7pt;
+	text-align:left;
+	top:50px;
+	color:#959494;
+	font-weight:300;
+	letter-spacing:0px;
+	margin:0px 10px 0px 10px;
+}
+
+.hook_hanger_product_name {
+	position:absolute;
+	font-size:14pt;
+	
+	text-align:left;
+	top:64px;
+	color:#000000;
+	font-weight:500;
+	letter-spacing:-0.5px;
+	margin:0px 10px 0px 10px;
+	max-height:76px;
+	max-width:130px;
+	overflow:hidden;
+}
+
+.hook_hanger_price {
+
+	position:absolute;
+	top:105px;
+	font-size:30px;
+	width:100%;
+	text-align:center;
+	color:#000000;
+	font-weight:500;
+}
+
+.hook_hanger_price_subtitle {
+	position:absolute;
+	z-index:9999;
+	font-size:6pt;
+	width:100%;
+	text-align:center;
+	top:152px;
+	color:#959494;
+	font-weight:500;
+	letter-spacing:0px;
+
+}
+
+.hook_hanger_barcode {
+	position:absolute;
+	z-index:9999;
+	font-size:4pt;
+	width:100%;
+	text-align:center;
+	top:190px;
+	color:#525252;
+	font-weight:500;
+	letter-spacing:0px;
+
+}
+
+.hook_hanger_barcode_image {
+	position:absolute;
+	z-index:9999;
+	
+	left:25px;
+	top:175px;
+	color:#525252;
+	font-weight:500;
+	letter-spacing:0px;
+	width:100px;
+	height:20px;
+	
+
+}
+
+.hook_hanger_supplier_code {
+	position:absolute;
+	z-index:9999;
+	font-size:5.5pt;
+	width:100%;
+	text-align:center;
+	bottom:-10px;
+	color:#525252;
+	font-weight:500;
+	letter-spacing:0px;
+	
+
+}
+
+.hook_hanger_header_shop {
+
+	position:absolute;
+	right:18px;
+	top:62px;
+	
+	z-index:9999;
+	color:#525252;
+	font-weight:500;
+
+}
+.hook_hanger_footer_text {
+
+	position:absolute;
+	right:18px;
+	bottom:4px;
+	font-weight:300;
+}
+
+/* Price Window Small */
+.price_window_small_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:3cm;
+  height:2cm;
+  border:1px solid #000;
+  float:left;
+  
+
+}
+
+.price_window_small_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:0.8cm;
+
+}
+
+.price_window_small_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_small_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_small_price {
+
+  position:absolute;
+  top:0px;
+  font-size:32px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+  letter-spacing: -1px;
+}
+
+.price_window_small_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_small_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_small_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:7px;
+  top:71px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:5px;
+  
+
+}
+
+.price_window_small_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:-12px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_small_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_small_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Medium */
+.price_window_medium_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:6.5cm;
+  height:4cm;
+  border:1px solid #000;
+  float:left;
+  
+
+}
+
+.price_window_medium_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_medium_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_medium_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_medium_price {
+
+  position:absolute;
+  top:-16px;
+  font-size:72px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+  letter-spacing: -1px;
+}
+
+.price_window_medium_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_medium_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_medium_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:72px;
+  top:141px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:10px;
+  
+
+}
+
+.price_window_medium_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:-2px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_medium_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_medium_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Large */
+.price_window_large_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:6.5cm;
+  height:4cm;
+  border:1px solid #000;
+  float:left;
+  
+
+}
+
+.price_window_large_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_large_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_large_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_large_price {
+
+  position:absolute;
+  top:-18px;
+  font-size:72px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+  letter-spacing: -1px;
+}
+
+.price_window_large_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_large_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_large_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:72px;
+  top:141px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:10px;
+  
+
+}
+
+.price_window_large_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:-2px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_large_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_large_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Colour XSmall */
+.price_window_colour_xsmall_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:2cm;
+  height:1.3cm;
+  
+  float:left;
+}
+
+.print_bg_img_pwcxs {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:2cm;
+    height:1.3cm;
+  }
+
+.price_window_colour_xsmall_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_colour_xsmall_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_colour_xsmall_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_colour_xsmall_price {
+
+  position:absolute;
+  top:-4px;
+  font-size:21px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+}
+
+.price_window_colour_xsmall_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_xsmall_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_xsmall_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:72px;
+  top:141px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:10px;
+  
+
+}
+
+.price_window_colour_xsmall_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:-2px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_colour_xsmall_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_colour_xsmall_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Colour Small */
+.price_window_colour_small_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:3cm;
+  height:1.95cm;
+  
+  float:left;
+  
+
+}
+
+.print_bg_img_pwcs {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:3cm;
+    height:1.95cm;
+  }
+
+.price_window_colour_small_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_colour_small_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_colour_small_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_colour_small_price {
+
+  position:absolute;
+  top:-9px;
+  font-size:32px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+}
+
+.price_window_colour_small_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_small_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_small_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:8px;
+  top:65px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:5px;
+  
+
+}
+
+.price_window_colour_small_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:-2px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_colour_small_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_colour_small_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Colour Medium */
+.price_window_colour_medium_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:4cm;
+  height:2.59cm;
+  
+  float:left;
+
+}
+
+.print_bg_img_pwcm {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:4cm;
+    height:2.59cm;
+  }
+
+.price_window_colour_medium_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_colour_medium_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_colour_medium_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_colour_medium_price {
+
+  position:absolute;
+  top:-12px;
+  font-size:43px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+}
+
+.price_window_colour_medium_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_medium_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_medium_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:26px;
+  top:88px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:5px;
+  
+
+}
+
+.price_window_colour_medium_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:-2px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_colour_medium_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_colour_medium_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Colour Large */
+.price_window_colour_large_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:6cm;
+  height:3.89cm;
+ 
+  float:left;
+}
+
+.print_bg_img_pwcl {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:6cm;
+    height:3.89cm;
+  }
+
+.price_window_colour_large_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_colour_large_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_colour_large_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_colour_large_price {
+
+  position:absolute;
+  top:-19px;
+  font-size:64px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+  letter-spacing: -1px;
+}
+
+.price_window_colour_large_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_large_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_large_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:62px;
+  top:129px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:10px;
+  
+
+}
+
+.price_window_colour_large_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:2px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_colour_large_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_colour_large_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price Window Colour XLarge */
+.price_window_colour_xlarge_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:8cm;
+  height:5.18cm;
+ 
+  float:left;
+}
+
+.print_bg_img_pwcxl {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:8cm;
+    height:5.18cm;
+  }
+
+.price_window_colour_xlarge_logo {
+  position:absolute;
+  top:8px;
+  right:5px;
+  width:1.4cm;
+
+}
+
+.price_window_colour_xlarge_supplier {
+  position:absolute;
+  font-size:7pt;
+  text-align:left;
+  top:55px;
+  color:#959494;
+  font-weight:300;
+  letter-spacing:0px;
+  margin:0px 10px 0px 10px;
+}
+
+.price_window_colour_xlarge_product_name {
+  position:absolute;
+  font-size:14pt;
+  
+  text-align:left;
+  top:64px;
+  color:#000000;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin:0px 10px 0px 10px;
+  max-height:76px;
+  max-width:130px;
+  overflow:hidden;
+}
+
+.price_window_colour_xlarge_price {
+
+  position:absolute;
+  top:-38px;
+  font-size:95px;
+  width:100%;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+  letter-spacing: -4px
+}
+
+.price_window_colour_xlarge_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:152px;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_xlarge_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:100%;
+  text-align:center;
+  top:190px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+
+}
+
+.price_window_colour_xlarge_barcode_image {
+  position:absolute;
+  z-index:9999;
+  
+  left:102px;
+  top:175px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  width:100px;
+  height:10px;
+  
+
+}
+
+.price_window_colour_xlarge_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5pt;
+  width:100%;
+  text-align:center;
+  bottom:6px;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0px;
+  
+
+}
+
+.price_window_colour_xlarge_header_shop {
+
+  position:absolute;
+  right:18px;
+  top:62px;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.price_window_colour_xlarge_footer_text {
+
+  position:absolute;
+  right:18px;
+  bottom:4px;
+  font-weight:300;
+}
+
+/* Price A4 Portrait */
+.print_main_wraper_pa4p{
+    position:relative;
+    background-repeat: no-repeat;
+    width:21cm;
+    height:29.7cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+  }
+
+  .print_bg_img_pa4p {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:21cm;
+    height:29.7cm;
+  }
+
+  .print_price_pa4p {
+
+    position:absolute;
+    top:378px;
+    font-size:265px;
+    width:90%;
+    text-align:center;
+    color:#000;
+    font-weight:500;
+    letter-spacing:-4px;
+    margin-left:5%;
+    margin-right:5%;
+  }
+
+  .print_product_name_pa4p {
+    position:absolute;
+    font-size:82pt;
+   
+    text-align:center;
+    top:146px;
+    color:#000;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-right:40px;
+    margin-left:40px;
+    
+  }
+
+  .print_price_subtitle_pa4p {
+    position:absolute;
+    z-index:9999;
+    font-size:30pt;
+    width:100%;
+    text-align:center;
+    top:466px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+
+  }
+
+  .print_header_shop_pa4p {
+
+    position:absolute;
+    right:28px;
+    top:105px;
+    font-size:12px;
+    z-index:9999;
+    color:#000;
+    font-weight:500;
+
+  }
+  .print_footer_text_pa4p {
+
+    position:absolute;
+    right:18px;
+    bottom:45px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+
+  .print_footer_barcode_pa4p {
+
+    position:absolute;
+    right:340px;
+    bottom:43px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+
+/* Price A4 Landscape */
+.print_main_wraper_pa4l {
+    position:relative;
+    background-repeat: no-repeat;
+    width:29.7cm;
+    height:21cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+
+  }
+
+  .print_bg_img_pa4l {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:29.7cm;
+    height:21cm;
+  }
+
+  .print_price_pa4l {
+
+    position:absolute;
+    top:350px;
+    font-size:265px;
+    width:100%;
+    text-align:center;
+    color:#353535;
+    font-weight:500;
+    letter-spacing:-4px;
+    margin-top:0px;
+  }
+
+  .print_product_name_pa4l {
+    position:absolute;
+    width:90%;
+    font-size:82pt;
+   
+    text-align:center;
+    top:110px;
+    color:#353535;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-right:5%;
+    margin-left:5%;
+    
+  }
+
+  .print_price_subtitle_pa4l {
+    position:absolute;
+    z-index:9999;
+    font-size:36pt;
+    width:100%;
+    text-align:center;
+    top:270px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+    margin-bottom:0px;
+
+  }
+
+  .print_header_shop_pa4l {
+
+    position:absolute;
+    right:28px;
+    top:105px;
+    font-size:12px;
+    z-index:9999;
+    color:#525252;
+    font-weight:500;
+
+  }
+  .print_footer_text_pa4l {
+
+    position:absolute;
+    right:18px;
+    bottom:40px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+
+  .print_footer_barcode_pa4l {
+
+    position:absolute;
+    right:508px;
+    bottom:38px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+
+/* Price A5 Portrait */
+  .print_main_wraper_pa5p {
+		position:relative;
+		background-repeat: no-repeat;
+		width:14.8cm;
+		height:21cm;
+	}
+
+	.print_bg_img_pa5p {
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:14.8cm;
+		height:21cm;
+	}
+
+	.print_price_pa5p {
+
+		position:absolute;
+		top:284px;
+		font-size:190px;
+		width:100%;
+		text-align:center;
+		color:#353535;
+		font-weight:500;
+	}
+
+	.print_product_name_pa5p {
+		position:absolute;
+		font-size:72pt;
+		width:90%;
+		text-align:center;
+		top:80px;
+		color:#353535;
+		font-weight:500;
+		letter-spacing:-2px;
+    margin-left:5%;
+    margin-right:5%;
+
+	}
+
+	.print_price_subtitle_pa5p {
+		position:absolute;
+		z-index:9999;
+		font-size:30pt;
+		width:100%;
+		text-align:center;
+		top:336px;
+		color:#525252;
+		font-weight:500;
+		letter-spacing:-1px;
+		
+
+	}
+
+	.print_header_shop_pa5p {
+
+		position:absolute;
+		right:18px;
+		top:62px;
+		
+		z-index:9999;
+		color:#525252;
+		font-weight:500;
+
+	}
+	.print_footer_text_pa5p {
+
+		position:absolute;
+		right:18px;
+		bottom:31px;
+		font-weight:300;
+		text-transform:uppercase;
+    font-size:9pt;
+	}
+
+  .print_footer_barcode_pa5p {
+
+    position:absolute;
+    right:220px;
+    bottom:30px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:9pt;
+  }
+
+/* Price A5 Landscape */
+  .print_main_wraper_pa5l {
+    position:relative;
+    background-repeat: no-repeat;
+    width:18.74cm;
+    height:13cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+
+  }
+
+  .print_bg_img_pa5l {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:18.74cm;
+    height:13cm;
+  }
+
+  .print_price_pa5l {
+
+    position:absolute;
+    top:200px;
+    font-size:180px;
+    width:100%;
+    text-align:center;
+    color:#000000;
+    font-weight:500;
+    letter-spacing:-4px;
+    margin-top:0px;
+  }
+
+  .print_product_name_pa5l {
+    position:absolute;
+    width:90%;
+    font-size:48pt;
+   
+    text-align:center;
+    top:75px;
+    color:#000000;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-left:5%;
+    margin-right:5%;
+    
+    
+  }
+
+  .print_price_subtitle_pa5l {
+    position:absolute;
+    z-index:9999;
+    font-size:26pt;
+    width:100%;
+    text-align:center;
+    top:150px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+    margin-bottom:0px;
+
+  }
+
+  .print_header_shop_pa5l {
+
+    position:absolute;
+    right:18px;
+    top:49px;
+    font-size:12px;
+    z-index:9999;
+    color:#525252;
+    font-weight:500;
+
+  }
+  .print_footer_text_pa5l {
+
+    position:absolute;
+    right:18px;
+    bottom:25px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:10px;
+  }
+
+  .print_footer_barcode_pa5l {
+
+    position:absolute;
+    right:296px;
+    bottom:24px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:10px;
+  }
+
+/* Price A6 Portrait */
+.print_main_wraper_pa6p {
+    position:relative;
+    background-repeat: no-repeat;
+    width:8.84cm;
+    height:12.5cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+  }
+
+  .print_bg_img_pa6p {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:8.84cm;
+    height:12.5cm;
+  }
+
+  .print_price_pa6p {
+
+    position:absolute;
+    top:168px;
+    font-size:110px;
+    width:100%;
+    text-align:center;
+    color:#353535;
+    font-weight:500;
+  }
+
+  .print_product_name_pa6p {
+    position:absolute;
+    font-size:40pt;
+    width:90%;
+    text-align:center;
+    top:46px;
+    color:#353535;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-left:5%;
+    margin-right:5%;
+  }
+
+  .print_price_subtitle_pa6p {
+    position:absolute;
+    z-index:9999;
+    font-size:16pt;
+    width:100%;
+    text-align:center;
+    top:196px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+    
+
+  }
+
+  .print_header_shop_pa6p {
+
+    position:absolute;
+    right:13px;
+    top:33px;
+    font-size:8px;
+    z-index:9999;
+    color:#525252;
+    font-weight:500;
+
+  }
+  .print_footer_barcode_pa6p {
+
+    position:absolute;
+    right:106px;
+    bottom:19px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:7px;
+  }
+
+/* Price A6 Landscape */
+.print_main_wraper_pa6l {
+    position:relative;
+    background-repeat: no-repeat;
+    width:12.31cm;
+    height:8.7cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+  }
+
+  .print_bg_img_pa6l {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:12.31cm;
+    height:8.7cm;
+  }
+
+  .print_price_pa6l {
+
+    position:absolute;
+    top:40px;
+    font-size:115px;
+    width:100%;
+    text-align:center;
+    color:#000;
+    font-weight:500;
+    letter-spacing:-2px;
+  }
+
+  .print_product_name_pa6l {
+    position:absolute;
+    font-size:32pt;
+    width:90%;
+    text-align:center;
+    top:44px;
+    color:#000;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-left:5%;
+    margin-right:5%;
+    max-height:56px;
+    overflow:hidden;
+    
+  }
+
+  .print_price_subtitle_pa6l {
+    position:absolute;
+    z-index:9999;
+    font-size:16pt;
+    width:100%;
+    text-align:center;
+    top:104px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+    
+
+  }
+
+  .print_header_shop_pa6l {
+
+    position:absolute;
+    right:13px;
+    top:33px;
+    font-size:8px;
+    z-index:9999;
+    color:#525252;
+    font-weight:500;
+
+  }
+  .print_footer_text_pa6l {
+
+    position:absolute;
+    right:18px;
+    bottom:16px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:8px;
+  }
+
+  .print_footer_barcode_pa6l {
+
+    position:absolute;
+    right:174px;
+    bottom:15px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:8px;
+  }
+
+
+/* Price A7 Portrait */
+.print_main_wraper_pa7p {
+    position:relative;
+    background-repeat: no-repeat;
+    width:6cm;
+    height:8.49cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+  }
+
+  .print_bg_img_pa7p {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:6cm;
+    height:8.49cm;
+  }
+
+  .print_price_pa7p {
+
+    position:absolute;
+    top:124px;
+    font-size:75px;
+    width:100%;
+    text-align:center;
+    color:#353535;
+    font-weight:500;
+    letter-spacing: -2px;
+  }
+
+  .print_product_name_pa7p {
+    position:absolute;
+    font-size:26pt;
+    width:90%;
+    text-align:center;
+    top:42px;
+    color:#353535;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-left:5%;
+    margin-right:5%;
+
+  }
+
+  .print_price_subtitle_pa7p {
+    position:absolute;
+    z-index:9999;
+    font-size:16pt;
+    width:100%;
+    text-align:center;
+    top:136px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+    
+
+  }
+
+  .print_header_shop_pa7p {
+
+    position:absolute;
+    right:8px;
+    top:22px;
+    font-size:6px;
+    z-index:9999;
+    color:#525252;
+    font-weight:500;
+
+  }
+  .print_footer_text_pa7p {
+
+    position:absolute;
+    right:18px;
+    bottom:12px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:6px;
+  }
+
+  .print_footer_barcode_pa7p {
+
+    position:absolute;
+    right:55px;
+    bottom:11px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:8px;
+  }
+
+/* Price A7 Landscape */
+.print_main_wraper_pa7l {
+    position:relative;
+    background-repeat: no-repeat;
+    width:8.49cm;
+    height:6cm;
+    float:left;
+    margin-right:2px;
+    overflow:hidden;
+  }
+
+  .print_bg_img_pa7l {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:8.49cm;
+    height:6cm;
+  }
+
+  .print_price_pa7l {
+
+    position:absolute;
+    top:50px;
+    font-size:70px;
+    width:100%;
+    text-align:center;
+    color:#353535;
+    font-weight:500;
+  }
+
+  .print_product_name_pa7l {
+    position:absolute;
+    font-size:24pt;
+    width:90%;
+    text-align:center;
+    top:30px;
+    color:#353535;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-left:5%;
+    margin-right:5%;
+    max-height:50px;
+    overflow:hidden;
+  }
+
+  .print_price_subtitle_pa7l {
+    position:absolute;
+    z-index:9999;
+    font-size:16pt;
+    width:100%;
+    text-align:center;
+    margin-left:10px;
+    top:66px;
+    color:#525252;
+    font-weight:500;
+    letter-spacing:-1px;
+    
+
+  }
+
+  .print_header_shop_pa7l {
+
+    position:absolute;
+    right:8px;
+    top:21px;
+    font-size:6px;
+    z-index:9999;
+    color:#525252;
+    font-weight:500;
+
+  }
+  .print_footer_text_pa7l {
+    display:none;
+    position:absolute;
+    right:18px;
+    bottom:10px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:7px;
+    text-align:center;
+  }
+  .print_footer_barcode_pa7l {
+
+    position:absolute;
+    right:100px;
+    bottom:10px;
+    font-weight:300;
+    text-transform:uppercase;
+    font-size:8px;
+  }
