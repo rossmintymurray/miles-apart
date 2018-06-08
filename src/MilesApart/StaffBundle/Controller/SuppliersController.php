@@ -521,7 +521,7 @@ class SuppliersController extends Controller
             $response = "false";
         }
 
-        $supplier_representative_name = $response['searchString'];
+        $supplier_representative_name = $response['search_string'];
 
         //Get the suppliers that have missing data 
         $em = $this->getDoctrine()->getManager();
@@ -530,9 +530,10 @@ class SuppliersController extends Controller
                      ->getRepository('MilesApartAdminBundle:SupplierRepresentative')
                      ->findByLetters($supplier_representative_name);
 
-        $supplier_representative_count = count($supplier_representatives);
+        $supplier_representative_count = 9; //count($supplier_representatives);
         //Render the page from template*/
         return $this->render('MilesApartStaffBundle:Suppliers:find_supplier_representatives_search.html.twig', array(
+            'string' => $supplier_representative_name,
             'entities' => $supplier_representatives,
             'supplier_representative_count' => $supplier_representative_count,
             ));

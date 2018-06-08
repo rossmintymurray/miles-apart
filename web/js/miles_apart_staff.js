@@ -967,13 +967,13 @@ function findCustomerSubmit() {
 //Supplier serach
 function findSupplierRepresentativeSubmit() {
   $( "#milesapart_staffbundlefindsupplierrepresentative_supplier_representative_full_name" ).keyup(function( event ) {
-	 var searchString = $('#milesapart_staffbundlefindsupplierrepresentative_supplier_representative_full_name').val();
-	 
+	 var search_string = $('#milesapart_staffbundlefindsupplierrepresentative_supplier_representative_full_name').val().toString();
+
 	 $.ajax({
 			 type: "POST",
-			 url: globalBaseUrl + "find-supplier-representatives/submit",
+			 url: globalBaseUrl + "suppliers/find-supplier-representatives/submit",
 			 dataType: 'html',
-			 data: { searchString : searchString  },
+			 data: { search_string : search_string  },
 			 success: function(data){
 				  $("#supplier_representatives_table").html(data);
 				  
