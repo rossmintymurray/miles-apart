@@ -9,7 +9,11 @@ staff-pickpack_find-order:
 staff-pickpack_find-order-form-submit:
     pattern:  /find-order-submit
     defaults: { _controller: "MilesApartStaffBundle:Pickpack:findordersubmit" }
-                
+
+staff-pickpack_show-order:
+    pattern:  /show-order/{customer_order_id}
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:showorder", customer_order_id: null }
+
 staff-pickpack_pick:
     pattern:  /pick
     defaults: { _controller: "MilesApartStaffBundle:Pickpack:pick" }

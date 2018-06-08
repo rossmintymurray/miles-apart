@@ -20,7 +20,7 @@
 	    <div class="col-md-4 col-sm-12 margin_bottom">
 	    	<a href="{{ path('miles_apart_staff_record_sale') }}" class="btn btn-primary btn-lg col-xs-12" role="button">Record Sale</a>
 	    </div>
-	    <div class="col-md-4 col-sm-12">
+	    <div class="col-md-4 col-sm-12 margin_bottom">
 	    	<a href="{{ path('miles_apart_staff_record_return') }}" class="btn btn-primary btn-lg col-xs-12" role="button">Record Return</a>
 	    </div>
 	    
@@ -29,19 +29,80 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-4">
 			<div class="well">
-				<h3>Outstanding orders - <span id="outstanding_orders_total"></span></h3>
-				
+				<div class="row">
+					<div class="col-xs-8">
+						<h4>Outstanding orders - <span id="outstanding_orders_total">{{ outstanding_orders|length }}</span></h4>
+					</div>
+					<div class="col-xs-4">
+						<!-- Single button -->
+						<div class="btn-group col-md-12">
+							<button type="button" class="btn btn-success btn-xs dropdown-toggle col-md-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Action <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a  target="_blank" href="{{ path('staff-pickpack_print-packing-slips') }}">Print packing slips</a></li>
+								<li><a  target="_blank" href="{{ path('staff-pickpack_print-invoices') }}">Print invoices</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<table class="table table-striped text-center">
+					<thead>
+					<tr class="text-center">
+						<th class="text-left">Order</th>
+						<th class="text-center">Date Placed</th>
+						<th class="text-center">State</th>
+						<th class="text-center">Total</th>
+					</tr>
+					</thead>
+					<tbody>
+
+                    {% for order in outstanding_orders %}
+						<tr id ="order_row_{{ order.getId }}">
+							<td class="text-left">
+
+								{#Check if order is overdue to be posted #}
+								{%  if  order.getIsDispatchLate == 1 %}
+									{% set class = 'btn-success' %}
+								{%  elseif  order.getIsDispatchLate == 2 %}
+                                        {% set class = 'btn-warning' %}
+								{%  else %}
+                                        {% set class = 'btn-danger' %}
+								{% endif %}
+
+								{# Use class for button #}
+								<a href="{{ path('staff-pickpack_show-order', {'customer_order_id': order.getId()}) }}" class="{{ class }} btn btn-xs">
+									{{ order.getId }}
+								</a>
+
+							</td>
+							<td class="text-center">
+                                {{ order.getCustomerOrderDateCreated|date('d-m-Y') }}
+							</td>
+							<td class="text-center">
+                                {{ order.getCustomerOrderState.getCustomerOrderState }}
+							</td>
+							<td class="text-center">
+
+								£{{ order.getCustomerOrderTotalPricePaid }}
+
+
+							</td>
+						</tr>
+                    {% endfor %}
+					</tbody>
+				</table>
 			</div>
 		</div>
 
 		<div class="col-xs-12 col-md-4">
 			<div class="well">
-				<h3>Unanswered questions - <span id="unanswered_questions_total">{{ unanswered_questions|length }}</span></h3>
+				<h4>Unanswered questions - <span id="unanswered_questions_total">{{ unanswered_questions|length }}</span></h4>
 				<table class="table table-striped text-center">
 			        <thead>
 			            <tr class="text-center">
 			                <th class="text-left">Question</th>
-			                <th class="text-center">Date</th>
+			                <th class="text-center">Date Asked</th>
 			                <th class="text-center">Ans</th>
 			            </tr>
 			        </thead>
@@ -71,12 +132,12 @@
 	
 		<div class="col-xs-12 col-md-4">
 			<div class="well">
-				<h3>Reviews to approve - <span id="unapproved_reviews_total">{{ unapproved_reviews|length }}</span></h3>
+				<h4>Reviews to approve - <span id="unapproved_reviews_total">{{ unapproved_reviews|length }}</span></h4>
 				<table class="table table-striped text-center">
 			        <thead>
 			            <tr class="text-center">
 			                <th class="text-left">Review</th>
-			                <th class="text-center">Date</th>
+			                <th class="text-center">Date Reviewed</th>
 			                <th class="text-center">App</th>
 			            </tr>
 			        </thead>

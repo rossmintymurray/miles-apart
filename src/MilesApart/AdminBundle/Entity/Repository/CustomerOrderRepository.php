@@ -88,6 +88,22 @@ class CustomerOrderRepository extends EntityRepository
    }
 
     //Check the products for array match. (For CSV import)
+    public function getUnshippedCustomerOrders()
+    {
+        //Get Daily Take Business Premises WHERE daily_take_date is between start date and end date.
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('co')
+            ->from('MilesApartAdminBundle:CustomerOrder', 'co')
+            ->where('co.customer_order_total_price_paid IS NOT NULL AND co.customer_order_state < 6')
+            ->orderBy('co.id', 'DESC');
+
+        $query = $qb->getQuery();
+
+        //Return result set.
+        return $query->getResult();
+    }
+
+    //Check the products for array match. (For CSV import)
     public function getCurrentOrdersByCustomerId($customerId)
     {
        

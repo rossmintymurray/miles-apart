@@ -36,10 +36,14 @@ class PageController extends Controller
 
         $unapproved_reviews = $em->getRepository('MilesApartAdminBundle:ProductReview')->findUnapprovedReviews();
 
+        //Get outstanding orders
+        $outstanding_orders = $em->getRepository('MilesApartAdminBundle:CustomerOrder')->getUnshippedCustomerOrders();
+
         //Render the page from template
         return $this->render('MilesApartStaffBundle:Page:index.html.twig', array(
             'unanswered_questions' => $unanswered_questions,
-            'unapproved_reviews' => $unapproved_reviews
+            'unapproved_reviews' => $unapproved_reviews,
+            'outstanding_orders' => $outstanding_orders,
         ));
     }
 

@@ -890,7 +890,24 @@ class CustomerOrder
 
         return $profit;
     }
-     
 
+
+
+    //Get indicator of how late the dispatch of an order
+    public function getIsDispatchLate()
+    {
+
+        $order_time = $this->getCustomerOrderDateCreated()->getTimestamp();
+
+        if((time()-(60*60*24)) < $order_time) {
+            $dispatch_time = 1;
+            //Amazon
+        } else if((time()-(60*60*48)) < $order_time) {
+            $dispatch_time = 2;
+        } else {
+            $dispatch_time = 3;
+        }
+        return $dispatch_time;
+    }
     
 }

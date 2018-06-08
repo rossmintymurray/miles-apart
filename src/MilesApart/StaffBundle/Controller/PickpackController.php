@@ -129,6 +129,28 @@ class PickpackController extends Controller
    
     }
 
+    public function showorderAction($customer_order_id)
+    {
+
+        //Get the order
+        $em = $this->getDoctrine()->getManager();
+        $order = $em->getRepository('MilesApartAdminBundle:CustomerOrder')->findOneById($customer_order_id);
+
+        //Set up breadcrumb.
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        // Add home to breadcrumb.
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("miles_apart_staff_homepage"));
+        // Add pick & pack to breadcrumb.
+        $breadcrumbs->addItem("Find Order", $this->get("router")->generate("staff-pickpack_find-order"));
+        $breadcrumbs->addItem("Order " . $order->getId(), $this->get("router")->generate("staff-pickpack_find-order"));
+
+
+        //Render the page from template
+        return $this->render('MilesApartStaffBundle:Pickpack:customer_order_details.html.twig', array(
+            'order' => $order,
+        ));
+
+    }
 
     public function pickAction() 
     {

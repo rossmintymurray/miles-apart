@@ -9,7 +9,7 @@ if (typeof environment === "undefined" ) {
 //Define the base URL that will be used for all calls - depending on environment
 //UPDATET HIS WHEN ON PRODUCTION SERVER
 if(environment == "dev") {
-    var globalBaseUrl = "http://dev.miles-apart.com/app_dev.php/staff/";
+    var globalBaseUrl = "http://localhost:8888/Miles-Apart/web/app_dev.php/staff/";
 } else if (environment == "test") {
     var globalBaseUrl = "http://test.miles-apart.com/app_dev.php/staff/";
 } else {
@@ -911,7 +911,7 @@ function findSupplierSubmit() {
 
 			$.ajax({
 				type: "POST",
-				url: globalBaseUrl + "find-suppliers/submit",
+				url: globalBaseUrl + "suppliers/find-suppliers/submit",
 				dataType: 'html',
 				data: { searchString : searchString  },
 				success: function(data){
