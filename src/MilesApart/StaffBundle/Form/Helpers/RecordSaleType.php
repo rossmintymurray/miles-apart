@@ -17,8 +17,8 @@ class RecordSaleType extends AbstractType
         $builder
             ->add('product_barcode', 'text', array(
                 'attr' => array(
-                    'class'=> 'col-md-3 col-xs-12 form-control'),
-                'label_attr'=> array('class'=>'col-md-4 col-xs-12 control-label'),
+                    'class'=> 'col-md-5 col-xs-12 form-control'),
+                'label_attr'=> array('class'=>'col-md-3 col-xs-12 control-label'),
                 'label'=>'Barcode',
                 'required'  => true,
             ));

@@ -89,7 +89,7 @@ class PageController extends Controller
         ));
 
         $form->add('submit', 'submit', array('label' => 'Check price', 'attr' => array(
-                        'class' => 'btn btn-primary col-md-offset-4 col-md-3 col-xs-12')));
+                        'class' => 'btn btn-primary  col-md-offset-3 col-md-5 col-xs-12')));
 
         return $form;
     }
@@ -203,7 +203,7 @@ class PageController extends Controller
         ));
 
         $form->add('submit', 'submit', array('label' => 'Record Sale', 'attr' => array(
-                        'class' => 'btn btn-primary col-md-offset-4 col-md-3 col-xs-12')));
+                        'class' => 'btn btn-primary col-md-offset-3 col-md-5 col-xs-12')));
 
         return $form;
     }
@@ -333,7 +333,7 @@ class PageController extends Controller
         ));
 
         $form->add('submit', 'submit', array('label' => 'Record Return', 'attr' => array(
-                        'class' => 'btn btn-primary col-md-offset-4 col-md-3 col-xs-12')));
+                        'class' => 'btn btn-primary col-md-offset-3 col-md-5 col-xs-12')));
 
         return $form;
     }
