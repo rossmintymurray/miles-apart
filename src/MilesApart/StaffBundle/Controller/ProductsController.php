@@ -2978,12 +2978,7 @@ $logger->info('I just got the logger tr 4');
 
         //Create the image upload form
         //$image_form = $this->createImageUploadForm($product_image, $id);
-        
-        foreach($entity->getProductSupplier() as $val) {
-            foreach($val->getProductCost() as $v) {
-                ladybug_dump($v->getProductSupplier());
-            }
-        }
+
        
 
         return $this->render('MilesApartStaffBundle:Products:view_product.html.twig', array(
