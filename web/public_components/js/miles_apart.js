@@ -486,7 +486,10 @@ function showShoppingCartDuration() {
 
     greyOut();
 
-    window.setTimeout(hideBasket, 2000);
+    var basketTimeout = window.setTimeout(hideBasket, 2000);
+    $("#basket_contents_popup_wrapper").hover(function() {
+        clearTimeout(basketTimeout);
+    });
 }
 
 
