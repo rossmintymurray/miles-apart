@@ -439,9 +439,14 @@ class PurchaseOrder
     {
         //Check if supplier exists
         if ($this->getSupplier() != NULL) {
-            $difference =  $this->getPurchaseOrderCurrentTotal() - $this->getSupplier()->getSupplierMinimumOrderValue();
+            if($this->getPurchaseOrderCurrentTotal() > 0 && $this->getSupplier()->getSupplierMinimumOrderValue() > 0) {
+                $difference = $this->getPurchaseOrderCurrentTotal() - $this->getSupplier()->getSupplierMinimumOrderValue();
+            } else {
+                $difference = "N/A";
+            }
         } else { 
-            $difference = "N/A";}
+            $difference = "N/A";
+        }
         return $difference;
     }
 

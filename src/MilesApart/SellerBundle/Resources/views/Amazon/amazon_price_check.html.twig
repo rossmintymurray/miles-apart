@@ -1,6 +1,12 @@
 {# src/MilesApart/StaffBundle/Resources/views/Sellers/notifications.html.twig #}
 {% extends 'MilesApartStaffBundle::layout.html.twig' %}
 
+{% if submitted == false %}
+    {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
 {#Set active page for interface highlighting #}
 {% set active_page = 'sellers' %}
 {% set current_page = 'amazon_price_check' %}

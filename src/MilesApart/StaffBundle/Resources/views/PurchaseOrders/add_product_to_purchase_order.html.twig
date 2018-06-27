@@ -66,11 +66,11 @@
 		        <div class="col-md-2 col-xs-3">
 		        	{# Show the totals #}
 		        	
-		        	{# Use JS to Check the min order value #}
-		        	
-		        	<a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="javascript:;" onclick="sendPurchaseOrder({{ purchase_order.getId }})" role="button">
-		                <span class="glyphicon glyphicon-export"></span> <span class="hide_on_xs">Send order</span> 
-		            </a>
+		        	{# Use php to Check the min order value #}
+		        	<a class="btn btn-success btn-sm col-md-12 col-xs-12 {%  if purchase_order.getPurchaseOrderMinimumOrderValueDifference >= 0  %}{% else %} disabled {% endif %}"  href="javascript:;" onclick="sendPurchaseOrder({{ purchase_order.getId }})" role="button">
+						<span class="glyphicon glyphicon-export"></span> <span class="hide_on_xs">Send order</span>
+					</a>
+
 			        
 		        </div>
 	    	</div>

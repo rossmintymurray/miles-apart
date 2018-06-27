@@ -19,8 +19,8 @@ class SelectSupplierType extends AbstractType
             //Add the season
            ->add('supplier', 'entity', array(
                 'attr' => array(
-                    'class'=> 'col-md-4 form-control'),
-                'label_attr'=> array('class'=>'col-md-4 control-label'),
+                    'class'=> 'col-xs-12 col-md-4 form-control'),
+                'label_attr'=> array('class'=>'hidden-xs col-md-4 control-label'),
                 'label'=>'Supplier',
                 'empty_value' => 'Please select one...',
                 'required'  => true,

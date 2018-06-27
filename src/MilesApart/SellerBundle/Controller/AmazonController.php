@@ -135,7 +135,7 @@ class AmazonController extends Controller
         ));
 
         $form->add('submit', 'submit', array('label' => 'Check price', 'attr' => array(
-                        'class' => 'btn btn-primary col-md-offset-4 col-md-3')));
+                        'class' => 'btn btn-primary col-md-offset-4 col-md-3 col-xs-12')));
 
         return $form;
     }
@@ -745,7 +745,7 @@ $logger->info('I just got the logger tr 3');
         //Set the end date as today
         $end_date = new \DateTime();
         //Remove 2 minutes
-        $end_date->modify('-2 minute');
+        $end_date->modify('-3 minute');
     
 
         $mwsResponse = $mwsOrdersClientPack->callListOrdersByCreateDate($start_date, $end_date);

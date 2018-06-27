@@ -1,6 +1,13 @@
 {# src/MilesApart/StaffBundle/Resources/views/PurchaseOrders/new_supplier_purchase_order.html.twig #}
 {% extends 'MilesApartStaffBundle::layout.html.twig' %}
 
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == false %}
+    {% form_theme form 'MilesApartAdminBundle:Form:fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartAdminBundle:Form:submitted_fields.html.twig' 'MilesApartAdminBundle:Form:field_errors.html.twig' %}
+{% endif %}
+
 {#Set active page for interface highlighting #}
 {% set active_page = 'purchase_orders' %}
 {% set current_page = 'new_supplier_purchase_order' %}
@@ -21,8 +28,10 @@
 
             {# Create and show the new admin user type #}
             <fieldset>
-                <legend class="text-muted">Supplier</legend>
-                {{ form_row(form.supplier) }}
+                <div class="form-control">
+                    <legend class="text-muted">Supplier</legend>
+                    {{ form_row(form.supplier) }}
+                </div>
                
             </fieldset>
                

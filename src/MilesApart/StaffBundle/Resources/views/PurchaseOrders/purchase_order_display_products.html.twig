@@ -1,10 +1,113 @@
-{# Create the modal #}
-{# Call the thumbnail controller #}
+{# Create the purchase order shopping basket #}
 <div class="row">
+    <div class="col-xs-12">
+        {# Create outer wrapper #}
+        <div id="purchase_order_shopping_basket_wrapper">
+
+            <div id="purchase_order_shopping_basket" class="well">
+                {% if purchase_orders == null %}
+                    <h4> No existing purchase order</h4>
+                    <p>Just add a product to create one for this supplier</p>
+                {% endif %}
+
+
+                {% for purchase_order in purchase_orders %}
+                    <div class="row" id="shopping_basket_wrapper">
+                        <div class="col-xs-9 col-md-9">
+                            <h4>Existing purchase order - <span class="text-muted" id="purchase_order_running_total">{{ purchase_order.purchaseordercurrenttotaldisplay }}</span></h4>
+                        </div>
+                        <div class="col-xs-3 col-md-3">
+                            <a class="btn btn-small success-colour col-xs-12" role="button" href="javascript:;" onclick="sendPurchaseOrder({{ purchase_order.getId }})">Send</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <p><span class="text-muted">Started on:</span> {{ purchase_order.purchaseorderdatecreated|date("d M Y g:i a") }}</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <p><span class="text-muted">Difference to minimum order value:</span> <span id="purchase_order_difference">{{ purchase_order.getpurchaseorderminimumordervaluedifferencedisplay }}</span></p>
+                    </div>
+
+                    <div id="purchase_order_products_table">
+                        <table class="table table-striped text-center table_small" >
+                            <thead>
+                            <tr class="text-center">
+                                <th class="text-center">Code</th>
+                                <th class="text-left">Name</th>
+                                <th class="text-center">Outers</th>
+                                <th class="text-center">Inners</th>
+                                <th class="text-center">Unit</th>
+                                <th class="text-center" style="min-width:70px">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for purchase_order_product in purchase_order.getpurchaseorderproduct %}
+                                {# Update the thumbnail class to show the product is in the basket #}
+                                <script>
+                                    //Find the product thumbnail.
+                                    //Set the id
+                                    var product_thumb_id = "#thumbnail_{{purchase_order_product.product.id}}";
+                                    //Set the selected class.
+                                    $(product_thumb_id).addClass("selected_thumbnail");
+
+                                    //Change the add button text.
+                                    var buttonId = "#another_button_{{purchase_order_product.product.id}}";
+                                    $(buttonId).html("Add another");
+
+                                </script>
+                                <tr id="product_row_{{ purchase_order_product.id }}">
+                                    <td>
+                                        {{ purchase_order_product.product.productsuppliercode }}
+                                    </td>
+                                    <td class="text-left">
+                                        <a href="javascript:;" class="more_info_link" id="{{ purchase_order_product.product.id }}">
+                                            {{ purchase_order_product.product.productname }}
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        {{ purchase_order_product.purchaseorderproductouters }}
+                                    </td>
+                                    <td>
+                                        {{ purchase_order_product.purchaseorderproductinners }}
+                                    </td>
+                                    <td>
+                                        {{ purchase_order_product.purchaseorderproductquantity }}
+                                    </td>
+                                    <td>
+
+                                        <a href="javascript:;" onclick="actionLinkMinus({{ purchase_order_product.getId }});" class="table-glyphicon action_link_minus" data-toggle="tooltip" data-placement="top" title="Edit" >
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </a>
+
+                                        <a href="javascript:;" onclick="actionLinkPlus({{ purchase_order_product.product.getId }});" class="table-glyphicon action_link_plus" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <span  class="glyphicon glyphicon-plus"></span>
+                                        </a>
+
+                                        <a href="javascript:;" onclick="actionLinkDelete({{ purchase_order_product.getId }});" class="table-glyphicon action_link_delete" data-toggle="tooltip" data-placement="top" title="Delete">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{# Call the thumbnail controller #}
+<div class="row" id="purchase_order_product_thumb_area">
   {# Create column for left thumbnails (there will be a second div for current purchase order). #}
-  <div class="col-sm-12 col-md-8 col-xs-12 col-lg-8">
+  <div class="col-xs-12">
     {% for entity in product_suppliers %} 
-      <div class="col-sm-4 col-md-4 col-xs-6 col-lg-4">
+      <div class="col-sm-3 col-md-3 col-xs-6 col-lg-3">
 
         {# Create the thumbnail #}
         <div class="thumbnail" id="thumbnail_{{ entity.product.id }}">
@@ -18,62 +121,67 @@
               {% if image.productimageismain == 1 %}
                 
                 {# Show the main image #}
-                <a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}"><img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="purchase_order_product_thumbnail col-md-12" /></a>
+                <a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}" target="_blank"><img src="{{ asset('images/products/')~image.productimagepath }}" alt="{{ image.productimagedescription}}" class="purchase_order_product_thumbnail col-md-12" /></a>
                 
               {% endif %}
             {% endfor %}
 
           {# If there is no image #}
           {% else %}
-            <a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}"><img src="{{ asset('images/web/thumbnail-placeholder.gif') }}" alt="Thumbnail placeholder" class="purchase_order_product_thumbnail col-md-12"/></a>
+            <a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}" target="_blank"><img src="{{ asset('images/web/thumbnail-placeholder.gif') }}" alt="Thumbnail placeholder" class="purchase_order_product_thumbnail col-md-12"/></a>
           {% endif %}
          
               <div class="caption">
                 <div class="thumbnail_product_name">
-                  <h4><a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}">{{ entity.product.productname }}</a></h4>
+                  <h4><a href="{{ path('staff-products_view-product', {'id': entity.getProduct.getId()}) }}" target="_blank">{{ entity.product.productname }}</a></h4>
                 </div>
                 
                 <div class="row">
                   <div class="col-md-4 col-xs-4">
                     <p class="thumbnail_sub_header">Cost:</p>
-                    <h4>{{ entity.product.currentcostdisplay }}</h4>
+                    <h5>{{ entity.product.currentcostdisplay }}</h5>
                   </div>
                   <div class="col-md-4 col-xs-4">
                     <p class="thumbnail_sub_header">Price:</p>
-                    <h4>{{ entity.product.currentpricedisplay }}</h4>
+                    <h5>{{ entity.product.currentpricedisplay }}</h5>
                   </div>
                   <div class="col-md-4 col-xs-4">
-                    <p class="thumbnail_sub_header">In stock:</p>
-                    <h4>{{ entity.product.currentstocklevel }}</h4>
+                    <p class="thumbnail_sub_header">Stk:</p>
+                    <h5>{{ entity.product.currentstocklevel }}</h5>
                   </div>
                 </div>
                 <div class="row" style="margin-top:5px">
                   <div class="col-md-6 col-xs-6">
                     <p class="thumbnail_sub_header">Supplier Code:</p>
-                    <h4>{{ entity.product.productsuppliercode }}</h4>
+                    <h5>{{ entity.product.productsuppliercode }}</h5>
                   </div>
                   <div class="col-md-6 col-xs-6">
                     <div class="row">
                        <div class="col-md-6 col-xs-6">
-                          <p class="thumbnail_sub_header">Inner Qty:</p>
-                          <h4>{{ entity.product.productinnerquantity }}</h4>
+                          <p class="thumbnail_sub_header">Inner:</p>
+                          <h5>{{ entity.product.productinnerquantity }}</h5>
                         </div>
                         <div class="col-md-6 col-xs-6">
-                          <p class="thumbnail_sub_header">Outer Qty:</p>
-                          <h4>{{ entity.product.productouterquantity }}</h4>
+                          <p class="thumbnail_sub_header">Outer:</p>
+                          <h5>{{ entity.product.productouterquantity }}</h5>
                         </div>
                     </div>
                   </div>
                 </div>
-                <div class="thumbnail_buttons">
-                  <p><a href="{{ path('staff-purchase-orders_add-product-to-purchase-order-shopping-basket', { 'id': entity.product.id }) }}" class="btn btn-primary btn-sm add_product_link" id="{{ entity.product.id }}" role="button">Order one case</a> <button type="button" class="btn btn-default btn-sm more_info_link" id="{{ entity.product.id }}">More info</button></p>
+                <div class="row">
+                  <div class="col-xs-8 col-sm-12 col-md-8">
+                      <a href="{{ path('staff-purchase-orders_add-product-to-purchase-order-shopping-basket', { 'id': entity.product.id }) }}" class="btn btn-primary btn-sm add_product_link col-xs-12" id="another_button_{{ entity.product.id }}" role="button">Order one case</a>
+                  </div>
+                    <div class="col-xs-4 col-sm-12 col-md-4">
+                        <button type="button" class="btn btn-default btn-sm more_info_link col-xs-12" id="{{ entity.product.id }}">Info</button>
+                    </div>
                 </div>
            
             </div>
           </div>
         </div>
 
-        {% if loop.index is divisible by(3) %}
+        {% if loop.index is divisible by(4) %}
             <div class="clearfix"></div>
         {% endif %}
       {% endfor %}
@@ -82,105 +190,26 @@
   </div> 
 <div id="modal_holder"></div>
   {# Create column for rightpurchase orer contents and info. #}
-  <div class="col-sm-12 col-md-4 col-xs-12 col-lg-4">
+
     
-    <div id="purchase_order_shopping_basket" class="well">
-      {% if purchase_orders == null %}
-        <h4> No existing purchase order</h4>
-        <p>Just add a product to create one for this supplier</p>
-      {% endif %}
-          
 
-        {% for purchase_order in purchase_orders %}
-          <div class="row" id="shopping_basket_wrapper">
-            <div class="col-md-9">
-              <h4>Existing purchase order</h4>
-            </div>
-            <div class="col-md-3">
-              <a class="btn btn-small success-colour" role="button" href="javascript:;" onclick="sendPurchaseOrder({{ purchase_order.getId }})">Send</a>
-            </div>
-          </div>
-          <p><span class="text-muted">Started on:</span> {{ purchase_order.purchaseorderdatecreated|date("d M Y g:i a") }}</p>
-          <p><span class="text-muted">Difference to minimum order value:</span> <span id="purchase_order_difference">{{ purchase_order.getpurchaseorderminimumordervaluedifferencedisplay }}</span></p>
-          <p><span class="text-muted">Running total:</span> <span id="purchase_order_running_total">{{ purchase_order.purchaseordercurrenttotaldisplay }}</span></p>
-          <table class="table table-striped text-center table_small">
-            <thead>
-                <tr class="text-center">
-                  <th class="text-left">Code</th>
-                    <th class="text-left">Name</th>
-                    <th class="text-center">Outers</th>
-                    <th class="text-center">Inners</th>
-                    <th class="text-center">Unit</th>
-                    <th class="text-center" style="min-width:70px">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-
-          {% for purchase_order_product in purchase_order.getpurchaseorderproduct %}
-            {# Update the thumbnail class to show the product is in the basket #}
-            <script>
-              //Find the product thumbnail.
-              //Set the id 
-              var product_thumb_id = "#thumbnail_{{purchase_order_product.product.id}}";
-              //Set the selected class.
-              $(product_thumb_id).addClass("selected_thumbnail");
-
-              //Change the add button text.
-              var buttonId = "#{{purchase_order_product.product.id}}";
-              $(buttonId).html("Add another");
-              
-            </script>
-            <tr id="product_row_{{ purchase_order_product.id }}">
-              <td>
-                {{ purchase_order_product.product.productsuppliercode }}
-              </td>
-              <td class="text-left">
-                <a href="javascript:;" class="more_info_link" id="{{ purchase_order_product.product.id }}">
-                  {{ purchase_order_product.product.productname }}
-                </a>
-              </td>
-              
-              <td>
-                {{ purchase_order_product.purchaseorderproductouters }}
-              </td>
-              <td>
-                {{ purchase_order_product.purchaseorderproductinners }}
-              </td>
-              <td>
-                {{ purchase_order_product.purchaseorderproductquantity }}
-              </td>
-              <td>
-                  
-                <a href="javascript:;" onclick="actionLinkMinus({{ purchase_order_product.getId }});" class="table-glyphicon action_link_minus" data-toggle="tooltip" data-placement="top" title="Edit" >
-                  <span class="glyphicon glyphicon-minus"></span>
-                </a>
-
-                <a href="javascript:;" onclick="actionLinkPlus({{ purchase_order_product.product.getId }});" class="table-glyphicon action_link_plus" data-toggle="tooltip" data-placement="top" title="Edit">
-                  <span  class="glyphicon glyphicon-plus"></span>
-                </a>
-                
-                <a href="javascript:;" onclick="actionLinkDelete({{ purchase_order_product.getId }});" class="table-glyphicon action_link_delete" data-toggle="tooltip" data-placement="top" title="Delete">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </a>
-              </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    {% endfor %}
-  </div>
 </div>
-</div>
+
 
 <script>
 
-$('#purchase_order_shopping_basket').affix({
-      offset: {
-        top: 260
-      }
-}); 
+    $("#purchase_order_shopping_basket_wrapper").affix({
+        offset: {
+            top: 240
+        }
+    });
 
-//When the add to purchase order more info is clicked, call the function to show the modal.
+    $("#purchase_order_shopping_basket_wrapper").on('affixed.bs.affix', function(){
+        $("#purchase_order_product_thumb_area").css("margin-top", "325px");
+    });
+
+
+    //When the add to purchase order more info is clicked, call the function to show the modal.
   $(".more_info_link").click(function(event){
     
     //Set the id of the product whose link was clicked.
