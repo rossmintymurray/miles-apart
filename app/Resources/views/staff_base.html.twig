@@ -154,8 +154,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'products' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-products_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-products_price-check') }}">Price Check</a></li>
                                             <li><a href="{{ path('staff-products_add-product-to-print-list') }}">Request Prices & Labels</a></li>
                                             <li><a href="{{ path('staff-products_print-requested-prices') }}">Print Requested Prices</a></li>
@@ -187,8 +185,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'transfer_requests' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transfer Requests</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-transfer-requests_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-transfer-requests_request-products') }}">Request products</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ path('staff-transfer-requests_view-requests') }}">View requests</a></li>
@@ -199,8 +195,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'categories' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-categories_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-categories_new-category') }}">New category</a></li>
                                             <li><a href="{{ path('staff-categories_view-categories') }}">View categories</a></li>
                                             <li class="divider"></li>
@@ -216,9 +210,7 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'customers' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customers</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-customers_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="{{ path('staff-customers_new-customer') }}">New customer</a></li>
+                                             <li><a href="{{ path('staff-customers_new-customer') }}">New customer</a></li>
                                             <li><a href="{{ path('staff-customers_view-customers') }}">View customers</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ path('staff-customers_take-contact') }}">Take contact</a></li>
@@ -230,8 +222,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'campaigns' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-campaigns_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-campaigns_new-campaign') }}">New campaign</a></li>
                                             <li><a href="{{ path('staff-campaigns_view-campaigns') }}">View campaigns</a></li>
                                             <li class="divider"></li>
@@ -258,8 +248,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'finances' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finances</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-finances_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-finances_process-daily-take') }}">Process daily take</a></li>
                                             <li><a href="{{ path('staff-finances_view-daily-takes') }}">View daily takes</a></li>
                                             <li class="divider"></li>
@@ -274,8 +262,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'business' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Business</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-business_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-business_new-business-premises') }}">New premises</a></li>
                                             <li><a href="{{ path('staff-business_view-business-premises') }}">View premises</a></li>
                                             <li class="divider"></li>
@@ -307,8 +293,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'hr' %} active {% endif %}">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">HR</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-hr_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-hr_view-employees') }}">View employees</a></li>
                                             <li><a href="{{ path('staff-hr_new-employee') }}">New employee</a></li>
                                             <li class="divider"></li>
@@ -326,8 +310,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'purchase_orders' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Purchase Orders</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-purchase-orders_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-purchase-orders_add-product-to-purchase-order') }}">Order by product</a></li>
                                             <li><a href="{{ path('staff-purchase-orders_new-supplier-purchase-order') }}">Supplier purchase order</a></li>
                                             <li class="divider"></li>
@@ -358,8 +340,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'goods_in' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Goods In</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-goods-in_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-goods-in_book-in-delivery') }}">Book in delivery</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ path('staff-goods-in_view-deliveries') }}">View deliveries</a></li>
