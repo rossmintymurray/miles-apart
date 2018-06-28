@@ -9,7 +9,7 @@ This is the foundation page for all other ADMIN pages on the site -->
 <html lang="en">
     <!--Create the document head-->
     <head>
-        <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -375,8 +375,6 @@ This is the foundation page for all other ADMIN pages on the site -->
                                     <li class="dropdown {% if active_page == 'suppliers' %} active {% endif %}">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers</a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ path('staff-suppliers_notifications') }}">Notifications</a></li>
-                                            <li class="divider"></li>
                                             <li><a href="{{ path('staff-suppliers_find-suppliers') }}">Find supplier</a></li>
                                             <li><a href="{{ path('staff-suppliers_new-supplier') }}">New supplier</a></li>
                                             
