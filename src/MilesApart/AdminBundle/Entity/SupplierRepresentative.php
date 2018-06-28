@@ -286,7 +286,13 @@ class SupplierRepresentative
      */
     public function getSupplierRepresentativeFullName()
     {
-        return $this->getSupplierRepresentativeFirstName() . " " .$this->getSupplierRepresentativeSurname();
+        if(($this->getSupplierRepresentativeFirstName() != null || $this->getSupplierRepresentativeFirstName() != "" ) ||
+            ($this->getSupplierRepresentativeSurname() != null || $this->getSupplierRepresentativeSurname() != "" )) {
+            return $this->getSupplierRepresentativeFirstName() . " " . $this->getSupplierRepresentativeSurname();
+        } else {
+            return "";
+        }
+
     }
 
     /**

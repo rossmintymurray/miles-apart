@@ -24,7 +24,7 @@ class EmployeeJobRoleEmployeeType extends AbstractType
               'empty_value' => array('year' => 'Year', 'month' => 'Month', 'day' => 'Day'),
               'widget' => 'choice',
               'format' => 'dd  MMMM  yyyy',
-               'years' => range(date('Y'), date('Y') -1),
+               'years' => range(date('Y'), date('Y') -10),
             'label_attr'=> array('class'=>'col-md-4 control-label'),
             'label'=>'Job role commenced',
             'required'  => false,

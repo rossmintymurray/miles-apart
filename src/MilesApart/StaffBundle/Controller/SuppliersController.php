@@ -530,7 +530,7 @@ class SuppliersController extends Controller
                      ->getRepository('MilesApartAdminBundle:SupplierRepresentative')
                      ->findByLetters($supplier_representative_name);
 
-        $supplier_representative_count = 9; //count($supplier_representatives);
+        $supplier_representative_count = count($supplier_representatives);
         //Render the page from template*/
         return $this->render('MilesApartStaffBundle:Suppliers:find_supplier_representatives_search.html.twig', array(
             'string' => $supplier_representative_name,
