@@ -26,6 +26,9 @@
 {# Set the dynamic content for this template #}
 {% block page_content %}
 
+    {# Print the name of company delivering #}
+    <p><span class="text-muted">Supplier - </span>{{ supplier_delivery.getSupplier.getSupplierName }} <span class="text-muted"> | Booked in date - </span>{{  supplier_delivery.getBookedInDate|date('d-m-Y') }}</p>
+
     {# Create and show the form #}
     {{ form_start(form) }}
         {{ form_errors(form) }}

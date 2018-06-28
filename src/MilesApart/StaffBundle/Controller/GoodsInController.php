@@ -638,7 +638,7 @@ $logger->info($email);
     function sendShortagesEmail($supplier_delivery, $undelivered_array)
     {
         //Set up the mailer
-        $mailer = $this->container->get('swiftmailer.mailer.goodsin');
+        $mailer = $this->container->get('swiftmailer.mailer.purchaseorders_mailer');
 
         $logger = $this->get('logger');
         $logger->info('I just got the logger add update pricetip');

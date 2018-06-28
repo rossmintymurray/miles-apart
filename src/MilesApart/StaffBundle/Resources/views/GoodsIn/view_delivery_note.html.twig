@@ -17,6 +17,9 @@
             <div class="col-md-8">
                 <h3>{{ supplier_delivery.supplier.suppliername }}</h3>
             </div>
+            <div class="col-md-4">
+                <a href="{{ path('staff-goods-in_process-delivery', { 'supplier_delivery_id': supplier_delivery.getId }) }}" class="btn col-md-12 btn-success">Process</a>
+            </div>
         </div>
     </div>
 
