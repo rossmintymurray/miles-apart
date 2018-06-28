@@ -19,14 +19,15 @@
     <table class="table table-striped small" id="existing_supplier_deliveries">
         <thead>
             <tr>
-                <th>Supplier name</th>
-                <th>Carrier</th>
-                <th>Contact</th>
-                <th>Booked In Date</th>
-                <th>Morning</th>
-                <th>Delivery location</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                <th width="5%">ID</th>
+                <th width="15%">Supplier name</th>
+                <th width="15%">Carrier</th>
+                <th width="15%">Contact</th>
+                <th width="10%">Booked In Date</th>
+                <th width="10%" class="hidden-xs">Morning</th>
+                <th width="10%" class="hidden-xs">Delivery location</th>
+                <th width="10%" class="hidden-xs">Notes</th>
+                <th width="10%">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,9 @@
                 {% if delivery.delivereddatetime == null %}
         
                     <tr>
+                        <td>
+                            {{ delivery.getSupplier.getId }}
+                        </td>
                         <td>
                             {{ delivery.getSupplier.getSupplierName }}
                         </td>
@@ -49,17 +53,17 @@
                         <td>
                             {{ delivery.getBookedInDate|date('d M Y') }}
                         </td>
-                        <td>
+                        <td class="hidden-xs">
                             {% if delivery.getBookedInBefore12 == true %}
-                                Yes
+                                AM
                             {% else %}
-                                No
+                                All day
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="hidden-xs">
                             {{ delivery.getBusinessPremises.getBusinessPremisesName }}
                         </td>
-                        <td>
+                        <td class="hidden-xs">
                             {{ delivery.getSupplierDeliveryNotes }}
                             {% if delivery.getBookedInDate|date('Y-m-d') < "now"|date('Y-m-d') %}
                                <button type="button" class="btn btn-danger btn-xs" disabled="disabled">Late</button>
@@ -83,12 +87,15 @@
     <table class="table table-striped small" id="existing_supplier_deliveries">
         <thead>
             <tr>
-                <th>Supplier name</th>
-                <th>Carrier</th>
-                <th>Booked In Date</th>
-                <th>Delivery location</th>
-                <th>Notes</th>
-                <th>Actions</th>
+                <th width="5%">ID</th>
+                <th width="15%">Supplier name</th>
+                <th width="15%">Carrier</th>
+                <th width="15%">Contact</th>
+                <th width="15%">Booked In Date</th>
+                <th width="10%" class="hidden-xs">Morning</th>
+                <th width="10%" class="hidden-xs">Delivery location</th>
+                <th width="10%" class="hidden-xs">Notes</th>
+                <th width="10%">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -100,18 +107,31 @@
         
                     <tr>
                         <td>
+                            {{ delivery.getSupplier.getId }}
+                        </td>
+                        <td>
                             {{ delivery.getSupplier.getSupplierName }}
                         </td>
                         <td>
                             {{ delivery.getLogisticsCompany.getLogisticsCompanyName }}
                         </td>
                         <td>
+                            {{ delivery.getContactName }} - {{ delivery.getContactPhoneNumber }}
+                        </td>
+                        <td>
                             {{ delivery.getBookedInDate|date('d M Y') }}
                         </td>
-                        <td>
+                        <td class="hidden-xs">
+                            {% if delivery.getBookedInBefore12 == true %}
+                                AM
+                            {% else %}
+                                All day
+                            {% endif %}
+                        </td>
+                        <td class="hidden-xs">
                             {{ delivery.getBusinessPremises.getBusinessPremisesName }}
                         </td>
-                        <td>
+                        <td class="hidden-xs">
                              {{ delivery.getSupplierDeliveryNotes }}
                         </td>
                         <td>
