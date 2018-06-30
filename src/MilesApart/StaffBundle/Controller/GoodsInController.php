@@ -89,7 +89,11 @@ class GoodsInController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if ($form->isValid()) {
-            
+
+            //Set supplier delivery state
+            $entity->setDeliveryStateId(
+                $em->getRepository('MilesApartAdminBundle:SupplierDeliveryState')->findOneById(1)
+            );
             $em->persist($entity);
             $em->flush();
 
@@ -572,6 +576,9 @@ class GoodsInController extends Controller
         
         } else {
             //Set the delivery as complete in the db
+            $supplier_delivery->setSupplierDeliveryState(
+                $em->getRepository('MilesApartAdminBundle:SupplierDeliveryState')->findOneById(4)
+            );
             $response = array(
                 "success" => true,
             );
@@ -585,54 +592,73 @@ class GoodsInController extends Controller
 
     public function processdeliverycompletesendemailAction($supplier_delivery_id)
     {
+        $logger = $this->get('logger');
+        $logger->info('I just got the logger add update pricp');
         //Check that the supplier delivery has been completed
         $em = $this->getDoctrine()->getManager();
 
         $supplier_delivery = $em->getRepository('MilesApartAdminBundle:SupplierDelivery')->findOneById($supplier_delivery_id);
-
-       
-        //Set up the undelivered array 
-        $undelivered_array = array();
-
-        //Get the list of products that have not been delivered 
-        foreach($supplier_delivery->getSupplierDeliveryProduct() as $product) {
-            if($product->getSupplierDeliveryQtyRemaining() > 0) {
-                array_push($undelivered_array, $product);
-            }
-        }
-        $logger = $this->get('logger');
-        $logger->info('I just got the logger add update pricea');
-        if(count($undelivered_array > 0)) {
-$logger->info('I just got the logger add update priceb');
-
-            //Call the email send
-            $email = $this->sendShortagesEmail($supplier_delivery, $undelivered_array);
-$logger->info('I just got the logger add update pricec');
-$logger->info($email);
-            if($email == true) {
+        $logger->info('I just got the logger add update pricq');
+        //Check if completed (an email for shortages has been sent)
+        if($supplier_delivery->getSupplierDeliveryState() != null) {
+            $logger->info('I just got the logger add update prq');
+            if($supplier_delivery->getSupplierDeliveryState()->getId() == 5) {
                 $response = array(
-                    "success" => true,
-                    "undelivered_array" => $undelivered_array,
+                    "success" => false,
                 );
+                $logger->info('I just got the logger add update pricr');
             } else {
-                $response = array(
-                "success" => false,
-            );
+                $logger->info('I just got the logger add update prics');
+                //Set up the undelivered array
+                $undelivered_array = array();
+
+                //Get the list of products that have not been delivered
+                foreach ($supplier_delivery->getSupplierDeliveryProduct() as $product) {
+                    if ($product->getSupplierDeliveryQtyRemaining() > 0) {
+                        array_push($undelivered_array, $product);
+                    }
+                }
+                $logger->info('I just got the logger add update prict');
+                //If any are missing, send the email
+                if (count($undelivered_array > 0)) {
+                    $logger = $this->get('logger');
+                    $logger->info('I just got the logger add update pricp');
+                    //Call the email send
+                    $email = $this->sendShortagesEmail($supplier_delivery, $undelivered_array);
+
+                    //If email was sent
+                    if ($email == true) {
+
+                        //Set the response
+                        $response = array(
+                            "success" => true,
+                            "undelivered_array" => $undelivered_array,
+                        );
+
+                        //Update state in database
+                        $supplier_delivery->setSupplierDeliveryState(
+                            $em->getRepository('MilesApartAdminBundle:SupplierDeliveryState')->findOneById(5)
+                        );
+
+                        $em->flush();
+
+                    //If email was not sent
+                    } else {
+                        $response = array(
+                            "success" => false,
+                        );
+                    }
+
+                } else {
+                    $response = array(
+                        "success" => false,
+                    );
+                }
             }
-            
-        
-        
-        } else {
-            $response = array(
-                "success" => false,
-            );
         }
 
-        return new JsonResponse(
-                    $response 
-                );
+        return new JsonResponse($response);
 
-    
     }
 
     function sendShortagesEmail($supplier_delivery, $undelivered_array)
@@ -640,8 +666,6 @@ $logger->info($email);
         //Set up the mailer
         $mailer = $this->container->get('swiftmailer.mailer.purchaseorders_mailer');
 
-        $logger = $this->get('logger');
-        $logger->info('I just got the logger add update pricetip');
         //Set the email address.
         if ($supplier_delivery->getSupplier()->getSupplierOrderingEmail() != NULL) {
             $email_address = $supplier_delivery->getSupplier()->getSupplierOrderingEmail();
@@ -650,8 +674,6 @@ $logger->info($email);
         } else {
             return false;
         }
-
-        $logger->info('I just got the logger add update price');
         
         //Get the supplier email address.
         $message = \Swift_Message::newInstance()
@@ -671,13 +693,10 @@ $logger->info($email);
             )
         ;
 
-        $logger->info('I just got the logger add update price2');
-
         //Avoid localhost issues
         $mailer->getTransport()->setLocalDomain('[127.0.0.1]');
 
         $mailer->send($message);
-        $logger->info('I just got the logger add update price3');
 
         return true;
     }

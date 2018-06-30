@@ -7,7 +7,7 @@
 {% set current_page = 'view_deliveries' %}
 
 {% block page_name %}
-    View deliveries
+    Process deliveries
 {% endblock %}
 
 {# Set the dynamic content for this template #}
@@ -21,13 +21,15 @@
             <tr>
                 <th width="5%">ID</th>
                 <th width="15%">Supplier name</th>
-                <th width="15%">Carrier</th>
+                <th width="12%">Carrier</th>
                 <th width="15%">Contact</th>
+                <th width="8%" class="hidden-xs">State</th>
                 <th width="10%">Booked In Date</th>
-                <th width="10%" class="hidden-xs">Morning</th>
+                <th width="5%" class="hidden-xs">Morning</th>
                 <th width="10%" class="hidden-xs">Delivery location</th>
-                <th width="10%" class="hidden-xs">Notes</th>
-                <th width="10%">Actions</th>
+                <th width="8%" class="hidden-xs">Notes</th>
+                <th width=7%" class="hidden-xs">On Time</th>
+                <th width="5%">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +37,7 @@
             {% for delivery in supplier_deliveries %} 
         
         
-                {% if delivery.delivereddatetime == null %}
+                {% if delivery.getSupplierDeliveryState.getId < 2 %}
         
                     <tr>
                         <td>
@@ -49,6 +51,9 @@
                         </td>
                         <td>
                             {{ delivery.getContactName }} - {{ delivery.getContactPhoneNumber }}
+                        </td>
+                        <td>
+                            {{ delivery.getSupplierDeliveryState.getSupplierDeliveryState }}
                         </td>
                         <td>
                             {{ delivery.getBookedInDate|date('d M Y') }}
@@ -65,8 +70,12 @@
                         </td>
                         <td class="hidden-xs">
                             {{ delivery.getSupplierDeliveryNotes }}
+                        </td>
+                        <td class="hidden-xs">
                             {% if delivery.getBookedInDate|date('Y-m-d') < "now"|date('Y-m-d') %}
-                               <button type="button" class="btn btn-danger btn-xs" disabled="disabled">Late</button>
+                            <span class="label label-success">On time</span>
+                            {%  else  %}
+                            <span class="label label-danger">Late</span>
                             {% endif %}
                         </td>
                         <td>
@@ -89,13 +98,15 @@
             <tr>
                 <th width="5%">ID</th>
                 <th width="15%">Supplier name</th>
-                <th width="15%">Carrier</th>
+                <th width="12%">Carrier</th>
                 <th width="15%">Contact</th>
-                <th width="15%">Booked In Date</th>
-                <th width="10%" class="hidden-xs">Morning</th>
+                <th width="8%" class="hidden-xs">State</th>
+                <th width="10%">Booked In Date</th>
+                <th width="5%" class="hidden-xs">Morning</th>
                 <th width="10%" class="hidden-xs">Delivery location</th>
-                <th width="10%" class="hidden-xs">Notes</th>
-                <th width="10%">Actions</th>
+                <th width="8%" class="hidden-xs">Notes</th>
+                <th width=7%" class="hidden-xs">On Time</th>
+                <th width="5%">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -103,7 +114,7 @@
             {% for delivery in supplier_deliveries %} 
         
         
-                {% if delivery.delivereddatetime != null %}
+                {% if delivery.getSupplierDeliveryState.getId > 2 %}
         
                     <tr>
                         <td>
@@ -119,6 +130,9 @@
                             {{ delivery.getContactName }} - {{ delivery.getContactPhoneNumber }}
                         </td>
                         <td>
+                            {{ delivery.getSupplierDeliveryState.getSupplierDeliveryState }}
+                        </td>
+                        <td>
                             {{ delivery.getBookedInDate|date('d M Y') }}
                         </td>
                         <td class="hidden-xs">
@@ -132,10 +146,17 @@
                             {{ delivery.getBusinessPremises.getBusinessPremisesName }}
                         </td>
                         <td class="hidden-xs">
-                             {{ delivery.getSupplierDeliveryNotes }}
+                            {{ delivery.getSupplierDeliveryNotes }}
+                        </td>
+                        <td class="hidden-xs">
+                            {% if delivery.getBookedInDate|date('Y-m-d') < "now"|date('Y-m-d') %}
+                                <span class="label label-success">On time</span>
+                            {%  else  %}
+                                <span class="label label-danger">Late</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('staff-goods-in_process-delivery', { 'supplier_delivery_id': delivery.getId }) }}" class="btn btn-xs btn-success">Process</a>
+                            <a href="{{ path('staff-goods-in_process-delivery', { 'supplier_delivery_id': delivery.getId }) }}" class="btn btn-xs btn-success {% if delivery.getSupplierDeliveryState.getId > 3 %} disabled {% endif %}">Process</a>
                         </td>
                         
                     </tr>

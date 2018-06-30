@@ -18,7 +18,7 @@
 
 {% block header_right_content %}
 
-    <button class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour margin_bottom" onclick="completeDeliveryProcess()">
+    <button id="complete_delivery_process_button" class="btn btn-success btn-sm col-md-12 col-xs-12 margin_bottom {% if supplier_delivery.getSupplierDeliveryState.getId > 3 %} disabled {% endif %}" onclick="completeDeliveryProcess()">
         Complete delivery process
     </button>
 {% endblock %}
@@ -254,7 +254,12 @@
                                 success: function(data){
                                     if(data['success'] == true) {
                                         alert("Supplier has been emailed.");
-                                        alert(data['undelivered_array'].toString());
+
+                                        //Disable the button
+                                        $('#complete_delivery_process_button').addClass('disabled');
+
+                                    } else if(data['success'] == false) {
+                                        alert("Supplier has already been emailed, so not sent.");
                                     } else {
                                         alert("There has been a problem sending the email.");
                                     }
