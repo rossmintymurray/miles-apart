@@ -56,16 +56,6 @@ task('deploy:assetic:dump', function () {
     run('{{app/console}}  assetic:dump --no-debug');
 });
 
-desc('Clear pre loaded classes');
-task('deploy:composerautoloader:clear', function () {
-    run('composer dump-autoload --optimize --no-dev --classmap-authoritative');
-});
-
-desc('Restart server to flush changes to opcache');
-task('deploy:webserver:restart', function () {
-    run('sudo service apache2 restart');
-});
-
 
 
 desc('Deploy project');
@@ -83,8 +73,6 @@ task('deploy', [
     'deploy:cache:warmup',
     'deploy:assetic:dump',
     'deploy:symlink',
-    'deploy:composerautoloader:clear',
-    'deploy:webserver:restart',
     'deploy:unlock',
     'cleanup',
 ]);
