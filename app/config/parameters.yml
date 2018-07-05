@@ -3,7 +3,7 @@ parameters:
     database_driver: pdo_mysql
     database_host: localhost
     database_port: '8889'
-    database_name: miles_apart
+    database_name: miles_apart_live
     database_user: milesapart
     database_password: Kfui6freShail4ap
     mailer_transport: smtp
