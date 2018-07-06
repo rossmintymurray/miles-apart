@@ -16,7 +16,6 @@ pipelines:
                     - mv ./composer.phar /usr/local/bin/composer
                     - dep -f=./deploy/deploy.php deploy test
                     - composer dump-autoload --optimize --no-dev --classmap-authoritative
-                    - sudo service apache2 restart
         miles_apart_live:
             - step:
                 script:
@@ -30,4 +29,3 @@ pipelines:
                     - mv ./composer.phar /usr/local/bin/composer
                     - dep -f=./deploy/deploy.php deploy production
                     - composer dump-autoload --optimize --no-dev --classmap-authoritative
-                    - sudo service apache2 restart

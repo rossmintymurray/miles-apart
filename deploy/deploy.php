@@ -56,6 +56,10 @@ task('deploy:assetic:dump', function () {
     run('{{app/console}}  assetic:dump --no-debug');
 });
 
+desc('Restart server');
+task('deploy:server:restart', function () {
+    run('sudo service apache2 restart');
+});
 
 
 desc('Deploy project');
@@ -73,6 +77,7 @@ task('deploy', [
     'deploy:cache:warmup',
     'deploy:assetic:dump',
     'deploy:symlink',
+    'deploy:server:restart',
     'deploy:unlock',
     'cleanup',
 ]);
