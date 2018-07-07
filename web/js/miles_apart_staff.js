@@ -1482,7 +1482,6 @@ function processStoreDeliveryFormSubmit() {
 }
 
 function processStoreDeliveryForm() {
-	alert("subm");
 	//Get the barcode and check if it is a shelf or a product.
 	var barcode = $('#store_delivery_barcode_input').val();
 	if(isNumeric(barcode)) { 
@@ -1493,18 +1492,20 @@ function processStoreDeliveryForm() {
 	    processStoreDeliveryAdd(barcode);
 
  	} else {
- 		alert("submi");
+
 	    //Cal the shelf AJAX code.
 	    //Create ajax call with array/JSON of ids, this will iterate thorough and added.
 	    $.ajax({
 			type: "POST",
-			url: globalBaseUrl + "select-storage-shelf",
+			url: globalBaseUrl + "goods-in/store-delivery/select-storage-shelf",
 			dataType: 'json',
 			data: { barcode : barcode  },
 			success: function(data) { 
-				alert("submit");
                 //Reset the barcode and search fields
             	$("#store_delivery_barcode_input").val("");
+
+            	//Update view with shelf detail
+                $("#store_delivery_shelf_code_selected").html('Shelf <b>' + data['shelf_code'] + '</b> selected');
             	
         	}, 
 	      	fail: function() {
@@ -1521,29 +1522,44 @@ function processStoreDeliveryForm() {
 
 function processStoreDeliveryAdd(barcode) {
 
-	alert("JSProcess");
 	//Pass product barcode to server to update database
 	$.ajax({
 		type: "POST",
-		url: globalBaseUrl + "store-delivery-process",
+		url: globalBaseUrl + "goods-in/store-delivery/store-delivery-process",
 		dataType: 'json',
 		data: { barcode : barcode },
 		success: function(data){
 
-			//Need to get success or failure from the server
-			if(data['stored_success'] == true) {
-				
-				//Update the colour of the table row to green
-				//Get the product id 
-				var rowId = data['supplier_delivery_product_id'];
-				$('#product_row_' +rowId).find("*").css("background-color", ":#71a01e");
-			}
+			//Check if shelf was set
+            if(data['stock_location_shelf'] == false) {
 
-			
+                //Instuct the user to scan a shelf first
+                alert("Please scan a shelf first");
+            } else {
 
-			if(data['already_stored'] == true) {
-				alert("This product has already been stored on shelf " + data['already_stored_shelf_code']);
-			}
+                //Need to get success or failure from the server
+                if (data['stored_success'] == true) {
+
+                    //Update the colour of the table row to green
+                    //Get the product id
+                    var rowId = data['supplier_delivery_product_id'];
+                    $('#product_row_' + rowId).find("*").css("background-color", ":#71a01e");
+
+                    //Check if there are remaining products to be stored
+                    $("#supplier_delivery_lines_to_store").html("<b>" + data['remaining_qty_to_store'] + "</b>");
+
+                    //If there are no more products to be stored, disable the barcode button
+					if(data['remaining_qty_to_store'] == 0 ) {
+						$("#milesapart_staffbundle_store_delivery_submit").addClass("disabled");
+					}
+
+                }
+
+
+                if (data['already_stored'] == true) {
+                    alert("This product has already been stored on shelf " + data['already_stored_shelf_code']);
+                }
+            }
 		}, 
       	fail: function() {
          	alert('Ajax failed');

@@ -13,8 +13,14 @@
 {# Set the dynamic content for this template #}
 {% block page_content %}
 
-    
-    <p class="lead">Scan the shelf first and then the product you are storing.</p>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <p class="lead">Scan the shelf first and then the product you are storing.</p>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <p class="lead" id="store_delivery_shelf_code_selected"></p>
+        </div>
+    </div>
   {# Create and show the form #}
     <form class="form-horizontal admin_form" method="post" name="store_delivery_form">
       <fieldset>
@@ -31,70 +37,75 @@
 
     {# Check that there are lines to store #}
     {% if supplier_delivery.SupplierDeliveryLinesToStore is defined %}
-        
-        <h5>There are {{ supplier_delivery.SupplierDeliveryLinesToStore }} lines to store for this delivery.</h5>
+        {% if supplier_delivery.SupplierDeliveryLinesToStore > 0 %}
+            <p>There are <span id="supplier_delivery_lines_to_store"><b>{{ supplier_delivery.SupplierDeliveryLinesToStore }}</b></span> lines to store for this delivery.</p>
 
-        {# Show the table header #}
-        <table class="table table-striped small existing_products" id="existing_transfer_request_products" style="margin-top:20px">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Product Code</th>
-                    <th>Product name</th>
-                    
-                    <th class="text-center">Qty To Store</th>
-                    <th class="hide_on_xs text-center">Barcode</th>
-                </tr>
-                    
-            </thead>
-            <tbody>
-                {% for product in supplier_delivery.supplierdeliveryproduct %}
+            {# Show the table header #}
+            <table class="table table-striped small existing_products" id="existing_transfer_request_products" style="margin-top:20px">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product Code</th>
+                        <th>Product name</th>
 
-                    {# Check if the product has any qty to be stored #}
-                    {% if product.supplierdeliveryqtytostore != 0 %}
-                        {# Check if the delivery note qty is equal to the delivered qty, show green if true #}
-                        {% if product.stocklocationshelfproductsent|length > 0  %}
+                        <th class="text-center">Qty To Store</th>
+                        <th class="hide_on_xs text-center">Barcode</th>
+                    </tr>
 
-                            {# Set total sent to 0 for the loop #}
-                            {% set total = 0 %}
-                            {% for productsent in product.stocklocationshelfproductsent %}
-                                {% set total = total + productsent.stocklocationshelfproductsentqty %}
-                            {% endfor %}
+                </thead>
+                <tbody>
+                    {% for product in supplier_delivery.supplierdeliveryproduct %}
 
-                            {% if  total == product.supplierdeliveryqtytostore %}
-                                <tr id="product_row_{{ product.getId }}" class="table_row_green">
+                        {# Check if the product has any qty to be stored #}
+                        {% if product.supplierdeliveryqtytostore != 0 %}
+                            {# Check if the delivery note qty is equal to the delivered qty, show green if true #}
+
+                            {# If some have been stored #}
+                            {% if product.stocklocationshelfproductsent|length > 0  %}
+                                {# Find out how many have been stored #}
+                                {# Set total sent to 0 for the loop #}
+                                {% set total = 0 %}
+                                {% for productsent in product.stocklocationshelfproductsent %}
+                                    {% set total = total + productsent.stocklocationshelfproductsentqty %}
+                                {% endfor %}
+
+                                {% if  total == product.supplierdeliveryqtytostore %}
+                                    <tr id="product_row_{{ product.getId }}" class="table_row_green">
+                                {% else %}
+                                    <tr id="product_row_{{ product.getId }}" class="table_row_amber">
+                                {% endif %}
                             {% else %}
-                                <tr id="product_row_{{ product.getId }}" class="table_row_amber">
+                                <tr id="product_row_{{ product.getId }}">
                             {% endif %}
-                        {% else %}
-                            <tr id="product_row_{{ product.getId }}">
+                             <td>
+                                {{ loop.index }}
+                            </td>
+                            <td>
+                                {{ product.getProduct.getProductSupplierCode }}
+                            </td>
+                            <td>
+                                {{ product.getProduct.getProductName }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ product.getSupplierDeliveryqtytostore }}
+                            </td>
+
+                            <td class="hide_on_xs text-center">
+                                {{ product.getProduct.getProductBarcode }}
+                            </td>
+
+                            </tr>
                         {% endif %}
-                         <td>
-                            {{ loop.index }}
-                        </td>
-                        <td>
-                            {{ product.getProduct.getProductSupplierCode }}
-                        </td>
-                        <td>
-                            {{ product.getProduct.getProductName }}
-                        </td>
-                        
-                        <td class="text-center">
-                            {{ product.getSupplierDeliveryqtytostore }}
-                        </td>
-                        
-                        <td class="hide_on_xs text-center">
-                            {{ product.getProduct.getProductBarcode }}
-                        </td>
-                        
-                        </tr>
-                    {% endif %}
 
-                {% endfor %}
-            </tbody>
-        </table>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    {# If there are no lines to store #}
+        {# If there are no lines to store #}
+        {% else %}
+            <h5>There are no products to store for this delivery.</h5>
+        {%  endif %}
     {% else %}
         <h5>There are no products to store for this delivery.</h5>
     {% endif %}

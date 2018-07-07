@@ -600,7 +600,7 @@ class SupplierDelivery
 
         $total_lines = 0;    
 
-        //If storage box exists
+        //If delivery products exist
         if (count($this->getSupplierDeliveryProduct()) > 0) {
 
             //Iterate over the delivery lines
@@ -608,9 +608,22 @@ class SupplierDelivery
 
                 //Icheck to see if the line has product to be stored
                 if($value->getSupplierDeliveryQtyToStore() > 0) {
-                   
-                    //Add the line to the total
-                    $total_lines = $total_lines + 1;
+
+                    //Check how many lives have already been stored
+                    if($value->getStockLocationShelfProductSent() != null) {
+                        $total_stored = 0;
+                        foreach($value->getStockLocationShelfProductSent() as $key2 => $value2) {
+                            $total_stored = $total_stored + $value2->getStockLocationShelfProductSentQty();
+                        }
+
+                        if($total_stored < $value->getSupplierDeliveryQtyToStore()) {
+                            //Add the line to the total
+                            $total_lines = $total_lines + 1;
+                        }
+                    } else {
+                        $total_lines = $total_lines + 1;
+                    }
+
                 }
             }
         }

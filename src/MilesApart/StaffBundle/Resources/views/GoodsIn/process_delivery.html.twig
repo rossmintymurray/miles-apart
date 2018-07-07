@@ -190,7 +190,6 @@
                         
                         if(data['qty_remaining'] == 0) {
                             //highlight the row green
-                           
                             $(row).css({
                                 "background-color": "",
                                 "background-color": "#71a01e",
@@ -203,7 +202,6 @@
 
                         } else {
                             //Not all products have been delivered so highlight amber
-                            
                             $(row).css({
                                 "background-color": "",
                                 "background-color": "#eca41c",
@@ -241,6 +239,9 @@
                     if(data['success'] == true) {
                         //If yes, mark as complete
                         alert("Delivery has been marked complete.");
+
+                        //Disable the button
+                        $('#complete_delivery_process_button').addClass('disabled');
                         
                     } else {
                         //If no, show alert box highlighting missing products, asking if ok to send email to supplier

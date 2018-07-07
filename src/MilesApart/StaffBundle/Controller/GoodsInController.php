@@ -478,11 +478,16 @@ class GoodsInController extends Controller
         $store_qty_inners = $response["store_qty_inners"];
         $store_qty_outers = $response["store_qty_outers"];
 
+        //Set the existing qty to 0, this will be added to should more products be added.
+        $existing_qty = 0;
+
         //Get the delivery product
         $em = $this->getDoctrine()->getManager();
 
         $supplier_delivery_product = $em->getRepository('MilesApartAdminBundle:SupplierDeliveryProduct')->findOneById($supplier_delivery_product_id);
 
+        //Add existing qty is some have already been marked off the delivery note
+        $existing_qty = $supplier_delivery_product->getSupplierdeliveryQtyDelivered();
 
         //Add the delivered qty to the database
         //Check if the outers is set
@@ -493,13 +498,13 @@ class GoodsInController extends Controller
                     $supplier_delivery_product->setSupplierDeliveryQtyDelivered($supplier_delivery_product->getSupplierDeliveryNoteQty());
 
                 } else {
-                    $supplier_delivery_product->setSupplierDeliveryQtyDelivered($delivered_qty_unit);
+                    $supplier_delivery_product->setSupplierDeliveryQtyDelivered($existing_qty + $delivered_qty_unit);
                 }
             } else {
-                    $supplier_delivery_product->setSupplierDeliveryQtyDelivered($delivered_qty_inners * $supplier_delivery_product->getProduct()->getProductInnerQuantity());
+                    $supplier_delivery_product->setSupplierDeliveryQtyDelivered($existing_qty + ($delivered_qty_inners * $supplier_delivery_product->getProduct()->getProductInnerQuantity()));
             }
         } else {
-            $supplier_delivery_product->setSupplierDeliveryQtyDelivered($delivered_qty_outers * $supplier_delivery_product->getProduct()->getProductOuterQuantity());
+            $supplier_delivery_product->setSupplierDeliveryQtyDelivered($existing_qty + ($delivered_qty_outers * $supplier_delivery_product->getProduct()->getProductOuterQuantity()));
         }
 
 
@@ -579,6 +584,10 @@ class GoodsInController extends Controller
             $supplier_delivery->setSupplierDeliveryState(
                 $em->getRepository('MilesApartAdminBundle:SupplierDeliveryState')->findOneById(4)
             );
+
+            //Flush the changes
+            $em->flush();
+
             $response = array(
                 "success" => true,
             );
@@ -793,7 +802,7 @@ class GoodsInController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         
-        $supplier_deliveries = $em->getRepository('MilesApartAdminBundle:SupplierDelivery')->findAll();
+        $supplier_deliveries = $em->getRepository('MilesApartAdminBundle:SupplierDelivery')->findDeliveriesToStore();
 
         return $this->render('MilesApartStaffBundle:GoodsIn:store_delivery_view_deliveries.html.twig', array(
            
@@ -862,6 +871,7 @@ class GoodsInController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -906,7 +916,16 @@ class GoodsInController extends Controller
         $stock_location_shelf = $session->get('stock_location_shelf');
         $supplier_delivery = $session->get('supplier_delivery');
 
-$logger->info('I just got the logger add update price2');
+        //If tere is no shelf selected, give instruction to user to scan shelf
+        if($stock_location_shelf == NULL) {
+            $response = array(
+                'stock_location_shelf' => false,
+            );
+            return new JsonResponse(
+                $response
+            );
+        }
+$logger->info($stock_location_shelf->getStockLocationShelfCode());
 
 $logger->info('I just got the logger add update price23');
 
@@ -914,34 +933,45 @@ $logger->info('I just got the logger add update price23');
         $em = $this->getDoctrine()->getManager();
 
         $stock_location_shelf = $em->merge($stock_location_shelf);
+        $supplier_delivery = $em->merge($supplier_delivery);
 
         //Get supplier delivery product from database
         $supplier_delivery_product = $em->getRepository('MilesApartAdminBundle:SupplierDeliveryProduct')->findProductByBarcode($product_barcode, $supplier_delivery->getId());
 
-
+        $logger->info('I just got the logger add update price24');
         //Check that the qty to store is not more than the remaining qty to store
         //Get the qty already stored 
         $supplier_delivery_product_stored = $em->getRepository('MilesApartAdminBundle:StockLocationShelfProductSent')->findOneBy(array('supplier_delivery_product' => $supplier_delivery_product));
-        //Check there was a result 
-        if(count($supplier_delivery_product_stored) > 0) {
-            if($supplier_delivery_product[0]->getSupplierDeliveryQtyToStore() == $supplier_delivery_product_stored->getStockLocationShelfProductSentQty()) {
-                
-                //Set the response to tell js that the product cannot be stored, as it already has been
-                $response = array(
-                    'found' => true,
-                    'already_stored' => true,
-                    'already_stored_shelf_code' => $supplier_delivery_product_stored->getStockLocationShelf()->getStockLocationShelfCode(),
-                    'stored_success' => false,
 
-                    
-                );
-           
-                return new JsonResponse(
-                    $response 
-                );
+        //Check that the qty to store is not more than the remaining qty to store
+        //Check there was a result
+        $remaining_qty_to_store = $supplier_delivery_product[0]->getSupplierDeliveryQtyToStore();
+        if(count($supplier_delivery_product_stored) > 0) {
+            foreach($supplier_delivery_product_stored as $value) {
+                $remaining_qty_to_store = $remaining_qty_to_store - $value->getStockLocationShelfProductSentQty();
             }
         }
-        //If all is ok, add the product to the product stored table
+$logger->info('I just got the logger add update price25');
+        if($remaining_qty_to_store == 0) {
+            $logger->info('I just got the logger add update price26');
+
+            //Every qty of this product has een store so can't store more
+            $response = array(
+                'found' => true,
+                'already_stored' => true,
+                'already_stored_shelf_code' => $supplier_delivery_product_stored->getStockLocationShelf()->getStockLocationShelfCode(),
+                'stored_success' => false,
+                'remaining_qty_to_store' => $supplier_delivery->getSupplierDeliveryLinesToStore(),
+
+
+            );
+$logger->info('I just got the logger add update price26');
+            return new JsonResponse(
+                $response
+            );
+        }
+
+        //If supplier delivery product has NOT been stored before, continue with storing
 
         //New product tarnsfer request
         $stock_location_shelf_product_sent = new StockLocationShelfProductSent();
@@ -967,6 +997,7 @@ $logger->info('I just got the logger add update price23');
             'alreadey_stored' => false,
             'stored_success' => true,
             'supplier_delivery_product_id' => $supplier_delivery_product[0]->getId(),
+            'remaining_qty_to_store' => $supplier_delivery->getSupplierDeliveryLinesToStore(),
             
         );
        
@@ -1025,6 +1056,7 @@ $logger->info('I just got the logger add update price23');
         
         $response = array(     
                         'response' => true,
+                        'shelf_code' => $stock_location_shelf->getStockLocationShelfCode(),
                     );
 
         $response = new JsonResponse($response);

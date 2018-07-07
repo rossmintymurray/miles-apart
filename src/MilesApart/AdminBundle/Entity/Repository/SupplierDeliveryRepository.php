@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class SupplierDeliveryRepository extends EntityRepository
 {
+    //Check the products for array match. (For CSV import)
+    public function findDeliveriesToStore()
+    {
+
+            $query = $this->getEntityManager()
+                ->createQuery('
+                            SELECT sd FROM MilesApartAdminBundle:SupplierDelivery sd
+                            LEFT JOIN sd.supplier_delivery_product sdp
+                            WHERE sdp.supplier_delivery_qty_to_store > 0
+                            ')
+               ;
+
+        return $query
+            ->getResult();
+    }
+
+
 }
