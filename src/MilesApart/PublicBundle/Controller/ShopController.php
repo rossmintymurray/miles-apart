@@ -275,11 +275,21 @@ class ShopController extends Controller
         //Set the specific category in the session
         $session->set("specific_category", $specific_category);
         
+
+
+        //Remove products with no stock
+        $saleable_products = array();
+        foreach($products as $product) {
+            if($product->getCurrentStockLevel() > 0) {
+                array_push($saleable_products, $product);
+            }
+        }
+
         //Get the total number of products
-        $product_count = count($products);
+        $product_count = count($saleable_products);
 
         //Set up pagerfanta
-        $adapter = new ArrayAdapter($products);
+        $adapter = new ArrayAdapter($saleable_products);
         
         //Pass adapter to pagerfanta
         $pager =  new Pagerfanta($adapter);
@@ -401,12 +411,20 @@ class ShopController extends Controller
         
         //Set the specific category in the session
         $session->set("specific_category", $specific_category);
-        
+
+        //Remove products with no stock
+        $saleable_products = array();
+        foreach($products as $product) {
+            if($product->getCurrentStockLevel() > 0) {
+                array_push($saleable_products, $product);
+            }
+        }
+
         //Get the total number of products
-        $product_count = count($products);
+        $product_count = count($saleable_products);
 
         //Set up pagerfanta
-        $adapter = new ArrayAdapter($products);
+        $adapter = new ArrayAdapter($saleable_products);
         
         //Pass adapter to pagerfanta
         $pager =  new Pagerfanta($adapter);
@@ -471,11 +489,14 @@ class ShopController extends Controller
         //Iterate over the products, 
         foreach($products as $product) {
 
-            //Iterate over the categories of each product
-            foreach($product->getCategory() as $category) {
+            //Ensure product is in stock
+            if($product->getCurrentStockLevel() > 0) {
+                //Iterate over the categories of each product
+                foreach ($product->getCategory() as $category) {
 
-                //Push the category to the array.
-                array_push($categories, $category->getId());
+                    //Push the category to the array.
+                    array_push($categories, $category->getId());
+                }
             }
         }
         $unique = array_unique($categories);
@@ -518,48 +539,50 @@ class ShopController extends Controller
         //Iterate over the products, 
         foreach($products as $product) {
 
-            //Iterate over each attribute of the product
-            foreach($product->getAttributeValue() as $product_attribute) {
-                $attribute_value_to_add = true;
-                //for each attribute that exists in the array
-
-                if(array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
-                    foreach($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()] as $attribute_value) {
-
-                        //Check if the attribute exists in the attributes array
-                        if($product_attribute == $attribute_value) {
-
-                            //If it exists, set to add to false 
-                            $attribute_value_to_add = false;
+            //Ensure product is in stock
+            if($product->getCurrentStockLevel() > 0) {
 
 
-                        } else {
-                            //If it doesn't exist, add the attribute to the array and the attribute value
-                            //Push the attribute to the array.
-                           
+                //Iterate over each attribute of the product
+                foreach ($product->getAttributeValue() as $product_attribute) {
+                    $attribute_value_to_add = true;
+                    //for each attribute that exists in the array
+
+                    if (array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
+                        foreach ($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()] as $attribute_value) {
+
+                            //Check if the attribute exists in the attributes array
+                            if ($product_attribute == $attribute_value) {
+
+                                //If it exists, set to add to false
+                                $attribute_value_to_add = false;
+
+
+                            } else {
+                                //If it doesn't exist, add the attribute to the array and the attribute value
+                                //Push the attribute to the array.
+
+
+                            }
+
 
                         }
-
-                        
                     }
-                }
 
-                if($attribute_value_to_add == true) {
+                    if ($attribute_value_to_add == true) {
 
-                    //Check if the index exists in the array
-                    if(array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
+                        //Check if the index exists in the array
+                        if (array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
 
-                        //The array key (attribute) exists, so add the attribute value to it
-                        array_push($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()], $product_attribute);
-                    } else {
-                        $attribute_values_array[$product_attribute->getAttribute()->getAttributeName()][0] = $product_attribute;
+                            //The array key (attribute) exists, so add the attribute value to it
+                            array_push($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()], $product_attribute);
+                        } else {
+                            $attribute_values_array[$product_attribute->getAttribute()->getAttributeName()][0] = $product_attribute;
+                        }
                     }
+
+
                 }
-
-                 
-
-             
-                
             }
 
 
@@ -614,41 +637,46 @@ class ShopController extends Controller
         //Iterate over the products, 
         foreach($products as $product) {
 
-            //Iterate over each attribute of the product
-            foreach($product->getAttributeValue() as $product_attribute) {
-                $attribute_value_to_add = true;
-                //for each attribute that exists in the array
-
-                if(array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
-                    foreach($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()] as $attribute_value) {
-
-                        //Check if the attribute exists in the attributes array
-                        if($product_attribute == $attribute_value) {
-
-                            //If it exists, set to add to false 
-                            $attribute_value_to_add = false;
+            //Ensure product is in stock
+            if($product->getCurrentStockLevel() > 0) {
 
 
-                        } else {
-                            //If it doesn't exist, add the attribute to the array and the attribute value
-                            //Push the attribute to the array.
-                           
+                //Iterate over each attribute of the product
+                foreach ($product->getAttributeValue() as $product_attribute) {
+                    $attribute_value_to_add = true;
+                    //for each attribute that exists in the array
+
+                    if (array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
+                        foreach ($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()] as $attribute_value) {
+
+                            //Check if the attribute exists in the attributes array
+                            if ($product_attribute == $attribute_value) {
+
+                                //If it exists, set to add to false
+                                $attribute_value_to_add = false;
+
+
+                            } else {
+                                //If it doesn't exist, add the attribute to the array and the attribute value
+                                //Push the attribute to the array.
+
+
+                            }
+
 
                         }
-
-                        
                     }
-                }
 
-                if($attribute_value_to_add == true) {
+                    if ($attribute_value_to_add == true) {
 
-                    //Check if the index exists in the array
-                    if(array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
+                        //Check if the index exists in the array
+                        if (array_key_exists($product_attribute->getAttribute()->getAttributeName(), $attribute_values_array)) {
 
-                        //The array key (attribute) exists, so add the attribute value to it
-                        array_push($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()], $product_attribute);
-                    } else {
-                        $attribute_values_array[$product_attribute->getAttribute()->getAttributeName()][0] = $product_attribute;
+                            //The array key (attribute) exists, so add the attribute value to it
+                            array_push($attribute_values_array[$product_attribute->getAttribute()->getAttributeName()], $product_attribute);
+                        } else {
+                            $attribute_values_array[$product_attribute->getAttribute()->getAttributeName()][0] = $product_attribute;
+                        }
                     }
                 }
             }
@@ -1089,7 +1117,15 @@ class ShopController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         //Find the products that match the search string
-        $products = $em->getRepository('MilesApartAdminBundle:Product')->publicSearch($search_string); 
+        $products = $em->getRepository('MilesApartAdminBundle:Product')->publicSearch($search_string);
+
+        //Remove products with no stock
+        $saleable_products = array();
+        foreach($products as $product) {
+            if($product->getCurrentStockLevel() > 0) {
+                array_push($saleable_products, $product);
+            }
+        }
 
         $per_page = $session->get("per_page", false);
         $order_by = $session->get("order_by", false);
@@ -1099,7 +1135,7 @@ class ShopController extends Controller
             'search_string' => $search_string,
             'per_page' => $per_page,
             'attributes' => $attributes,
-            'results_count' => count($products),
+            'results_count' => count($saleable_products),
             'order_by' => $order_by,
             'page' => $page
 
@@ -1143,15 +1179,23 @@ class ShopController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //Find the products that match the search string
-        $products = $em->getRepository('MilesApartAdminBundle:Product')->findWebProductsBySearchWithParams($search_string, $parameters, $order_by_query);  
+        $products = $em->getRepository('MilesApartAdminBundle:Product')->findWebProductsBySearchWithParams($search_string, $parameters, $order_by_query);
+
+        //Remove products with no stock
+        $saleable_products = array();
+        foreach($products as $product) {
+            if($product->getCurrentStockLevel() > 0) {
+                array_push($saleable_products, $product);
+            }
+        }
 
         //Set up pagerfanta
-        $adapter = new ArrayAdapter($products);
+        $adapter = new ArrayAdapter($saleable_products);
         
         //Pass adapter to pagerfanta
         $pager =  new Pagerfanta($adapter);
         
-        $product_count = count($products);
+        $product_count = count($saleable_products);
         //Check if products per page is set
         if(!$session->get("per_page")) {
             $products_per_page = 12;

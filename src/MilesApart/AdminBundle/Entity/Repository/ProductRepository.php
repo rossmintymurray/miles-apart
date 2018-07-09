@@ -12,79 +12,80 @@ use MilesApart\AdminBundle\ProductCategory;
  */
 class ProductRepository extends EntityRepository
 {
-	//Check the products for array match. (For CSV import)
-	public function findProductByBarcode($barcodeArray)
-	{
+    //Check the products for array match. (For CSV import)
+    public function findProductByBarcode($barcodeArray)
+    {
         //Check if there is a value for product id.
         if ($barcodeArray) {
-                $query = $this->getEntityManager()
-                    	->createQuery('
+            $query = $this->getEntityManager()
+                ->createQuery('
                     		SELECT p FROM MilesApartAdminBundle:Product p
                             LEFT JOIN p.product_supplier s
                             WHERE p.product_barcode = :barcodeArray	
                     		')
-                        ->setParameter('barcodeArray', $barcodeArray);
-            
-        return $query
-                  ->getResult(); 
-              }
-   }
+                ->setParameter('barcodeArray', $barcodeArray);
 
-   //Check the products for array match. (For CSV import)
+            return $query
+                ->getResult();
+        }
+    }
+
+    //Check the products for array match. (For CSV import)
     public function findProductByName($productName)
     {
         //Check if there is a value for product id.
         if ($productName) {
-                $query = $this->getEntityManager()
-                        ->createQuery('
+            $query = $this->getEntityManager()
+                ->createQuery('
                             SELECT p FROM MilesApartAdminBundle:Product p
                             WHERE p.product_name = :productName       
                             ')
-                        ->setParameter('productName', $productName);
-            } 
+                ->setParameter('productName', $productName);
+        }
         return $query
-                  ->getResult(); 
-   }
+            ->getResult();
+    }
 
-   //Check the products for array match. (For CSV import)
+    //Check the products for array match. (For CSV import)
     public function findBySupplierCode($productSupplierCode, $supplierId)
     {
         //Check if there is a value for product id.
         if ($productSupplierCode && $supplierId) {
-                $query = $this->getEntityManager()
-                        ->createQuery('
+            $query = $this->getEntityManager()
+                ->createQuery('
                             SELECT p FROM MilesApartAdminBundle:Product p
                             JOIN p.product_supplier ps
                             JOIN ps.supplier s
                             WHERE p.product_supplier_code = :productSupplierCode
                             AND s.id = :supplierId 
                             ')
-                        ->setParameter('productSupplierCode', $productSupplierCode)
-                        ->setParameter('supplierId', $supplierId);
-            } 
+                ->setParameter('productSupplierCode', $productSupplierCode)
+                ->setParameter('supplierId', $supplierId);
+        }
         return $query
-                  ->getResult(); 
-   }
+            ->getResult();
+    }
 
-   public function findProductsFromSupplierCodeText($productSupplierCode)
+    public function findProductsFromSupplierCodeText($productSupplierCode)
     {
         //Check if there is a value for product id.
         if ($productSupplierCode) {
-                $query = $this->getEntityManager()
-                        ->createQuery('
+            $query = $this->getEntityManager()
+                ->createQuery('
                             SELECT p FROM MilesApartAdminBundle:Product p
                             WHERE p.product_supplier_code LIKE :productSupplierCode
                             ')
-                        ->setParameter('productSupplierCode', '%'.$productSupplierCode.'%');
-            } 
+                ->setParameter('productSupplierCode', '%' . $productSupplierCode . '%');
+        }
         return $query
-                  ->getResult(); 
-   }
+            ->getResult();
+    }
 
-   
-	public function findByLetters($string){
+
+    public function findByLetters($string)
+    {
         return $this->getEntityManager()
-        ->createQuery('
+            ->createQuery('
             SELECT p FROM MilesApartAdminBundle:Product p  
                 WHERE p.product_name  LIKE :string 
                 OR p.product_marketing_name LIKE :string 
@@ -92,13 +93,14 @@ class ProductRepository extends EntityRepository
                 AND p.is_product_online = true
 
                 ')
-                ->setParameter('string','%'.$string.'%')
-                ->getResult();
+            ->setParameter('string', '%' . $string . '%')
+            ->getResult();
     }
 
-    public function publicSearch($string){
+    public function publicSearch($string)
+    {
         return $this->getEntityManager()
-        ->createQuery('
+            ->createQuery('
             SELECT p, k FROM MilesApartAdminBundle:Product p  
             LEFT JOIN p.keyword k
                 WHERE p.product_marketing_name LIKE :string 
@@ -107,22 +109,24 @@ class ProductRepository extends EntityRepository
                 AND p.is_product_online = true
 
                 ')
-                ->setParameter('string','%'.$string.'%')
-                ->getResult();
+            ->setParameter('string', '%' . $string . '%')
+            ->getResult();
     }
 
-    public function findProductsByCategory($category_slug){
+    public function findProductsByCategory($category_slug)
+    {
         return $this->getEntityManager()
-        ->createQuery('
+            ->createQuery('
             SELECT p FROM MilesApartAdminBundle:Product p  
              JOIN p.category c 
                 WHERE c.category_slug = :category_slug
                 ')
-                ->setParameter('category_slug', $category_slug)
-                ->getResult();
+            ->setParameter('category_slug', $category_slug)
+            ->getResult();
     }
 
-    public function findWebProductsByCategory($category_slug, $order_by = null){
+    public function findWebProductsByCategory($category_slug, $order_by = null)
+    {
         $query = '
             SELECT p FROM MilesApartAdminBundle:Product p  
              JOIN p.category c 
@@ -131,19 +135,19 @@ class ProductRepository extends EntityRepository
                 AND p.is_product_online = true
                 ';
 
-        if($order_by != null) {
-                $query .= " ORDER BY ". $order_by;
-            } else {
-                $query .= " ORDER BY p.product_name ASC";
-            }
+        if ($order_by != null) {
+            $query .= " ORDER BY " . $order_by;
+        } else {
+            $query .= " ORDER BY p.product_name ASC";
+        }
         return $this->getEntityManager()
-        ->createQuery($query)
-
-                ->setParameter('category_slug', $category_slug)
-                ->getResult();
+            ->createQuery($query)
+            ->setParameter('category_slug', $category_slug)
+            ->getResult();
     }
 
-    public function findWebProductsByCategoryWithParams($category_slug, $params, $order_by = null){
+    public function findWebProductsByCategoryWithParams($category_slug, $params, $order_by = null)
+    {
 
 
         //Build the query 
@@ -151,52 +155,52 @@ class ProductRepository extends EntityRepository
              JOIN p.category c 
              JOIN p.product_price pp
              JOIN p.attribute_value av WHERE";
-             
-                
 
-                $index = 0;
-                //Iterate over the params 
-                if(count($params) == 1) {
-                    $query .= " av.attribute_value_slug = :attribute_value_0 AND";
-                } else if(count($params) > 1){
-                    $query .= " (";
-                    foreach($params as $value) {
-                        
-                        if($index == 0){
-                            $query .= "av.attribute_value_slug = :attribute_value_".$index;
-                        } else {
-                            $query .= " OR av.attribute_value_slug = :attribute_value_".$index;
-                        }
-                        $index++;
-                    }
-                    $query .= ") AND ";
-                } 
 
-            $query .= " c.category_slug = :category_slug
-                AND p.is_product_online = true";
-            
-            if($order_by != null) {
-                $query .= " ORDER BY ". $order_by;
-            } else {
-                $query .= " ORDER BY p.product_name ASC";
+        $index = 0;
+        //Iterate over the params
+        if (count($params) == 1) {
+            $query .= " av.attribute_value_slug = :attribute_value_0 AND";
+        } else if (count($params) > 1) {
+            $query .= " (";
+            foreach ($params as $value) {
+
+                if ($index == 0) {
+                    $query .= "av.attribute_value_slug = :attribute_value_" . $index;
+                } else {
+                    $query .= " OR av.attribute_value_slug = :attribute_value_" . $index;
+                }
+                $index++;
             }
-        
+            $query .= ") AND ";
+        }
+
+        $query .= " c.category_slug = :category_slug
+                AND p.is_product_online = true";
+
+        if ($order_by != null) {
+            $query .= " ORDER BY " . $order_by;
+        } else {
+            $query .= " ORDER BY p.product_name ASC";
+        }
+
         $full_query = $this->getEntityManager()->createQuery($query);
         $full_query->setParameter('category_slug', $category_slug);
 
         $i = 0;
         //Iterate over the params 
-        foreach($params as $value) {
-                $full_query->setParameter('attribute_value_'.$i, $value);
+        foreach ($params as $value) {
+            $full_query->setParameter('attribute_value_' . $i, $value);
 
-                $i++;
-            }
-                
+            $i++;
+        }
 
-                return $full_query->getResult();
+
+        return $full_query->getResult();
     }
 
-    public function findWebProductsBySearchWithParams($string, $params, $order_by = null){
+    public function findWebProductsBySearchWithParams($string, $params, $order_by = null)
+    {
 
 
         //Build the query 
@@ -206,99 +210,98 @@ class ProductRepository extends EntityRepository
              JOIN p.attribute_value av 
              LEFT JOIN p.keyword k
              WHERE";
-             
-                
 
-                $index = 0;
-                //Iterate over the params 
-                if(count($params) == 1) {
-                    $query .= " av.attribute_value_slug = :attribute_value_0 AND";
-                } else if(count($params) > 1){
-                    $query .= " (";
-                    foreach($params as $value) {
-                        
-                        if($index == 0){
-                            $query .= "av.attribute_value_slug = :attribute_value_".$index;
-                        } else {
-                            $query .= " OR av.attribute_value_slug = :attribute_value_".$index;
-                        }
-                        $index++;
-                    }
-                    $query .= ") AND ";
-                } 
 
-            //Set the category
-            //$query .= " c.category_slug = :category_slug
-                //AND p.is_product_online = true";
+        $index = 0;
+        //Iterate over the params
+        if (count($params) == 1) {
+            $query .= " av.attribute_value_slug = :attribute_value_0 AND";
+        } else if (count($params) > 1) {
+            $query .= " (";
+            foreach ($params as $value) {
 
-            //Search string
-            $query .= " p.product_marketing_name LIKE :string 
+                if ($index == 0) {
+                    $query .= "av.attribute_value_slug = :attribute_value_" . $index;
+                } else {
+                    $query .= " OR av.attribute_value_slug = :attribute_value_" . $index;
+                }
+                $index++;
+            }
+            $query .= ") AND ";
+        }
+
+        //Set the category
+        //$query .= " c.category_slug = :category_slug
+        //AND p.is_product_online = true";
+
+        //Search string
+        $query .= " p.product_marketing_name LIKE :string 
                 OR p.product_marketing_sub_name LIKE :string 
                 OR k.keyword_word LIKE :string";
-            
-            //Set the online only
-            //$query .= " AND p.is_product_online = true";
-            
-            //Set the order by
-            if($order_by != null) {
-                $query .= " ORDER BY ". $order_by;
-            } else {
-                $query .= " ORDER BY p.product_name ASC";
-            }
+
+        //Set the online only
+        //$query .= " AND p.is_product_online = true";
+
+        //Set the order by
+        if ($order_by != null) {
+            $query .= " ORDER BY " . $order_by;
+        } else {
+            $query .= " ORDER BY p.product_name ASC";
+        }
 
 
-        
         $full_query = $this->getEntityManager()->createQuery($query);
-        $full_query->setParameter('string','%'.$string.'%');
+        $full_query->setParameter('string', '%' . $string . '%');
 
         $i = 0;
         //Iterate over the params 
-        foreach($params as $value) {
-                $full_query->setParameter('attribute_value_'.$i, $value);
+        foreach ($params as $value) {
+            $full_query->setParameter('attribute_value_' . $i, $value);
 
-                $i++;
-            }
-                
+            $i++;
+        }
 
-                return $full_query->getResult();
+
+        return $full_query->getResult();
     }
 
 
-
-    public function findProductsBySubCategory($sub_category_slug){
+    public function findProductsBySubCategory($sub_category_slug)
+    {
         return $this->getEntityManager()
-        ->createQuery('
+            ->createQuery('
             SELECT p FROM MilesApartAdminBundle:Product p  
              JOIN p.category c 
              JOIN c.parent pa
                 WHERE pa.category_slug = :sub_category_slug
                 ')
-                ->setParameter('sub_category_slug', $sub_category_slug)
-                ->getResult();
+            ->setParameter('sub_category_slug', $sub_category_slug)
+            ->getResult();
     }
 
-     public function findProductsBySupplier($supplier_id){
+    public function findProductsBySupplier($supplier_id)
+    {
         return $this->getEntityManager()
-        ->createQuery('
+            ->createQuery('
             SELECT p FROM MilesApartAdminBundle:Product p  
              JOIN p.product_supplier ps 
              JOIN ps.supplier s
                 WHERE s.id = :supplier_id
                 ')
-                ->setParameter('supplier_id', $supplier_id)
-                ->getResult();
+            ->setParameter('supplier_id', $supplier_id)
+            ->getResult();
     }
 
-    public function findNewProducts() {
+    public function findNewProducts()
+    {
         return $this->getEntityManager()
-        ->createQuery('
+            ->createQuery('
             SELECT p FROM MilesApartAdminBundle:Product p  
              JOIN p.product_price pp 
                 WHERE p.is_product_online = true
                 ORDER BY p.product_date_created DESC
                 ')
-                ->setMaxResults(4)
-                ->getResult();
+            ->setMaxResults(4)
+            ->getResult();
     }
-
 }

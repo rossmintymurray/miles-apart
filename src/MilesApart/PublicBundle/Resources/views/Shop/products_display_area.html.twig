@@ -6,31 +6,31 @@
 
 {# Call the thumbnail controller #}
 <ul class="row grid" id="display_area">
-    {% for entity in pager %} 
+    {% for entity in pager %}
         <li class="small-6 medium-3 columns left">
             <div class="prod_disp_wrapper thumbnail">
                 <div class="row_wrapper">
                     <div class="prod_left">
                         {# Show image #}
                         {% for image in entity.productimage %}
-                            
+
                             {# If there is a product image with main image set #}
                             {% if image.productimageismain == true %}
 
                                 {# Set the image name #}
                                 {% set photo_path = 'images/products/'~image.productimagepath %}
                                 <a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}">
-                                    
+
                                     <img alt="{{ image.productimagetitle }}" src="{{ photo_path|apply_filter('public_product_thumb') }}" class="product_thumbnail_image small-12" />
-                                    
+
                                 </a>
                             {% endif %}
 
                         {% endfor %}
-                        
+
                         {# If there is no product image, show the placeholder image #}
                         {% if entity.productimage|length == 0 %}
-                            
+
                             {# Show placeholder image #}
                             <a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}">
                                 <img src="{{ asset('images/web/placeholder_thumb.jpg') }}" alt="Thumbnail placeholder" class="small-12"/>
@@ -39,19 +39,19 @@
 
                     </div>
                     <div class="prod_center text-center">
-                        
+
 
                         {# Product name #}
                         <h5 class="thumbnail_product_name"><a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}">{{ entity.productmarketingname }}</a></h5>
-                        
+
                         <p class="thumbnail_product_sub_name search_results_sub_title sub_name">{{ entity.getProductMarketingSubName }}</p>
 
-                        <p class="product_description hidden"> <span class="wrapper">{{ entity.productdescription }}<a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}"></span><br/>More info</a></p>
-                           
+                        <p class="product_description hidden"> <span class="wrapper">{{ entity.productdescription }}<a href="{{ path('miles_apart_public_product_page', { 'slug': entity.getProductSlug }) }}"><br/>More info</a></span></p>
+
                     </div>
                     <div class="prod_right">
                         {# Product price #}
-                        
+
 
                         {# Check if price is sale price #}
                         {% if entity.productpricebydate("now"|date("Y-m-d H:i:s")).productpriceisspecial == true %}
@@ -70,7 +70,7 @@
                                     <span class="sale_price shop_price">{{ entity.getCurrentPriceDisplay }}</span>
                                 </div>
                             </div>
-                         
+
                          {# Not sale price so show the current price #}
                          {% else %}
                             <h3 class="thumbnail_price search_results_price small-12 shop_price">{{ entity.getCurrentPriceDisplay }}</h3>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </li>
 
         {# Clearfix if loop index is divisable by 4 #}
@@ -101,8 +101,7 @@
             </div>
         {% endif %}
     {% endfor %}
-    
-</div>
+</ul>
 
 
 {% block javascripts %}

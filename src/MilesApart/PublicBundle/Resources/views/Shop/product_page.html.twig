@@ -72,7 +72,12 @@
                 <div class="large-12 columns">
 
                     <p class="product_page_price">{{ entity.currentpricedisplay }}</p>
-                    <a href="{{ path('miles_apart_basket_add_from_product', { 'id': entity.getId }) }}" id="{{ entity.id }}" class="button success small small-12 add_to_basket_from_product" role="button">Add to basket</a>
+                    {# Check if the product is in stock, is so show add to basket. If not, show out of stock #}
+                    {%  if entity.getCurrentStockLevel > 0 %}
+                        <a href="{{ path('miles_apart_basket_add_from_product', { 'id': entity.getId }) }}" id="{{ entity.id }}" class="button success small small-12 add_to_basket_from_product" role="button">Add to basket</a>
+                    {%  else  %}
+                        <a class="button success small small-12 disabled" role="button">Out of stock</a>
+                    {% endif %}
                     <p class="product_codes">Product code: MA-{{ entity.id }} / SC-{{ entity.productsuppliercode }}</p>
 
                     <div class="homepage_header"></div>
