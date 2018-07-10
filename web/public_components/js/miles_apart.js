@@ -356,8 +356,23 @@ function basketAddFunction(basketUrl, product_id) {
         dataType: "json",
         data: {product_id : product_id},
         success: function(data){
-            //Add to javscript shopping cart
-            addToJSShoppingCart(data);
+            //Check if in stock
+            if(data['current_stock_level'] > 0) {
+                //Add to javscript shopping cart
+                addToJSShoppingCart(data);
+
+                //Check if this was the last in stock
+                if(data['current_stock_level'] == 1) {
+                    //Change button to disabled
+                    var div = "#" + product_id;
+                    $(div).addClass('disabled');
+                    $(div).removeClass('add_to_basket');
+                    $(div).html('Currently unavailable');
+
+                }
+            } else {
+                swal("Sorry!", "This product has now sold out so no more can be added to your basket.", "warning");
+            }
         },
         fail: function() {
             alert('failed'); 

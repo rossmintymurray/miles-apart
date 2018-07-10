@@ -283,21 +283,36 @@ class BasketFunctionsController extends Controller
                  
                 //Check if the product id of each item in the basket matches the one we are adding.
                 if ($basket_product_existing->getProduct()->getId() == $id) {
-                    
-                    
-                    //Product is in basket so add qty..
-                    $new_qty = $basket_product_existing->getBasketProductQuantity() + 1;
-                    $basket_product_existing->setBasketProductQuantity($new_qty);
-                    
+
+                    //The product is in the basket
                     $exists_in_basket = true;
-                    //$em->persist($basket_product_existing);
-                    
-                    //Set the return data
-                    $product_id = $basket_product_existing->getProduct()->getId();
-                    $product_name = $basket_product_existing->getProduct()->getProductMarketingName();
-                    $product_price = $basket_product_existing->getProduct()->getCurrentPriceDecimal();
-                    $product_quantity = $basket_product_existing->getBasketProductQuantity();
-                } 
+
+                    //Check stock of product
+                    if ($basket_product_existing->getProduct()->getCurrentStockLevel() - $basket_product_existing->getBasketProductQuantity() > 0) {
+                        //Product is in basket so add qty..
+                        $new_qty = $basket_product_existing->getBasketProductQuantity() + 1;
+                        $basket_product_existing->setBasketProductQuantity($new_qty);
+
+
+                        //$em->persist($basket_product_existing);
+
+                        //Set the return data
+                        $product_id = $basket_product_existing->getProduct()->getId();
+                        $product_name = $basket_product_existing->getProduct()->getProductMarketingName();
+                        $product_price = $basket_product_existing->getProduct()->getCurrentPriceDecimal();
+                        $product_quantity = $basket_product_existing->getBasketProductQuantity();
+                        $current_stock_level = $basket_product_existing->getProduct()->getCurrentSTockLevel();
+                    } else {
+                        //Set that there is not enough stock for the warning message
+                        //Set the return data
+                        $product_id = FALSE;
+                        $product_name = FALSE;
+                        $product_price = FALSE;
+                        $product_quantity = FALSE;
+                        $current_stock_level = 0;
+                    }
+
+                }
 
             }
         }
@@ -306,22 +321,33 @@ class BasketFunctionsController extends Controller
             
             $product = $em->getRepository('MilesApartAdminBundle:Product')->findOneById($id);
 
-            //Create new basket product.
-            $basket_product = new BasketProduct();
-            $basket_product->setBasket($basket);
-            //Set the product of the basket product.
-            $basket_product->setProduct($product);
-            $basket_product->setBasketProductQuantity(1);
+            //Check stock level
+            if($product->getCurrentStockLevel() > 0) {
+                //Create new basket product.
+                $basket_product = new BasketProduct();
+                $basket_product->setBasket($basket);
+                //Set the product of the basket product.
+                $basket_product->setProduct($product);
+                $basket_product->setBasketProductQuantity(1);
 
-            //Product is not in basket so add it..
-            $basket->addBasketProduct($basket_product);
-                   
-            //Set the return data
-            $product_id = $basket_product->getProduct()->getId();
-            $product_name = $basket_product->getProduct()->getProductMarketingName();
-            $product_price = $basket_product->getProduct()->getCurrentPriceDecimal();
-            $product_quantity = $basket_product->getBasketProductQuantity();
-                
+                //Product is not in basket so add it..
+                $basket->addBasketProduct($basket_product);
+
+                //Set the return data
+                $product_id = $basket_product->getProduct()->getId();
+                $product_name = $basket_product->getProduct()->getProductMarketingName();
+                $product_price = $basket_product->getProduct()->getCurrentPriceDecimal();
+                $product_quantity = $basket_product->getBasketProductQuantity();
+                $current_stock_level = $product->getCurrentSTockLevel();
+            } else {
+                //Set that there is not enough stock for the warning message
+                //Set the return data
+                $product_id = FALSE;
+                $product_name = FALSE;
+                $product_price = FALSE;
+                $product_quantity = FALSE;
+                $current_stock_level = 0;
+            }
         }
 
 
@@ -345,6 +371,7 @@ class BasketFunctionsController extends Controller
             "product_quantity" => $product_quantity,
             "basket_quantity" =>$basket->getBasketTotalQuantity(),
             "basket_value" =>$basket->getBasketTotalPriceDisplay(),
+            "current_stock_level" => $current_stock_level,
 
             );
 
