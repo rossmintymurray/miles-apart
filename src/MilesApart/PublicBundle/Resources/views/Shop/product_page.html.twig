@@ -74,7 +74,7 @@
                     <p class="product_page_price">{{ entity.currentpricedisplay }}</p>
                     {# Check if the product is in stock, is so show add to basket. If not, show out of stock #}
                     {%  if entity.getCurrentStockLevel > 0 %}
-                        <a href="{{ path('miles_apart_basket_add_from_product', { 'id': entity.getId }) }}" id="{{ entity.id }}" class="button success small small-12 add_to_basket_from_product" role="button">Add to basket</a>
+                        <a href="{{ path('miles_apart_basket_add_from_product', { 'id': entity.getId }) }}" id="{{ entity.id }}" class="button success small small-12 {%  if entity.getCurrentStockLevelMinusBasket <= 0 %}disabled{%  else  %}add_to_basket_from_product{%  endif %}" role="button" style="margin-bottom:0.5rem">{%  if entity.getCurrentStockLevelMinusBasket <= 0 %}Currently unavailable{%  else  %}Add to basket{%  endif %}</a>
                     {%  else  %}
                         <a class="button success small small-12 disabled" role="button">Out of stock</a>
                     {% endif %}

@@ -116,7 +116,7 @@ function toggleNewBillingAddressDisplay() {
 function selectDeliveryAddress(addressId) {
     //Check for delivery&billing address set
     if($(".delivery_and_billing_address_select").length > 0) {
-        alert("there is a double");
+
         $(".delivery_and_billing_address_select").each(function() {
             //Get the link id
             if($( this ).hasClass( "success" )) {
@@ -124,7 +124,6 @@ function selectDeliveryAddress(addressId) {
                 $( this ).removeClass( "delivery_and_billing_address_select" );
                 $(this).text("Select address");
                 var oldId = $(this).attr("id").substr(22,3);
-                alert("old" + oldId);
             
                 //Update the Billing address to show this one 
                 $("#billing_address_hidden").show();
@@ -320,14 +319,14 @@ function checkDefaultAddresses() {
     //Check if defaults are set
     if($(".default_delivery_address").length > 0) {
         $(".default_delivery_address").each(function(index) {
-            alert(index + ": " + $( this ).attr('id') );
+
             defaultDeliveryAddressId = $( this ).attr('id').substr(17,3);
         });
     }
 
     if($(".default_billing_address").length > 0) {
         $(".default_billing_address").each(function(index) {
-            alert(index + ": " + $( this ).attr('id') );
+
             defaultBillingAddressId = $( this ).attr('id').substr(16,3);
         });
     }
