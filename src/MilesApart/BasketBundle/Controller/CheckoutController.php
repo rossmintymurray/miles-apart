@@ -47,21 +47,60 @@ class CheckoutController extends Controller
         $em = $this->getDoctrine()->getManager();
         //Merge the basket
         $basket = $em->merge($basket);
+
+        //Check basket is purchasable
+        $purchasable_basket = $this->getPurchasableBasket($basket);
+
+        if($purchasable_basket) {
+            //Adjustments have been made to the basket as items have been sold since they put it in their basket
+            $basket = $purchasable_basket;
+
+            //Set flashbage
+            $this->get('session')->getFlashBag()->set('checkout-public-error', 'Our apologies, we have had to remove item(s) from your basket. your basket has been updated to reflect current available stock.');
+
+            //Persist the new basket
+            $em->flush();
+        }
         
         //Create the new customer checkout and existing customer checkout forms
         $entity = new FosUser();
 
         //Create for for existing customer to login
         $existing_customer_checkout_form = $this->createExistingCustomerCheckoutForm($entity);
-       
+
        //Render the page
         return $this->render('MilesApartBasketBundle::checkout_start.html.twig', array(
-            'basket' => $basket, 
+            'basket' => $basket,
             'form' => $existing_customer_checkout_form->createView(),
             'submitted' => false
         ));
     }
-    
+
+    /*
+     *
+     * Check basket can be purchased at this moment
+     *
+     */
+    public function getPurchasableBasket($basket)
+    {
+        $purchasable_basket = NULL;
+
+        foreach($basket->getBasketProduct() as $value) {
+            $stock_offset = $value->getProduct()->getCurrentStockLevel() - $value->getBasketProductQuantity();
+
+            if($stock_offset < 0) {
+                //Adjust the basket quantity
+                $value->setBasketProductQuantity($value->getBasketProductQuantity() + $stock_offset);
+
+                $purchasable_basket = $basket;
+
+            }
+        }
+
+
+        return $purchasable_basket;
+    }
+
     /**
     * Creates a form to create an existing customer checkout form.
     *

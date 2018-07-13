@@ -1505,6 +1505,39 @@ class Product
     }
 
     /**
+     * Get current_stock_level minus the qty in any basket at any time
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCurrentStockLevelMinusBasket()
+    {
+        //Get current date and minus 10 minutes
+        $endtime = new \DateTime();
+        $endtime->setTimestamp(strtotime('- 10 minutes', time()));
+
+        $stock_level = $this->getCurrentStockLevel();
+
+        //Check every un-checked out basket for this product and deduct from the stock level
+        //Check if there are any products in baskets that are not checked out and have not been added to for 10 mins
+        if (count($this->getBasketProduct()) > 0) {
+
+            //For each time there is a basket product
+            foreach ($this->getBasketProduct() as $key => $value) {
+
+                //If the basket has not been checjed out
+                if ($value->getBasket()->getBasketCheckedOut() != TRUE && $value->getBasket()->getBasketDateModified() > $endtime)  {
+
+                    //Update the qty
+                    $stock_level = $stock_level - $value->getBasketProductQuantity();
+
+                }
+            }
+        }
+
+        return $stock_level;
+    }
+
+    /**
      * Add product_question
      *
      * @param \MilesApart\AdminBundle\Entity\ProductQuestion $productQuestion

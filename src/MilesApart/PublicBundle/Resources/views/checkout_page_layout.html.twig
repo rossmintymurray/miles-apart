@@ -20,6 +20,17 @@
 
             {% endblock %}
         </div>
+
+        <div class="small-12">
+            {# Flahbag messages #}
+            <!--Info box area placeholder for success/failure messages  (flash messages) -->
+            {% for flashMessage in app.session.flashbag.get('checkout-public-error') %}
+                <div data-alert class="alert-box alert radius">
+                    {{ flashMessage }}
+                    <a href="#" class="close">&times;</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
     {# Main content row #}
