@@ -1,92 +1,95 @@
 {# Set up the 'new products' section #}
-<div class="row">
-	<div class="large-12 columns">
-	    <div class="homepage_header"></div>
-	    <h3 class="text-center homepage_header_text"><span>New Products</span></h3>
-	</div>
-</div>
+{# Check that there are at least 4 products to display #}
+{% if new_products|length >= 4 %}
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="homepage_header"></div>
+            <h3 class="text-center homepage_header_text"><span>New Products</span></h3>
+        </div>
+    </div>
 
-<div class="row text-center">
-	{% for product in new_products %}
-		<div class="small-6 medium-3 large-3 columns">
-			<div class="thumbnail">
+    <div class="row text-center">
+        {% for product in new_products %}
+            <div class="small-6 medium-3 large-3 columns">
+                <div class="thumbnail">
 
-			 	{# Show image #}
-	            {% for image in product.productimage %}
-	                
-	                {# If there is a product image with main image set #}
-	                {% if image.productimageismain == 1 %}
-	                	
+                    {# Show image #}
+                    {% for image in product.productimage %}
 
-	                    {# Set the image name #}
-	                    {% set photo_path = 'images/products/'~image.productimagepath %}
-	                    <a href="{{ path('miles_apart_public_product_page', { 'slug': product.getProductSlug }) }}">
-	                        
-	                        <img alt="{{ image.productimagetitle }}" src="{{ photo_path|apply_filter('public_product_thumb') }}" class="product_thumbnail_image large-12" />
-	                        
-	                    </a>
-	                {% endif %}
-
-	            {% endfor %}
- 				
- 				{# Show the text under the image #}
-                <div class="text-center">
-		
-					{# Product name #}
-                    <h5 class="thumbnail_product_name"><a href="{{ path('miles_apart_public_product_page', { 'slug': product.getProductSlug }) }}">{{ product.productmarketingname }}</a></h5>
-                    
-                    <span class="thumbnail_product_sub_name">{{ product.productmarketingsubname }}</span>
-
-                    {# Product price #}
-                    <div class="thumbnail_bottom">
-
-                        {# Check if price is sale price #}
-                        {% if product.productpricebydate("now"|date("Y-m-d H:i:s")).productpriceisspecial == true %}
+                        {# If there is a product image with main image set #}
+                        {% if image.productimageismain == 1 %}
 
 
+                            {# Set the image name #}
+                            {% set photo_path = 'images/products/'~image.productimagepath %}
+                            <a href="{{ path('miles_apart_public_product_page', { 'slug': product.getProductSlug }) }}">
 
-                           {# Is sale price #}
-                            <div class="row">
-                                {# Show old prices crossed through #}
-                                <div class="large-6 columns text-right">
-                                    <span class="price_title">Was</span>
-                                    <span class="original_price shop_price">£5.99</span>
-                                </div>
+                                <img alt="{{ image.productimagetitle }}" src="{{ photo_path|apply_filter('public_product_thumb') }}" class="product_thumbnail_image large-12" />
 
-                                {# Show sale price #}
-                                <div class="large-6  columns text-left ">
-                                    <span class="price_title">Now</span>
-                                    <span class="sale_price shop_price">£2.99</span>
-                                </div>
-                            </div>
-                        
-                        {% else %}
-						{# Not sale price so show the current price #}
-
-							<span class="thumbnail_price large-12 shop_price">{{ product.getCurrentPriceDisplay }}</span>
-
+                            </a>
                         {% endif %}
 
-                        {# Add to basket link, need to check if in basket and show add another if it is #}
-                        <p><a href="{# path('miles_apart_basket_add_from_shop', { 'id': product.getId }) #}" id="{{ product.id }}" class="button tiny small-12 add_to_basket_from_shop success" role="button">Add to basket</a></p>
-	
-					</div>
-				</div>
-			</div>
-		</div>
-		{# Clearfix if loop index is divisable by 4 #}
-        {% if loop.index is divisible by(4) %}
-        	<div class="hide-for-small-only">
-            	<div class="clearfix"></div>
-            </div>
-        {% endif %}
+                    {% endfor %}
 
-        {# Clearfix if loop index is divisable by 4 #}
-        {% if loop.index is divisible by(2) %}
-        	<div class="show-for-small-only">
-            	<div class="clearfix"></div>
-            </div>
-        {% endif %}
-	{% endfor %}
+                    {# Show the text under the image #}
+                    <div class="text-center">
 
-</div>
+                        {# Product name #}
+                        <h5 class="thumbnail_product_name"><a href="{{ path('miles_apart_public_product_page', { 'slug': product.getProductSlug }) }}">{{ product.productmarketingname }}</a></h5>
+
+                        <span class="thumbnail_product_sub_name">{{ product.productmarketingsubname }}</span>
+
+                        {# Product price #}
+                        <div class="thumbnail_bottom">
+
+                            {# Check if price is sale price #}
+                            {% if product.productpricebydate("now"|date("Y-m-d H:i:s")).productpriceisspecial == true %}
+
+
+
+                               {# Is sale price #}
+                                <div class="row">
+                                    {# Show old prices crossed through #}
+                                    <div class="large-6 columns text-right">
+                                        <span class="price_title">Was</span>
+                                        <span class="original_price shop_price">£5.99</span>
+                                    </div>
+
+                                    {# Show sale price #}
+                                    <div class="large-6  columns text-left ">
+                                        <span class="price_title">Now</span>
+                                        <span class="sale_price shop_price">£2.99</span>
+                                    </div>
+                                </div>
+
+                            {% else %}
+                            {# Not sale price so show the current price #}
+
+                                <span class="thumbnail_price large-12 shop_price">{{ product.getCurrentPriceDisplay }}</span>
+
+                            {% endif %}
+
+                            {# Add to basket link, need to check if in basket and show add another if it is #}
+                            <p><a href="{# path('miles_apart_basket_add_from_shop', { 'id': product.getId }) #}" id="{{ product.id }}" class="button tiny small-12 add_to_basket_from_shop success" role="button">Add to basket</a></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# Clearfix if loop index is divisable by 4 #}
+            {% if loop.index is divisible by(4) %}
+                <div class="hide-for-small-only">
+                    <div class="clearfix"></div>
+                </div>
+            {% endif %}
+
+            {# Clearfix if loop index is divisable by 4 #}
+            {% if loop.index is divisible by(2) %}
+                <div class="show-for-small-only">
+                    <div class="clearfix"></div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+{% endif %}

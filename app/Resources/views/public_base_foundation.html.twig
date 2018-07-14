@@ -66,8 +66,15 @@
 
             </script>
 
-           
-            
+            {# Set the logged_in_uesr_id for JS purposes #}
+            <form class="hidden">
+                {% if app.user %}
+                    <input type="hidden" id="logged_in_user_id" value="{{ app.security.getToken().getUser().getId() }}" />
+                {% else %}
+                    <input type="hidden" id="logged_in_user_id" value=false />
+                {% endif %}
+            </form>
+
 
             {# Call the info links controller #}
             {{ render(controller('MilesApartPublicBundle:PageComponents:infoLinks')) }}

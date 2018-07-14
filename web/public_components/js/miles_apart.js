@@ -470,12 +470,19 @@ function createJSShoppingCart(data) {
 
 
     //Create the wishlist and empty button
-    var wishlist_button = "<a href=\"" + globalBaseUrl + "basket/save-to-wish-list\" class=\"button secondary tiny large-6 columns text-center\" id=\"add_basket_to_wish_list\">Add to wish list</a>";
-    wishlist_button = wishlist_button + "<a href=\"" + globalBaseUrl + "basket/empty\" class=\"button secondary tiny large-6 columns text-center\" id=\"empty_basket\">Empty basket</a>";
-    $("#drop").append(wishlist_button);
+    // If the user is logged in, show the wish list
+    if($("#logged_in_user_id").val() != "false") {
+        var wishlist_button = "<a href=\"" + globalBaseUrl + "basket/save-to-wish-list\" class=\"button secondary tiny large-6 columns text-center\" id=\"add_basket_to_wish_list\">Add to wish list</a>";
+        var empty_button = "<a href=\"" + globalBaseUrl + "basket/empty\" class=\"button secondary tiny large-6 columns text-center\" id=\"empty_basket\">Empty basket</a>";
+        $("#drop").append(wishlist_button + empty_button);
+        addBasketToWishList();
+        emptyBasket();
+    } else {
+        var empty_button = "<a href=\"" + globalBaseUrl + "basket/empty\" class=\"button secondary tiny large-12 columns text-center\" id=\"empty_basket\">Empty basket</a>";
+        $("#drop").append(empty_button);
+        emptyBasket();
+    }
 
-    addBasketToWishList();
-    emptyBasket();
 
     var basket_qty_items_text ="";
 

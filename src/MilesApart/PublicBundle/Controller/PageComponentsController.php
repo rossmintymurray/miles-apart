@@ -157,10 +157,18 @@ class PageComponentsController extends Controller
         //Get the new products from the database
         $new_products = $em->getRepository('MilesApartAdminBundle:Product')->findNewProducts();
 
+        //Remove products with no stock
+        $saleable_products = array();
+        foreach($new_products as $product) {
+            if($product->getCurrentStockLevel() > 0) {
+                array_push($saleable_products, $product);
+            }
+        }
+
         //Create the footer.
         return $this->render(
             'MilesApartPublicBundle:PageComponents:new_products.html.twig', array(
-                'new_products' => $new_products,
+                'new_products' => $saleable_products,
             )
            
         );
@@ -173,10 +181,18 @@ class PageComponentsController extends Controller
         //Get the new products from the database
         $staff_picks = $em->getRepository('MilesApartAdminBundle:StaffPickProduct')->findStaffPickProducts();
 
+        //Remove products with no stock
+        $saleable_products = array();
+        foreach($staff_picks as $product) {
+            if($product->getProduct()->getCurrentStockLevel() > 0) {
+                array_push($saleable_products, $product);
+            }
+        }
+
         //Create the footer.
         return $this->render(
             'MilesApartPublicBundle:PageComponents:staff_picks.html.twig', array(
-                'staff_picks' => $staff_picks,
+                'staff_picks' => $saleable_products,
             )
            
         );

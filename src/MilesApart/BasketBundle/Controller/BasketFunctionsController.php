@@ -452,7 +452,7 @@ class BasketFunctionsController extends Controller
             $session->remove('basket');
             
             //Show the flash message with success
-            $this->get('session')->getFlashBag()->set('public-success', 'The basket has been emptied');
+            $this->get('session')->getFlashBag()->set('basket-success', 'The basket has been emptied');
             
             //Get the categories from the session for the redirect.
             $page = $session->get('page');
@@ -473,6 +473,22 @@ class BasketFunctionsController extends Controller
         $session = new Session();
        
         if ($session->has('basket')) {
+
+            //Set the products qty to 0
+            //Get entity manager
+            $em = $this->getDoctrine()->getManager();
+
+            $basket = $session->get('basket');
+
+            $basket = $em->merge($basket);
+
+            //For each basket product set to 0
+            foreach($basket->getBasketProduct() as $value) {
+                $value->setBasketProductQuantity(0);
+            }
+
+            $em->flush();
+
             //Get the basket from the session
             $session->remove('basket');
 
