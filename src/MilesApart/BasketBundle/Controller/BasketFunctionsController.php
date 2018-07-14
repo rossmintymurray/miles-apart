@@ -301,7 +301,7 @@ class BasketFunctionsController extends Controller
                         $product_name = $basket_product_existing->getProduct()->getProductMarketingName();
                         $product_price = $basket_product_existing->getProduct()->getCurrentPriceDecimal();
                         $product_quantity = $basket_product_existing->getBasketProductQuantity();
-                        $current_stock_level = $basket_product_existing->getProduct()->getCurrentSTockLevel();
+                        $current_stock_level = $basket_product_existing->getProduct()->getCurrentStockLevelMinusBasket();
                     } else {
                         //Set that there is not enough stock for the warning message
                         //Set the return data
@@ -309,7 +309,7 @@ class BasketFunctionsController extends Controller
                         $product_name = FALSE;
                         $product_price = FALSE;
                         $product_quantity = FALSE;
-                        $current_stock_level = 0;
+                        $current_stock_level = -1;
                     }
 
                 }
@@ -338,7 +338,7 @@ class BasketFunctionsController extends Controller
                 $product_name = $basket_product->getProduct()->getProductMarketingName();
                 $product_price = $basket_product->getProduct()->getCurrentPriceDecimal();
                 $product_quantity = $basket_product->getBasketProductQuantity();
-                $current_stock_level = $product->getCurrentSTockLevel();
+                $current_stock_level = $product->getCurrentStockLevelMinusBasket();
             } else {
                 //Set that there is not enough stock for the warning message
                 //Set the return data
@@ -346,7 +346,7 @@ class BasketFunctionsController extends Controller
                 $product_name = FALSE;
                 $product_price = FALSE;
                 $product_quantity = FALSE;
-                $current_stock_level = 0;
+                $current_stock_level = -1;
             }
         }
 
