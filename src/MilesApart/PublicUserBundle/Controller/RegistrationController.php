@@ -118,7 +118,7 @@ class RegistrationController extends BaseController
                     }
                    
 
-                    $this->setFlash('fos_user_success', 'registration.flash.user_created');
+                    $this->setFlash('fos_registration_success', 'registration.flash.user_created');
                     $url = $this->container->get('router')->generate($route);
                     $response = new RedirectResponse($url);
 
@@ -130,6 +130,10 @@ class RegistrationController extends BaseController
 
 
                 } else {
+
+
+                    $this->setFlash('fos_registration_error', 'There are some issues with the form');
+
                     //Redirect to login register page
                     $logger = $this->container->get('logger');
                     $logger->info('I just got the logger add update price444 pre');
