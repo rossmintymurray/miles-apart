@@ -164,7 +164,7 @@ fos_user:
     firewall_name: main
     user_class: MilesApart\AdminBundle\Entity\FosUser
     service:
-        mailer: fos_user.mailer.twig_swift
+        mailer: milesapart_publicuser_mailer
     registration:
         form:
             type: milesapart_publicuser_registration
@@ -197,22 +197,30 @@ services:
         arguments: ['@router', "@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
         scope: request
         public: false
+
     fos_user.doctrine_registry:
         alias: doctrine
+
     milesapart_publicuser_registration:
         class: MilesApart\PublicUserBundle\Form\Type\RegistrationFormType
         tags:
             - {name: form.type, alias: milesapart_publicuser_registration}
+
     milesapart_publicuser_changepassword:
         class: MilesApart\PublicUserBundle\Form\Type\ChangePasswordFormType
         tags:
             - {name: form.type, alias: milesapart_publicuser_changepassword}
+
     milesapart_publicuser_profile:
         class: MilesApart\PublicUserBundle\Form\Type\ProfileFormType
         tags:
             - {name: form.type, alias: milesapart_publicuser_profile}
         arguments:
             - @security.context
+
+    milesapart_publicuser_mailer:
+        class: MilesApart\PublicUserBundle\Mailer\PublicUserMailer
+        arguments: ['@swiftmailer.mailer.useraccounts_mailer', "@router", "@twig"]
 
     caponica_mws_client_pool_de:
         class:      %caponica_amazon_mws.client_pool.class%
