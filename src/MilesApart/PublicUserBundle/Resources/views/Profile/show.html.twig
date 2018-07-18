@@ -159,6 +159,49 @@
 			
 			</div>
 		</div>
+
+        {# Show wish lists and their products #}
+		<div class="large-12 columns">
+			<div class="panel">
+				<h4>Wish Lists</h4>
+                {# Check that there are wish lists #}
+                {% if user.getCustomer.getCustomerWishList|default([])|length > 0 %}
+                	{% for wish_list in user.getCustomer.getCustomerWishList %}
+
+						{# Check there are products in the wish list#}
+						{% if wish_list.getCustomerWishListProduct|default([])|length > 0 %}
+
+							<table style="width:100%">
+								{# Create the table header #}
+								<thead>
+								<tr>
+									<th scope="column" class="text-left">Code</th>
+									<th scope="column" class="text-left">Description</th>
+									<th scope="column" class="text-center">Price</th>
+									<th scope="column" class="text-center">Actions</th>
+								</tr>
+								</thead>
+								<tbody>
+								{# Create the table #}
+								{% for wish_list_product in wish_list.getCustomerWishListProduct %}
+									<tr>
+										<td class="text-left"><a href="{{ path('miles_apart_public_product_page', { 'slug': wish_list_product.getProduct.getProductSlug }) }}">{{ wish_list_product.getProduct.getProductSupplierCode }}</a></td>
+										<td class="text-left">{{ wish_list_product.getProduct.getProductName }}</td>
+										<td class="text-center">{{ wish_list_product.getProduct.getCurrentPriceDisplay }}</td>
+										<td class="text-center"></td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						{% endif %}
+					{% endfor %}
+                {% else %}
+                    {# Show that there are no current orders #}
+					<p>You have no wish lists.</p>
+                {% endif %}
+
+			</div>
+		</div>
 	</div>
 
 	

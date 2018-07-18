@@ -535,7 +535,7 @@ class BasketFunctionsController extends Controller
             //Get entity manager
             $em = $this->getDoctrine()->getManager();
 
-            //Merge the basket so we have acces to it's methods
+            //Merge the basket so we have access to it's methods
             $basket = $em->merge($basket);
 
             //Create new wish list/check for existsing
@@ -543,6 +543,9 @@ class BasketFunctionsController extends Controller
             
             if($customer_wish_list == null) {
                 $customer_wish_list = new CustomerWishList();
+
+                //Set the customer
+                $customer_wish_list->setCustomer($customer);
             }
 
             //Iterate over the items in the basket
