@@ -46,10 +46,17 @@
 
 		       
 		            {{ form_row(form.contact_us_message_name) }}
+					<small class="error">Please enter your name</small>
+
 		            {{ form_row(form.contact_us_message_email_address) }}
+					<small class="error">Please enter your email address</small>
+
 		            {{ form_row(form.contact_us_message_content) }}
+					<small class="error">Please enter your message</small>
+
 		        	<div style="margin-bottom:1rem">
 		        		{{ form_row(form.recaptcha) }}
+						<small class="error" style="width:302px">Please complete the reCaptcha</small>
 		        	</div>
 		            {{ form_row(form.submit) }}
 		        

@@ -26,7 +26,7 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                     'pattern' => 'alpha'),
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
-                'required'  => false,
+                'required'  => true,
                 
             ));
 
@@ -37,7 +37,7 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                     'pattern' => 'alpha'),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
-                'required'  => false,
+                'required'  => true,
             ));
         
         $builder

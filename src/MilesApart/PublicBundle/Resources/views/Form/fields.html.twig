@@ -3,15 +3,13 @@
 {% block form_row %}
 	{% spaceless %}
 		{# Create the group for each input so foundation groups together #}
-		<div>
+
 	    	{{ form_label(form) }}
 	    	{{ form_widget(form) }}
 
 	    	{# Create the form errors and display if validation fails #}
-	    	<small class="form-error col-md-7 col-md-offset-4">
-	    		{{ form_errors(form) }}
-	    	</small>
-    	</div>
+
+
 	{% endspaceless %}
 {% endblock form_row %}
 
@@ -116,7 +114,7 @@
     	<textarea {{ block('widget_attributes') }} class="error">{{ value }}</textarea>
     {% else %}
     	<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
-    	<small class="error">Text cannot be blank.</small>
+
     {% endif %}
 {% endblock textarea_widget %}
 

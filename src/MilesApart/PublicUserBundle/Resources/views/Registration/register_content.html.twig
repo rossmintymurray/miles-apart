@@ -1,26 +1,46 @@
-{# Form template #}
-{% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{#Check if the form has been submitted or not and use the appropriate form template #}
+{% if submitted == true %}
+    {% form_theme form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% else %}
+    {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
+{% endif %}
 
-{# Business customer button #}
-<input type="checkbox" id="business_customer_toggle" />
-<label for="business_customer">Are you a business customer?</label>
-<p class="form_subtext">Please check this box if you are a representative for business, school, charity or other organisation.</p>
 
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" data-abide>
-    
+
     {# Show the form #}
     {{ form_start(form) }}
-        {{ form_errors(form) }}
+
+        {# TODO: Only show the alert box if there are errors, Add prepend text to the error box to explsin that there hs been an error with the form#}
+        {% if form_errors(form)|default([])|length > 5%}
+            <div data-alert class="alert-box alert radius">
+                There has ben a problem with the form - <br />
+                {{ form_errors(form) }}
+                <a href="#" class="close">&times;</a>
+            </div>
+        {%  endif %}
+
+    {# Business customer button #}
+    <input type="checkbox" id="business_customer_toggle" {% if form.business_customer_representative.business_customer.business_customer_name.vars.value != "" or form.business_customer_representative.business_customer.business_customer_name.vars.value != null %} checked {% endif %} />
+    <label for="business_customer">Are you a business customer?</label>
+    <p class="form_subtext">Please check this box if you are a representative for business, school, charity or other organisation.</p>
+
 
             {# Personal customer form elements #}
             <div class="personal_customer_form">
 
            		<div class="row">
            			<div class="large-6 columns">
-                		{{ form_row(form.personal_customer.personal_customer_first_name) }}
+                        <div>
+                            {{ form_row(form.personal_customer.personal_customer_first_name) }}
+                            <small class="error">Please enter your first name</small>
+                        </div>
                 	</div>
                 	<div class="large-6 columns">
-                		{{ form_row(form.personal_customer.personal_customer_surname) }}
+                        <div>
+                            {{ form_row(form.personal_customer.personal_customer_surname) }}
+                            <small class="error">Please enter your surname</small>
+                        </div>
                 	</div>
                 </div>
                 
@@ -29,30 +49,47 @@
             {# Business customer representative form elements #}
 
             <div class="business_customer_representative_form">
-                {{ form_row(form.business_customer_representative.business_customer.business_customer_name) }}
+                <div>
+                    {{ form_row(form.business_customer_representative.business_customer.business_customer_name) }}
+                    <small class="error">Please enter your business name</small>
+                </div>
 
                 <div class="row">
                     
 
                     <div class="large-6 columns">
-                        {{ form_row(form.business_customer_representative.business_customer_representative_first_name) }}
+                        <div>
+                            {{ form_row(form.business_customer_representative.business_customer_representative_first_name) }}
+                            <small class="error">Please enter your first name</small>
+                        </div>
                     </div>
                     <div class="large-6 columns">
-                        {{ form_row(form.business_customer_representative.business_customer_representative_surname) }}
+                        <div>
+                            {{ form_row(form.business_customer_representative.business_customer_representative_surname) }}
+                            <small class="error">Please enter your surname</small>
+                        </div>
                     </div>
                 </div>
                 
             </div>
 
-
-            {{ form_row(form.email) }}
+            <div>
+                {{ form_row(form.email) }}
+                <small class="error">Please enter your email address</small>
+            </div>
 
             <div class="row">
                 <div class="large-6 columns">
-                    {{ form_row(form.plainPassword.first) }}
+                    <div>
+                        {{ form_row(form.plainPassword.first) }}
+                        <small class="error">Please enter your password</small>
+                    </div>
                 </div>
                 <div class="large-6 columns">
-                    {{ form_row(form.plainPassword.second) }}
+                    <div>
+                        {{ form_row(form.plainPassword.second) }}
+                        <small class="error">Please enter same password</small>
+                    </div>
                 </div>
                 
             </div>
@@ -150,8 +187,10 @@
             </div>
 
             <div style="margin-bottom:1rem">
-                {{ form_row(form.recaptcha) }}
-                <small class="error">Please enter a valid email address.</small>
+                <div>
+                    {{ form_row(form.recaptcha) }}
+                    <small class="error" style="width:302px">Please complete the reCaptcha.</small>
+                </div>
             </div>
         {{ form_rest(form) }}
         
@@ -166,3 +205,4 @@
 
     <p class="form_subtext">* Your details will be stored in an industry standard User Management system</p>
 </form>
+

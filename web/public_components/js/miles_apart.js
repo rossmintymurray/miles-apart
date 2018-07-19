@@ -545,30 +545,68 @@ function greyIn(){
 
 //JS for toggle business customer fields on registration
 function businessCustomerToggle() {
-    
-   
+
+    //Check if the business customer toggle is checked
+    if ($('#business_customer_toggle').is(":checked")) {
+        //SHow business
+        showBusinessCustomerRegistration();
+    } else {
+        //Add required to personal customer form fields
+        $("#fos_user_registration_form_personal_customer_personal_customer_first_name").attr( "required", "required" );
+        $("#fos_user_registration_form_personal_customer_personal_customer_surname").attr( "required", "required" );
+    }
+
     $("#business_customer_toggle").change(function() {
 
         if ($('#business_customer_toggle').is(":checked")) {
             // it is checked
-            $(".personal_customer_form").hide();
-            $(".business_customer_representative_form").show();
-
-            //Move over the data (form the customer form to the business one)
-            
-
+            showBusinessCustomerRegistration();
         } else {
             // it is not checked
-            $(".personal_customer_form").show();
-            $(".business_customer_representative_form").hide();
-
-            //Move over the data (form the business form to the customer one)
+            showPersonalCustomerRegistration();
         }
-        
 
     });
 }
 
+function showBusinessCustomerRegistration() {
+    $(".personal_customer_form").hide();
+    $(".business_customer_representative_form").show();
+
+    //Move over the data (form the customer form to the business one)
+
+
+    //Deactivate required on personal customer
+    $("#fos_user_registration_form_personal_customer_personal_customer_first_name").removeAttr("required");
+    $("#fos_user_registration_form_personal_customer_personal_customer_surname").removeAttr("required");
+
+    //Activate required on business customer
+    $("#fos_user_registration_form_business_customer_representative_business_customer_business_customer_name").attr( "required", "required" );
+    $("#fos_user_registration_form_business_customer_representative_business_customer_representative_first_name").attr( "required", "required" );
+    $("#fos_user_registration_form_business_customer_representative_business_customer_representative_surname").attr( "required", "required" );
+
+    $(document).foundation('abide', 'reflow');
+
+}
+
+function showPersonalCustomerRegistration() {
+    $(".personal_customer_form").show();
+    $(".business_customer_representative_form").hide();
+
+    //Move over the data (form the business form to the customer one)
+
+    //Deactivate required on business customer
+    $("#fos_user_registration_form_business_customer_representative_business_customer_business_customer_name").removeAttr("required");
+    $("#fos_user_registration_form_business_customer_representative_business_customer_representative_first_name").removeAttr("required");
+    $("#fos_user_registration_form_business_customer_representative_business_customer_representative_surname").removeAttr("required");
+
+    //Activate required on personal customer
+    $("#fos_user_registration_form_personal_customer_personal_customer_first_name").attr( "required", "required" );
+    $("#fos_user_registration_form_personal_customer_personal_customer_surname").attr( "required", "required" );
+
+    $(document).foundation('abide', 'reflow');
+
+}
 //Functions for view ort options
 function viewPortOptions(urlToCall) {
     formSubmission();

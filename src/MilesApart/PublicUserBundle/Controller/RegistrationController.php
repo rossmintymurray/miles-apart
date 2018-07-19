@@ -19,16 +19,38 @@ class RegistrationController extends BaseController
 {
     public function registerAction()
     {
-       
-        //Chec session for form 
+
+        //GEt the session
         $session = new Session();
+
+        //Get the submitted value for showing form error messages
+        $submitted = false;
+
+        if($session->get('form_submitted')) {
+            if($session->get('form_submitted') == true) {
+                $submitted = true;
+            } else {
+                $submitted = false;
+            }
+        } else {
+            $submitted = false;
+        }
+
+        //Chec session for form 
+
         if($session->get('form')) {
             $form = $session->get('form');
             $session->remove('form');
 
+
+
+            //Call the form
             return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
-            'form' => $form,
-        ));
+                'form' => $form,
+                'submitted' => $submitted,
+            ));
+
+        //Process the form
         } else {
 
             $form = $this->container->get('fos_user.registration.form');
@@ -147,6 +169,9 @@ class RegistrationController extends BaseController
                     //Set the form in the session
                     $session = new Session();
                     $session->set('form', $form->createView());
+                    $session->set('form_submitted', true);
+
+                    //Redirect back to login page, need to set form errors
                     $url = $this->container->get('router')->generate('miles_apart_public_login_or_register');
                     return new RedirectResponse($url);
                 }
@@ -156,6 +181,7 @@ class RegistrationController extends BaseController
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
+            'submitted' => true,
         ));
     }
 }

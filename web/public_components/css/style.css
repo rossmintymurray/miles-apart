@@ -1495,4 +1495,7 @@ a.button.postfix.mobile-search-bar-button {
   margin-top:1rem;
 }
 
+.alert-box small.error {
+    margin-bottom:0px !important;
+}
 
