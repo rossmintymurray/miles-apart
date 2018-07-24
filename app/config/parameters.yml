@@ -40,3 +40,4 @@ parameters:
         secret_key: Grx5DC3tLOpGASZ+KiGd91HUmvXfwDwfqzL5Ti08
         application_name: 'Miles Apart'
         application_version: 1
+    httpProtocol: https

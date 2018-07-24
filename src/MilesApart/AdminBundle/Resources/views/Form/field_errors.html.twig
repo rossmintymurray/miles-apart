@@ -6,7 +6,7 @@
 		{% if errors|default([])|length > 0 %}
 			<p class="text-danger light form_error">
 			    {% for error in errors %}
-			    {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+					<li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
 			    {% endfor %}
 			</p>
 		{% endif %}

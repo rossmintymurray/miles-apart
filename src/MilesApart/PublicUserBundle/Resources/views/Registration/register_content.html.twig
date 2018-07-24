@@ -11,11 +11,12 @@
     {# Show the form #}
     {{ form_start(form) }}
 
-        {# TODO: Only show the alert box if there are errors, Add prepend text to the error box to explsin that there hs been an error with the form#}
         {% if form_errors(form)|default([])|length > 5%}
             <div data-alert class="alert-box alert radius">
-                There has ben a problem with the form - <br />
-                {{ form_errors(form) }}
+                There has been a problem with the form: <br />
+                <ul>
+                    {{ form_errors(form) }}
+                </ul>
                 <a href="#" class="close">&times;</a>
             </div>
         {%  endif %}
