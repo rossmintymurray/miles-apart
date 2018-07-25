@@ -37,7 +37,7 @@
 		</h2>
 		
 		<!-- Barcode -->
-		<img class="shelf_front_medium_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
+		<img class="shelf_front_medium_barcode" alt="[barcode]" src="{{ asset('')}}{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
 
 		<h1 class="shelf_front_medium_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
 		<!-- Grey sub text -->
@@ -65,7 +65,7 @@
 		</h2>
 
 		<!-- Barcode -->
-		<img class="shelf_front_medium_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':132, 'height':30}}) }}">
+		<img class="shelf_front_medium_barcode" alt="[barcode]" src="{{ asset('')}}{{ path(mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':132, 'height':30}})) }}">
 
 		<div class="clearfix"></div>
 
