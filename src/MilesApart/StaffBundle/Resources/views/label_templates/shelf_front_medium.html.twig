@@ -37,7 +37,7 @@
 		</h2>
 		
 		<!-- Barcode -->
-		<img class="shelf_front_medium_barcode" alt="[barcode]" src="{{ asset('')}}{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
+		<img class="shelf_front_medium_barcode" alt="[barcode]" src="{{ asset('')}}{{ mopa_barcode_url('ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
 
 		<h1 class="shelf_front_medium_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
 		<!-- Grey sub text -->
