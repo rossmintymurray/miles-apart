@@ -36,6 +36,23 @@ task('deploy:create_cache_dir', function () {
     run("chmod -R g+w {{cache_dir}}");
 })->desc('Create cache dir');
 
+/**
+ * Create image cache dir
+ */
+task('deploy:create_image_cache_dir', function () {
+    // Set cache dir
+    set('image_cache_dir', '{{release_path}}/web/cache');
+
+    // Remove cache dir if it exist
+    run('if [ -d "{{image_cache_dir}}" ]; then rm -rf {{image_cache_dir}}; fi');
+
+    // Create cache dir
+    run('mkdir -p {{image_cache_dir}}');
+
+    // Set rights
+    run("chmod -R g+w {{image_cache_dir}}");
+})->desc('Create image cache dir');
+
 desc('Migrate database');
 task('database:migrate', function () {
     run('{{app/console}} doctrine:migrations:migrate --allow-no-migration');
@@ -70,6 +87,7 @@ task('deploy', [
     'deploy:release',
     'deploy:update_code',
     'deploy:create_cache_dir',
+    'deploy:create_image_cache_dir',
     'deploy:shared',
     'deploy:writable',
     'deploy:vendors',
