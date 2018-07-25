@@ -41,7 +41,7 @@
 		</h4>
 
 		<!-- Barcode -->
-		<img class="shelf_front_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 10, drawText : false}, 'rendererOptions': {'width':115, 'height':10}}) }}">
+		<img class="shelf_front_small_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 10, drawText : false}, 'rendererOptions': {'width':115, 'height':10}}) }}">
 
 		
 
@@ -59,7 +59,7 @@
 		</h2>
 
 		<!-- Barcode -->
-		<img class="shelf_front_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 10, drawText : false}, 'rendererOptions': {'width':135, 'height':10}}) }}">
+		<img class="shelf_front_small_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 10, drawText : false}, 'rendererOptions': {'width':135, 'height':10}}) }}">
 
 		<div class="clearfix"></div>
 

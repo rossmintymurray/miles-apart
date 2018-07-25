@@ -76,7 +76,7 @@
                     <h4>{{ order.customerorderdatecreated|date('jS F Y') }}</h4>
                
                     {# order barcode #}
-                    <img style="margin-top:10px;margin-left:-10px" class="order_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code128', order.id, {'barcodeOptions': {'barHeight' : 15, drawText : false}, 'rendererOptions': {'width':175, 'height':15}}) }}">
+                    <img style="margin-top:10px;margin-left:-10px" class="order_barcode_image" alt="[barcode]" src="{{ mopa_barcode_url('Code128', order.id, {'barcodeOptions': {'barHeight' : 15, drawText : false}, 'rendererOptions': {'width':175, 'height':15}}) }}">
                 </div>
             </div>
         </div>

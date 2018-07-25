@@ -32,7 +32,7 @@
 
 		<!-- Footer bar text -->
 		<div class="print_footer_barcode_pa6p">
-			<img class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
+			<img class="print_small_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
 		</div>
 	{#
 	*
@@ -57,7 +57,7 @@
 		{% endif %}
 
 		<!-- Barcode -->
-		<img class="print_footer_barcode_pa6p" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
+		<img class="print_footer_barcode_pa6p" alt="[barcode]" src="{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
 	{% endif %}
 </div>
 

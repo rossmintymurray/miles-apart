@@ -38,7 +38,7 @@
 		{#{{mopa_barcode_url|replace({'{{region_top}}': region_top, '{{region_center}}': region_center})}}#}
 
 
-		<img class="hook_hanger_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
+		<img class="hook_hanger_barcode_image" alt="[barcode]" src="{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
 		<h6 class="hook_hanger_barcode">{{ entity.getProduct.getProductBarcode }}</h6>
 
 		<!-- Supplier Code -->
@@ -65,7 +65,7 @@
 		{% endif %}
 
 		<!-- Barcode -->
-		<img class="hook_hanger_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
+		<img class="hook_hanger_barcode_image" alt="[barcode]" src="{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 30, drawText : false}, 'rendererOptions': {'width':115, 'height':30}}) }}">
 
 		
 	{% endif %}

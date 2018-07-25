@@ -10,7 +10,7 @@
 	{#{{mopa_barcode_url|replace({'{{region_top}}': region_top, '{{region_center}}': region_center})}}#}
 
 
-	<img class="price_window_colour_xlarge_barcode_image" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
+	<img class="price_window_colour_xlarge_barcode_image" alt="[barcode]" src="{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 40, drawText : false}, 'rendererOptions': {'width':115, 'height':40}}) }}">
 
 	<!-- Supplier Code -->
 	<h6 class="price_window_colour_xlarge_supplier_code">SC: {{ entity.getProduct.getProductSupplierCode }}</h6>

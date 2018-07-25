@@ -36,9 +36,9 @@
 			<!-- Barcode -->
 			{# Check number of digits, if 13 print normal barcode, if 8, print small barcode  #}
 			{% if entity.getProduct.getProductBarcode|length == 8 %}
-				<img  class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean8', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 5, drawText : false}, 'rendererOptions': {'width':95, 'height':5}}) }}">
+				<img  class="print_small_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Ean8', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 5, drawText : false}, 'rendererOptions': {'width':95, 'height':5}}) }}">
 			{% else %}
-				<img class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 5, drawText : false}, 'rendererOptions': {'width':115, 'height':5}}) }}">
+				<img class="print_small_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 5, drawText : false}, 'rendererOptions': {'width':115, 'height':5}}) }}">
 			{% endif %}
 		</div>
 	{#
@@ -64,6 +64,6 @@
 		{% endif %}
 
 		<!-- Barcode -->
-		<img class="print_small_barcode" alt="[barcode]" src="http://localhost:8888/Miles-Apart/web{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
+		<img class="print_small_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 7, drawText : false}, 'rendererOptions': {'width':115, 'height':7}}) }}">
 	{% endif %}
 </div>
