@@ -13,7 +13,7 @@ if(environment == "dev") {
 } else if (environment == "test") {
     var globalBaseUrl = "http://test.miles-apart.com/app_dev.php/staff/";
 } else {
-    var globalBaseUrl = "http://www.miles-apart.com/staff/";
+    var globalBaseUrl = "https://www.miles-apart.com/staff/";
 }
 
 /*******************************************
