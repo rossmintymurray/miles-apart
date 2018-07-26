@@ -49,16 +49,18 @@
 						<table id="basket_bar_table">
 							<thead>
 								<tr>
-									<th>Item name</th>
-									<th class="text-center">Qty</th>
-									<th>Price</th>
+									<th width="60%">Item name</th>
+									<th width="20%" class="text-center">Qty</th>
+									<th width="15%">Price</th>
+									<th width="5%"></th>
 								</tr>
 							</thead>
 							{% for item in basket.getBasketProduct %}
 								<tr id="product_{{ item.getProduct.getId }}">
 									<td>{{ item.getProduct.getProductName }}</td>
-									<td class="text-center">{{ item.getBasketProductQuantity }}</td>
+									<td class="text-center"><a href="#" onclick="minusOneFromBasket()"><i class="fi-minus basket_bar_table_icon basket_bar_table_icon_left"></i></a> {{ item.getBasketProductQuantity }} <a href="#" onclick="addOneToBasket()"><i class="fi-plus basket_bar_table_icon basket_bar_table_icon_right"></i></a></td>
 									<td>{{ item.getBasketProductTotalPriceDisplay }}</td>
+									<td><a href="#" onclick="deleteFromBasket()"><i class="fi-trash basket_bar_table_icon"></i></a></td>
 								</tr>
 							{% endfor %}
 							
@@ -66,6 +68,7 @@
 								<th class="text-right">Total</td>
 								<th class="text-center" id="table_basket_quantity">{{basket.getBasketTotalQuantity}}</td>
          						<th id="table_basket_price">{{ basket.getBasketTotalPriceDisplay }}</td>
+								<td></td>
          					</tr>
 
 						</table>

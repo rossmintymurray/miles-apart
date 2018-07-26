@@ -28,13 +28,17 @@
 			<table id="shopping_basket_table">
 				<tr>
 					<th>Item name</th>
+					<th></th>
 					<th>Qty</th>
+					<th></th>
 					<th>Total</th>
+					<th></th>
 				</tr>
 				{% for item in basket.getBasketProduct %}
 					<tr>
 						<td>{{ item.getId }}</td>
 						<td>{{ item.getProduct.getId }}</td>
+						<td>THT</td>
 						<td>{{ item.getProduct.getProductName }}</td>
 						<td>{{ item.getBasketProductQuantity }}</td>
 						<td></td>

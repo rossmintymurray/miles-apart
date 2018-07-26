@@ -133,16 +133,27 @@ a.button.split.no-pip.left-icon.basket.large-12 {
 
 a.button.split.no-pip.left-icon.basket.large-12.open {
   padding-right:2rem;
-  
 }
 
 #basket_bar_table tr th{
   font-size:0.8rem;
-  width:100%;
+
 }
 
 #basket_bar_table tr td{
   font-size:0.75rem;
+}
+
+.basket_bar_table_icon {
+    color:#999;
+}
+
+.basket_bar_table_icon_left {
+    padding-right:5px;
+}
+
+.basket_bar_table_icon_right {
+    padding-left:5px;
 }
 
 

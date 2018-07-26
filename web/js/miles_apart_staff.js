@@ -29,9 +29,9 @@ if(environment == "dev") {
 				window.onload = function() {
 					 oldonload();
 					 func();
-				}
-		  }
-	 }
+            }
+      }
+ }
 
 /*******************************************
 * Load the initialisations
