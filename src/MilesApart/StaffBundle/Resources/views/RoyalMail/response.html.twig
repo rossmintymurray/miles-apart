@@ -1,2 +1,6 @@
-<iframe height="1000" width="700"src="data:application/pdf;base64, {{ manifest }}"></iframe>
-
+{# Check that the manifest was created #}
+{%  if manifest!= false %}
+    <iframe height="1000" width="700"src="data:application/pdf;base64, {{ manifest }}"></iframe>
+{% else %}
+    <h1>Manifest was false, there has been an error with the API call - probably bad credentials</h1>
+{% endif %}

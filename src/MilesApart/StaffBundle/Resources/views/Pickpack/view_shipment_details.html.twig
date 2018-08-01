@@ -47,6 +47,9 @@
 					</button>
 				{% endif %}
 				<ul class="dropdown-menu">
+					{% if shipment.royalmailshipmentnumber == null %}
+						<li><a href="#" onclick="completeOrderPostage({{shipment.customerorder.id}})">Recreate shipment</a></li>
+					{% endif %}
 					<li><a href="#">Recall</a></li>
 					<li><a href="#">Update</a></li>
 					{# Check that the shipment has been allocated #}

@@ -12,6 +12,18 @@ miles_apart_basket_ajax_add:
     requirements:
         _method:  GET|POST
 
+miles_apart_basket_ajax_minus:
+    path:     /ajax-minus
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:ajaxminus"  }
+    requirements:
+        _method:  GET|POST
+
+miles_apart_basket_ajax_delete:
+    path:     /ajax-delete
+    defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:ajaxdelete"  }
+    requirements:
+        _method:  GET|POST
+
 miles_apart_basket_remove_product:
     path:     /remove_product/{id}
     defaults: { _controller: "MilesApartBasketBundle:BasketFunctions:removeproduct"  }

@@ -258,18 +258,16 @@ function submitProductQuestion() {
 
 function basketAddFunctionFromShop() {
     $(".add_to_basket_from_shop").unbind('click').click(function(e) {
-        var basketUrl = globalBaseUrl + "basket/ajax-add";
         var product_id = $( this ).attr('id');
-        basketAddFunction(basketUrl, product_id);
+        basketAddFunction(product_id);
         e.preventDefault();  
     });
 }
 
 function basketAddFunctionFromProduct() {
     $(".add_to_basket_from_product").click(function(e) {
-        var basketUrl = globalBaseUrl + "basket/ajax-add";
         var product_id = $( this ).attr('id');
-        basketAddFunction(basketUrl, product_id);
+        basketAddFunction(product_id);
         e.preventDefault();  
     });
 }
@@ -346,13 +344,12 @@ function emptyBasketFunction(showAlert) {
     });
 }
 
-function basketAddFunction(basketUrl, product_id) {
-
+function basketAddFunction(product_id) {
     //Set up the ajax function to add to server side basket.
     //Make ajax to get the supplier details for printing
     $.ajax({
         type: "POST",
-        url: basketUrl,
+        url: globalBaseUrl + "basket/ajax-add",
         dataType: "json",
         data: {product_id : product_id},
         success: function(data){
@@ -378,6 +375,62 @@ function basketAddFunction(basketUrl, product_id) {
         },
         fail: function() {
             alert('failed'); 
+        }
+    });
+}
+
+function basketMinusFunction(basket_product_id) {
+    //Set up the ajax function to add to server side basket.
+    //Make ajax to get the supplier details for printing
+    $.ajax({
+        type: "POST",
+        url: globalBaseUrl + "basket/ajax-minus",
+        dataType: "json",
+        data: {basket_product_id : basket_product_id},
+        success: function(data){
+
+            //Add to javscript shopping cart
+            minusFromJSShoppingCart(data);
+
+            //Check if this was the first back in stock
+            if(data['current_stock_level'] == 1) {
+                //Change button to enabled
+                var div = "#" + data['product_id'];
+                $(div).removeClass('disabled');
+                $(div).addClass('add_to_basket');
+                $(div).html('Add to basket');
+
+            }
+        },
+        fail: function() {
+        swal("Sorry!", "There has been a problem removing this from your basket. Please try again or empty your basket.", "warning");
+        }
+    });
+}
+
+function deleteFromBasket(basket_product_id) {
+    $.ajax({
+        type: "POST",
+        url: globalBaseUrl + "basket/ajax-delete",
+        dataType: "json",
+        data: {basket_product_id : basket_product_id},
+        success: function(data){
+
+            //Add to javscript shopping cart
+            deleteFromJSShoppingCart(data);
+
+            //Check if this was the first back in stock
+            if(data['current_stock_level'] == 1) {
+                //Change button to enabked
+                var div = "#" + data['product_id'];
+                $(div).removeClass('disabled');
+                $(div).addClass('add_to_basket');
+                $(div).html('Add to basket');
+
+            }
+        },
+        fail: function() {
+            swal("Sorry!", "There has been a problem removing the product from your basket. Please try again or empty your basket.", "warning");
         }
     });
 }
@@ -447,6 +500,147 @@ function addToJSShoppingCart(data) {
     } 
 }
 
+function minusFromJSShoppingCart(data) {
+    //Check if success is true.
+    if(data['success'] == true) {
+
+        //Check if cart table exists.
+        if ($("#basket_bar_table").length) {
+            //Check if product to remove exists in the table.
+            if ($("#product_"+data['product_id']).length) {
+
+                //Update the quantity and total of the existing row in the cart table.
+                //Calculate the total price
+                var total_price = data['product_price'] * data['product_quantity'];
+                total_price = total_price.toFixed(2);
+
+                //Update the table data
+                $("#product_"+data['product_id']+" td:nth-child(2)").html(data['product_quantity']);
+                $("#product_"+data['product_id']+" td:nth-child(3)").html("£"+total_price);
+
+            } else {
+
+                //Add the row as it does not exist
+                var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\">"+ data['product_quantity'] +"</td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
+
+                $('#basket_bar_table tr:nth-last-child(2)').after(newRow);
+
+            }
+
+            //Update the totals
+            //Check if basket has been emptied
+            if(data['basket_quantity'] == 0) {
+                //Remove the items from the basket bar
+                //Create the header
+                var shopping_bar_header = "<p>Your basket is empty</h5>";
+                //Overwrite the content with the header
+                $("#drop").html(shopping_bar_header);
+
+                $("#basket_button_wrapper").html("No items");
+                //Update button in the basket bar to link to chackout
+                $("#basket_bar_button").attr('href', '#');
+            } else {
+                $("#table_basket_quantity").html(data['basket_quantity']);
+                $("#table_basket_price").html(data['basket_value']);
+
+                var basket_qty_items_text ="";
+
+                if(data['basket_quantity'] > 1) {
+                    basket_qty_items_text = "items";
+                } else {
+                    basket_qty_items_text = "item";
+                }
+
+                //Update the popup header
+                $("#popup_basket_quantity").html(data['basket_quantity']);
+                basket_qty_items_text = basket_qty_items_text.substr(0,1).toUpperCase()+basket_qty_items_text.substr(1);
+                $("#popup_basket_quantity_text").html(basket_qty_items_text);
+
+                //Update the button
+                var button = "<strong id=\"button_basket_quantity\">"+ data['basket_quantity'] +"</strong> "+ basket_qty_items_text +", <strong id=\"button_basket_price\">"+ data['basket_value'] +"</strong>";
+                $("#basket_button_wrapper").html(button);
+            }
+
+
+            //showShoppingCartDuration();
+
+        }
+
+        //Update the mobile cart display
+        $("#mobile_button_basket_quantity").html(data['basket_quantity']);
+        $("#mobile_button_basket_price").html(data['basket_value']);
+        $("#mobile_header_basket_label").html(data['basket_quantity']);
+        showMobileBasketDuration();
+        $(window).scrollTop(0);
+
+    }
+}
+
+function deleteFromJSShoppingCart(data) {
+    //Check if success is true.
+    if(data['success'] == true) {
+
+        //Check if cart table exists.
+        if ($("#basket_bar_table").length) {
+            //Check if product to add exists in the table.
+            if ($("#product_"+data['product_id']).length) {
+
+                //Update the quantity and total of the existing row in the cart table.
+                //Calculate the total price
+                var total_price = data['product_price'] * data['product_quantity'];
+                total_price = total_price.toFixed(2);
+
+                //Update the table data
+                $("#product_"+data['product_id']+" td:nth-child(2)").html(data['product_quantity']);
+                $("#product_"+data['product_id']+" td:nth-child(3)").html("£"+total_price);
+
+            } else {
+
+                //Add the row as it does not exist
+                var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\">"+ data['product_quantity'] +"</td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
+
+                $('#basket_bar_table tr:nth-last-child(2)').after(newRow);
+
+            }
+
+            //Update the totals
+            $("#table_basket_quantity").html(data['basket_quantity']);
+            $("#table_basket_price").html(data['basket_value']);
+
+            var basket_qty_items_text ="";
+
+            if(data['basket_quantity'] > 1) {
+                basket_qty_items_text = "items";
+            } else {
+                basket_qty_items_text = "item";
+            }
+
+            //Update the popup header
+            $("#popup_basket_quantity").html(data['basket_quantity']);
+            basket_qty_items_text = basket_qty_items_text.substr(0,1).toUpperCase()+basket_qty_items_text.substr(1);
+            $("#popup_basket_quantity_text").html(basket_qty_items_text);
+
+            //Update the button
+            var button = "<strong id=\"button_basket_quantity\">"+ data['basket_quantity'] +"</strong> "+ basket_qty_items_text +", <strong id=\"button_basket_price\">"+ data['basket_value'] +"</strong>";
+            $("#basket_button_wrapper").html(button);
+
+            showShoppingCartDuration();
+
+        } else {
+            //Shopping basket does not exist so add it.
+            createJSShoppingCart(data);
+        }
+
+        //Update the mobile cart display
+        $("#mobile_button_basket_quantity").html(data['basket_quantity']);
+        $("#mobile_button_basket_price").html(data['basket_value']);
+        $("#mobile_header_basket_label").html(data['basket_quantity']);
+        showMobileBasketDuration();
+        $(window).scrollTop(0);
+
+    }
+}
+
 function createJSShoppingCart(data) {
 
     //Create the header
@@ -455,11 +649,11 @@ function createJSShoppingCart(data) {
     $("#drop").html(shopping_bar_header);
 
     //Create the table & table header
-    var table_content = "<table id=\"basket_bar_table\"><thead><tr><th>Item name</th><th>Qty</th><th>Price</th></tr></thead></table>";
+    var table_content = "<table id=\"basket_bar_table\"><thead><tr><th>Item name</th><th>Qty</th><th>Price</th><th></th></tr></thead></table>";
     $("#drop").append(table_content);
 
     //Create the first row 
-    var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\">"+ data['product_quantity'] +"</td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
+    var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\"><a href=\"#\" onclick=\"basketMinusFunction({{ item.getId }})\"><i class=\"fi-minus basket_bar_table_icon basket_bar_table_icon_left\"></i></a>"+ data['product_quantity'] +"<a href=\"#\" onclick=\"basketAddFunction({{ item.getProduct.getId }})\"><i class=\"fi-plus basket_bar_table_icon basket_bar_table_icon_right\"></i></a></td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
     $("#basket_bar_table thead").after(newRow);
 
     //Create the table footer

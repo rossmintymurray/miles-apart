@@ -1,4 +1,5 @@
 <?php
+
 umask(0000); // This will let the permissions be 0777
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;

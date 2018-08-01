@@ -1230,7 +1230,7 @@ function processPackProductForm() {
 //Make AJAX call to update database
   	$.ajax({
 		  type: "POST",
-		  url: globalBaseUrl + "process-pack-product",
+		  url: globalBaseUrl + "pickpack/process-pack-product",
 		  dataType: 'json',
 		  data: { order_id: order_id, barcode: barcode  },
 		  success: function(data){
@@ -1323,7 +1323,14 @@ function completeOrderPostage(orderId) {
 				  'This order already has an existing shipment, please check the order details page',
 				  'error'
 				);
-	  		} else {
+			//If there was a failt with the API call
+	  		} else if (data['allocated'] == false) {
+                swal(
+                    'Oops...',
+                    'There has been a fault when sending this to Royal Mail',
+                    'error'
+                );
+            } else {
 	  			//SHOW ANY ERROR MESSAGES FIRST, THEN OPEN LABEL
 				//Set up the error messages
 			 	swal.setDefaults({
@@ -1402,8 +1409,8 @@ function completeOrderPostage(orderId) {
 						//It was not allocated due to server fault, find the fault
 						//Iterate over warnings and add them to the array
 						steps.push({
-							title: "Fault - " + data["create_shipment_API_call_response"]['array']['soapenvBody']['soapenvFault']['detail']['v1exceptionDetails']['exceptionCode'],   
-							text: data["create_shipment_API_call_response"]['array']['soapenvBody']['soapenvFault']['detail']['v1exceptionDetails']['exceptionText'],   
+							title: "Fault - " + toString(data["create_shipment_API_call_response"]['array']),
+							text: toString(data["create_shipment_API_call_response"]['array']),
 							type: "warning",   
 							confirmButtonText: "OK" ,
 							showCancelButton: false
@@ -1469,7 +1476,14 @@ function completeOrderPostage(orderId) {
 }
 
 function reprintShipmentLabel(shipmentId) {
+
+	//Get the data from the database and
  alert(shipmentId);
+    //Open the window with the royal mail label
+    myWindow=window.open('','','width=200,height=100');
+    myWindow.document.write("<img style=\"width:3.7in; height:6in;\" src=\"" +globalBaseUrl + "royal_mail_labels/" + orderId + ".jpg\"></img><script type=\"text/javascript\">window.setTimeout(window.print(), 2000);</script>");
+
+
 }
 
 

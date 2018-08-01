@@ -556,19 +556,12 @@ class ShopController extends Controller
 
                                 //If it exists, set to add to false
                                 $attribute_value_to_add = false;
-
-
-                            } else {
-                                //If it doesn't exist, add the attribute to the array and the attribute value
-                                //Push the attribute to the array.
-
-
                             }
-
-
                         }
                     }
 
+                    //If it doesn't exist, add the attribute to the array and the attribute value
+                    //Push the attribute to the array.
                     if ($attribute_value_to_add == true) {
 
                         //Check if the index exists in the array
@@ -580,16 +573,9 @@ class ShopController extends Controller
                             $attribute_values_array[$product_attribute->getAttribute()->getAttributeName()][0] = $product_attribute;
                         }
                     }
-
-
                 }
             }
-
-
-
         }
-       
-        
 
         //Sort the arrays
         //ksort($attribute_values_array);
@@ -601,10 +587,7 @@ class ShopController extends Controller
             usort($attribute_values_array[$key], array($this, "cmp")); 
             //usort($attribute_values_array[$key], SORT_ASC);  
 
-                
         }
-        
-    
          
         return $this->render('MilesApartPublicBundle:Shop:attributes_filter.html.twig', array(
             'attributes_array' => $attributes_array,

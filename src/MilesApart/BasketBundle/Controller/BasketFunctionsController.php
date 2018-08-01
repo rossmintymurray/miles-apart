@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\JsonResponse;
 class BasketFunctionsController extends Controller
 {
+    //Add from shop page (if user has ajax disabled
     public function shopaddAction($id, $specific_category_slug = null, $sub_category_slug=null, $main_category_slug=null)
     {
     	//Get the product and add it to the session
@@ -379,91 +380,200 @@ class BasketFunctionsController extends Controller
         
     }
 
-
-
-    public function removeproductAction($id)
+    /*
+     * Minus qty 1 from a product in the basket
+     */
+    public function ajaxminusAction(Request $request)
     {
-    	//Get the product and add it to the session
-        $session = new Session();
-        $session->start();
-        $removed = "false";
-        if ($session->has('basket')) {
-        	//Get the basket from the session
-        	$basket = $session->get('basket');
-        	$removed .= "false 2";
-        	//Iterate through the basket and find the id.
-        	foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
-        		$removed .= "false 3";
-        		if ($basket_product_existing->getProduct()->getId() == $id) {
-        			$basket->removeBasketProduct($basket_product_existing);
-        			$removed = "true";
-        		}
-        	}
+        $logger = $this->get('logger');
+        $logger->info('I just got the logger count 1 or more');
+
+        $session = $request->getSession();
+
+        //Get the product and add it to the session
+        //Get the $_POST array.
+        if ($request->isXMLHttpRequest()) {
+            //Load the post array into response variable
+            $response = $_POST;
+
+            //If there is no post data
+        } else {
+            //Set response to false
+            $response = "false";
         }
 
-        //Save to session.
-        $session->set('basket', $basket);
+        $logger->info('I just got the logger count 2 or more');
+        $id = $response["basket_product_id"];
+        $logger->info('I just got the logger count 2.5 or more');
+        //Get product from the database.
+        $em = $this->getDoctrine()->getManager();
 
-        //$session->remove('basket');
-       
-        return $this->render('MilesApartBasketBundle::basket_contents_page.html.twig', array(
-            	
-            'basket' => $basket, 
-            'removed' => $removed,
-            'source' => "remove",
-            
-            
-        ));
-       
-    }
-
-     public function contentsAction()
-    {
-        //Get the product and add it to the session
-        $session = new Session();
-        $session->start();
-        $removed = "false";
+        //Get the basket from the session
         if ($session->has('basket')) {
+            $logger->info('I just got the logger count 3 or more');
             //Get the basket from the session
             $basket = $session->get('basket');
-            
-            
+            $basket = $em->merge($basket);
+
+        } else {
+            $logger->info('I just got the logger count 4 or more');
+            //Return false as there is no basket
+            return new JsonResponse(
+                array(
+                    "success" => false
+            ));
         }
 
-        
-       
-        return $this->render('MilesApartBasketBundle::basket_contents_page.html.twig', array(
-                
-            'basket' => $basket, 
-            
-            
-            
-        ));
-       
+        //Check if any products exists in the basket
+        $count = count($basket->getBasketProduct());
+        if ($count > 0) {
+            //For each basket product in the basket
+            foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
+
+                //Check if the product id of each item in the basket matches the one we are minusing.
+                if ($basket_product_existing->getId() == $id) {
+
+                    //The product is in the basket
+                    $exists_in_basket = true;
+
+                    //Product is in basket so minus qty..
+                    $new_qty = $basket_product_existing->getBasketProductQuantity() - 1;
+
+                    //If there are no more qty of this item, remove the item
+                    if ($new_qty == 0) {
+                        $basket->removeBasketProduct($basket_product_existing);
+                    } else {
+                        //Still some left in basket so just update qty
+                        $basket_product_existing->setBasketProductQuantity($new_qty);
+                    }
+
+                    //Save to session.
+                    $session->set('basket', $basket);
+
+                    //Persist to database.
+                    $em->flush();
+
+                    //Set the return data
+                    $product_id = $basket_product_existing->getProduct()->getId();
+                    $product_name = $basket_product_existing->getProduct()->getProductMarketingName();
+                    $product_price = $basket_product_existing->getProduct()->getCurrentPriceDecimal();
+                    $product_quantity = $basket_product_existing->getBasketProductQuantity();
+                    $current_stock_level = $basket_product_existing->getProduct()->getCurrentStockLevelMinusBasket();
+                }
+            }
+        } else {
+            //If the product we are removing does not exist in the database
+            //Set the return data
+            $product_id = FALSE;
+            $product_name = FALSE;
+            $product_price = FALSE;
+            $product_quantity = FALSE;
+            $current_stock_level = -1;
+        }
+
+        //Set basket totals for sending to JS
+        $response = array(
+            "success" => true,
+            "product_id" => $product_id,
+            "product_name" => $product_name,
+            "product_price" => $product_price,
+            "product_quantity" => $product_quantity,
+            "basket_quantity" =>$basket->getBasketTotalQuantity(),
+            "basket_value" =>$basket->getBasketTotalPriceDisplay(),
+            "current_stock_level" => $current_stock_level,
+        );
+
+        return new JsonResponse($response);
     }
 
-    public function shopemptyAction($specific_category_slug = null, $sub_category_slug=null, $main_category_slug=null)
+    /*
+     * Remove an entire line from the basket
+     */
+    public function ajaxdelete(Request $request)
     {
+        $session = $request->getSession();
+
         //Get the product and add it to the session
-        $session = new Session();
-       
+        //Get the $_POST array.
+        if ($request->isXMLHttpRequest()) {
+            //Load the post array into response variable
+            $response = $_POST;
+
+            //If there is no post data
+        } else {
+            //Set response to false
+            $response = "false";
+        }
+
+        $id = $response["basket_product_id"];
+
+        //Get product from the database.
+        $em = $this->getDoctrine()->getManager();
+
+        //Check that the basket exists in the session
         if ($session->has('basket')) {
+
             //Get the basket from the session
-            $session->remove('basket');
-            
-            //Show the flash message with success
-            $this->get('session')->getFlashBag()->set('basket-success', 'The basket has been emptied');
-            
-            //Get the categories from the session for the redirect.
-            $page = $session->get('page');
+            $basket = $session->get('basket');
 
-            if($specific_category_slug == null || $sub_category_slug == null|| $main_category_slug == null) {
-                return $this->redirect($this->generateUrl('miles_apart_public_shop', array('main_category' => $main_category_slug, 'sub_category' => $sub_category_slug, 'specific_category' => $specific_category_slug, 'page' => $page )));
-            } else {
-                return $this->redirect($this->generateUrl('miles_apart_public_homepage'));
+            $basket = $em->merge($basket);
 
+        } else {
+            //Return false as there is no basket
+            return new JsonResponse(
+                array(
+                    "success" => false
+                ));
+        }
+
+        //Check if any products exists in the basket
+        $count = count($basket->getBasketProduct());
+        if ($count > 0) {
+            //For each basket product in the basket
+            foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
+
+                //Check if the product id of each item in the basket matches the one we are adding.
+                if ($basket_product_existing->getId() == $id) {
+
+                    //The product is in the basket
+                    $exists_in_basket = true;
+
+                    //Remove product from basket
+                    $basket->removeBasketProduct($basket_product_existing);
+
+                    //If it is the last product in the basket, remove the basket
+                    if($count - 1 == 0) {
+                        $session->remove('basket');
+                    } else {
+                        $session->set('basket', $basket);
+                    }
+
+                    //Persist to database.
+                    $em->flush();
+
+                    //Set the return data
+                    $product_id = $basket_product_existing->getProduct()->getId();
+                    $product_name = $basket_product_existing->getProduct()->getProductMarketingName();
+                    $product_price = $basket_product_existing->getProduct()->getCurrentPriceDecimal();
+                    $product_quantity = $basket_product_existing->getBasketProductQuantity();
+                    $current_stock_level = $basket_product_existing->getProduct()->getCurrentStockLevelMinusBasket();
+                }
             }
         }
+
+        //Set basket totals for sending to JS
+        $response = array(
+            "success" => true,
+            "product_id" => $product_id,
+            "product_name" => $product_name,
+            "product_price" => $product_price,
+            "product_quantity" => $product_quantity,
+            "basket_quantity" =>$basket->getBasketTotalQuantity(),
+            "basket_value" =>$basket->getBasketTotalPriceDisplay(),
+            "current_stock_level" => $current_stock_level,
+        );
+
+        return new JsonResponse($response);
     }
 
     //Basket empty from AJAX fiunction
@@ -498,22 +608,6 @@ class BasketFunctionsController extends Controller
             );
 
             return new JsonResponse($response);
-        }
-    }
-
-    public function emptyfromproductAction($product_slug)
-    {
-        //Get the product and add it to the session
-        $session = new Session();
-       
-        if ($session->has('basket')) {
-            //Get the basket from the session
-            $session->remove('basket');
-
-            //$session->remove('basket');
-            //$session->invalidate();
-            return $this->redirect($this->generateUrl('miles_apart_public_product_page', array('slug' => $product_slug )));
-            
         }
     }
 

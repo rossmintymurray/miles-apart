@@ -261,6 +261,10 @@ services:
         class:     MilesApart\StaffBundle\Service\AddProductFromAddToList
         arguments: ["@doctrine.orm.entity_manager", "@logger", '@session', "@inject.product", "@inject.product_price", "@inject.product_supplier"]
 
+    staff.royal_mail_service:
+          class:     MilesApart\StaffBundle\Service\RoyalMailService
+          arguments: ["@doctrine.orm.entity_manager", "@logger", "@inject.order", "@inject.shipment", "@inject.manifest", %royal_mail_api_endpoint%, %royal_mail_api_application_id%, %royal_mail_api_client_id%, %royal_mail_api_client_secret%, %royal_mail_api_username%, %royal_mail_api_password%]
+
     inject.product:
         class: MilesApart\AdminBundle\Entity\Product
         shared: false
@@ -272,6 +276,18 @@ services:
     inject.product_supplier:
         class: MilesApart\AdminBundle\Entity\ProductSupplier
         shared: false
+
+    inject.order:
+        class: MilesApart\AdminBundle\Entity\CustomerOrder
+        shared: false
+
+    inject.shipment:
+        class: MilesApart\AdminBundle\Entity\RoyalMailShipment
+        shared: false
+
+    inject.manifest:
+            class: MilesApart\AdminBundle\Entity\ShippingManifest
+            shared: false
 
     staff.get_vat_at_date:
         class:     MilesApart\StaffBundle\Service\GetVATAtDate
