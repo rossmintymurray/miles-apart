@@ -142,7 +142,7 @@ function postcodeFormSubmission(postcode) {
 function shippingAddressSelectUpdateForm() {
     $("#shipping_address_select").change(function(e) {
 
-       
+       //Get the address from the selected text box
         var address = this.value;
        
         var add = address.split(",");
@@ -151,12 +151,12 @@ function shippingAddressSelectUpdateForm() {
 
         //Get the form name 
         var form = $('#shipping_address_select').parents("form").attr('name');
-
+alert(form);
         //Fillin the form fields
-        $("#" + form + "_customer_address_line_1").val(add1[0]);
-        $("#" + form + "_customer_address_line_2").val(add1[1]);
-        $("#" + form + "_customer_address_town").val(add[1]);
-        $("#" + form + "_customer_address_county").val(add[2]);
+        $("#" + form + "_delivery_address_customer_address_line_1").val(add1[0]);
+        $("#" + form + "_delivery_address_customer_address_line_2").val(add1[1]);
+        $("#" + form + "_delivery_address_customer_address_town").val(add[1]);
+        $("#" + form + "_delivery_address_customer_address_county").val(add[2]);
 
 
         
@@ -178,7 +178,7 @@ function billingPostcodeFormSubmission(postcode) {
     //Call the serverr code and return the formatted addresses from in html
     $.ajax({
         type: "POST",
-        url: globalBaseUrl + "shipping/get-postcode-addresses",
+        url: globalBaseUrl + "basket/checkout/shipping/get-postcode-addresses",
         dataType: 'html',
         data: { postcode : postcode },
         success: function(data){
