@@ -68,6 +68,7 @@ class RegistrationController extends BaseController
                   
 
                     $session = $this->container->get('session');
+                    $em = $this->container->get('doctrine')->getManager();
 
                         //If business, create new business customer and new business customer representative.
                         if($form->get('business_customer_representative')->get('business_customer_representative_first_name')->getData()) {
@@ -91,11 +92,13 @@ class RegistrationController extends BaseController
                             //Create business customer and set  id
                             $customer = new Customer();
                             $business_customer->setCustomer($customer);
+                            //Set customer type
+                            $customer->setCustomerType($em->getRepository('MilesApartAdminBundle:CustomerType')->findOneById(2));
 
                             //Set vat invoice option to true
                             $customer->setVatInvoiceOption(true);
 
-                            $em = $this->container->get('doctrine')->getManager();
+
                             $em->persist($business_customer_representative);
                             $em->persist($user);
                             $em->flush();
@@ -122,7 +125,12 @@ class RegistrationController extends BaseController
                             $customer = new Customer();
                             $personal_customer->setCustomer($customer);
 
-                            $em = $this->container->get('doctrine')->getManager();
+                            //Set customer type
+                            $customer->setCustomerType($em->getRepository('MilesApartAdminBundle:CustomerType')->findOneById(1));
+
+                            //Set vat invoice option to true
+                            $customer->setVatInvoiceOption(false);
+
                             $em->persist($personal_customer);
                             $em->persist($user);
                             $em->flush();

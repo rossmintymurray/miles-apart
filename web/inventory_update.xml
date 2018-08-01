@@ -10,7 +10,7 @@
     <OperationType>Update</OperationType>
     <Inventory>
       <SKU>8441</SKU>
-      <Quantity>0</Quantity>
+      <Quantity>1</Quantity>
       <FulfillmentLatency>1</FulfillmentLatency>
     </Inventory>
   </Message>
