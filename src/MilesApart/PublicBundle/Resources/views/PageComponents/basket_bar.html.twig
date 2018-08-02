@@ -58,9 +58,9 @@
 							{% for item in basket.getBasketProduct %}
 								<tr id="product_{{ item.getProduct.getId }}">
 									<td>{{ item.getProduct.getProductName }}</td>
-									<td class="text-center"><a href="#" onclick="basketMinusFunction({{ item.getId }})"><i class="fi-minus basket_bar_table_icon basket_bar_table_icon_left"></i></a> {{ item.getBasketProductQuantity }} <a href="#" onclick="basketAddFunction({{ item.getProduct.getId }})"><i class="fi-plus basket_bar_table_icon basket_bar_table_icon_right"></i></a></td>
+									<td class="text-center"><a href="#" onclick="basketMinusFunction({{ item.getProduct.getId }})"><i class="fi-minus basket_bar_table_icon basket_bar_table_icon_left"></i></a> <span>{{ item.getBasketProductQuantity }}</span> <a href="#" onclick="basketAddFunction({{ item.getProduct.getId }})"><i class="fi-plus basket_bar_table_icon basket_bar_table_icon_right"></i></a></td>
 									<td>{{ item.getBasketProductTotalPriceDisplay }}</td>
-									<td><a href="#" onclick="deleteFromBasket({{ item.getId }})"><i class="fi-trash basket_bar_table_icon"></i></a></td>
+									<td><a href="#" onclick="deleteFromBasket({{ item.getProduct.getId }})"><i class="fi-trash basket_bar_table_icon"></i></a></td>
 								</tr>
 							{% endfor %}
 							

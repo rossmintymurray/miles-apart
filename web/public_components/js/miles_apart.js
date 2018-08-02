@@ -359,14 +359,14 @@ function basketAddFunction(product_id) {
                 //Add to javscript shopping cart
                 addToJSShoppingCart(data);
 
-
                 //Check if this was the last in stock
                 if(data['current_stock_level'] == 0) {
                     //Change button to disabled
                     var div = "#" + product_id;
                     $(div).addClass('disabled');
-                    $(div).removeClass('add_to_basket');
+                    $(div).removeClass('add_to_basket_from_shop');
                     $(div).html('Currently unavailable');
+                    $(div).setAttribute("href", "#");
 
                 }
             } else {
@@ -379,14 +379,14 @@ function basketAddFunction(product_id) {
     });
 }
 
-function basketMinusFunction(basket_product_id) {
+function basketMinusFunction(product_id) {
     //Set up the ajax function to add to server side basket.
     //Make ajax to get the supplier details for printing
     $.ajax({
         type: "POST",
         url: globalBaseUrl + "basket/ajax-minus",
         dataType: "json",
-        data: {basket_product_id : basket_product_id},
+        data: {product_id : product_id},
         success: function(data){
 
             //Add to javscript shopping cart
@@ -397,8 +397,9 @@ function basketMinusFunction(basket_product_id) {
                 //Change button to enabled
                 var div = "#" + data['product_id'];
                 $(div).removeClass('disabled');
-                $(div).addClass('add_to_basket');
+                $(div).addClass('add_to_basket_from_shop');
                 $(div).html('Add to basket');
+                $(div).setAttribute("href", "#");
 
             }
         },
@@ -408,12 +409,12 @@ function basketMinusFunction(basket_product_id) {
     });
 }
 
-function deleteFromBasket(basket_product_id) {
+function deleteFromBasket(product_id) {
     $.ajax({
         type: "POST",
         url: globalBaseUrl + "basket/ajax-delete",
         dataType: "json",
-        data: {basket_product_id : basket_product_id},
+        data: {product_id : product_id},
         success: function(data){
 
             //Add to javscript shopping cart
@@ -424,7 +425,7 @@ function deleteFromBasket(basket_product_id) {
                 //Change button to enabked
                 var div = "#" + data['product_id'];
                 $(div).removeClass('disabled');
-                $(div).addClass('add_to_basket');
+                $(div).addClass('add_to_basket_from_shop');
                 $(div).html('Add to basket');
 
             }
@@ -450,14 +451,13 @@ function addToJSShoppingCart(data) {
                 total_price = total_price.toFixed(2);
 
                 //Update the table data
-                $("#product_"+data['product_id']+" td:nth-child(2)").html(data['product_quantity']);
+                $("#product_"+data['product_id']+" td:nth-child(2) span").html(data['product_quantity']);
                 $("#product_"+data['product_id']+" td:nth-child(3)").html("£"+total_price);
                 
             } else {
                 
                 //Add the row as it does not exist
-                var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\">"+ data['product_quantity'] +"</td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
-                
+                var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\"><a href=\"#\" onclick=\"basketMinusFunction(" + data['product_id'] + ")\"><i class=\"fi-minus basket_bar_table_icon basket_bar_table_icon_left\"></i></a><span>"+ data['product_quantity'] +"</span><a href=\"#\" onclick=\"basketAddFunction(" + data['product_id'] + ")\"><i class=\"fi-plus basket_bar_table_icon basket_bar_table_icon_right\"></i></a></td><td class=\"text-center\">£"+ data['product_price'] +"</td><td><a href=\"#\" onclick=\"deleteFromBasket(" + data['product_id'] + ")\"><i class=\"fi-trash basket_bar_table_icon\"></i></a></td></tr>";
                 $('#basket_bar_table tr:nth-last-child(2)').after(newRow);
 
             }
@@ -515,15 +515,8 @@ function minusFromJSShoppingCart(data) {
                 total_price = total_price.toFixed(2);
 
                 //Update the table data
-                $("#product_"+data['product_id']+" td:nth-child(2)").html(data['product_quantity']);
+                $("#product_"+data['product_id']+" td:nth-child(2) span").html(data['product_quantity']);
                 $("#product_"+data['product_id']+" td:nth-child(3)").html("£"+total_price);
-
-            } else {
-
-                //Add the row as it does not exist
-                var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\">"+ data['product_quantity'] +"</td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
-
-                $('#basket_bar_table tr:nth-last-child(2)').after(newRow);
 
             }
 
@@ -585,46 +578,45 @@ function deleteFromJSShoppingCart(data) {
             //Check if product to add exists in the table.
             if ($("#product_"+data['product_id']).length) {
 
-                //Update the quantity and total of the existing row in the cart table.
-                //Calculate the total price
-                var total_price = data['product_price'] * data['product_quantity'];
-                total_price = total_price.toFixed(2);
-
-                //Update the table data
-                $("#product_"+data['product_id']+" td:nth-child(2)").html(data['product_quantity']);
-                $("#product_"+data['product_id']+" td:nth-child(3)").html("£"+total_price);
-
-            } else {
-
-                //Add the row as it does not exist
-                var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\">"+ data['product_quantity'] +"</td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
-
-                $('#basket_bar_table tr:nth-last-child(2)').after(newRow);
+                //Remove the row
+                $("#product_"+data['product_id']).remove();
 
             }
+
 
             //Update the totals
-            $("#table_basket_quantity").html(data['basket_quantity']);
-            $("#table_basket_price").html(data['basket_value']);
+            //Check if basket has been emptied
+            if(data['basket_quantity'] == 0) {
+                //Remove the items from the basket bar
+                //Create the header
+                var shopping_bar_header = "<p>Your basket is empty</h5>";
+                //Overwrite the content with the header
+                $("#drop").html(shopping_bar_header);
 
-            var basket_qty_items_text ="";
-
-            if(data['basket_quantity'] > 1) {
-                basket_qty_items_text = "items";
+                $("#basket_button_wrapper").html("No items");
+                //Update button in the basket bar to link to chackout
+                $("#basket_bar_button").attr('href', '#');
             } else {
-                basket_qty_items_text = "item";
+                $("#table_basket_quantity").html(data['basket_quantity']);
+                $("#table_basket_price").html(data['basket_value']);
+
+                var basket_qty_items_text ="";
+
+                if(data['basket_quantity'] > 1) {
+                    basket_qty_items_text = "items";
+                } else {
+                    basket_qty_items_text = "item";
+                }
+
+                //Update the popup header
+                $("#popup_basket_quantity").html(data['basket_quantity']);
+                basket_qty_items_text = basket_qty_items_text.substr(0,1).toUpperCase()+basket_qty_items_text.substr(1);
+                $("#popup_basket_quantity_text").html(basket_qty_items_text);
+
+                //Update the button
+                var button = "<strong id=\"button_basket_quantity\">"+ data['basket_quantity'] +"</strong> "+ basket_qty_items_text +", <strong id=\"button_basket_price\">"+ data['basket_value'] +"</strong>";
+                $("#basket_button_wrapper").html(button);
             }
-
-            //Update the popup header
-            $("#popup_basket_quantity").html(data['basket_quantity']);
-            basket_qty_items_text = basket_qty_items_text.substr(0,1).toUpperCase()+basket_qty_items_text.substr(1);
-            $("#popup_basket_quantity_text").html(basket_qty_items_text);
-
-            //Update the button
-            var button = "<strong id=\"button_basket_quantity\">"+ data['basket_quantity'] +"</strong> "+ basket_qty_items_text +", <strong id=\"button_basket_price\">"+ data['basket_value'] +"</strong>";
-            $("#basket_button_wrapper").html(button);
-
-            showShoppingCartDuration();
 
         } else {
             //Shopping basket does not exist so add it.
@@ -653,11 +645,11 @@ function createJSShoppingCart(data) {
     $("#drop").append(table_content);
 
     //Create the first row 
-    var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\"><a href=\"#\" onclick=\"basketMinusFunction({{ item.getId }})\"><i class=\"fi-minus basket_bar_table_icon basket_bar_table_icon_left\"></i></a>"+ data['product_quantity'] +"<a href=\"#\" onclick=\"basketAddFunction({{ item.getProduct.getId }})\"><i class=\"fi-plus basket_bar_table_icon basket_bar_table_icon_right\"></i></a></td><td class=\"text-center\">£"+ data['product_price'] +"</td></tr>";
+    var newRow = "<tr id=\"product_"+data['product_id']+ "\"><td>"+ data['product_name'] + "</td><td class=\"text-center\"><a href=\"#\" onclick=\"basketMinusFunction(" + data['product_id'] + ")\"><i class=\"fi-minus basket_bar_table_icon basket_bar_table_icon_left\"></i></a><span>"+ data['product_quantity'] +"</span><a href=\"#\" onclick=\"basketAddFunction(" + data['product_id'] + ")\"><i class=\"fi-plus basket_bar_table_icon basket_bar_table_icon_right\"></i></a></td><td class=\"text-center\">£"+ data['product_price'] +"</td><td><a href=\"#\" onclick=\"deleteFromBasket(" + data['product_id'] + ")\"><i class=\"fi-trash basket_bar_table_icon\"></i></a></td></tr>";
     $("#basket_bar_table thead").after(newRow);
 
     //Create the table footer
-    var table_footer = "<tr id=\"basket_total_row\"><th class=\"text-right\">Total</th><th class=\"text-center\" id=\"table_basket_quantity\">" + data['basket_quantity'] + "</th><th id=\"table_basket_price\">" + data['basket_value'] + "</th></tr>";
+    var table_footer = "<tr id=\"basket_total_row\"><th class=\"text-right\">Total</th><th class=\"text-center\" id=\"table_basket_quantity\">" + data['basket_quantity'] + "</th><th id=\"table_basket_price\">" + data['basket_value'] + "</th><th></th></tr>";
     $("#basket_bar_table").append(table_footer);
     
    //Create the checkout button

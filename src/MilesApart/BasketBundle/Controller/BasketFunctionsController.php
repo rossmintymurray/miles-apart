@@ -403,7 +403,7 @@ class BasketFunctionsController extends Controller
         }
 
         $logger->info('I just got the logger count 2 or more');
-        $id = $response["basket_product_id"];
+        $id = $response["product_id"];
         $logger->info('I just got the logger count 2.5 or more');
         //Get product from the database.
         $em = $this->getDoctrine()->getManager();
@@ -425,13 +425,13 @@ class BasketFunctionsController extends Controller
         }
 
         //Check if any products exists in the basket
-        $count = count($basket->getBasketProduct());
-        if ($count > 0) {
+        $line_count = count($basket->getBasketProduct());
+        if ($line_count > 0) {
             //For each basket product in the basket
             foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
 
                 //Check if the product id of each item in the basket matches the one we are minusing.
-                if ($basket_product_existing->getId() == $id) {
+                if ($basket_product_existing->getProduct()->getId() == $id) {
 
                     //The product is in the basket
                     $exists_in_basket = true;
@@ -441,18 +441,34 @@ class BasketFunctionsController extends Controller
 
                     //If there are no more qty of this item, remove the item
                     if ($new_qty == 0) {
+                        $logger->info('I just got the logger count 5 or more');
+                        //Set the qty so it doesnt interfere with adding items to the basket
+                        $basket_product_existing->setBasketProductQuantity($new_qty);
+                        //Remove from th ebasket
                         $basket->removeBasketProduct($basket_product_existing);
+
+                        //Reduce count by 1
+                        $line_count = $line_count - 1;
+                        $logger->info('I just got the logger count 5.5 or more');
                     } else {
+                        $logger->info('I just got the logger count 6 or more');
                         //Still some left in basket so just update qty
                         $basket_product_existing->setBasketProductQuantity($new_qty);
                     }
 
-                    //Save to session.
-                    $session->set('basket', $basket);
+                    //If no more items in the basket, remove the session
+                    if($line_count == 0){
+                        $session->remove('basket');
+                    } else {
+                        //Save to session.
+                        $session->set('basket', $basket);
+                    }
+
+
 
                     //Persist to database.
                     $em->flush();
-
+                    $logger->info('I just got the logger count 6.5 or more');
                     //Set the return data
                     $product_id = $basket_product_existing->getProduct()->getId();
                     $product_name = $basket_product_existing->getProduct()->getProductMarketingName();
@@ -489,8 +505,10 @@ class BasketFunctionsController extends Controller
     /*
      * Remove an entire line from the basket
      */
-    public function ajaxdelete(Request $request)
+    public function ajaxdeleteAction(Request $request)
     {
+        $logger = $this->get('logger');
+        $logger->info('I just got the logger count 1 or more');
         $session = $request->getSession();
 
         //Get the product and add it to the session
@@ -504,12 +522,12 @@ class BasketFunctionsController extends Controller
             //Set response to false
             $response = "false";
         }
-
-        $id = $response["basket_product_id"];
+        $logger->info('I just got the logger count 2 or more');
+        $id = $response["product_id"];
 
         //Get product from the database.
         $em = $this->getDoctrine()->getManager();
-
+        $logger->info('I just got the logger count 3 or more');
         //Check that the basket exists in the session
         if ($session->has('basket')) {
 
@@ -525,29 +543,32 @@ class BasketFunctionsController extends Controller
                     "success" => false
                 ));
         }
-
+        $logger->info('I just got the logger count 4 or more');
         //Check if any products exists in the basket
         $count = count($basket->getBasketProduct());
         if ($count > 0) {
+            $logger->info('I just got the logger count 5.78 or more');
             //For each basket product in the basket
             foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
-
+                $logger->info('I just got the logger count 5.87 or more');
                 //Check if the product id of each item in the basket matches the one we are adding.
-                if ($basket_product_existing->getId() == $id) {
-
+                if ($basket_product_existing->getProduct()->getId() == $id) {
+                    $logger->info('I just got the logger count 4.58 or more');
                     //The product is in the basket
                     $exists_in_basket = true;
-
+                    $logger->info('I just got the logger count 4.59 or more');
+                    //Set the qty so it doesnt interfere with adding items to the basket
+                    $basket_product_existing->setBasketProductQuantity(0);
                     //Remove product from basket
                     $basket->removeBasketProduct($basket_product_existing);
-
+                    $logger->info('I just got the logger count 5 or more');
                     //If it is the last product in the basket, remove the basket
                     if($count - 1 == 0) {
                         $session->remove('basket');
                     } else {
                         $session->set('basket', $basket);
                     }
-
+                    $logger->info('I just got the logger count 6 or more');
                     //Persist to database.
                     $em->flush();
 
@@ -575,6 +596,8 @@ class BasketFunctionsController extends Controller
 
         return new JsonResponse($response);
     }
+
+
 
     //Basket empty from AJAX fiunction
     public function basketemptyAction()
