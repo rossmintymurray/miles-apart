@@ -405,7 +405,7 @@ class CheckoutController extends Controller
             }
 
             //For each product add it to the customer order
-            foreach($basket->getBasketProduct() as $basket_product) {
+            foreach($basket->getPurchasingBasketProduct() as $basket_product) {
                 $customer_order_product = new CustomerOrderProduct();
                 $customer_order_product->setProduct($basket_product->getProduct());
                 $customer_order_product->setCustomerOrderProductQuantity($basket_product->getBasketProductQuantity());
@@ -585,7 +585,7 @@ class CheckoutController extends Controller
             }
 
             //For each item add it to the customer order
-            foreach($basket->getBasketProduct() as $basket_product) {
+            foreach($basket->getPurchasingBasketProduct() as $basket_product) {
                 $customer_order_product = new CustomerOrderProduct();
                 $customer_order_product->setProduct($basket_product->getProduct());
                 $customer_order_product->setCustomerOrderProductQuantity($basket_product->getBasketProductQuantity());

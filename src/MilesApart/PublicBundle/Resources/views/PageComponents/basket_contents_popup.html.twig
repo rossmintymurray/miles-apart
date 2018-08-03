@@ -21,9 +21,9 @@
 	{# Check if basket is null (there is no basket yet) #}
 	{% if basket != null %}
 		<h3>Basket</h3>
-		<p>{{ basket.getBasketProduct|length }} items</p>
+		<p>{{ basket.getPurchasingBasketProduct|length }} items</p>
 		{# Check if items in the basket #}
-		{% if basket.getBasketProduct|default([])|length > 0 %}
+		{% if basket.getPurchasingBasketProduct|default([])|length > 0 %}
 			{# Create the table for the items #}
 			<table id="shopping_basket_table">
 				<tr>
@@ -34,7 +34,7 @@
 					<th>Total</th>
 					<th></th>
 				</tr>
-				{% for item in basket.getBasketProduct %}
+				{% for item in basket.getPurchasingBasketProduct %}
 					<tr>
 						<td>{{ item.getId }}</td>
 						<td>{{ item.getProduct.getId }}</td>

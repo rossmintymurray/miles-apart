@@ -41,7 +41,12 @@ class BasketProduct
     /**
      * @ORM\Column(type="integer")
      */
-    protected $basket_product_quantity;
+    protected $basket_added_product_quantity;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $basket_removed_product_quantity;
 
     /**
      * @ORM\ManyToOne(targetEntity="Basket", inversedBy="basket_product", cascade={"persist"})
@@ -56,11 +61,6 @@ class BasketProduct
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;
-
-     /**
-     * @ORM\OneToMany(targetEntity="RemovedBasketProduct", mappedBy="basket_product", cascade={"persist"})
-     */
-    protected $removed_basket_product;
 
 
      /**
@@ -144,16 +144,49 @@ class BasketProduct
     }
 
     /**
-     * Set basket_product_quantity
+     * Set basket_added_product_quantity
      *
-     * @param integer $basketProductQuantity
+     * @param integer $basketAddedProductQuantity
      * @return BasketProduct
      */
-    public function setBasketProductQuantity($basketProductQuantity)
+    public function setBasketAddedProductQuantity($basketAddedProductQuantity)
     {
-        $this->basket_product_quantity = $basketProductQuantity;
-    
+        $this->basket_added_product_quantity = $basketAddedProductQuantity;
+
         return $this;
+    }
+
+    /**
+     * Get basket_added_product_quantity
+     *
+     * @return integer
+     */
+    public function getBasketAddedProductQuantity()
+    {
+        return $this->basket_added_product_quantity;
+    }
+
+    /**
+     * Set basket_removed_product_quantity
+     *
+     * @param integer $basketRemovedProductQuantity
+     * @return BasketProduct
+     */
+    public function setBasketRemovedProductQuantity($basketRemovedProductQuantity)
+    {
+        $this->basket_removed_product_quantity = $basketRemovedProductQuantity;
+
+        return $this;
+    }
+
+    /**
+     * Get basket_removed_product_quantity
+     *
+     * @return integer
+     */
+    public function getBasketRemovedProductQuantity()
+    {
+        return $this->basket_removed_product_quantity;
     }
 
     /**
@@ -163,7 +196,7 @@ class BasketProduct
      */
     public function getBasketProductQuantity()
     {
-        return $this->basket_product_quantity;
+        return $this->getBasketAddedProductQuantity() - $this->getBasketRemovedProductQuantity();
     }
 
     /**
@@ -210,52 +243,6 @@ class BasketProduct
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * Set removed_basket_product
-     *
-     * @param \MilesApart\BasketBundle\Entity\RemovedBasketProduct $removedBasketProduct
-     * @return BasketProduct
-     */
-    public function setRemovedBasketProduct(\MilesApart\BasketBundle\Entity\RemovedBasketProduct $removedBasketProduct = null)
-    {
-        $this->removed_basket_product = $removedBasketProduct;
-    
-        return $this;
-    }
-
-    /**
-     * Get removed_basket_product
-     *
-     * @return \MilesApart\BasketBundle\Entity\RemovedBasketProduct 
-     */
-    public function getRemovedBasketProduct()
-    {
-        return $this->removed_basket_product;
-    }
-
-    /**
-     * Add removed_basket_product
-     *
-     * @param \MilesApart\BasketBundle\Entity\RemovedBasketProduct $removedBasketProduct
-     * @return BasketProduct
-     */
-    public function addRemovedBasketProduct(\MilesApart\BasketBundle\Entity\RemovedBasketProduct $removedBasketProduct)
-    {
-        $this->removed_basket_product[] = $removedBasketProduct;
-    
-        return $this;
-    }
-
-    /**
-     * Remove removed_basket_product
-     *
-     * @param \MilesApart\BasketBundle\Entity\RemovedBasketProduct $removedBasketProduct
-     */
-    public function removeRemovedBasketProduct(\MilesApart\BasketBundle\Entity\RemovedBasketProduct $removedBasketProduct)
-    {
-        $this->removed_basket_product->removeElement($removedBasketProduct);
     }
 
     public function getBasketProductTotalPrice()

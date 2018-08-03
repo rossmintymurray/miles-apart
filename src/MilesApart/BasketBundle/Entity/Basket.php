@@ -225,13 +225,32 @@ class Basket
         return $this->basket_product;
     }
 
+    /**
+     * Get purchasing_basket_product (that hould be displayed everywhere except analysis)
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPurchasingBasketProduct()
+    {
+        //Set up array
+        $purchasing_basket_products = array();
+
+        foreach($this->getBasketProduct() as $key => $value) {
+            if($value->getBasketProductQuantity() > 0) {
+               array_push($purchasing_basket_products, $value);
+            }
+        }
+
+        return $purchasing_basket_products;
+    }
+
     //Get basket total qty
     public function getBasketTotalQuantity()
     {
         $basket_total_quantity = 0;
         //If there are items in the basket
-        if(count($this->getBasketProduct()) > 0) {
-            foreach($this->getBasketProduct() as $key => $value) {
+        if(count($this->getPurchasingBasketProduct()) > 0) {
+            foreach($this->getPurchasingBasketProduct() as $key => $value) {
                 $basket_total_quantity = $basket_total_quantity + $value->getBasketProductQuantity();
             }
         }
@@ -246,8 +265,8 @@ class Basket
     {
         $basket_total_price = 0;
         //If there are items in the basket
-        if(count($this->getBasketProduct()) > 0) {
-            foreach($this->getBasketProduct() as $key => $value) {
+        if(count($this->getPurchasingBasketProduct()) > 0) {
+            foreach($this->getPurchasingBasketProduct() as $key => $value) {
                 $basket_total_price = $basket_total_price + $value->getBasketProductTotalPrice();
             }
         }
@@ -277,8 +296,8 @@ class Basket
     {
         $basket_total_price = 0;
         //If there are items in the basket
-        if(count($this->getBasketProduct()) > 0) {
-            foreach($this->getBasketProduct() as $key => $value) {
+        if(count($this->getPurchasingBasketProduct()) > 0) {
+            foreach($this->getPurchasingBasketProduct() as $key => $value) {
                 $basket_total_price = $basket_total_price + $value->getBasketProductTotalPrice();
             }
         }
@@ -297,7 +316,7 @@ class Basket
         $length = 0;
         
         //Set maximums
-        foreach($this->getBasketProduct() as $basket_product){
+        foreach($this->getPurchasingBasketProduct() as $basket_product){
             
             //For length
             if($basket_product->getProduct()->getProductHeight() > $length) {
@@ -319,7 +338,7 @@ class Basket
         $width = 0;
         
         //Set maximums
-        foreach($this->getBasketProduct() as $basket_product){
+        foreach($this->getPurchasingBasketProduct() as $basket_product){
             
             //For width
             if($basket_product->getProduct()->getProductWidth() > $width) {
@@ -343,7 +362,7 @@ class Basket
         $depth = 0;
         
         //Set maximums
-        foreach($this->getBasketProduct() as $basket_product){
+        foreach($this->getPurchasingBasketProduct() as $basket_product){
             
             //For depth
             if($basket_product->getProduct()->getProductDepth() > $depth) {
@@ -363,7 +382,7 @@ class Basket
     {
         $total_weight = 0;
         //For each product
-        foreach($this->getBasketProduct() as $key => $value) {
+        foreach($this->getPurchasingBasketProduct() as $key => $value) {
             
             //Add the weight of each item to the total
             $total_weight = $total_weight + $value->getProduct()->getProductWeight();
@@ -393,5 +412,23 @@ class Basket
     public function getBasketCheckedOut()
     {
         return $this->basket_checked_out;
+    }
+
+    /**
+     * Get basket_has_basket_products
+     *
+     * @return boolean
+     */
+    public function getBasketHasBasketProducts()
+    {
+        $has_products = false;
+
+        foreach($this->getPurchasingBasketProduct() as $key => $value) {
+            if($value->getBasketProductQuantity() > 0) {
+                $has_products = true;
+            }
+        }
+
+        return $has_products;
     }
 }

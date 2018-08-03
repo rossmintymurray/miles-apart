@@ -1519,10 +1519,10 @@ class Product
 
         //Check every un-checked out basket for this product and deduct from the stock level
         //Check if there are any products in baskets that are not checked out and have not been added to for 10 mins
-        if (count($this->getBasketProduct()) > 0) {
+        if (count($this->getPurchasingBasketProduct()) > 0) {
 
             //For each time there is a basket product
-            foreach ($this->getBasketProduct() as $key => $value) {
+            foreach ($this->getPurchasingBasketProduct() as $key => $value) {
 
                 //If the basket has not been checjed out
                 if ($value->getBasket()->getBasketCheckedOut() != TRUE && $value->getBasket()->getBasketDateModified() > $endtime)  {

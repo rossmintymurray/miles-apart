@@ -4,116 +4,127 @@
 
 {# Create the basket button #}
 {# Check if basket is null (there is no basket yet) #}
-	{% if basket is defined %}
+	{% if basket != null %}
+		{% if basket.getBasketHasBasketProducts == true %}
 
-		{# Check if there are items in the basket #}
-		{% if basket|default([])|length > 0 %}
-			
-			{# Create the link button #}
-			<a href="{{ path('miles_apart_basket_checkout_start') }}" class="button split no-pip left-icon basket small-12 dropdown-btn" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button">
+			{# Check if there are items in the basket #}
+			{% if basket|default([])|length > 0 %}
+
+				{# Create the link button #}
+				<a href="{{ path('miles_apart_basket_checkout_start') }}" class="button split no-pip left-icon basket small-12 dropdown-btn" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button">
+					<span>
+
+					</span>
+					<div id="basket_button_wrapper">
+						<strong id="button_basket_quantity">{{ basket.getBasketTotalQuantity }}</strong> {% if basket.getBasketTotalQuantity > 1 %} items{% else %} item{% endif %}, <strong id="button_basket_price">{{ basket.getBasketTotalPriceDisplay}}</strong>
+					</div>
+				</a>
+
+				{# Create the drop down content #}
+				<div id="drop" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+
+					<!--Info box area placeholder for success/failure messages  (flash messages) -->
+					{% for flashMessage in app.session.flashbag.get('basket-public-error') %}
+						<div data-alert class="alert-box alert radius">
+							{{ flashMessage }}
+							<a href="#" class="close">&times;</a>
+						</div>
+					{% endfor %}
+
+					{# Flash message for success #}
+					{% for flashMessage in app.session.flashbag.get('basket-public-success') %}
+						<div data-alert class="alert-box success radius">
+							{{ flashMessage }}
+							<a href="#" class="close">&times;</a>
+						</div>
+					{% endfor %}
+
+					{# Crete the contents display #}
+					{# Check if basket is null (there is no basket yet) #}
+					{% if basket != null %}
+						<h5 class="text-center">Your Basket Has <span id="popup_basket_quantity">{{ basket.getBasketTotalQuantity }}</span> {% if basket.getPurchasingBasketProduct|length > 1 %} items {% else %} item{% endif %}</h5>
+
+						{# Check if items in the basket #}
+						{% if basket.getPurchasingBasketProduct|default([])|length > 0 %}
+							{# Create the table for the items #}
+							<table id="basket_bar_table">
+								<thead>
+									<tr>
+										<th width="60%">Item name</th>
+										<th width="20%" class="text-center">Qty</th>
+										<th width="15%">Price</th>
+										<th width="5%"></th>
+									</tr>
+								</thead>
+								{% for item in basket.getPurchasingBasketProduct %}
+									{% if item.getBasketProductQuantity > 0 %}
+										<tr id="product_{{ item.getProduct.getId }}">
+											<td>{{ item.getProduct.getProductName }}</td>
+											<td class="text-center"><a href="#" onclick="basketMinusFunction({{ item.getProduct.getId }})"><i class="fi-minus basket_bar_table_icon basket_bar_table_icon_left"></i></a> <span>{{ item.getBasketProductQuantity }}</span> <a href="#" onclick="basketAddFunction({{ item.getProduct.getId }})"><i class="fi-plus basket_bar_table_icon basket_bar_table_icon_right"></i></a></td>
+											<td>{{ item.getBasketProductTotalPriceDisplay }}</td>
+											<td><a href="#" onclick="deleteFromBasket({{ item.getProduct.getId }})"><i class="fi-trash basket_bar_table_icon"></i></a></td>
+										</tr>
+									{% endif %}
+								{% endfor %}
+
+								<tr id="basket_total_row">
+									<th class="text-right">Total</td>
+									<th class="text-center" id="table_basket_quantity">{{basket.getBasketTotalQuantity}}</td>
+									<th id="table_basket_price">{{ basket.getBasketTotalPriceDisplay }}</td>
+									<td></td>
+								</tr>
+
+							</table>
+						{% endif %}
+
+					{% else %}
+						<h3>No basket</h3>
+					{% endif %}
+
+					{# Create the checkout link  #}
+					<div id="basket_bar_empty_checkout_link">
+						<a class="button small small-12" href="{{ path('miles_apart_basket_checkout_start') }}">Checkout</a>
+
+						{# Show wish list link if the user is logged in #}
+						{% if app.user %}
+							<a href="{{ path('miles_apart_basket_save_to_wish_list') }}" class="button secondary tiny small-6 columns text-center" id="add_basket_to_wish_list">Add to wish list</a>
+						{% endif %}
+
+						<a href="{{ path('miles_apart_basket_empty') }}" class="button secondary tiny {% if app.user %}small-6{% else %}small-12{% endif %} columns text-center" id="empty_basket">Empty basket</a>
+					</div>
+
+
+
+				</div>
+			{% else %}
+				<a href="#" class="button split no-pip left-icon basket small-12 dropdown-btn" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button"><span></span><div id="basket_button_wrapper">No items</div></a>
+
+                {# Create the drop down content #}
+				<div id="drop" data-dropdown-content class="f-dropdown content medium small-12" aria-hidden="true" tabindex="-1">
+					<p>Your basket is empty</p>
+				</div>
+            {% endif %}
+		{% else %}
+			<a href="#" class="button split no-pip left-icon basket small-12 dropdown-btn" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button"><span></span><div id="basket_button_wrapper">No items</div></a>
+
+			{# Create the drop down content #}
+			<div id="drop" data-dropdown-content class="f-dropdown content medium small-12" aria-hidden="true" tabindex="-1">
+				<p>Your basket is empty</p>
+			</div>
+			{% endif %}
+		{% else %}
+			<a href="#" class="button split no-pip left-icon basket small-12" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button">
 				<span>
-					
+					<i class="fi-arrow-down"></i>
 				</span>
 				<div id="basket_button_wrapper">
-					<strong id="button_basket_quantity">{{ basket.getBasketTotalQuantity }}</strong> {% if basket.getBasketTotalQuantity > 1 %} items{% else %} item{% endif %}, <strong id="button_basket_price">{{ basket.getBasketTotalPriceDisplay}}</strong>
+					No items
 				</div>
 			</a>
 
 			{# Create the drop down content #}
-			<div id="drop" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
-				
-				<!--Info box area placeholder for success/failure messages  (flash messages) -->
-	            {% for flashMessage in app.session.flashbag.get('basket-public-error') %}
-	                <div data-alert class="alert-box alert radius">
-	                    {{ flashMessage }}
-	                    <a href="#" class="close">&times;</a>
-	                </div>
-	            {% endfor %}
-
-	            {# Flash message for success #}
-	            {% for flashMessage in app.session.flashbag.get('basket-public-success') %}
-	                <div data-alert class="alert-box success radius">
-	                    {{ flashMessage }}
-	                    <a href="#" class="close">&times;</a>
-	                </div>
-	            {% endfor %}
-
-	            {# Crete the contents display #}
-			  	{# Check if basket is null (there is no basket yet) #}
-				{% if basket != null %}
-					<h5 class="text-center">Your Basket Has <span id="popup_basket_quantity">{{ basket.getBasketTotalQuantity }}</span> {% if basket.getBasketProduct|length > 1 %} items {% else %} item{% endif %}</h5>
-
-					{# Check if items in the basket #}
-					{% if basket.getBasketProduct|default([])|length > 0 %}
-						{# Create the table for the items #}
-						<table id="basket_bar_table">
-							<thead>
-								<tr>
-									<th width="60%">Item name</th>
-									<th width="20%" class="text-center">Qty</th>
-									<th width="15%">Price</th>
-									<th width="5%"></th>
-								</tr>
-							</thead>
-							{% for item in basket.getBasketProduct %}
-								<tr id="product_{{ item.getProduct.getId }}">
-									<td>{{ item.getProduct.getProductName }}</td>
-									<td class="text-center"><a href="#" onclick="basketMinusFunction({{ item.getProduct.getId }})"><i class="fi-minus basket_bar_table_icon basket_bar_table_icon_left"></i></a> <span>{{ item.getBasketProductQuantity }}</span> <a href="#" onclick="basketAddFunction({{ item.getProduct.getId }})"><i class="fi-plus basket_bar_table_icon basket_bar_table_icon_right"></i></a></td>
-									<td>{{ item.getBasketProductTotalPriceDisplay }}</td>
-									<td><a href="#" onclick="deleteFromBasket({{ item.getProduct.getId }})"><i class="fi-trash basket_bar_table_icon"></i></a></td>
-								</tr>
-							{% endfor %}
-							
-							<tr id="basket_total_row">
-								<th class="text-right">Total</td>
-								<th class="text-center" id="table_basket_quantity">{{basket.getBasketTotalQuantity}}</td>
-         						<th id="table_basket_price">{{ basket.getBasketTotalPriceDisplay }}</td>
-								<td></td>
-         					</tr>
-
-						</table>
-					{% endif %}
-
-				{% else %}
-					<h3>No basket</h3>
-				{% endif %}
-					
-				{# Create the checkout link  #}
-			  	<div id="basket_bar_empty_checkout_link">
-					<a class="button small small-12" href="{{ path('miles_apart_basket_checkout_start') }}">Checkout</a>
-					
-					{# Show wish list link if the user is logged in #}
-					{% if app.user %}
-						<a href="{{ path('miles_apart_basket_save_to_wish_list') }}" class="button secondary tiny small-6 columns text-center" id="add_basket_to_wish_list">Add to wish list</a>
-					{% endif %}
-					
-					<a href="{{ path('miles_apart_basket_empty') }}" class="button secondary tiny {% if app.user %}small-6{% else %}small-12{% endif %} columns text-center" id="empty_basket">Empty basket</a>
-				</div>
-
-				
-				
+			<div id="drop" data-dropdown-content class="f-dropdown content medium small-12" aria-hidden="true" tabindex="-1">
+				<p>Your basket is empty</p>
 			</div>
-		{% else %}
-			<a href="#" class="button split no-pip left-icon basket small-12 dropdown-btn" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button"><span></span><div id="basket_button_wrapper">No items</div></a>
-
-		{# Create the drop down content #}
-		<div id="drop" data-dropdown-content class="f-dropdown content medium small-12" aria-hidden="true" tabindex="-1">
-  			<p>Your basket is empty</p>
-  		</div>
-  		{% endif %}
-	{% else %}
-		<a href="#" class="button split no-pip left-icon basket small-12" data-dropdown="drop" data-options="is_hover:true; hover_timeout:500" id="basket_bar_button">
-			<span>
-				<i class="fi-arrow-down"></i>
-			</span>
-			<div id="basket_button_wrapper">
-				No items
-			</div>
-		</a>
-
-		{# Create the drop down content #}
-		<div id="drop" data-dropdown-content class="f-dropdown content medium small-12" aria-hidden="true" tabindex="-1">
-  			<p>Your basket is empty</p>
-		</div>
-	{% endif %}
+		{% endif %}
 

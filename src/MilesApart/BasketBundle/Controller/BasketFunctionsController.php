@@ -44,7 +44,7 @@ class BasketFunctionsController extends Controller
         
 
         $exists = "";
-        $count = count($basket->getBasketProduct());
+        $count = count($basket->getPurchasingBasketProduct());
         //Check if any products exists in the basket 
         //Set existing to 0.
         $exists_in_basket = false;
@@ -55,7 +55,7 @@ class BasketFunctionsController extends Controller
             
 
             //For each basket product in the basket
-	        foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
+	        foreach($basket->getPurchasingBasketProduct() as $key => $basket_product_existing) {
 		         
                 //Check if the product id of each item in the basket matches the one we are adding.
 		        if ($basket_product_existing->getProduct()->getId() == $id) {
@@ -150,7 +150,7 @@ class BasketFunctionsController extends Controller
         
 
         $exists = "";
-        $count = count($basket->getBasketProduct());
+        $count = count($basket->getPurchasingBasketProduct());
         //Check if any products exists in the basket 
         //Set existing to 0.
         $exists_in_basket = false;
@@ -161,7 +161,7 @@ class BasketFunctionsController extends Controller
             
 
             //For each basket product in the basket
-            foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
+            foreach($basket->getPurchasingBasketProduct() as $key => $basket_product_existing) {
                  
                 //Check if the product id of each item in the basket matches the one we are adding.
                 if ($basket_product_existing->getProduct()->getId() == $id) {
@@ -190,7 +190,7 @@ class BasketFunctionsController extends Controller
             $basket_product->setBasket($basket);
             //Set the product of the basket product.
             $basket_product->setProduct($product);
-            $basket_product->setBasketProductQuantity(1);
+            $basket_product->setBasketAddedProductQuantity($basket_product->getBasketAddedProductQuantity() +1);
 
             //Product is not in basket so add it..
             $basket->addBasketProduct($basket_product);
@@ -269,7 +269,7 @@ class BasketFunctionsController extends Controller
         
 
         $exists = "";
-        $count = count($basket->getBasketProduct());
+        $count = count($basket->getPurchasingBasketProduct());
         //Check if any products exists in the basket 
         //Set existing to 0.
         $exists_in_basket = false;
@@ -280,7 +280,7 @@ class BasketFunctionsController extends Controller
             
 
             //For each basket product in the basket
-            foreach($basket->getBasketProduct() as $key => $basket_product_existing) {
+            foreach($basket->getPurchasingBasketProduct() as $key => $basket_product_existing) {
                  
                 //Check if the product id of each item in the basket matches the one we are adding.
                 if ($basket_product_existing->getProduct()->getId() == $id) {
@@ -291,8 +291,8 @@ class BasketFunctionsController extends Controller
                     //Check stock of product
                     if ($basket_product_existing->getProduct()->getCurrentStockLevel() - $basket_product_existing->getBasketProductQuantity() > 0) {
                         //Product is in basket so add qty..
-                        $new_qty = $basket_product_existing->getBasketProductQuantity() + 1;
-                        $basket_product_existing->setBasketProductQuantity($new_qty);
+                        $new_qty = $basket_product_existing->getBasketAddedProductQuantity() + 1;
+                        $basket_product_existing->setBasketAddedProductQuantity($new_qty);
 
 
                         //$em->persist($basket_product_existing);
@@ -329,7 +329,7 @@ class BasketFunctionsController extends Controller
                 $basket_product->setBasket($basket);
                 //Set the product of the basket product.
                 $basket_product->setProduct($product);
-                $basket_product->setBasketProductQuantity(1);
+                $basket_product->setBasketAddedProductQuantity(1);
 
                 //Product is not in basket so add it..
                 $basket->addBasketProduct($basket_product);
@@ -437,15 +437,13 @@ class BasketFunctionsController extends Controller
                     $exists_in_basket = true;
 
                     //Product is in basket so minus qty..
-                    $new_qty = $basket_product_existing->getBasketProductQuantity() - 1;
+                    $new_qty = $basket_product_existing->getBasketRemovedProductQuantity() + 1;
 
                     //If there are no more qty of this item, remove the item
                     if ($new_qty == 0) {
                         $logger->info('I just got the logger count 5 or more');
                         //Set the qty so it doesnt interfere with adding items to the basket
-                        $basket_product_existing->setBasketProductQuantity($new_qty);
-                        //Remove from th ebasket
-                        $basket->removeBasketProduct($basket_product_existing);
+                        $basket_product_existing->setBasketRemovedProductQuantity($new_qty);
 
                         //Reduce count by 1
                         $line_count = $line_count - 1;
@@ -453,7 +451,7 @@ class BasketFunctionsController extends Controller
                     } else {
                         $logger->info('I just got the logger count 6 or more');
                         //Still some left in basket so just update qty
-                        $basket_product_existing->setBasketProductQuantity($new_qty);
+                        $basket_product_existing->setBasketRemovedProductQuantity($new_qty);
                     }
 
                     //If no more items in the basket, remove the session
@@ -558,9 +556,8 @@ class BasketFunctionsController extends Controller
                     $exists_in_basket = true;
                     $logger->info('I just got the logger count 4.59 or more');
                     //Set the qty so it doesnt interfere with adding items to the basket
-                    $basket_product_existing->setBasketProductQuantity(0);
-                    //Remove product from basket
-                    $basket->removeBasketProduct($basket_product_existing);
+                    $basket_product_existing->setBasketRemovedProductQuantity($basket_product_existing->getBasketAddedProductQuantity());
+
                     $logger->info('I just got the logger count 5 or more');
                     //If it is the last product in the basket, remove the basket
                     if($count - 1 == 0) {
@@ -598,6 +595,10 @@ class BasketFunctionsController extends Controller
     }
 
 
+    public function addRemovedBasketProduct($basket_product)
+    {
+
+    }
 
     //Basket empty from AJAX fiunction
     public function basketemptyAction()
