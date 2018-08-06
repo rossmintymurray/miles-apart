@@ -47,8 +47,15 @@ class RoyalMailController extends Controller
                         $ajax_response
                     );
                 } else {
-                    //Shipment has been created in database, so recall create shipment
+                    //Shipment has been created in database, so re-call create shipment
                     $ajax_response = $royal_mail_service->createShipmentAPICall($order, $existing_shipment);
+
+                    //Check if shipment created successfully, before sending shipped email
+                    if(array_key_exists('allocated', $ajax_response )) {
+                        //Send the order shipped email
+                        $this->sendOrderShippedEmail($order);
+                    }
+
                     return $ajax_response;
                 }
             }
@@ -99,6 +106,9 @@ class RoyalMailController extends Controller
             $em->flush();
         }
 
+        //Send the order shipped email
+        $this->sendOrderShippedEmail($order);
+
         //Call the create shipment api
         $ajax_response = $royal_mail_service->createShipmentAPICall($order);
 
@@ -106,12 +116,41 @@ class RoyalMailController extends Controller
         $shipment = new RoyalMailShipment();
         $shipment->setRoyalMailShipmentNumber(3);
 
-
-
-
         return $ajax_response;
     }
 
+    //Send order shipped email
+    function sendOrderShippedEmail($customer_order)
+    {
+        $mailer = $this->container->get('swiftmailer.mailer.weborders_mailer');
+        //Get entity manager
+        $em = $this->getDoctrine()->getManager();
+        $customer_order = $em->merge($customer_order);
+
+        //Set the email address.
+        $email_address = 'weborders@miles-apart.com';
+
+        //Get the supplier email address.
+        $message = \Swift_Message::newInstance()
+            ->setContentType("text/html")
+            ->setSubject('Your order has shipped')
+            ->setFrom(array('weborders@miles-apart.com' => 'Miles Apart Web Orders'))
+            ->setTo($email_address)
+            ->setBody(
+                $this->renderView(
+                    'MilesApartPublicBundle:Emails:order_shipped_email.html.twig',
+                    array('customer_order' => $customer_order)
+                )
+
+            )
+        ;
+
+        $mailer->getTransport()->setLocalDomain('[127.0.0.1]');
+
+        $mailer->send($message);
+
+        return true;
+    }
     //Creates and then prints a manifest with all unmanifested items
     function printManifestAction() 
 	{
@@ -150,6 +189,8 @@ class RoyalMailController extends Controller
 
 	        $em->persist($shipping_manifest);
 	        $em->flush();
+
+	        //Send the customer order shipped email
 	    } else {
 	    	$manifest_batch_number = FALSE;
 	    }

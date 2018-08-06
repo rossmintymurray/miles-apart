@@ -2,15 +2,15 @@
 {% extends 'MilesApartPublicBundle::email_layout.html.twig' %}
 
 {% block email_name %}
-	Miles Apart Order Dispatch Notification
+	Miles Apart Order Shipped Notification
 {% endblock %}
 
 {% block email_title %}
-	Your order has been dispatched.
+	Your order has been shipped.
 {% endblock %}
 
 {% block email_intro %}
-	Order number <b>{{ customer_order.id }}</b> has now been dispatched.
+	Order number <b>{{ customer_order.id }}</b> has now been shipped.
 {% endblock %}
 
 {% block email_content %}
@@ -21,7 +21,6 @@
 	    		<table>
 	    			<tr>
 	    				<th>
-					      	<p>Your order has been dispatched.</p>
 							<p>Please contact us at <a href="mailto:customersupport@miles-apart.com">customersupport@miles-apart.com</a> if you have any queries regarding your order.</p>
 						</th>
 						<th class="expander"></th>
