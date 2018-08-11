@@ -265,6 +265,10 @@ services:
           class:     MilesApart\StaffBundle\Service\RoyalMailService
           arguments: ["@doctrine.orm.entity_manager", "@logger", "@inject.order", "@inject.shipment", "@inject.manifest", %royal_mail_api_endpoint%, %royal_mail_api_application_id%, %royal_mail_api_client_id%, %royal_mail_api_client_secret%, %royal_mail_api_username%, %royal_mail_api_password%]
 
+    seller.amazon_orders_service:
+          class:     MilesApart\SellerBundle\Service\AmazonService
+          arguments: ["@doctrine.orm.entity_manager", "@logger", "@caponica_mws_client_pool_uk"]
+
     inject.product:
         class: MilesApart\AdminBundle\Entity\Product
         shared: false

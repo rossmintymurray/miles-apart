@@ -767,25 +767,22 @@ $logger->info('I just got the logger tr 3');
     //Map new orders and save to MA database
     public function saveNewOrders($orders) 
     {
-        ladybug_dump($orders->getListOrdersResult()->getOrders());
         $em = $this->getDoctrine()->getManager();
 
         //Iterate over the orders 
         foreach($orders->getListOrdersResult()->getOrders() as $order) {
-            ladybug_dump($order->getIsBusinessOrder());
             //Check if the order exists in the MA DB
             $existing_amazon_order = $em->getRepository('MilesApartSellerBundle:AmazonOrder')->findOneBy(array('amazon_order_id' => $order->getAmazonOrderId()));
 
             if($existing_amazon_order != null) {
                 //Update the order
-                ladybug_dump("notexisting");
             } else {
 
 
             
                 //Split name into first name and surname
                 $arr = explode(' ', trim($order->getBuyerName()));
-                echo $arr[0]; // will print Test
+
                 $amazon_first_name = ucfirst($arr[0]);
                 $amazon_surname = "";
                 foreach($arr as $key => $name) {
@@ -802,7 +799,6 @@ $logger->info('I just got the logger tr 3');
 
                 //Create new personal or business customer object
                 if($order->getIsBusinessOrder() != true){
-                    ladybug_dump("businesss");
                     $business_customer = new BusinessCustomer();
 
                     $business_customer_representative = new BusinessCustomerRepresentative();
@@ -813,7 +809,6 @@ $logger->info('I just got the logger tr 3');
                     $business_customer->addBusinessCustomerRepresentative($business_customer_representative);
                     $customer->setBusinessCustomer($business_customer);
                 } else {
-                    ladybug_dump("personal");
                     $personal_customer = new PersonalCustomer();
 
                     //Set up the variables
@@ -840,7 +835,6 @@ $logger->info('I just got the logger tr 3');
                 $customer_address->setCustomerAddressCountry($order->getShippingAddress()->getCountryCode());
 
                 $customer->addCustomerAddress($customer_address);
-
                 //Create new customer order object
                 $customer_order = new CustomerOrder();
 
@@ -852,7 +846,6 @@ $logger->info('I just got the logger tr 3');
                     $em->getRepository('MilesApartAdminBundle:CustomerOrderSource')->findOneBy(
                     array( 'id' => 2 )
                 ));
-
                 //Check the order status and insert into the DB as appropriate
                 if($order->getOrderStatus() == "Pending") {
                     $customer_order->setCustomerOrderState(
@@ -875,16 +868,12 @@ $logger->info('I just got the logger tr 3');
                         array( 'id' => 9)
                     ));
                 }
-                
                 $customer->addCustomerOrder($customer_order);
-
                 //Get the order contents
                 $order_contents = $this->getNewOrderContents($order->getAmazonOrderId());
-
                 //Set delivery total variable.
                 $amazon_delivery_total_price = 0.00;
-
-                //For each product in the order 
+                //For each product in the order
                 foreach($order_contents->getListOrderItemsResult()->getOrderItems() as $order_product) {
 
                     //Get the product from the DB
@@ -903,7 +892,6 @@ $logger->info('I just got the logger tr 3');
                     //Update the delivery total
                     $amazon_delivery_total_price = $amazon_delivery_total_price + $order_product->getShippingPrice()->getAmount();
                 }
-                    
 
                 //Update the total shipping price on customer order
                 $customer_order->setCustomerOrderShippingPaid($amazon_delivery_total_price);
@@ -920,21 +908,15 @@ $logger->info('I just got the logger tr 3');
 
                 $customer_order->setAmazonOrder($amazon_order);
 
-                ladybug_dump($customer_order->getCustomerOrderLargestWidth());
-                ladybug_dump($customer_order->getCustomerOrderLargestHeight());
-                ladybug_dump($customer_order->getCustomerOrderLargestDepth());
-                ladybug_dump($customer_order->getCustomerOrderTotalWeight());
                 //Set up the postage band details
                 //Query the model with the order, height width, depth and weight
                 $postage_band = $em->getRepository('MilesApartAdminBundle:PostageBand')->findPostageBandBySizes($customer_order->getCustomerOrderLargestWidth(), $customer_order->getCustomerOrderLargestHeight(), $customer_order->getCustomerOrderLargestDepth(), $customer_order->getCustomerOrderTotalWeight());
 
-                ladybug_dump($postage_band);
 
                 $customer_order->setDeliveryOption(
                     $em->getRepository('MilesApartAdminBundle:PostageBandDispatchLogistics')->findOneBy(array('postage_band' => $postage_band[0]->getId(), 'postage_type' => 2))
                 );
 
-                ladybug_dump($customer_order);
 
                 //Persist the order and return success or failure
                 $em->persist($customer_order);
