@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Caponica\AmazonMwsBundle\CaponicaAmazonMwsBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
+            new Sentry\SentryBundle\SentryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

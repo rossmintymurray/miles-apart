@@ -47,7 +47,8 @@
         "caponica/amazon-mws-complete": "dev-master",
         "caponica/amazon-mws-bundle": "dev-master",
         "jms/serializer-bundle": "2.0.0",
-        "excelwebzone/recaptcha-bundle": "1.4.0"
+        "excelwebzone/recaptcha-bundle": "1.4.0",
+        "sentry/sentry-symfony": "0.7.1"
 
 
     },

@@ -15,3 +15,6 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+sentry:
+    dsn: "https://4de77a48094e4af0b118dc0826525279@sentry.io/1270580"
