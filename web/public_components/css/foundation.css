@@ -2025,12 +2025,16 @@ meta.foundation-mq-topbar {
         margin-bottom: 0;
         margin-top: 0;
         font-size: 1.125rem; }
-        .top-bar-section .dropdown li.title h5 a, .top-bar-section .dropdown li.parent-link a {
+         .top-bar-section .dropdown li.parent-link a {
           color: #999999;
           display: block;
-          font-size:0.8rem; }
+          font-size:1.2rem; }
+.top-bar-section .dropdown li.title h5 a {
+  color: #999999;
+  display: block;
+  font-size:0.8rem; }
           .top-bar-section .dropdown li.title h5 a:hover, .top-bar-section .dropdown li.parent-link a:hover {
-            background: none; }
+            background: #555555; }
       .top-bar-section .dropdown li.has-form {
         padding: 8px 0.9375rem; }
       .top-bar-section .dropdown li .button,

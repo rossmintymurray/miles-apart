@@ -161,7 +161,7 @@ a.button.split.no-pip.left-icon.basket.large-12.open {
 
 /* Navigation top bar styles */
 .top-bar {
-  background: #f5f5f5;
+  background: #f2f2f2;
 }
 
 .top-bar-section .has-dropdown {
@@ -175,11 +175,11 @@ a.button.split.no-pip.left-icon.basket.large-12.open {
 }
 
 .top-bar.expanded .title-area {
-  background: #f5f5f5;
+  background: #f2f2f2;
 }
 
 .top-bar-section ul li {
-  background: #f5f5f5;
+  background: #f2f2f2;
 }
 
 .top-bar-section li a:not(.button, .season_nav_link) {
@@ -191,7 +191,8 @@ a.button.split.no-pip.left-icon.basket.large-12.open {
 }
 
 .top-bar-section ul li.active > a {
-    background: #555555 !important;   
+    background: #555555 !important;
+    color:#f5f5f5 !important;
 }
 
 .top-bar-section ul li.active > a:hover {
@@ -212,15 +213,25 @@ li.nav_title a {
   font-size:1rem !important;
 }
 
+li.parent-link.js-generated {
+    font-size:1.2rem !important;
+}
 
 .top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
-  color:#333333;
+    color:#333333;
+    background-color:#f2f2f2
+}
+
+.top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button):hover {
+    color:#f5f5f5;
+    background-color:#4444;
 }
 
 .top-bar-section li:not(.has-form) .nav_title a:not(.button) {
   color:#333333;
   line-height: 1.4rem;
   padding:0.8rem;
+    background-color:#f2f2f2;
 }
 
 
@@ -231,7 +242,7 @@ li.nav_title a {
 }
 
 li.nav_title.active a {
-  color:#f5f5f5 !important;
+  color:#f2f2f2 !important;
 }
 
 
@@ -552,7 +563,7 @@ div.row.homepage-carousel-banners {
 ol#wo-breadcrumbs.breadcrumbs {
   margin-top:1.2rem;
   border:none;
-  background-color:#f5f5f5;
+  background-color:#f2f2f2;
 }
 
 /* Styles for side nav */
@@ -778,12 +789,13 @@ margin-bottom:0rem;
 
 .top-bar-section li:not(.has-form) a:not(.button):hover {
   color:#ffffff;
+    background-color:#555555;
 }
 
 .nav_columns:not(:last-child) {
   
-  margin-bottom:0.6rem;
-  margin-top:0.3rem;
+  margin-bottom:0rem;
+  margin-top:0rem;
 }
 
 

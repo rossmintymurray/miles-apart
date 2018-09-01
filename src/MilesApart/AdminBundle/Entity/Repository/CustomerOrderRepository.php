@@ -144,5 +144,21 @@ class CustomerOrderRepository extends EntityRepository
       return $query
                 ->getResult(); 
    }
+
+    //Find all amazon customer orders on a shipping manifest
+    public function findAmazonOrdersOnManifest($manifest_batch_number)
+    {
+        //Check if there is a value for product id.
+
+        $query = $this->getEntityManager()
+            ->createQuery('
+            		SELECT co FROM MilesApartAdminBundle:CustomerOrder co
+                    JOIN co.ShippingManifest p
+                    ORDER BY spp.staff_pick_product_date_created DESC
+            		')
+            ->setMaxResults(4);
+        return $query
+            ->getResult();
+    }
 }
 

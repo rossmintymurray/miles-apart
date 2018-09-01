@@ -197,17 +197,33 @@ class RoyalMailController extends Controller
 
         //Call the print manifest function
         $manifest = $this->printManifestFunction($manifest_batch_number);
+
+        //call the function to update Amazon shipping status for Amazon orders
+        $amazon_output = setAmazonOrdersToShipped($manifest_batch_number)
         
         //Render the page from template
         return $this->render('MilesApartStaffBundle:RoyalMail:response.html.twig', array( 
             'create_manifest_API_call_response' => $create_manifest_API_call_response,
             'manifest'=> $manifest,
+            'amazon_output' => $amazon_output,
 
         ));
 
 	}
 
-	//Function to print a manifest (either an existing or newly created, depending on what called it).
+	//Function to iterate over amazon orders in a shipment, then call the Amazon Controller to update each one
+    public function setAmazonOrdersToShipped($manifest_batch_number)
+    {
+        $em = $this->getDoctrine()->getManager();
+        //Get amazon orders from a shipping manifest
+        $postage_band = $em->getRepository('MilesApartAdminBundle:ShippingManifest')->findAmazonOrdersOnManifest($manifest_batch_number);
+
+
+        //Call the amazon feed
+        uploadAmazonOrderFulfillment();
+    }
+
+    //Function to print a manifest (either an existing or newly created, depending on what called it).
 	public function printManifestFunction($manifest_batch_number)
     {
         //Get the Royal Mail service

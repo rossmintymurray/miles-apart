@@ -953,8 +953,8 @@ $logger->info('I just got the logger tr 3');
         return $response;
     }
 
-    /******************* Feed creation for order acknowledgement *********************/
-    //Function to upload acknowledgement of order (after an order has been downloaded and  added to the MA DB)
+    /******************* Feed creation for order fulfilment *********************/
+    //Function to upload acknowledgement of order dispatch
     public function uploadAmazonOrderFulfillment($amazon_order_id) 
     {
         //Get the Amazon setup
