@@ -151,7 +151,7 @@ function shippingAddressSelectUpdateForm() {
 
         //Get the form name 
         var form = $('#shipping_address_select').parents("form").attr('name');
-alert(form);
+
         //Fillin the form fields
         $("#" + form + "_delivery_address_customer_address_line_1").val(add1[0]);
         $("#" + form + "_delivery_address_customer_address_line_2").val(add1[1]);
