@@ -106,7 +106,7 @@ class CustomerOrder
     protected $delivery_option;
 
     /**
-     * @ORM\OneToMany(targetEntity="BusinessCustomerRepresentativeCustomerOrder", mappedBy="customer_order", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="BusinessCustomerRepresentativeCustomerOrder", mappedBy="customer_order", cascade={"persist"})
      */
     protected $business_customer_representative_customer_order;
 

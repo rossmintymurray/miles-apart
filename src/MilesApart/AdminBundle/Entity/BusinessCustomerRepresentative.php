@@ -80,7 +80,7 @@ class BusinessCustomerRepresentative
     protected $business_customer_representative_text_opt_in;
 
     /**
-     * @ORM\OneToOne(targetEntity="BusinessCustomerRepresentativeCustomerOrder", mappedBy="business_customer_representative", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="BusinessCustomerRepresentativeCustomerOrder", mappedBy="business_customer_representative", cascade={"persist"})
      */
     protected $business_customer_representative_customer_order;
 

@@ -189,7 +189,7 @@ class CheckoutController extends Controller
     */
     private function createCheckoutDeliveryForm(CustomerOrder $entity, $postage_options)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(new NewCustomerCheckoutDeliveryType($postage_options, $em), $entity, array(
             'action' => $this->generateUrl('miles_apart_basket_checkout_payment'),
@@ -212,7 +212,7 @@ class CheckoutController extends Controller
     */
     private function createCheckoutExistingCustomerDeliveryForm(CustomerOrder $entity, $postage_options)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(new ExistingCustomerCheckoutDeliveryType($postage_options, $em), $entity, array(
             'action' => $this->generateUrl('miles_apart_basket_checkout_payment'),
@@ -277,7 +277,7 @@ class CheckoutController extends Controller
     {
         //Check if the user is logged in
         if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            
+
             //Redirect to checkout existing customer
             $response = $this->forward('MilesApartBasketBundle:Checkout:checkoutexistingcustomerpayment', array(
                 'request'  => $request,
@@ -416,7 +416,6 @@ class CheckoutController extends Controller
             
             //Add the total to be paid
             $customer_order->setCustomerOrderShippingPaid($this->getCustomerOrderShippingTotal($customer_order));
-
             //Persist &flush changes
             $em->persist($customer_order);
             $em->flush();
@@ -575,12 +574,11 @@ class CheckoutController extends Controller
             $business_customer_representative = $this->container->get('security.context')->getToken()->getUser()->getBusinessCustomerRepresentative();
             if($business_customer_representative != null) {
 
-                //Set the buiness customer representative customer order 
+                //Set the buiness customer representative customer order
                 $business_customer_representative_customer_order = new BusinessCustomerRepresentativeCustomerOrder();
                 $business_customer_representative_customer_order->setCustomerOrder($customer_order);
                 $business_customer_representative_customer_order->setBusinessCustomerRepresentative($business_customer_representative);
                 $customer_order->setBusinessCustomerRepresentativeCustomerOrder($business_customer_representative_customer_order);
-                $business_customer_representative->setBusinessCustomerRepresentativeCustomerOrder($business_customer_representative_customer_order);
                 $em->persist($business_customer_representative_customer_order);
             }
 
@@ -593,18 +591,18 @@ class CheckoutController extends Controller
                 $customer_order->addCustomerOrderProduct($customer_order_product);
                 $em->persist($customer_order_product);
             }
-            
+
             //Insert the shipping total into the customer order table
             $customer_order->setCustomerOrderShippingPaid($this->getCustomerOrderShippingTotal($customer_order));
 
             //Persist and flush the customer order
             $em->persist($customer_order);
-             $em->flush();
+            $em->flush();
 
             //Put the customer order in the session
             $em->detach($customer_order);
             $session->set('customer_order', $customer_order);
-           
+
             //Call the payment page
             return $this->checkoutmakepaymentAction($request);
         } else {

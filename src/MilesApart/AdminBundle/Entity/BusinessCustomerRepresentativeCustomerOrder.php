@@ -37,12 +37,11 @@ class BusinessCustomerRepresentativeCustomerOrder
     protected $customer_order;
 
      /**
-     * @ORM\OneToOne(targetEntity="BusinessCustomerRepresentative", inversedBy="business_customer_representative_customer_order", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="BusinessCustomerRepresentative", inversedBy="business_customer_representative_customer_order", cascade={"persist"})
      * @ORM\JoinTable(name="business_customer_representative")
      * @ORM\JoinColumn(name="business_customer_representative_id", referencedColumnName="id")
      */
     protected $business_customer_representative;
-    
 
     /**
      * Get id

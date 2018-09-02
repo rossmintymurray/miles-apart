@@ -1,6 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     database_name: miles_apart_dev
+    database_host: 127.0.0.1
     httpProtocol: http
     royal_mail_api_endpoint: https://api.royalmail.net/shipping/v2
     royal_mail_api_application_id: RMG-API-G-01

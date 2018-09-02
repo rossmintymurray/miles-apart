@@ -199,7 +199,7 @@ class RoyalMailController extends Controller
         $manifest = $this->printManifestFunction($manifest_batch_number);
 
         //call the function to update Amazon shipping status for Amazon orders
-        $amazon_output = setAmazonOrdersToShipped($manifest_batch_number)
+        $amazon_output = setAmazonOrdersToShipped($manifest_batch_number);
         
         //Render the page from template
         return $this->render('MilesApartStaffBundle:RoyalMail:response.html.twig', array( 
