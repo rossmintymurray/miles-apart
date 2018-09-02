@@ -180,37 +180,37 @@
             </div>
 
             {# Create the links under the images #}
-            <div class="row">
+            <div class="row collapse">
                 {# Sharing links #}
 
                 {# Facebook #}
                 <div class="small-2 columns">
-                    <a href="#" id="FBShare" class="button tiny medium-12 facebook_button share" role="button" data-share-url="{{ entity.productslug }}"><img src="{{ asset('images/icons/share/facebook.png') }}" class="share_botton_icon"><span class="show-for-large-up">Share</span></a>
+                    <a href="#" id="FBShare" class="button tiny small-12 facebook_button share" role="button" data-share-url="{{ entity.productslug }}"><img src="{{ asset('images/icons/share/facebook.png') }}" class="share_botton_icon"><span class="show-for-large-up">Share</span></a>
                 </div>
                 
                 {# Twitter #}
                 <div class="small-2 columns">
-                    <a href="https://twitter.com/intent/tweet?text=http://www.miles-apart.com/product/{{ entity.productslug }}" target="_blank" class="button tiny medium-12 twitter_button share" role="button" ><img src="{{ asset('images/icons/share/twitter.png') }}" class="share_botton_icon"><span class="show-for-large-up">Tweet</span></a>
+                    <a href="https://twitter.com/intent/tweet?text=http://www.miles-apart.com/product/{{ entity.productslug }}" target="_blank" class="button tiny small-12 twitter_button share" role="button" ><img src="{{ asset('images/icons/share/twitter.png') }}" class="share_botton_icon"><span class="show-for-large-up">Tweet</span></a>
                 </div>
 
                 {# Google + #}
                 <div class="small-2 columns">
-                    <a href="https://plus.google.com/share?url=http://www.miles-apart.com/product/{{ entity.productslug }}&media={{ entity.productmarketingname}}" target="_blank" class="button tiny medium-12 google_button share" role="button" ><img src="{{ asset('images/icons/share/google.png') }}" class="share_botton_icon"><span class="show-for-large-up">Google+</span></a>
+                    <a href="https://plus.google.com/share?url=http://www.miles-apart.com/product/{{ entity.productslug }}&media={{ entity.productmarketingname}}" target="_blank" class="button tiny small-12 google_button share" role="button" ><img src="{{ asset('images/icons/share/google.png') }}" class="share_botton_icon"><span class="show-for-large-up">Google+</span></a>
                 </div>
 
                 {# Pintrest + #}
                 <div class="small-2 columns">
-                    <a href="https://pinterest.com/pin/create/button/?url=http://www.miles-apart.com/product/{{ entity.productslug }}&media=http://www.miles-apart.com/images/products/{{ entity.productmainimagepath}}&description={{ entity.productdescription }}" target="_blank" class="button tiny medium-12 pinterest_button share" role="button" ><img src="{{ asset('images/icons/share/pinterest.png') }}" class="share_botton_icon"><span class="show-for-large-up">Pinterest</span></a>
+                    <a href="https://pinterest.com/pin/create/button/?url=http://www.miles-apart.com/product/{{ entity.productslug }}&media=http://www.miles-apart.com/images/products/{{ entity.productmainimagepath}}&description={{ entity.productdescription }}" target="_blank" class="button tiny small-12 pinterest_button share" role="button" ><img src="{{ asset('images/icons/share/pinterest.png') }}" class="share_botton_icon"><span class="show-for-large-up">Pinterest</span></a>
                 </div>
 
                 {# Email #}
                 <div class="small-2 columns">
-                    <a href="mailto:test@tes?&subject={{ entity.productmarketingname}}&body=this%20is%20the%20content%20of%20the%20email" class="button secondary tiny medium-12 share" role="button" ><img src="{{ asset('images/icons/share/email.png') }}" class="share_botton_icon"><span class="show-for-large-up">Email</span></a>
+                    <a href="mailto:test@tes?&subject={{ entity.productmarketingname}}&body=this%20is%20the%20content%20of%20the%20email" class="button secondary tiny small-12 share" role="button" ><img src="{{ asset('images/icons/share/email.png') }}" class="share_botton_icon"><span class="show-for-large-up">Email</span></a>
                 </div>
 
                 {# Wishlist link #}
                 <div class="small-2 columns">
-                    <a href="#" class="button tiny medium-12 wish_list_button share" role="button"><img src="{{ asset('images/icons/share/wish.png') }}" class="share_botton_icon "><span class="show-for-large-up">Wish list</span></a>
+                    <a href="#" class="button tiny small-12 wish_list_button share" role="button"><img src="{{ asset('images/icons/share/wish.png') }}" class="share_botton_icon "><span class="show-for-large-up">Wish list</span></a>
                 </div>
 
             </div>
