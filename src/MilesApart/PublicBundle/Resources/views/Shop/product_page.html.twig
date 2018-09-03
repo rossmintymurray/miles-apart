@@ -83,7 +83,7 @@
                     <div class="homepage_header"></div>
 
                     <h4 style="margin-top:1rem">Delivery</h4>
-                    <p>Free 2nd class delivery for all orders over £30. If order is under £30, delivery for this product will cost:
+                    <p>Free 2nd class delivery for all orders over £30. If your order is under £30, delivery for this product will cost:
                         <ul style="margin-left:2rem">
                             {# Get the postage cost array and display #}
 
@@ -214,165 +214,174 @@
                 </div>
 
             </div>
-            
 
-            <ul class="tabs show-for-medium-up" id="product_details_tabs" data-tab>
-                <li class="tab-title active"><a href="#panel11">Product Information</a></li>
-                <li class="tab-title"><a href="#panel21">Questions</a></li>
-                <li class="tab-title"><a href="#panel31">Reviews</a></li>
-                <li class="tab-title"><a href="#panel41">Returns</a></li>
-                <li class="tab-title"><a href="#panel51">Brand</a></li>
-            </ul>
 
-            <dl class="accordion" data-accordion>
-                <dd class="accordion-navigation">
-                    <a href="#panel11" class="show-for-small-only">Product Information</a>
+            <div class="row">
+                <div class="small-12 columns">
 
-                    <div class="content active" id="panel11">
-                        <div class="content-box section-box">
-                            <div class="homepage_header"></div>
-                            <h4 class="text-center homepage_header_text"><span>Features</span></h4>
-                            <ul class="product_feature">
+                    <ul class="tabs show-for-medium-up"  data-tab>
+                        <li class="tab-title active"><a href="#panel1">Product Information</a></li>
+                        <li class="tab-title"><a href="#panel2">Questions</a></li>
+                        <li class="tab-title"><a href="#panel3">Reviews</a></li>
+                        <li class="tab-title"><a href="#panel4">Returns</a></li>
+                        <li class="tab-title"><a href="#panel5">Brand</a></li>
+                    </ul>
 
-                                {% for feature in entity.productfeature %}
-                                    <li>{{ feature.productfeaturetext }}</li>
-                                {% endfor %}
-                            </ul>
+                    <dl class="accordion" data-accordion>
+                        <dd class="accordion-navigation">
+                            <a href="#panel1" class="show-for-small-only">Product Information</a>
 
-                            <div class="homepage_header"></div>
-                            <h4 class="text-center homepage_header_text"><span>Overview</span></h4>
-                            <p>{{ entity.productintroduction }}</p>
+                            <div class="content active" id="panel1">
+                                <div class="content-box section-box">
+                                    <div class="left_header"></div>
+                                    <h4 class="left_header_text"><span>Features</span></h4>
+                                    <ul class="product_feature">
 
-                            <p>{{ entity.productdescription }}</p>
+                                        {% for feature in entity.productfeature %}
+                                            <li>{{ feature.productfeaturetext }}</li>
+                                        {% endfor %}
+                                    </ul>
 
-                            
-                        </div>
+                                    <div class="left_header"></div>
+                                    <h4 class="left_header_text"><span>Overview</span></h4>
+                                    <p>{{ entity.productintroduction }}</p>
 
-                    </div>
-                </dd>
+                                    <p>{{ entity.productdescription }}</p>
 
-                <dd class="accordion-navigation">
-                    {# Questions & answers panel #}
-                    <a href="#panel21" class="show-for-small-only">Questions</a>
 
-                    <div class="content" id="panel21">
-                        <div class="content-box section-box">
-                            <div class="large-8 columns">
-                                    <h4>Questions</h4>
-                                </div>
-                                <div class="large-4 columns">
-                                    <a href="#" class="button small small-12" data-reveal-id="ask_question_modal" role="button" >Ask a question</a>
                                 </div>
 
-                            {# Check if any questions have been asked #}
-                            {% if entity.getAnsweredProductQuestion|default([])|length > 0 %}
-                                {% for question in entity.getAnsweredProductQuestion %}
-                                    <p>{{ question.productquestiontext }}</p>
+                            </div>
 
-                                    {# Check if there is an answer for the question #}
-                                    {% if question.productanswer %}
-                                        {% for answer in question.productanswer %}
-                                            <p>{{ answer.productanswertext }}</p>
+                            {# Questions & answers panel #}
+                            <a href="#panel2" class="show-for-small-only">Questions</a>
+
+                            <div class="content" id="panel2">
+                                <div class="content-box section-box">
+                                    <div class="row">
+                                        <div class="large-8 columns">
+                                            <div class="left_header"></div>
+                                            <h4 class="left_header_text"><span>Questions</span></h4>
+
+                                        </div>
+                                        <div class="large-4 columns">
+                                            <a href="#" class="button small small-12" data-reveal-id="ask_question_modal" role="button" >Ask a question</a>
+                                        </div>
+                                    </div>
+
+                                    {# Check if any questions have been asked #}
+                                    {% if entity.getAnsweredProductQuestion|default([])|length > 0 %}
+                                        {% for question in entity.getAnsweredProductQuestion %}
+                                            <p>{{ question.productquestiontext }}</p>
+
+                                            {# Check if there is an answer for the question #}
+                                            {% if question.productanswer %}
+                                                {% for answer in question.productanswer %}
+                                                    <p>{{ answer.productanswertext }}</p>
+                                                {% endfor %}
+                                            {% endif %}
                                         {% endfor %}
                                     {% endif %}
-                                {% endfor %}
-                            {% endif %}
 
-                            
-                        </div>
-                    </div>
-                </dd>
+                                    <div class="clearfix"></div>
 
-                
-
-                <dd class="accordion-navigation">
-                    <a href="#panel31" class="show-for-small-only">Reviews</a>
-
-                    <div class="content" id="panel31">
-                        <div class="content-box section-box">
-                            <div class="row">
-                                <div class="large-8 columns">
-                                    <h4>Customer Reviews</h4>
-                                    {{ entity.averagereviewrating|star_rating }} - {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews
-                                </div>
-                                <div class="large-4 columns">
-                                    <a href="{{ path('miles_apart_public_product_review', { 'id': entity.getId }) }}" class="button small small-12" role="button" >Add your review</a>
                                 </div>
                             </div>
 
+                            <a href="#panel3" class="show-for-small-only">Reviews</a>
+
+                            <div class="content" id="panel3">
+                                <div class="content-box section-box">
+                                    <div class="row">
+                                        <div class="large-8 columns">
+                                            <div class="left_header"></div>
+                                            <h4 class="left_header_text"><span>Customer Reviews</span></h4>
+                                            {{ entity.averagereviewrating|star_rating }} - {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews
+                                        </div>
+                                        <div class="large-4 columns">
+                                            <a href="{{ path('miles_apart_public_product_review', { 'id': entity.getId }) }}" class="button small small-12" role="button" >Add your review</a>
+                                        </div>
+                                    </div>
 
 
-                            {# Check for reviews #}
-                            {% if entity.productreview|default([])|length > 0 %}
-                                {% for review in entity.productreview %}
-                                    <h6>{{ review.productreviewrating|star_rating }} <b>{{ review.productreviewtitle }}</b></h6>
-                                    <span class="small">by 
-                                        {% for personal in review.customer.personalcustomer %}
-                                            <b>{{ personal.personalcustomerfirstname }} {{ personal.personalcustomersurname }}</b>
+
+                                    {# Check for reviews #}
+                                    {% if entity.productreview|default([])|length > 0 %}
+                                        {% for review in entity.productreview %}
+                                            <h6>{{ review.productreviewrating|star_rating }} <b>{{ review.productreviewtitle }}</b></h6>
+                                            <span class="small">by
+                                                {% for personal in review.customer.personalcustomer %}
+                                                    <b>{{ personal.personalcustomerfirstname }} {{ personal.personalcustomersurname }}</b>
+                                                {% endfor %}
+                                                on {{ review.productreviewdatecreated|date('jS M Y')}}
+                                            </span>
+                                            <p>{{ review.productreviewcontent }}</p>
                                         {% endfor %}
-                                        on {{ review.productreviewdatecreated|date('jS M Y')}}
-                                    </span>
-                                    <p>{{ review.productreviewcontent }}</p>
-                                {% endfor %}
-                            {% else %}
-                                <p>There are currently no reviews for this product.</p>
-                            {% endif %}
-                        </div>
-                        
-                    </div>
-                </dd>
-
-                <dd class="accordion-navigation">
-                    <a href="#panel41" class="show-for-small-only">Delivery & Returns</a>
-
-                    <div class="content" id="panel41">
-                        <div class="content-box section-box">
-                            <div class="homepage_header"></div>
-                            <h4 class="text-center homepage_header_text"><span>Delivery Options</span></h4>
-                                
-                            <p>All products displayed on the website are currently in-stock and will be dispatched within 1 working day.</p>
-
-                            <div class="row">
-                                <div class="large-10 columns">
-                                    
-                                    <p>Free Royal Mail 2nd Class delivery for all orders over £30.</p>
-                                    
-                                    <p>If you wish to have first class ddelivery the cost of Second class delivery will be deducted from this</p>
+                                    {% else %}
+                                        <p>There are currently no reviews for this product.</p>
+                                    {% endif %}
                                 </div>
-                                <div class="large-2 columns">
-                                   
-                                </div>
+
                             </div>
-                        </div>
-                    </div>
-                </dd>
 
-                <dd class="accordion-navigation">
-                    <a href="#panel51" class="show-for-small-only">Brand</a>
+                            <a href="#panel4" class="show-for-small-only">Delivery & Returns</a>
 
-                    <div class="content" id="panel51">
-                        <div class="content-box section-box">
-                            <div class="row">
-                                <div class="large-9 columns">
-                                    <h3>{{ entity.brand.brandname }}</h3>
-                                </div>
-                                <div class="large-3 columns">
-                                    <img src="{{ asset('images/brands/'~entity.brand.brandlogoimagepath) }}" class="large-12"/>
+                            <div class="content" id="panel4">
+                                <div class="content-box section-box">
+                                    <div class="left_header"></div>
+                                    <h4 class="left_header_text"><span>Delivery Options</span></h4>
+
+                                    <p>All products displayed on the website are currently in-stock and will be dispatched within 1 working day.</p>
+
+                                    <div class="row">
+                                        <div class="large-10 columns">
+
+                                            <p>Free Royal Mail 2nd Class delivery for all orders over £30.</p>
+
+                                            <p>If you wish to have first class delivery the cost of Second class delivery will be deducted from this</p>
+                                        </div>
+                                        <div class="large-2 columns">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="left_header"></div>
+                                    <h4 class="left_header_text"><span>Return Options</span></h4>
+
+                                    <p>If you would like to return an item please</p>
+
+                                    <p>If you have a problem with a product purchased from us after this period please <a href="mailto:customerservice@miles-apart.com">email us.</a></p>
                                 </div>
                             </div>
 
-                            <p class="lead">{{ entity.brand.brandintroduction }}</p>
+                            <a href="#panel5" class="show-for-small-only">Brand</a>
 
-                            {% for paragraph in entity.brand.branddescriptionparagraph %}
-                                <p>{{ paragraph.branddescriptionparagraphtext }}</p>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </dd>
-            </dl>
+                            <div class="content" id="panel5">
+                                <div class="content-box section-box">
+                                    <div class="row">
+                                        <div class="small-9 columns">
+                                            <div class="left_header"></div>
+                                            <h4 class="left_header_text"><span>{{ entity.brand.brandname }}</span></h4>
+                                        </div>
+                                        <div class="small-3 columns">
+                                            <img src="{{ asset('images/brands/'~entity.brand.brandlogoimagepath) }}" class="large-12"/>
+                                        </div>
+                                    </div>
 
+                                    <p class="lead">{{ entity.brand.brandintroduction }}</p>
+
+                                    {% for paragraph in entity.brand.branddescriptionparagraph %}
+                                        <p>{{ paragraph.branddescriptionparagraphtext }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
         </div>
     </div>
+
     {# Product information #}
     <div class="row">
         

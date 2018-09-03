@@ -502,22 +502,43 @@ div.row.homepage-carousel-banners {
   margin-top:1em;
 }
 
+.homepage_header_text {
+    margin-top:-0.7em;
+    margin-bottom:.7em;
+}
+
+.homepage_header_text span {
+    background-color: #fff;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
 @media only screen and (max-width: 40em) {
   .homepage_header {
     margin-top:2em;
   }
 }
 
-.homepage_header_text {
- margin-top:-0.7em;
-  margin-bottom:.7em;
+.left_header {
+    height:0.2em;
+    background-color:#007095;
+    margin-top:2.5em;
 }
 
-.homepage_header_text span{
- background-color:#fff;
- padding-left:2em;
- padding-right: 2em;
- 
+.left_header:first-child {
+    margin-top:1em;
+}
+
+.left_header_text {
+    margin-top:-0.7em;
+    margin-bottom:.7em;
+}
+
+.left_header_text span{
+    background-color:#fff;
+    padding-left:0em;
+    padding-right: 2em;
+
 }
 
 .homepage_store h4 {
