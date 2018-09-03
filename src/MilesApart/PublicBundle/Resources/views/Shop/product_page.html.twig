@@ -84,13 +84,21 @@
 
                     <h4 style="margin-top:1rem">Delivery</h4>
                     <p>Free 2nd class delivery for all orders over £30. If your order is under £30, delivery for this product will cost:
-                        <ul style="margin-left:2rem">
-                            {# Get the postage cost array and display #}
 
-                            <li>1<sup>st</sup> Class - £{{postage_options.first_class_postage}}</li>
-                            <li>2<sup>nd</sup> Class - £{{postage_options.second_class_postage}}</li>
-                            
-                        </ul>
+
+                        <table>
+                            <tr>
+                                <td>Royal Mail 1<sup>st</sup> Class</td>
+                                <td>-</td>
+                                <td><b>£{{postage_options.first_class_postage}}</b></td>
+                            </tr>
+
+                            <tr>
+                                <td>Royal Mail 2<sup>nd</sup> Class</td>
+                                <td>-</td>
+                                <td><b>£{{postage_options.second_class_postage}}</b></td>
+                            </tr>
+                        </table>
                         Please select delivery option when you checkout. The cost of delivery will be added at the checkout.
                     </p>
 
@@ -368,7 +376,7 @@
                                         </div>
                                     </div>
 
-                                    <p class="lead">{{ entity.brand.brandintroduction }}</p>
+                                    <p>{{ entity.brand.brandintroduction }}</p>
 
                                     {% for paragraph in entity.brand.branddescriptionparagraph %}
                                         <p>{{ paragraph.branddescriptionparagraphtext }}</p>
