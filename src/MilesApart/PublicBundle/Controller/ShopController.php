@@ -1005,6 +1005,9 @@ class ShopController extends Controller
         //Send an email to say that the question has been received 
         $confirm_email = $this->sendCustomerQuestionConfirmationEmail($product_question, $email);
 
+        //Send an email to say that the question has been received
+        $staff_confirm_email = $this->sendCustomerQuestionStaffNotificationEmail($product_question, $email);
+
 
 
         $response = array(
@@ -1041,6 +1044,36 @@ class ShopController extends Controller
 
         //Send the email
         $mailer->send($message);       
+
+        return true;
+    }
+
+    function sendCustomerQuestionStaffNotificationEmail($product_question, $email_address)
+    {
+        //Set up the mailer
+        $mailer = $this->container->get('swiftmailer.mailer.weborders_mailer');
+
+        //Get the supplier email address.
+        $message = \Swift_Message::newInstance()
+            ->setContentType("text/html")
+            ->setSubject('Miles Apart New Question Notification')
+            ->setFrom(array('wesite@miles-apart.com' => 'Miles Apart'))
+            ->setTo(array('customersupport@miles-apart.com' => 'Miles Apart'))
+            ->setBody(
+                $this->renderView(
+                    'MilesApartPublicBundle:Emails:ask_question_staff_notification.html.twig',
+                    array('product_question' => $product_question)
+
+                )
+
+            )
+        ;
+
+        //Avoid localhost issues
+        $mailer->getTransport()->setLocalDomain('[127.0.0.1]');
+
+        //Send the email
+        $mailer->send($message);
 
         return true;
     }

@@ -201,7 +201,7 @@ function submitProductQuestion() {
             },
             success: function(data){
                 //Add to javscript shopping cart
-                swal("Done!", "Your question has been submitted.", "success");
+                swal("Thanks!", "Your question has been submitted.", "success");
                 
                 //Remove the question text in case another question is asked.
                 $("#milesapart_publicbundle_question_product_question_text").val("");
