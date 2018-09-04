@@ -183,6 +183,26 @@ class Customer
         return $name;
     }
 
+    public function getCustomerFirstName()
+    {
+        //If it's a personal customer
+        if($this->getPersonalCustomer() != null) {
+            $name = $this->getPersonalCustomer()->getPersonalCustomerFirstName();
+
+            //If its a business customer with rep
+        } else if($this->getBusinessCustomer() != null) {
+            if($this->getBusinessCustomer()->getBusinessCustomerRepresentative() != null) {
+                foreach($this->getBusinessCustomer()->getBusinessCustomerRepresentative() as $rep) {
+                    $name = $rep->getBusinessCustomerRepresentativeFirstName();
+                }
+            }
+        } else {
+            $name = null;
+        }
+
+        return $name;
+    }
+
     public function getCustomerEmailAddress() 
     {
         //If it's a personal customer

@@ -18,6 +18,9 @@
     <div id="ask_question_modal_content">
         <h2 id="modalTitle"></h2>
         <p class="lead">Please answer the question using the form below.</p>
+        <p><b>Q:</b> {{ product_question.productquestiontext }}</p>
+        <p><b>Product:</b> {{ product_question.product.productname }}</p>
+        <a target="_blank" href="{{ path('miles_apart_public_product_page', { 'slug': product_question.product.getProductSlug }) }}">Details page</a>
         {{ form_start(form) }}
         {{ form_errors(form) }}
 

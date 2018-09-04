@@ -83,24 +83,23 @@
                     <div class="homepage_header"></div>
 
                     <h4 style="margin-top:1rem">Delivery</h4>
-                    <p>Free 2nd class delivery for all orders over £30. If your order is under £30, delivery for this product will cost:
+                    <p>Free 2nd class delivery for all orders over £30. If your order is under £30, delivery for this product will cost:</p>
 
 
-                        <table>
-                            <tr>
-                                <td>Royal Mail 1<sup>st</sup> Class</td>
-                                <td>-</td>
-                                <td><b>£{{postage_options.first_class_postage}}</b></td>
-                            </tr>
+                    <table>
+                        <tr>
+                            <td>Royal Mail 1<sup>st</sup> Class</td>
+                            <td>-</td>
+                            <td><b>£{{postage_options.first_class_postage}}</b></td>
+                        </tr>
 
-                            <tr>
-                                <td>Royal Mail 2<sup>nd</sup> Class</td>
-                                <td>-</td>
-                                <td><b>£{{postage_options.second_class_postage}}</b></td>
-                            </tr>
-                        </table>
-                        Please select delivery option when you checkout. The cost of delivery will be added at the checkout.
-                    </p>
+                        <tr>
+                            <td>Royal Mail 2<sup>nd</sup> Class</td>
+                            <td>-</td>
+                            <td><b>£{{postage_options.second_class_postage}}</b></td>
+                        </tr>
+                    </table>
+                    <p>Please select delivery option when you checkout. The cost of delivery will be added at the checkout.</p>
 
                     
                     <div class="homepage_header"></div>
@@ -229,8 +228,8 @@
 
                     <ul class="tabs show-for-medium-up"  data-tab>
                         <li class="tab-title active"><a href="#panel1">Product Information</a></li>
-                        <li class="tab-title"><a href="#panel2">Questions</a></li>
-                        <li class="tab-title"><a href="#panel3">Reviews</a></li>
+                        <li class="tab-title"><a href="#panel2">Questions <sup><span class="info round label">{{ entity.getAnsweredProductQuestion|default([])|length }}</span></sup></a></li>
+                        <li class="tab-title"><a href="#panel3">Reviews <sup><span class="info round label">{{ entity.productreview|default([])|length }}</span></sup></a></li>
                         <li class="tab-title"><a href="#panel4">Returns</a></li>
                         <li class="tab-title"><a href="#panel5">Brand</a></li>
                     </ul>
@@ -262,32 +261,37 @@
                             </div>
 
                             {# Questions & answers panel #}
-                            <a href="#panel2" class="show-for-small-only">Questions</a>
+                            <a href="#panel2" class="show-for-small-only">Questions <sup><span class="info round label">{{ entity.getAnsweredProductQuestion|default([])|length }}</span></sup></a>
 
                             <div class="content" id="panel2">
                                 <div class="content-box section-box">
                                     <div class="row">
-                                        <div class="large-8 columns">
+
+                                        <div class="large-4 large-push-8 columns">
+                                            <a href="#" class="button small small-12" data-reveal-id="ask_question_modal" role="button" >Ask a question</a>
+                                        </div>
+                                        <div class="large-8 large-pull-4 columns">
                                             <div class="left_header"></div>
                                             <h4 class="left_header_text"><span>Questions</span></h4>
 
-                                        </div>
-                                        <div class="large-4 columns">
-                                            <a href="#" class="button small small-12" data-reveal-id="ask_question_modal" role="button" >Ask a question</a>
                                         </div>
                                     </div>
 
                                     {# Check if any questions have been asked #}
                                     {% if entity.getAnsweredProductQuestion|default([])|length > 0 %}
                                         {% for question in entity.getAnsweredProductQuestion %}
-                                            <p>{{ question.productquestiontext }}</p>
+                                            <div class="panel">
+                                                <p>Q: {{ question.productquestiontext }}</p>
+                                                <p class="question_sub_text">Asked by {{ question.customer.customerfirstname }} on {{ question.productquestiondatecreated|date('jS F Y') }}</p>
+                                                {# Check if there is an answer for the question #}
+                                                {% if question.productanswer %}
+                                                    {% for answer in question.productanswer %}
+                                                        <p>A: <i>{{ answer.productanswertext }}</i></p>
+                                                        <p class="question_sub_text">Answered by Miles Apart on {{ question.productquestiondatecreated|date('jS F Y') }}</p>
 
-                                            {# Check if there is an answer for the question #}
-                                            {% if question.productanswer %}
-                                                {% for answer in question.productanswer %}
-                                                    <p>{{ answer.productanswertext }}</p>
-                                                {% endfor %}
-                                            {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
                                         {% endfor %}
                                     {% endif %}
 
@@ -296,19 +300,20 @@
                                 </div>
                             </div>
 
-                            <a href="#panel3" class="show-for-small-only">Reviews</a>
+                            <a href="#panel3" class="show-for-small-only">Reviews <sup><span class="info round label">{{ entity.productreview|default([])|length }}</span></sup></a>
 
                             <div class="content" id="panel3">
                                 <div class="content-box section-box">
                                     <div class="row">
-                                        <div class="large-8 columns">
+                                        <div class="large-4 large-push-8 columns">
+                                            <a href="{{ path('miles_apart_public_product_review', { 'id': entity.getId }) }}" class="button small small-12" role="button" >Add your review</a>
+                                        </div>
+                                        <div class="large-8 large-pull-4 columns">
                                             <div class="left_header"></div>
                                             <h4 class="left_header_text"><span>Customer Reviews</span></h4>
                                             {{ entity.averagereviewrating|star_rating }} - {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews
                                         </div>
-                                        <div class="large-4 columns">
-                                            <a href="{{ path('miles_apart_public_product_review', { 'id': entity.getId }) }}" class="button small small-12" role="button" >Add your review</a>
-                                        </div>
+
                                     </div>
 
 

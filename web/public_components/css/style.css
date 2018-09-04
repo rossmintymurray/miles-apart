@@ -1545,3 +1545,9 @@ a.button.postfix.mobile-search-bar-button {
 .alert-box ul {
     margin-bottom:0px !important;
 }
+
+.question_sub_text {
+    color:#777777 !important;
+    font-size:0.8em;
+    margin-top:-1rem;
+}

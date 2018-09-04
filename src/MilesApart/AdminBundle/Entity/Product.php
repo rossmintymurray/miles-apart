@@ -1581,7 +1581,7 @@ class Product
         $answered_product_questions = array();
         //Iterate over the product question and check if they have answers
         foreach($this->getProductQuestion() as $question) {
-            if($question->getProductAnswer() != NULL) {
+            if(count($question->getProductAnswer()) > 0) {
                 array_push($answered_product_questions, $question);
             }
         }

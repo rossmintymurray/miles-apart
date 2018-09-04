@@ -4061,6 +4061,7 @@ $logger->info('I just got the logger tr 3');
         //Return the modal html
         $html = $this->renderView('MilesApartStaffBundle:Products:answer_question_modal.html.twig', array(
             'form'   => $form->createView(),
+            'product_question' => $product_question,
         ));
 
         $response = array("html" => $html, "success" => true);
