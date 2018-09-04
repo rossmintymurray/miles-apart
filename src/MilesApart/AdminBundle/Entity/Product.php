@@ -2395,6 +2395,24 @@ class Product
     }
 
     /**
+     * Get approved_product_review
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApprovedProductReview()
+    {
+        //Make array
+        $approved_product_reviews = array();
+        //Iterate over the product question and check if they have answers
+        foreach($this->getProductReview() as $review) {
+            if($review->getProductReviewApproved() == true) {
+                array_push($approved_product_reviews, $review);
+            }
+        }
+        return $approved_product_reviews;
+    }
+
+    /**
      * Set product_marketing_name
      *
      * @param string $productMarketingName

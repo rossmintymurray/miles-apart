@@ -282,12 +282,12 @@
                                         {% for question in entity.getAnsweredProductQuestion %}
                                             <div class="panel">
                                                 <p>Q: {{ question.productquestiontext }}</p>
-                                                <p class="question_sub_text">Asked by {{ question.customer.customerfirstname }} on {{ question.productquestiondatecreated|date('jS F Y') }}</p>
+                                                <p class="question_sub_text">Asked by <b>{{ question.customer.customerfirstname }}</b> on <b>{{ question.productquestiondatecreated|date('jS F Y') }}</b></p>
                                                 {# Check if there is an answer for the question #}
                                                 {% if question.productanswer %}
                                                     {% for answer in question.productanswer %}
                                                         <p>A: <i>{{ answer.productanswertext }}</i></p>
-                                                        <p class="question_sub_text">Answered by Miles Apart on {{ question.productquestiondatecreated|date('jS F Y') }}</p>
+                                                        <p class="question_sub_text">Answered by <b>Miles Apart</b> on <b>{{ question.productquestiondatecreated|date('jS F Y') }}</b></p>
 
                                                     {% endfor %}
                                                 {% endif %}
@@ -311,7 +311,13 @@
                                         <div class="large-8 large-pull-4 columns">
                                             <div class="left_header"></div>
                                             <h4 class="left_header_text"><span>Customer Reviews</span></h4>
-                                            {{ entity.averagereviewrating|star_rating }} - {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews
+                                            {# Check for reviews #}
+
+                                            {% if entity.getApprovedProductReview|default([])|length > 0 %}
+                                                <p>{{ entity.averagereviewrating|star_rating }}</p>
+                                                <div class="clearfix"></div>
+                                                <h4 class="subheader"><small>this product averages {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews</small></h4>
+                                            {% endif %}
                                         </div>
 
                                     </div>
@@ -319,16 +325,14 @@
 
 
                                     {# Check for reviews #}
-                                    {% if entity.productreview|default([])|length > 0 %}
-                                        {% for review in entity.productreview %}
-                                            <h6>{{ review.productreviewrating|star_rating }} <b>{{ review.productreviewtitle }}</b></h6>
-                                            <span class="small">by
-                                                {% for personal in review.customer.personalcustomer %}
-                                                    <b>{{ personal.personalcustomerfirstname }} {{ personal.personalcustomersurname }}</b>
-                                                {% endfor %}
-                                                on {{ review.productreviewdatecreated|date('jS M Y')}}
-                                            </span>
-                                            <p>{{ review.productreviewcontent }}</p>
+                                    {% if entity.getApprovedProductReview|default([])|length > 0 %}
+                                        {% for review in entity.getApprovedProductReview %}
+                                            <div class="panel">
+                                                <h6>{{ review.productreviewrating|star_rating }} <b> <span style="padding-left:1rem">{{ review.productreviewtitle }}</span></b></h6>
+                                                <p>{{ review.productreviewcontent }}</p>
+                                                <p class="question_sub_text">by <b>{{ review.customer.customerfullname }}</b> on <b>{{ review.productreviewdatecreated|date('jS F Y')}}</b></p>
+
+                                            </div>
                                         {% endfor %}
                                     {% else %}
                                         <p>There are currently no reviews for this product.</p>

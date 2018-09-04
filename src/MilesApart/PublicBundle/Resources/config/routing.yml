@@ -111,7 +111,7 @@ miles_apart_public_product_review:
 
 miles_apart_public_product_review_submit:
     pattern:  /product-review-submit
-    defaults: { _controller: MilesApartPublicBundle:Shop:productreview }
+    defaults: { _controller: MilesApartPublicBundle:Shop:productreviewsubmit }
 
 miles_apart_public_product_ask_product_question:
     pattern:  /ask-product-question

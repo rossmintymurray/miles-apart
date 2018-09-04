@@ -56,9 +56,14 @@ class ProductReview
     protected $admin_user;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", unique=false, nullable=true)
      */
     protected $product_review_date_created;
+
+    /**
+     * @ORM\Column(type="datetime", unique=false, nullable=false)
+     */
+    protected $product_review_date_modified;
 
     /**
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="product_review")
@@ -75,6 +80,19 @@ class ProductReview
     protected $customer;
 
 
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setProductReviewDateModified(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getProductReviewDateCreated() == null)
+        {
+            $this->setProductReviewDateCreated(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
 
     
     //Validators for data
@@ -109,9 +127,15 @@ class ProductReview
 
         
         
-    }   
+    }
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->product_review_approved = false;
+    }
 
     /**
      * Get id
@@ -216,29 +240,6 @@ class ProductReview
     }
 
     /**
-     * Set product_review_date_created
-     *
-     * @param \DateTime $productReviewDateCreated
-     * @return ProductReview
-     */
-    public function setProductReviewDateCreated($productReviewDateCreated)
-    {
-        $this->product_review_date_created = $productReviewDateCreated;
-    
-        return $this;
-    }
-
-    /**
-     * Get product_review_date_created
-     *
-     * @return \DateTime 
-     */
-    public function getProductReviewDateCreated()
-    {
-        return $this->product_review_date_created;
-    }
-
-    /**
      * Set admin_user
      *
      * @param \MilesApart\AdminBundle\Entity\AdminUser $adminUser
@@ -259,6 +260,52 @@ class ProductReview
     public function getAdminUser()
     {
         return $this->admin_user;
+    }
+
+    /**
+     * Set product_review_date_created
+     *
+     * @param \DateTime $productReviewDateCreated
+     * @return ProductReview
+     */
+    public function setProductReviewDateCreated($productReviewDateCreated)
+    {
+        $this->product_review_date_created = $productReviewDateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get product_review_date_created
+     *
+     * @return \DateTime
+     */
+    public function getProductReviewDateCreated()
+    {
+        return $this->product_review_date_created;
+    }
+
+    /**
+     * Set product_review_date_modified
+     *
+     * @param \DateTime $productReviewDateModified
+     * @return ProductReview
+     */
+    public function setProductReviewDateModified($productReviewDateModified)
+    {
+        $this->product_review_date_modified = $productReviewDateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get product_review_date_modified
+     *
+     * @return \DateTime
+     */
+    public function getProductReviewDateModified()
+    {
+        return $this->product_review_date_modified;
     }
 
     /**

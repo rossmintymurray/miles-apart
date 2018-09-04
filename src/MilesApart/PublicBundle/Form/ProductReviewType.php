@@ -38,17 +38,16 @@ class ProductReviewType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Review title',
                 'required'  => true,
-                'mapped' => false
             ));
 
         $builder
             ->add('product_review_rating', null, array(
                 'attr' => array(
-                    'type'=> 'email'),
+                    'type'=> 'integer'),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Rating',
                 'required'  => true,
-                'mapped' => false
+
             ));
 
         $builder
