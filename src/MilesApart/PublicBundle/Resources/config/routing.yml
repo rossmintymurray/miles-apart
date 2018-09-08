@@ -106,8 +106,8 @@ miles_apart_public_product_page:
     defaults: { _controller: MilesApartPublicBundle:Shop:productpage, slug: null }
 
 miles_apart_public_product_review:
-    pattern:  /product-review/{id}
-    defaults: { _controller: MilesApartPublicBundle:Shop:productreview, slug: null }
+    pattern:  /product-review/{id}/{customer_order_product_id}
+    defaults: { _controller: MilesApartPublicBundle:Shop:productreview, slug: null, customer_order_product_id: null }
 
 miles_apart_public_product_review_submit:
     pattern:  /product-review-submit

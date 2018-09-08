@@ -49,6 +49,11 @@ class ProductReview
     protected $product_review_approved;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $product_review_confirmed_purchase;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AdminUser", inversedBy="product_review")
      * @ORM\JoinTable(name="admin_user")
      * @ORM\JoinColumn(name="admin_user_id", referencedColumnName="id")
@@ -168,6 +173,29 @@ class ProductReview
     public function getProductReviewApproved()
     {
         return $this->product_review_approved;
+    }
+
+    /**
+     * Set product_review_confirmed_purchase
+     *
+     * @param boolean $productReviewConfirmedPurchase
+     * @return ProductReview
+     */
+    public function setProductReviewConfirmedPurchase($productReviewConfirmedPurchase)
+    {
+        $this->product_review_confirmed_purchase = $productReviewConfirmedPurchase;
+
+        return $this;
+    }
+
+    /**
+     * Get product_review_confirmed_purchase
+     *
+     * @return boolean
+     */
+    public function getProductReviewConfirmedPurchase()
+    {
+        return $this->product_review_confirmed_purchase;
     }
 
     /**

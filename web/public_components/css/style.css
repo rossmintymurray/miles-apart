@@ -1551,3 +1551,7 @@ a.button.postfix.mobile-search-bar-button {
     font-size:0.8em;
     margin-top:-1rem;
 }
+
+.small {
+    font-size:0.8rem;
+}

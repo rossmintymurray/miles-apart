@@ -4,7 +4,7 @@
 
 	{% spaceless %}
 		{% if errors|default([])|length > 0 %}
-			<small class="error" style="display:block">
+			<small class="error">
 			    {% for error in errors %}
 			    {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
 			    {% endfor %}

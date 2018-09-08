@@ -229,7 +229,7 @@
                     <ul class="tabs show-for-medium-up"  data-tab>
                         <li class="tab-title active"><a href="#panel1">Product Information</a></li>
                         <li class="tab-title"><a href="#panel2">Questions <sup><span class="info round label">{{ entity.getAnsweredProductQuestion|default([])|length }}</span></sup></a></li>
-                        <li class="tab-title"><a href="#panel3">Reviews <sup><span class="info round label">{{ entity.productreview|default([])|length }}</span></sup></a></li>
+                        <li class="tab-title"><a href="#panel3">Reviews <sup><span class="info round label">{{ entity.getApprovedProductReview|default([])|length }}</span></sup></a></li>
                         <li class="tab-title"><a href="#panel4">Returns</a></li>
                         <li class="tab-title"><a href="#panel5">Brand</a></li>
                     </ul>
@@ -300,7 +300,7 @@
                                 </div>
                             </div>
 
-                            <a href="#panel3" class="show-for-small-only">Reviews <sup><span class="info round label">{{ entity.productreview|default([])|length }}</span></sup></a>
+                            <a href="#panel3" class="show-for-small-only">Reviews <sup><span class="info round label">{{ entity.getApprovedProductReview|default([])|length }}</span></sup></a>
 
                             <div class="content" id="panel3">
                                 <div class="content-box section-box">
@@ -316,7 +316,7 @@
                                             {% if entity.getApprovedProductReview|default([])|length > 0 %}
                                                 <p>{{ entity.averagereviewrating|star_rating }}</p>
                                                 <div class="clearfix"></div>
-                                                <h4 class="subheader"><small>this product averages {{ entity.averagereviewrating }} out of 5 stars from {{ entity.productreview|length }} reviews</small></h4>
+                                                <h4 class="subheader"><small>this product averages {{ entity.averagereviewrating }} out of 5 stars from {{ entity.getApprovedProductReview|length }} reviews</small></h4>
                                             {% endif %}
                                         </div>
 
@@ -328,7 +328,11 @@
                                     {% if entity.getApprovedProductReview|default([])|length > 0 %}
                                         {% for review in entity.getApprovedProductReview %}
                                             <div class="panel">
-                                                <h6>{{ review.productreviewrating|star_rating }} <b> <span style="padding-left:1rem">{{ review.productreviewtitle }}</span></b></h6>
+                                                {%  if review.productreviewconfirmedpurchase == true %}
+                                                    <p class="right success round label">Confirmed Purchase</p>
+                                                {% endif %}
+                                                <h6 style="line-height:1.2rem">{{ review.productreviewrating|star_rating }} <b> <span style="padding-left:1rem">{{ review.productreviewtitle }}</span></b></h6>
+
                                                 <p>{{ review.productreviewcontent }}</p>
                                                 <p class="question_sub_text">by <b>{{ review.customer.customerfullname }}</b> on <b>{{ review.productreviewdatecreated|date('jS F Y')}}</b></p>
 

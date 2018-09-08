@@ -2,11 +2,10 @@
 {% extends 'MilesApartPublicBundle::product_page_layout.html.twig' %}
 
 {#Check if the form has been submitted or not and use the appropriate form template #}
-{% if submitted == false %}
-    {% form_theme review_form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
-{% else %}
+
+
     {% form_theme review_form 'MilesApartPublicBundle:Form:submitted_fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
-{% endif %}
+
 
 {% block page_title %}
     {{ entity.producttitle }}   
@@ -65,23 +64,31 @@
             <h1 class="product_page_product_name">Review Product: {{ entity.productmarketingname }}</h1>
             <h2 class="subheader product_page_product_subheader">{{ entity.productmarketingsubname }}</h2>
 
-            {# Form to leave a review #}
-            {{ form_start(review_form) }}
-            {{ form_errors(review_form) }}
+            <div class="row">
+                <div class="medium-10 medium-offset-1 columns">
 
-            {# Create and show the new admin user type #}
-            {{ form_row(review_form.product) }}
-            {{ form_row(review_form.product_review_title) }}
-            {{ form_row(review_form.product_review_rating) }}
-            {{ form_row(review_form.product_review_content) }}
-            {{ form_row(review_form.recaptcha) }}
+                    {# Form to leave a review #}
+                    {{ form_start(review_form) }}
+                    {{ form_errors(review_form) }}
 
-            <div style="margin-top:1rem">
-                {{ form_row(review_form.submit) }}
+                    {# Create and show the new admin user type #}
+                    {{ form_row(review_form.product) }}
+                    {{ form_row(review_form.product_review_name) }}
+                    {{ form_row(review_form.product_review_email) }}
+                    {{ form_row(review_form.product_review_title) }}
+                    {{ form_row(review_form.product_review_rating) }}
+                    {{ form_row(review_form.product_review_content) }}
+                    {{ form_row(review_form.recaptcha) }}
+
+                    <div style="margin-top:1rem">
+                        {{ form_row(review_form.submit) }}
+                    </div>
+                    {{ form_rest(review_form) }}
+
+                    {{ form_end(review_form) }}
+                </div>
             </div>
-            {{ form_rest(review_form) }}
 
-            {{ form_end(review_form) }}
 
         </div>
 
@@ -163,6 +170,22 @@
             {# End of the product images div #}
             </div>
 
+        </div>
+
+        {# Create the row for two columns #}
+        <div class="row">
+
+            {# Right column content (price and add to cart button) #}
+            <div class="large-8 columns">
+                <h6 class="small">Please note the following when leaving a review:</h6>
+
+
+                    <ol class="small">
+                        <li>If you would like you review to show 'Confirmed Purchase' please log in and review a product you have previosly purchased from us or click the link in your shippin confirmation email.</li>
+                    </ol>
+
+                <p class="small">Thank you for taking the time to write a review, it really helps make our site a better place to shop.</p>
+            </div>
         </div>
     </div>
 {% endblock %}

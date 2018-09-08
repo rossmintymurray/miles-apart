@@ -896,7 +896,6 @@ class CustomerOrder
     //Get indicator of how late the dispatch of an order
     public function getIsDispatchLate()
     {
-
         $order_time = $this->getCustomerOrderDateCreated()->getTimestamp();
 
         if((time()-(60*60*24)) < $order_time) {
@@ -909,5 +908,17 @@ class CustomerOrder
         }
         return $dispatch_time;
     }
-    
+
+    public function isProductInOrder($id)
+    {
+        $isProductInOrder = false;
+        //Iterate over the order products and check if id matches
+        foreach($this->getCustomerOrderProduct() as $value) {
+            if($value->getProduct()->getId() == $id) {
+                $isProductInOrder = true;
+            }
+        }
+
+        return $isProductInOrder;
+    }
 }

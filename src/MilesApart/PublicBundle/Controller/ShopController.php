@@ -797,13 +797,14 @@ class ShopController extends Controller
     }
 
 
-    public function productreviewAction($id=null, Request $request)
+    public function productreviewAction($id=null, $customer_order_product_id=null, Request $request)
     {
-         $em = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();
         //Find the data required for breadcrumb.
         //Find the category by slug.
         $product = $em->getRepository('MilesApartAdminBundle:Product')->findOneById($id);
-        
+
         $slug = $product->getProductSlug();
         //Get the category that was clicked.
         $session = $request->getSession();
@@ -834,8 +835,8 @@ class ShopController extends Controller
             $main_category_slug = $category->getParent()->getParent()->getCategorySlug();
 
         }
-        
-        
+
+
         //Get the nex cat and so on.
 
         //Set up the breadcrumb
@@ -844,20 +845,65 @@ class ShopController extends Controller
         $breadcrumbs->addItem("Homepage", $this->get("router")->generate("miles_apart_public_homepage"));
         $breadcrumbs->addItem($main_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> null, 'specific_category'=> null )));
         $breadcrumbs->addItem($sub_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> null  )));
-
         $breadcrumbs->addItem($specific_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> $specific_category_slug )));
-
         $breadcrumbs->addItem($product->getProductName(), $this->get("router")->generate("miles_apart_public_product_page", array ('slug'=> $slug, 'main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> $specific_category_slug )));
-
         $breadcrumbs->addItem("Leave Review", $this->get("router")->generate("miles_apart_public_product_review", array ('id' => $id)));
 
-       
-       //Get the product question form 
+        //Set up vars
+        $product_review_confirmed_purchase = false;
+        $customer = null;
+
+        //Check for order
+        if($customer_order_product_id != null) {
+            $customer_order_product = $em->getRepository('MilesApartAdminBundle:CustomerOrderProduct')->findOneById($customer_order_product_id);
+            //Check if the exists on an order
+            if ($customer_order_product) {
+                if($customer_order_product->getProduct()->getId() == $id) {
+                    //Assign the review as confirmed purchase
+                    $product_review_confirmed_purchase = true;
+
+                    //Set the customer
+                    $customer = $customer_order_product->getCustomerOrder()->getCustomer();
+                }
+            }
+
+        } else {
+            $logger = $this->get('logger');
+            $logger->info('I just got the logger add update price pre');
+            //Check if user is logged in
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $logger->info('I just got the logger add update price pre2');
+            //If the user is logged in and order id is null
+            if(is_object($user) || $user instanceof UserInterface) {
+                $logger->info('I just got the logger add update price pre3');
+                //Check existing orders for this product
+                if(count($user->getCustomer()->getCustomerOrder()) > 0) {
+                    foreach($user->getCustomer()->getCustomerOrder() as $key => $value) {
+                        $logger->info('I just got the logger add update price pre4');
+                        if($value->isProductInOrder($id) == true) {
+                            $logger->info('I just got the logger add update price pre5');
+                            $product_review_confirmed_purchase = true;
+
+                            //Set the customer
+                            $customer = $user->getCustomer();
+                        }
+                    }
+                }
+            }
+
+        }
+
+        //Get the product question form
         $entity = new ProductReview();
 
         //Set the product 
         $entity->setProduct($product);
-        
+
+        //Set the confirmed purchase flag
+        $entity->setProductReviewConfirmedPurchase($product_review_confirmed_purchase);
+
+        //Set the customer
+        $entity->setCustomer($customer);
         $form = $this->createProductReviewForm($entity);
 
         //If user is logged in, assign the email address
@@ -865,8 +911,8 @@ class ShopController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
 
         } else {
-            $form->get('question_name')->setData($this->container->get('security.context')->getToken()->getUser()->getCustomer()->getCustomerFullName());
-            $form->get('question_email')->setData($this->container->get('security.context')->getToken()->getUser()->getCustomer()->getCustomerEmailAddress());
+            $form->get('product_review_name')->setData($this->container->get('security.context')->getToken()->getUser()->getCustomer()->getCustomerFullName());
+            $form->get('product_review_email')->setData($this->container->get('security.context')->getToken()->getUser()->getCustomer()->getCustomerEmailAddress());
         }
 
         return $this->render('MilesApartPublicBundle:Shop:product_review_page.html.twig', array(
@@ -902,80 +948,127 @@ class ShopController extends Controller
 
     public function productreviewsubmitAction(Request $request)
     {
-        $id = 8441;
-        $em = $this->getDoctrine()->getManager();
-        //Find the data required for breadcrumb.
-        //Find the category by slug.
-        $product = $em->getRepository('MilesApartAdminBundle:Product')->findOneById(8441);
-        $logger = $this->get('logger');
-        $logger->info('I just got the logger add update price pre');
-        $slug = $product->getProductSlug();
-        //Get the category that was clicked.
-        $session = $request->getSession();
-
-        $category_slug = $session->get("category_slug");
-        $category_level = $session->get("category_level");
-
-        //If there is no category clicked, get the defaut and the category that was cliked is the third level
-        if(!$category_slug OR $category_level != 3) {
-            $specific_category_name = $product->getProductDefaultCategory()->getCategoryName();
-            $sub_category_name = $product->getProductDefaultCategory()->getParent()->getCategoryName();
-            $main_category_name = $product->getProductDefaultCategory()->getParent()->getParent()->getCategoryName();
-
-            $specific_category_slug = $product->getProductDefaultCategory()->getCategorySlug();
-            $sub_category_slug = $product->getProductDefaultCategory()->getParent()->getCategorySlug();
-            $main_category_slug = $product->getProductDefaultCategory()->getParent()->getParent()->getCategorySlug();
-        } else {
-
-            //There is a category slug so find the upper categories
-            $category = $em->getRepository('MilesApartAdminBundle:Category')->findOneBy(array('category_slug'=>$category_slug));
-
-            $specific_category_name = $category->getCategoryName();
-            $sub_category_name = $category->getParent()->getCategoryName();
-            $main_category_name = $category->getParent()->getParent()->getCategoryName();
-
-            $specific_category_slug = $category->getCategorySlug();
-            $sub_category_slug = $category->getParent()->getCategorySlug();
-            $main_category_slug = $category->getParent()->getParent()->getCategorySlug();
-
-        }
-
-
-        //Get the nex cat and so on.
-
-        //Set up the breadcrumb
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        // Add pages to breadcrumb.
-        $breadcrumbs->addItem("Homepage", $this->get("router")->generate("miles_apart_public_homepage"));
-        $breadcrumbs->addItem($main_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> null, 'specific_category'=> null )));
-        $breadcrumbs->addItem($sub_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> null  )));
-
-        $breadcrumbs->addItem($specific_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> $specific_category_slug )));
-
-        $breadcrumbs->addItem($product->getProductName(), $this->get("router")->generate("miles_apart_public_product_page", array ('slug'=> $slug, 'main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> $specific_category_slug )));
-
-        $breadcrumbs->addItem("Leave Review", $this->get("router")->generate("miles_apart_public_product_review", array ('id' => $id)));
-
-        $logger->info('I just got the logger add update price pre 2');
         $entity = new ProductReview();
-        $logger->info('I just got the logger add update price pre 3');
         $form = $this->createProductReviewForm($entity);
-        $logger->info('I just got the logger add update price pre 3');
         $form->handleRequest($request);
-        $logger->info('I just got the logger add update price pre 3');
 
         if ($form->isValid()) {
 
             //Persist to database
             $em = $this->getDoctrine()->getManager();
+
+            //Set the customer if not set already
+            if($form->get('customer')->getData() == null) {
+                //Create the customer
+                //Check if the customer exists
+                $review_customer = $em->getRepository('MilesApartAdminBundle:Customer')->findByLetters(null, $form->get('product_review_email')->getData(), null);
+                if (count($review_customer) > 0) {
+                    $review_customer = $review_customer[0];
+                } else {
+                    //Figure out the first names and surname
+                    $names = explode(" ", $form->get('product_review_name')->getData());
+                    $arrayKeys = array_keys($names);
+
+                    // Fetch last array key
+                    $lastArrayKey = array_pop($arrayKeys);
+
+                    //Set up the last name variable
+                    $first_name = "";
+                    //iterate over array
+                    foreach ($names as $k => $v) {
+                        if ($k == $lastArrayKey) {
+                            //during array iteration this condition states the last element.
+                            break;
+                        }
+                        $first_name = $first_name . " " . $v;
+                    }
+                    $surname = $names[$lastArrayKey];
+                    //Create new personal customer and set values
+                    $personal_customer = new PersonalCustomer();
+
+                    //Set the variables of the object
+                    $personal_customer->setPersonalCustomerFirstName($first_name);
+                    $personal_customer->setPersonalCustomerSurname($surname);
+                    $personal_customer->setPersonalCustomerEmailAddress($form->get('product_review_email')->getData());
+                    $em->persist($personal_customer);
+                    //Create new customer and set values
+                    $review_customer = new Customer();
+                    //Assign values to the customer
+                    $review_customer->setPersonalCustomer($personal_customer);
+                    $personal_customer->setCustomer($review_customer);
+                    $em->persist($review_customer);
+
+
+                }
+
+                $entity->setCustomer($review_customer);
+            }
+
+            if($form->get('product_review_confirmed_purchase')->getData() == null) {
+                $entity->setProductReviewConfirmedPurchase(false);
+            }
+
+
             $em->persist($entity);
             $em->flush();
 
+
+            //Send an email to say that the question has been received
+            $confirm_email = $this->sendCustomerReviewConfirmationEmail($entity, $form->get('product_review_email')->getData());
+
+            //Send an email to say that the question has been received
+            $staff_confirm_email = $this->sendCustomerReviewStaffNotificationEmail($entity);
+
+
             //Show the flash message with success
-            $this->get('session')->getFlashBag()->set('public-notice', 'Thank you for submitting your review.');
+            $this->get('session')->getFlashBag()->set('public-success', 'Thank you for submitting your review.');
 
             return $this->redirect($this->generateUrl('miles_apart_public_homepage'));
         } else {
+            $id = $entity->getProduct()->getId();
+            $em = $this->getDoctrine()->getManager();
+            //Find the data required for breadcrumb.
+            //Find the category by slug.
+            $product = $em->getRepository('MilesApartAdminBundle:Product')->findOneById($id);
+            $logger = $this->get('logger');
+            $logger->info('I just got the logger add update price pre');
+            $slug = $product->getProductSlug();
+            //Get the category that was clicked.
+            $session = $request->getSession();
+
+            $category_slug = $session->get("category_slug");
+            $category_level = $session->get("category_level");
+
+            //If there is no category clicked, get the defaut and the category that was cliked is the third level
+            if(!$category_slug OR $category_level != 3) {
+                $specific_category_name = $product->getProductDefaultCategory()->getCategoryName();
+                $sub_category_name = $product->getProductDefaultCategory()->getParent()->getCategoryName();
+                $main_category_name = $product->getProductDefaultCategory()->getParent()->getParent()->getCategoryName();
+                $specific_category_slug = $product->getProductDefaultCategory()->getCategorySlug();
+                $sub_category_slug = $product->getProductDefaultCategory()->getParent()->getCategorySlug();
+                $main_category_slug = $product->getProductDefaultCategory()->getParent()->getParent()->getCategorySlug();
+            } else {
+                //There is a category slug so find the upper categories
+                $category = $em->getRepository('MilesApartAdminBundle:Category')->findOneBy(array('category_slug'=>$category_slug));
+                $specific_category_name = $category->getCategoryName();
+                $sub_category_name = $category->getParent()->getCategoryName();
+                $main_category_name = $category->getParent()->getParent()->getCategoryName();
+                $specific_category_slug = $category->getCategorySlug();
+                $sub_category_slug = $category->getParent()->getCategorySlug();
+                $main_category_slug = $category->getParent()->getParent()->getCategorySlug();
+            }
+
+            //Set up the breadcrumb
+            $breadcrumbs = $this->get("white_october_breadcrumbs");
+            // Add pages to breadcrumb.
+            $breadcrumbs->addItem("Homepage", $this->get("router")->generate("miles_apart_public_homepage"));
+            $breadcrumbs->addItem($main_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> null, 'specific_category'=> null )));
+            $breadcrumbs->addItem($sub_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> null  )));
+            $breadcrumbs->addItem($specific_category_name, $this->get("router")->generate("miles_apart_public_shop", array ('main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> $specific_category_slug )));
+            $breadcrumbs->addItem($product->getProductName(), $this->get("router")->generate("miles_apart_public_product_page", array ('slug'=> $slug, 'main_category'=>  $main_category_slug, 'sub_category'=> $sub_category_slug, 'specific_category'=> $specific_category_slug )));
+            $breadcrumbs->addItem("Leave Review", $this->get("router")->generate("miles_apart_public_product_review", array ('id' => $id)));
+
+
             $logger->info('I just got the logger add update price pre 4');
             //Validation has failed
             //Set submit to true for error messages
@@ -990,6 +1083,66 @@ class ShopController extends Controller
             'review_form' => $form->createView(),
             'submitted' => true
         ));
+    }
+
+    function sendCustomerReviewConfirmationEmail($product_review, $email_address)
+    {
+        //Set up the mailer
+        $mailer = $this->container->get('swiftmailer.mailer.weborders_mailer');
+
+        //Get the supplier email address.
+        $message = \Swift_Message::newInstance()
+            ->setContentType("text/html")
+            ->setSubject('Miles Apart Review Confirmation')
+            ->setFrom(array('customersupport@miles-apart.com' => 'Miles Apart'))
+            ->setTo($email_address)
+            ->setBody(
+                $this->renderView(
+                    'MilesApartPublicBundle:Emails:leave_review_confirmation.html.twig',
+                    array('product_review' => $product_review)
+
+                )
+
+            )
+        ;
+
+        //Avoid localhost issues
+        $mailer->getTransport()->setLocalDomain('[127.0.0.1]');
+
+        //Send the email
+        $mailer->send($message);
+
+        return true;
+    }
+
+    function sendCustomerReviewStaffNotificationEmail($product_review)
+    {
+        //Set up the mailer
+        $mailer = $this->container->get('swiftmailer.mailer.weborders_mailer');
+
+        //Get the supplier email address.
+        $message = \Swift_Message::newInstance()
+            ->setContentType("text/html")
+            ->setSubject('Miles Apart New Review Notification')
+            ->setFrom(array('wesite@miles-apart.com' => 'Miles Apart'))
+            ->setTo(array('customersupport@miles-apart.com' => 'Miles Apart'))
+            ->setBody(
+                $this->renderView(
+                    'MilesApartPublicBundle:Emails:leave_review_staff_notification.html.twig',
+                    array('product_review' => $product_review)
+
+                )
+
+            )
+        ;
+
+        //Avoid localhost issues
+        $mailer->getTransport()->setLocalDomain('[127.0.0.1]');
+
+        //Send the email
+        $mailer->send($message);
+
+        return true;
     }
 
 

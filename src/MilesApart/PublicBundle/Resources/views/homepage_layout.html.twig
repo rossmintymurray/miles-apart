@@ -10,9 +10,31 @@
 
             
             <div id="homepage_main_div">
+
+                <!--Info box area placeholder for success/failure messages  (flash messages) -->
+                {% for flashMessage in app.session.flashbag.get('public-error') %}
+                    <div class="flashbag" style="margin-top:1rem">
+                        <div data-alert class="alert-box alert radius">
+                            {{ flashMessage }}
+                            <a href="#" class="close">&times;</a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {# Flash message for success #}
+                {% for flashMessage in app.session.flashbag.get('public-success') %}
+                    <div class="flashbag" style="margin-top:1rem">
+                        <div data-alert class="alert-box success radius">
+                            {{ flashMessage }}
+                            <a href="#" class="close">&times;</a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
         		{# Create page content #}
         		{% block page_content %}
-                    
+
 
         		{% endblock %}
             </div>

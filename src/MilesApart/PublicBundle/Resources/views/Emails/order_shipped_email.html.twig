@@ -156,7 +156,7 @@
 						{% endif %}
 
 							<td style="padding:5px 3px 5px 6px;font-size:13px">{{ product.product.productsuppliercode }}</td>
-							<td style="padding:5px 3px 5px 3px;font-size:13px">{{ product.product.productname }}</td>
+						<td style="padding:5px 3px 5px 3px;font-size:13px"><a href="{{ path('miles_apart_public_product_review', { 'id': product.product.id, 'customer_order_product_id': product.getId }) }}">{{ product.product.productname }}</a></td>
 							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.product.currentpricedisplay }}</td>
 							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.customerorderproductquantity }}</td>
 							<td style="text-align:center;padding:5px 3px 5px 3px;font-size:13px">{{ product.customerorderproducttotalpricedisplay }}</td>
@@ -202,6 +202,22 @@
 				</table>
 	    	</th>
 	    </tr>
+	</table>
+
+	<table class="row">
+		<tr>
+			<th class="small-12 large-12 columns first last">
+				<table>
+					<tr>
+						<th>
+							<h5>Review</h5>
+							<p>If you would like to review the product you have purchased, please click the product name above and complete the form. Thanks</p>
+						</th>
+						<th class="expander"></th>
+					</tr>
+				</table>
+			</th>
+		</tr>
 	</table>
         	
 	<table class="spacer">

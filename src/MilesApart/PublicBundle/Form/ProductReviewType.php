@@ -7,7 +7,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 use MilesApart\PublicBundle\Form\DataTransformer\ProductToIdTransformer;
+use MilesApart\PublicBundle\Form\DataTransformer\CustomerToIdTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
+
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
 
 class ProductReviewType extends AbstractType
 {
@@ -29,6 +33,43 @@ class ProductReviewType extends AbstractType
 
          $builder->get('product')
             ->addModelTransformer(new ProductToIdTransformer($this->objectManager));
+
+         $builder
+             ->add('product_review_confirmed_purchase', 'hidden');
+
+        $builder
+            ->add('customer', 'hidden');
+
+        $builder->get('customer')
+            ->addModelTransformer(new CustomerToIdTransformer($this->objectManager));
+
+        $builder
+            ->add('product_review_name', null, array(
+                'attr' => array(
+                    'type'=> 'text',
+                ),
+                'label_attr'=> array('class'=>''),
+                'label'=>'Your Name',
+                'required'  => true,
+                'mapped' => false,
+                'constraints' => array(
+                    new NotBlank(),
+                ),
+            ));
+
+        $builder
+            ->add('product_review_email', null, array(
+                'attr' => array(
+                    'type'=> 'email'),
+                'label_attr'=> array('class'=>''),
+                'label'=>'Your Email',
+                'required'  => true,
+                'mapped' => false,
+                'constraints' => array(
+                    new NotBlank(),
+                    new Email(),
+                ),
+            ));
 
         $builder
             ->add('product_review_title', null, array(

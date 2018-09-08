@@ -427,6 +427,7 @@ class Product
         $this->shop_returned_product = new \Doctrine\Common\Collections\ArrayCollection();
         $this->staff_pick_product = new \Doctrine\Common\Collections\ArrayCollection();
         $this->print_request = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->print_review = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function __toString()
@@ -2455,14 +2456,14 @@ class Product
      */
     public function getAverageReviewRating()
     {
-        if (count($this->getProductReview()) > 0) {
+        if (count($this->getApprovedProductReview()) > 0) {
             $rating = 0;
-            foreach($this->getProductReview() as $key => $value) {
+            foreach($this->getApprovedProductReview() as $key => $value) {
                 $rating = $rating + $value->getProductReviewRating();
             }
 
-            $average_rating = $rating / count($this->getProductReview());
-            return $average_rating;
+            $average_rating = $rating / count($this->getApprovedProductReview());
+            return number_format($average_rating, 1);
         } else {
             return false;
         }
