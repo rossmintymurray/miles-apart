@@ -7,6 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+
 class ContactUsMessageType extends AbstractType
 {
         /**
@@ -24,6 +27,9 @@ class ContactUsMessageType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Your Name',
                 'required'  => true,
+                'constraints' => array(
+                    new NotBlank(),
+                ),
             ));
 
         $builder
@@ -33,6 +39,10 @@ class ContactUsMessageType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Your Email',
                 'required'  => true,
+                'constraints' => array(
+                    new NotBlank(),
+                    new Email(),
+                ),
             ));
 
         $builder
@@ -51,7 +61,8 @@ class ContactUsMessageType extends AbstractType
                         'theme' => 'light',
                         'type' => 'image',
                     )
-                )
+                ),
+                'error_bubbling' => false,
             ));   
     }
     

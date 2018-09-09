@@ -60,7 +60,9 @@ class ProductReviewType extends AbstractType
         $builder
             ->add('product_review_email', null, array(
                 'attr' => array(
-                    'type'=> 'email'),
+                    'type'=> 'email',
+                    'pattern' => 'email'
+                ),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Your Email',
                 'required'  => true,
@@ -115,7 +117,7 @@ class ProductReviewType extends AbstractType
             'constraints'   => array(
                 new RecaptchaTrue()
             ),
-            'error_bubbling' => true
+            'error_bubbling' => false
         )); 
     }
     
