@@ -5,18 +5,17 @@
     {% form_theme form 'MilesApartPublicBundle:Form:fields.html.twig' 'MilesApartPublicBundle:Form:field_errors.html.twig' %}
 {% endif %}
 
-
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" data-abide>
-
+{% if submitted == true %}
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+{% else %}
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" data-abide>
+{% endif %}
     {# Show the form #}
     {{ form_start(form) }}
 
         {% if form_errors(form)|default([])|length > 5%}
             <div data-alert class="alert-box alert radius">
-                There has been a problem with the form: <br />
-                <ul>
-                    {{ form_errors(form) }}
-                </ul>
+                Sorry, there has been a problem with your registration. Please check the fields highlighted red.
                 <a href="#" class="close">&times;</a>
             </div>
         {%  endif %}
@@ -34,13 +33,17 @@
            			<div class="large-6 columns">
                         <div>
                             {{ form_row(form.personal_customer.personal_customer_first_name) }}
-                            <small class="error">Please enter your first name</small>
+                            <div class="{% if submitted == true %}hidden{% endif %}">
+                                <small class="error">Please enter your first name</small>
+                            </div>
                         </div>
                 	</div>
                 	<div class="large-6 columns">
                         <div>
                             {{ form_row(form.personal_customer.personal_customer_surname) }}
-                            <small class="error">Please enter your surname</small>
+                            <div class="{% if submitted == true %}hidden{% endif %}">
+                                <small class="error">Please enter your surname</small>
+                            </div>
                         </div>
                 	</div>
                 </div>
@@ -52,7 +55,9 @@
             <div class="business_customer_representative_form">
                 <div>
                     {{ form_row(form.business_customer_representative.business_customer.business_customer_name) }}
-                    <small class="error">Please enter your business name</small>
+                    <div class="{% if submitted == true %}hidden{% endif %}">
+                        <small class="error">Please enter your business name</small>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -61,13 +66,17 @@
                     <div class="large-6 columns">
                         <div>
                             {{ form_row(form.business_customer_representative.business_customer_representative_first_name) }}
-                            <small class="error">Please enter your first name</small>
+                            <div class="{% if submitted == true %}hidden{% endif %}">
+                                <small class="error">Please enter your first name</small>
+                            </div>
                         </div>
                     </div>
                     <div class="large-6 columns">
                         <div>
                             {{ form_row(form.business_customer_representative.business_customer_representative_surname) }}
-                            <small class="error">Please enter your surname</small>
+                            <div class="{% if submitted == true %}hidden{% endif %}">
+                                <small class="error">Please enter your surname</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,20 +85,26 @@
 
             <div>
                 {{ form_row(form.email) }}
-                <small class="error">Please enter your email address</small>
+                <div class="{% if submitted == true %}hidden{% endif %}">
+                    <small class="error">Please enter your email address</small>
+                </div>
             </div>
 
             <div class="row">
                 <div class="large-6 columns">
                     <div>
                         {{ form_row(form.plainPassword.first) }}
-                        <small class="error">Please enter your password</small>
+                        <div class="{% if submitted == true %}hidden{% endif %}">
+                            <small class="error">Please enter your password</small>
+                        </div>
                     </div>
                 </div>
                 <div class="large-6 columns">
                     <div>
                         {{ form_row(form.plainPassword.second) }}
-                        <small class="error">Please enter same password</small>
+                        <div class="{% if submitted == true %}hidden{% endif %}">
+                            <small class="error">Please enter same password</small>
+                        </div>
                     </div>
                 </div>
                 
@@ -190,7 +205,6 @@
             <div style="margin-bottom:1rem">
                 <div>
                     {{ form_row(form.recaptcha) }}
-                    <small class="error" style="width:302px">Please complete the reCaptcha.</small>
                 </div>
             </div>
         {{ form_rest(form) }}

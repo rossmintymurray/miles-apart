@@ -36,12 +36,12 @@ class RegistrationController extends BaseController
             $submitted = false;
         }
 
-        //Chec session for form 
+        //Check session for form
 
         if($session->get('form')) {
             $form = $session->get('form');
             $session->remove('form');
-
+            $session->remove('form_submitted');
 
 
             //Call the form
@@ -189,7 +189,7 @@ class RegistrationController extends BaseController
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
-            'submitted' => true,
+            'submitted' => $submitted,
         ));
     }
 }

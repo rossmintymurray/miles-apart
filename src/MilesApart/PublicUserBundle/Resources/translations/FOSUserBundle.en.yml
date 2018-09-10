@@ -39,7 +39,7 @@ change_password:
 # Registration
 registration:
     check_email: An email has been sent to %email%. It contains an activation link, please click this to activate your account.
-    confirmed: Thank you %username%, your account is now activated.
+    confirmed: Thank you %username%, your account is now active.
     back: Back to the originating page.
     submit: Register
     flash:
@@ -87,7 +87,7 @@ layout:
 form:
     group_name: "Group name"
     username: "Username"
-    email: "Your Email"
+    email: "Email Address"
     current_password: "Current Password"
     password: "Password"
     password_confirmation: "Verify Password"

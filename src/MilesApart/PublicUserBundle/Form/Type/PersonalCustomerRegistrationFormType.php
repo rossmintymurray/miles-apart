@@ -5,6 +5,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class PersonalCustomerRegistrationFormType extends AbstractType
 {
@@ -16,10 +18,13 @@ class PersonalCustomerRegistrationFormType extends AbstractType
             ->add('personal_customer_first_name', null, array(
                 'attr' => array(
                     'type'=> 'text',
-                    'pattern' => 'alpha'),
+                ),
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
                 'required'  => true,
+                'constraints' => array(
+                    new NotBlank(),
+                ),
                 
             ));
 
@@ -27,10 +32,13 @@ class PersonalCustomerRegistrationFormType extends AbstractType
             ->add('personal_customer_surname', null, array(
                 'attr' => array(
                     'type'=> 'text',
-                    'pattern' => 'alpha'),
+                ),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
                 'required'  => true,
+                'constraints' => array(
+                    new NotBlank(),
+                ),
             ));
 
         $builder

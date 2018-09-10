@@ -10,6 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+
     
 
 
@@ -20,6 +23,8 @@ class RegistrationFormType extends AbstractType
         //parent::buildForm($builder, $options);
         
        $builder->remove('username');  // we use email as the username
+
+
 
        $builder->add('personal_customer',new PersonalCustomerRegistrationFormType(),array(
 
@@ -52,7 +57,7 @@ class RegistrationFormType extends AbstractType
             'constraints'   => array(
                 new RecaptchaTrue()
             ),
-            'error_bubbling' => true
+            'error_bubbling' => false
         ));
 
     }

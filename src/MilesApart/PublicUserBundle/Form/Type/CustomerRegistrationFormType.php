@@ -19,6 +19,7 @@ class CustomerRegistrationFormType extends AbstractType
        $builder->remove('username');  // we use email as the username
 
 
+
        $builder->add('business_customer',new BusinessCustomerRegistrationFormType(),array(
 
                             'data_class' => null,

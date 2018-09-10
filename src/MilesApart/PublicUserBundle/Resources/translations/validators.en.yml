@@ -6,7 +6,7 @@ fos_user:
         long: "[-Inf,Inf]The username is too long"
     email:
         already_used: The email is already used
-        blank: Please enter an email
+        blank: Please enter your email address
         short: "[-Inf,Inf]The email is too short"
         long: "[-Inf,Inf]The email is too long"
         invalid: The email is not valid
