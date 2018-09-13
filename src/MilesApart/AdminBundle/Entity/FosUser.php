@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
+use Symfony\Component\Validator\ExecutionContextInterface;
+
 /**
  * @ORM\Entity(repositoryClass="MilesApart\AdminBundle\Entity\Repository\FosUserRepository")
  * @ORM\Table(name="fos_user")
@@ -35,21 +37,30 @@ class FosUser extends BaseUser
      */
     protected $personal_customer;
 
+    protected $is_customer_business;
+
      /**
      * @ORM\OneToOne(targetEntity="BusinessCustomerRepresentative", inversedBy="fos_user", cascade={"persist"})
      * @ORM\JoinTable(name="business_customer_representative")
      * @ORM\JoinColumn(name="business_customer_representative_id", referencedColumnName="id")
      */
     protected $business_customer_representative;
-    
-    //Validators for data
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+
+
+
+    //Set up validation callback to check that either personal customer or business customer exist
+    public function validate(ExecutionContextInterface $context)
     {
-
-       
+        // check if the personal customer or business customer is set
+        if ($this->getPersonalCustomer() == null && $this->getBusinessCustomerRepresentative() == null) {
+            $context->addViolationAt(
+                'personal_customer',
+                'This name sounds totally fake!',
+                array(),
+                null
+            );
+        }
     }
-
-
 
     public function setEmail($email)
     {
@@ -68,7 +79,28 @@ class FosUser extends BaseUser
         return $this->id;
     }
 
-    
+    /**
+     * Set is_customer_business
+     *
+     * @param boolean $isCustomerBusiness
+     * @return FosUser
+     */
+    public function setIsCustomerBusiness($isCustomerBusiness)
+    {
+        $this->is_customer_business = $isCustomerBusiness;
+
+        return $this;
+    }
+
+    /**
+     * Get is_customer_business
+     *
+     * @return boolean
+     */
+    public function getIsCustomerBusiness()
+    {
+        return $this->is_customer_business;
+    }
 
     /**
      * Set personal_customer

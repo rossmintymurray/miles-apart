@@ -38,6 +38,10 @@ FOS\UserBundle\Model\User:
                 minMessage: fos_user.password.short
                 groups: [ "AcmeRegistration", "AcmeProfile", "ResetPassword", "ChangePassword"]
 
+MilesApart\AdminBundle\Entity\FosUser:
+    constraints:
+        - Callback: [validate]
+
 FOS\UserBundle\Model\Group:
     properties:
         name:

@@ -49,7 +49,29 @@ class BusinessCustomer
      */
     protected $business_customer_representative;
 
-    
+    /**
+     * @ORM\Column(type="datetime", unique=false, nullable=false)
+     */
+    protected $business_customer_date_created;
+
+    /**
+     * @ORM\Column(type="datetime", unique=false, nullable=true)
+     */
+    protected $business_customer_date_modified;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setBusinessCustomerDateModified(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getBusinessCustomerDateCreated() == null)
+        {
+            $this->setBusinessCustomerDateCreated(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
 
     //Validators for data
     public static function loadValidatorMetadata(ClassMetadata $metadata)
@@ -64,7 +86,6 @@ class BusinessCustomer
         )));
 
         //Business customer vat number
-        $metadata->addPropertyConstraint('business_customer_vat_number', new Assert\NotBlank());
         $metadata->addPropertyConstraint('business_customer_vat_number', new Assert\Length(array(
             'min'        => 2,
             'max'        => 15,
@@ -95,6 +116,52 @@ class BusinessCustomer
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set business_customer_date_created
+     *
+     * @param \DateTime $businessCustomerDateCreated
+     * @return BusinessCustomer
+     */
+    public function setBusinessCustomerDateCreated($businessCustomerDateCreated)
+    {
+        $this->business_customer_date_created = $businessCustomerDateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get business_customer_date_created
+     *
+     * @return \DateTime
+     */
+    public function getBusinessCustomerDateCreated()
+    {
+        return $this->business_customer_date_created;
+    }
+
+    /**
+     * Set business_customer_date_modified
+     *
+     * @param \DateTime $businessCustomerDateModified
+     * @return BusinessCustomer
+     */
+    public function setBusinessCustomerDateModified($businessCustomerDateModified)
+    {
+        $this->business_customer_date_modified = $businessCustomerDateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get business_customer_date_modified
+     *
+     * @return \DateTime
+     */
+    public function getBusinessCustomerDateModified()
+    {
+        return $this->business_customer_date_modified;
     }
 
     /**

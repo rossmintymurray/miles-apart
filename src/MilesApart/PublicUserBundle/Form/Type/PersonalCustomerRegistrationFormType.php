@@ -5,9 +5,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Symfony\Component\Validator\Constraints\NotBlank;
-
-
 class PersonalCustomerRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -22,10 +19,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
                 'required'  => true,
-                'constraints' => array(
-                    new NotBlank(),
-                ),
-                
             ));
 
         $builder
@@ -36,9 +29,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
                 'required'  => true,
-                'constraints' => array(
-                    new NotBlank(),
-                ),
             ));
 
         $builder

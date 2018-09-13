@@ -43,7 +43,7 @@ class RegistrationController extends BaseController
             $session->remove('form');
             $session->remove('form_submitted');
 
-
+ladybug_dump($form);
             //Call the form
             return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
                 'form' => $form,
@@ -57,25 +57,29 @@ class RegistrationController extends BaseController
             $formHandler = $this->container->get('fos_user.registration.form.handler');
             $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
+            $logger = $this->container->get('logger');
+            $logger->info('I just got the logger add update price444 pre');
+
             $process = $formHandler->process($confirmationEnabled);
-           
+            $logger->info('I just got the logger add update price7777 pre');
+
             if ($process['proc']) {
                 if ($process['valid']) {
                    
                     $user = $form->getData();
 
-                   
-                  
-
                     $session = $this->container->get('session');
                     $em = $this->container->get('doctrine')->getManager();
 
+                    //Check if business or personal customer
+                    if($form->get('is_customer_business')->getData() == true) {
+
                         //If business, create new business customer and new business customer representative.
-                        if($form->get('business_customer_representative')->get('business_customer_representative_first_name')->getData()) {
+                        if ($form->get('business_customer_representative')->getData()) {
 
                             $business_customer_representative = new BusinessCustomerRepresentative();
                             $business_customer_representative = $form->get('business_customer_representative')->getData();
-                           
+
                             $business_customer_representative->setFosUser($user);
                             $user->setBusinessCustomerRepresentative($business_customer_representative);
 
@@ -102,16 +106,17 @@ class RegistrationController extends BaseController
                             $em->persist($business_customer_representative);
                             $em->persist($user);
                             $em->flush();
-                            
+
 
                         }
+                    } else {
 
                         //If personal, create new personal customer.
-                        if($form->get('personal_customer')->get('personal_customer_first_name')->getData()) {
+                        if ($form->get('personal_customer')->getData()) {
 
                             $personal_customer = new PersonalCustomer();
                             $personal_customer = $form->get('personal_customer')->getData();
-                           
+
                             $personal_customer->setFosUser($user);
                             $user->setPersonalCustomer($personal_customer);
 
@@ -134,8 +139,11 @@ class RegistrationController extends BaseController
                             $em->persist($personal_customer);
                             $em->persist($user);
                             $em->flush();
-                            
+
                         }
+                    }
+
+
 
                     
                     $authUser = false;
@@ -161,7 +169,7 @@ class RegistrationController extends BaseController
 
                 } else {
 
-
+                    ladybug_dump($form);
                     $this->setFlash('fos_registration_error', 'There are some issues with the form');
 
                     //Redirect to login register page
@@ -185,7 +193,7 @@ class RegistrationController extends BaseController
                 }
             }
         }
-    
+        ladybug_dump($form);
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
             'form' => $form->createView(),

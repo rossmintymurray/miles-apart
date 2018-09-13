@@ -4,12 +4,5 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-
-    {% for flashMessage in app.session.flashbag.get('fos_registration_success') %}
-        <div data-alert class="alert-box success radius">
-            {{ flashMessage }}
-            <a href="#" class="close">&times;</a>
-        </div>
-    {% endfor %}
     {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}

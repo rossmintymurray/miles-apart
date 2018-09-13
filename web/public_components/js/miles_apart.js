@@ -697,7 +697,7 @@ function greyIn(){
 function businessCustomerToggle() {
 
     //Check if the business customer toggle is checked
-    if ($('#business_customer_toggle').is(":checked")) {
+    if ($('.business_customer_toggle').is(":checked")) {
         //SHow business
         showBusinessCustomerRegistration();
     } else {
@@ -706,9 +706,9 @@ function businessCustomerToggle() {
         $("#fos_user_registration_form_personal_customer_personal_customer_surname").attr( "required", "required" );
     }
 
-    $("#business_customer_toggle").change(function() {
+    $(".business_customer_toggle").change(function() {
 
-        if ($('#business_customer_toggle').is(":checked")) {
+        if ($('.business_customer_toggle').is(":checked")) {
             // it is checked
             showBusinessCustomerRegistration();
         } else {

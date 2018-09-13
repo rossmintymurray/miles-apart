@@ -5,10 +5,12 @@ namespace MilesApart\AdminBundle\Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @ORM\Entity(repositoryClass="MilesApart\AdminBundle\Entity\Repository\PersonalCustomerRepository")
  * @ORM\Table(name="personal_customer")
@@ -20,7 +22,7 @@ class PersonalCustomer
     //Define the values
 
     /**
-     *  
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -78,6 +80,45 @@ class PersonalCustomer
      * @ORM\OneToOne(targetEntity="FosUser", mappedBy="personal_customer")
      */
     protected $fos_user;
+
+    //Set up validation callback to check that either personal customer or business customer exist
+    public function validate(ExecutionContextInterface $context)
+    {
+        // check if the personal customer or business customer is set
+        if ($this->getFosUser()->getBusinessCustomerRepresentative() == null) {
+
+            //Check the values of each of the inputs that are required
+            if ($this->getPersonalCustomerFirstName() == null || $this->getPersonalCustomerFirstName() == "") {
+                $context->addViolationAt(
+                    'personal_customer_first_name',
+                    'Please enter your first name',
+                    array(),
+                    null
+                );
+            }
+
+
+            if ($this->getPersonalCustomerSurname() == null || $this->getPersonalCustomerSurname() == "") {
+                $context->addViolationAt(
+                    'personal_customer_surname',
+                    'Please enter your  surname',
+                    array(),
+                    null
+                );
+            }
+        }
+
+    }
+
+    //Validators for data
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        //First name
+        $metadata->addPropertyConstraint('personal_customer_first_name', new Assert\NotBlank());
+
+        //Surname
+        $metadata->addPropertyConstraint('personal_customer_surname', new Assert\NotBlank());
+    }
 
     /**
      * Constructor

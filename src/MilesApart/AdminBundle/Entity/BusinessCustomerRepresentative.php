@@ -84,6 +84,29 @@ class BusinessCustomerRepresentative
      */
     protected $business_customer_representative_customer_order;
 
+    /**
+     * @ORM\Column(type="datetime", unique=false, nullable=false)
+     */
+    protected $business_customer_representative_date_created;
+
+    /**
+     * @ORM\Column(type="datetime", unique=false, nullable=true)
+     */
+    protected $business_customer_representative_date_modified;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setBusinessCustomerRepresentativeDateModified(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getBusinessCustomerRepresentativeDateCreated() == null)
+        {
+            $this->setBusinessCustomerRepresentativeDateCreated(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
@@ -109,6 +132,7 @@ class BusinessCustomerRepresentative
     }
 
 
+
     /**
      * Constructor
      */
@@ -131,6 +155,52 @@ class BusinessCustomerRepresentative
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set business_customer_representative_date_created
+     *
+     * @param \DateTime $businessCustomerRepresentativeDateCreated
+     * @return BusinessCustomerRepresentative
+     */
+    public function setBusinessCustomerRepresentativeDateCreated($businessCustomerRepresentativeDateCreated)
+    {
+        $this->business_customer_representative_date_created = $businessCustomerRepresentativeDateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get business_customer_representative_date_created
+     *
+     * @return \DateTime
+     */
+    public function getBusinessCustomerRepresentativeDateCreated()
+    {
+        return $this->business_customer_representative_date_created;
+    }
+
+    /**
+     * Set business_customer_representative_date_modified
+     *
+     * @param \DateTime $businessCustomerRepresentativeDateModified
+     * @return BusinessCustomerRepresentative
+     */
+    public function setBusinessCustomerRepresentativeDateModified($businessCustomerRepresentativeDateModified)
+    {
+        $this->business_customer_representative_date_modified = $businessCustomerRepresentativeDateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get business_customer_representative_date_modified
+     *
+     * @return \DateTime
+     */
+    public function getBusinessCustomerRepresentativeDateModified()
+    {
+        return $this->business_customer_representative_date_modified;
     }
 
     /**
