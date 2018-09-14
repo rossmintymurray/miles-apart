@@ -17,7 +17,6 @@ class BusinessCustomerRegistrationFormType extends AbstractType
                     'pattern' => 'alpha'),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Business Name',
-                'required'  => true,
             ));
     }
 
@@ -29,8 +28,6 @@ class BusinessCustomerRegistrationFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomer',
             'validation_groups' => function(FormInterface $form) {
-                ladybug_dump($form->getParent()->getParent()->get('is_customer_business')->getData());
-
                 $data = $form->getParent()->getParent()->get('is_customer_business')->getData();
                 if ($data === true) {
                     return array('business_customer');

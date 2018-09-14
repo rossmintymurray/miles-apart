@@ -24,7 +24,6 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                     'pattern' => 'alpha'),
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
-                'required'  => true,
             ));
 
         $builder
@@ -34,7 +33,6 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                     'pattern' => 'alpha'),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
-                'required'  => true,
             ));
         
         $builder
@@ -99,7 +97,6 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
             'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomerRepresentative',
             'cascade_validation' => true,
             'validation_groups' => function(FormInterface $form) {
-                ladybug_dump($form->getParent()->get('is_customer_business')->getData());
                 $data = $form->getParent()->get('is_customer_business')->getData();
                 if ($data === true) {
                     return array('business_customer');

@@ -57,11 +57,7 @@ class RegistrationController extends BaseController
             $formHandler = $this->container->get('fos_user.registration.form.handler');
             $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
-            $logger = $this->container->get('logger');
-            $logger->info('I just got the logger add update price444 pre');
-
             $process = $formHandler->process($confirmationEnabled);
-            $logger->info('I just got the logger add update price7777 pre');
 
             if ($process['proc']) {
                 if ($process['valid']) {
@@ -73,16 +69,13 @@ class RegistrationController extends BaseController
 
                     //Check if business or personal customer
                     if($form->get('is_customer_business')->getData() == true) {
-
                         //If business, create new business customer and new business customer representative.
                         if ($form->get('business_customer_representative')->getData()) {
-
                             $business_customer_representative = new BusinessCustomerRepresentative();
                             $business_customer_representative = $form->get('business_customer_representative')->getData();
 
                             $business_customer_representative->setFosUser($user);
                             $user->setBusinessCustomerRepresentative($business_customer_representative);
-
                             //Set the personal customer email address
                             $business_customer_representative->setBusinessCustomerRepresentativeEmailAddress($user->getEmailCanonical());
 
@@ -172,14 +165,7 @@ class RegistrationController extends BaseController
                     $this->setFlash('fos_registration_error', 'There are some issues with the form');
 
                     //Redirect to login register page
-                    $logger = $this->container->get('logger');
-                    $logger->info('I just got the logger add update price444 pre');
-                    if($form == null) {
-                        $logger->info("reg is null44");
-                    } else {
-                        $logger->info("reg is not null44");
-                    }
-                    $logger->info('I just got the logger add update price444');
+
 
                     //Set the form in the session
                     $session = new Session();

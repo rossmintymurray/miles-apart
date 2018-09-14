@@ -17,7 +17,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
                 ),
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
-                'required'  => true,
                 'mapped' => true,
             ));
 
@@ -28,7 +27,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
                 ),
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
-                'required'  => true,
             ));
 
         $builder
@@ -92,8 +90,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'MilesApart\AdminBundle\Entity\PersonalCustomer',
             'validation_groups' => function(FormInterface $form) {
-                ladybug_dump($form->getParent()->get('is_customer_business')->getData());
-
                 $data = $form->getParent()->get('is_customer_business')->getData();
                 if ($data === true) {
                     return array('business_customer');

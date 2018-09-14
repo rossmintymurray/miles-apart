@@ -23,22 +23,20 @@ class RegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label' => false,
                 'required' => false,
-                'empty_data' => null
+                'empty_data' => null,
             ));
 
         $builder
             ->add('business_customer_representative', new BusinessCustomerRepresentativeRegistrationFormType(), array(
                 'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomerRepresentative',
-                'required' => true,
-                'mapped' => true,
+                'mapped' => false,
                 'cascade_validation' => true
             ));
 
         $builder
             ->add('personal_customer', new PersonalCustomerRegistrationFormType(), array(
                 'data_class' => 'MilesApart\AdminBundle\Entity\PersonalCustomer',
-                'required' => true,
-                'mapped' => true,
+                'mapped' => false,
                 'cascade_validation' => true
             ));
 
