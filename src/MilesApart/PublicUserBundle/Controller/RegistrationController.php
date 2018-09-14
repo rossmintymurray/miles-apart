@@ -43,7 +43,7 @@ class RegistrationController extends BaseController
             $session->remove('form');
             $session->remove('form_submitted');
 
-ladybug_dump($form);
+
             //Call the form
             return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
                 'form' => $form,
@@ -169,7 +169,6 @@ ladybug_dump($form);
 
                 } else {
 
-                    ladybug_dump($form);
                     $this->setFlash('fos_registration_error', 'There are some issues with the form');
 
                     //Redirect to login register page
@@ -193,7 +192,6 @@ ladybug_dump($form);
                 }
             }
         }
-        ladybug_dump($form);
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
             'form' => $form->createView(),

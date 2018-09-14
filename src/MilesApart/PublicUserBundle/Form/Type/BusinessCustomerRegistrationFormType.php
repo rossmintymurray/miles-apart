@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Validator\Constraints;
 
 
 
@@ -24,12 +25,11 @@ class BusinessCustomerRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Business Name',
                 'required'  => true,
+                'constraints' => array(
+                    new Constraints\NotBlank(),
+                ),
                 
             ));
-
-    
-
-        
 
     }
 
@@ -40,6 +40,15 @@ class BusinessCustomerRegistrationFormType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomer'
+        ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'empty_data' => function (FormInterface $form) {
+                return new Blog($form->get('title')->getData());
+            },
         ));
     }
 

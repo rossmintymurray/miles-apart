@@ -5,6 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Validator\Constraints;
 
 
 
@@ -12,14 +13,11 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('business_customer',new BusinessCustomerRegistrationFormType(),array(
-
-                            'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomer',
-                            'required' =>false,
-                            
-
-                    )
-                );
+        $builder
+            ->add('business_customer',new BusinessCustomerRegistrationFormType(),array(
+                'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomer',
+                'required' =>false,
+            ));
 
         $builder
             ->add('business_customer_representative_first_name', null, array(
@@ -29,8 +27,10 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
                 'required'  => true,
-                
-            ));
+                'constraints' => array(
+                    new Constraints\NotBlank(),
+                ),
+                ));
 
         $builder
             ->add('business_customer_representative_surname', null, array(
@@ -40,6 +40,9 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
                 'required'  => true,
+                'constraints' => array(
+                    new Constraints\NotBlank(),
+                ),
             ));
         
         $builder

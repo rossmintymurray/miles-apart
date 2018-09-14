@@ -47,21 +47,6 @@ class FosUser extends BaseUser
     protected $business_customer_representative;
 
 
-
-    //Set up validation callback to check that either personal customer or business customer exist
-    public function validate(ExecutionContextInterface $context)
-    {
-        // check if the personal customer or business customer is set
-        if ($this->getPersonalCustomer() == null && $this->getBusinessCustomerRepresentative() == null) {
-            $context->addViolationAt(
-                'personal_customer',
-                'This name sounds totally fake!',
-                array(),
-                null
-            );
-        }
-    }
-
     public function setEmail($email)
     {
         $email = is_null($email) ? '' : $email;

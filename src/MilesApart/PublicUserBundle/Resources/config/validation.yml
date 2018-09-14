@@ -38,10 +38,6 @@ FOS\UserBundle\Model\User:
                 minMessage: fos_user.password.short
                 groups: [ "AcmeRegistration", "AcmeProfile", "ResetPassword", "ChangePassword"]
 
-MilesApart\AdminBundle\Entity\FosUser:
-    constraints:
-        - Callback: [validate]
-
 FOS\UserBundle\Model\Group:
     properties:
         name:
@@ -94,3 +90,4 @@ FOS\UserBundle\Propel\Group:
                 max: 255
                 maxMessage: fos_user.group.long
                 groups: [ "AcmeRegistration" ]
+

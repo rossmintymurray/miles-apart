@@ -10,20 +10,21 @@
 {% else %}
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" data-abide>
 {% endif %}
-    {# Show the form #}
+
     {{ form_start(form) }}
 
-        {% if form_errors(form)|default([])|length > 5%}
+        {% if form_errors(form)|default([])|length > 5 %}
             <div data-alert class="alert-box alert radius">
                 Sorry, there has been a problem with your registration. Please check the fields highlighted red.
                 <a href="#" class="close">&times;</a>
             </div>
         {%  endif %}
 
-    {# Business customer button #}
-    <input type="checkbox" id="business_customer_toggle" {% if form.business_customer_representative.business_customer.business_customer_name.vars.value != "" or form.business_customer_representative.business_customer.business_customer_name.vars.value != null %} checked {% endif %} />
-    <label for="business_customer">Are you a business customer?</label>
-    <p class="form_subtext">Please check this box if you are a representative for business, school, charity or other organisation.</p>
+        {# Business customer button #}
+        {{ form_row(form.is_customer_business) }}
+        {#<input type="checkbox" id="business_customer_toggle" {% if form.business_customer_representative.business_customer.business_customer_name.vars.value != "" or form.business_customer_representative.business_customer.business_customer_name.vars.value != null %} checked {% endif %} />#}
+        <label for="fos_user_registration_form_is_customer_business">Are you a business customer?</label>
+        <p class="form_subtext">Please check this box if you are a representative for business, school, charity or other organisation.</p>
 
 
             {# Personal customer form elements #}
@@ -47,7 +48,7 @@
                         </div>
                 	</div>
                 </div>
-                
+
             </div>
 
             {# Business customer representative form elements #}
@@ -61,7 +62,7 @@
                 </div>
 
                 <div class="row">
-                    
+
 
                     <div class="large-6 columns">
                         <div>
@@ -80,38 +81,37 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
-            <div>
-                {{ form_row(form.email) }}
-                <div class="{% if submitted == true %}hidden{% endif %}">
-                    <small class="error">Please enter your email address</small>
+        <div>
+            {{ form_row(form.email) }}
+            <div class="{% if submitted == true %}hidden{% endif %}">
+                <small class="error">Please enter your email address</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-6 columns">
+                <div>
+                    {{ form_row(form.plainPassword.first) }}
+                    <div class="{% if submitted == true %}hidden{% endif %}">
+                        <small class="error">Please enter your password</small>
+                    </div>
+                </div>
+            </div>
+            <div class="large-6 columns">
+                <div>
+                    {{ form_row(form.plainPassword.second) }}
+                    <div class="{% if submitted == true %}hidden{% endif %}">
+                        <small class="error">Please enter same password</small>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="large-6 columns">
-                    <div>
-                        {{ form_row(form.plainPassword.first) }}
-                        <div class="{% if submitted == true %}hidden{% endif %}">
-                            <small class="error">Please enter your password</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="large-6 columns">
-                    <div>
-                        {{ form_row(form.plainPassword.second) }}
-                        <div class="{% if submitted == true %}hidden{% endif %}">
-                            <small class="error">Please enter same password</small>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-           
-        
-        
+        </div>
+
+
             {# Personal customer form elements #}
             <div class="personal_customer_form">
                 {# Show the opts #}
@@ -136,13 +136,13 @@
         				</div>
         		    </div>
         		</div>
-                
+
         		<p class="form_subtext">Please select the methods to which we are able to contact you. If you leave unchecked we will still contact you regarding purchases you have made or if there are any problems with your account.</p>
 
                 <div class="row">
                     <div class="large-12 columns">
                         <label><b>Terms & Conditions</b></label>
-                       
+
                         <div class="row">
                             <div class="small-1 columns">
                                 {{ form_widget(form.personal_customer.personal_customer_terms_agreed) }}
@@ -152,11 +152,13 @@
                                 <label for="checkbox_terms" class="bottom_label"><label>I have read and agree to the <a href="{{ path('miles_apart_public_terms_and_conditions') }}">terms</a> and <a href="{{ path('miles_apart_public_privacy_and_cookie_policy') }}">privacy policy</a>.</label>
                             </div>
                         </div>
-                           
-                        
+
+
                     </div>
                 </div>
             </div>
+
+
             {# Business customer representative form elements #}
             <div class="business_customer_representative_form">
                 {# Show the opts #}
@@ -181,13 +183,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <p class="form_subtext">Please select the methods to which we are able to contact you. If you leave unchecked we will still contact you regarding purchases you have made or if there are any problems with your account.</p>
 
                 <div class="row">
                     <div class="large-12 columns">
                         <label><b>Terms & Conditions</b></label>
-                       
+
                         <div class="row">
                             <div class="small-1 columns">
                                 {{ form_widget(form.business_customer_representative.business_customer_representative_terms_agreed) }}
@@ -196,17 +198,17 @@
                                 <label class="bottom_label" for="fos_user_registration_form_personal_customer_personal_customer_terms_agreed">I have read and agree to the <a href="{{ path('miles_apart_public_terms_and_conditions') }}">terms</a> and <a href="{{ path('miles_apart_public_privacy_and_cookie_policy') }}">privacy policy</a>.</label>
                             </div>
                         </div>
-                           
-                        
+
+
                     </div>
                 </div>
             </div>
 
-            <div style="margin-bottom:1rem">
-                <div>
-                    {{ form_row(form.recaptcha) }}
-                </div>
+        <div style="margin-bottom:1rem">
+            <div>
+                {{ form_row(form.recaptcha) }}
             </div>
+        </div>
         {{ form_rest(form) }}
         
         <div class="clearfix"></div>
