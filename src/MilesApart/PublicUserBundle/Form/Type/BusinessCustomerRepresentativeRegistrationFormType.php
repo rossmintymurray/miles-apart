@@ -3,11 +3,8 @@ namespace MilesApart\PublicUserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Symfony\Component\Validator\Constraints;
-
-
 
 class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
 {
@@ -16,7 +13,8 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
         $builder
             ->add('business_customer',new BusinessCustomerRegistrationFormType(),array(
                 'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomer',
-                'required' =>false,
+                'required' =>true,
+                'cascade_validation' => true
             ));
 
         $builder
@@ -27,10 +25,7 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'First Name',
                 'required'  => true,
-                'constraints' => array(
-                    new Constraints\NotBlank(),
-                ),
-                ));
+            ));
 
         $builder
             ->add('business_customer_representative_surname', null, array(
@@ -40,9 +35,6 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
                 'required'  => true,
-                'constraints' => array(
-                    new Constraints\NotBlank(),
-                ),
             ));
         
         $builder
@@ -92,7 +84,7 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
                     ),
                 'label_attr'=> array('class'=>''),
                 'label' => "I have read and agree to the terms and privacy policy.",
-                'required'  => false,
+                'required'  => true,
             ));
         
         
@@ -104,7 +96,17 @@ class BusinessCustomerRepresentativeRegistrationFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomerRepresentative'
+            'data_class' => 'MilesApart\AdminBundle\Entity\BusinessCustomerRepresentative',
+            'cascade_validation' => true,
+            'validation_groups' => function(FormInterface $form) {
+                ladybug_dump($form->getParent()->get('is_customer_business')->getData());
+                $data = $form->getParent()->get('is_customer_business')->getData();
+                if ($data === true) {
+                    return array('business_customer');
+                } else {
+                    return array('personal_customer');
+                }
+            }
         ));
     }
 

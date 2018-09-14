@@ -90,4 +90,3 @@ FOS\UserBundle\Propel\Group:
                 max: 255
                 maxMessage: fos_user.group.long
                 groups: [ "AcmeRegistration" ]
-

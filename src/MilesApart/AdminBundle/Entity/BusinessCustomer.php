@@ -77,12 +77,15 @@ class BusinessCustomer
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         //Business customer name
-        $metadata->addPropertyConstraint('business_customer_name', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('business_customer_name', new Assert\NotBlank(array(
+            'groups' => array('business_customer'),
+        )));
         $metadata->addPropertyConstraint('business_customer_name', new Assert\Length(array(
             'min'        => 2,
             'max'        => 100,
             'minMessage' => 'The business customer name must be at least {{ limit }} characters length',
             'maxMessage' => 'The business customer name cannot be longer than {{ limit }} characters length',
+            'groups' => array('business_customer'),
         )));
 
         //Business customer vat number
@@ -91,6 +94,7 @@ class BusinessCustomer
             'max'        => 15,
             'minMessage' => 'The business customer vat number name must be at least {{ limit }} characters length',
             'maxMessage' => 'The business customer vat number name cannot be longer than {{ limit }} characters length',
+            'groups' => array('business_customer'),
         )));
 
     }

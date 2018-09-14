@@ -3,17 +3,13 @@ namespace MilesApart\PublicUserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Symfony\Component\Validator\Constraints;
-
 
 class PersonalCustomerRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //parent::buildForm($builder, $options);
-
         $builder
             ->add('personal_customer_first_name', null, array(
                 'attr' => array(
@@ -23,10 +19,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
                 'label'=>'First Name',
                 'required'  => true,
                 'mapped' => true,
-                'constraints' => array(
-                    new Constraints\NotBlank(),
-                ),
-
             ));
 
         $builder
@@ -37,9 +29,6 @@ class PersonalCustomerRegistrationFormType extends AbstractType
                 'label_attr'=> array('class'=>''),
                 'label'=>'Surname',
                 'required'  => true,
-                'constraints' => array(
-                    new Constraints\NotBlank(),
-                ),
             ));
 
         $builder
@@ -101,7 +90,17 @@ class PersonalCustomerRegistrationFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MilesApart\AdminBundle\Entity\PersonalCustomer'
+            'data_class' => 'MilesApart\AdminBundle\Entity\PersonalCustomer',
+            'validation_groups' => function(FormInterface $form) {
+                ladybug_dump($form->getParent()->get('is_customer_business')->getData());
+
+                $data = $form->getParent()->get('is_customer_business')->getData();
+                if ($data === true) {
+                    return array('business_customer');
+                } else {
+                    return array('personal_customer');
+                }
+            }
         ));
     }
 

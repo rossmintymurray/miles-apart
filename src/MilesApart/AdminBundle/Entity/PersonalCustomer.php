@@ -114,10 +114,14 @@ class PersonalCustomer
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         //First name
-        $metadata->addPropertyConstraint('personal_customer_first_name', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('personal_customer_first_name', new Assert\NotBlank(array(
+            'groups' => array('personal_customer'),
+        )));
 
         //Surname
-        $metadata->addPropertyConstraint('personal_customer_surname', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('personal_customer_surname', new Assert\NotBlank(array(
+            'groups' => array('personal_customer'),
+        )));
     }
 
     /**
