@@ -8,8 +8,9 @@
 {% endblock %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.fullname }, 'FOSUserBundle') }}</p>
-    {% if app.session is not empty %}
-       <a href="{{ path('miles_apart_public_homepage') }}" class="button">Back to the homepage</a>
-    {% endif %}
+    <h4>Success!!!</h4>
+    <p>Thank you for completing you registration.</p>
+
+    <a href="{{ path('miles_apart_public_login_or_register') }}" class="button">Login here</a>
+
 {% endblock fos_user_content %}

@@ -184,4 +184,36 @@ class RegistrationController extends BaseController
             'submitted' => $submitted,
         ));
     }
+
+    /**
+     * Receive the confirmation token from user email provider, login the user
+     */
+    public function confirmAction($token)
+    {
+        //GEt the session
+        $session = new Session();
+        $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($token);
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
+        }
+
+        $user->setConfirmationToken(null);
+        $user->setEnabled(true);
+        $user->setLastLogin(new \DateTime());
+
+        $this->container->get('fos_user.user_manager')->updateUser($user);
+        $response = new RedirectResponse($this->container->get('router')->generate('fos_user_registration_confirmed'));
+        //$this->authenticateUser($user, $response);
+
+        return $response;
+    }
+
+    /**
+     * Tell the user his account is now confirmed
+     */
+    public function confirmedAction()
+    {
+        return $this->container->get('templating')->renderResponse('MilesApartPublicUserBundle:Registration:confirmed.html.'.$this->getEngine(), array(
+        ));
+    }
 }
