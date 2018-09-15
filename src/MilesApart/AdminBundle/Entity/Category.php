@@ -88,6 +88,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OrderBy({"category_display_order" = "ASC"})
      */
     protected $children;
 

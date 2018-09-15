@@ -55,8 +55,8 @@ class ShopController extends Controller
 
             //Find category from the db.
             $category = $em->getRepository('MilesApartAdminBundle:Category')->findOneBy(array('category_slug'=>$category_slug), array('category_display_order' => 'ASC'));
-          
-            
+
+
 
             $session->set("category_level", $level);
             $session->set("category_slug", $category->getCategorySlug());
