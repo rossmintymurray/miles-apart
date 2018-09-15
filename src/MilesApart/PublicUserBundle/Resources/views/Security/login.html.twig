@@ -31,7 +31,13 @@
 	    {# Need to show this only if the user is logging in to complete an order #}
 	    {% if checkout == true %}
 	    	<input type="hidden" name="_target_path" value="miles_apart_basket_checkout_shipping" />
-	    {% endif %}
+			<input type="hidden" name="_failure_path" value="miles_apart_basket_checkout_start" />
+
+        {% else %}
+			<input type="hidden" name="_target_path" value="miles_apart_public_homepage" />
+			<input type="hidden" name="_failure_path" value="miles_apart_public_login_or_register" />
+
+        {% endif %}
 	    
 	    <input type="submit" class="button small-12" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
 	</form>
