@@ -69,3 +69,9 @@ staff-pickpack_print-invoices:
 staff-pickpack_update-order-state-printed:
     pattern:  /update-order-state/printed
     defaults: { _controller: "MilesApartStaffBundle:Pickpack:updateorderstateprinted"}
+
+staff-pickpack_get-customer-order-shipping-address:
+    pattern:  /get-customer-order-shipping-address
+    defaults: { _controller: "MilesApartStaffBundle:Pickpack:getcustomerordershippingaddress" }
+    requirements:
+        _method:  GET|POST

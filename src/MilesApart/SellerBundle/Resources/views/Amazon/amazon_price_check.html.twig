@@ -14,9 +14,7 @@
 {# Set the dynamic content for this template #}
 {% block page_content %}
    	<h1>Amazon Price Check</h1>
-	{% if product is defined %}
-		{{ product|ladybug_dump }}
-	{% endif %}
+
 
 	{% if price is defined %}
 		<h4>Lowest Price - £{{price}}</h4>

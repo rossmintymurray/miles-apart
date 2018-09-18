@@ -435,7 +435,7 @@ function processTransferRequestAddFormSubmit() {
 
 
 function processTransferRequestAdd() {
-  var submitUrl = globalBaseUrl + "transfer-requests/submit";
+  var submitUrl = globalBaseUrl + "transfer-requests/request-products/submit";
   var functionName = "TransferRequest";
   var variablePrepend = "product_transfer_request_";
 
@@ -444,7 +444,7 @@ function processTransferRequestAdd() {
 
 function newTransferRequestProduct() {
 
-  var submitUrl = globalBaseUrl + "transfer-requests/new-product-submit";
+  var submitUrl = globalBaseUrl + "transfer-requests/request-products/new-product-submit";
   var functionName = "TransferRequest";
   var variablePrepend = "product_transfer_request_";
 

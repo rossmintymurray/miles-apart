@@ -15,6 +15,9 @@ use MilesApart\StaffBundle\Form\Pickpack\PackType;
 use MilesApart\StaffBundle\Form\Pickpack\PackProductType;
 use MilesApart\StaffBundle\Form\Pickpack\FindOrderType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 class PickpackController extends Controller
 {
@@ -795,7 +798,28 @@ class PickpackController extends Controller
         return $response;
 
         
-    } 
+    }
+
+    public function getcustomerordershippingaddressAction(Request $request)
+    {
+        //Get the $_POST array.
+        if ($request->isXMLHttpRequest()) {
+            $response = $_POST;
+            //$response = new JsonResponse($r);
+        } else {
+            $response = "false";
+        }
+
+        $address_id = $response['address_id'];
+
+        //Get the suppliers that have missing data
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('MilesApartAdminBundle:CustomerAddress')->getCustomerAddressText($address_id);
+
+        return new JsonResponse([
+            $entity
+        ]);
+    }
     
 }
 

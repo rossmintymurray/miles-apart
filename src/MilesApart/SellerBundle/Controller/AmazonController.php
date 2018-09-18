@@ -266,6 +266,7 @@ $logger->info('I just got the logger tr got3');
 $logger->info('I just got the logger tr got4');
                             //if(array_key_exists(0, $array[0]['GetMatchingProductForIdResult']['Products'])) {
     $logger->info('I just got the logger tr got5');
+    ladybug_dump($array[0]['GetMatchingProductForIdResult']['Products']['Product']);
                                 $amazon_product_array = $array[0]['GetMatchingProductForIdResult']['Products']['Product']['AttributeSets'];
                                 $match = true;
                                 $logger->info('I just got the logger tr got6');
@@ -661,8 +662,13 @@ $logger->info('I just got the logger tr 3');
         $mwsResponse = $mwsProductClientPackUk->callGetCompetitivePricingForASIN($asin);
 
         //Render the page from template
-        return $mwsResponse->getGetCompetitivePricingForASINResult()[0]->getProduct()->getCompetitivePricing()->getCompetitivePrices()->getCompetitivePrice()[0]->getPrice()->getLandedPrice()->getAmount();
-    //return $mwsResponse->getGetCompetitivePricingForASINResult();
+        if(count($mwsResponse->getGetCompetitivePricingForASINResult() > 0)) {
+            if (count($mwsResponse->getGetCompetitivePricingForASINResult()[0]->getProduct()->getCompetitivePricing()->getCompetitivePrices()->getCompetitivePrice()) > 0) {
+                return $mwsResponse->getGetCompetitivePricingForASINResult()[0]->getProduct()->getCompetitivePricing()->getCompetitivePrices()->getCompetitivePrice()[0]->getPrice()->getLandedPrice()->getAmount();
+            } else {
+                return null;
+            }
+        } //return $mwsResponse->getGetCompetitivePricingForASINResult();
     }
 
     //Get the lowest Amazon shipping cost for any given ASIN
@@ -675,7 +681,13 @@ $logger->info('I just got the logger tr 3');
         $mwsResponse = $mwsProductClientPackUk->callGetCompetitivePricingForASIN($asin);
 
         //Render the page from template
-        return $mwsResponse->getGetCompetitivePricingForASINResult()[0]->getProduct()->getCompetitivePricing()->getCompetitivePrices()->getCompetitivePrice()[0]->getPrice()->getShipping()->getAmount();
+        if(count($mwsResponse->getGetCompetitivePricingForASINResult() > 0)) {
+            if (count($mwsResponse->getGetCompetitivePricingForASINResult()[0]->getProduct()->getCompetitivePricing()->getCompetitivePrices()->getCompetitivePrice()) > 0) {
+                return $mwsResponse->getGetCompetitivePricingForASINResult()[0]->getProduct()->getCompetitivePricing()->getCompetitivePrices()->getCompetitivePrice()[0]->getPrice()->getShipping()->getAmount();
+            } else {
+                return null;
+            }
+        }
     }
     /************** End of Price Check *********************/
    
@@ -1071,7 +1083,6 @@ $logger->info('I just got the logger tr 3');
     //Add inventory qty data to Amazon for multiple products
     public function uploadAmazonMultipleProductNewQtyAction($customer_order_products) 
     {
-        //Get the Amazon setup
         $mwsClientPoolUk = $this->container->get('caponica_mws_client_pool_uk');
         $mwsFeedandReportClientPackUk = $mwsClientPoolUk->getFeedAndReportClientPack();
 

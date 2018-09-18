@@ -13,7 +13,14 @@
         
             <div class="small-6 medium-4 large-3 columns text-center shop_category_thumb left">
                 <a href="{{ path('miles_apart_public_shop', {'main_category': cat.categoryslug }) }}">
-                    <img class="large-12" src="{{ asset('images/categories/')~cat.categoryimagepath }}" class="product_thumbnail_image" alt="{{ cat.categoryname}}" />
+                    {# If there is no product image, show the placeholder image #}
+                    {% if cat.categoryimagepath == null %}
+                        {# Show placeholder image #}
+                        {% set image_path = 'images/web/public-missing-image.jpg' %}
+                    {% else %}
+                        {% set image_path = 'images/web/'~cat.categoryimagepath%}
+                    {% endif %}
+                    <img src="{{ image_path|apply_filter('public_product_thumb') }}" class=" small-12 product_thumbnail_image" alt="{{ cat.categoryname}}" />
                 </a>
                 <div class="caption">
                     <h4 class="thumbnail_product_name"><a href="{{ path('miles_apart_public_shop', {'main_category': cat.categoryslug }) }}">{{ cat.categoryname }}</a></h4>
@@ -30,7 +37,13 @@
         
             <div class="small-6 medium-4 large-3 columns text-center shop_category_thumb left">
                 <a href="{{ path('miles_apart_public_shop', {'sub_category': subcategory.categoryslug, 'main_category': category.categoryslug }) }}">
-                    <img class="large-12" src="{{ asset('images/categories/')~subcategory.categoryimagepath }}" class="product_thumbnail_image" alt="{{ subcategory.categoryname}}" />
+                    {% if subcategory.categoryimagepath == null %}
+                        {# Show placeholder image #}
+                        {% set image_path = 'images/web/public-missing-image.jpg' %}
+                    {% else %}
+                        {% set image_path = 'images/web/'~subcategory.categoryimagepath%}
+                    {% endif %}
+                    <img src="{{ image_path|apply_filter('public_product_thumb') }}" class=" small-12 product_thumbnail_image" alt="{{ subcategory.categoryname}}" />
                 </a>
                 <div class="caption">
                     <h4 class="thumbnail_product_name"><a href="{{ path('miles_apart_public_shop', {'sub_category': subcategory.categoryslug, 'main_category': category.categoryslug }) }}">{{ subcategory.categoryname }}</a></h4>
@@ -46,7 +59,14 @@
         {% for specifccategory in category.children %}
             <div class="small-6 medium-4 large-3 columns text-center shop_category_thumb left">
                 <a href="{{ path('miles_apart_public_shop', {'specific_category': specifccategory.categoryslug, 'sub_category': category.categoryslug, 'main_category': category.parent.categoryslug }) }}">
-                    <img class="large-12" src="{{ asset('images/categories/')~specifccategory.categoryimagepath }}" alt="{{ specifccategory.categoryname}}"  />
+                    {% if specifccategory.categoryimagepath == null %}
+                        {# Show placeholder image #}
+                        {% set image_path = 'images/web/public-missing-image.jpg' %}
+                    {% else %}
+                        {% set image_path = 'images/web/'~specifccategory.categoryimagepath%}
+                    {% endif %}
+                    <img src="{{ image_path|apply_filter('public_product_thumb') }}" class=" small-12 product_thumbnail_image" alt="{{ specifccategory.categoryname}}" />
+
                 </a>
                 <div class="caption">
                     <h4 class="thumbnail_category_name"><a href="{{ path('miles_apart_public_shop', {'specific_category': specifccategory.categoryslug, 'sub_category': category.categoryslug, 'main_category': category.parent.categoryslug }) }}">{{ specifccategory.categoryname }}</a></h4>

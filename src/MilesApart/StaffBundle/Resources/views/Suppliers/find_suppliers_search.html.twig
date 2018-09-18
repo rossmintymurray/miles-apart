@@ -53,7 +53,7 @@
 		                <a href="{{ path('staff-suppliers_edit-supplier', { 'id': entity.getId }) }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top"title="Edit">
 		                	<span class="glyphicon glyphicon-pencil"></span>
 		                </a>
-		                <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printAdd({{ entity.getId() }})" >
+		                <a href="#print_address" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Print address label" onclick="printSupplierAdd({{ entity.getId() }})" >
 		                	<span class="glyphicon glyphicon-print"></span>
 		                </a>
 		                <a href="tel:{{ entity.getSupplierPhone() }}" class="table-glyphicon" data-toggle="tooltip" data-placement="top" title="Call">

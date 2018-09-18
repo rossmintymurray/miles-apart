@@ -5,13 +5,70 @@
 *******************************************/
 
 /*******************************************
-* This is the function for printing SUPPLIER ADDRESS
+* This is the function for printing CUSTOMER ADDRESS
 *******************************************/
-function printAdd(supplier_id) {
-	dymo.label.framework.init(printAddPrint(supplier_id));
+function printCustomerAdd(address_id)
+{
+    //Make ajax call to get the supplier details for printing
+    $.ajax({
+        type: "POST",
+        url: globalBaseUrl + "pickpack/get-customer-order-shipping-address",
+        dataType: 'json',
+        data: { address_id : address_id  },
+
+        success: function(data){
+        	//Check if personal or business
+			if(data[0][0].personal_customer_first_name != null) {
+                //Set the address data up each field at a time
+                var printName = data[0][0].personal_customer_first_name + " " + data[0][0].personal_customer_surname;
+            } else {
+                var printName = data[0][0].business_customer_representative_first_name + " Hello " + data[0][0].business_customer_representative_surname;
+
+            }
+            var printAddress1 = data[0][0].customer_address_line_1;
+
+            //Add second line of address only if it exists
+            if (data[0][0].customer_address_line_2) {
+                var printAddress2 = data[0][0].customer_address_line_2;
+            } else {
+                var printAddress2 = null;
+            }
+
+            //Add the remaining address lines
+            var printTown = data[0][0].customer_address_town;
+            var printCounty = data[0][0].customer_address_county;
+            var printPostcode = data[0][0].customer_address_postcode;
+            var printCountry = data[0][0].customer_address_country;
+
+            //Colate fields to address for printing
+            var addressText = printName+'\n'+printAddress1+'\n';
+
+            //Add second line of address if it exists.
+            if (printAddress2 != null) {
+                addressText = addressText + printAddress2+'\n'
+            }
+
+            //Add rest of the address fields
+            addressText = addressText +printTown+'\n'+printCounty+'\n'+printPostcode;
+
+            //If country is not UK, add country.
+            if (printCountry != "UK" && printCountry != null) {
+                addressText = addressText + '\n' + printCountry;
+            }
+
+            dymo.label.framework.init(printAddress(addressText));
+
+        },
+        fail: function() {
+            alert('failed');
+        }
+    });
 }
 
-function printAddPrint(supplier_id)
+/*******************************************
+ * This is the function for printing SUPPLIER ADDRESS
+ *******************************************/
+function printSupplierAdd(supplier_id)
 {
 	//Make ajax call to get the supplier details for printing
 	$.ajax({
@@ -53,15 +110,30 @@ function printAddPrint(supplier_id)
 			if (printCountry != "UK" || (printCountry != "UK" && printCountry != null)) {
 			 	addressText = addressText + printCountry;
 			}
-							  
-			//Set the Dymo template for the label
-			try {
-				// open label
-				var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
+
+            dymo.label.framework.init(printAddress(addressText));
+
+		}, 
+		fail: function() {
+		 	alert('failed');
+		}
+	});
+}
+
+/*******************************************
+ * This is the function for the PRINTING of addresses
+ *******************************************/
+function printAddress(address) {
+//Set the Dymo template for the label
+
+	if(address) {
+        try {
+            // open label
+            var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
 				<DieCutLabel Version="8.0" Units="twips">\
 				<PaperOrientation>Landscape</PaperOrientation>\
 				<Id>Address</Id>\
-				<PaperName>99012 Large Address</PaperName>\
+				<PaperName>99014 Shipping</PaperName>\
 				<DrawCommands/>\
 				<ObjectInfo>\
 				<TextObject>\
@@ -74,53 +146,51 @@ function printAddPrint(supplier_id)
 				<IsVariable>True</IsVariable>\
 				<HorizontalAlignment>Left</HorizontalAlignment>\
 				<VerticalAlignment>Middle</VerticalAlignment>\
-				<TextFitMode>ShrinkToFit</TextFitMode>\
+				<TextFitMode>AlwaysFit</TextFitMode>\
 				<UseFullFontHeight>True</UseFullFontHeight>\
 				<Verticalized>False</Verticalized>\
 				<StyledText/>\
 				</TextObject>\
-				<Bounds X="332" Y="50" Width="4455" Height="2260" />\
+				<Bounds X="202" Y="50" Width="5455" Height="2900" />\
 				</ObjectInfo>\
 				</DieCutLabel>';
 
-				//Create the label object
-				var label = dymo.label.framework.openLabelXml(labelXml);
+            //Create the label object
+            var label = dymo.label.framework.openLabelXml(labelXml);
 
-				// set label text
-				label.setObjectText("Text", addressText);
+            // set label text
+            label.setObjectText("Text", address);
 
-				// select printer to print on
-				// for simplicity sake just use the first LabelWriter printer
-				var printers = dymo.label.framework.getPrinters();
-				if (printers.length == 0) {
-					throw "No DYMO printers are installed. Install DYMO printers.";
-					var printerName = "";
-				}
+            // select printer to print on
+            // for simplicity sake just use the first LabelWriter printer
+            var printers = dymo.label.framework.getPrinters();
+            if (printers.length == 0) {
+                throw "No DYMO printers are installed. Install DYMO printers.";
+                var printerName = "";
+            }
 
-				for (var i = 0; i < printers.length; ++i) {
-				  	var printer = printers[i];
-				  	if (printer.printerType == "LabelWriterPrinter") {
-						printerName = printer.name;
-						break;
-				  	}
-				}
-					 
-				if (printerName == "") {
-					throw "No LabelWriter printers found. Install LabelWriter printer";
-				}
-				
-				// finally print the label
-				label.print(printerName);
-			}
-			catch(e) {
-				alert(e.message || e);
-			}
-		}, 
-		fail: function() {
-		 	alert('failed');
-		}
-	});
+            for (var i = 0; i < printers.length; ++i) {
+                var printer = printers[i];
+                if (printer.printerType == "LabelWriterPrinter") {
+                    printerName = printer.name;
+                    break;
+                }
+            }
+
+            if (printerName == "") {
+                throw "No LabelWriter printers found. Install LabelWriter printer";
+            }
+
+            // finally print the label
+            label.print(printerName);
+        }
+        catch (e) {
+            alert(e.message || e);
+        }
+    }
 }
+
+
 
 /*******************************************
 * This is the function for printing SEASONAL BOX BARCODES

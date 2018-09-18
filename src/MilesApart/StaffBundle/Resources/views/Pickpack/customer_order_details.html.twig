@@ -20,7 +20,10 @@
 		</div>
 		<div class="col-md-4">
 			<div class="well">
-				<h4>Customer</h4>
+				<h4>
+					Customer
+
+				</h4>
 				<h3>
 					<a href="{{ path('staff-customers_view-customer', {'customer_id': order.customer.getId()}) }}">
 						{{ order.customerorderfullname }}
@@ -48,7 +51,18 @@
 
 		<div class="col-md-4">
 			<div class="well">
-				<h4>Postage</h4>
+				<div class="row">
+					<div class="col-sm-9">
+						<h4>Postage</h4>
+					</div>
+					<div class="col-sm-3">
+						<a href="#" class="table-glyphicon btn btn-success col-sm-12" title="Print address label" onclick="printCustomerAdd({{ order.deliveryaddress.id }})" >
+							<span class="glyphicon glyphicon-print"></span>
+						</a>
+					</div>
+				</div>
+
+
 				<h5>Postage Selected</h5>
 				{{ order.deliveryoption.postagetype.postagetypename }} - {{ order.deliveryoption.postageband.postagebandtype.postagebandtypename}} - £{{ order.deliveryoption.postagebandprice }}
 				<h5>Royal Mail details</h5>

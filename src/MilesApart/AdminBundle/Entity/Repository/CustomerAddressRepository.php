@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class CustomerAddressRepository extends EntityRepository
 {
+    public function getCustomerAddressText($address_id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                    SELECT  pc.personal_customer_first_name, pc.personal_customer_surname, bcr.business_customer_representative_first_name, bcr.business_customer_representative_surname, a.customer_address_line_1, a.customer_address_line_2, a.customer_address_town,
+                    a.customer_address_county, a.customer_address_postcode, a.customer_address_country FROM MilesApartAdminBundle:CustomerAddress a
+                    JOIN a.customer c
+                    LEFT JOIN c.business_customer bc
+                    LEFT JOIN bc.business_customer_representative bcr
+                    LEFT JOIN c.personal_customer pc
+                    WHERE a.id = :address_id 
+                    ')
+            ->setParameter('address_id', $address_id)
+        ;
+
+
+        return $query
+            ->getResult();
+    }
 }
