@@ -211,10 +211,11 @@ class AmazonController extends Controller
 $logger = $this->get('logger');
         $logger->info('I just got the logger tr ');
         //Set the new price and the product id
-        $barcode = $response["barcode"];
-        $submitUrl = $response["submitUrl"];
-        $functionName = $response["functionName"];
-        $variablePrepend = $response["variablePrepend"];
+        $barcode = '4005556107308'; //$response["barcode"];
+        $submitUrl = 'http://localhost:8888/Miles-Apart/web/app_dev.php/staff/products/add-stocktake-product/submit'; //$response["submitUrl"];
+        $functionName = 'StocktakeProduct'; //$response["functionName"];
+        $variablePrepend = 'stocktake_product_'; //$response["variablePrepend"];
+        //$logger->info('|' .$barcode . ' - ' . $submitUrl .' - ' . $functionName . ' - ' . $variablePrepend . '|');
         $logger->info('I just got the logger br-- ' . $barcode);
 $logger->info('I just got the logger br ');
         $em = $this->getDoctrine()->getManager();
@@ -226,202 +227,174 @@ $logger->info('I just got the logger dr ');
 
         $logger->info('I just got the logger tr 5555 ');
         //Check if products were found 
-       
         if(count($mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()) > 0) {
             
-            //Product was found so 
-            //Set up the form (using standard product form)
-            //New product action
-            $product = new Product();
+
         
 
             
 $logger->info('I just got the logger tr 235235');
 $logger->info($mwsResponse->getRawXml());
             //Handle the xml data
-            $xml = preg_replace('~(</?|\s)([a-z0-9_]+):~is', '$1$2_', $mwsResponse->getRawXml());
-            $logger->info($xml);
 
-            $xml = new \SimpleXMLElement(stripslashes($xml));
 
-$logger->info('I just got the logger tr 235235');
-            $logger->info($xml);
-            //No fault
-            $body = $xml->xpath("//*[local-name()='GetMatchingProductForIdResponse']");
 
-$logger->info('I just got the logger tr rt5');
-            $allocated = TRUE;
-            $array = json_decode(json_encode($body), TRUE); 
+            //Check if there are multiple products returned
+            if(count($mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()) > 1) {
+                $logger->info('I just got the logger tr got5');
 
-$logger->info('I just got the logger tr rt6');
+                //Multiple products
+                //if(array_key_exists(0, $array[0]['GetMatchingProductForIdResult']['Products'])) {
 
-            //Check if we have single producs or array of products
-            if(array_key_exists('GetMatchingProductForIdResult', $array[0])) {
-$logger->info('I just got the logger tr got1');
-                if(array_key_exists('Products', $array[0]['GetMatchingProductForIdResult'])) {
-$logger->info('I just got the logger tr got2');
-                    if(array_key_exists('Product', $array[0]['GetMatchingProductForIdResult']['Products'])) {
-$logger->info('I just got the logger tr got3');
-                        //if(count($array[0]['GetMatchingProductForIdResult']['Products']) > 1) {
-$logger->info('I just got the logger tr got4');
-                            //if(array_key_exists(0, $array[0]['GetMatchingProductForIdResult']['Products'])) {
-    $logger->info('I just got the logger tr got5');
-    ladybug_dump($array[0]['GetMatchingProductForIdResult']['Products']['Product']);
-                                $amazon_product_array = $array[0]['GetMatchingProductForIdResult']['Products']['Product']['AttributeSets'];
-                                $match = true;
-                                $logger->info('I just got the logger tr got6');
-                            //} else {
-                                //$match = false;
-                            //}
-                        //} else {
-                            //$match = false;
-                        //}
-                    } else {
-                        $match = false;
-                    }
-                } else if(array_key_exists('Product', $array[0]['GetMatchingProductForIdResult'])) {
-                    if(array_key_exists('AttributeSets', $array[0]['GetMatchingProductForIdResult']['Product'])) {
-                        $logger->info('I just got the logger tr got7');
-                        $amazon_product_array = $array[0]['GetMatchingProductForIdResult']['Product']['AttributeSets'];
-                        $match = true;
-                        $logger->info('I just got the logger tr got8');
-                    } else {
-                        $match = false;
-                    }
-                } else {
-                    $logger->info('I just got the logger tr got9');
-                    $match = false;
-                }
+                    $amazon_product_array = $mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()->getProduct()->getAttributeSets();
+                    $match = true;
+                    $logger->info('I just got the logger tr got6');
+
+               // }
+            //Single product returned in response
             } else {
-                $match = FALSE;
-            }
-$logger->info('I just got the logger tr got10');
-            
-            if($match) {
-$logger->info('I just got the logger tr 1');
-                //Asign values returned from Amazon into the form
-                $product->setProductName($amazon_product_array["ns2_ItemAttributes"]['ns2_Title']);
-                $product->setProductBarcode($barcode);
-                $logger->info('I just got the logger tr 12');
-                //Convert height from inches to mm
-                if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Height'])) {
-                    $height_inches = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Height'];
-                    $height_inches = floatval($height_inches);
-                    $height_mm = $height_inches/0.039370;
-                    $product->setProductDepth($height_mm);
-                }
-$logger->info('I just got the logger tr 13');
-                //Convert length from inches to mm
-                if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Length'])) {
-                    $length_inches = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Length'];
-                    $length_inches = floatval($length_inches);
-                    $length_mm = $length_inches/0.039370;
-                    $product->setProductHeight($length_mm);
-                }
-$logger->info('I just got the logger tr 14');
-                //Convert width from inches to mm
-                if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Width'])) {
-                    $width_inches = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Width'];
-                    $width_inches = floatval($width_inches);
-                    $width_mm = $width_inches/0.039370;
-                    $product->setProductWidth($width_mm);
-                }
-$logger->info('I just got the logger tr 15');
 
-                //Convert weight from ounces to grams
-                if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Weight'])) {
-                    $weight_pounds = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Weight'];
-                    $logger->info('I just got the logger tr 1516');
-                    $weight_pounds = floatval($weight_pounds);
-                    $logger->info('I just got the logger tr 1616');
-                    $weight_grams = $weight_pounds/0.0022046;
-                    $logger->info('I just got the logger tr 1716');
-                    $product->setProductWeight($weight_grams);
-                    $logger->info('I just got the logger tr 16');
-                }
-
-                //Check feature exists
-                if(array_key_exists('ns2_Feature', $amazon_product_array["ns2_ItemAttributes"])) {
-                    //Iterate over the featurs, adding each one
-                    if(is_array($amazon_product_array["ns2_ItemAttributes"]["ns2_Feature"])) {
-                        foreach($amazon_product_array["ns2_ItemAttributes"]["ns2_Feature"] as $amazon_feature) {
-                            $logger->info('I just got the logger tr 17');
-                            $product_feature = new ProductFeature();
-                            $product_feature->setProductFeatureText($amazon_feature);
-                            $product_feature->setProduct($product);
-                            $product->addProductFeature($product_feature);
-                            $em->persist($product_feature);
-                            $logger->info('I just got the logger tr 18');
-                        } 
-                    } else {
-                        //If just a single feature
-                        $product_feature = new ProductFeature();
-                        $product_feature->setProductFeatureText($amazon_product_array["ns2_ItemAttributes"]["ns2_Feature"]);
-                        $product_feature->setProduct($product);
-                        $product->addProductFeature($product_feature);
-                        $em->persist($product_feature);
-                        $logger->info('I just got the logger tr 18other');
-                    }
-                }
-
-                //Set the brand
-                //Check if it exists
-                $logger->info('I just got the logger tr 19');
-                if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_Brand'])) {
-                    $logger->info('I just got the logger tr 119');
-                    $brand = $em->getRepository('MilesApartAdminBundle:Brand')->findOneBy(
-                        array( 'brand_name' => $amazon_product_array["ns2_ItemAttributes"]['ns2_Brand'])
-                    );
-                
-                    //Add new brand to tha database
-                    $logger->info('I just got the logger tr 2');
-                    if(!$brand) {
-                        $logger->info('I just got the logger tr 23');
-                        //Create new brand 
-                        $brand = new Brand();
-                        $logger->info('I just got the logger tr 24');
-                        //Set brand name 
-                        $brand->setBrandName($amazon_product_array["ns2_ItemAttributes"]['ns2_Brand']);
-                        $logger->info('I just got the logger tr 26');
-                        //Persist to database 
-                        $em->persist($brand);
-                        $logger->info('I just got the logger tr 27');
-                        $em->flush();
-                        $logger->info('I just got the logger tr 25');
-                    }
-
-                    //Set the product brand
-                    $product->setBrand($brand); 
-                    $logger->info('I just got the logger tr 2');
-                }
-                
-
-                //Create the form 
-                $form = $this->createAmazonProductModalForm($product);
-$logger->info('I just got the logger tr 3');
-                //Return the modal html
-                $html = $this->renderView('MilesApartSellerBundle:Amazon:amazon_product_modal.html.twig', array(
-                    'form'   => $form->createView(),
-                    //'product' => $product,
-                    'submitted' => false,
-                    'mws' => $mwsResponse->getRawXml(),
-                    'image' => $amazon_product_array["ns2_ItemAttributes"]['ns2_SmallImage']['ns2_URL'],
-                    'barcode' => $barcode,
-                    'product_name' => $amazon_product_array["ns2_ItemAttributes"]['ns2_Title'],
-                    'submitUrl' => $submitUrl,
-                    'functionName' => $functionName,
-                    'variablePrepend' => $variablePrepend
-                ));
-            $logger->info('I just got the logger tr 4');
-            } else {
-                
-                $html = false;
-            
+                $logger->info('I just got the logger tr got7');
+                $logger->info('Test');
+                $amazon_product_array = $mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()->getProduct()->getAttributeSets();
+                $match = true;
+                $logger->info('I just got the logger tr got8');
             }
 
         } else {
-            $html = false;
+            $match = false;
         }
+
+
+
+$logger->info('I just got the logger tr got10');
+            
+        if($match) {
+            //Product was found so
+            //Set up the form (using standard product form)
+            //New product action
+            $product = new Product();
+$logger->info('I just got the logger tr 1');
+            //Asign values returned from Amazon into the form
+            $product->setProductName($amazon_product_array["ns2_ItemAttributes"]['ns2_Title']);
+            $product->setProductBarcode($barcode);
+            $logger->info('I just got the logger tr 12');
+            //Convert height from inches to mm
+            if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Height'])) {
+                $height_inches = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Height'];
+                $height_inches = floatval($height_inches);
+                $height_mm = $height_inches/0.039370;
+                $product->setProductDepth($height_mm);
+            }
+$logger->info('I just got the logger tr 13');
+            //Convert length from inches to mm
+            if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Length'])) {
+                $length_inches = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Length'];
+                $length_inches = floatval($length_inches);
+                $length_mm = $length_inches/0.039370;
+                $product->setProductHeight($length_mm);
+            }
+$logger->info('I just got the logger tr 14');
+            //Convert width from inches to mm
+            if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Width'])) {
+                $width_inches = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Width'];
+                $width_inches = floatval($width_inches);
+                $width_mm = $width_inches/0.039370;
+                $product->setProductWidth($width_mm);
+            }
+$logger->info('I just got the logger tr 15');
+
+            //Convert weight from ounces to grams
+            if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Weight'])) {
+                $weight_pounds = $amazon_product_array["ns2_ItemAttributes"]['ns2_PackageDimensions']['ns2_Weight'];
+                $logger->info('I just got the logger tr 1516');
+                $weight_pounds = floatval($weight_pounds);
+                $logger->info('I just got the logger tr 1616');
+                $weight_grams = $weight_pounds/0.0022046;
+                $logger->info('I just got the logger tr 1716');
+                $product->setProductWeight($weight_grams);
+                $logger->info('I just got the logger tr 16');
+            }
+
+            //Check feature exists
+            if(array_key_exists('ns2_Feature', $amazon_product_array["ns2_ItemAttributes"])) {
+                //Iterate over the featurs, adding each one
+                if(is_array($amazon_product_array["ns2_ItemAttributes"]["ns2_Feature"])) {
+                    foreach($amazon_product_array["ns2_ItemAttributes"]["ns2_Feature"] as $amazon_feature) {
+                        $logger->info('I just got the logger tr 17');
+                        $product_feature = new ProductFeature();
+                        $product_feature->setProductFeatureText($amazon_feature);
+                        $product_feature->setProduct($product);
+                        $product->addProductFeature($product_feature);
+                        $em->persist($product_feature);
+                        $logger->info('I just got the logger tr 18');
+                    }
+                } else {
+                    //If just a single feature
+                    $product_feature = new ProductFeature();
+                    $product_feature->setProductFeatureText($amazon_product_array["ns2_ItemAttributes"]["ns2_Feature"]);
+                    $product_feature->setProduct($product);
+                    $product->addProductFeature($product_feature);
+                    $em->persist($product_feature);
+                    $logger->info('I just got the logger tr 18other');
+                }
+            }
+
+            //Set the brand
+            //Check if it exists
+            $logger->info('I just got the logger tr 19');
+            if(isset($amazon_product_array["ns2_ItemAttributes"]['ns2_Brand'])) {
+                $logger->info('I just got the logger tr 119');
+                $brand = $em->getRepository('MilesApartAdminBundle:Brand')->findOneBy(
+                    array( 'brand_name' => $amazon_product_array["ns2_ItemAttributes"]['ns2_Brand'])
+                );
+
+                //Add new brand to tha database
+                $logger->info('I just got the logger tr 2');
+                if(!$brand) {
+                    $logger->info('I just got the logger tr 23');
+                    //Create new brand
+                    $brand = new Brand();
+                    $logger->info('I just got the logger tr 24');
+                    //Set brand name
+                    $brand->setBrandName($amazon_product_array["ns2_ItemAttributes"]['ns2_Brand']);
+                    $logger->info('I just got the logger tr 26');
+                    //Persist to database
+                    $em->persist($brand);
+                    $logger->info('I just got the logger tr 27');
+                    $em->flush();
+                    $logger->info('I just got the logger tr 25');
+                }
+
+                //Set the product brand
+                $product->setBrand($brand);
+                $logger->info('I just got the logger tr 2');
+            }
+
+
+            //Create the form
+            $form = $this->createAmazonProductModalForm($product);
+$logger->info('I just got the logger tr 3');
+            //Return the modal html
+            $html = $this->renderView('MilesApartSellerBundle:Amazon:amazon_product_modal.html.twig', array(
+                'form'   => $form->createView(),
+                //'product' => $product,
+                'submitted' => false,
+                'mws' => $mwsResponse->getRawXml(),
+                'image' => $amazon_product_array["ns2_ItemAttributes"]['ns2_SmallImage']['ns2_URL'],
+                'barcode' => $barcode,
+                'product_name' => $amazon_product_array["ns2_ItemAttributes"]['ns2_Title'],
+                'submitUrl' => $submitUrl,
+                'functionName' => $functionName,
+                'variablePrepend' => $variablePrepend
+            ));
+        $logger->info('I just got the logger tr 4');
+        } else {
+
+            $html = false;
+
+        }
+
 
 
         $response = array("match" => $match, "html" => $html);
