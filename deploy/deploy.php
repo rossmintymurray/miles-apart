@@ -50,8 +50,10 @@ task('deploy:create_image_cache_dir', function () {
     run('mkdir -p {{image_cache_dir}}');
 
     // Set rights
-    run("chmod -R g+w {{image_cache_dir}}");
+    run("sudo chown www-data:www-data {{image_cache_dir}}");
 
+    // Set rights
+    run("chmod -R g+w {{image_cache_dir}}");
 })->desc('Create image cache dir');
 
 desc('Migrate database');
