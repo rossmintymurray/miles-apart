@@ -1,0 +1,29 @@
+{# app/Resources/views/empty_base.html.twig
+
+This is the foundation page for all other PRINT pages on the site #}
+<!DOCTYPE html>
+<html lang="en">
+<!--Create the document head-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+
+    {# Create generic header #}
+    <title>{% block title %} {% endblock %} | Miles Apart | Amesbury &amp; Westbury, Wiltshire</title>
+
+
+    {# Include stylesheets #}
+    {% block stylesheets %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    {# Include content #}
+    {% block empty_content %}
+    {% endblock %}
+
+</body>
+</html>
+
+
