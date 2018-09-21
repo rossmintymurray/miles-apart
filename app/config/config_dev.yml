@@ -9,7 +9,6 @@ framework:
     profiler: { only_exceptions: false }
     session:
             save_path: '/tmp'
-
 web_profiler:
     toolbar: true
     intercept_redirects: false

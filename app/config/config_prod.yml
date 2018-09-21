@@ -5,11 +5,16 @@ imports:
 #    validation:
 #        cache: apc
 
+framework:
+    cookie_lifetime: 86400
+    gc_maxlifetime: 1800
+
 #doctrine:
 #    orm:
 #        metadata_cache_driver: apc
 #        result_cache_driver: apc
 #        query_cache_driver: apc
+
 
 
 monolog:
