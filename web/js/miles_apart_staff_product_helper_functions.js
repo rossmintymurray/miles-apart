@@ -200,64 +200,64 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 			 	var match = false;
 
 			 	//Need to create AJAX call to query the Amazon API with the barcode scanned.
-			 	
+                alert("hi44");
 			 	$.ajax({
 					type: "POST",
 					url: globalBaseUrl + "seller/amazon/product-modal",
 					dataType: 'json',
 					data: { barcode: barcode, submitUrl: submitUrl, functionName: functionName, variablePrepend: variablePrepend },
 					success: function(data){
+                        alert("hi45");
+                        console.log(data);
+                        //alert(data);
 					 	//Check if a match was made
 					 	if(data['match'] == true) {
-					 		//Info needs to be displayed to user with option to import/save date in the MS database
-
+					 		//Info needs to be displayed to user with option to import/save date in the MA database
+alert(data['html']);
 							//Show modal with Amazon product information and allowing this info to be saved ( creating a new product in the MA DB)
 							$("#amazon_product_modal").html(data['html']);
 							$('#amazon_product_modal').modal();
 							match = true;
 					 	} else {
 					 		//Show the red form if there was no match with Amazon
-						 	if(match == false) {
+							//Set up the supplier options.
+							var supplierList = "";
+
+							$.ajax({
+								type: "POST",
+								url: globalBaseUrl + "suppliers/get-suppliers-list",
+								dataType: 'html',
+								data: {  },
+								success: function(secondData){
+									supplierList = secondData;
+
+									if (product_supplier_code != null) {
+										var supplier_code = product_supplier_code;
+									} else {
+										var supplier_code = "Supplier code...";
+									}
 
 
-								//Set up the supplier options.
-								var supplierList = "";
+									//Show the error popup
+									var popupContent = "<span style=\"display:none\" id=\"new_product_barcode\">" + barcode + "</span><div class=\"row\"><div class=\"col-md-3\"><h6>Note</h6><h5>Product not found</h5></div><div class=\"col-xs-12 col-md-6\"><div class=\"row\"><div class=\"col-md-10 col-xs-9\"><h6>Product Name</h6><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_name\" style=\"margin-top:5px\" type=\"text\" value=\"Please type product name...\" onfocus=\"if (this.value == 'Please type product name...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Please type product name...'; this.style.color='#888888';}\"  /></div><div class=\"col-md-2 col-xs-3\"><h6>Qty</h6><h5><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_qty\" type=\"text\" value=\"Qty...\" onfocus=\"if (this.value == 'Qty...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Qty...'; this.style.color='#888888';}\" /></h5></div></div><div class=\"row\"><div class=\"col-md-3 col-xs-6\"><h6>Supplier Code</h6><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_supplier_code\" style=\"margin-top:5px\" type=\"text\" value=\"" + supplier_code + "\" onfocus=\"if (this.value == 'Supplier code...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Supplier code...'; this.style.color='#888888';}\"  /></div><div class=\"col-md-3 col-xs-6\"><h6>Price</h6><h5><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_price\" type=\"text\" value=\"Price...\" onfocus=\"if (this.value == 'Price...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Price...'; this.style.color='#888888';}\" /></h5></div><div class=\"col-md-6 col-xs-12 xs_clear\"><h6>Supplier</h6><h5><select class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#333333;\" id=\"new_product_supplier\"><option>Select one...</option>" + supplierList + "</select></h5></div></div></div><div class=\"col-md-2 col-md-offset-1\"><a href=\"#\" class=\"btn btn-default col-md-12 col-xs-12\" style=\"margin-top:10px\" onclick=\"newProductListProduct('" + submitUrl + "', '" + functionName + "', '" + variablePrepend + "')\">Add Product</a></div></div>";
 
-								$.ajax({
-									type: "POST",
-									url: globalBaseUrl + "suppliers/get-suppliers-list",
-									dataType: 'html',
-									data: {  },
-									success: function(secondData){
-									 	supplierList = secondData;
-									 
-									 	if (product_supplier_code != null) {
-											var supplier_code = product_supplier_code;
-									 	} else {
-											var supplier_code = "Supplier code...";
-									 	}
-									 
+									$("#popup_form_response_content").html(popupContent);
+									//if ($("#popup_form_response").css('background-color') == 'rgba(113, 160, 30, .9)') {
+										$('#popup_form_response').animate({backgroundColor: 'rgba(219, 41, 37, .97)'}, 500);
+									//}
+									$("#popup_form_response").slideDown('slow');
 
-									  	//Show the error popup
-									  	var popupContent = "<span style=\"display:none\" id=\"new_product_barcode\">" + barcode + "</span><div class=\"row\"><div class=\"col-md-3\"><h6>Note</h6><h5>Product not found</h5></div><div class=\"col-xs-12 col-md-6\"><div class=\"row\"><div class=\"col-md-10 col-xs-9\"><h6>Product Name</h6><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_name\" style=\"margin-top:5px\" type=\"text\" value=\"Please type product name...\" onfocus=\"if (this.value == 'Please type product name...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Please type product name...'; this.style.color='#888888';}\"  /></div><div class=\"col-md-2 col-xs-3\"><h6>Qty</h6><h5><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_qty\" type=\"text\" value=\"Qty...\" onfocus=\"if (this.value == 'Qty...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Qty...'; this.style.color='#888888';}\" /></h5></div></div><div class=\"row\"><div class=\"col-md-3 col-xs-6\"><h6>Supplier Code</h6><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_supplier_code\" style=\"margin-top:5px\" type=\"text\" value=\"" + supplier_code + "\" onfocus=\"if (this.value == 'Supplier code...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Supplier code...'; this.style.color='#888888';}\"  /></div><div class=\"col-md-3 col-xs-6\"><h6>Price</h6><h5><input class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#888888\" id=\"new_product_price\" type=\"text\" value=\"Price...\" onfocus=\"if (this.value == 'Price...') {this.value = ''; this.style.color='#333333'}\" onblur=\"if (this.value == '') {this.value = 'Price...'; this.style.color='#888888';}\" /></h5></div><div class=\"col-md-6 col-xs-12 xs_clear\"><h6>Supplier</h6><h5><select class=\"col-md-12 col-xs-12 form-control\"  style=\"color:#333333;\" id=\"new_product_supplier\"><option>Select one...</option>" + supplierList + "</select></h5></div></div></div><div class=\"col-md-2 col-md-offset-1\"><a href=\"#\" class=\"btn btn-default col-md-12 col-xs-12\" style=\"margin-top:10px\" onclick=\"newProductListProduct('" + submitUrl + "', '" + functionName + "', '" + variablePrepend + "')\">Add Product</a></div></div>";
-									  
-									  	$("#popup_form_response_content").html(popupContent);
-									  	//if ($("#popup_form_response").css('background-color') == 'rgba(113, 160, 30, .9)') {
-										 	$('#popup_form_response').animate({backgroundColor: 'rgba(219, 41, 37, .97)'}, 500);
-									  	//}
-									  	$("#popup_form_response").slideDown('slow');
-									
-									  
 
-									}, 
 
-								  	fail: function() {
-									 	alert('Ajax supplier list failed');
-								  	}
+								},
 
-								});
-							}
-					 	}	
+								fail: function() {
+									alert('Ajax supplier list failed');
+								}
+
+							});
+						}
+
 	
 					}, 
 

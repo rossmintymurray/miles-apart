@@ -196,7 +196,8 @@ class AmazonController extends Controller
         ));
     }
 
- //Get the Product for any given barcode
+
+    //Get the Product for any given barcode
     public function amazonproductmodalAction(Request $request)
     {
         $match = false;
@@ -208,66 +209,102 @@ class AmazonController extends Controller
 
             $response = "false";
         }
-$logger = $this->get('logger');
+        $logger = $this->get('logger');
         $logger->info('I just got the logger tr ');
         //Set the new price and the product id
-        $barcode = '4005556107308'; //$response["barcode"];
-        $submitUrl = 'http://localhost:8888/Miles-Apart/web/app_dev.php/staff/products/add-stocktake-product/submit'; //$response["submitUrl"];
-        $functionName = 'StocktakeProduct'; //$response["functionName"];
-        $variablePrepend = 'stocktake_product_'; //$response["variablePrepend"];
-        //$logger->info('|' .$barcode . ' - ' . $submitUrl .' - ' . $functionName . ' - ' . $variablePrepend . '|');
+        $barcode = $response["barcode"];
+        $submitUrl = $response["submitUrl"];
+        $functionName = $response["functionName"];
+        $variablePrepend = $response["variablePrepend"];
         $logger->info('I just got the logger br-- ' . $barcode);
-$logger->info('I just got the logger br ');
+        $logger->info('I just got the logger br ');
         $em = $this->getDoctrine()->getManager();
         $mwsClientPoolUk = $this->container->get('caponica_mws_client_pool_uk');
         $logger->info('I just got the logger cr ');
         $mwsProductClientPackUk = $mwsClientPoolUk->getProductClientPack();
-$logger->info('I just got the logger dr ');
+        $logger->info('I just got the logger dr ');
         $mwsResponse = $mwsProductClientPackUk->callGetMatchingProductForId('EAN', $barcode);
 
         $logger->info('I just got the logger tr 5555 ');
-        //Check if products were found 
+        //Check if products were found
+
         if(count($mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()) > 0) {
-            
 
-        
+            //Product was found so
+            //Set up the form (using standard product form)
+            //New product action
+            $product = new Product();
 
-            
-$logger->info('I just got the logger tr 235235');
-$logger->info($mwsResponse->getRawXml());
+
+            $logger->info('I just got the logger tr 235235');
+            $logger->info($mwsResponse->getRawXml());
             //Handle the xml data
+            $xml = preg_replace('~(</?|\s)([a-z0-9_]+):~is', '$1$2_', $mwsResponse->getRawXml());
+            $logger->info($xml);
 
+            $xml = new \SimpleXMLElement(stripslashes($xml));
 
+            $logger->info('I just got the logger tr 235235');
+            $logger->info($xml);
+            //No fault
+            $body = $xml->xpath("//*[local-name()='GetMatchingProductForIdResponse']");
 
-            //Check if there are multiple products returned
-            if(count($mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()) > 1) {
-                $logger->info('I just got the logger tr got5');
+            $logger->info('I just got the logger tr rt5');
+            $allocated = TRUE;
+            $array = json_decode(json_encode($body), TRUE);
 
-                //Multiple products
-                //if(array_key_exists(0, $array[0]['GetMatchingProductForIdResult']['Products'])) {
+            $logger->info('I just got the logger tr rt6');
 
-                    $amazon_product_array = $mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()->getProduct()->getAttributeSets();
-                    $match = true;
-                    $logger->info('I just got the logger tr got6');
+            //Check if we have single producs or array of products
+            if (array_key_exists('GetMatchingProductForIdResult', $array[0])) {
+                if (array_key_exists('Products', $array[0]['GetMatchingProductForIdResult'])) {
+                    if (array_key_exists('Product', $array[0]['GetMatchingProductForIdResult']['Products'])) {
 
-               // }
-            //Single product returned in response
+                        //There is only ONE product
+                        if (array_key_exists('AttributeSets', $array[0]['GetMatchingProductForIdResult']['Products']['Product'])) {
+
+                            $logger->info('I just got the logger tr got7');
+                            $amazon_product_array = $array[0]['GetMatchingProductForIdResult']['Products']['Product']['AttributeSets'];
+                            $match = true;
+                            $logger->info('I just got the logger tr got8');
+
+                            //if multiple products have been matched
+                        } else {
+
+                            //Use the ruturned product with the most attributes
+                            $product_key = null;
+                            $highest = null;
+                            foreach ($array[0]['GetMatchingProductForIdResult']['Products']['Product'] as $key => $value) {
+                                //Check if the key has been set
+                                if ($highest) {
+                                    if (count($value['AttributeSets']['ns2_ItemAttributes']) > $highest) {
+                                        $product_key = $key;
+                                        $highest = count($value['AttributeSets']['ns2_ItemAttributes']);
+                                    }
+                                } else {
+                                    $product_key = $key;
+                                    $highest = count($value['AttributeSets']['ns2_ItemAttributes']);
+                                }
+                            }
+
+                            if(array_key_exists('AttributeSets', $array[0]['GetMatchingProductForIdResult']['Products']['Product'][$product_key])) {
+                                //Get the Attributes from the amazon XML response
+                                $amazon_product_array = $array[0]['GetMatchingProductForIdResult']['Products']['Product'][$product_key]['AttributeSets'];
+                                $match = true;
+                            } else {
+                                $match = false;
+                            }
+                        }
+                    } else {
+                        $match = false;
+                    }
+                } else {
+                    $match = false;
+                }
             } else {
-
-                $logger->info('I just got the logger tr got7');
-                $logger->info('Test');
-                $amazon_product_array = $mwsResponse->getGetMatchingProductForIdResult()[0]->getProducts()->getProduct()->getAttributeSets();
-                $match = true;
-                $logger->info('I just got the logger tr got8');
+                $match = false;
             }
-
-        } else {
-            $match = false;
         }
-
-
-
-$logger->info('I just got the logger tr got10');
             
         if($match) {
             //Product was found so
@@ -392,16 +429,13 @@ $logger->info('I just got the logger tr 3');
         } else {
 
             $html = false;
-
+            $match = false;
         }
+        $logger->info('I just got the logger tr 5');
+        $response = array("match" => true, "html" => $html);
+        $logger->info('I just got the logger tr 6667');
 
-
-
-        $response = array("match" => $match, "html" => $html);
-        
-        return new JsonResponse(
-                    $response 
-                );
+        return new JsonResponse( $response);
     
     }
 
