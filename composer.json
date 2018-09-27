@@ -49,7 +49,8 @@
         "caponica/amazon-mws-bundle": "dev-master",
         "jms/serializer-bundle": "2.0.0",
         "excelwebzone/recaptcha-bundle": "1.4.0",
-        "symfony/var-dumper": "3.0.0"
+        "symfony/var-dumper": "3.0.0",
+        "backup-manager/symfony": "1.1"
 
 
     },

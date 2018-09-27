@@ -322,3 +322,18 @@ ewz_recaptcha:
     locale_key:  %kernel.default_locale%
     enabled: true
 
+#Database backup configuration
+bm_backup_manager:
+    database:
+        production:
+            type: mysql
+            host: %database_host%
+            port: %database_port%
+            user: %database_user%
+            pass: %database_password%
+            database: %database_name%
+
+    storage:
+        local:
+            type: Local
+            root: /home/milesapart/automated_tasks/database_backups
