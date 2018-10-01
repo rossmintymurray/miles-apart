@@ -323,17 +323,26 @@ ewz_recaptcha:
     enabled: true
 
 #Database backup configuration
-bm_backup_manager:
-    database:
-        production:
-            type: mysql
-            host: %database_host%
-            port: %database_port%
-            user: %database_user%
-            pass: %database_password%
-            database: %database_name%
-
-    storage:
+dizda_cloud_backup:
+    # By default backup files will have your servers hostname as prefix
+    # such as: hostname_2014-01-01_21-08-39.tar
+    output_file_prefix: hostname
+    timeout: 300
+    restore: false # Set to true to enable restore command
+    processor:
+        type: tar # Required: tar|zip|7z
+        options:
+            compression_ratio: 6
+    cloud_storages:
+        # Local storage definition
         local:
-            type: Local
-            root: /home/milesapart/automated_tasks/database_backups
+            path: /Users/rossmurray/Projects/miles-apart # Required
+    databases:
+
+        mysql:
+            all_databases: false # Only required when no database is set
+            database: %database_name%          # Required if all_databases is false
+            db_host: %database_host%   # This, and following is not required and if not specified, the bundle will take ORM configuration in parameters.yml
+            db_port: %database_port%           # Default 3306
+            db_user: %database_user%
+            db_password: %database_password%
