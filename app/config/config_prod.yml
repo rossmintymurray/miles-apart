@@ -5,7 +5,7 @@ imports:
 #    validation:
 #        cache: apc
 
-framework:
+session:
     cookie_lifetime: 86400
     gc_maxlifetime: 1800
 
