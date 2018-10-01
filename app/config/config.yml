@@ -326,7 +326,7 @@ ewz_recaptcha:
 dizda_cloud_backup:
     # By default backup files will have your servers hostname as prefix
     # such as: hostname_2014-01-01_21-08-39.tar
-    output_file_prefix: hostname
+    output_file_prefix: %database_name%
     timeout: 300
     restore: false # Set to true to enable restore command
     processor:
@@ -336,7 +336,7 @@ dizda_cloud_backup:
     cloud_storages:
         # Local storage definition
         local:
-            path: /Users/rossmurray/Projects/miles-apart # Required
+            path: %database_backup_path%  # Required
     databases:
 
         mysql:

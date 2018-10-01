@@ -6,6 +6,7 @@ parameters:
     database_name: miles_apart_live
     database_user: milesapart
     database_password: Kfui6freShail4ap
+    database_backup_path: /home/milesapart/automated_tasks/database_backups
     mailer_transport: smtp
     mailer_host: smtp.miles-apart.com
     mailer_port: 25
