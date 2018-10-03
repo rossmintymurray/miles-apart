@@ -156,7 +156,7 @@ class PageController extends Controller
         return $this->render('MilesApartPublicBundle:Page:faqs.html.twig');
     }
 
-    public function loginorregisterAction($registration_form = null)
+    public function loginorregisterAction($registration_form = true)
     {
         //Set up the breadcrumb
         $breadcrumbs = $this->get("white_october_breadcrumbs");
