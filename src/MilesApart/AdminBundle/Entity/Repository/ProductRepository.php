@@ -207,7 +207,7 @@ class ProductRepository extends EntityRepository
         $query = "SELECT p FROM MilesApartAdminBundle:Product p  
              JOIN p.category c 
              JOIN p.product_price pp
-             JOIN p.attribute_value av 
+             LEFT JOIN p.attribute_value av 
              LEFT JOIN p.keyword k
              WHERE";
 
