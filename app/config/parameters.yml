@@ -7,6 +7,10 @@ parameters:
     database_user: milesapart
     database_password: Kfui6freShail4ap
     database_backup_path: /home/milesapart/automated_tasks/database_backups
+    braintree_environment: 'sandbox'
+    braintree_merchant: '6rtb49mww88mnjgd'
+    braintree_public_key: 'xqf4rg4m3cz6nxvr'
+    braintree_private_key: 'b690d1a1fcf18783a0a3672b8d1c7c6b'
     mailer_transport: smtp
     mailer_host: smtp.miles-apart.com
     mailer_port: 25

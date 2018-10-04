@@ -632,11 +632,11 @@ class CheckoutController extends Controller
         require_once('./braintree-php-3.16.0/lib/Braintree.php'); 
 
         //Set up Braintree
-        \Braintree_Configuration::environment('sandbox');
-        \Braintree_Configuration::merchantId('6mb2mcgm9nxnqfv4');
-        \Braintree_Configuration::publicKey('q2hpnvsyk6r5ztx3');
-        \Braintree_Configuration::privateKey('85b7ea604b309de7e0c8401c9e2b3df3');
-
+        \Braintree_Configuration::environment($this->container->getParameter('braintree_environment'));
+        \Braintree_Configuration::merchantId($this->container->getParameter('braintree_merchant'));
+        \Braintree_Configuration::publicKey($this->container->getParameter('braintree_public_key'));
+        \Braintree_Configuration::privateKey($this->container->getParameter('braintree_private_key'));
+        
         //Generate the client token
         $clientToken = \Braintree_ClientToken::generate();
 

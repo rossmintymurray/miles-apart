@@ -3,6 +3,10 @@ parameters:
     database_name: miles_apart_dev
     database_host: 127.0.0.1
     database_backup_path: /Users/rossmurray/Projects/miles-apart
+    braintree_environment: 'sandbox'
+    braintree_merchant: '6mb2mcgm9nxnqfv4'
+    braintree_public_key: 'q2hpnvsyk6r5ztx3'
+    braintree_private_key: '85b7ea604b309de7e0c8401c9e2b3df3'
     httpProtocol: http
     royal_mail_api_endpoint: https://api.royalmail.net/shipping/v2
     royal_mail_api_application_id: RMG-API-G-01
