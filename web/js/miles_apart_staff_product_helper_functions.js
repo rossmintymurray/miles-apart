@@ -200,20 +200,17 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 			 	var match = false;
 
 			 	//Need to create AJAX call to query the Amazon API with the barcode scanned.
-                alert("hi44");
 			 	$.ajax({
 					type: "POST",
 					url: globalBaseUrl + "seller/amazon/product-modal",
 					dataType: 'json',
 					data: { barcode: barcode, submitUrl: submitUrl, functionName: functionName, variablePrepend: variablePrepend },
 					success: function(data){
-                        alert("hi45");
-                        console.log(data);
+
                         //alert(data);
 					 	//Check if a match was made
 					 	if(data['match'] == true) {
 					 		//Info needs to be displayed to user with option to import/save date in the MA database
-alert(data['html']);
 							//Show modal with Amazon product information and allowing this info to be saved ( creating a new product in the MA DB)
 							$("#amazon_product_modal").html(data['html']);
 							$('#amazon_product_modal').modal();
