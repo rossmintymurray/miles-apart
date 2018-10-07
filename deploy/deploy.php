@@ -54,6 +54,8 @@ task('deploy:create_image_cache_dir', function () {
 
     // Set rights
     run("sudo chown www-data:www-data {{image_cache_dir}}");
+    run("sudo chown -R www-data:www-data {{release_path}}/web/media");
+    run("sudo chown -R www-data:www-data {{release_path}}/web/images/products");
 
 
 })->desc('Create image cache dir');
