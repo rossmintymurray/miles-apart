@@ -3023,7 +3023,8 @@ $logger->info('I just got the logger tr 4');
 
         
         $basename = $name .$increment . '.' . $extension;
-       
+
+        $basename = str_replace(' ', '_', $basename);
 
          $file = $uploadedFile->move($directory, $basename);
          $logger->info($file);
