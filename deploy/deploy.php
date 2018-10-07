@@ -57,6 +57,11 @@ task('deploy:create_image_cache_dir', function () {
     run("sudo chown -R www-data:www-data {{release_path}}/web/media");
     run("sudo chown -R www-data:www-data {{release_path}}/web/images/products");
 
+    //Move images from existing release to new one
+    run("sudo cp -r {{ current_path }}/web/media {{ release_path }}/web/media");
+    run("sudo cp -r {{ current_path }}/web/images {{ release_path }}/web/images");
+
+
 
 })->desc('Create image cache dir');
 
