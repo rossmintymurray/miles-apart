@@ -729,21 +729,25 @@ class FinancesController extends Controller
         //Start the session
         $session = new Session();
 
+
         //Check if period start date and end date have been set.
         if ($session->has('start_date') && $session->has('end_date')) {
 
+            //$session->remove('start_date');
+            //$session->remove('end_date');
+
             //Use the session dates for search query.
-            $default_start_date = Date('y-m-d', strtotime($session->get('start_date')));
-            $default_end_date = Date('y-m-d', strtotime($session->get('end_date')));
+            $default_start_date = $session->get('start_date');
+            $default_end_date = $session->get('end_date');
 
             //Default start date to be 30 prior to todays date
            //$default_start_date = Date('y-m-d', strtotime("-30 days"));
-           
+
             //$default_end_date = date('y-m-d');
 
-            //$default_start_date = Date('2016-09-01');
-           
-            //$default_end_date = date('2016-09-30');
+            //$default_start_date = Date('2017-09-01');
+
+            //$default_end_date = date('2017-09-30');
 
         //Get current month and use these dates.
        } else {

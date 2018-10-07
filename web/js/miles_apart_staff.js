@@ -244,6 +244,23 @@ function submitDatePickerSelections(dates) {
   var start_date = dates[0];
   var end_date = dates[1];
 
+	/*alert(dates[0]);
+	var partsOfStr = dates[0].split(',');
+	alert(partsOfStr[0]);
+	var firstDate = partsOfStr[0].substring(0, s.indexOf('('));
+	var secondDate = partsOfStr[1].substring(0, s.indexOf('('));
+	*/
+
+	start_date = Date.parse(start_date);
+    var newDate = new Date();
+    newDate.setTime(start_date);
+    start_date = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
+
+	end_date = Date.parse(end_date);
+    var newDate = new Date();
+    newDate.setTime(end_date);
+    end_date = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
+
   //Check if compare is set.
   if ($('input.compare').is(':checked')) {
 	 var compare_start_date = $('#comparestartdatepicker').val();
