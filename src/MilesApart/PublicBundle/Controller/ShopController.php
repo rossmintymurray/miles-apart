@@ -73,10 +73,14 @@ class ShopController extends Controller
             //Set the three tier variables for slug and name.
             $specific_category_name = $category->getCategoryName();
             $specific_category_slug = $category->getCategorySlug();
+            $specific_category_description = $category->getCategoryDescription();
             $sub_category_name = $category->getParent()->getCategoryName();
             $sub_category_slug = $category->getParent()->getCategorySlug();
+            $sub_category_description = $category->getParent()->getCategoryDescription();
             $main_category_name = $category->getParent()->getParent()->getCategoryName();
             $main_category_slug = $category->getParent()->getParent()->getCategorySlug();
+            $main_category_description = $category->getParent()->getParent()->getCategoryDescription();
+
             
 
             // Add pages to breadcrumb.
@@ -98,10 +102,13 @@ class ShopController extends Controller
             //Set the main and sub category, reducing the parent level
             $specific_category_name = null;
             $specific_category_slug = null;
+            $specific_category_description = null;
             $sub_category_name = $category->getCategoryName();
             $sub_category_slug = $category->getCategorySlug();
+            $sub_category_description = $category->getCategoryDescription();
             $main_category_name = $category->getParent()->getCategoryName();
             $main_category_slug = $category->getParent()->getCategorySlug();
+            $main_category_description = $category->getParent()->getCategoryDescription();
             
 
             // Add pages to breadcrumb.
@@ -117,10 +124,13 @@ class ShopController extends Controller
 
             $specific_category_name = null;
             $specific_category_slug = null;
+            $specific_category_description = null;
             $sub_category_name = null;
             $sub_category_slug = null;
+            $sub_category_description = null;
             $main_category_name = $category->getCategoryName();
             $main_category_slug = $category->getCategorySlug();
+            $main_category_description = $category->getCategoryDescription();
 
             // Add pages to breadcrumb.
             $breadcrumbs->addItem("Homepage", $this->get("router")->generate("miles_apart_public_homepage"));
@@ -134,10 +144,13 @@ class ShopController extends Controller
 
             $specific_category_name = null;
             $specific_category_slug = null;
+            $specific_category_description = null;
             $sub_category_name = null;
             $sub_category_slug = null;
+            $sub_category_description = null;
             $main_category_name = null;
             $main_category_slug = null;
+            $main_category_description = null;
 
             // Add pages to breadcrumb.
             $breadcrumbs->addItem("Homepage", $this->get("router")->generate("miles_apart_public_homepage"));
@@ -158,6 +171,10 @@ class ShopController extends Controller
                 'specific_category_name'=>$specific_category_name,
                 'sub_category_name'=>$sub_category_name,
                 'main_category_name'=>$main_category_name,
+
+                'specific_category_description'=>$specific_category_description,
+                'sub_category_description'=>$sub_category_description,
+                'main_category_description'=>$main_category_description,
     	  		
                 'level'=> $level,
                 'products' => $products,

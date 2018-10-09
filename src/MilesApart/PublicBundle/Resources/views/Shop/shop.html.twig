@@ -3,29 +3,36 @@
 
 {# Create the page title for HTML title tag #}
 {% block page_title %}
-    Shop - 
     {# Check the level and show category levels accordingly #}
     {% if main_category_name is not null %}
         {{ main_category_name }} 
     {% endif %}
 
-    {% if sub_category_name is not null %}
-        - {{ sub_category_name }} 
-    {% else %}
-        - All
+    {% if sub_category_name is not null and specific_category_name is null%}
+        - {{ sub_category_name }}
     {% endif %}
 
     {% if specific_category_name is not null %}
-        - {{ specific_category_name }} 
-    {% else %}
-        - All
+        - {{ specific_category_name }}
     {% endif %}
 
 {% endblock %}
 
+{# Create the meta description #}
+{% block meta_description %}
+    {% if specific_category_description %}
+        {{ specific_category_description }}
+    {% elseif sub_category_description %}
+        {{ sub_category_description }}
+    {% elseif main_category_description %}
+        {{ main_category_description }}
+    {% else %}
+        Miles Apart Online Shop
+    {% endif %}
+{% endblock %}
+
 {% if current_page is not defined %}
   {% set current_page = 'shop' %}
-
 {% endif %}
 
 

@@ -12,6 +12,9 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        {# Create the meta tags that will be populated by the page content when loaded #}
+        <meta name="description" content="{% block meta_description %}{% endblock %}" />
+
         {# Create generic header , 'page_title' will change with each page, 'homepage_title' will add the address but only on the homepage #}
         <title>
             {% block page_title %} Thousands of things for your hobbies, garden and home {% endblock %} | Miles Apart 
