@@ -27,11 +27,11 @@
                             {% endif %}
 
                             {# Delete search string iof it is set when the user selects the search #}
-                            onfocus="if (this.value == '{{ search_string }}') {this.value = ''; this.style.color='#333333'}" onblur="if (this.value == '') {this.value = '{{ search_string }}'; this.style.color='#333333';}"
+                            onblur="if (this.value == '') {this.value = '{{ search_string }}'; this.style.color='#333333';}"
                             />
                         </div>
                         <div class="small-2 columns">
-                            <a href="#" type="submit" class="button postfix search-bar-button"></a>
+                            <input type="submit" class="button postfix search-bar-button" value=""/>
                         </div>
                     </div>
                 </form>
