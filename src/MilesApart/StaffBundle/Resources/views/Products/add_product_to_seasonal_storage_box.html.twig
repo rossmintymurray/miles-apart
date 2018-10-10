@@ -18,6 +18,10 @@
 	Add Product to Seasonal Storage Box
 {% endblock %}
 
+{% block page_title %}
+    Add Product to Seasonal Storage Box
+{% endblock %}
+
 {% block header_right_content %}
 	<button class="btn btn-default col-md-12 col-xs-12" onclick="window.history.back()" >Back to box selection</button>
     <button class="btn btn-default col-md-12 col-xs-12" onclick="emptySeasonalStorageBox('{{ seasonal_storage_box.getSeasonalStorageBoxCode }}')" >Empty Box</button>

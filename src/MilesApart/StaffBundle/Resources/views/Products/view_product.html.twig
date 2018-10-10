@@ -59,6 +59,10 @@
     View Product
 {% endblock %}
 
+{% block page_title %}
+    View Product
+{% endblock %}
+
 {% block header_right_content %}
     <div class="btn-group" style="float:right;margin-top:20px">
       <button class="btn btn-default" type="button">
@@ -81,8 +85,8 @@
       <li role="presentation"><a href="#seo" role="tab" data-toggle="tab">SEO</a></li>
       <li role="presentation"><a href="#price" role="tab" data-toggle="tab">Price</a></li>
       <li role="presentation"><a href="#categories" role="tab" data-toggle="tab">Categories</a></li>
-      <li role="presentation"><a href="#attributes_features" role="tab" data-toggle="tab">Attributes &amp; Features</a></li>
-      <li role="presentation"><a href="#associations" role="tab" data-toggle="tab">Associations</a></li>
+      <li role="presentation"><a href="#attributes_features" role="tab" data-toggle="tab">Attr. &amp; Features</a></li>
+      <li role="presentation"><a href="#associations" role="tab" data-toggle="tab">Assocs.</a></li>
       <li role="presentation"><a href="#images" role="tab" data-toggle="tab">Images</a></li>
       <li role="presentation"><a href="#order_history" role="tab" data-toggle="tab">Order History</a></li>
       <li role="presentation"><a href="#inventory" role="tab" data-toggle="tab">Inventory</a></li>
@@ -91,7 +95,7 @@
 
     </ul>
 
-    <div id="daily_takes_ajax_content">{# Create the tab panes to be hidden and shown #}
+    <div id="daily_takes_ajax_content" style="margin-top:20px">{# Create the tab panes to be hidden and shown #}
         
         {{ form_start(form) }}
             {{ form_errors(form) }}

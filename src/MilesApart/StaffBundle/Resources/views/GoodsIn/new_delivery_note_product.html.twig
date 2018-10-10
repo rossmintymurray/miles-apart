@@ -16,6 +16,10 @@
     Book in delivery
 {% endblock %}
 
+{% block page_title %}
+    Book in delivery
+{% endblock %}
+
 {% block header_right_content %}
 
     <a class="btn btn-default btn-sm col-md-12 col-xs-12 success-colour" href="{{ path('staff-goods-in_complete_delivery_note', {'supplier_delivery_id': supplier_delivery_id }) }}" role="button">

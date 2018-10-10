@@ -10,6 +10,10 @@
     {{ transfer_request.getBusinessPremises.getBusinessPremisesName }} - {{ transfer_request.getTransferRequestDateCreated|date ("D M Y") }} - TR {{ transfer_request.id }}
 {% endblock %}
 
+{% block page_title %}
+    {{ transfer_request.getBusinessPremises.getBusinessPremisesName }} - {{ transfer_request.getTransferRequestDateCreated|date ("D M Y") }} - TR {{ transfer_request.id }}
+{% endblock %}
+
 {# Set the dynamic content for this template #}
 {% block page_content %}
     
