@@ -195,7 +195,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
-                
+               'label' => false,
                 
             ))
 
@@ -213,7 +213,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
-                
+                'label' => false,
             ));
 
          //Set up product image form
@@ -228,7 +228,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
-                
+                'label' => false,
                 
             ));
 
@@ -324,7 +324,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
-                
+                'label' => false,
                 
             ));
             
@@ -340,6 +340,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
+                'label' => false,
                 
                 
             ));
@@ -450,7 +451,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
-                
+                'label' => false,
                 
             ));
 
@@ -466,7 +467,7 @@ class EditProductType extends AbstractType
                 'options'       => array(
                     'label'         => false,
                 ),
-                
+                'label' => false,
                 
             ));
 

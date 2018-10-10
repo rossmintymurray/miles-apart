@@ -15,10 +15,6 @@ class EditProductKeywordType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    
-
-        
-
             $builder
             ->add('keyword_word', null, array(
                 'attr' => array(

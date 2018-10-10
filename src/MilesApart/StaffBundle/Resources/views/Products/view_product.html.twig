@@ -100,9 +100,7 @@
         {{ form_start(form) }}
             {{ form_errors(form) }}
 
-        <fieldset>
-            {{ form_row(form.submit) }}
-        </fieldset>
+
 
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="overview">
@@ -343,7 +341,7 @@
                         <div class="well">
                             
 
-                            <form action="{{ path('staff-products_view-product_image-upload', {id: product.id}) }}" method="post" class="dropzone">
+                            <form action="{{ path('staff-products_view-product_image-upload', {id: product.id}) }}" method="post" id="product-image-upload-dropzone" class="dropzone">
                                 <div class="fallback">
                                     <input name="file" type="file" multiple />
                                 </div>
@@ -357,6 +355,45 @@
                 <div class="row edit_product_panel">
                     <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
                         <p>To view the occasions this product has been previously ordered.</p>
+
+                        <table class="table table-striped small existing_products" id="product_order_history">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            {% set total_value = 0 %}
+                            {% set total_qty = 0 %}
+                            {% for customer_order_product in product.getCustomerOrderProduct %}
+
+                                <tr>
+                                    <td>{{ customer_order_product.getId }}</td>
+                                    <td>{{ customer_order_product.getCustomerOrderProductDateCreated|date('d-m-Y') }}</td>
+                                    <td>£{{ customer_order_product.getCustomerOrderProductPrice }}</td>
+                                    <td>{{ customer_order_product.getCustomerOrderProductQuantity }}</td>
+                                    <td>£{{ customer_order_product.getCustomerOrderProductPrice * customer_order_product.getCustomerOrderProductQuantity }}</td>
+                                </tr>
+
+                                {% set total_value = total_value + customer_order_product.getCustomerOrderProductPrice * customer_order_product.getCustomerOrderProductQuantity %}
+                                {% set total_qty = total_qty + customer_order_product.getCustomerOrderProductQuantity %}
+
+                            {% endfor %}
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"><b>Totals</b></td>
+                                <td><b>{{ total_qty }}</b></td>
+                                <td><b>£{{ total_value }}</b></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -544,6 +581,9 @@
                     </div>
                 </div>
             </div>
+            <fieldset style="margin-top:20px">
+                {{ form_row(form.submit) }}
+            </fieldset>
 {{ form_rest(form) }}
     
     {{ form_end(form) }}
@@ -559,4 +599,41 @@
 
 {% block javascripts %}
      <script src="{{ asset('js/dropzone.js') }}" type="text/javascript"></script>
+     <script type="text/javascript">
+          Dropzone.options.productImageUploadDropzone = {
+               init: function() {
+                   this.on("success", function(file) {
+                       //Redirect to the view product page - image tab (so the image just added can be edited).
+                       location.reload();
+                   });
+               }
+          };
+    </script>
+
+       {# Function to load specified tab by the url hash #}
+     <script type="text/javascript">
+
+        {# Function to load specified tab by the url hash #}
+         $(function(){
+             var hash = window.location.hash;
+             hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+             $('.nav-tabs a').click(function (e) {
+                 $(this).tab('show');
+                 var scrollmem = $('body').scrollTop();
+                 window.location.hash = this.hash;
+                 $('html,body').scrollTop(scrollmem);
+             });
+         });
+
+        {# Function to select a category when default category is selected #}
+        $( "#milesapart_staffbundle_newproduct_product_default_category" ).change(function() {
+
+            $("#milesapart_staffbundle_newproduct_category").val(this.value);
+        });
+
+     </script>
+
+
+
 {% endblock %}
