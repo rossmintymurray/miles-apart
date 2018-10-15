@@ -2476,18 +2476,16 @@ class Product
      */
     public function getProductMainImagePath()
     {
+        $product_main_image_path = FALSE;
+
         if (count($this->getProductImage()) > 0) {
-           
             foreach($this->getProductImage() as $key => $value) {
-                if($value->getProductImageIsMain() == true){
+                if ($value->getProductImageIsMain() == true) {
                     $product_main_image_path = $value->getProductImagePath();
                 }
             }
-
-            return $product_main_image_path;
-        } else {
-            return false;
         }
+        return $product_main_image_path;
     }
 
 
