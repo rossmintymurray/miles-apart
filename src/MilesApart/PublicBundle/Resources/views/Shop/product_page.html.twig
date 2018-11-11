@@ -231,10 +231,10 @@
                 <div class="small-12 columns">
 
                     <ul class="tabs show-for-medium-up"  data-tab>
-                        <li class="tab-title active"><a href="#panel1">Product Information</a></li>
+                        <li class="tab-title active"><a href="#panel1">Information</a></li>
                         <li class="tab-title"><a href="#panel2">Questions <sup><span class="info round label">{{ entity.getAnsweredProductQuestion|default([])|length }}</span></sup></a></li>
                         <li class="tab-title"><a href="#panel3">Reviews <sup><span class="info round label">{{ entity.getApprovedProductReview|default([])|length }}</span></sup></a></li>
-                        <li class="tab-title"><a href="#panel4">Returns</a></li>
+                        <li class="tab-title"><a href="#panel4">Delivery &amp; Returns</a></li>
                         <li class="tab-title"><a href="#panel5">Brand</a></li>
                     </ul>
 
@@ -297,6 +297,9 @@
                                                 {% endif %}
                                             </div>
                                         {% endfor %}
+
+                                    {% else %}
+                                        <p>There are currently no questions for this product.</p>
                                     {% endif %}
 
                                     <div class="clearfix"></div>
