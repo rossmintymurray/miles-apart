@@ -48,7 +48,7 @@ parameters:
     httpProtocol: https
     royal_mail_api_endpoint: https://api.royalmail.net/shipping/v2
     royal_mail_api_application_id: RMG-API-G-01
-    royal_mail_api_client_id: dcf0b455-acc6-49cf-9699-f90d239b49e0
-    royal_mail_api_client_secret: oY4xI3bS3dG4wA3aL4sT6bL3dG0uK5kX2iM2jL4vB8bJ2jC2nW
+    royal_mail_api_client_id: 6ced703f-f943-4b9e-a13c-2b6ce06c4cd2
+    royal_mail_api_client_secret: jP6qA4oI3xK0bY0pK2uW8iC0vS5lJ1wY7uT2bA0xC0tK7jP0aU
     royal_mail_api_username: milesapart_9000460333API
     royal_mail_api_password: Password2014!
