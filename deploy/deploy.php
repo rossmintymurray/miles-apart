@@ -61,10 +61,6 @@ task('deploy:create_image_cache_dir', function () {
     run("sudo chown -R www-data:www-data {{release_path}}/web/media");
     run("sudo chown -R www-data:www-data {{release_path}}/web/images/products");
 
-
-
-
-
 })->desc('Create image cache dir');
 
 desc('Migrate database');
