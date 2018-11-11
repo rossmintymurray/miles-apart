@@ -88,7 +88,7 @@ class ProductReviewType extends AbstractType
                 'attr' => array(
                     'type'=> 'integer'),
                 'label_attr'=> array('class'=>''),
-                'label'=>'Rating',
+                'label'=>'Rating (out of 5)',
                 'required'  => true,
 
             ));
