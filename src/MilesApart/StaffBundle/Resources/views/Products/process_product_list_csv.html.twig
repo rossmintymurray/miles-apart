@@ -75,7 +75,19 @@
                 </li>
 
             </ul>
+
+            <h3>Custom Attributes</h3>
+            <p>Create custom attributes and drag to their respective columns.</p>
+            <form name="custom_attributes_form" id="custom_attributes_form" class="form-inline">
+                <input class="form-control" type="text" id="custom_attribute_input" />
+                <input class="btn btn-default" type="submit" value="Add" />
+            </form>
+
+            <ul class="list-inline csv_mapping_list csv_mapping_list_custom" id="custom_attributes_container">
+            </ul>
+
         </div>
+
         <div class="col-md-5 col-sm-6 col-xs-6">
             <h2>Details</h2>
             <h4><small>Supplier name:</small><br /> {{ supplier.suppliername }}</h4>
@@ -101,8 +113,8 @@
                         {% for header in headers|keys %}
 
                                 
-                                <th class="droppable" id="{{ header }}">
-                                    {{ header }}
+                                <th class="droppable" id="{{ header|replace({' ': '_'})|replace({'(': '_'})|replace({')': '_'}) }}">
+                                    {{ header|replace({'(': '_'})|replace({')': '_'}) }}
                                 </th>
                         {% endfor %}
                     </tr>
@@ -128,5 +140,20 @@
 {% endblock %}
 
 {% block javascripts %}
-    
+    <script type="text/javascript">
+        //Handle the custom attributes and draggable creation
+
+        $("form[name='custom_attributes_form']").submit(function(e){
+            e.preventDefault(); //prevent submit
+
+            var customAttribute = $("#custom_attribute_input").val();
+            var customAttributeId = customAttribute.replace(/\s+/g, '_').toLowerCase();
+            //Call the serverr code and return the formatted table from in html
+            $("#custom_attributes_container").html('<li class="draggable3 ui-draggable ui-draggable-handle" id="' + customAttributeId + '">' + customAttribute + '</li>');
+
+            initialiseDraggable();
+
+        });
+
+    </script>
 {% endblock %}
