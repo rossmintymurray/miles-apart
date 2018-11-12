@@ -61,6 +61,9 @@ task('deploy:create_image_cache_dir', function () {
     run("sudo chown -R www-data:www-data {{release_path}}/web/media");
     run("sudo chown -R www-data:www-data {{release_path}}/web/images/products");
 
+    // Set rights on upload folder for CSV product imports
+    run("sudo chown www-data:www-data {{release_path}}/web/product-list-uploads");
+
 })->desc('Create image cache dir');
 
 desc('Migrate database');
