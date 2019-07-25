@@ -780,7 +780,7 @@ $logger->info('I just got the logger add update oemail');
         //Update other channels
         //Amazon
         //Send the array to Amazon Upload script
-        if(count($customer_order->getCustomerOrderProduct()) > 1) {
+        /*if(count($customer_order->getCustomerOrderProduct()) > 1) {
             $amazon_response = $this->forward('MilesApartSellerBundle:Amazon:uploadAmazonMultipleProductNewQty', array(
                 'customer_order_products'  => $customer_order->getCustomerOrderProduct(),
             
@@ -790,7 +790,7 @@ $logger->info('I just got the logger add update oemail');
                 'customer_order_product'  => $customer_order->getCustomerOrderProduct()[0],
             
             ));
-        }
+        }*/
         
         
         //Unset basket and customer order session
