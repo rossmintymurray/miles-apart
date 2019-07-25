@@ -88,6 +88,7 @@ swiftmailer:
             username:  %system_mailer_user%
             password:  %system_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
             
         customersupport_mailer:
@@ -96,6 +97,7 @@ swiftmailer:
             username:  %customersupport_mailer_user%
             password:  %customersupport_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
 
         marketing_mailer:
@@ -104,6 +106,7 @@ swiftmailer:
             username:  %system_mailer_user%
             password:  %system_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
 
         weborders_mailer:
@@ -112,6 +115,7 @@ swiftmailer:
             username:  %weborders_mailer_user%
             password:  %weborders_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
 
         useraccounts_mailer:
@@ -120,6 +124,7 @@ swiftmailer:
             username:  %system_mailer_user%
             password:  %system_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
 
         system_mailer:
@@ -128,6 +133,7 @@ swiftmailer:
             username:  %system_mailer_user%
             password:  %system_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
 
         purchaseorders_mailer:
@@ -136,6 +142,7 @@ swiftmailer:
             username:  %system_mailer_user%
             password:  %system_mailer_password%
             port:      %mailer_port%
+            encryption:      %mailer_encryption%
             logging:   "%kernel.debug%"
 
 #Breadcrumb set up

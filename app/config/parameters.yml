@@ -12,15 +12,15 @@ parameters:
     braintree_public_key: 'xm6h7s6wdp99862s'
     braintree_private_key: '77ba380d4d15ac8fa013c7e2d06c738b'
     mailer_transport: smtp
-    mailer_host: email-smtp.us-west-2.amazonaws.com
-    mailer_port: 465
+    mailer_host: email-smtp.eu-west-1.amazonaws.com
+    mailer_port: 587
     mailer_encryption: tls
-    customersupport_mailer_user: AKIAYD5A76PYH4VVDUVX
-    customersupport_mailer_password: BF5/ew1vcfIK/RYTiET+986PehU24cpzIfYL8HWNzzKH
-    weborders_mailer_user: AKIAYD5A76PYH4VVDUVX
-    weborders_mailer_password: BF5/ew1vcfIK/RYTiET+986PehU24cpzIfYL8HWNzzKH
-    system_mailer_user: AKIAYD5A76PYH4VVDUVX
-    system_mailer_password: BF5/ew1vcfIK/RYTiET+986PehU24cpzIfYL8HWNzzKH
+    customersupport_mailer_user: AKIAYD5A76PYH3MSSWER
+    customersupport_mailer_password: "BIz55HuGDHs/EShxkXqrnNLEHwXEXKe9P3G5+qibXf8o"
+    weborders_mailer_user: AKIAYD5A76PYH3MSSWER
+    weborders_mailer_password: "BIz55HuGDHs/EShxkXqrnNLEHwXEXKe9P3G5+qibXf8o"
+    system_mailer_user: AKIAYD5A76PYH3MSSWER
+    system_mailer_password: "BIz55HuGDHs/EShxkXqrnNLEHwXEXKe9P3G5+qibXf8o"
     locale: en
     secret: Kfui6freShail4ap
     amazon: false
