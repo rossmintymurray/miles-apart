@@ -85,8 +85,8 @@ swiftmailer:
         webmaster_mailer:
             transport: %mailer_transport%
             host:      %mailer_host%
-            username:  %webmaster_mailer_user%
-            password:  %webmaster_mailer_password%
+            username:  %system_mailer_user%
+            password:  %system_mailer_password%
             port:      %mailer_port%
             logging:   "%kernel.debug%"
             
@@ -101,8 +101,8 @@ swiftmailer:
         marketing_mailer:
             transport: %mailer_transport%
             host:      %mailer_host%
-            username:  %marketing_mailer_user%
-            password:  %marketing_mailer_password%
+            username:  %system_mailer_user%
+            password:  %system_mailer_password%
             port:      %mailer_port%
             logging:   "%kernel.debug%"
 
@@ -117,8 +117,8 @@ swiftmailer:
         useraccounts_mailer:
             transport: %mailer_transport%
             host:      %mailer_host%
-            username:  %useraccounts_mailer_user%
-            password:  %useraccounts_mailer_password%
+            username:  %system_mailer_user%
+            password:  %system_mailer_password%
             port:      %mailer_port%
             logging:   "%kernel.debug%"
 
@@ -133,8 +133,8 @@ swiftmailer:
         purchaseorders_mailer:
             transport: %mailer_transport%
             host:      %mailer_host%
-            username:  %purchaseorders_mailer_user%
-            password:  %purchaseorders_mailer_password%
+            username:  %system_mailer_user%
+            password:  %system_mailer_password%
             port:      %mailer_port%
             logging:   "%kernel.debug%"
 
