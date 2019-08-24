@@ -11,3 +11,5 @@
 /web/cache
 /web/images
 /web/media
+/web/product-list-uploads
+/.idea
