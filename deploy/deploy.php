@@ -44,7 +44,7 @@ task('deploy:create_image_cache_dir', function () {
     set('image_cache_dir', '{{release_path}}/web/cache');
 
     // Remove cache dir if it exist
-    run('if [ -d "{{image_cache_dir}}" ]; then sudo rm -rf {{image_cache_dir}}; fi');
+    ///run('if [ -d "{{image_cache_dir}}" ]; then sudo rm -rf {{image_cache_dir}}; fi');
 
     // Create cache dir
     run('mkdir -p {{image_cache_dir}}');
