@@ -26,7 +26,7 @@
 			            {% set colour_number = 1 %} 
 			            {# Get the main categories and display #}
 						{% for entity in navigation_categories %}
-						    {% if entity.categorytype.categorytypename is sameas ("Main") %}
+						    {% if entity.categorytype.categorytypename is sameas ("Main") and (entity.categoryslug == 'jigsaw-puzzles' or entity.categoryslug == 'toys-models') %}
 						    	{# Show the main category item #}
 						    	<li class="has-dropdown {% if entity.categoryslug == main_cat_slug %}active{% endif %}"><a href="{{ path('miles_apart_public_shop', { 'main_category': entity.CategorySlug }) }}" data-toggle="dropdown" class="dropdown-toggle colour_{{ colour_number }}">{{ entity.categoryname }}</a>
 						    		{% set colour_number = colour_number + 1 %}
