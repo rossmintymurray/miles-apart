@@ -19,6 +19,8 @@ set('app/console', function () {
 set('bin_dir', 'app');
 set('var_dir', 'app');
 
+set('default_timeout', null);
+
 /**
  * Create cache dir
  */
@@ -56,13 +58,22 @@ task('deploy:create_image_cache_dir', function () {
     run("sudo chown www-data:www-data {{image_cache_dir}}");
 
     //Move images from existing release to new one
-    run('if [ -d "{{previous_release}}" ]; then sudo cp -r {{ previous_release }}/web/media {{ release_path }}/web/media');
-    run('if [ -d "{{previous_release}}" ]; thensudo cp -r {{ previous_release }}/web/images {{ release_path }}/web/images');
+    if (has('previous_release')) {
+	    run('sudo cp -r {{ previous_release }}/web/media {{ release_path }}/web/media');
+    	    run('sudo cp -r {{ previous_release }}/web/images {{ release_path }}/web/images');
+    } else {
+	run('mkdir {{ release_path }}/web/media');
+        run('mkdir {{ release_path }}/web/images');
+        run('mkdir {{ release_path }}/web/images/products'); 
+    }
     run("sudo chown -R www-data:www-data {{release_path}}/web/media");
-    run("sudo chown -R www-data:www-data {{release_path}}/web/images/products");
+    run("sudo chown -R www-data:www-data {{release_path}}/web/images");
+    run("sudo chmod -R 770 {{release_path}}/web/media");
+    run("sudo chmod -R 770 {{release_path}}/web/images");
 
     // Set rights on upload folder for CSV product imports
-    run("sudo chown www-data:www-data {{release_path}}/web/product-list-uploads");
+    run("sudo chown -R www-data:www-data {{release_path}}/web/product-list-uploads");
+    run("sudo chmod -R 770 {{release_path}}/web/product-list-uploads");
 
 })->desc('Create image cache dir');
 
