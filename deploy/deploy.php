@@ -44,7 +44,7 @@ task('deploy:create_image_cache_dir', function () {
     set('image_cache_dir', '{{release_path}}/web/cache');
 
     // Remove cache dir if it exist
-    ///run('if [ -d "{{image_cache_dir}}" ]; then sudo rm -rf {{image_cache_dir}}; fi');
+    run('if [ -d "{{image_cache_dir}}" ]; then sudo rm -rf {{image_cache_dir}}; fi');
 
     // Create cache dir
     run('mkdir -p {{image_cache_dir}}');
@@ -56,8 +56,8 @@ task('deploy:create_image_cache_dir', function () {
     run("sudo chown www-data:www-data {{image_cache_dir}}");
 
     //Move images from existing release to new one
-    run("sudo cp -r {{ previous_release }}/web/media {{ release_path }}/web/media");
-    run("sudo cp -r {{ previous_release }}/web/images {{ release_path }}/web/images");
+    run('if [ -d "{{previous_release}}" ]; then sudo cp -r {{ previous_release }}/web/media {{ release_path }}/web/media');
+    run('if [ -d "{{previous_release}}" ]; thensudo cp -r {{ previous_release }}/web/images {{ release_path }}/web/images');
     run("sudo chown -R www-data:www-data {{release_path}}/web/media");
     run("sudo chown -R www-data:www-data {{release_path}}/web/images/products");
 
