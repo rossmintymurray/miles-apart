@@ -8,8 +8,8 @@
     },
     "require": {
         "php": "7.2.*",
-        "symfony/symfony": "2.7.0",
-        "symfony/debug": "2.4.0",
+        "symfony/symfony": "2.8.52",
+        "symfony/debug": "2.8.52",
         "doctrine/orm": "2.4.8",
         "doctrine/doctrine-bundle": "1.2.0",
         "doctrine/inflector": "1.0.1",
@@ -49,7 +49,6 @@
         "caponica/amazon-mws-bundle": "dev-master",
         "jms/serializer-bundle": "2.0.0",
         "excelwebzone/recaptcha-bundle": "1.4.0",
-        "symfony/var-dumper": "3.0.0",
         "dizda/cloud-backup-bundle": "3.5"
 
 

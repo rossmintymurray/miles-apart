@@ -9,7 +9,7 @@ use Pagerfanta\Pagerfanta;
 use MilesApart\AdminBundle\Entity\ProductImage;
 
 
-class IPNsController extends Controller
+class IPNController extends Controller
 {
     public function ipncallAction()
     {

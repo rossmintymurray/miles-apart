@@ -44,3 +44,5 @@ parameters:
     royal_mail_api_client_secret: jP6qA4oI3xK0bY0pK2uW8iC0vS5lJ1wY7uT2bA0xC0tK7jP0aU
     royal_mail_api_username: milesapart_9000460333API
     royal_mail_api_password: Password2014!
+    session.storage.options:
+      cache_limiter: 0
