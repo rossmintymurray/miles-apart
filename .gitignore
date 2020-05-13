@@ -9,7 +9,7 @@
 /bin/
 /composer.phar
 /web/cache
-/web/images
+/web/images/products
 /web/media
 /web/product-list-uploads
 /.idea
