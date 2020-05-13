@@ -125,3 +125,6 @@ task('deploy', [
 ]);
 
 after('deploy', 'success');
+
+// if deploy fails automatically unlock.
+after('deploy:failed', 'deploy:unlock');
