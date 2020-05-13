@@ -59,13 +59,14 @@ task('deploy:create_image_cache_dir', function () {
 
     //Move images from existing release to new one
     if (has('previous_release')) {
-	    run('sudo cp -r {{ previous_release }}/web/media {{ release_path }}/web/media');
-    	    run('sudo cp -r {{ previous_release }}/web/images {{ release_path }}/web/images');
+        run('sudo cp -r {{ previous_release }}/web/images/products {{ release_path }}/web/images/products');
     } else {
-	run('mkdir {{ release_path }}/web/media');
-        run('mkdir {{ release_path }}/web/images');
         run('mkdir {{ release_path }}/web/images/products'); 
     }
+
+    //Make image cache dir
+    run('mkdir {{ release_path }}/web/media');
+
     run("sudo chown -R www-data:www-data {{release_path}}/web/media");
     run("sudo chown -R www-data:www-data {{release_path}}/web/images");
     run("sudo chmod -R 770 {{release_path}}/web/media");
