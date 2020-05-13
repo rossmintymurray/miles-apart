@@ -2,10 +2,10 @@
 parameters:
     database_driver: pdo_mysql
     database_host: localhost
-    database_port: '8889'
+    database_port: '3306'
     database_name: miles_apart_live
     database_user: milesapart
-    database_password: Kfui6freShail4ap
+    database_password: o7hF5CdlobYTr2Xx4MwWHzlz
     database_backup_path: /home/milesapart/automated_tasks/database_backups
     braintree_environment: 'production'
     braintree_merchant: 'nr8rvbvj7bzsw88r'

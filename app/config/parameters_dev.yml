@@ -2,6 +2,7 @@
 parameters:
     database_name: miles_apart_dev_live
     database_host: 127.0.0.1
+    database_port: '8889'
     database_user: root
     database_password: root
     database_backup_path: /Users/rossmurray/Projects/miles-apart
