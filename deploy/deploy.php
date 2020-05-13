@@ -105,6 +105,7 @@ task('deploy:server:restart', function () {
 
 desc('Deploy project');
 task('deploy', [
+    'deploy:unlock',
     'deploy:info',
     'deploy:prepare',
     'deploy:lock',
