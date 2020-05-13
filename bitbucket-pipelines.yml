@@ -5,6 +5,8 @@ pipelines:
     branches:
         miles_apart_test:
             - step:
+                caches:
+                  - composer
                 script:
                     - apt-get update
                     - apt-get --assume-yes install curl git -y
@@ -19,6 +21,8 @@ pipelines:
                 deployment: test
         miles_apart_live:
             - step:
+                caches:
+                  - composer
                 script:
                     - apt-get update
                     - apt-get --assume-yes install curl git -y
