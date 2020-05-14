@@ -48,7 +48,7 @@ set('target', function () {
 /**
  * Configuration
  */
-set('keep_releases', 5);
+set('keep_releases', 3);
 set('repository', ''); // Repository to deploy.
 set('shared_dirs', []);
 set('shared_files', []);
