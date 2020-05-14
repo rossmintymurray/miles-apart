@@ -41,7 +41,9 @@ task('deploy:create_cache_dir', function () {
 /**
  * Delete old cache folder to save space on server
  */
-run('sudo rm -rf {{ previous_release }}/app/cache/*');
+if (has('previous_release')) {
+    run('sudo rm -rf {{ previous_release }}/app/cache/*');
+}
 
 /**
  * Create image cache dir
