@@ -9,6 +9,8 @@ set('repository', 'git@bitbucket.org:rossmintymurray/miles_apart.git');
 set('shared_dirs', ['app/logs']);
 set('writable_dirs', ['app/cache', 'app/logs']);
 
+set('keep_releases', 3);
+
 // Servers
 inventory('./deploy/servers.yml');
 
@@ -93,7 +95,7 @@ task('deploy:cache:clear', function () {
     if (has('previous_release')) {
         run('sudo rm -rf {{ previous_release }}/app/cache/*');
     }
-    
+
     run('{{app/console}} cache:clear --no-warmup');
 });
 
