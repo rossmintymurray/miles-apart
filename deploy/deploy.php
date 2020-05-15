@@ -38,12 +38,7 @@ task('deploy:create_cache_dir', function () {
     run("chmod -R g+w {{cache_dir}}");
 })->desc('Create cache dir');
 
-/**
- * Delete old cache folder to save space on server
- */
-if (has('previous_release')) {
-    run('sudo rm -rf {{ previous_release }}/app/cache/*');
-}
+
 
 /**
  * Create image cache dir
@@ -92,6 +87,13 @@ task('database:migrate', function () {
 
 desc('Clear cache');
 task('deploy:cache:clear', function () {
+    /**
+     * Delete old cache folder to save space on server
+     */
+    if (has('previous_release')) {
+        run('sudo rm -rf {{ previous_release }}/app/cache/*');
+    }
+    
     run('{{app/console}} cache:clear --no-warmup');
 });
 
