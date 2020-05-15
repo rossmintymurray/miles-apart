@@ -787,7 +787,7 @@ $logger->info('I just got the logger add update price 4');
         $entity->upload();
         $supplier = $entity->getSupplier();
         $session = new Session();
-            $session->set('csvSupplier', $supplier);
+        $session->set('csvSupplier', $supplier);
         $csvFilePath = 'product-list-uploads/' . $entity->getProductListCSVFilePath();
 
         $csvArray = $this->newcsvimport($request, $csvFilePath);
@@ -805,27 +805,10 @@ $logger->info('I just got the logger add update price 4');
 
     public function newcsvimport(Request $request, $csvFilePath)
     {
-        
-            
 
         // Create and configure the reader
         $file = new \SplFileObject($csvFilePath);
         $csvReader = new CsvReader($file);
-        
-
-        /*$csvReader = new ArrayReader(array(
-            'products' => array(
-                0 => array(
-                    'name' => 'some name',
-                    'price' => '€12,16',
-                ),
-                1 => array(
-                    'name' => 'some name',
-                    'price' => '€12,16',
-                )
-            ))
-        );
-        */
 
         // Tell the reader that the first row in the CSV file contains column headers
         $csvReader->setHeaderRowNumber(0);
@@ -837,12 +820,6 @@ $logger->info('I just got the logger add update price 4');
 
         $arrayWriter = new ArrayWriter($csvArray);
         $workflow->addWriter($arrayWriter);
-
-        /*$file = new \SplFileObject('test/output.csv', 'w');
-        $writer = new CsvWriter($file);
-        $workflow->addWriter($writer);
-        */
-        
 
         // Process the workflow
         $upload = $workflow->process();
@@ -973,10 +950,7 @@ $logger->info('I just got the logger add update price 4');
             $product = new Product();
             
             $repository = $em->getRepository('MilesApartAdminBundle:Product');
-        
-            $logger = $this->get('logger');
-                
-                $logger->info('I just got the logger m 0');
+
             try {
             /*////////////Barcode////////////*/
             //Check if barcode exists
@@ -1063,11 +1037,7 @@ $logger->info('I just got the logger add update price 4');
                     //Add to printout (for testing)
                     $printout .= "does exist" .$value;
 
-
                 }
-                $logger = $this->get('logger');
-                
-                $logger->info('I just got the logger tr 0');
 
                 //Check if the product name is a duplicate (within csv file)
                 /*if(!in_array($csvArray2[$row]['product_name'], $records) && $toAdd) {
@@ -1075,18 +1045,15 @@ $logger->info('I just got the logger add update price 4');
                 } else {
                     $csvArray2[$row]['product_name'] = $csvArray2[$row]['product_name'] . " - Dupe " .$row;
                 }*/
-                $logger->info('I just got the logger tr 1');
-                
-                
+
             //If name does not exist
             } else {
-                $logger->info('I just got the logger tr no name');
-            $printout .= "Name is not selected";
+                $printout .= "Name is not selected";
             }
 
         }  catch (Exception $e) {
-            $logger->info('I just got the logger tr no fail'. $printout);
-        $printout .= "Product name fail";
+
+            $printout .= "Product name fail";
         }
              
         try {
@@ -1139,7 +1106,7 @@ $logger->info('I just got the logger add update price 4');
 
             //Check if toAdd is true and add to database.
             if($toAdd) {
-                $logger->info('I just got the logger tr 2');
+
                 try {
                    $em = $this->getDoctrine()->getManager();
                     $product = new Product();
@@ -1210,22 +1177,20 @@ $logger->info('I just got the logger add update price 4');
 
             //Else, if the product is in the DB, check for new data that can be added to the DB (toAdd is false)
             } else { 
-                $logger->info('I just got the logger exit 1');
+
                 //Check that the barcode matches, only then add new data to the row. 
                 if($barcode_match == true) {
-                    $logger->info('I just got the logger exit 2');
-                    
+
                     //Check if the cost has changed, if so add new cost to db
                     //Find the cost for this product from the db
                     //Check the importing cost is not null
                     if ($import_product_cost != NULL) {
-                        $logger->info('I just got the logger exit 21');
                         
                         //Ceck if the existing cost is null
                         if ($existing_product[0]->getCurrentCost() != null) {
-                            $logger->info('I just got the logger exit 23');
+
                             if($existing_product[0]->getCurrentCost() != $import_product_cost) {
-                                $logger->info('I just got the logger exit 3');
+
                                 //Create new cost in DB
                                 $new_cost = new ProductCost();
                                 $new_cost->setProductCostValue($import_product_cost);
@@ -1242,7 +1207,6 @@ $logger->info('I just got the logger add update price 4');
 
                         //Existing product has no cost assigned so add the new one
                         } else {
-                            $logger->info('I just got the logger exit 23 null');
 
                             //Create new product cost
                             $new_cost = new ProductCost();
@@ -1257,17 +1221,13 @@ $logger->info('I just got the logger add update price 4');
                             $change = true;
                         }
                     }
-                    
-                    $logger->info('I just got the logger exit 34');
+
                     //Check if the inner barcode has changed, if so add new barcode to db
                     //Make sure the barcode is not null or empty
-                    $logger->info(var_dump($csvArray2));
                     if(isset($csvArray2[$row]['product_inner_barcode']) && $csvArray2[$row]['product_inner_barcode'] != "") {
-                        $logger->info('I just got the logger exit 4');
                     
                         //Find the inner barcode for this product from the db
                         if ($existing_product[0]->getProductInnerBarcode() != $csvArray2[$row]['product_inner_barcode']) {
-                            $logger->info('I just got the logger exit 455');
                             //Set the new barcode in the db.
                             $existing_product[0]->setProductInnerBarcode($csvArray2[$row]['product_inner_barcode']);
 
@@ -1279,11 +1239,10 @@ $logger->info('I just got the logger add update price 4');
                             $change = true;
                         }
                     }
-                    $logger->info('I just got the logger exit 45');
                     //Check if the outer barcode has changed, if so add new cost to db
                     //Make sure the barcode is not null or empty
                     if(isset($csvArray2[$row]['product_outer_barcode']) && $csvArray2[$row]['product_outer_barcode'] != "") {
-                        $logger->info('I just got the logger exit 5');
+
                         //Find the outer barcode for this product from the db
                         if ($existing_product[0]->getProductOuterBarcode() != $csvArray2[$row]['product_outer_barcode']) {
                            
@@ -1298,11 +1257,11 @@ $logger->info('I just got the logger add update price 4');
                             $change = true;
                         }
                     }
-                    $logger->info('I just got the logger exit 56');
+
                     //Check if the inner quantity has changed, if so add new cost to db
                     //Make sure the quantity is not null or empty
                     if(isset($csvArray2[$row]['product_inner_quantity']) && $csvArray2[$row]['product_inner_quantity'] != "") {
-                        $logger->info('I just got the logger exit 6');
+
                         //Find the inner quantity for this product from the db
                         if ($existing_product[0]->getProductInnerQuantity() != $csvArray2[$row]['product_inner_quantity']) {
                            
@@ -1317,11 +1276,10 @@ $logger->info('I just got the logger add update price 4');
                             $change = true;
                         }
                     }
-                    $logger->info('I just got the logger exit 67');
                     //Check if the outer quantity has changed, if so add new cost to db
                     //Make sure the quantity is not null or empty
                     if(isset($csvArray2[$row]['product_outer_quantity']) && $csvArray2[$row]['product_outer_quantity'] != "") {
-                        $logger->info('I just got the logger exit 7');
+
                         //Find the outer quantity for this product from the db
                         if ($existing_product[0]->getProductOuterQuantity() != $csvArray2[$row]['product_outer_quantity']) {
                            
@@ -1337,11 +1295,11 @@ $logger->info('I just got the logger add update price 4');
                         }
                     }
 
-                    $logger->info('I just got the logger exit 78');
+
                     //Check if the weight has changed, if so add new cost to db
                     //Make sure the weight is not null or empty
                     if(isset($csvArray2[$row]['product_weight']) && $csvArray2[$row]['product_weight'] != "") {
-                        $logger->info('I just got the logger exit 8');
+
                         //Find the weight for this product from the db
                         if ($existing_product[0]->getProductWeight() != $csvArray2[$row]['product_weight']) {
                            
@@ -1356,11 +1314,11 @@ $logger->info('I just got the logger add update price 4');
                             $change = true;
                         }
                     }
-                    $logger->info('I just got the logger exit 89');
+
                     //Check if the height has changed, if so add new cost to db
                     //Make sure the height is not null or empty
                     if(isset($csvArray2[$row]['product_height']) && $csvArray2[$row]['product_height'] != "") {
-                        $logger->info('I just got the logger exit 9');
+
                         //Find the height for this product from the db
                         if ($existing_product[0]->getProductHeight() != $csvArray2[$row]['product_height']) {
                            
@@ -1376,11 +1334,11 @@ $logger->info('I just got the logger add update price 4');
                         }
                     }
 
-                    $logger->info('I just got the logger exit 910');
+
                     //Check if the depth has changed, if so add new cost to db
                     //Make sure the height is not null or empty
                     if(isset($csvArray2[$row]['product_depth']) && $csvArray2[$row]['product_depth'] != "") {
-                        $logger->info('I just got the logger exit 10');
+
                         //Find the depth for this product from the db
                         if ($existing_product[0]->getProductDepth() != $csvArray2[$row]['product_depth']) {
                            
@@ -1396,11 +1354,10 @@ $logger->info('I just got the logger add update price 4');
                         }
                     }
 
-                    $logger->info('I just got the logger exit 1011');
                     //Check if the width has changed, if so add new cost to db
                     //Make sure the width is not null or empty
                     if(isset($csvArray2[$row]['product_width']) && $csvArray2[$row]['product_width'] != "") {
-                        $logger->info('I just got the logger exit 11');
+
                         //Find the width for this product from the db
                         if ($existing_product[0]->getProductWidth() != $csvArray2[$row]['product_width']) {
                            
@@ -1416,11 +1373,10 @@ $logger->info('I just got the logger add update price 4');
                         }
                     }
 
-                    $logger->info('I just got the logger exit 1112');
                     //Check if the product pack quantity has changed, if so add new cost to db
                     //Make sure the product pack quantity is not null or empty
                     if(isset($csvArray2[$row]['product_pack_quantity']) && $csvArray2[$row]['product_pack_quantity'] != "") {
-                        $logger->info('I just got the logger exit 12');
+
                         //Find the product pack quantity for this product from the db
                         if ($existing_product[0]->getProductPackQuantity() != $csvArray2[$row]['product_pack_quantity']) {
                            
@@ -1440,26 +1396,19 @@ $logger->info('I just got the logger add update price 4');
 
                 //End of barcode match if
                 }
-                $logger->info('I just got the logger exit 13');
                 ++$notAdded ;
-            
-
-
-
             }
             /*////////////Price/cost////////////*/
 
             //For each duplicate remove from array and put into duplicates array
             $printout .= "Test";
-            $logger->info('I just got the logger exit 14');
+
             
         //End of CSV iteration.
         }
 
         //Check the dupes for price changes - iterate over dupes and compare prices, if different, add new.
-        
 
-        $logger->info('I just got the logger exit 15');
         if ($added > 0 || $change == true) {
             $em->flush();
             $em->clear();
@@ -1468,11 +1417,8 @@ $logger->info('I just got the logger add update price 4');
             $flash = "No products have been added";
         }
 
-        $logger->info('I just got the logger exit 16');
-
         $count = count($csvArray2);
 
-        $logger->info('I just got the logger exit 17');
 
         //Return results data to template for ajax page section.
          //Render the page from template
