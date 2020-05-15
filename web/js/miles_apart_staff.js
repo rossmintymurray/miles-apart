@@ -1,7 +1,7 @@
 /*********************************************
 ** This code pulls intit argumants from header 
 *********************************************/
-var environment = document.currentScript.getAttribute('data-environment');   
+var environment = appEnvironment;
 if (typeof environment === "undefined" ) {
    var environment = 'prod';
 }
