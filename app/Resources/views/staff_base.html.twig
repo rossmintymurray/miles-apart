@@ -62,11 +62,11 @@ This is the foundation page for all other ADMIN pages on the site -->
         <script src="{{ asset('js/miles_apart_dymo.js') }}" type="text/javascript"></script>
 
         <!-- Set the app environment for JS paths -->
-        <script>
-            var appEnvironment = {{ app.environment }};
+        <script type="text/javascript">
+            var appEnvironment = "{{ app.environment }}";
         </script>
 
-        <script src="{{ asset('js/miles_apart_staff.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('js/miles_apart_staff.js') }}" ></script>
         
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
