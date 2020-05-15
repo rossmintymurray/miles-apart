@@ -13,7 +13,7 @@ if (typeof environment === "undefined" ) {
 if(environment == "dev") {
     var globalBaseUrl = "http://dev.miles-apart.com:8888/Miles-Apart/web/app_dev.php/";
 } else if (environment == "test") {
-    var globalBaseUrl = "http://test.miles-apart.com/app_test.php/";
+    var globalBaseUrl = "https://test.miles-apart.com/app_test.php/";
 } else {
     var globalBaseUrl = "https://www.miles-apart.com/";
 }
