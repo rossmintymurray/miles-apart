@@ -1799,9 +1799,11 @@ $logger->info('I just got the logger add update price 4');
         $stocktake_unique = $this->stocktakeUnique($stocktake);
 
         //Send the array to Amazon Upload script
-        $amazon_response = $this->forward('MilesApartSellerBundle:Amazon:uploadAmazonProductArray', array(
-            'stocktake_unique'  => $stocktake_unique,
-        ));
+//        $amazon_response = $this->forward('MilesApartSellerBundle:Amazon:uploadAmazonProductArray', array(
+//            'stocktake_unique'  => $stocktake_unique,
+//        ));
+
+        $amazon_response = true;
 
         //Render the page from template
         return $this->render('MilesApartStaffBundle:Products:complete_stocktake_confirm.html.twig', array(
