@@ -64,7 +64,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Ddeboer\DataImport\Filter\CallbackFilter;
 
 
-
 class ProductsController extends Controller
 {
     /*************************************************
@@ -1802,6 +1801,12 @@ $logger->info('I just got the logger add update price 4');
 //        $amazon_response = $this->forward('MilesApartSellerBundle:Amazon:uploadAmazonProductArray', array(
 //            'stocktake_unique'  => $stocktake_unique,
 //        ));
+
+        //Update stocktake completed date
+        $stocktake->setStocktakeCompletedDate(new \DateTime());
+
+        $em->persist($stocktake);
+        $em->flush();
 
         $amazon_response = true;
 
