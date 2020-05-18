@@ -1486,7 +1486,7 @@ $logger->info('I just got the logger add update price 4');
         if ($stocktake == NULL) {
             $stocktake = new Stocktake();
 
-            $stocktake->setStocktakeStartDate(new \Date());
+            $stocktake->setStocktakeStartDate(new \DateTime());
         }
         //Set the stocktake session.
         $session = new Session();

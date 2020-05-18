@@ -76,7 +76,7 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 				  	//}
 
 				  	$("#popup_form_response_content").html(popupContent);
-				  	$("#popup_form_response").slideDown('slow', function() {
+				  	$("#popup_form_response").slideDown('fast', function() {
 					 	//Set focus on the Qty form field.
 					 	if(functionName != "PrintRequest") {
 					 		$("#product_new_qty").focus();
@@ -187,7 +187,7 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 				//if ($("#popup_form_response").css('background-color') == 'rgba(113, 160, 30, .9)') {
 				  $('#popup_form_response').animate({backgroundColor: 'rgba(245, 114, 27, .97)'}, 500);
 				//}
-				$("#popup_form_response").slideDown('slow');
+				$("#popup_form_response").slideDown('fast');
 			 
 				//Reset the barcode and search fields
 				$(".add_product_to_list_product_barcode").val("");
@@ -205,22 +205,22 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 			 	var match = false;
 
 			 	//Need to create AJAX call to query the Amazon API with the barcode scanned.
-			 	$.ajax({
-					type: "POST",
-					url: globalBaseUrl + "seller/amazon/product-modal",
-					dataType: 'json',
-					data: { barcode: barcode, submitUrl: submitUrl, functionName: functionName, variablePrepend: variablePrepend },
-					success: function(data){
-
-                        //alert(data);
-					 	//Check if a match was made
-					 	if(data['match'] == true) {
-					 		//Info needs to be displayed to user with option to import/save date in the MA database
-							//Show modal with Amazon product information and allowing this info to be saved ( creating a new product in the MA DB)
-							$("#amazon_product_modal").html(data['html']);
-							$('#amazon_product_modal').modal();
-							match = true;
-					 	} else {
+			 	// $.ajax({
+				// 	type: "POST",
+				// 	url: globalBaseUrl + "seller/amazon/product-modal",
+				// 	dataType: 'json',
+				// 	data: { barcode: barcode, submitUrl: submitUrl, functionName: functionName, variablePrepend: variablePrepend },
+				// 	success: function(data){
+                //
+                //         //alert(data);
+				// 	 	//Check if a match was made
+				// 	 	if(data['match'] == true) {
+				// 	 		//Info needs to be displayed to user with option to import/save date in the MA database
+				// 			//Show modal with Amazon product information and allowing this info to be saved ( creating a new product in the MA DB)
+				// 			$("#amazon_product_modal").html(data['html']);
+				// 			$('#amazon_product_modal').modal();
+				// 			match = true;
+				// 	 	} else {
 					 		//Show the red form if there was no match with Amazon
 							//Set up the supplier options.
 							var supplierList = "";
@@ -247,7 +247,7 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 									//if ($("#popup_form_response").css('background-color') == 'rgba(113, 160, 30, .9)') {
 										$('#popup_form_response').animate({backgroundColor: 'rgba(219, 41, 37, .97)'}, 500);
 									//}
-									$("#popup_form_response").slideDown('slow');
+									$("#popup_form_response").slideDown('fast');
 
 
 
@@ -258,16 +258,16 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 								}
 
 							});
-						}
-
-	
-					}, 
-
-				  	fail: function() {
-					 	alert('Ajax supplier list failed');
-				  	}
-
-				});
+				// 		}
+                //
+                //
+				// 	},
+                //
+				//   	fail: function() {
+				// 	 	alert('Ajax supplier list failed');
+				//   	}
+                //
+				// });
 			 	/***********************************
 			 	* End of Amazon product check
 			 	***********************************/
@@ -355,7 +355,6 @@ function addProductToListModal(data, variablePrepend) {
 
 	//IF Supplier DOES NOT EXIST
 	if (data['supplier_name'] == null | data['supplier_name'] == '') {
-		alert("no supplier");
 		var supplierSelect = true;
 		modalRequired = true;
 		var supplierList = "";
@@ -526,7 +525,7 @@ function setMissingProductPrice(productId, newPrice) {
 * Update product short name and subtitle
 *******************************************/
 function setMissingShortNameAndSubtitle(productId, short_name, subtitle) {
-alert(globalBaseUrl);
+
   	//Make AJAX call to update database
   	return $.ajax({
 		type: "POST",
@@ -554,7 +553,7 @@ alert(globalBaseUrl);
 * Update product supplier
 *******************************************/
 function setMissingSupplier(productId, supplier) {
-alert(globalBaseUrl);
+
   	//Make AJAX call to update database
   	return $.ajax({
 		type: "POST",
@@ -616,8 +615,7 @@ function newProductListProduct(submitUrl, functionName, variablePrepend){
 
   	//Check that product name and qty have been set
   	if (newProductName != "Please type product name..." && newProductQty != "Qty...") {
-	 
-  		alert(newProductSupplierId);
+
 		//Make AJAX call to add product to database
 		$.ajax({
 			type: "POST",
@@ -633,7 +631,7 @@ function newProductListProduct(submitUrl, functionName, variablePrepend){
 					var popupContent = "<div class=\"row\"><div class=\"col-md-4 col-xs-10\"><h6>Product Name</h6><h5>" + data['product_name'] + "</h5></div><div class=\"hide_on_non_xs_jquery col-xs-1\"><a href=\"#\" class=\"popup_close\" onclick=\"hidePopup();\"><span class=\"glyphicon glyphicon-remove\"></span> </a></div><div class=\"col-md-2 col-xs-6\"><h6>Request Qty</h6><input class=\"col-md-6 col-xs-6 form-control\"  id=\"product_new_qty\" type=\"text\" value=\"" + data['product_qty'] + "\" /></div><div class=\"col-md-2 col-xs-6\"><h6>Supplier Code</h6><h5>" + data['product_supplier_code'] + "</h5></div><div class=\"col-md-2 col-xs-6\"><h6>Barcode</h6><h5>" + data['product_barcode'] + "</h5></div><span style=\"display:none\" id=\"latest_product_transfer_request_id\">"+ data['product_id'] + "</span><div class=\"col-md-1 col-md-offset-1 col-xs-6\"><a href=\"#\" class=\"btn btn-default col-xs-12\" style=\"margin-top:10px\" onclick=\"updateProductListQty('" + data['product_id'] + "', '" + submitUrl +"')\">Update</a></div></div>";
 					$('#popup_form_response').animate({backgroundColor: 'rgba(113, 160, 30, .97)'}, 500);
 					$("#popup_form_response_content").html(popupContent);
-					$("#popup_form_response").slideDown('slow');
+					$("#popup_form_response").slideDown('fast');
 					
 
 					//Then the table row
@@ -706,7 +704,8 @@ function updateProductListQty(productId, submitUrl) {
 				$('#product_row_' +productId + '> td:nth-child(3)').html(productNewQty);
 				$('#product_row_' +productId).find("*").effect("highlight", {color:"#71a01e"}, 2000);
 
-				//Ensure the box is green
+				//Hide green box popup
+                $("#popup_form_response").slideUp('fast');
 			} else {
 				alert("Qty not updated");
 			}
@@ -739,7 +738,7 @@ function addProductGroupToTransferRequest(barcode) {
 			  	//}
 
 			  	$("#popup_form_response_content").html(popupContent);
-			  	$("#popup_form_response").slideDown('slow', function() {
+			  	$("#popup_form_response").slideDown('fast', function() {
 				 	//Set focus on the Qty form field.
 				 	if(functionName != "PrintRequest") {
 				 		$("#product_new_qty").focus();
@@ -771,7 +770,7 @@ function addProductGroupToTransferRequest(barcode) {
 				//if ($("#popup_form_response").css('background-color') == 'rgba(113, 160, 30, .9)') {
 				  $('#popup_form_response').animate({backgroundColor: 'rgba(245, 114, 27, .97)'}, 500);
 				//}
-				$("#popup_form_response").slideDown('slow');
+				$("#popup_form_response").slideDown('fast');
 			 
 				//Reset the barcode and search fields
 				$(".add_product_to_list_product_barcode").val("");
