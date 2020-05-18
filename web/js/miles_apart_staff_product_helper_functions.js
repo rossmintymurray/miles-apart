@@ -81,6 +81,11 @@ function addProductToList(submitUrl, functionName, variablePrepend, barcode) {
 					 	if(functionName != "PrintRequest") {
 					 		$("#product_new_qty").focus();
 				  		}
+
+                        //If stock taje, set qty to 1
+                        if(functionName == "StocktakeProduct") {
+                            $("#product_new_qty").val(1);
+                        }
 				  	});
 				  
 				  	//Then the table row
@@ -495,7 +500,6 @@ function submitProductUpdateModal(variablePrepend) {
 * Update product price (ID of product, New price decimal)
 *******************************************/
 function setMissingProductPrice(productId, newPrice) {
-	alert(globalBaseUrl);
   	//Make AJAX call to update database
   	return $.ajax({
 		type: "POST",
