@@ -15,7 +15,7 @@ if(environment == "dev") {
 } else if (environment == "test") {
     var globalBaseUrl = "https://test.miles-apart.com/app_test.php/";
 } else {
-    var globalBaseUrl = "https://www.miles-apart.com/";
+    var globalBaseUrl = "https://miles-apart.com/";
 }
 
 //Create the onload event function to load other functions as page loaded
