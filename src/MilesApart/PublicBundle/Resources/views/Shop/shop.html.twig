@@ -40,26 +40,26 @@
 {% block page_content %}
 
 
-    {# Check if categories need to be displayed #}
-    {% if level == 0 %}
-       
-        {# Call the categories display area controller #}
-        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}
+{#    #}{# Check if categories need to be displayed #}
+{#    {% if level == 0 %}#}
+{#       #}
+{#        #}{# Call the categories display area controller #}
+{#        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}#}
 
-    {# Check if categories need to be displayed #}
-    {% elseif level == 1 %}
-       
-        {# Call the categories display area controller #}
-        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}
-    
-    {# If category display is true #}
-    {% elseif level == 2 %}
-        
-        {# Call the categories display area controller #}
-        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}
-    
-    {# If category products display is true #}
-    {% else %}
+{#    #}{# Check if categories need to be displayed #}
+{#    {% elseif level == 1 %}#}
+{#       #}
+{#        #}{# Call the categories display area controller #}
+{#        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}#}
+{#    #}
+{#    #}{# If category display is true #}
+{#    {% elseif level == 2 %}#}
+{#        #}
+{#        #}{# Call the categories display area controller #}
+{#        {{ render(controller('MilesApartPublicBundle:Shop:categoriesdisplayarea', {'level':level,'category':category}) ) }}#}
+{#    #}
+{#    #}{# If category products display is true #}
+{#    {% else %}#}
         
         {# Call the view port header #}
         {% include 'MilesApartPublicBundle:Shop:view_port_header.html.twig' %}
@@ -69,7 +69,7 @@
             {{ render(controller('MilesApartPublicBundle:Shop:productsdisplayarea',  {'specific_category':category, 'products_per_page':null, 'page': page, 'attributes': attributes}) ) }}
         </div>
 
-    {% endif %}
+{#    {% endif %}#}
    
   
    
@@ -81,10 +81,10 @@
 {% endblock %}
 
 {% block attributes_filter %}
-    {% if level == 3 %}
+{#    {% if level == 3 %}#}
         {# Include the attributes filter #}
         {{ render(controller('MilesApartPublicBundle:Shop:getAttributesOwningProducts',  {'specific_category':category, 'products_per_page':null, 'page': page, 'attributes': attributes}) ) }}
-    {% endif %}
+{#    {% endif %}#}
 {% endblock %}
 
 

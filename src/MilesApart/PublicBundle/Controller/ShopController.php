@@ -335,12 +335,7 @@ class ShopController extends Controller
             throw new NotFoundHttpException('Illegal page');
         }
 
-        //Create the routeParams variable for pagerfanta
-        $routeParams = array(
-            'main_category' => $specific_category->getParent()->getParent()->getCategorySlug(),
-            'sub_category' => $specific_category->getParent()->getCategorySlug(),
-            'specific_category' => $specific_category->getCategorySlug()
-            );
+        $routeParams = $this->getCategorySlugs($specific_category);
 
         //Add each attribute to routeParams
         if($attributes != null) {
@@ -349,8 +344,7 @@ class ShopController extends Controller
                     $routeParams[$key][$k] = $param;
                 
             }
-        } 
-
+        }
 
         return $this->render('MilesApartPublicBundle:Shop:products_display_area.html.twig', array(
             'pager' => $pager,
@@ -359,7 +353,7 @@ class ShopController extends Controller
             'attributes' => $attributes,
             'parameters' => $parameters,
             'routeParams' => $routeParams
-            ));
+        ));
     }
 
     /* Code to show products on shop page */
@@ -609,12 +603,40 @@ class ShopController extends Controller
         return $this->render('MilesApartPublicBundle:Shop:attributes_filter.html.twig', array(
             'attributes_array' => $attributes_array,
             'attribute_values_array' => $attribute_values_array,
-            'specific_category_slug' => $specific_category->getCategorySlug(),
-            'sub_category_slug' => $specific_category->getParent()->getCategorySlug(),
-            'main_category_slug' => $specific_category->getParent()->getParent()->getCategorySlug(),
+            'specific_category_slug' => $this->getCategorySlugs($specific_category)["specific_category"],
+            'sub_category_slug' => $this->getCategorySlugs($specific_category)["sub_category"],
+            'main_category_slug' => $this->getCategorySlugs($specific_category)["main_category"],
             'attributes' => $attributes
             ));
     }
+
+    public function getCategorySlugs($specific_category) {
+        //Create the routeParams variable for pagerfanta
+        if($specific_category->getParent()) {
+            //If specific
+            if($specific_category->getParent()->getParent()) {
+                $routeParams = array(
+                    'main_category' => $specific_category->getParent()->getParent()->getCategorySlug(),
+                    'sub_category' => $specific_category->getParent()->getCategorySlug(),
+                    'specific_category' => $specific_category->getCategorySlug()
+                );
+            } else {
+                $routeParams = array(
+                    'main_category' => $specific_category->getParent()->getCategorySlug(),
+                    'sub_category' => $specific_category->getCategorySlug(),
+                    'specific_category' => NULL
+                );
+            }
+        } else {
+            $routeParams = array(
+                'main_category' => $specific_category->getCategorySlug(),
+                'sub_category' => NULL,
+                'specific_category' => NULL
+            );
+        }
+        return $routeParams;
+    }
+
 
     public function getSearchAttributesOwningProductsAction($search_string, $attributes = null, Request $request)
     {

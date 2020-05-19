@@ -44,13 +44,16 @@
             <link rel="stylesheet" href="{{ asset('public_components/css/card_payment.css') }}">
             <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
             <link rel="stylesheet" type="text/css" href="{{ asset('sweetalert2/sweetalert2.css') }}">
-        
+
+
 
         {# Set up favicon #}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         <script src="{{ asset('public_components/js/vendor/modernizr.js') }}"></script>
 
         {% block header_includes %}{% endblock %}
+
+
 
     </head>
     
@@ -157,7 +160,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-    swal("Please Note", "This site is not currently accepting orders, products are shown as in-stock so the site can be assessed by our payments provider prior to going live.", "info");
 
 </script>
 
