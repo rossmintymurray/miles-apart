@@ -597,7 +597,7 @@ function processAddProductToPrintListAddFormSubmit() {
 }
 
 function processAddProductToPrintListAdd() {
-  var submitUrl = globalBaseUrl + "submit";
+  var submitUrl = globalBaseUrl + "products/add-product-to-print-list/submit";
   var functionName = "PrintRequest";
   var variablePrepend = "print_request";
 
