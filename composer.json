@@ -35,7 +35,7 @@
         "friendsofsymfony/user-bundle": "1.3.7",
         "ob/highcharts-bundle": "1.5.0",
         "mopa/barcode-bundle": "dev-master",
-        "zendframework/zendframework": "2.3.3",
+        "zendframework/zendframework": "2.5.3",
         "zendframework/zendxml": "1.0.1",
         "avalanche123/imagine-bundle": "dev-master",
         "florianbelhomme/flob-foundation-bundle": "2.0.0",
@@ -49,7 +49,8 @@
         "caponica/amazon-mws-bundle": "dev-master",
         "jms/serializer-bundle": "2.0.0",
         "excelwebzone/recaptcha-bundle": "1.4.0",
-        "dizda/cloud-backup-bundle": "3.5"
+        "dizda/cloud-backup-bundle": "3.5",
+        "zendframework/zend-barcode": "2.8.0"
 
 
     },
