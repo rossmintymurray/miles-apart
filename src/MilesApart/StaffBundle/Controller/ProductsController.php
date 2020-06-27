@@ -1082,6 +1082,13 @@ $logger->info('I just got the logger add update price 4');
                         $import_product_cost = NULL;
                     }
 
+                    if (isset($csvArray2[$row]['product_price'])) {
+                        //Get price for comarison.
+                        $import_product_price = $csvArray2[$row]['product_price'];
+                    } else {
+                        $import_product_price = NULL;
+                    }
+
                     
                     //Remove from CSV array
                     //unset($csvArray2[$row]);
@@ -1217,6 +1224,44 @@ $logger->info('I just got the logger add update price 4');
                             $em->persist($new_cost);
 
                             $cost_change_count++;
+                            $change = true;
+                        }
+                    }
+
+                    //Check the importing price is not null
+                    if ($import_product_price != NULL) {
+
+                        //Ceck if the existing cost is null
+                        if ($existing_product[0]->getCurrentPrice() != null) {
+
+                            if($existing_product[0]->getCurrentPrice() != $import_product_price) {
+
+                                //Create new cost in DB
+                                $new_price = new ProductPrice();
+                                $new_price->setProductPriceValue($import_product_price);
+                                $new_price->setProductPriceIsSpecial(0);
+                                $new_price->setProduct($existing_product[0]);
+                                $new_price->setProductPriceValidFrom(new \DateTime('now'));
+
+                                $em->persist($new_price);
+
+                                $price_change_count++;
+                                $change = true;
+                            }
+
+                            //Existing product has no cost assigned so add the new one
+                        } else {
+
+                            //Create new product cost
+                            $new_price = new ProductPrice();
+                            $new_price->setProductPriceValue($import_product_price);
+                            $new_price->setProductPriceIsSpecial(0);
+                            $new_price->setProduct($existing_product[0]);
+                            $new_price->setProductPriceValidFrom(new \DateTime('now'));
+
+                            $em->persist($new_price);
+
+                            $price_change_count++;
                             $change = true;
                         }
                     }
