@@ -37,7 +37,7 @@
         "mopa/barcode-bundle": "dev-master",
         "zendframework/zendframework": "2.5.3",
         "zendframework/zendxml": "1.0.1",
-        "avalanche123/imagine-bundle": "dev-master",
+        "avalanche123/imagine-bundle": "2.1.2",
         "florianbelhomme/flob-foundation-bundle": "2.0.0",
         "oneup/uploader-bundle": "1.8.0",
         "raulfraile/ladybug-bundle": "~1.0",
