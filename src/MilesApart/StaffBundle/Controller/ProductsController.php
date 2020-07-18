@@ -938,6 +938,7 @@ $logger->info('I just got the logger add update price 4');
 
         $change = false;
         $barcode_match = false;
+        $import_product_price = NULL;
 
         //Iterate over csvArray.
         for($row = 0; $row < $count; ++$row){
