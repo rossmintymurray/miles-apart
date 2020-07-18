@@ -113,7 +113,7 @@
                         {% for header in headers|keys %}
 
                                 
-                                <th class="droppable" id="{{ header|replace({' ': '_'})|replace({'(': '_'})|replace({')': '_'}) }}">
+                                <th class="droppable" id="{{ header|trim|replace({' ': '_'})|replace({'(': '_'})|replace({')': '_'}) }}">
                                     {{ header|replace({'(': '_'})|replace({')': '_'}) }}
                                 </th>
                         {% endfor %}

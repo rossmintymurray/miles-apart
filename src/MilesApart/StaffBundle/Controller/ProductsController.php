@@ -855,6 +855,14 @@ $logger->info('I just got the logger add update price 4');
         //Get the original array from the session.
         $csvArray = $session->get('csvArray');
 
+        for ($i = 0;$i < count($csvArray); ++$i){
+
+            $a = array_map('trim', array_keys($csvArray[$i]));
+            $b = array_map('trim', $csvArray[$i]);
+            $csvArray[$i] = array_combine($a, $b);
+
+        }
+
         //Initiate array reader.
         $arrayReader = new ArrayReader($csvArray);
 
@@ -938,7 +946,7 @@ $logger->info('I just got the logger add update price 4');
 
         $change = false;
         $barcode_match = false;
-        $import_product_price = NULL;
+        $import_product_price = FALSE;
 
         //Iterate over csvArray.
         for($row = 0; $row < $count; ++$row){
@@ -977,6 +985,13 @@ $logger->info('I just got the logger add update price 4');
                         $import_product_cost = $csvArray2[$row]['product_cost'];
                     } else {
                         $import_product_cost = NULL;
+                    }
+
+                    if (isset($csvArray2[$row]['product_price'])) {
+                        //Get price for comarison.
+                        $import_product_price = $csvArray2[$row]['product_price'];
+                    } else {
+                        $import_product_price = NULL;
                     }
 
                     //Remove from csvArray
@@ -1025,6 +1040,13 @@ $logger->info('I just got the logger add update price 4');
                         $import_product_cost = $csvArray2[$row]['product_cost'];
                     } else {
                         $import_product_cost = NULL;
+                    }
+
+                    if (isset($csvArray2[$row]['product_price'])) {
+                        //Get price for comarison.
+                        $import_product_price = $csvArray2[$row]['product_price'];
+                    } else {
+                        $import_product_price = NULL;
                     }
 
 
