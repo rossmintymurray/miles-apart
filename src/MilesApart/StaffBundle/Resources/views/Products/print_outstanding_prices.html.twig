@@ -16,7 +16,7 @@
 				
 					{# Get the price type template from the db - might have to check this #}
 					{% if entity.getPrintRequestType.getPrintRequestTypeName == 'Hook Hanger'%}
-						{% include 'MilesApartStaffBundle:label_templates:hook_hanger.html.twig' %}
+						{% include 'MilesApartStaffBundle:label_templates:hook_hanger_v2.html.twig' %}
 
 
 
@@ -95,7 +95,7 @@
 		{% for entity in entities %}
 		    {# Get the price type template from the db - might have to check this #}
 				{% if entity.getPrintRequestType.getPrintRequestTypeName == 'Hook Hanger'%}
-					{% include 'MilesApartStaffBundle:label_templates:hook_hanger.html.twig' %}
+					{% include 'MilesApartStaffBundle:label_templates:hook_hanger_v2.html.twig' %}
 				
 
 				{% elseif entity.getPrintRequestType.getPrintRequestTypeName == 'Shelf Front - Large'%}

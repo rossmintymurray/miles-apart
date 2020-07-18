@@ -1,0 +1,170 @@
+/*
+Styles for different price types
+*/
+
+
+  @page {
+    size: 210mm 297mm; /* landscape */
+    /* you can also specify margins here: */
+    margin: 16mm 4mm 10mm 6mm;
+  }
+
+
+
+body  
+{ 
+    /* this affects the margin on the content before sending to printer */ 
+    margin-top: 0mm;
+    margin-left:0mm;  
+} 
+
+
+div {
+      page-break-inside: avoid;
+    }
+
+.margin-right div{
+margin-right:2mm;
+
+}
+/* Small shelf front card */
+.hook_hanger_v2_main_wraper {
+  position:relative;
+  background-repeat: no-repeat;
+  width:48mm;
+  height:38mm;
+  float:left;
+    border: 1px solid black;
+
+}
+
+.hook_hanger_v2_logo {
+  position:absolute;
+  top:17mm;
+  right:8px;
+  width:0.8cm;
+
+}
+
+.hook_hanger_v2_supplier {
+    position:absolute;
+    font-size:6pt;
+    text-align:left;
+    top:19mm;
+    color:#959494;
+    font-weight:300;
+    letter-spacing:0mm;
+    margin:0mm 2mm 0mm 2mm;
+}
+
+.hook_hanger_v2_product_name {
+    position:absolute;
+    font-size:8pt;
+    overflow:hidden;
+    text-align:center;
+    top:22mm;
+    color:#000000;
+    font-weight:500;
+    letter-spacing:-0.1mm;
+    margin:0;
+    width:100%;
+    height:12px;
+}
+
+h4.hook_hanger_v2_price_as_marked {
+  position:absolute;
+  top:8mm;
+  left:3mm;
+  right: 3mm;
+  font-size:13pt;
+  width:38mm;
+  text-align:center;
+  color:#000000;
+  font-weight:400;
+    letter-spacing: -0.23mm;
+}
+
+
+.hook_hanger_v2_price {
+
+  position:absolute;
+  top:21mm;
+  
+  font-size:14pt;
+  width:50mm;
+  text-align:center;
+  color:#000000;
+  font-weight:500;
+  letter-spacing: -0.2mm;
+}
+
+.hook_hanger_v2_price_subtitle {
+  position:absolute;
+  z-index:9999;
+  font-size:6pt;
+  width:100%;
+  text-align:center;
+  top:27.5mm;
+  width:50mm;
+  color:#959494;
+  font-weight:500;
+  letter-spacing:0mm;
+  
+}
+
+.hook_hanger_v2_barcode {
+  position:absolute;
+  z-index:9999;
+  font-size:4pt;
+  width:37mm;
+  text-align:center;
+  top:33mm;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0mm;
+  
+  margin:0mm 5mm 0mm 5mm;
+}
+
+.hook_hanger_v2_barcode img {
+  width:36mm;
+  height:11mm;
+  position:absolute;
+  top:0mm;
+
+}
+
+
+.hook_hanger_v2_supplier_code {
+  position:absolute;
+  z-index:9999;
+  font-size:5.5pt;
+  width:100%;
+  text-align:left;
+  bottom:6mm;
+  color:#525252;
+  font-weight:500;
+  letter-spacing:0mm;
+  margin:0mm 10mm 0mm 10mm;
+  display:none;
+
+}
+
+.hook_hanger_v2_header_shop {
+
+  position:absolute;
+  right:18mm;
+  top:62mm;
+  
+  z-index:9999;
+  color:#525252;
+  font-weight:500;
+
+}
+.hook_hanger_v2_footer_text {
+
+  position:absolute;
+  right:18mm;
+  bottom:4mm;
+  font-weight:300;
+}

@@ -1,0 +1,82 @@
+{# Include the css stylesheet #}
+{% block stylesheets %}
+	<link href="{{ asset('css/hook_hanger_v2.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% if loop.index is not divisible by (4) %}
+	<div class="margin-right">
+{% endif %}
+
+<div class="hook_hanger_v2_main_wraper">
+
+	<!-- MA Logo -->
+	<img class="hook_hanger_v2_logo" src="{{ asset('images/logos/Small-Logo-No-Text.png') }}" />
+
+	{#
+	*
+	* AREA FOR PRODUCT 
+	*
+	#}
+	{% if entity.getProduct != NULL %}
+		<!-- Supplier text -->
+		<h6 class="hook_hanger_v2_supplier">
+			{# Check that the supplier is set #}
+			{% if entity.getProduct.getDefaultProductSupplier is defined %}
+				{{ entity.getProduct.getDefaultProductSupplier.getSupplier.getSupplierShortName }}</h6>
+			{% endif %}
+		</h6>
+		
+		<!-- Main content -->
+		<h2 class="hook_hanger_v2_product_name">{{ entity.getProduct.getProductName }}</h2>
+		
+		
+
+		<h1 class="hook_hanger_v2_price">{{ entity.getProduct.getCurrentPriceDisplay }}</h1>
+		<h4 class="hook_hanger_v2_price_subtitle">
+			{% if entity.getProduct.getPrintSubtitle != null %}   
+				{{ entity.getProduct.getPrintSubtitle }}
+			{% else %}
+				each
+			{% endif %}
+		</h4>
+
+		<!-- Barcode -->
+		<img class="hook_hanger_v2_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Ean13', entity.getProduct.getProductBarcode|slice(0,12), {'barcodeOptions': {'barHeight' : 10, drawText : false}, 'rendererOptions': {'width':115, 'height':10}}) }}">
+
+		
+
+		<!-- Supplier Code -->
+		<h6 class="hook_hanger_v2_supplier_code">Supplier code: {{ entity.getProduct.getProductSupplierCode }}</h6>
+	{#
+	*
+	* AREA FOR PRODUCT GROUP
+	*
+	#}
+	{% elseif entity.getProductGroup != NULL %}
+		<!-- Main content -->
+		<h2 class="hook_hanger_v2_product_name">
+			{{ entity.getProductGroup.getProductGroupName }}
+		</h2>
+
+		<!-- Barcode -->
+		<img class="hook_hanger_v2_barcode" alt="[barcode]" src="{{ mopa_barcode_url('Code39', entity.getProductGroup.getProductGroupBarcode, {'barcodeOptions': {'barHeight' : 10, drawText : false}, 'rendererOptions': {'width':135, 'height':10}}) }}">
+
+		<div class="clearfix"></div>
+
+		{% if entity.getProductGroup.getProductGroupDefaultPrice != NULL %}
+			<h1 class="hook_hanger_v2_price">{{ entity.getProductGroup.getProductGroupDefaultPriceDisplay }}</h1>
+			<!-- Grey sub text -->
+			<h4 class="hook_hanger_v2_price_subtitle">
+				Unless marked otherwise
+			</h4>
+		{% else %}
+			<h4 class="hook_hanger_v2_price_as_marked">Please see product for price</h4>
+		{% endif %}
+	{% endif %}
+</div>
+
+{% if loop.index is not divisible by (4) %}
+	</div>
+{% endif %}
+</body>
+</html>
