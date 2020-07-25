@@ -31,6 +31,10 @@ staff-products_update-price:
     pattern:  /update-price
     defaults: { _controller: "MilesApartStaffBundle:Products:updateprice" }
 
+staff-products_update-price-state-printed:
+    pattern:  /update-price-state/printed
+    defaults: { _controller: "MilesApartStaffBundle:Products:updatepricestateprinted"}
+
 staff-products_update-short-name-and-subtitle:
     pattern:  /update-short-name-and-subtitle
     defaults: { _controller: "MilesApartStaffBundle:Products:updateshortnameandsubtitle" }

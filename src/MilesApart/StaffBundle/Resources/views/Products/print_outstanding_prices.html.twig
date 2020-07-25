@@ -2,7 +2,7 @@
 {% extends '::price_print_base.html.twig' %}
 
 {% block print_page_content %}
-	
+    <script src="{{ asset('js/jquery-1.11.1.js') }}" type="text/javascript"></script>
 
 	{# Check if there are multiple price types to be printed #}
 	{% if print_request_types is defined %}
@@ -87,9 +87,53 @@
 
 			{% endfor %}
 
-			
+            <script>
+                window.print();
+                function printCompleteCallback() {
+                    var conf = confirm('Confirm printing of prices have been successful?');
+                    if (conf) {
+                        //Call AJAX to update the database to say all outstanding invoices up to the date/time of printing have been printed (possibly use an array of ids to ensure no errors.)
+
+
+                        //Create array of ids to send with ajax query
+                        var priceIdArray = [];
+                        {% for price in print_request_type.getPrintRequest %}
+                        //Push each order id into the array
+                        priceIdArray.push('{{price.id}}');
+                        {% endfor %}
+
+                        //Call ajax script to update array of ids to order state printed
+                        var result = updatePriceStatePrinted(priceIdArray);
+                    }
+                }
+
+                setTimeout(printCompleteCallback, 4000);
+
+                function updatePriceStatePrinted(priceIdArray) {
+                    $.ajax({
+                        type: "POST",
+                        url: './../update-price-state/printed',
+                        dataType: 'json',
+                        data: { priceIdArray : priceIdArray },
+                        success: function(data){
+                            if(data['success'] == true) {
+                                window.close();
+                            }
+                        },
+                        fail: function() {
+                            alert("The price states were not updated, please try again.")
+                        }
+
+                        //End of AJAX function
+                    });
+
+                }
+
+            </script>
 
 		{% endfor %}
+
+
 	{% else %}
 		
 		{% for entity in entities %}
@@ -163,6 +207,51 @@
 
 				
 		{% endfor %}
+
+        <script>
+            window.print();
+            function printCompleteCallback() {
+                var conf = confirm('Confirm printing of prices have been successful?');
+                if (conf) {
+                    //Call AJAX to update the database to say all outstanding invoices up to the date/time of printing have been printed (possibly use an array of ids to ensure no errors.)
+
+
+                    //Create array of ids to send with ajax query
+                    var priceIdArray = [];
+                    {% for price in entities %}
+                    //Push each order id into the array
+                    priceIdArray.push('{{price.id}}');
+                    {% endfor %}
+
+                    //Call ajax script to update array of ids to order state printed
+                    var result = updatePriceStatePrinted(priceIdArray);
+                }
+            }
+
+            setTimeout(printCompleteCallback, 4000);
+
+            function updatePriceStatePrinted(priceIdArray) {
+                $.ajax({
+                    type: "POST",
+                    url: './../update-price-state/printed',
+                    dataType: 'json',
+                    data: { priceIdArray : priceIdArray },
+                    success: function(data){
+                        if(data['success'] == true) {
+                            window.close();
+                        }
+                    },
+                    fail: function() {
+                        alert("The price states were not updated, please try again.")
+                    }
+
+                    //End of AJAX function
+                });
+
+            }
+
+        </script>
 	{% endif %}
+
 
 {% endblock %}

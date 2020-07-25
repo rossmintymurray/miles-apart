@@ -369,6 +369,47 @@ class ProductsController extends Controller
         ));
     }
 
+    public function updatepricestateprintedAction(Request $request)
+    {
+        //Get the $_POST array.
+        if ($request->isXMLHttpRequest()) {
+            $response = $_POST;
+            //$response = new JsonResponse($r);
+        } else {
+
+            $response = "false";
+        }
+
+        //Get the barcode and search query from the request
+        $price_id_array = $response["priceIdArray"];
+
+        //Get the product
+        $em = $this->getDoctrine()->getManager();
+
+        //For each order id, update the order to printed
+        foreach($price_id_array as $price_id) {
+            $print_request = $em->getRepository('MilesApartAdminBundle:PrintRequest')->findOneById($price_id);
+
+            $print_request->setPrintRequestPrinted(TRUE);
+
+            //Persist the change
+            $em->persist($print_request);
+        }
+
+        //Flush the db changes
+        $em->flush();
+
+
+        //Return success to the JS
+        $response = array(
+            'success' => true,
+        );
+
+        $response = new JsonResponse($response);
+        return $response;
+
+
+    }
 
     //New price section
     public function newpriceAction(Request $request)
