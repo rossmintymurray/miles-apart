@@ -23,7 +23,7 @@
 
         <div class="large-8 columns show-for-medium-up">
 
-            <p class="lead text-right panel radius">For general enquiries please email <a href="mailto:info@miles-apart.com">info@miles-apart.com</a>.</p>
+{#            <p class="lead text-right panel radius">For general enquiries please email <a href="mailto:info@miles-apart.com">info@miles-apart.com</a>.</p>#}
         </div>
     </div>  
 {% endblock %}
@@ -32,7 +32,7 @@
 {% block page_content %}
     {# Create the shop information display #}
     <div class="show-for-small-only">
-        <p class="lead text-left panel radius" style="margin-top:1.5rem;">For general enquiries please email <a href="mailto:info@miles-apart.com">info@miles-apart.com</a>.</p>
+{#        <p class="lead text-left panel radius" style="margin-top:1.5rem;">For general enquiries please email <a href="mailto:info@miles-apart.com">info@miles-apart.com</a>.</p>#}
     </div>
         <div class="large-12 columns">
             <div class="section_header"></div>
@@ -59,8 +59,6 @@
                             <address>
                                 <strong class="phone">Phone:</strong><br />
                                 <a href="tel:01980626880">01980 626880</a><br />
-                                <strong class="phone">Email:</strong><br />
-                                <a href="mailto:26amesbury@miles-apart.com" class="small-email">26amesbury@miles-apart.com</a>
                             </address>
                         </div>
 
@@ -70,40 +68,44 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-left">Monday</td>
-                                        <td class="text-center">8.30am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Tuesday</td>
-                                        <td class="text-center">8.30am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Wednesday</td>
-                                        <td class="text-center">8.30am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Thursday</td>
-                                        <td class="text-center">8.30am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Friday</td>
-                                        <td class="text-center">8.30am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Saturday</td>
-                                        <td class="text-center">8.30am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Sunday</td>
+                                        <td class="text-center">Closed</td>
                                     </tr>
                                     {#Check the date, if Nov or Dec, show that it is open, if not show that it will be open #}
-                                    {% if ("now"|date('m-d') > '11-01') and ("now"|date('m-d') < '12-24') %}
-                                        <tr>
-                                            <td class="text-left">Sunday</td>
-                                            <td class="text-center">10am - 3pm</td>
-                                        </tr>
-                                    {% else %}
-                                        <tr>
-                                            <td class="text-left">Sunday</td>
-                                            <td class="text-center">Closed<br/>(10am - 3pm in Nov & Dec)</td>
-                                        </tr>
-                                    {% endif %}
+{#                                    {% if ("now"|date('m-d') > '11-01') and ("now"|date('m-d') < '12-24') %}#}
+{#                                        <tr>#}
+{#                                            <td class="text-left">Sunday</td>#}
+{#                                            <td class="text-center">10am - 3pm</td>#}
+{#                                        </tr>#}
+{#                                    {% else %}#}
+{#                                        <tr>#}
+{#                                            <td class="text-left">Sunday</td>#}
+{#                                            <td class="text-center">Closed<br/>(10am - 3pm in Nov & Dec)</td>#}
+{#                                        </tr>#}
+{#                                    {% endif %}#}
                                 </tbody>
                             </table>
                         </div>
@@ -137,8 +139,6 @@
                             <address class="phone">
                                 <strong class="phone">Phone:</strong><br />
                                 <a href="tel:01980626060">01980 626060</a><br />
-                                <strong class="phone">Email:</strong><br />
-                                <a href="mailto:28amesbury@miles-apart.com" class="small-email">28amesbury@miles-apart.com</a>
                             </address>
                         </div>
                    
@@ -149,40 +149,44 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-left">Monday</td>
-                                        <td class="text-center">8.45am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Tuesday</td>
-                                        <td class="text-center">8.45am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Wednesday</td>
-                                        <td class="text-center">8.45am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Thursday</td>
-                                        <td class="text-center">8.45am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Friday</td>
-                                        <td class="text-center">8.45am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Saturday</td>
-                                        <td class="text-center">8.45am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Sunday</td>
+                                        <td class="text-center">Closed</td>
                                     </tr>
                                    {#Check the date, if Nov or Dec, show that it is open, if not show that it will be open #}
-                                    {% if ("now"|date('m-d') > '11-01') and ("now"|date('m-d') < '12-24') %}
-                                        <tr>
-                                            <td class="text-left">Sunday</td>
-                                            <td class="text-center">10am - 3pm</td>
-                                        </tr>
-                                    {% else %}
-                                        <tr>
-                                            <td class="text-left">Sunday</td>
-                                            <td class="text-center">Closed<br/>(10am - 3pm in Nov & Dec)</td>
-                                        </tr>
-                                    {% endif %}
+{#                                    {% if ("now"|date('m-d') > '11-01') and ("now"|date('m-d') < '12-24') %}#}
+{#                                        <tr>#}
+{#                                            <td class="text-left">Sunday</td>#}
+{#                                            <td class="text-center">10am - 3pm</td>#}
+{#                                        </tr>#}
+{#                                    {% else %}#}
+{#                                        <tr>#}
+{#                                            <td class="text-left">Sunday</td>#}
+{#                                            <td class="text-center">Closed<br/>(10am - 3pm in Nov & Dec)</td>#}
+{#                                        </tr>#}
+{#                                    {% endif %}#}
                                 </tbody>
                             </table>
                         </div>
@@ -214,8 +218,6 @@
                             <address class="phone">
                                 <strong class="phone">Phone:</strong><br />
                                 <a href="tel:01373822225">01373 822225</a><br/>
-                                <strong class="phone">Email:</strong><br />
-                                <a href="mailto:westbury@miles-apart.com" class="small-email">westbury@miles-apart.com</a>
                             </address>
                         </div>
 
@@ -224,23 +226,23 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-left">Monday</td>
-                                        <td class="text-center">9am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Tuesday</td>
-                                        <td class="text-center">9am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Wednesday</td>
-                                        <td class="text-center">9am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Thursday</td>
-                                        <td class="text-center">9am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Friday</td>
-                                        <td class="text-center">9am - 5pm</td>
+                                        <td class="text-center">9am - 4pm</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Saturday</td>
